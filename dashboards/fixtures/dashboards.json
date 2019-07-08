@@ -1,0 +1,62 @@
+[
+  {
+    "model": "dashboards.Dashboard",
+    "pk": 1,
+    "fields": {
+      "title": "Technical Services",
+      "author": "Alan Chan",
+      "primary_color": "#7a6293"
+    }
+  },
+  {
+    "model": "dashboards.Dashboard",
+    "pk": 2,
+    "fields": {
+      "title": "Maintenance",
+      "author": "Tyrion Lannister",
+      "primary_color": "#f22293"
+    }
+  },
+  {
+    "model": "dashboards.Dashboard",
+    "pk": 3,
+    "fields": {
+      "title": "Compliance",
+      "author": "Stannis Baratheon",
+      "primary_color": "#f72383"
+    }
+  },
+  {
+    "model": "dashboards.Dashboard",
+    "pk": 4,
+    "fields": {
+      "title": "Water Systems",
+      "author": "Arthur Dayne",
+      "primary_color": "#ff6783"
+    }
+  },
+  {
+    "model": "dashboards.Kpi",
+    "pk": 5,
+    "fields": {
+      "pillar": "Cost",
+      "name": "C&M Spend",
+      "danger": 0.1,
+      "safe": 0.05,
+      "frequency": 12,
+      "dashboard": 41
+    }
+  },
+  {
+    "model": "dashboards.Kpi",
+    "pk": 5,
+    "fields": {
+      "pillar": "Cost",
+      "name": "Strat Spend",
+      "danger": 0.07,
+      "safe": 0.03,
+      "frequency": 12,
+      "dashboard": 41
+    }
+  }
+]
