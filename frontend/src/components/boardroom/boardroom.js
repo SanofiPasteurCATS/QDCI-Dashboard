@@ -30,6 +30,7 @@ class Boardroom extends Component {
   }
 
   render() {
+    const plotSize = 300;
     return (
       <div>
         <Fragment>

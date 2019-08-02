@@ -50,7 +50,6 @@ class Pillar extends React.Component {
   // Handles all D3 updates caused by changes to dataset
   updateD3() {}
 }
-
 Pillar.defaultProps = {
   chart: "loading"
 };
