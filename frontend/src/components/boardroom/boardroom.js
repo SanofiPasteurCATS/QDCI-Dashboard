@@ -8,37 +8,90 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getKpis } from "../../actions/dashboards";
-import Pillar from "./pillar";
-
-/**
- * Boardroom component handles the rendering and control of the entire +QDCI dashboard
- * is a parent to all other components in the dashboard
- * root of all dashboard data
- */
+import {
+  getKpis,
+  getDashboards,
+  getADashboard,
+  clearKpis
+} from "../../actions/dashboards";
+import LoadingScreen from "../layout/LoadingScreen";
+import Sidebar from "./sidebar";
+import Table from "../common/ui/table/Table";
+import {
+  ACTION_TABLE_DUMMY_DATA,
+  ACTION_TABLE_HEADERS
+} from "../../common/dashboardOptions";
 
 class Boardroom extends Component {
-  // Define all propTypes
   static propTypes = {
+    dashboards: PropTypes.array.isRequired,
     kpis: PropTypes.array.isRequired,
+    isAuthenticated: PropTypes.bool,
+    getDashboards: PropTypes.func.isRequired,
+    getADashboard: PropTypes.func.isRequired,
     getKpis: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    clearKpis: PropTypes.func.isRequired
   };
 
   componentDidMount() {
-    this.props.getKpis(this.props.match.params.id);
+    const { getADashboard, getKpis } = this.props;
+    const { id } = this.props.match.params;
+    getADashboard(id);
+    getKpis(id);
   }
 
   render() {
-    const plotSize = 300;
+    const { currentDashboard, kpis } = this.props;
+    if (currentDashboard == null) {
+      return <LoadingScreen />;
+    }
+    const color = currentDashboard.background;
     return (
       <div>
         <Fragment>
-          <div className="container">
-            {/* TEST CODE */}
-            <p>Dashboard ID: {this.props.match.params.id}</p>
+          <div
+            className="container-fluid"
+            style={{
+              padding: 0,
+              background: color,
+              height: `${100}%`
+            }}
+          >
+            <div className="row" style={{ margin: 0 }}>
+              <div className="col-lg-2">
+                <div className="card card-body m-4">
+                  <Sidebar
+                    kpis={kpis}
+                    dashboardId={this.props.match.params.id}
+                  />
+                </div>
+              </div>
+              <div className="col-lg-7">
+                <div className="card m-4">
+                  <div className="card-body">
+                    <h1>Short Term Action Plan</h1>
+                    <Table
+                      data={ACTION_TABLE_DUMMY_DATA}
+                      header={ACTION_TABLE_HEADERS}
+                      editable={false}
+                    />
+                    <h1>Long Term Action Plan</h1>
+                    <Table
+                      data={ACTION_TABLE_DUMMY_DATA}
+                      header={ACTION_TABLE_HEADERS}
+                      editable={false}
+                    />
+                    <h1>Upper Level Escalation</h1>
+                    <Table
+                      data={ACTION_TABLE_DUMMY_DATA}
+                      header={ACTION_TABLE_HEADERS}
+                      editable={false}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <Pillar kpis={this.props.kpis} />
         </Fragment>
       </div>
     );
@@ -46,13 +99,18 @@ class Boardroom extends Component {
 }
 
 // Extracting data from state
-const mapStateToProps = state => {
-  return {
-    kpis: state.dashboards.kpis,
-    isAuthenticated: state.auth.isAuthenticated
-  };
-};
+const mapStateToProps = state => ({
+  dashboards: state.dashboards.dashboards,
+  kpis: state.dashboards.kpis,
+  isAuthenticated: state.auth.isAuthenticated,
+  currentDashboard: state.dashboards.currentDashboard
+});
 export default connect(
   mapStateToProps,
-  { getKpis }
+  {
+    getKpis,
+    getDashboards,
+    getADashboard,
+    clearKpis
+  }
 )(Boardroom);

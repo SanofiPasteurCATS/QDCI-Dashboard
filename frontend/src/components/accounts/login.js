@@ -1,10 +1,3 @@
-// -----------------------------------------------------------------------------
-//                             Login Component
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
-
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -24,22 +17,26 @@ export class Login extends Component {
 
   static propTypes = {
     login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool.isRequired
   };
+
   onSubmit = e => {
     // Dispatches a login action which will check credentials
+    const { login } = this.props;
+    const { username, password } = this.state;
     e.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+    login(username, password);
   };
 
   onChange = e => {
-    // Updates the state with user input from form
+    // Updates the local state with user input from form
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     // Redirects users which are already authenticated to there homepage
-    if (this.props.isAuthenticated) {
+    const { isAuthenticated } = this.props;
+    if (isAuthenticated) {
       return <Redirect to="/" />;
     }
     const { username, password } = this.state;
@@ -49,7 +46,7 @@ export class Login extends Component {
           <h2 className="text-center">Login</h2>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <label>Username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 className="form-control"
@@ -59,7 +56,7 @@ export class Login extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"

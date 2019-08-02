@@ -1,0 +1,33 @@
+{
+	"files": {
+		"main.scss": {
+			"engines": [
+				{
+					"compiler": "scss",
+					"output": "style.css",
+					"options": {
+						"style": 0,
+						"comments": false
+					}
+				}
+			],
+			"sources": [
+				"abstracts/_functions.scss",
+				"abstracts/_mixins.scss",
+				"abstracts/_variables.scss",
+				"base/_base.scss",
+				"base/_fonts.scss",
+				"base/_helpers.scss",
+				"base/_typography.scss",
+				"bootstrap-overides/_modal.scss",
+				"components/_sidebar.scss",
+				"layout/_footer.scss",
+				"layout/_header.scss",
+				"main.scss",
+				"pages/_home.scss",
+				"themes/_default.scss",
+				"vendors/_normalize.scss"
+			]
+		}
+	}
+}

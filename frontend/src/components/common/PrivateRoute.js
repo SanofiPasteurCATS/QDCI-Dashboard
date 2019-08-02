@@ -5,9 +5,10 @@
 //                           Date: 08JUL2019
 // -----------------------------------------------------------------------------
 
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import LoadingScreen from '../layout/LoadingScreen';
 
 /**
  * Component will check if user is authenticatd before preceding to mount component
@@ -16,19 +17,18 @@ import { connect } from "react-redux";
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       if (auth.isLoading) {
-        return <h2>Loading...</h2>;
-      } else if (!auth.isAuthenticated) {
+        return <LoadingScreen />;
+      } if (auth.isAuthenticated == false) {
         return <Redirect to="/login" />;
-      } else {
-        return <Component {...props} />;
       }
+      return <Component {...props} />;
     }}
   />
 );
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

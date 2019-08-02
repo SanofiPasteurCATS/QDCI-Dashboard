@@ -18,6 +18,7 @@ class Header extends Component {
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
   };
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -29,7 +30,7 @@ class Header extends Component {
         <li className="nav-item">
           <button
             onClick={this.props.logout}
-            className="nav-link btn btn-info btn-sm text-light"
+            className="nav-link btn btn-info btn-sm text-light pl-2 pr-2"
           >
             Logout
           </button>
@@ -53,7 +54,7 @@ class Header extends Component {
     );
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container">
+        <div className="container-fluid">
           <a className="navbar-brand" href="#">
             +QDCI Boards
           </a>
@@ -70,9 +71,9 @@ class Header extends Component {
           </button>
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav">
-              <li className="nav-item active">
+              <li className="nav-item">
                 <a className="nav-link" href="#">
-                  My Dashboards<span className="sr-only">(current)</span>
+                  My Dashboards
                 </a>
               </li>
               <li className="nav-item">

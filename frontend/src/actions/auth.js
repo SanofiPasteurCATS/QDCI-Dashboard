@@ -12,6 +12,27 @@ import {
   REGISTER_SUCCESS
 } from "./types";
 
+// Setup config with token - helper function
+
+export const tokenConfig = getState => {
+  // Get token from state
+  const { token } = getState().auth;
+
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  // If token, add to headers config
+
+  if (token) {
+    config.headers.Authorization = `Token ${token}`;
+  }
+  return config;
+};
+
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
   // User Loading
@@ -95,7 +116,7 @@ export const register = ({ username, password, email }) => dispatch => {
 export const logout = () => (dispatch, getState) => {
   axios
     .post("/api/auth/logout/", null, tokenConfig(getState))
-    .then(res => {
+    .then(() => {
       dispatch({
         type: LOGOUT_SUCCESS
       });
@@ -103,25 +124,4 @@ export const logout = () => (dispatch, getState) => {
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
-};
-
-// Setup config with token - helper function
-
-export const tokenConfig = getState => {
-  // Get token from state
-  const token = getState().auth.token;
-
-  // Headers
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  // If token, add to headers config
-
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-  }
-  return config;
 };

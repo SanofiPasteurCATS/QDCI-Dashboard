@@ -11,16 +11,16 @@ class DashboardSerializer(serializers.ModelSerializer):
 class DatapointSerializer(serializers.ModelSerializer):
     class Meta:
         model = Datapoint
-        fields = ('target', 'value')
+        fields = ('target', 'value', 'date', 'series', 'id')
 
 class SeriesSerializer(serializers.ModelSerializer):
     entries = DatapointSerializer(many=True, read_only=True)
     class Meta:
         model = Series
-        fields = ('name','plot_type','color','kpi', 'entries')
+        fields = ('name','plot_type','color','kpi', 'entries','id')
 
 class KpiSerializer(serializers.ModelSerializer):
     series = SeriesSerializer(many = True, read_only=True)
     class Meta:
         model = Kpi
-        fields = ("pillar", "name", "safe", "danger", "frequency","dashboard",'series')
+        fields = ("pillar", "name", "safe", "danger", "frequency","dashboard",'series','id')

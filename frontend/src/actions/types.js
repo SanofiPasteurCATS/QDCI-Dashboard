@@ -1,15 +1,9 @@
-// -----------------------------------------------------------------------------
-//                             ACTION TYPES
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
-
 // Reference this list for action types
 export const GET_DASHBOARDS = "GET_DASHBOARDS";
 export const DELETE_DASHBOARD = "DELETE_DASHBOARD";
 export const ADD_DASHBOARD = "ADD_DASHBOARD";
 export const GET_ERRORS = "GET_ERRORS";
+export const GET_A_DASHBOARD = "GET_A_DASHBOARD";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const USER_LOADING = "USER_LOADING";
 export const USER_LOADED = "USER_LOADED";
@@ -21,3 +15,16 @@ export const LOGOUT_FAIL = "LOGOUT_FAIL";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const GET_KPIS = "GET_KPIS";
+export const GET_PILLAR_KPIS = "GET_PILLARS_KPI";
+export const CLEAR_PILLAR_KPIS = "CLEAR_PILLAR_KPIS";
+export const ADD_KPI = "ADD_KPI";
+export const UPDATE_KPI = "UPDATE_KPI";
+export const DELETE_KPI = "DELETE_KPI";
+export const CLEAR_KPIS = "CLEAR_KPIS";
+export const ADD_SERIES = "ADD_SERIES";
+export const GET_SERIES = "GET_SERIES";
+export const DELETE_SERIES = "DELETE_SERIES";
+export const UPDATE_SERIES = "UPDATE_SERIES";
+export const DELETE_DATAPOINT = "DELETE_DATAPOINT";
+export const UPDATE_DATAPOINT = "UPDATE_DATAPOINT";
+export const ADD_DATAPOINT = "ADD_DATAPOINT";

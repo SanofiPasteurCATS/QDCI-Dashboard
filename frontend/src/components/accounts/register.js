@@ -27,21 +27,23 @@ export class Register extends Component {
 
   static propTypes = {
     register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool.isRequired,
+    createMessage: PropTypes.func.isRequired
   };
 
   onSubmit = e => {
     e.preventDefault();
     const { username, email, password, password2 } = this.state;
+    const { createMessage, register } = this.props;
     if (password !== password2) {
-      this.props.createMessage({ passwordsNotMatch: "Passwords Do Not Match" });
+      createMessage({ passwordsNotMatch: "Passwords Do Not Match" });
     } else {
       const newUser = {
         username,
         password,
         email
       };
-      this.props.register(newUser);
+      register(newUser);
     }
   };
 
@@ -50,7 +52,8 @@ export class Register extends Component {
   };
 
   render() {
-    if (this.props.isAuthenticated) {
+    const { isAuthenticated } = this.props;
+    if (isAuthenticated) {
       return <Redirect to="/" />;
     }
     const { username, email, password, password2 } = this.state;
@@ -60,7 +63,7 @@ export class Register extends Component {
           <h2 className="text-center">Register Your Department</h2>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <label>Username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 className="form-control"
@@ -70,7 +73,7 @@ export class Register extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
                 className="form-control"
@@ -80,7 +83,7 @@ export class Register extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -90,7 +93,7 @@ export class Register extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Confirm Password</label>
+              <label htmlFor="password2">Confirm Password</label>
               <input
                 type="password"
                 className="form-control"
@@ -105,7 +108,7 @@ export class Register extends Component {
               </button>
             </div>
             <p>
-              Already have an account? <Link to="/login">Login!</Link>
+              Already have an account? <Link to="/login"> Login!</Link>
             </p>
           </form>
         </div>
