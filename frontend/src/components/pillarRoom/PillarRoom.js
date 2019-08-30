@@ -13,7 +13,6 @@ import ChartOptions from "./ChartOptions";
 import DataOptions from "./series/DataOptions";
 import { KPI_TABLE_HEADERS } from "../../common/dashboardOptions";
 import Table from "../common/ui/table/Table";
-import BubbleChart from "../common/d3charts/BubbleChart";
 
 class pillarRoom extends Component {
   static propTypes = {
@@ -177,7 +176,6 @@ class pillarRoom extends Component {
                   >
                     Export Chart
                   </button>
-                  <BubbleChart></BubbleChart>
                 </div>
               </div>
             </div>

@@ -162,7 +162,6 @@
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require), ./node_modules/react-spinners/PropagateLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3-selection/src/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/parseISO/index.js */
@@ -898,7 +897,8 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           dashboard = _this$props.dashboard,
-          deleteDashboard = _this$props.deleteDashboard;
+          deleteDashboard = _this$props.deleteDashboard,
+          deleteClick = _this$props.deleteClick;
       return react_default.a.createElement("div", {
         className: "card m-3"
       }, react_default.a.createElement("img", {
@@ -929,7 +929,9 @@ function (_Component) {
         to: "/boardroom/".concat(dashboard.id),
         className: "btn btn-primary btn-sm"
       }, "View"), react_default.a.createElement("button", {
-        onClick: deleteDashboard.bind(this, dashboard.id),
+        onClick: function onClick() {
+          return deleteClick("dashboard", dashboard.title);
+        },
         className: "btn btn-danger btn-sm ml-auto"
       }, " ", "Delete"))));
     }
@@ -1320,6 +1322,126 @@ var DashboardOptions_DashboardOptions = function DashboardOptions(props) {
 };
 
 /* harmony default export */ var hompage_DashboardOptions = (DashboardOptions_DashboardOptions);
+// CONCATENATED MODULE: ./frontend/src/components/common/ui/DeleteConfirmation.js
+function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
+
+function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
+
+function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
+
+function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
+
+function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
+
+
+
+
+var DeleteConfirmation_DeletetionConformation =
+/*#__PURE__*/
+function (_Component) {
+  DeleteConfirmation_inherits(DeletetionConformation, _Component);
+
+  function DeletetionConformation() {
+    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
+
+    return DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).apply(this, arguments));
+  }
+
+  DeleteConfirmation_createClass(DeletetionConformation, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          deletionItem = _this$props.deletionItem,
+          deletionName = _this$props.deletionName;
+      return react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "deletionConfirmation",
+        role: "dialog",
+        "aria-labelledby": "deletionConfirmationLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document",
+        style: {
+          maxWidth: "fit-content"
+        }
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "deletionConfirmationLabel"
+      }, react_default.a.createElement("span", {
+        className: "im im-data-delete",
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", "Are you absolutely sure?"), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("p", {
+        className: "card-text"
+      }, "This action cannot be undone. This will permanently delete the ".concat(deletionName, " ").concat(deletionItem, " and all associated data."), " "), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        "for": "password"
+      }, "Please enter dashboard password"), react_default.a.createElement("input", {
+        type: "password",
+        className: "form-control"
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        "for": "name"
+      }, "Please type in the name of the ".concat(deletionItem, " to confirm")), react_default.a.createElement("input", {
+        type: "text",
+        className: "form-control"
+      })), react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "checkbox",
+        name: "export",
+        className: "form-check-input"
+      }), react_default.a.createElement("label", {
+        "for": "export",
+        className: "form-check-label mb-3"
+      }, "Do you want to export data?")), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-warning"
+      }, "I understand the consequences, delete this item")))))));
+    }
+  }]);
+
+  return DeletetionConformation;
+}(react["Component"]);
+
+DeleteConfirmation_DeletetionConformation.propTypes = {
+  deletionItem: prop_types_default.a.string.isRequired,
+  deletionName: prop_types_default.a.string.isRequired
+};
+/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
 // CONCATENATED MODULE: ./frontend/src/components/hompage/List.js
 function List_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { List_typeof = function _typeof(obj) { return typeof obj; }; } else { List_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return List_typeof(obj); }
 
@@ -1331,13 +1453,14 @@ function List_createClass(Constructor, protoProps, staticProps) { if (protoProps
 
 function List_possibleConstructorReturn(self, call) { if (call && (List_typeof(call) === "object" || typeof call === "function")) { return call; } return List_assertThisInitialized(self); }
 
-function List_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function List_getPrototypeOf(o) { List_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return List_getPrototypeOf(o); }
+
+function List_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function List_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) List_setPrototypeOf(subClass, superClass); }
 
 function List_setPrototypeOf(o, p) { List_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return List_setPrototypeOf(o, p); }
+
 
 
 
@@ -1353,20 +1476,32 @@ var List_List =
 function (_Component) {
   List_inherits(List, _Component);
 
-  function List() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
+  function List(props) {
+    var _this;
 
     List_classCallCheck(this, List);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = List_possibleConstructorReturn(this, List_getPrototypeOf(List).call(this, props));
 
-    return List_possibleConstructorReturn(_this, (_temp = _this = List_possibleConstructorReturn(this, (_getPrototypeOf2 = List_getPrototypeOf(List)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.newDashboardClick = function () {
+    _this.newDashboardClick = function () {
       $("#dashboardOptions").modal("show");
-    }, _temp));
+    };
+
+    _this.deleteClick = function (deletionItem, deletionName) {
+      _this.setState({
+        deletionItem: deletionItem,
+        deletionName: deletionName
+      });
+
+      $("#deletionConfirmation").modal("show");
+    };
+
+    _this.state = {
+      deletionItem: "",
+      deletionName: ""
+    };
+    _this.deleteClick = _this.deleteClick.bind(List_assertThisInitialized(_this));
+    return _this;
   }
 
   List_createClass(List, [{
@@ -1377,9 +1512,14 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           dashboards = _this$props.dashboards,
           deleteDashboard = _this$props.deleteDashboard;
+      var _this$state = this.state,
+          deletionItem = _this$state.deletionItem,
+          deletionName = _this$state.deletionName;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "row"
       }, dashboards.map(function (dashboard) {
@@ -1387,13 +1527,17 @@ function (_Component) {
           key: dashboard.id,
           className: "col-lg-4 col-sm-12"
         }, react_default.a.createElement(ui_DashboardDisplayCard, {
-          dashboard: dashboard
+          dashboard: dashboard,
+          deleteClick: _this2.deleteClick
         }));
       }), react_default.a.createElement("div", {
         className: "col-lg-4 col-sm-12"
       }, react_default.a.createElement(ui_NewDashboardCard, {
         handleClick: this.newDashboardClick
-      }))), react_default.a.createElement(hompage_DashboardOptions, null));
+      }))), react_default.a.createElement(hompage_DashboardOptions, null), react_default.a.createElement(DeleteConfirmation, {
+        deletionItem: deletionItem,
+        deletionName: deletionName
+      }));
     }
   }]);
 
@@ -2288,7 +2432,7 @@ var override =  false ? undefined : {
     }
   }, "Loading"))));
 });
-// EXTERNAL MODULE: ./node_modules/d3/index.js + 464 modules
+// EXTERNAL MODULE: ./node_modules/d3/index.js + 515 modules
 var d3 = __webpack_require__("./node_modules/d3/index.js");
 
 // EXTERNAL MODULE: ./node_modules/react-faux-dom/lib/ReactFauxDOM.js
@@ -5536,54 +5680,6 @@ var DataOptions_DataOptions = function DataOptions(props) {
 };
 
 /* harmony default export */ var series_DataOptions = (DataOptions_DataOptions);
-// EXTERNAL MODULE: ./node_modules/d3-selection/src/index.js + 50 modules
-var src = __webpack_require__("./node_modules/d3-selection/src/index.js");
-
-// CONCATENATED MODULE: ./frontend/src/components/common/d3charts/BubbleChart.js
-function BubbleChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { BubbleChart_typeof = function _typeof(obj) { return typeof obj; }; } else { BubbleChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return BubbleChart_typeof(obj); }
-
-function BubbleChart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function BubbleChart_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function BubbleChart_createClass(Constructor, protoProps, staticProps) { if (protoProps) BubbleChart_defineProperties(Constructor.prototype, protoProps); if (staticProps) BubbleChart_defineProperties(Constructor, staticProps); return Constructor; }
-
-function BubbleChart_possibleConstructorReturn(self, call) { if (call && (BubbleChart_typeof(call) === "object" || typeof call === "function")) { return call; } return BubbleChart_assertThisInitialized(self); }
-
-function BubbleChart_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function BubbleChart_getPrototypeOf(o) { BubbleChart_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return BubbleChart_getPrototypeOf(o); }
-
-function BubbleChart_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) BubbleChart_setPrototypeOf(subClass, superClass); }
-
-function BubbleChart_setPrototypeOf(o, p) { BubbleChart_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return BubbleChart_setPrototypeOf(o, p); }
-
-
-
-
-var BubbleChart_BubbleChart =
-/*#__PURE__*/
-function (_Component) {
-  BubbleChart_inherits(BubbleChart, _Component);
-
-  function BubbleChart() {
-    BubbleChart_classCallCheck(this, BubbleChart);
-
-    return BubbleChart_possibleConstructorReturn(this, BubbleChart_getPrototypeOf(BubbleChart).apply(this, arguments));
-  }
-
-  BubbleChart_createClass(BubbleChart, [{
-    key: "render",
-    value: function render() {
-      src["select"](".btn").attr;
-      return react_default.a.createElement("div", null, "Hello");
-    }
-  }]);
-
-  return BubbleChart;
-}(react["Component"]);
-
-/* harmony default export */ var d3charts_BubbleChart = (BubbleChart_BubbleChart);
 // CONCATENATED MODULE: ./frontend/src/components/pillarRoom/PillarRoom.js
 function PillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { PillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { PillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return PillarRoom_typeof(obj); }
 
@@ -5602,7 +5698,6 @@ function PillarRoom_assertThisInitialized(self) { if (self === void 0) { throw n
 function PillarRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) PillarRoom_setPrototypeOf(subClass, superClass); }
 
 function PillarRoom_setPrototypeOf(o, p) { PillarRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return PillarRoom_setPrototypeOf(o, p); }
-
 
 
 
@@ -5802,7 +5897,7 @@ function (_Component) {
         onClick: function onClick() {
           _this2.updateExport("#chart");
         }
-      }, "Export Chart"), react_default.a.createElement(d3charts_BubbleChart, null))))), react_default.a.createElement(kpis_KpiOptions, {
+      }, "Export Chart"))))), react_default.a.createElement(kpis_KpiOptions, {
         dashboardId: dashboardId,
         kpis: kpis,
         pillarId: pillarId

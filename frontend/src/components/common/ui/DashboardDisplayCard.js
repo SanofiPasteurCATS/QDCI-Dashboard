@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 class DashboardDisplayCard extends Component {
   render() {
-    const { dashboard, deleteDashboard } = this.props;
+    const { dashboard, deleteDashboard, deleteClick } = this.props;
     return (
       <div className="card m-3">
         <img
@@ -39,7 +39,7 @@ class DashboardDisplayCard extends Component {
               View
             </Link>
             <button
-              onClick={deleteDashboard.bind(this, dashboard.id)}
+              onClick={() => deleteClick("dashboard", dashboard.title)}
               className="btn btn-danger btn-sm ml-auto"
             >
               {" "}
