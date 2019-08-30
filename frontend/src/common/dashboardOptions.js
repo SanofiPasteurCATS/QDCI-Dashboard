@@ -92,6 +92,14 @@ export const SERIES_TABLE_HEADERS = [
     prop: "color"
   }
 ];
+
+export const DEFAULT_ACTION_TABLES = [
+  "Short Term Action Plan",
+  "Mid Term Action Plan",
+  "Upper Level Escalations",
+  "Lower Level Escalations"
+];
+
 export const ACTION_TABLE_HEADERS = [
   {
     name: "Letter",
@@ -115,7 +123,8 @@ export const ACTION_TABLE_HEADERS = [
   },
   {
     name: "Date",
-    prop: "date"
+    prop: "date",
+    date: true
   }
 ];
 

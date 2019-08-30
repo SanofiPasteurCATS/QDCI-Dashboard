@@ -1,8 +1,12 @@
 // -----------------------------------------------------------------------------
-//                           Register Component
+//                            LOGIN COMPONENT
 //                      Organization: Sanofi Pasteur
 //                         Author: Kyle Thatcher
 //                           Date: 08JUL2019
+//
+//
+//            * Register component privides a form to create a new account
+//            * Apon succesful completion the user will be auto logged in
 // -----------------------------------------------------------------------------
 
 import React, { Component } from "react";
@@ -33,8 +37,11 @@ export class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    // Need current field values to create a new user instance
     const { username, email, password, password2 } = this.state;
     const { createMessage, register } = this.props;
+
+    // Check password consitancy
     if (password !== password2) {
       createMessage({ passwordsNotMatch: "Passwords Do Not Match" });
     } else {
@@ -43,19 +50,25 @@ export class Register extends Component {
         password,
         email
       };
+
+      // Create new user
       register(newUser);
     }
   };
 
   onChange = e => {
+    // Update state to relfect current field values
     this.setState({ [e.target.name]: e.target.value });
   };
 
   render() {
     const { isAuthenticated } = this.props;
+    // Redirect users whom already have valid Auth tokens
     if (isAuthenticated) {
       return <Redirect to="/" />;
     }
+
+    // Need these state values to update form fields
     const { username, email, password, password2 } = this.state;
     return (
       <div className="col-md-6 m-auto">

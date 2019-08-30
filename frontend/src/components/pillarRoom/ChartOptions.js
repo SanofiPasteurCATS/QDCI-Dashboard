@@ -3,6 +3,8 @@ import React, { Fragment, Component } from "react";
 class ChartOptions extends Component {
   onChange = e => {
     this.props.selectKpiHook(e.target.value);
+    this.props.selectSeriesHook(null);
+    this.props.deselectHook();
   };
 
   componentDidUpdate(prevProps) {

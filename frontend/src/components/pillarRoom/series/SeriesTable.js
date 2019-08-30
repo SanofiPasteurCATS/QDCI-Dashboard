@@ -18,6 +18,7 @@ class SeriesTable extends Component {
 
   delete(id) {
     this.props.deleteSeries(id);
+    this.props.deletionHook();
   }
 
   update(current, id) {

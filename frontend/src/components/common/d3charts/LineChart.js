@@ -8,8 +8,9 @@ const margin = {
   top: 10,
   right: 100,
   bottom: 30,
-  left: 60
+  left: 50
 };
+
 const width = 1100 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
@@ -17,7 +18,7 @@ class LineChart extends React.Component {
   static propTypes = {
     kpis: PropTypes.array.isRequired,
     selectSeriesHook: PropTypes.func.isRequired,
-    selectedKpi: PropTypes.string.isRequired
+    selectedKpi: PropTypes.number
   };
 
   constructor(props) {
@@ -31,13 +32,11 @@ class LineChart extends React.Component {
     this.renderD3();
     this.updateD3();
   }
-
   // Triger D3 update()
   componentDidUpdate(prevProps) {
-    if (
-      this.props.kpis !== prevProps.kpis ||
-      this.props.selectedKpi != prevProps.selectedKpi
-    ) {
+    const { kpis, selectedKpi } = this.props;
+
+    if (kpis !== prevProps.kpis || selectedKpi != prevProps.selectedKpi) {
       this.updateD3();
     }
   }
@@ -62,6 +61,7 @@ class LineChart extends React.Component {
         .attr("font-weight", "bold")
         .attr("font-size", "20");
     }
+
     const svg = d3
       .select(faux)
       .attr("id", "chart")
@@ -79,7 +79,7 @@ class LineChart extends React.Component {
       .style("margin", "20px 0")
       .append("g")
       .attr("id", "plotArea")
-      .attr("transform", `translate(${margin.left},${margin.bottom})`);
+      .attr("transform", `translate(${margin.left + 30},${margin.bottom})`);
 
     svg
       .append("rect")
@@ -390,7 +390,8 @@ class LineChart extends React.Component {
 }
 
 LineChart.defaultProps = {
-  chart: "loading"
+  chart: "loading",
+  selectedKpi: null
 };
 
 export default withFauxDOM(LineChart);

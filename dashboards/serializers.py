@@ -1,5 +1,5 @@
 from rest_framework import serializers, fields
-from dashboards.models import Dashboard, Kpi, Datapoint, Series
+from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable
 
 # Serializers for all Dashboard models (converts python objects to JSON format for REST API endpoints)
 
@@ -20,7 +20,30 @@ class SeriesSerializer(serializers.ModelSerializer):
         fields = ('name','plot_type','color','kpi', 'entries','id')
 
 class KpiSerializer(serializers.ModelSerializer):
-    series = SeriesSerializer(many = True, read_only=True)
+    series =  SeriesSerializer(many = True, read_only=True)
     class Meta:
         model = Kpi
         fields = ("pillar", "name", "safe", "danger", "frequency","dashboard",'series','id')
+
+class ShallowActionTableSerializer(serializers.ModelSerializer):
+
+    dashboard = DashboardSerializer(many = False, read_only=True)
+
+    class Meta:
+        model = ActionTable
+        fields = ('id','dashboard')
+
+class ActionSerializer(serializers.ModelSerializer):
+    source = ShallowActionTableSerializer(many = False, read_only = True)
+    source_id = serializers.PrimaryKeyRelatedField(
+        queryset=ActionTable.objects.all(), source='source', write_only=True)
+    class Meta:
+        model = Action
+        fields = ('letter','problem','solution','root_cause', 'date', 'leader', 'id', 'tables','source', 'source_id', 'date_created')
+
+class ActionTableSerializer(serializers.ModelSerializer):
+    actions = ActionSerializer(many=True, read_only=True)
+    class Meta:
+        model = ActionTable
+        fields = ('title', 'actions', 'id', 'parent', "dashboard", "parent_dashboard")
+

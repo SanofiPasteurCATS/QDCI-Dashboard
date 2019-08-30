@@ -75,6 +75,7 @@ const SeriesOptions = props => {
                       <SeriesTable
                         data={series}
                         header={SERIES_TABLE_HEADERS}
+                        deletionHook={props.deletionHook}
                       />
                     </div>
                     <div id="adds" className="tab-pane fade">

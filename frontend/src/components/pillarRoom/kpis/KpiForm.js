@@ -47,7 +47,6 @@ class KpiForm extends Component {
   render() {
     const { name, frequency, safe, danger } = this.state;
     const { pillarId } = this.props;
-    console.log(frequency);
     return (
       <Fragment>
         <form onSubmit={this.onSubmit} noValidate>

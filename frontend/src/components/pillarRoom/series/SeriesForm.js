@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addSeries } from "../../../actions/dashboards";
 import { PLOT_TYPE_CHOICES } from "../../../common/dashboardOptions";
-
+import { ChromePicker } from "react-color";
 class SeriesForm extends Component {
   state = {
     name: "",
@@ -15,6 +15,9 @@ class SeriesForm extends Component {
     addSeries: PropTypes.func.isRequired
   };
 
+  onChangeColor = color => {
+    this.setState({ color: color.hex });
+  };
   onSubmit = e => {
     e.preventDefault();
     const { addSeries, kpi } = this.props;
@@ -42,49 +45,51 @@ class SeriesForm extends Component {
     return (
       <Fragment>
         <form onSubmit={this.onSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              onChange={this.onChange}
-              placeholder="..."
-              value={name}
-              required
-            />
-          </div>
+          <div className="row m-0">
+            <div className="col-sm-6">
+              <div className="d-flex flex-column">
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    name="name"
+                    onChange={this.onChange}
+                    placeholder="..."
+                    value={name}
+                    required
+                  />
+                </div>
 
-          <div className="form-group">
-            <label htmlFor="plot_type">Plot Type</label>
-            <select
-              className="form-control"
-              type="text"
-              name="plot_type"
-              onChange={this.onChange}
-              placeholder="..."
-              value={plot_type}
-              required
-            >
-              {PLOT_TYPE_CHOICES.map(choice => (
-                <option key={`choice-${choice.id}`} value={choice.id}>
-                  {choice.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="color">Color</label>
-            <input
-              className="form-control"
-              type="text"
-              name="color"
-              onChange={this.onChange}
-              placeholder="..."
-              value={color}
-              required
-            />
+                <div className="form-group mt-4">
+                  <label htmlFor="plot_type">Plot Type</label>
+                  <select
+                    className="form-control"
+                    type="text"
+                    name="plot_type"
+                    onChange={this.onChange}
+                    placeholder="..."
+                    value={plot_type}
+                    required
+                  >
+                    {PLOT_TYPE_CHOICES.map(choice => (
+                      <option key={`choice-${choice.id}`} value={choice.id}>
+                        {choice.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-4 m-auto">
+              <div className="form-group">
+                <label htmlFor="color">Color</label>
+                <ChromePicker
+                  color={this.state.color}
+                  onChangeComplete={this.onChangeColor}
+                />
+              </div>
+            </div>
           </div>
           <div className="modal-footer">
             <button

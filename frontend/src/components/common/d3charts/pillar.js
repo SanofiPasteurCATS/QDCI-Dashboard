@@ -178,6 +178,9 @@ class Pillar extends React.Component {
       .enter()
       .append("path")
       .attr("class", "ring")
+      .attr("id", d => {
+        return "ring_" + d.data.id;
+      })
       .attr("d", (d, i, j) => {
         const index = $(j)[i].parentNode.getAttribute("data-index");
         return arc
@@ -187,6 +190,14 @@ class Pillar extends React.Component {
           .innerRadius(
             radius + ((plotSize * labelScale) / 16) * (index + labelOffset) + 4
           )(d);
+      })
+      .on("mouseover", d => {
+        d3.select(`#ring_${d.data.id}`)
+          .style("stroke", "#000")
+          .attr("stroke-width", "1");
+      })
+      .on("mouseout", d => {
+        d3.select(`#ring_${d.data.id}`).style("stroke", "none");
       })
       .merge(ringBind)
       .style("fill", (d, i, j) => {

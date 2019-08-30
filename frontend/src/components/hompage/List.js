@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { getDashboards, deleteDashboard } from "../../actions/dashboards";
+import DashboardDisplayCard from "../common/ui/DashboardDisplayCard";
+import NewDashboardCard from "../common/ui/NewDashboardCard";
+import DashboardOptions from "./DashboardOptions";
 
 class List extends Component {
   static propTypes = {
@@ -14,57 +17,25 @@ class List extends Component {
   componentDidMount() {
     this.props.getDashboards();
   }
-
+  newDashboardClick = () => {
+    $("#dashboardOptions").modal("show");
+  };
   render() {
     const { dashboards, deleteDashboard } = this.props;
     return (
       <Fragment>
-        <div className="card card-body mt-4 mb-4">
-          <h2>Department Dashboards</h2>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Level</th>
-                <th>Type</th>
-                <th>Background</th>
-                <th />
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {dashboards.map(dashboard => (
-                <tr key={dashboard.id}>
-                  <td>{dashboard.id}</td>
-                  <td>{dashboard.title}</td>
-                  <td>{dashboard.author}</td>
-                  <td>{dashboard.level}</td>
-                  <td>{dashboard.dashboard_type}</td>
-                  <td>{dashboard.background}</td>
-                  <td>
-                    <Link
-                      to={`/boardroom/${dashboard.id}`}
-                      className="btn btn-primary btn-sm"
-                    >
-                      View
-                    </Link>
-                  </td>
-                  <td>
-                    <button
-                      onClick={deleteDashboard.bind(this, dashboard.id)}
-                      className="btn btn-danger btn-sm"
-                    >
-                      {" "}
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="row">
+          {dashboards.map(dashboard => (
+            <div key={dashboard.id} className="col-lg-4 col-sm-12">
+              <DashboardDisplayCard dashboard={dashboard} />
+            </div>
+          ))}
+
+          <div className="col-lg-4 col-sm-12">
+            <NewDashboardCard handleClick={this.newDashboardClick} />
+          </div>
         </div>
+        <DashboardOptions />
       </Fragment>
     );
   }

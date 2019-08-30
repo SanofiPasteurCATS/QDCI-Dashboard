@@ -33,6 +33,7 @@ class KpiTable extends Component {
         header={header}
         update={this.update}
         delete={this.delete}
+        deletable
       />
     );
   }

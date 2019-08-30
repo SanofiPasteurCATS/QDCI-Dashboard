@@ -36,6 +36,7 @@ export class Alerts extends Component {
       if (messages.addKpi) alert.success(messages.addKpi);
       if (messages.updateKpi) alert.success(messages.updateKpi);
       if (messages.deleteKpi) alert.success(messages.deleteKpi);
+      if (messages.updateActionTable) alert.success(messages.updateActionTable);
     }
   }
 

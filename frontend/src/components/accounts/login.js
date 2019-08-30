@@ -1,13 +1,19 @@
+// -----------------------------------------------------------------------------
+//                            LOGIN COMPONENT
+//                      Organization: Sanofi Pasteur
+//                         Author: Kyle Thatcher
+//                           Date: 08JUL2019
+//
+//
+//           * Login component handles login markup and control
+//       * Validates users and supplies Auth tokens via the login action
+// -----------------------------------------------------------------------------
+
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
-
-/**
- * Login component is render handles login markup and control
- * Validates users and supplies Auth tokens via the login action
- */
 
 export class Login extends Component {
   state = {
@@ -39,7 +45,10 @@ export class Login extends Component {
     if (isAuthenticated) {
       return <Redirect to="/" />;
     }
+
+    // Need the current username and password to update the inputs
     const { username, password } = this.state;
+
     return (
       <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">

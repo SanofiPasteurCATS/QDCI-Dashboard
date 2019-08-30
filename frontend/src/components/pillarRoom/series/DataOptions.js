@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import DataInfo from "./DataInfo";
-import DataForm from "./DataForm";
 import DataTable from "./DataTable";
 import { DATAPOINT_TABLE_HEADERS } from "../../../common/dashboardOptions";
 

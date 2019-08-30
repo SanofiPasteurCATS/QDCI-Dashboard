@@ -24,6 +24,16 @@ class DatapointTable extends Component {
     this.props.updateDatapoint(current, id);
   }
 
+  formatRow = datapoint => {
+    const today = new Date();
+    const date = new Date(datapoint.date);
+    if (date.getTime() <= today.getTime()) {
+      if (!datapoint.value) return "table-danger";
+    } else if (date.getTime() <= today.setDate(today.getDate() + 5))
+      return "table-warning";
+    return "";
+  };
+
   render() {
     const { data, header } = this.props;
     return (
@@ -33,6 +43,8 @@ class DatapointTable extends Component {
         header={header}
         update={this.update}
         delete={this.delete}
+        deletable
+        formatRow={this.formatRow}
       />
     );
   }

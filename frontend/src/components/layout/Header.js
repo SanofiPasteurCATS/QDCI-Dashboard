@@ -21,6 +21,7 @@ class Header extends Component {
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    const { currentDashboard } = this.props;
 
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2">
@@ -87,6 +88,9 @@ class Header extends Component {
                 </a>
               </li>
             </ul>
+            {currentDashboard && (
+              <h2 className="m-auto">{currentDashboard.title}</h2>
+            )}
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
@@ -96,7 +100,8 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  currentDashboard: state.dashboards.currentDashboard
 });
 
 export default connect(

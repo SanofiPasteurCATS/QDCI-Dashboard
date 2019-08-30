@@ -17,9 +17,15 @@ import {
   DELETE_SERIES,
   UPDATE_DATAPOINT,
   DELETE_DATAPOINT,
-  ADD_DATAPOINT
+  ADD_DATAPOINT,
+  ADD_ACTION,
+  GET_ACTION_TABLE,
+  UPDATE_ACTION,
+  DELETE_ACTION,
+  UPDATE_ACTION_TABLE,
+  CLEAR_ACTION_TABLES,
+  CLEAR_CURRENT_DASHBOARD
 } from "./types";
-import { DATAPOINT_TABLE_HEADERS } from "../common/dashboardOptions";
 
 /*---------------------------------------
           DASHBOARD ACTIONS
@@ -212,7 +218,7 @@ export const updateSeries = (series, id) => (dispatch, getState) => {
 };
 
 export const deleteSeries = id => (dispatch, getState) => {
-  axios.delete(`/api/series/${id}/`, tokenConfig(getState)).then(res => {
+  axios.delete(`/api/series/${id}/`, tokenConfig(getState)).then(() => {
     dispatch(createMessage({ deleteSeries: "Series Deleted" }));
     dispatch({
       type: DELETE_SERIES,
@@ -234,7 +240,7 @@ export const updateDatapoint = (datapoint, id) => (dispatch, getState) => {
 };
 
 export const deleteDatapoint = id => (dispatch, getState) => {
-  axios.delete(`/api/datapoint/${id}/`, tokenConfig(getState)).then(res => {
+  axios.delete(`/api/datapoint/${id}/`, tokenConfig(getState)).then(() => {
     dispatch(createMessage({ deleteDatapoint: "Series Datapoint" }));
     dispatch({
       type: DELETE_DATAPOINT,
@@ -250,5 +256,81 @@ export const addDatapoint = datapoint => (dispatch, getState) => {
       type: ADD_DATAPOINT,
       payload: res.data
     });
+  });
+};
+
+export const addAction = action => (dispatch, getState) => {
+  axios.post("/api/action/", action, tokenConfig(getState)).then(res => {
+    dispatch(createMessage({ addAction: "Action Added" }));
+    dispatch({
+      type: ADD_ACTION,
+      payload: res.data
+    });
+  });
+};
+
+export const getActionTable = (dashboard = null) => (dispatch, getState) => {
+  const endpoint = dashboard
+    ? `/api/actionTable/?dashboard=${dashboard}`
+    : `/api/actionTable/`;
+  axios.get(endpoint, tokenConfig(getState)).then(res => {
+    dispatch({
+      type: GET_ACTION_TABLE,
+      payload: res.data
+    });
+  });
+};
+
+export const deleteAction = id => (dispatch, getState) => {
+  axios.delete(`api/action/${id}/`, tokenConfig(getState)).then(() => {
+    dispatch({
+      type: DELETE_ACTION,
+      payload: id
+    });
+  });
+};
+
+export const updateAction = (action, id) => (dispatch, getState) => {
+  axios
+    .patch(`api/action/${id}/`, action, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: UPDATE_ACTION,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+};
+
+export const updateActionTable = (actionTable, id, parent) => (
+  dispatch,
+  getState
+) => {
+  axios
+    .patch(
+      `api/actionTable/${id}/?parent=${parent || "null"}`,
+      actionTable,
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch(createMessage({ updateActionTable: "Connection Made" }));
+      dispatch({
+        type: UPDATE_ACTION_TABLE,
+        payload: res.data
+      });
+    });
+};
+
+export const clearActionTables = () => dispatch => {
+  dispatch({
+    type: CLEAR_ACTION_TABLES
+  });
+};
+
+export const clearCurrentDashboard = () => dispatch => {
+  dispatch({
+    type: CLEAR_CURRENT_DASHBOARD
   });
 };

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import date
+from django.utils import timezone
 
 # Choices for pillar field for kpis
 PILLAR_CHOICES = [
@@ -61,5 +62,22 @@ class Datapoint(models.Model):
     date = models.DateField(default=None, null=True)
     series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name="entries")
 
+
+class ActionTable(models.Model):
+    dashboard = models.ForeignKey(Dashboard,related_name='actionTables',on_delete=models.CASCADE)
+    title = models.CharField(max_length=26)
+    parent = models.IntegerField(null=True)
+    parent_dashboard = models.ForeignKey(Dashboard,null=True, related_name="childTables", on_delete=models.SET_NULL)
+
+class Action(models.Model):
+    tables = models.ManyToManyField(ActionTable, related_name="actions")
+    source = models.ForeignKey(ActionTable, related_name="native_actions", on_delete=models.CASCADE)
+    letter = models.CharField(null=True,max_length=1, choices = PILLAR_CHOICES)
+    problem = models.CharField(null=True,max_length=50)
+    root_cause = models.CharField(null=True,max_length=50)
+    solution = models.CharField(null=True,max_length=50)
+    leader = models.CharField(null=True,max_length=50)
+    date = models.DateField(default=None, null=True)
+    date_created = models.DateTimeField(default=timezone.now, null=False)
 
 

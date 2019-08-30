@@ -14,13 +14,21 @@ import {
   UPDATE_SERIES,
   DELETE_DATAPOINT,
   DELETE_SERIES,
-  ADD_DATAPOINT
+  ADD_DATAPOINT,
+  ADD_ACTION,
+  GET_ACTION_TABLE,
+  DELETE_ACTION,
+  UPDATE_ACTION,
+  UPDATE_ACTION_TABLE,
+  CLEAR_CURRENT_DASHBOARD,
+  CLEAR_ACTION_TABLES
 } from "../actions/types";
 
 const initalState = {
   dashboards: [],
   kpis: [],
-  currentDashboard: null
+  currentDashboard: null,
+  actionTables: []
 };
 
 export default function(state = initalState, action) {
@@ -75,6 +83,7 @@ export default function(state = initalState, action) {
         kpis: []
       };
     case ADD_SERIES:
+      console.log("added");
       var kpis = state.kpis.map(kpi => {
         if (kpi.id != action.payload.kpi) return kpi;
         const series = kpi.series;
@@ -177,6 +186,69 @@ export default function(state = initalState, action) {
       return {
         ...state,
         kpis: kpis___
+      };
+    case GET_ACTION_TABLE:
+      return { ...state, actionTables: action.payload };
+
+    case ADD_ACTION:
+      var actionTables = state.actionTables.map(at => {
+        if (action.payload.tables.indexOf(at.id) == -1) return at;
+        else
+          return {
+            ...at,
+            actions: [...at.actions, action.payload]
+          };
+      });
+      return {
+        ...state,
+        actionTables: actionTables
+      };
+    case DELETE_ACTION:
+      var actionTables = state.actionTables.map(at => {
+        return {
+          ...at,
+          actions: at.actions.filter(act => {
+            return act.id != action.payload;
+          })
+        };
+      });
+      return {
+        ...state,
+        actionTables: actionTables
+      };
+    case UPDATE_ACTION:
+      var actionTables = state.actionTables.map(at => {
+        return {
+          ...at,
+          actions: at.actions.map(act => {
+            if (act.id != action.payload.id) return act;
+            else return action.payload;
+          })
+        };
+      });
+      return {
+        ...state,
+        actionTables: actionTables
+      };
+    case UPDATE_ACTION_TABLE:
+      var actionTables = state.actionTables.map(at => {
+        if (at.id != action.payload.id) return at;
+        else return action.payload;
+      });
+      return {
+        ...state,
+        actionTables: actionTables
+      };
+    case CLEAR_CURRENT_DASHBOARD:
+      return {
+        ...state,
+        actionTables: []
+      };
+
+    case CLEAR_ACTION_TABLES:
+      return {
+        ...state,
+        currentDashboard: null
       };
     default:
       return state;

@@ -20,7 +20,10 @@
     "linebreak-style": ["error", "windows"],
     "import/no-named-as-default": "off",
     "react/jsx-filename-extension": "off",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "no-shadow": "off",
+    "label-has-associated-control": "off",
+    "label-has-for": "off"
   },
   "parser": "babel-eslint"
 }
