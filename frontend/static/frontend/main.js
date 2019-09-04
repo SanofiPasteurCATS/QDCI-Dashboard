@@ -157,10 +157,10 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 52 modules ***!
+  !*** ./frontend/src/index.js + 53 modules ***!
   \********************************************/
 /*! no exports provided */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require), ./node_modules/react-spinners/PropagateLoader.js (referenced with amd require)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js */
@@ -222,7 +222,7 @@ var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 var axios = __webpack_require__("./node_modules/axios/index.js");
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
-// CONCATENATED MODULE: ./frontend/src/actions/types.js
+// CONCATENATED MODULE: ./frontend/src/core/actions/types.js
 // Reference this list for action types
 var GET_DASHBOARDS = "GET_DASHBOARDS";
 var DELETE_DASHBOARD = "DELETE_DASHBOARD";
@@ -260,7 +260,7 @@ var UPDATE_ACTION_TABLE = "UPDATE_ACTION_TABLE";
 var GET_ACTION_TABLE = "GET_ACTION_TABLE";
 var CLEAR_CURRENT_DASHBOARD = "CLEAR_CURRENT_DASHBOARD";
 var CLEAR_ACTION_TABLES = "CLEAR_ACTION_TABLE";
-// CONCATENATED MODULE: ./frontend/src/actions/messages.js
+// CONCATENATED MODULE: ./frontend/src/core/actions/messages.js
  // CREATE MESSAGE
 
 var messages_createMessage = function createMessage(msg) {
@@ -279,7 +279,7 @@ var messages_returnErrors = function returnErrors(msg, status) {
     }
   };
 };
-// CONCATENATED MODULE: ./frontend/src/actions/auth.js
+// CONCATENATED MODULE: ./frontend/src/core/actions/auth.js
 
 
  // Setup config with token - helper function
@@ -391,8 +391,10 @@ var auth_logout = function logout() {
     });
   };
 };
-// CONCATENATED MODULE: ./frontend/src/components/layout/Header.js
+// CONCATENATED MODULE: ./frontend/src/scenes/portal/scenes/login/index.js
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -411,123 +413,313 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // -----------------------------------------------------------------------------
-//                           HEADER COMPONENT
+//                            LOGIN COMPONENT
 //                      Organization: Sanofi Pasteur
 //                         Author: Kyle Thatcher
 //                           Date: 08JUL2019
+//
+//
+//           * Login component handles login markup and control
+//       * Validates users and supplies Auth tokens via the login action
 // -----------------------------------------------------------------------------
 
 
 
 
 
-/**
- * Header component for the site
- */
-
-var Header_Header =
+var login_Login =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Header, _Component);
+  _inherits(Login, _Component);
 
-  function Header() {
-    _classCallCheck(this, Header);
+  function Login() {
+    var _getPrototypeOf2;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Header).apply(this, arguments));
+    var _temp, _this;
+
+    _classCallCheck(this, Login);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _possibleConstructorReturn(_this, (_temp = _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Login)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      username: "",
+      password: ""
+    }, _this.onSubmit = function (e) {
+      // Dispatches a login action which will check credentials
+      var login = _this.props.login;
+      var _this$state = _this.state,
+          username = _this$state.username,
+          password = _this$state.password;
+      e.preventDefault();
+      login(username, password);
+    }, _this.onChange = function (e) {
+      // Updates the local state with user input from form
+      _this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }, _temp));
   }
 
-  _createClass(Header, [{
+  _createClass(Login, [{
     key: "render",
     value: function render() {
-      var _this$props$auth = this.props.auth,
-          isAuthenticated = _this$props$auth.isAuthenticated,
-          user = _this$props$auth.user;
-      var currentDashboard = this.props.currentDashboard;
-      var authLinks = react_default.a.createElement("ul", {
-        className: "navbar-nav ml-auto mt-2"
-      }, react_default.a.createElement("span", {
-        className: "navbar-text mr-3"
-      }, react_default.a.createElement("strong", null, user ? "Welcome ".concat(user.username) : "")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("button", {
-        onClick: this.props.logout,
-        className: "nav-link btn btn-info btn-sm text-light pl-2 pr-2"
-      }, "Logout")));
-      var guestLinks = react_default.a.createElement("ul", {
-        className: "navbar-nav ml-auto mt-2"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement(react_router_dom["Link"], {
-        to: "/register",
-        className: "nav-link"
-      }, "Register")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement(react_router_dom["Link"], {
-        to: "/login",
-        className: "nav-link"
-      }, "Login")));
-      return react_default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-light"
+      // Redirects users which are already authenticated to there homepage
+      var isAuthenticated = this.props.isAuthenticated;
+
+      if (isAuthenticated) {
+        return react_default.a.createElement(react_router_dom["Redirect"], {
+          to: "/"
+        });
+      } // Need the current username and password to update the inputs
+
+
+      var _this$state2 = this.state,
+          username = _this$state2.username,
+          password = _this$state2.password;
+      return react_default.a.createElement("div", {
+        className: "col-md-6 m-auto"
       }, react_default.a.createElement("div", {
-        className: "container-fluid"
-      }, react_default.a.createElement("a", {
-        className: "navbar-brand",
-        href: "#"
-      }, "+QDCI Boards"), react_default.a.createElement("button", {
-        className: "navbar-toggler",
-        type: "button",
-        "data-toggle": "collapse",
-        "data-target": "#navbarNavDropdown",
-        "aria-controls": "navbarNavDropdown",
-        "aria-expanded": "false",
-        "aria-label": "Toggle navigation"
-      }, react_default.a.createElement("span", {
-        className: "navbar-toggler-icon"
+        className: "card card-body mt-5"
+      }, react_default.a.createElement("h2", {
+        className: "text-center"
+      }, "Login"), react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "username"
+      }, "Username"), react_default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "username",
+        onChange: this.onChange,
+        value: username
       })), react_default.a.createElement("div", {
-        className: "collapse navbar-collapse",
-        id: "navbarNavDropdown"
-      }, react_default.a.createElement("ul", {
-        className: "navbar-nav"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#"
-      }, "My Dashboards")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#"
-      }, "Browse")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#"
-      }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h2", {
-        className: "m-auto"
-      }, currentDashboard.title), isAuthenticated ? authLinks : guestLinks)));
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "password"
+      }, "Password"), react_default.a.createElement("input", {
+        type: "password",
+        className: "form-control",
+        name: "password",
+        onChange: this.onChange,
+        value: password
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Login")), react_default.a.createElement("p", null, "Don't have an account?", " ", react_default.a.createElement(react_router_dom["Link"], {
+        to: "/register"
+      }, "Sign up your department today!")))));
     }
   }]);
 
-  return Header;
+  return Login;
 }(react["Component"]);
-
-Header_Header.propTypes = {
-  auth: prop_types_default.a.object.isRequired,
-  logout: prop_types_default.a.func.isRequired
+login_Login.propTypes = {
+  login: prop_types_default.a.func.isRequired,
+  isAuthenticated: prop_types_default.a.bool.isRequired
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    auth: state.auth,
-    currentDashboard: state.dashboards.currentDashboard
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 
-/* harmony default export */ var layout_Header = (Object(es["connect"])(mapStateToProps, {
-  logout: auth_logout
-})(Header_Header));
-// CONCATENATED MODULE: ./frontend/src/actions/dashboards.js
+/* harmony default export */ var scenes_login = (Object(es["connect"])(mapStateToProps, {
+  login: auth_login
+})(login_Login));
+// CONCATENATED MODULE: ./frontend/src/scenes/portal/scenes/register/index.js
+function register_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { register_typeof = function _typeof(obj) { return typeof obj; }; } else { register_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return register_typeof(obj); }
+
+function register_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function register_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function register_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function register_createClass(Constructor, protoProps, staticProps) { if (protoProps) register_defineProperties(Constructor.prototype, protoProps); if (staticProps) register_defineProperties(Constructor, staticProps); return Constructor; }
+
+function register_possibleConstructorReturn(self, call) { if (call && (register_typeof(call) === "object" || typeof call === "function")) { return call; } return register_assertThisInitialized(self); }
+
+function register_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function register_getPrototypeOf(o) { register_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return register_getPrototypeOf(o); }
+
+function register_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) register_setPrototypeOf(subClass, superClass); }
+
+function register_setPrototypeOf(o, p) { register_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return register_setPrototypeOf(o, p); }
+
+// -----------------------------------------------------------------------------
+//                            REGISTER COMPONENT
+//                      Organization: Sanofi Pasteur
+//                         Author: Kyle Thatcher
+//                           Date: 08JUL2019
+//
+//
+//            * Register component privides a form to create a new account
+//            * Apon succesful completion the user will be auto logged in
+// -----------------------------------------------------------------------------
+
+
+
+
+
+
+/**
+ * Register component privides a form to create a new account
+ * Apon succesful completion the user will be auto logged in
+ */
+
+var register_Register =
+/*#__PURE__*/
+function (_Component) {
+  register_inherits(Register, _Component);
+
+  function Register() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    register_classCallCheck(this, Register);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return register_possibleConstructorReturn(_this, (_temp = _this = register_possibleConstructorReturn(this, (_getPrototypeOf2 = register_getPrototypeOf(Register)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      username: "",
+      email: "",
+      password: "",
+      password2: ""
+    }, _this.onSubmit = function (e) {
+      e.preventDefault(); // Need current field values to create a new user instance
+
+      var _this$state = _this.state,
+          username = _this$state.username,
+          email = _this$state.email,
+          password = _this$state.password,
+          password2 = _this$state.password2;
+      var _this$props = _this.props,
+          createMessage = _this$props.createMessage,
+          register = _this$props.register; // Check password consitancy
+
+      if (password !== password2) {
+        createMessage({
+          passwordsNotMatch: "Passwords Do Not Match"
+        });
+      } else {
+        var newUser = {
+          username: username,
+          password: password,
+          email: email
+        }; // Create new user
+
+        register(newUser);
+      }
+    }, _this.onChange = function (e) {
+      // Update state to relfect current field values
+      _this.setState(register_defineProperty({}, e.target.name, e.target.value));
+    }, _temp));
+  }
+
+  register_createClass(Register, [{
+    key: "render",
+    value: function render() {
+      var isAuthenticated = this.props.isAuthenticated; // Redirect users whom already have valid Auth tokens
+
+      if (isAuthenticated) {
+        return react_default.a.createElement(react_router_dom["Redirect"], {
+          to: "/"
+        });
+      } // Need these state values to update form fields
+
+
+      var _this$state2 = this.state,
+          username = _this$state2.username,
+          email = _this$state2.email,
+          password = _this$state2.password,
+          password2 = _this$state2.password2;
+      return react_default.a.createElement("div", {
+        className: "col-md-6 m-auto"
+      }, react_default.a.createElement("div", {
+        className: "card card-body mt-5"
+      }, react_default.a.createElement("h2", {
+        className: "text-center"
+      }, "Register Your Department"), react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "username"
+      }, "Username"), react_default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "username",
+        onChange: this.onChange,
+        value: username
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "email"
+      }, "Email"), react_default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "email",
+        onChange: this.onChange,
+        value: email
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "password"
+      }, "Password"), react_default.a.createElement("input", {
+        type: "password",
+        className: "form-control",
+        name: "password",
+        onChange: this.onChange,
+        value: password
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "password2"
+      }, "Confirm Password"), react_default.a.createElement("input", {
+        type: "password",
+        className: "form-control",
+        name: "password2",
+        onChange: this.onChange,
+        value: password2
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Register")), react_default.a.createElement("p", null, "Already have an account? ", react_default.a.createElement(react_router_dom["Link"], {
+        to: "/login"
+      }, " Login!")))));
+    }
+  }]);
+
+  return Register;
+}(react["Component"]);
+register_Register.propTypes = {
+  register: prop_types_default.a.func.isRequired,
+  isAuthenticated: prop_types_default.a.bool.isRequired,
+  createMessage: prop_types_default.a.func.isRequired
+};
+
+var register_mapStateToProps = function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+};
+
+/* harmony default export */ var scenes_register = (Object(es["connect"])(register_mapStateToProps, {
+  register: auth_register,
+  createMessage: messages_createMessage
+})(register_Register));
+// CONCATENATED MODULE: ./frontend/src/core/actions/dashboards.js
 
 
 
@@ -857,1540 +1049,6 @@ var dashboards_clearCurrentDashboard = function clearCurrentDashboard() {
     });
   };
 };
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/DashboardDisplayCard.js
-function DashboardDisplayCard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardDisplayCard_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardDisplayCard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardDisplayCard_typeof(obj); }
-
-function DashboardDisplayCard_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function DashboardDisplayCard_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function DashboardDisplayCard_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardDisplayCard_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardDisplayCard_defineProperties(Constructor, staticProps); return Constructor; }
-
-function DashboardDisplayCard_possibleConstructorReturn(self, call) { if (call && (DashboardDisplayCard_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardDisplayCard_assertThisInitialized(self); }
-
-function DashboardDisplayCard_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function DashboardDisplayCard_getPrototypeOf(o) { DashboardDisplayCard_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardDisplayCard_getPrototypeOf(o); }
-
-function DashboardDisplayCard_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardDisplayCard_setPrototypeOf(subClass, superClass); }
-
-function DashboardDisplayCard_setPrototypeOf(o, p) { DashboardDisplayCard_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardDisplayCard_setPrototypeOf(o, p); }
-
-
-
-
-
-
-var DashboardDisplayCard_DashboardDisplayCard =
-/*#__PURE__*/
-function (_Component) {
-  DashboardDisplayCard_inherits(DashboardDisplayCard, _Component);
-
-  function DashboardDisplayCard() {
-    DashboardDisplayCard_classCallCheck(this, DashboardDisplayCard);
-
-    return DashboardDisplayCard_possibleConstructorReturn(this, DashboardDisplayCard_getPrototypeOf(DashboardDisplayCard).apply(this, arguments));
-  }
-
-  DashboardDisplayCard_createClass(DashboardDisplayCard, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          dashboard = _this$props.dashboard,
-          deleteDashboard = _this$props.deleteDashboard,
-          deleteClick = _this$props.deleteClick;
-      return react_default.a.createElement("div", {
-        className: "card m-3"
-      }, react_default.a.createElement("img", {
-        className: "card-img-top",
-        src: "https://via.placeholder.com/320x200.png",
-        alt: "Card image cap"
-      }), react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement("div", {
-        className: "card-title",
-        style: {
-          fontSize: "1.25rem",
-          fontWeight: "bold"
-        }
-      }, dashboard.title, " "), react_default.a.createElement("i", {
-        style: {
-          color: dashboard.background,
-          textAlign: "right"
-        },
-        className: "im im-drop ml-auto"
-      })), react_default.a.createElement("p", {
-        className: "card-text"
-      }, "Author: ", dashboard.author, react_default.a.createElement("br", null), "Level: ", dashboard.level), react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement(react_router_dom["Link"], {
-        to: "/boardroom/".concat(dashboard.id),
-        className: "btn btn-primary btn-sm"
-      }, "View"), react_default.a.createElement("button", {
-        onClick: function onClick() {
-          return deleteClick("dashboard", dashboard.title);
-        },
-        className: "btn btn-danger btn-sm ml-auto"
-      }, " ", "Delete"))));
-    }
-  }]);
-
-  return DashboardDisplayCard;
-}(react["Component"]);
-
-/* harmony default export */ var ui_DashboardDisplayCard = (Object(es["connect"])(null, {
-  deleteDashboard: dashboards_deleteDashboard
-})(DashboardDisplayCard_DashboardDisplayCard));
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/NewDashboardCard.js
-
-
-var NewDashboardCard_NewDashboardCard = function NewDashboardCard(props) {
-  var handleClick = props.handleClick;
-  return react_default.a.createElement("div", {
-    className: "card m-3 text-center icon",
-    onClick: handleClick
-  }, react_default.a.createElement("div", {
-    className: "card-body",
-    style: {
-      paddingBottom: "-1rem !important"
-    }
-  }, react_default.a.createElement("div", {
-    className: "d-flex h-100 w-100"
-  }, react_default.a.createElement("div", {
-    className: "m-auto"
-  }, react_default.a.createElement("i", {
-    className: " mt-5 im im-plus"
-  }), react_default.a.createElement("h4", {
-    className: "mt-2 mb-5"
-  }, "New Dashboard")))));
-};
-
-/* harmony default export */ var ui_NewDashboardCard = (NewDashboardCard_NewDashboardCard);
-// CONCATENATED MODULE: ./frontend/src/common/dashboardOptions.js
-// Options for form-controls. This is a temp solution until I can pull the data directly from the database
-var PLOT_TYPE_CHOICES = [{
-  id: "li",
-  name: "Connected Scatter Plot"
-}];
-var DASHBOARD_TYPE_CHOICES = [{
-  id: 0,
-  name: "QDCI Dashboard"
-}];
-var LEVEL_CHOICES = [{
-  id: 1,
-  name: "Level 1"
-}, {
-  id: 2,
-  name: "Level 2"
-}, {
-  id: 3,
-  name: "Level 3"
-}, {
-  id: 4,
-  name: "Level 4"
-}];
-var DATAPOINT_TABLE_HEADERS = [{
-  name: "Value",
-  prop: "value"
-}, {
-  name: "Target",
-  prop: "target"
-}, {
-  name: "Date",
-  prop: "date"
-}];
-var PILLAR_CHOICES = [{
-  id: "+",
-  name: "Safety"
-}, {
-  id: "Q",
-  name: "Quality"
-}, {
-  id: "D",
-  name: "Delivery"
-}, {
-  id: "C",
-  name: "Cost"
-}, {
-  id: "I",
-  name: "Involvement"
-}];
-var FREQUENCY_CHOICES = [{
-  id: 0,
-  name: "Monthly"
-}, {
-  id: 1,
-  name: "Weekly"
-}, {
-  id: 2,
-  name: "Bi-Weekly"
-}];
-var KPI_TABLE_HEADERS = [{
-  name: "Name",
-  prop: "name"
-}, {
-  name: "Pillar",
-  prop: "pillar"
-}, {
-  name: "Frequency",
-  prop: "frequency"
-}, {
-  name: "Safe Threshold",
-  prop: "safe"
-}, {
-  name: "Danger Threshold",
-  prop: "danger"
-}];
-var SERIES_TABLE_HEADERS = [{
-  name: "Name",
-  prop: "name"
-}, {
-  name: "Plot Type",
-  prop: "plot_type"
-}, {
-  name: "Color",
-  prop: "color"
-}];
-var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
-var ACTION_TABLE_HEADERS = [{
-  name: "Letter",
-  prop: "letter"
-}, {
-  name: "Problem",
-  prop: "problem"
-}, {
-  name: "Root Cause",
-  prop: "root_cause"
-}, {
-  name: "Solution",
-  prop: "solution"
-}, {
-  name: "Leader",
-  prop: "leader"
-}, {
-  name: "Date",
-  prop: "date",
-  date: true
-}];
-var ACTION_TABLE_DUMMY_DATA = [{
-  letter: "Q",
-  problem: "not enough sleep",
-  root_cause: "Insomnia",
-  solution: "take sleeping pills",
-  leader: "Kyle",
-  date: "24-OCT-2019"
-}, {
-  letter: "Q",
-  problem: "Not enough coffee",
-  root_cause: "coffe machine is broken",
-  solution: "fix coffee machine",
-  leader: "Kyle",
-  date: "08-AUG-2019"
-}, {
-  letter: "I",
-  problem: "Not enough GEMBAS",
-  root_cause: "No legs",
-  solution: "Get legs",
-  leader: "Kyle",
-  date: "03-SEP-2019"
-}];
-// EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
-var lib = __webpack_require__("./node_modules/react-color/lib/index.js");
-
-// CONCATENATED MODULE: ./frontend/src/components/hompage/DashboardForm.js
-function DashboardForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardForm_typeof(obj); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function DashboardForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function DashboardForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function DashboardForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function DashboardForm_possibleConstructorReturn(self, call) { if (call && (DashboardForm_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardForm_assertThisInitialized(self); }
-
-function DashboardForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function DashboardForm_getPrototypeOf(o) { DashboardForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardForm_getPrototypeOf(o); }
-
-function DashboardForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardForm_setPrototypeOf(subClass, superClass); }
-
-function DashboardForm_setPrototypeOf(o, p) { DashboardForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardForm_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var DashboardForm_DashboardForm =
-/*#__PURE__*/
-function (_Component) {
-  DashboardForm_inherits(DashboardForm, _Component);
-
-  function DashboardForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    DashboardForm_classCallCheck(this, DashboardForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return DashboardForm_possibleConstructorReturn(_this, (_temp = _this = DashboardForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DashboardForm_getPrototypeOf(DashboardForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      title: "",
-      author: "",
-      background: "",
-      dashboardType: "0",
-      level: "0"
-    }, _this.onChange = function (e) {
-      return _this.setState(_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onChangeColor = function (color) {
-      _this.setState({
-        background: color.hex
-      });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$state = _this.state,
-          title = _this$state.title,
-          author = _this$state.author,
-          background = _this$state.background,
-          dashboardType = _this$state.dashboardType,
-          level = _this$state.level;
-      var dashboard = {
-        title: title,
-        author: author,
-        background: background,
-        dashboardType: dashboardType,
-        level: level
-      };
-
-      _this.props.addDashboard(dashboard);
-
-      _this.setState({
-        title: "",
-        author: "",
-        background: "#0",
-        level: ""
-      });
-    }, _temp));
-  }
-
-  DashboardForm_createClass(DashboardForm, [{
-    key: "render",
-    value: function render() {
-      var _this$state2 = this.state,
-          title = _this$state2.title,
-          author = _this$state2.author,
-          background = _this$state2.background;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h2", null, "Create Dashboard"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "row justify-content-between"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "title"
-      }, "Title"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "title",
-        onChange: this.onChange,
-        value: title
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "author"
-      }, "Author"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "author",
-        onChange: this.onChange,
-        value: author
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "dashboardType"
-      }, "Type"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "dashboardType",
-        onChange: this.onChange
-      }, DASHBOARD_TYPE_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
-          key: "choice-".concat(choice.id),
-          value: choice.id
-        }, choice.name);
-      }))), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "level"
-      }, "Level"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "level",
-        onChange: this.onChange
-      }, LEVEL_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
-          key: choice.id,
-          value: choice.id
-        }, choice.name);
-      })))), react_default.a.createElement("div", {
-        className: "col-sm-5"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "color"
-      }, "Background Color"), react_default.a.createElement(lib["ChromePicker"], {
-        color: background,
-        onChangeComplete: this.onChangeColor
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn\r btn-primary"
-      }, "Submit"))))));
-    }
-  }]);
-
-  return DashboardForm;
-}(react["Component"]);
-
-DashboardForm_DashboardForm.propTypes = {
-  addDashboard: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var hompage_DashboardForm = (Object(es["connect"])(null, {
-  addDashboard: dashboards_addDashboard
-})(DashboardForm_DashboardForm));
-// CONCATENATED MODULE: ./frontend/src/components/hompage/DashboardOptions.js
-
-
-
-var DashboardOptions_DashboardOptions = function DashboardOptions(props) {
-  return react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "dashboardOptions",
-    role: "dialog",
-    "aria-labelledby": "dashboardOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document",
-    style: {
-      maxWidth: "fit-content"
-    }
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "dashboardOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-computer",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Create New Dashboard"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement(hompage_DashboardForm, null)))))));
-};
-
-/* harmony default export */ var hompage_DashboardOptions = (DashboardOptions_DashboardOptions);
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/DeleteConfirmation.js
-function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
-
-function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
-
-function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
-
-function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
-
-function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
-
-function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
-
-
-
-
-var DeleteConfirmation_DeletetionConformation =
-/*#__PURE__*/
-function (_Component) {
-  DeleteConfirmation_inherits(DeletetionConformation, _Component);
-
-  function DeletetionConformation() {
-    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
-
-    return DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).apply(this, arguments));
-  }
-
-  DeleteConfirmation_createClass(DeletetionConformation, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          deletionItem = _this$props.deletionItem,
-          deletionName = _this$props.deletionName;
-      return react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "deletionConfirmation",
-        role: "dialog",
-        "aria-labelledby": "deletionConfirmationLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document",
-        style: {
-          maxWidth: "fit-content"
-        }
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "deletionConfirmationLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-data-delete",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Are you absolutely sure?"), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("p", {
-        className: "card-text"
-      }, "This action cannot be undone. This will permanently delete the ".concat(deletionName, " ").concat(deletionItem, " and all associated data."), " "), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        "for": "password"
-      }, "Please enter dashboard password"), react_default.a.createElement("input", {
-        type: "password",
-        className: "form-control"
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        "for": "name"
-      }, "Please type in the name of the ".concat(deletionItem, " to confirm")), react_default.a.createElement("input", {
-        type: "text",
-        className: "form-control"
-      })), react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "checkbox",
-        name: "export",
-        className: "form-check-input"
-      }), react_default.a.createElement("label", {
-        "for": "export",
-        className: "form-check-label mb-3"
-      }, "Do you want to export data?")), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-warning"
-      }, "I understand the consequences, delete this item")))))));
-    }
-  }]);
-
-  return DeletetionConformation;
-}(react["Component"]);
-
-DeleteConfirmation_DeletetionConformation.propTypes = {
-  deletionItem: prop_types_default.a.string.isRequired,
-  deletionName: prop_types_default.a.string.isRequired
-};
-/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
-// CONCATENATED MODULE: ./frontend/src/components/hompage/List.js
-function List_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { List_typeof = function _typeof(obj) { return typeof obj; }; } else { List_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return List_typeof(obj); }
-
-function List_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function List_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function List_createClass(Constructor, protoProps, staticProps) { if (protoProps) List_defineProperties(Constructor.prototype, protoProps); if (staticProps) List_defineProperties(Constructor, staticProps); return Constructor; }
-
-function List_possibleConstructorReturn(self, call) { if (call && (List_typeof(call) === "object" || typeof call === "function")) { return call; } return List_assertThisInitialized(self); }
-
-function List_getPrototypeOf(o) { List_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return List_getPrototypeOf(o); }
-
-function List_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function List_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) List_setPrototypeOf(subClass, superClass); }
-
-function List_setPrototypeOf(o, p) { List_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return List_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-
-
-
-var List_List =
-/*#__PURE__*/
-function (_Component) {
-  List_inherits(List, _Component);
-
-  function List(props) {
-    var _this;
-
-    List_classCallCheck(this, List);
-
-    _this = List_possibleConstructorReturn(this, List_getPrototypeOf(List).call(this, props));
-
-    _this.newDashboardClick = function () {
-      $("#dashboardOptions").modal("show");
-    };
-
-    _this.deleteClick = function (deletionItem, deletionName) {
-      _this.setState({
-        deletionItem: deletionItem,
-        deletionName: deletionName
-      });
-
-      $("#deletionConfirmation").modal("show");
-    };
-
-    _this.state = {
-      deletionItem: "",
-      deletionName: ""
-    };
-    _this.deleteClick = _this.deleteClick.bind(List_assertThisInitialized(_this));
-    return _this;
-  }
-
-  List_createClass(List, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getDashboards();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props = this.props,
-          dashboards = _this$props.dashboards,
-          deleteDashboard = _this$props.deleteDashboard;
-      var _this$state = this.state,
-          deletionItem = _this$state.deletionItem,
-          deletionName = _this$state.deletionName;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "row"
-      }, dashboards.map(function (dashboard) {
-        return react_default.a.createElement("div", {
-          key: dashboard.id,
-          className: "col-lg-4 col-sm-12"
-        }, react_default.a.createElement(ui_DashboardDisplayCard, {
-          dashboard: dashboard,
-          deleteClick: _this2.deleteClick
-        }));
-      }), react_default.a.createElement("div", {
-        className: "col-lg-4 col-sm-12"
-      }, react_default.a.createElement(ui_NewDashboardCard, {
-        handleClick: this.newDashboardClick
-      }))), react_default.a.createElement(hompage_DashboardOptions, null), react_default.a.createElement(DeleteConfirmation, {
-        deletionItem: deletionItem,
-        deletionName: deletionName
-      }));
-    }
-  }]);
-
-  return List;
-}(react["Component"]);
-
-List_List.propTypes = {
-  dashboards: prop_types_default.a.array.isRequired,
-  getDashboards: prop_types_default.a.func.isRequired,
-  deleteDashboard: prop_types_default.a.func.isRequired
-};
-
-var List_mapStateToProps = function mapStateToProps(state) {
-  return {
-    dashboards: state.dashboards.dashboards
-  };
-};
-
-/* harmony default export */ var hompage_List = (Object(es["connect"])(List_mapStateToProps, {
-  getDashboards: dashboards_getDashboards,
-  deleteDashboard: dashboards_deleteDashboard
-})(List_List));
-// CONCATENATED MODULE: ./frontend/src/components/hompage/dashboard.js
-function dashboard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { dashboard_typeof = function _typeof(obj) { return typeof obj; }; } else { dashboard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return dashboard_typeof(obj); }
-
-function dashboard_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function dashboard_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function dashboard_createClass(Constructor, protoProps, staticProps) { if (protoProps) dashboard_defineProperties(Constructor.prototype, protoProps); if (staticProps) dashboard_defineProperties(Constructor, staticProps); return Constructor; }
-
-function dashboard_possibleConstructorReturn(self, call) { if (call && (dashboard_typeof(call) === "object" || typeof call === "function")) { return call; } return dashboard_assertThisInitialized(self); }
-
-function dashboard_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function dashboard_getPrototypeOf(o) { dashboard_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return dashboard_getPrototypeOf(o); }
-
-function dashboard_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) dashboard_setPrototypeOf(subClass, superClass); }
-
-function dashboard_setPrototypeOf(o, p) { dashboard_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return dashboard_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var dashboard_Dashboard =
-/*#__PURE__*/
-function (_Component) {
-  dashboard_inherits(Dashboard, _Component);
-
-  function Dashboard() {
-    dashboard_classCallCheck(this, Dashboard);
-
-    return dashboard_possibleConstructorReturn(this, dashboard_getPrototypeOf(Dashboard).apply(this, arguments));
-  }
-
-  dashboard_createClass(Dashboard, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props = this.props,
-          clearCurrentDashboard = _this$props.clearCurrentDashboard,
-          clearActionTables = _this$props.clearActionTables;
-      clearCurrentDashboard();
-      clearActionTables();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react_default.a.createElement("div", null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "container"
-      }, react_default.a.createElement(hompage_List, null))));
-    }
-  }]);
-
-  return Dashboard;
-}(react["Component"]);
-
-/* harmony default export */ var hompage_dashboard = (Object(es["connect"])(null, {
-  clearCurrentDashboard: dashboards_clearCurrentDashboard,
-  clearActionTables: dashboards_clearActionTables
-})(dashboard_Dashboard));
-// CONCATENATED MODULE: ./frontend/src/components/layout/Alerts.js
-function Alerts_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Alerts_typeof = function _typeof(obj) { return typeof obj; }; } else { Alerts_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Alerts_typeof(obj); }
-
-function Alerts_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Alerts_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Alerts_createClass(Constructor, protoProps, staticProps) { if (protoProps) Alerts_defineProperties(Constructor.prototype, protoProps); if (staticProps) Alerts_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Alerts_possibleConstructorReturn(self, call) { if (call && (Alerts_typeof(call) === "object" || typeof call === "function")) { return call; } return Alerts_assertThisInitialized(self); }
-
-function Alerts_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Alerts_getPrototypeOf(o) { Alerts_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Alerts_getPrototypeOf(o); }
-
-function Alerts_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Alerts_setPrototypeOf(subClass, superClass); }
-
-function Alerts_setPrototypeOf(o, p) { Alerts_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Alerts_setPrototypeOf(o, p); }
-
-// -----------------------------------------------------------------------------
-//                           ALERT COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
-
-
-
-
-var Alerts_Alerts =
-/*#__PURE__*/
-function (_Component) {
-  Alerts_inherits(Alerts, _Component);
-
-  function Alerts() {
-    Alerts_classCallCheck(this, Alerts);
-
-    return Alerts_possibleConstructorReturn(this, Alerts_getPrototypeOf(Alerts).apply(this, arguments));
-  }
-
-  Alerts_createClass(Alerts, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this$props = this.props,
-          error = _this$props.error,
-          alert = _this$props.alert,
-          messages = _this$props.messages;
-
-      if (error !== prevProps.error) {
-        if (error.msg.title) alert.error("Title: ".concat(error.msg.title.join()));
-        if (error.msg.author) alert.error("Author: ".concat(error.msg.author.join()));
-        if (error.msg.background) alert.error("Color: ".concat(error.msg.background.join()));
-        if (error.msg.non_field_errors) alert.error("Author: ".concat(error.msg.non_field_errors.join()));
-        if (error.msg.username) alert.error(error.msg.username.join());
-      }
-
-      if (messages !== prevProps.messages) {
-        if (messages.deleteDashboard) alert.success(messages.deleteDashboard);
-        if (messages.addDashboard) alert.success(messages.addDashboard);
-        if (messages.passwordsNotMatch) alert.error(messages.passwordsNotMatch);
-        if (messages.addKpi) alert.success(messages.addKpi);
-        if (messages.updateKpi) alert.success(messages.updateKpi);
-        if (messages.deleteKpi) alert.success(messages.deleteKpi);
-        if (messages.updateActionTable) alert.success(messages.updateActionTable);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react_default.a.createElement(react["Fragment"], null);
-    }
-  }]);
-
-  return Alerts;
-}(react["Component"]);
-Alerts_Alerts.propTypes = {
-  error: prop_types_default.a.object.isRequired,
-  alert: prop_types_default.a.object.isRequired,
-  messages: prop_types_default.a.object.isRequired
-};
-
-var Alerts_mapStateToProps = function mapStateToProps(state) {
-  return {
-    error: state.errors,
-    messages: state.messages
-  };
-};
-
-/* harmony default export */ var layout_Alerts = (Object(es["connect"])(Alerts_mapStateToProps)(Object(react_alert["withAlert"])()(Alerts_Alerts)));
-// EXTERNAL MODULE: ./node_modules/redux/es/redux.js
-var redux = __webpack_require__("./node_modules/redux/es/redux.js");
-
-// EXTERNAL MODULE: ./node_modules/redux-devtools-extension/index.js
-var redux_devtools_extension = __webpack_require__("./node_modules/redux-devtools-extension/index.js");
-
-// EXTERNAL MODULE: ./node_modules/redux-thunk/es/index.js
-var redux_thunk_es = __webpack_require__("./node_modules/redux-thunk/es/index.js");
-
-// CONCATENATED MODULE: ./frontend/src/reducers/dashboards.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
-
-function dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var initalState = {
-  dashboards: [],
-  kpis: [],
-  currentDashboard: null,
-  actionTables: []
-};
-/* harmony default export */ var reducers_dashboards = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initalState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case GET_A_DASHBOARD:
-      return _objectSpread({}, state, {
-        currentDashboard: action.payload
-      });
-
-    case GET_DASHBOARDS:
-      return _objectSpread({}, state, {
-        dashboards: action.payload
-      });
-
-    case DELETE_DASHBOARD:
-      return _objectSpread({}, state, {
-        dashboards: state.dashboards.filter(function (dashboard) {
-          return dashboard.id !== action.payload;
-        })
-      });
-
-    case ADD_DASHBOARD:
-      return _objectSpread({}, state, {
-        dashboards: [].concat(_toConsumableArray(state.dashboards), [action.payload])
-      });
-
-    case GET_KPIS:
-      return _objectSpread({}, state, {
-        kpis: action.payload
-      });
-
-    case ADD_KPI:
-      return _objectSpread({}, state, {
-        kpis: [].concat(_toConsumableArray(state.kpis), [action.payload])
-      });
-
-    case UPDATE_KPI:
-      return _objectSpread({}, state, {
-        kpis: state.kpis.map(function (kpi) {
-          return kpi.id === action.payload.id ? action.payload : kpi;
-        })
-      });
-
-    case DELETE_KPI:
-      return _objectSpread({}, state, {
-        kpis: state.kpis.filter(function (kpi) {
-          return kpi.id !== action.payload;
-        })
-      });
-
-    case CLEAR_KPIS:
-      return _objectSpread({}, state, {
-        kpis: []
-      });
-
-    case ADD_SERIES:
-      console.log("added");
-      var kpis = state.kpis.map(function (kpi) {
-        if (kpi.id != action.payload.kpi) return kpi;
-        var series = kpi.series;
-        return _objectSpread({}, kpi, {
-          series: [].concat(_toConsumableArray(series), [action.payload])
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis
-      });
-
-    case UPDATE_SERIES:
-      var kpis__ = state.kpis.map(function (kpi) {
-        return _objectSpread({}, kpi, {
-          series: kpi.series.map(function (series) {
-            if (series.id != action.payload.id) return series;else return action.payload;
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis__
-      });
-
-    case GET_SERIES:
-      return _objectSpread({}, state, {
-        series: action.payload
-      });
-
-    case DELETE_SERIES:
-      var kpis_ = state.kpis.map(function (kpi) {
-        return _objectSpread({}, kpi, {
-          series: kpi.series.filter(function (series) {
-            return series.id != action.payload;
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis_
-      });
-
-    case UPDATE_DATAPOINT:
-      var kpis = state.kpis.map(function (kpi) {
-        return _objectSpread({}, kpi, {
-          series: kpi.series.map(function (series) {
-            if (series.id != action.payload.series) return series;
-            return _objectSpread({}, series, {
-              entries: series.entries.map(function (datapoint) {
-                if (datapoint.id != action.payload.id) return datapoint;else return action.payload;
-              })
-            });
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis
-      });
-
-    case DELETE_DATAPOINT:
-      var kpis = state.kpis.map(function (kpi) {
-        return _objectSpread({}, kpi, {
-          series: kpi.series.map(function (series) {
-            return _objectSpread({}, series, {
-              entries: series.entries.filter(function (datapoint) {
-                return datapoint != action.payload;
-              })
-            });
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis
-      });
-
-    case ADD_DATAPOINT:
-      var kpis___ = state.kpis.map(function (kpi) {
-        return _objectSpread({}, kpi, {
-          series: kpi.series.map(function (series) {
-            if (series.id != action.payload.series) return series;else return _objectSpread({}, series, {
-              entries: [].concat(_toConsumableArray(series.entries), [action.payload])
-            });
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        kpis: kpis___
-      });
-
-    case GET_ACTION_TABLE:
-      return _objectSpread({}, state, {
-        actionTables: action.payload
-      });
-
-    case ADD_ACTION:
-      var actionTables = state.actionTables.map(function (at) {
-        if (action.payload.tables.indexOf(at.id) == -1) return at;else return _objectSpread({}, at, {
-          actions: [].concat(_toConsumableArray(at.actions), [action.payload])
-        });
-      });
-      return _objectSpread({}, state, {
-        actionTables: actionTables
-      });
-
-    case DELETE_ACTION:
-      var actionTables = state.actionTables.map(function (at) {
-        return _objectSpread({}, at, {
-          actions: at.actions.filter(function (act) {
-            return act.id != action.payload;
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        actionTables: actionTables
-      });
-
-    case UPDATE_ACTION:
-      var actionTables = state.actionTables.map(function (at) {
-        return _objectSpread({}, at, {
-          actions: at.actions.map(function (act) {
-            if (act.id != action.payload.id) return act;else return action.payload;
-          })
-        });
-      });
-      return _objectSpread({}, state, {
-        actionTables: actionTables
-      });
-
-    case UPDATE_ACTION_TABLE:
-      var actionTables = state.actionTables.map(function (at) {
-        if (at.id != action.payload.id) return at;else return action.payload;
-      });
-      return _objectSpread({}, state, {
-        actionTables: actionTables
-      });
-
-    case CLEAR_CURRENT_DASHBOARD:
-      return _objectSpread({}, state, {
-        actionTables: []
-      });
-
-    case CLEAR_ACTION_TABLES:
-      return _objectSpread({}, state, {
-        currentDashboard: null
-      });
-
-    default:
-      return state;
-  }
-});
-// CONCATENATED MODULE: ./frontend/src/reducers/errors.js
-
-var initialState = {
-  msg: {},
-  status: null
-};
-/* harmony default export */ var errors = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case GET_ERRORS:
-      return {
-        msg: action.payload.msg,
-        status: action.payload.status
-      };
-
-    default:
-      return state;
-  }
-});
-// CONCATENATED MODULE: ./frontend/src/reducers/messages.js
-
-var messages_initialState = {
-  msg: {},
-  status: null
-};
-/* harmony default export */ var messages = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : messages_initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case CREATE_MESSAGE:
-      return state = action.payload;
-
-    default:
-      return state;
-  }
-});
-// CONCATENATED MODULE: ./frontend/src/reducers/auth.js
-function auth_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { auth_defineProperty(target, key, source[key]); }); } return target; }
-
-function auth_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var auth_initialState = {
-  token: localStorage.getItem("token"),
-  isAuthenticated: null,
-  isLoading: false,
-  user: null
-};
-/* harmony default export */ var reducers_auth = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : auth_initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case USER_LOADING:
-      return auth_objectSpread({}, state, {
-        isLoading: true
-      });
-
-    case USER_LOADED:
-      return auth_objectSpread({}, state, {
-        isAuthenticated: true,
-        isLoading: false,
-        user: action.payload
-      });
-
-    case LOGIN_SUCCESS:
-    case REGISTER_SUCCESS:
-      localStorage.setItem("token", action.payload.token);
-      return auth_objectSpread({}, state, action.payload, {
-        isAuthenticated: true,
-        isLoading: false
-      });
-
-    case LOGIN_FAIL:
-    case AUTH_ERROR:
-    case LOGOUT_SUCCESS:
-    case REGISTER_FAIL:
-      localStorage.removeItem("token");
-      return auth_objectSpread({}, state, {
-        token: null,
-        user: null,
-        leads: [],
-        isAuthenticated: false,
-        isLoading: false
-      });
-
-    default:
-      return state;
-  }
-});
-// CONCATENATED MODULE: ./frontend/src/reducers/index.js
-
-
-
-
-
-/* harmony default export */ var reducers = (Object(redux["combineReducers"])({
-  dashboards: reducers_dashboards,
-  errors: errors,
-  messages: messages,
-  auth: reducers_auth
-}));
-// CONCATENATED MODULE: ./frontend/src/store.js
-
-
-
-
-var store_initialState = {};
-var middleware = [redux_thunk_es["default"]];
-var store = Object(redux["createStore"])(reducers, store_initialState, Object(redux_devtools_extension["composeWithDevTools"])(redux["applyMiddleware"].apply(void 0, middleware)));
-/* harmony default export */ var src_store = (store);
-// CONCATENATED MODULE: ./frontend/src/components/accounts/login.js
-function login_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { login_typeof = function _typeof(obj) { return typeof obj; }; } else { login_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return login_typeof(obj); }
-
-function login_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function login_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function login_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function login_createClass(Constructor, protoProps, staticProps) { if (protoProps) login_defineProperties(Constructor.prototype, protoProps); if (staticProps) login_defineProperties(Constructor, staticProps); return Constructor; }
-
-function login_possibleConstructorReturn(self, call) { if (call && (login_typeof(call) === "object" || typeof call === "function")) { return call; } return login_assertThisInitialized(self); }
-
-function login_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function login_getPrototypeOf(o) { login_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return login_getPrototypeOf(o); }
-
-function login_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) login_setPrototypeOf(subClass, superClass); }
-
-function login_setPrototypeOf(o, p) { login_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return login_setPrototypeOf(o, p); }
-
-// -----------------------------------------------------------------------------
-//                            LOGIN COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-//
-//
-//           * Login component handles login markup and control
-//       * Validates users and supplies Auth tokens via the login action
-// -----------------------------------------------------------------------------
-
-
-
-
-
-var login_Login =
-/*#__PURE__*/
-function (_Component) {
-  login_inherits(Login, _Component);
-
-  function Login() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    login_classCallCheck(this, Login);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return login_possibleConstructorReturn(_this, (_temp = _this = login_possibleConstructorReturn(this, (_getPrototypeOf2 = login_getPrototypeOf(Login)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      username: "",
-      password: ""
-    }, _this.onSubmit = function (e) {
-      // Dispatches a login action which will check credentials
-      var login = _this.props.login;
-      var _this$state = _this.state,
-          username = _this$state.username,
-          password = _this$state.password;
-      e.preventDefault();
-      login(username, password);
-    }, _this.onChange = function (e) {
-      // Updates the local state with user input from form
-      _this.setState(login_defineProperty({}, e.target.name, e.target.value));
-    }, _temp));
-  }
-
-  login_createClass(Login, [{
-    key: "render",
-    value: function render() {
-      // Redirects users which are already authenticated to there homepage
-      var isAuthenticated = this.props.isAuthenticated;
-
-      if (isAuthenticated) {
-        return react_default.a.createElement(react_router_dom["Redirect"], {
-          to: "/"
-        });
-      } // Need the current username and password to update the inputs
-
-
-      var _this$state2 = this.state,
-          username = _this$state2.username,
-          password = _this$state2.password;
-      return react_default.a.createElement("div", {
-        className: "col-md-6 m-auto"
-      }, react_default.a.createElement("div", {
-        className: "card card-body mt-5"
-      }, react_default.a.createElement("h2", {
-        className: "text-center"
-      }, "Login"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "username"
-      }, "Username"), react_default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "username",
-        onChange: this.onChange,
-        value: username
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "password"
-      }, "Password"), react_default.a.createElement("input", {
-        type: "password",
-        className: "form-control",
-        name: "password",
-        onChange: this.onChange,
-        value: password
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Login")), react_default.a.createElement("p", null, "Don't have an account?", " ", react_default.a.createElement(react_router_dom["Link"], {
-        to: "/register"
-      }, "Sign up your department today!")))));
-    }
-  }]);
-
-  return Login;
-}(react["Component"]);
-login_Login.propTypes = {
-  login: prop_types_default.a.func.isRequired,
-  isAuthenticated: prop_types_default.a.bool.isRequired
-};
-
-var login_mapStateToProps = function mapStateToProps(state) {
-  return {
-    isAuthenticated: state.auth.isAuthenticated
-  };
-};
-
-/* harmony default export */ var accounts_login = (Object(es["connect"])(login_mapStateToProps, {
-  login: auth_login
-})(login_Login));
-// CONCATENATED MODULE: ./frontend/src/components/accounts/register.js
-function register_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { register_typeof = function _typeof(obj) { return typeof obj; }; } else { register_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return register_typeof(obj); }
-
-function register_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function register_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function register_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function register_createClass(Constructor, protoProps, staticProps) { if (protoProps) register_defineProperties(Constructor.prototype, protoProps); if (staticProps) register_defineProperties(Constructor, staticProps); return Constructor; }
-
-function register_possibleConstructorReturn(self, call) { if (call && (register_typeof(call) === "object" || typeof call === "function")) { return call; } return register_assertThisInitialized(self); }
-
-function register_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function register_getPrototypeOf(o) { register_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return register_getPrototypeOf(o); }
-
-function register_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) register_setPrototypeOf(subClass, superClass); }
-
-function register_setPrototypeOf(o, p) { register_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return register_setPrototypeOf(o, p); }
-
-// -----------------------------------------------------------------------------
-//                            LOGIN COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-//
-//
-//            * Register component privides a form to create a new account
-//            * Apon succesful completion the user will be auto logged in
-// -----------------------------------------------------------------------------
-
-
-
-
-
-
-/**
- * Register component privides a form to create a new account
- * Apon succesful completion the user will be auto logged in
- */
-
-var register_Register =
-/*#__PURE__*/
-function (_Component) {
-  register_inherits(Register, _Component);
-
-  function Register() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    register_classCallCheck(this, Register);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return register_possibleConstructorReturn(_this, (_temp = _this = register_possibleConstructorReturn(this, (_getPrototypeOf2 = register_getPrototypeOf(Register)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      username: "",
-      email: "",
-      password: "",
-      password2: ""
-    }, _this.onSubmit = function (e) {
-      e.preventDefault(); // Need current field values to create a new user instance
-
-      var _this$state = _this.state,
-          username = _this$state.username,
-          email = _this$state.email,
-          password = _this$state.password,
-          password2 = _this$state.password2;
-      var _this$props = _this.props,
-          createMessage = _this$props.createMessage,
-          register = _this$props.register; // Check password consitancy
-
-      if (password !== password2) {
-        createMessage({
-          passwordsNotMatch: "Passwords Do Not Match"
-        });
-      } else {
-        var newUser = {
-          username: username,
-          password: password,
-          email: email
-        }; // Create new user
-
-        register(newUser);
-      }
-    }, _this.onChange = function (e) {
-      // Update state to relfect current field values
-      _this.setState(register_defineProperty({}, e.target.name, e.target.value));
-    }, _temp));
-  }
-
-  register_createClass(Register, [{
-    key: "render",
-    value: function render() {
-      var isAuthenticated = this.props.isAuthenticated; // Redirect users whom already have valid Auth tokens
-
-      if (isAuthenticated) {
-        return react_default.a.createElement(react_router_dom["Redirect"], {
-          to: "/"
-        });
-      } // Need these state values to update form fields
-
-
-      var _this$state2 = this.state,
-          username = _this$state2.username,
-          email = _this$state2.email,
-          password = _this$state2.password,
-          password2 = _this$state2.password2;
-      return react_default.a.createElement("div", {
-        className: "col-md-6 m-auto"
-      }, react_default.a.createElement("div", {
-        className: "card card-body mt-5"
-      }, react_default.a.createElement("h2", {
-        className: "text-center"
-      }, "Register Your Department"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "username"
-      }, "Username"), react_default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "username",
-        onChange: this.onChange,
-        value: username
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "email"
-      }, "Email"), react_default.a.createElement("input", {
-        type: "text",
-        className: "form-control",
-        name: "email",
-        onChange: this.onChange,
-        value: email
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "password"
-      }, "Password"), react_default.a.createElement("input", {
-        type: "password",
-        className: "form-control",
-        name: "password",
-        onChange: this.onChange,
-        value: password
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "password2"
-      }, "Confirm Password"), react_default.a.createElement("input", {
-        type: "password",
-        className: "form-control",
-        name: "password2",
-        onChange: this.onChange,
-        value: password2
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Register")), react_default.a.createElement("p", null, "Already have an account? ", react_default.a.createElement(react_router_dom["Link"], {
-        to: "/login"
-      }, " Login!")))));
-    }
-  }]);
-
-  return Register;
-}(react["Component"]);
-register_Register.propTypes = {
-  register: prop_types_default.a.func.isRequired,
-  isAuthenticated: prop_types_default.a.bool.isRequired,
-  createMessage: prop_types_default.a.func.isRequired
-};
-
-var register_mapStateToProps = function mapStateToProps(state) {
-  return {
-    isAuthenticated: state.auth.isAuthenticated
-  };
-};
-
-/* harmony default export */ var accounts_register = (Object(es["connect"])(register_mapStateToProps, {
-  register: auth_register,
-  createMessage: messages_createMessage
-})(register_Register));
-// EXTERNAL MODULE: ./node_modules/react-spinners/PropagateLoader.js
-var PropagateLoader = __webpack_require__("./node_modules/react-spinners/PropagateLoader.js");
-
 // EXTERNAL MODULE: ./node_modules/react-spinners/CircleLoader.js
 var CircleLoader = __webpack_require__("./node_modules/react-spinners/CircleLoader.js");
 var CircleLoader_default = /*#__PURE__*/__webpack_require__.n(CircleLoader);
@@ -2398,21 +1056,22 @@ var CircleLoader_default = /*#__PURE__*/__webpack_require__.n(CircleLoader);
 // EXTERNAL MODULE: ./node_modules/@emotion/core/dist/core.browser.esm.js + 5 modules
 var core_browser_esm = __webpack_require__("./node_modules/@emotion/core/dist/core.browser.esm.js");
 
-// CONCATENATED MODULE: ./frontend/src/components/common/style-config.js
+// CONCATENATED MODULE: ./frontend/src/core/config/styleConfig.js
 // COLORS
 var primary_color = "#EEEEEE";
 var secondary_color = "#EEEEEE";
 var accent_color = "#437bb7";
-// CONCATENATED MODULE: ./frontend/src/components/layout/LoadingScreen.js
+// CONCATENATED MODULE: ./frontend/src/core/components/layout/LoadingScreen.js
+// DEPENDANCIES
 
 
-
+ // CONFIG
 
 
 var override =  false ? undefined : {
   name: "qdsigz-override",
   styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;label:override;",
-  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFNb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFJlYWN0IGZyb20gXCJyZWFjdFwiO1xyXG5pbXBvcnQgUHJvcGFnYXRlTG9hZGVyIGZyb20gXCJyZWFjdC1zcGlubmVycy9Qcm9wYWdhdGVMb2FkZXJcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcbmltcG9ydCB7IGFjY2VudF9jb2xvciB9IGZyb20gXCIuLi8uLi9jb21wb25lbnRzL2NvbW1vbi9zdHlsZS1jb25maWdcIjtcclxuXHJcbmNvbnN0IG92ZXJyaWRlID0gY3NzYFxyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgbWFyZ2luOiAwIGF1dG8gMjBweCBhdXRvO1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbmA7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbigpIHtcclxuICByZXR1cm4gKFxyXG4gICAgPGRpdiBjbGFzc05hbWU9XCJjb2wtbWQtNiBtLWF1dG9cIj5cclxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkIHRleHQtY2VudGVyIG10LTVcIj5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmQgY2FyZC1ib2R5XCI+XHJcbiAgICAgICAgICA8Q2lyY2xlTG9hZGVyXHJcbiAgICAgICAgICAgIHNpemVVbml0PXtcInB4XCJ9XHJcbiAgICAgICAgICAgIHNpemU9ezYwfVxyXG4gICAgICAgICAgICBjc3M9e292ZXJyaWRlfVxyXG4gICAgICAgICAgICBjb2xvcj17YWNjZW50X2NvbG9yfVxyXG4gICAgICAgICAgLz5cclxuICAgICAgICAgIDxoMSBzdHlsZT17eyBtYXJnaW46IDAgfX0+TG9hZGluZzwvaDE+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvZGl2PlxyXG4gICAgPC9kaXY+XHJcbiAgKTtcclxufVxyXG4iXX0= */"
+  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50X2NvbG9yIH0gZnJvbSBcIi4uLy4uL2NvbmZpZy9zdHlsZUNvbmZpZ1wiO1xyXG5cclxuY29uc3Qgb3ZlcnJpZGUgPSBjc3NgXHJcbiAgZGlzcGxheTogZmxleDtcclxuICBtYXJnaW46IDAgYXV0byAyMHB4IGF1dG87XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuYDtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uKCkge1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IGNsYXNzTmFtZT1cImNvbC1tZC02IG0tYXV0b1wiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmQgdGV4dC1jZW50ZXIgbXQtNVwiPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCBjYXJkLWJvZHlcIj5cclxuICAgICAgICAgIDxDaXJjbGVMb2FkZXJcclxuICAgICAgICAgICAgc2l6ZVVuaXQ9e1wicHhcIn1cclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRfY29sb3J9XHJcbiAgICAgICAgICAvPlxyXG4gICAgICAgICAgPGgxIHN0eWxlPXt7IG1hcmdpbjogMCB9fT5Mb2FkaW5nPC9oMT5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59XHJcbiJdfQ== */"
 };
 /* harmony default export */ var LoadingScreen = (function () {
   return react_default.a.createElement("div", {
@@ -2438,7 +1097,7 @@ var d3 = __webpack_require__("./node_modules/d3/index.js");
 // EXTERNAL MODULE: ./node_modules/react-faux-dom/lib/ReactFauxDOM.js
 var ReactFauxDOM = __webpack_require__("./node_modules/react-faux-dom/lib/ReactFauxDOM.js");
 
-// CONCATENATED MODULE: ./frontend/src/components/common/d3charts/pillar.js
+// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/pillar.js
 function pillar_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillar_typeof = function _typeof(obj) { return typeof obj; }; } else { pillar_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillar_typeof(obj); }
 
 function pillar_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2457,15 +1116,11 @@ function pillar_inherits(subClass, superClass) { if (typeof superClass !== "func
 
 function pillar_setPrototypeOf(o, p) { pillar_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return pillar_setPrototypeOf(o, p); }
 
-// -----------------------------------------------------------------------------
-//                           PILLAR COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
+// DEPENDANCIES
 
 
 
+ // COMPONENTS
 
 
 /**
@@ -2637,7 +1292,7 @@ pillar_Pillar.defaultProps = {
   labeled: false
 };
 /* harmony default export */ var d3charts_pillar = (Object(ReactFauxDOM["withFauxDOM"])(pillar_Pillar));
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/PillarBar.js
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/PillarBar.js
 // -----------------------------------------------------------------------------
 //                          PillarBar COMPONENT
 //                      Organization: Sanofi Pasteur
@@ -2693,17 +1348,21 @@ PillarBar_PillarBar.propType = {
 PillarBar_PillarBar.defaultProps = {
   kpis: null
 };
-/* harmony default export */ var boardroom_PillarBar = (PillarBar_PillarBar);
+/* harmony default export */ var components_PillarBar = (PillarBar_PillarBar);
+// EXTERNAL MODULE: ./node_modules/react-tooltip/dist/index.js
+var dist = __webpack_require__("./node_modules/react-tooltip/dist/index.js");
+var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+
 // EXTERNAL MODULE: ./node_modules/react-datepicker/es/index.js
 var react_datepicker_es = __webpack_require__("./node_modules/react-datepicker/es/index.js");
 
 // EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.css
 var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.css");
 
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/table/Row.js
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Row.js
 function Row_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Row_typeof = function _typeof(obj) { return typeof obj; }; } else { Row_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Row_typeof(obj); }
 
-function Row_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } return target; }
 
 function Row_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2741,7 +1400,7 @@ function (_Component) {
     _this = Row_possibleConstructorReturn(this, Row_getPrototypeOf(Row).call(this, props));
 
     _this.handleChange = function (e) {
-      var current = Row_objectSpread({}, _this.state.entry);
+      var current = _objectSpread({}, _this.state.entry);
 
       current[e.target.name] = e.target.value;
 
@@ -2751,7 +1410,7 @@ function (_Component) {
     };
 
     _this.handleDateChange = function (date, prop) {
-      var current = Row_objectSpread({}, _this.state.entry);
+      var current = _objectSpread({}, _this.state.entry);
 
       current[prop] = date;
 
@@ -2887,11 +1546,7 @@ function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var table_Row = (Row_Row);
-// EXTERNAL MODULE: ./node_modules/react-tooltip/dist/index.js
-var dist = __webpack_require__("./node_modules/react-tooltip/dist/index.js");
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
-
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/table/Table.js
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Table.js
 function Table_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Table_typeof = function _typeof(obj) { return typeof obj; }; } else { Table_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Table_typeof(obj); }
 
 function Table_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2910,8 +1565,10 @@ function Table_inherits(subClass, superClass) { if (typeof superClass !== "funct
 
 function Table_setPrototypeOf(o, p) { Table_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Table_setPrototypeOf(o, p); }
 
+// DEPENDACIES
 
 
+ // COMPONENTS
 
 
 
@@ -3092,7 +1749,7 @@ Table_Table.defaultProps = {
   deletable: false
 };
 /* harmony default export */ var table_Table = (Table_Table);
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/actionPlans/ActionTable.js
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionTable.js
 function ActionTable_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function ActionTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionTable_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionTable_typeof(obj); }
@@ -3207,7 +1864,7 @@ ActionTable_ActionTable.propTypes = ActionTable_defineProperty({
   hoverable: prop_types_default.a.bool,
   deletable: prop_types_default.a.bool
 }, "hoverable", prop_types_default.a.bool);
-/* harmony default export */ var actionPlans_ActionTable = (Object(es["connect"])(null, {
+/* harmony default export */ var components_ActionTable = (Object(es["connect"])(null, {
   updateAction: dashboards_updateAction,
   deleteAction: dashboards_deleteAction,
   addAction: dashboards_addAction
@@ -3219,7 +1876,135 @@ ActionTable_ActionTable.defaultProps = {
   appendable: false,
   rowClick: null
 };
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/DashboardCard.js
+// CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
+// Options for form-controls. This is a temp solution until I can pull the data directly from the database
+var PLOT_TYPE_CHOICES = [{
+  id: "li",
+  name: "Connected Scatter Plot"
+}];
+var DASHBOARD_TYPE_CHOICES = [{
+  id: 0,
+  name: "QDCI Dashboard"
+}];
+var LEVEL_CHOICES = [{
+  id: 1,
+  name: "Level 1"
+}, {
+  id: 2,
+  name: "Level 2"
+}, {
+  id: 3,
+  name: "Level 3"
+}, {
+  id: 4,
+  name: "Level 4"
+}];
+var DATAPOINT_TABLE_HEADERS = [{
+  name: "Value",
+  prop: "value"
+}, {
+  name: "Target",
+  prop: "target"
+}, {
+  name: "Date",
+  prop: "date"
+}];
+var PILLAR_CHOICES = [{
+  id: "+",
+  name: "Safety"
+}, {
+  id: "Q",
+  name: "Quality"
+}, {
+  id: "D",
+  name: "Delivery"
+}, {
+  id: "C",
+  name: "Cost"
+}, {
+  id: "I",
+  name: "Involvement"
+}];
+var FREQUENCY_CHOICES = [{
+  id: 0,
+  name: "Monthly"
+}, {
+  id: 1,
+  name: "Weekly"
+}, {
+  id: 2,
+  name: "Bi-Weekly"
+}];
+var KPI_TABLE_HEADERS = [{
+  name: "Name",
+  prop: "name"
+}, {
+  name: "Pillar",
+  prop: "pillar"
+}, {
+  name: "Frequency",
+  prop: "frequency"
+}, {
+  name: "Safe Threshold",
+  prop: "safe"
+}, {
+  name: "Danger Threshold",
+  prop: "danger"
+}];
+var SERIES_TABLE_HEADERS = [{
+  name: "Name",
+  prop: "name"
+}, {
+  name: "Plot Type",
+  prop: "plot_type"
+}, {
+  name: "Color",
+  prop: "color"
+}];
+var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
+var ACTION_TABLE_HEADERS = [{
+  name: "Letter",
+  prop: "letter"
+}, {
+  name: "Problem",
+  prop: "problem"
+}, {
+  name: "Root Cause",
+  prop: "root_cause"
+}, {
+  name: "Solution",
+  prop: "solution"
+}, {
+  name: "Leader",
+  prop: "leader"
+}, {
+  name: "Date",
+  prop: "date",
+  date: true
+}];
+var ACTION_TABLE_DUMMY_DATA = [{
+  letter: "Q",
+  problem: "not enough sleep",
+  root_cause: "Insomnia",
+  solution: "take sleeping pills",
+  leader: "Kyle",
+  date: "24-OCT-2019"
+}, {
+  letter: "Q",
+  problem: "Not enough coffee",
+  root_cause: "coffe machine is broken",
+  solution: "fix coffee machine",
+  leader: "Kyle",
+  date: "08-AUG-2019"
+}, {
+  letter: "I",
+  problem: "Not enough GEMBAS",
+  root_cause: "No legs",
+  solution: "Get legs",
+  leader: "Kyle",
+  date: "03-SEP-2019"
+}];
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/DashboardCard.js
 
 
 
@@ -3251,7 +2036,7 @@ var DashboardCard_DashboardCard = function DashboardCard(props) {
 };
 
 /* harmony default export */ var ui_DashboardCard = (DashboardCard_DashboardCard);
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/actionPlans/EscalationsOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/EscalationsOptions.js
 function EscalationsOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { EscalationsOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { EscalationsOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return EscalationsOptions_typeof(obj); }
 
 function EscalationsOptions_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3438,7 +2223,7 @@ var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.j
 // EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 28 modules
 var format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
 
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/actionPlans/ActionForm.js
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
 function ActionForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionForm_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionForm_typeof(obj); }
 
 function ActionForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3459,26 +2244,20 @@ function ActionForm_inherits(subClass, superClass) { if (typeof superClass !== "
 
 function ActionForm_setPrototypeOf(o, p) { ActionForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionForm_setPrototypeOf(o, p); }
 
-// -----------------------------------------------------------------------------
-//                             Action Form
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-//
-//
-//          * The boardroom is the landing page for all dashboards
-//                  * Parent of all boardroom components
-//               * Contains pillar widgets and action tables
-//         * This component makes ALL GET request for Boardroom data
-// -----------------------------------------------------------------------------
+//DEPENDANCIES
 
 
 
 
 
 
+ // ACTIONS
 
 
+/* The boardroom is the landing page for all dashboards
+Parent of all boardroom components Contains pillar widgets and action tables
+This component makes ALL GET request for Boardroom data
+*/
 
 var ActionForm_ActionForm =
 /*#__PURE__*/
@@ -3674,11 +2453,11 @@ ActionForm_ActionForm.propTypes = {
   updateAction: prop_types_default.a.func.isRequired,
   deleteAction: prop_types_default.a.func.isRequired
 };
-/* harmony default export */ var actionPlans_ActionForm = (Object(es["connect"])(null, {
+/* harmony default export */ var components_ActionForm = (Object(es["connect"])(null, {
   updateAction: dashboards_updateAction,
   deleteAction: dashboards_deleteAction
 })(ActionForm_ActionForm));
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/actionPlans/ActionOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionOptions.js
 
 
 
@@ -3726,7 +2505,7 @@ var ActionOptions_ActionOptions = function ActionOptions(props) {
     className: "card"
   }, react_default.a.createElement("div", {
     className: "card-body"
-  }, react_default.a.createElement(actionPlans_ActionForm, {
+  }, react_default.a.createElement(components_ActionForm, {
     action: action
   })))))));
 };
@@ -3734,8 +2513,8 @@ var ActionOptions_ActionOptions = function ActionOptions(props) {
 ActionOptions_ActionOptions.propTypes = {
   action: prop_types_default.a.object
 };
-/* harmony default export */ var actionPlans_ActionOptions = (ActionOptions_ActionOptions);
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/actionPlans/ActionPlan.js
+/* harmony default export */ var components_ActionOptions = (ActionOptions_ActionOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionPlan.js
 function ActionPlan_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionPlan_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionPlan_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionPlan_typeof(obj); }
 
 function ActionPlan_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3756,6 +2535,7 @@ function ActionPlan_setPrototypeOf(o, p) { ActionPlan_setPrototypeOf = Object.se
 
 
 
+ // COMPONENTS
 
 
 
@@ -3816,7 +2596,7 @@ function (_Component) {
       var ll = this.filterTables("Lower Level Feed");
       var lt = this.filterTables("Long Term Action Plan");
       var st = this.filterTables("Short Term Action Plan");
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(actionPlans_ActionOptions, {
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
         action: currentAction
       }), react_default.a.createElement("div", {
         className: "row"
@@ -3826,14 +2606,14 @@ function (_Component) {
         className: "card m-4"
       }, react_default.a.createElement("div", {
         className: "card-body"
-      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", null, " Short Term Action Plan"), react_default.a.createElement(actionPlans_ActionTable, {
+      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", null, " Short Term Action Plan"), react_default.a.createElement(components_ActionTable, {
         data: st,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
         rowClick: this.rowClick
       })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
         className: "mt-3"
-      }, " Long Term Action Plan"), react_default.a.createElement(actionPlans_ActionTable, {
+      }, " Long Term Action Plan"), react_default.a.createElement(components_ActionTable, {
         data: lt,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
@@ -3859,7 +2639,7 @@ function (_Component) {
         className: "btn btn-primary btn-sm mb-1 ml-auto",
         "data-toggle": "modal",
         "data-target": "#escalationOptions"
-      }, "Manage Escalations")), react_default.a.createElement(actionPlans_ActionTable, {
+      }, "Manage Escalations")), react_default.a.createElement(components_ActionTable, {
         data: ul,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
@@ -3870,7 +2650,7 @@ function (_Component) {
         actionTable: this.filterTables("Upper Level Escalation")
       })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
         className: "mt-3"
-      }, " Lower Level Feed"), react_default.a.createElement(actionPlans_ActionTable, {
+      }, " Lower Level Feed"), react_default.a.createElement(components_ActionTable, {
         data: ll,
         header: ACTION_TABLE_HEADERS,
         hoverable: true
@@ -3893,28 +2673,28 @@ var ActionPlan_mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ var actionPlans_ActionPlan = (Object(es["connect"])(ActionPlan_mapStateToProps)(ActionPlan_ActionPlan));
-// CONCATENATED MODULE: ./frontend/src/components/boardroom/boardroom.js
-function boardroom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardroom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardroom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardroom_typeof(obj); }
+/* harmony default export */ var components_ActionPlan = (Object(es["connect"])(ActionPlan_mapStateToProps)(ActionPlan_ActionPlan));
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/index.js
+function boardRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardRoom_typeof(obj); }
 
-function boardroom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function boardRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function boardroom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function boardRoom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function boardroom_createClass(Constructor, protoProps, staticProps) { if (protoProps) boardroom_defineProperties(Constructor.prototype, protoProps); if (staticProps) boardroom_defineProperties(Constructor, staticProps); return Constructor; }
+function boardRoom_createClass(Constructor, protoProps, staticProps) { if (protoProps) boardRoom_defineProperties(Constructor.prototype, protoProps); if (staticProps) boardRoom_defineProperties(Constructor, staticProps); return Constructor; }
 
-function boardroom_possibleConstructorReturn(self, call) { if (call && (boardroom_typeof(call) === "object" || typeof call === "function")) { return call; } return boardroom_assertThisInitialized(self); }
+function boardRoom_possibleConstructorReturn(self, call) { if (call && (boardRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return boardRoom_assertThisInitialized(self); }
 
-function boardroom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function boardRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function boardroom_getPrototypeOf(o) { boardroom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardroom_getPrototypeOf(o); }
+function boardRoom_getPrototypeOf(o) { boardRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardRoom_getPrototypeOf(o); }
 
-function boardroom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) boardroom_setPrototypeOf(subClass, superClass); }
+function boardRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) boardRoom_setPrototypeOf(subClass, superClass); }
 
-function boardroom_setPrototypeOf(o, p) { boardroom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return boardroom_setPrototypeOf(o, p); }
+function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return boardRoom_setPrototypeOf(o, p); }
 
 // -----------------------------------------------------------------------------
-//                         BOARDROOM COMPONENT
+//                          BOARDROOM SCENE
 //                      Organization: Sanofi Pasteur
 //                         Author: Kyle Thatcher
 //                           Date: 08JUL2019
@@ -3925,26 +2705,29 @@ function boardroom_setPrototypeOf(o, p) { boardroom_setPrototypeOf = Object.setP
 //               * Contains pillar widgets and action tables
 //         * This component makes ALL GET request for Boardroom data
 // -----------------------------------------------------------------------------
+// DEPENDACIES
+
+
+ // CORE COMPONENTS
+
+
+ // NATIVE COMPONENTS
 
 
 
 
-
-
-
-
-var boardroom_Boardroom =
+var boardRoom_Boardroom =
 /*#__PURE__*/
 function (_Component) {
-  boardroom_inherits(Boardroom, _Component);
+  boardRoom_inherits(Boardroom, _Component);
 
   function Boardroom() {
-    boardroom_classCallCheck(this, Boardroom);
+    boardRoom_classCallCheck(this, Boardroom);
 
-    return boardroom_possibleConstructorReturn(this, boardroom_getPrototypeOf(Boardroom).apply(this, arguments));
+    return boardRoom_possibleConstructorReturn(this, boardRoom_getPrototypeOf(Boardroom).apply(this, arguments));
   }
 
-  boardroom_createClass(Boardroom, [{
+  boardRoom_createClass(Boardroom, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props = this.props,
@@ -3991,12 +2774,12 @@ function (_Component) {
         className: "col-lg-2"
       }, react_default.a.createElement("div", {
         className: "card card-body m-4"
-      }, react_default.a.createElement(boardroom_PillarBar, {
+      }, react_default.a.createElement(components_PillarBar, {
         kpis: kpis,
         dashboardId: id
       }))), react_default.a.createElement("div", {
         className: "col-lg-10"
-      }, react_default.a.createElement(actionPlans_ActionPlan, {
+      }, react_default.a.createElement(components_ActionPlan, {
         tables: actionTables,
         dashboards: dashboards
       })))));
@@ -4006,7 +2789,7 @@ function (_Component) {
   return Boardroom;
 }(react["Component"]);
 
-boardroom_Boardroom.propTypes = {
+boardRoom_Boardroom.propTypes = {
   dashboards: prop_types_default.a.array,
   kpis: prop_types_default.a.array.isRequired,
   getDashboards: prop_types_default.a.func.isRequired,
@@ -4016,12 +2799,12 @@ boardroom_Boardroom.propTypes = {
   currentDashboard: prop_types_default.a.object,
   actionTables: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired
 };
-boardroom_Boardroom.defaultProps = {
+boardRoom_Boardroom.defaultProps = {
   dashboards: null,
   currentDashboard: null
 };
 
-var boardroom_mapStateToProps = function mapStateToProps(state) {
+var boardRoom_mapStateToProps = function mapStateToProps(state) {
   return {
     dashboards: state.dashboards.dashboards,
     kpis: state.dashboards.kpis,
@@ -4031,14 +2814,14 @@ var boardroom_mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ var boardroom = (Object(es["connect"])(boardroom_mapStateToProps, {
+/* harmony default export */ var boardRoom = (Object(es["connect"])(boardRoom_mapStateToProps, {
   getKpis: dashboards_getKpis,
   getDashboards: dashboards_getDashboards,
   getADashboard: dashboards_getADashboard,
   clearKpis: dashboards_clearKpis,
   getActionTable: dashboards_getActionTable
-})(boardroom_Boardroom));
-// CONCATENATED MODULE: ./frontend/src/components/common/PrivateRoute.js
+})(boardRoom_Boardroom));
+// CONCATENATED MODULE: ./frontend/src/core/components/utils/PrivateRoute.js
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
@@ -4093,8 +2876,8 @@ PrivateRoute_PrivateRoute.propTypes = {
   component: prop_types_default.a.object,
   auth: prop_types_default.a.object
 };
-/* harmony default export */ var common_PrivateRoute = (Object(es["connect"])(PrivateRoute_mapStateToProps)(PrivateRoute_PrivateRoute));
-// CONCATENATED MODULE: ./frontend/src/components/common/d3charts/LineChart.js
+/* harmony default export */ var utils_PrivateRoute = (Object(es["connect"])(PrivateRoute_mapStateToProps)(PrivateRoute_PrivateRoute));
+// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
 function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
 
 function LineChart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4113,9 +2896,11 @@ function LineChart_inherits(subClass, superClass) { if (typeof superClass !== "f
 
 function LineChart_setPrototypeOf(o, p) { LineChart_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return LineChart_setPrototypeOf(o, p); }
 
+// DEPENDACIES
 
 
 
+ // COMPONENTS
 
 
 var margin = {
@@ -4395,787 +3180,7 @@ LineChart_LineChart.defaultProps = {
   selectedKpi: null
 };
 /* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/kpis/KpiForm.js
-function KpiForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiForm_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiForm_typeof(obj); }
-
-function KpiForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function KpiForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function KpiForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function KpiForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function KpiForm_possibleConstructorReturn(self, call) { if (call && (KpiForm_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiForm_assertThisInitialized(self); }
-
-function KpiForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function KpiForm_getPrototypeOf(o) { KpiForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiForm_getPrototypeOf(o); }
-
-function KpiForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiForm_setPrototypeOf(subClass, superClass); }
-
-function KpiForm_setPrototypeOf(o, p) { KpiForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiForm_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var KpiForm_KpiForm =
-/*#__PURE__*/
-function (_Component) {
-  KpiForm_inherits(KpiForm, _Component);
-
-  function KpiForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    KpiForm_classCallCheck(this, KpiForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return KpiForm_possibleConstructorReturn(_this, (_temp = _this = KpiForm_possibleConstructorReturn(this, (_getPrototypeOf2 = KpiForm_getPrototypeOf(KpiForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      name: "",
-      frequency: 0,
-      safe: "",
-      danger: "",
-      dashboard: _this.props.dashboardId
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$props = _this.props,
-          addKpi = _this$props.addKpi,
-          pillarId = _this$props.pillarId;
-      var _this$state = _this.state,
-          name = _this$state.name,
-          frequency = _this$state.frequency,
-          safe = _this$state.safe,
-          danger = _this$state.danger,
-          dashboard = _this$state.dashboard;
-      var pillar = pillarId;
-      var kpi = {
-        name: name,
-        pillar: pillar,
-        danger: danger,
-        safe: safe,
-        frequency: frequency,
-        dashboard: dashboard
-      };
-      addKpi(kpi);
-
-      _this.setState({
-        name: "",
-        danger: "",
-        safe: "",
-        frequency: 0
-      });
-    }, _this.onChange = function (e) {
-      _this.setState(KpiForm_defineProperty({}, e.target.name, e.target.value));
-    }, _temp));
-  }
-
-  KpiForm_createClass(KpiForm, [{
-    key: "render",
-    value: function render() {
-      var _this$state2 = this.state,
-          name = _this$state2.name,
-          frequency = _this$state2.frequency,
-          safe = _this$state2.safe,
-          danger = _this$state2.danger;
-      var pillarId = this.props.pillarId;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        noValidate: true
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Name"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "name",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: name,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "pillar"
-      }, "Pillar"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "pillar",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: pillarId,
-        required: true,
-        disabled: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "frequency"
-      }, "Frequency"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "frequency",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: frequency,
-        required: true
-      }, FREQUENCY_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
-          key: "choice-".concat(choice.id),
-          value: choice.id
-        }, choice.name);
-      }))), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "safe"
-      }, "Safe Range"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "safe",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: safe,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "danger"
-      }, "Danger Range"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "danger",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: danger,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "modal-footer"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "Close"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Create Kpi"))));
-    }
-  }]);
-
-  return KpiForm;
-}(react["Component"]);
-
-KpiForm_KpiForm.propTypes = {
-  addKpi: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var kpis_KpiForm = (Object(es["connect"])(null, {
-  addKpi: dashboards_addKpi
-})(KpiForm_KpiForm));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/kpis/KpiInfo.js
-
-
-var KpiInfo_KpiInfo = function KpiInfo() {
-  return react_default.a.createElement("div", {
-    id: "info",
-    className: "tab-pane fade show active"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "KPIS"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Here you can view and manage all your key preformance indicators. Each KPI is defined by the following fields."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-pencil mr-2"
-  }), ' ', "Name"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Give your KPIs distinct and informative labels"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-bank mr-2"
-  }), ' ', "Pillar"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " - Defines which pillar the KPI belongs too."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, " ", react_default.a.createElement("i", {
-    className: "im im-date-o mr-2"
-  }), ' ', "Frequency"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the frequency of measurement, ie, 12 for monthly or 52 for weekly"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-check-mark mr-2"
-  }), ' ', "Safe Threshold"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the threshold for values which are considered within adequate range of the target", react_default.a.createElement("br", null), "- These values turn green"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-x-mark mr-2"
-  }), ' ', "Danger Threshold"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the threshold for values which are not within adequate range of the target", ' ', react_default.a.createElement("br", null), "- These values will turn red and require actions"));
-};
-
-/* harmony default export */ var kpis_KpiInfo = (KpiInfo_KpiInfo);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/kpis/KpiTable.js
-function KpiTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiTable_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiTable_typeof(obj); }
-
-function KpiTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function KpiTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function KpiTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function KpiTable_possibleConstructorReturn(self, call) { if (call && (KpiTable_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiTable_assertThisInitialized(self); }
-
-function KpiTable_getPrototypeOf(o) { KpiTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiTable_getPrototypeOf(o); }
-
-function KpiTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function KpiTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiTable_setPrototypeOf(subClass, superClass); }
-
-function KpiTable_setPrototypeOf(o, p) { KpiTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiTable_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var KpiTable_KpiTable =
-/*#__PURE__*/
-function (_Component) {
-  KpiTable_inherits(KpiTable, _Component);
-
-  function KpiTable(props) {
-    var _this;
-
-    KpiTable_classCallCheck(this, KpiTable);
-
-    _this = KpiTable_possibleConstructorReturn(this, KpiTable_getPrototypeOf(KpiTable).call(this, props));
-    _this.update = _this.update.bind(KpiTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(KpiTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  KpiTable_createClass(KpiTable, [{
-    key: "delete",
-    value: function _delete(id) {
-      this.props.deleteKpi(id);
-    }
-  }, {
-    key: "update",
-    value: function update(current, id) {
-      this.props.updateKpi(current, id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          header = _this$props.header;
-      return react_default.a.createElement(table_Table, {
-        editable: true,
-        data: data,
-        header: header,
-        update: this.update,
-        "delete": this["delete"],
-        deletable: true
-      });
-    }
-  }]);
-
-  return KpiTable;
-}(react["Component"]);
-
-KpiTable_KpiTable.propTypes = {
-  data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array.isRequired
-};
-/* harmony default export */ var kpis_KpiTable = (Object(es["connect"])(null, {
-  updateKpi: dashboards_updateKpi,
-  deleteKpi: dashboards_deleteKpi
-})(KpiTable_KpiTable));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/kpis/KpiOptions.js
-
-
-
-
-
-
-var KpiOptions_KpiOptions = function KpiOptions(props) {
-  var kpiCopy = [];
-
-  for (var i in props.kpis) {
-    var copy = {};
-    var entry = props.kpis[i];
-    copy.name = entry.name;
-    copy.pillar = entry.pillar;
-    copy.frequency = entry.frequency;
-    copy.safe = entry.safe;
-    copy.danger = entry.danger;
-    copy.id = entry.id;
-    kpiCopy.push(copy);
-  }
-
-  var pillarId = props.pillarId;
-  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "kpiOptions",
-    role: "dialog",
-    "aria-labelledby": "kpiOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document"
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "kpiOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-dashboard",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Manage KPIs"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-header"
-  }, react_default.a.createElement("ul", {
-    className: "nav nav-tabs card-header-tabs"
-  }, react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link active",
-    "data-toggle": "tab",
-    href: "#info"
-  }, "Info")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#list"
-  }, "View KPIs")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#add"
-  }, "Add KPI")))), react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("div", {
-    className: "tab-content",
-    style: {
-      maxHeight: "".concat(550, "px"),
-      overflow: "auto",
-      overflowX: "auto"
-    }
-  }, react_default.a.createElement(kpis_KpiInfo, null), react_default.a.createElement("div", {
-    id: "list",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Your KPIs"), react_default.a.createElement(kpis_KpiTable, {
-    data: kpiCopy,
-    header: KPI_TABLE_HEADERS
-  })), react_default.a.createElement("div", {
-    id: "add",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Create A New KPI"), react_default.a.createElement(kpis_KpiForm, {
-    dashboardId: props.dashboardId,
-    pillarId: pillarId
-  }))))))))));
-};
-
-/* harmony default export */ var kpis_KpiOptions = (KpiOptions_KpiOptions);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/SeriesInfo.js
-
-
-var SeriesInfo_SeriesInfo = function SeriesInfo() {
-  return react_default.a.createElement("div", {
-    id: "infos",
-    className: "tab-pane fade show active"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Series"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Here you can view and manage all your series. Each Series is defined by the following fields."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-pencil mr-2"
-  }), " Name"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Give your Series distinct and informative labels"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, " ", react_default.a.createElement("i", {
-    className: "im im-flip-chart-o mr-2"
-  }), " Plot Type"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the way which the series data is displayed"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-paintbrush mr-2"
-  }), " Color"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Give each series a distinct look with different colors"));
-};
-
-/* harmony default export */ var series_SeriesInfo = (SeriesInfo_SeriesInfo);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/SeriesForm.js
-function SeriesForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesForm_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesForm_typeof(obj); }
-
-function SeriesForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function SeriesForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function SeriesForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function SeriesForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function SeriesForm_possibleConstructorReturn(self, call) { if (call && (SeriesForm_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesForm_assertThisInitialized(self); }
-
-function SeriesForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function SeriesForm_getPrototypeOf(o) { SeriesForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesForm_getPrototypeOf(o); }
-
-function SeriesForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesForm_setPrototypeOf(subClass, superClass); }
-
-function SeriesForm_setPrototypeOf(o, p) { SeriesForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesForm_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var SeriesForm_SeriesForm =
-/*#__PURE__*/
-function (_Component) {
-  SeriesForm_inherits(SeriesForm, _Component);
-
-  function SeriesForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    SeriesForm_classCallCheck(this, SeriesForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return SeriesForm_possibleConstructorReturn(_this, (_temp = _this = SeriesForm_possibleConstructorReturn(this, (_getPrototypeOf2 = SeriesForm_getPrototypeOf(SeriesForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      name: "",
-      color: "",
-      plot_type: "li"
-    }, _this.onChangeColor = function (color) {
-      _this.setState({
-        color: color.hex
-      });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$props = _this.props,
-          addSeries = _this$props.addSeries,
-          kpi = _this$props.kpi;
-      var _this$state = _this.state,
-          name = _this$state.name,
-          color = _this$state.color,
-          plot_type = _this$state.plot_type;
-      var series = {
-        name: name,
-        color: color,
-        plot_type: plot_type,
-        kpi: kpi
-      };
-      addSeries(series);
-
-      _this.setState({
-        name: "",
-        color: "",
-        plot_type: "li"
-      });
-    }, _this.onChange = function (e) {
-      _this.setState(SeriesForm_defineProperty({}, e.target.name, e.target.value));
-    }, _temp));
-  }
-
-  SeriesForm_createClass(SeriesForm, [{
-    key: "render",
-    value: function render() {
-      var _this$state2 = this.state,
-          name = _this$state2.name,
-          color = _this$state2.color,
-          plot_type = _this$state2.plot_type;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        noValidate: true
-      }, react_default.a.createElement("div", {
-        className: "row m-0"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "d-flex flex-column"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Name"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "name",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: name,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group mt-4"
-      }, react_default.a.createElement("label", {
-        htmlFor: "plot_type"
-      }, "Plot Type"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "plot_type",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: plot_type,
-        required: true
-      }, PLOT_TYPE_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
-          key: "choice-".concat(choice.id),
-          value: choice.id
-        }, choice.name);
-      }))))), react_default.a.createElement("div", {
-        className: "col-sm-4 m-auto"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "color"
-      }, "Color"), react_default.a.createElement(lib["ChromePicker"], {
-        color: this.state.color,
-        onChangeComplete: this.onChangeColor
-      })))), react_default.a.createElement("div", {
-        className: "modal-footer"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "Close"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Create Series"))));
-    }
-  }]);
-
-  return SeriesForm;
-}(react["Component"]);
-
-SeriesForm_SeriesForm.propTypes = {
-  addSeries: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var series_SeriesForm = (Object(es["connect"])(null, {
-  addSeries: dashboards_addSeries
-})(SeriesForm_SeriesForm));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/SeriesTable.js
-function SeriesTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesTable_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesTable_typeof(obj); }
-
-function SeriesTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function SeriesTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function SeriesTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function SeriesTable_possibleConstructorReturn(self, call) { if (call && (SeriesTable_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesTable_assertThisInitialized(self); }
-
-function SeriesTable_getPrototypeOf(o) { SeriesTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesTable_getPrototypeOf(o); }
-
-function SeriesTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function SeriesTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesTable_setPrototypeOf(subClass, superClass); }
-
-function SeriesTable_setPrototypeOf(o, p) { SeriesTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesTable_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var SeriesTable_SeriesTable =
-/*#__PURE__*/
-function (_Component) {
-  SeriesTable_inherits(SeriesTable, _Component);
-
-  function SeriesTable(props) {
-    var _this;
-
-    SeriesTable_classCallCheck(this, SeriesTable);
-
-    _this = SeriesTable_possibleConstructorReturn(this, SeriesTable_getPrototypeOf(SeriesTable).call(this, props));
-    _this.update = _this.update.bind(SeriesTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(SeriesTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  SeriesTable_createClass(SeriesTable, [{
-    key: "delete",
-    value: function _delete(id) {
-      this.props.deleteSeries(id);
-      this.props.deletionHook();
-    }
-  }, {
-    key: "update",
-    value: function update(current, id) {
-      this.props.updateSeries(current, id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          header = _this$props.header;
-      return react_default.a.createElement(table_Table, {
-        editable: true,
-        data: data,
-        header: header,
-        update: this.update,
-        "delete": this["delete"]
-      });
-    }
-  }]);
-
-  return SeriesTable;
-}(react["Component"]);
-
-SeriesTable_SeriesTable.propTypes = {
-  data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array.isRequired
-};
-/* harmony default export */ var series_SeriesTable = (Object(es["connect"])(null, {
-  updateSeries: dashboards_updateSeries,
-  deleteSeries: dashboards_deleteSeries
-})(SeriesTable_SeriesTable));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/SeriesOptions.js
-
-
-
-
-
-
-var SeriesOptions_SeriesOptions = function SeriesOptions(props) {
-  var series = props.series,
-      kpi = props.kpi;
-  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "seriesOptions",
-    role: "dialog",
-    "aria-labelledby": "seriesOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document"
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "seriesOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-line-chart-up",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Manage Series For ", kpi ? kpi.name : "Null"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-header"
-  }, react_default.a.createElement("ul", {
-    className: "nav nav-tabs card-header-tabs"
-  }, react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link active",
-    "data-toggle": "tab",
-    href: "#infos"
-  }, "Info")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#lists"
-  }, "View Series")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#adds"
-  }, "Add a Series")))), react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("div", {
-    className: "tab-content",
-    style: {
-      maxHeight: "".concat(550, "px"),
-      overflow: "auto",
-      overflowX: "auto"
-    }
-  }, react_default.a.createElement(series_SeriesInfo, null), react_default.a.createElement("div", {
-    id: "lists",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Your Series"), react_default.a.createElement(series_SeriesTable, {
-    data: series,
-    header: SERIES_TABLE_HEADERS,
-    deletionHook: props.deletionHook
-  })), react_default.a.createElement("div", {
-    id: "adds",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Create A New Series"), react_default.a.createElement(series_SeriesForm, {
-    kpi: kpi ? kpi.id : 0
-  }))))))))));
-};
-
-/* harmony default export */ var series_SeriesOptions = (SeriesOptions_SeriesOptions);
-// CONCATENATED MODULE: ./frontend/src/components/common/ui/svgExporter.js
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/svgExporter.js
 function svgExporter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { svgExporter_typeof = function _typeof(obj) { return typeof obj; }; } else { svgExporter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return svgExporter_typeof(obj); }
 
 function svgExporter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5194,7 +3199,7 @@ function svgExporter_inherits(subClass, superClass) { if (typeof superClass !== 
 
 function svgExporter_setPrototypeOf(o, p) { svgExporter_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return svgExporter_setPrototypeOf(o, p); }
 
-
+// DEPENDACIES
 
 
 
@@ -5339,7 +3344,7 @@ svgExporter_SvgExporter.propTypes = {
   target: prop_types_default.a.string.isRequired
 };
 /* harmony default export */ var svgExporter = (svgExporter_SvgExporter);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/ChartOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/ChartOptions.js
 function ChartOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ChartOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { ChartOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ChartOptions_typeof(obj); }
 
 function ChartOptions_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5358,6 +3363,7 @@ function ChartOptions_inherits(subClass, superClass) { if (typeof superClass !==
 
 function ChartOptions_setPrototypeOf(o, p) { ChartOptions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ChartOptions_setPrototypeOf(o, p); }
 
+// DEPENDANCIES
 
 
 var ChartOptions_ChartOptions =
@@ -5416,35 +3422,21 @@ function (_Component) {
           key: "choice-".concat(kpi.id),
           value: kpi.id
         }, kpi.name);
-      })), kpis[0] ? react_default.a.createElement("button", {
+      })), react_default.a.createElement("button", {
         type: "button",
         className: "btn btn-primary mt-auto ml-2",
         "data-toggle": "modal",
-        "data-target": "#seriesOptions"
-      }, "Manage Series") : react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary mt-auto ml-2",
-        "data-toggle": "modal",
-        "data-target": "#seriesOptions",
-        disabled: true
-      }, "Manage Series"), active ? react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary mt-auto ml-auto",
-        "data-toggle": "modal",
-        "data-target": "#dataOptions"
-      }, "Edit Selected") : react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary mt-auto ml-auto",
-        disabled: true
-      }, "Edit Selected"));
+        "data-target": "#manageKpi"
+      }, "Manage KPI"));
     }
   }]);
 
   return ChartOptions;
 }(react["Component"]);
 
-/* harmony default export */ var pillarRoom_ChartOptions = (ChartOptions_ChartOptions);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/DataInfo.js
+/* harmony default export */ var components_ChartOptions = (ChartOptions_ChartOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataInfo.js
+// DEPENDANCIES
 
 
 var DataInfo_DataInfo = function DataInfo() {
@@ -5476,8 +3468,8 @@ var DataInfo_DataInfo = function DataInfo() {
   }, " ", "- Defines the day which the data was reported ", react_default.a.createElement("br", null), "- Format: YYYY-MM-DD"));
 };
 
-/* harmony default export */ var series_DataInfo = (DataInfo_DataInfo);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/DataTable.js
+/* harmony default export */ var datapoints_DataInfo = (DataInfo_DataInfo);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataTable.js
 function DataTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataTable_typeof = function _typeof(obj) { return typeof obj; }; } else { DataTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataTable_typeof(obj); }
 
 function DataTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5496,9 +3488,14 @@ function DataTable_inherits(subClass, superClass) { if (typeof superClass !== "f
 
 function DataTable_setPrototypeOf(o, p) { DataTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DataTable_setPrototypeOf(o, p); }
 
+// DEPENDANCIES
 
 
+ // CONFIG
 
+ // ACTIONS
+
+ // CORE COMPONENTS
 
 
 
@@ -5563,14 +3560,20 @@ function (_Component) {
 
 DataTable_DatapointTable.propTypes = {
   data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array.isRequired
+  header: prop_types_default.a.array
+};
+DataTable_DatapointTable.defaultProps = {
+  header: DATAPOINT_TABLE_HEADERS
 };
 /* harmony default export */ var DataTable = (Object(es["connect"])(null, {
   updateDatapoint: dashboards_updateDatapoint,
   deleteDatapoint: dashboards_deleteDatapoint
 })(DataTable_DatapointTable));
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/series/DataOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataOptions.js
+// DEPENDANCIES
+ // CONFIG
 
+ // COMPONENTS
 
 
 
@@ -5658,7 +3661,7 @@ var DataOptions_DataOptions = function DataOptions(props) {
       overflow: "auto",
       overflowX: "auto"
     }
-  }, react_default.a.createElement(series_DataInfo, null), react_default.a.createElement("div", {
+  }, react_default.a.createElement(datapoints_DataInfo, null), react_default.a.createElement("div", {
     id: "viewData",
     className: "tab-pane fade show active"
   }, react_default.a.createElement("h5", {
@@ -5679,53 +3682,1098 @@ var DataOptions_DataOptions = function DataOptions(props) {
   }, "WIP"))))))))));
 };
 
-/* harmony default export */ var series_DataOptions = (DataOptions_DataOptions);
-// CONCATENATED MODULE: ./frontend/src/components/pillarRoom/PillarRoom.js
-function PillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { PillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { PillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return PillarRoom_typeof(obj); }
+/* harmony default export */ var datapoints_DataOptions = (DataOptions_DataOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiForm.js
+function KpiForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiForm_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiForm_typeof(obj); }
 
-function PillarRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function KpiForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiForm_defineProperty(target, key, source[key]); }); } return target; }
 
-function PillarRoom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function KpiForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function PillarRoom_createClass(Constructor, protoProps, staticProps) { if (protoProps) PillarRoom_defineProperties(Constructor.prototype, protoProps); if (staticProps) PillarRoom_defineProperties(Constructor, staticProps); return Constructor; }
+function KpiForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function PillarRoom_possibleConstructorReturn(self, call) { if (call && (PillarRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return PillarRoom_assertThisInitialized(self); }
+function KpiForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function PillarRoom_getPrototypeOf(o) { PillarRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return PillarRoom_getPrototypeOf(o); }
+function KpiForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiForm_defineProperties(Constructor, staticProps); return Constructor; }
 
-function PillarRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function KpiForm_possibleConstructorReturn(self, call) { if (call && (KpiForm_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiForm_assertThisInitialized(self); }
 
-function PillarRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) PillarRoom_setPrototypeOf(subClass, superClass); }
+function KpiForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function PillarRoom_setPrototypeOf(o, p) { PillarRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return PillarRoom_setPrototypeOf(o, p); }
+function KpiForm_getPrototypeOf(o) { KpiForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiForm_getPrototypeOf(o); }
 
+function KpiForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiForm_setPrototypeOf(subClass, superClass); }
 
+function KpiForm_setPrototypeOf(o, p) { KpiForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiForm_setPrototypeOf(o, p); }
 
-
-
-
-
-
+// DEPENDANCIES
 
 
+ // CONFIG
 
-
-
+ // ACTIONS
 
 
 
-
-var PillarRoom_pillarRoom =
+var KpiForm_KpiForm =
 /*#__PURE__*/
 function (_Component) {
-  PillarRoom_inherits(pillarRoom, _Component);
+  KpiForm_inherits(KpiForm, _Component);
+
+  function KpiForm(props) {
+    var _this;
+
+    KpiForm_classCallCheck(this, KpiForm);
+
+    _this = KpiForm_possibleConstructorReturn(this, KpiForm_getPrototypeOf(KpiForm).call(this, props));
+
+    _this.update = function (kpi) {
+      _this.setState(KpiForm_objectSpread({}, kpi));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var addKpi = _this.props.addKpi;
+      var _this$state = _this.state,
+          name = _this$state.name,
+          frequency = _this$state.frequency,
+          safe = _this$state.safe,
+          danger = _this$state.danger,
+          dashboard = _this$state.dashboard;
+      var pillar = pillarId;
+      var kpi = {
+        name: name,
+        pillar: pillar,
+        danger: danger,
+        safe: safe,
+        frequency: frequency,
+        dashboard: dashboard
+      };
+      addKpi(kpi);
+
+      _this.setState({
+        name: "",
+        danger: "",
+        safe: "",
+        frequency: 0
+      });
+    };
+
+    _this.onChange = function (e) {
+      _this.setState(KpiForm_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    _this.state = {
+      name: "",
+      frequency: "",
+      safe: "",
+      danger: "",
+      dashboard: "",
+      pillar: ""
+    };
+    return _this;
+  }
+
+  KpiForm_createClass(KpiForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var kpi = this.props.kpi;
+
+      if (kpi != prevProps.kpi) {
+        this.update(kpi);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state2 = this.state,
+          name = _this$state2.name,
+          frequency = _this$state2.frequency,
+          safe = _this$state2.safe,
+          danger = _this$state2.danger;
+      var _this$props = this.props,
+          pillarId = _this$props.pillarId,
+          kpi = _this$props.kpi;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        className: "w-100 mt-3",
+        noValidate: true
+      }, react_default.a.createElement("div", {
+        className: "row"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-4"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "name"
+      }, "Name"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "name",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: name,
+        required: true
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "frequency"
+      }, "Frequency"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "frequency",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: frequency,
+        required: true
+      }, FREQUENCY_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: "choice-".concat(choice.id),
+          value: choice.id
+        }, choice.name);
+      })))), react_default.a.createElement("div", {
+        className: "col-sm-4"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "safe"
+      }, "Safe Range"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "safe",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: safe,
+        required: true
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "danger"
+      }, "Danger Range"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "danger",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: danger,
+        required: true
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-4"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "pillar"
+      }, "Pillar"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "pillar",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: kpi ? kpi.pillar : "",
+        required: true,
+        disabled: true
+      })))), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success mb-4 mt-3"
+      }, "Save Changes")));
+    }
+  }]);
+
+  return KpiForm;
+}(react["Component"]);
+
+KpiForm_KpiForm.propTypes = {
+  addKpi: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var kpis_KpiForm = (Object(es["connect"])(null, {
+  addKpi: dashboards_addKpi
+})(KpiForm_KpiForm));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiInfo.js
+// DEPENDACIES
+
+
+var KpiInfo_KpiInfo = function KpiInfo() {
+  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
+    className: "card-title"
+  }, "KPIS"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, "Here you can view and manage all your key preformance indicators. Each KPI is defined by the following fields."), react_default.a.createElement("h5", {
+    className: "mt-4"
+  }, react_default.a.createElement("i", {
+    className: "im im-pencil mr-2"
+  }), " Name"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, " ", "- Give your KPIs distinct and informative labels"), react_default.a.createElement("h5", {
+    className: "mt-4"
+  }, react_default.a.createElement("i", {
+    className: "im im-bank mr-2"
+  }), " Pillar"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, " - Defines which pillar the KPI belongs too."), react_default.a.createElement("h5", {
+    className: "mt-4"
+  }, " ", react_default.a.createElement("i", {
+    className: "im im-date-o mr-2"
+  }), " Frequency"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, " ", "- Defines the frequency of measurement, ie, 12 for monthly or 52 for weekly"), react_default.a.createElement("h5", {
+    className: "mt-4"
+  }, react_default.a.createElement("i", {
+    className: "im im-check-mark mr-2"
+  }), " Safe Threshold"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, " ", "- Defines the threshold for values which are considered within adequate range of the target", react_default.a.createElement("br", null), "- These values turn green"), react_default.a.createElement("h5", {
+    className: "mt-4"
+  }, react_default.a.createElement("i", {
+    className: "im im-x-mark mr-2"
+  }), " Danger Threshold"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, " ", "- Defines the threshold for values which are not within adequate range of the target ", react_default.a.createElement("br", null), "- These values will turn red and require actions"));
+};
+
+/* harmony default export */ var kpis_KpiInfo = (KpiInfo_KpiInfo);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiTable.js
+function KpiTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiTable_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiTable_typeof(obj); }
+
+function KpiTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function KpiTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function KpiTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiTable_defineProperties(Constructor, staticProps); return Constructor; }
+
+function KpiTable_possibleConstructorReturn(self, call) { if (call && (KpiTable_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiTable_assertThisInitialized(self); }
+
+function KpiTable_getPrototypeOf(o) { KpiTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiTable_getPrototypeOf(o); }
+
+function KpiTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function KpiTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiTable_setPrototypeOf(subClass, superClass); }
+
+function KpiTable_setPrototypeOf(o, p) { KpiTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiTable_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+ // CORE COMPONENTS
+
+ // ACTIONS
+
+
+
+var KpiTable_KpiTable =
+/*#__PURE__*/
+function (_Component) {
+  KpiTable_inherits(KpiTable, _Component);
+
+  function KpiTable(props) {
+    var _this;
+
+    KpiTable_classCallCheck(this, KpiTable);
+
+    _this = KpiTable_possibleConstructorReturn(this, KpiTable_getPrototypeOf(KpiTable).call(this, props));
+    _this.update = _this.update.bind(KpiTable_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(KpiTable_assertThisInitialized(_this));
+    return _this;
+  }
+
+  KpiTable_createClass(KpiTable, [{
+    key: "delete",
+    value: function _delete(id) {
+      this.props.deleteKpi(id);
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      this.props.updateKpi(current, id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          header = _this$props.header;
+      return react_default.a.createElement(table_Table, {
+        editable: true,
+        data: data,
+        header: header,
+        update: this.update,
+        "delete": this["delete"],
+        deletable: true
+      });
+    }
+  }]);
+
+  return KpiTable;
+}(react["Component"]);
+
+KpiTable_KpiTable.propTypes = {
+  data: prop_types_default.a.array.isRequired,
+  header: prop_types_default.a.array.isRequired
+};
+/* harmony default export */ var kpis_KpiTable = (Object(es["connect"])(null, {
+  updateKpi: dashboards_updateKpi,
+  deleteKpi: dashboards_deleteKpi
+})(KpiTable_KpiTable));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiOptions.js
+// DEPENDACIES
+ // CONFIG
+
+ // COMPONENTS
+
+
+
+
+
+var KpiOptions_KpiOptions = function KpiOptions(props) {
+  var kpiCopy = [];
+
+  for (var i in props.kpis) {
+    var copy = {};
+    var entry = props.kpis[i];
+    copy.name = entry.name;
+    copy.pillar = entry.pillar;
+    copy.frequency = entry.frequency;
+    copy.safe = entry.safe;
+    copy.danger = entry.danger;
+    copy.id = entry.id;
+    kpiCopy.push(copy);
+  }
+
+  var pillarId = props.pillarId;
+  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+    className: "modal fade",
+    id: "kpiOptions",
+    role: "dialog",
+    "aria-labelledby": "kpiOptionsLabel",
+    "aria-hidden": "true"
+  }, react_default.a.createElement("div", {
+    className: "modal-dialog",
+    role: "document"
+  }, react_default.a.createElement("div", {
+    className: "modal-content"
+  }, react_default.a.createElement("div", {
+    className: "modal-header"
+  }, react_default.a.createElement("h1", {
+    className: "modal-title",
+    id: "kpiOptionsLabel"
+  }, react_default.a.createElement("span", {
+    className: "im im-dashboard",
+    style: {
+      fontSize: "".concat(2.5, "rem"),
+      verticalAlign: "-0.1em"
+    }
+  }), "  ", "Manage KPIs"), react_default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, react_default.a.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xD7"))), react_default.a.createElement("div", {
+    className: "modal-body",
+    style: {
+      padding: 0
+    }
+  }, react_default.a.createElement("div", {
+    className: "card"
+  }, react_default.a.createElement("div", {
+    className: "card-header"
+  }, react_default.a.createElement("ul", {
+    className: "nav nav-tabs card-header-tabs"
+  }, react_default.a.createElement("li", {
+    className: "nav-item"
+  }, react_default.a.createElement("a", {
+    className: "nav-link",
+    "data-toggle": "tab",
+    href: "#info"
+  }, "Info")), react_default.a.createElement("li", {
+    className: "nav-item"
+  }, react_default.a.createElement("a", {
+    className: "nav-link active",
+    "data-toggle": "tab",
+    href: "#list"
+  }, "View KPIs")), react_default.a.createElement("li", {
+    className: "nav-item"
+  }, react_default.a.createElement("a", {
+    className: "nav-link",
+    "data-toggle": "tab",
+    href: "#add"
+  }, "Add KPI")))), react_default.a.createElement("div", {
+    className: "card-body"
+  }, react_default.a.createElement("div", {
+    className: "tab-content",
+    style: {
+      maxHeight: "".concat(550, "px"),
+      overflow: "auto",
+      overflowX: "auto"
+    }
+  }, react_default.a.createElement("div", {
+    id: "info",
+    className: "tab-pane fade"
+  }, react_default.a.createElement(kpis_KpiInfo, null)), react_default.a.createElement("div", {
+    id: "list",
+    className: "tab-pane fade show active"
+  }, react_default.a.createElement("h5", {
+    className: "card-title"
+  }, "Your KPIs"), react_default.a.createElement(kpis_KpiTable, {
+    data: kpiCopy,
+    header: KPI_TABLE_HEADERS
+  })), react_default.a.createElement("div", {
+    id: "add",
+    className: "tab-pane fade"
+  }, react_default.a.createElement("h5", {
+    className: "card-title"
+  }, "Create A New KPI"), react_default.a.createElement(kpis_KpiForm, {
+    dashboardId: props.dashboardId,
+    pillarId: pillarId
+  }))))))))));
+};
+
+/* harmony default export */ var kpis_KpiOptions = (KpiOptions_KpiOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesCard.js
+function SeriesCard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesCard_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesCard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesCard_typeof(obj); }
+
+function SeriesCard_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesCard_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesCard_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesCard_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesCard_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesCard_possibleConstructorReturn(self, call) { if (call && (SeriesCard_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesCard_assertThisInitialized(self); }
+
+function SeriesCard_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesCard_getPrototypeOf(o) { SeriesCard_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesCard_getPrototypeOf(o); }
+
+function SeriesCard_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesCard_setPrototypeOf(subClass, superClass); }
+
+function SeriesCard_setPrototypeOf(o, p) { SeriesCard_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesCard_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+var SeriesCard_SeriesCard =
+/*#__PURE__*/
+function (_Component) {
+  SeriesCard_inherits(SeriesCard, _Component);
+
+  function SeriesCard() {
+    SeriesCard_classCallCheck(this, SeriesCard);
+
+    return SeriesCard_possibleConstructorReturn(this, SeriesCard_getPrototypeOf(SeriesCard).apply(this, arguments));
+  }
+
+  SeriesCard_createClass(SeriesCard, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          series = _this$props.series,
+          _onClick = _this$props.onClick;
+      return react_default.a.createElement("div", {
+        className: "card m-3 card-hover",
+        onClick: function onClick() {
+          return _onClick(series.id);
+        },
+        "data-toggle": "modal",
+        "data-target": "#manageKpi"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement("div", {
+        className: "card-title",
+        style: {
+          fontSize: "1.25rem",
+          fontWeight: "bold"
+        }
+      }, series.name, " "), react_default.a.createElement("i", {
+        style: {
+          color: series.color,
+          textAlign: "right"
+        },
+        className: "im im-drop ml-auto"
+      }))));
+    }
+  }]);
+
+  return SeriesCard;
+}(react["Component"]);
+
+/* harmony default export */ var components_SeriesCard = (SeriesCard_SeriesCard);
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/NewCard.js
+// DEPENDANCIES
+
+
+var NewCard_NewCard = function NewCard(props) {
+  var handleClick = props.handleClick,
+      text = props.text;
+  return react_default.a.createElement("div", {
+    className: "card m-3 text-center icon",
+    onClick: handleClick
+  }, react_default.a.createElement("div", {
+    className: "card-body",
+    style: {
+      paddingBottom: "-1rem !important"
+    }
+  }, react_default.a.createElement("div", {
+    className: "d-flex h-100 w-100"
+  }, react_default.a.createElement("div", {
+    className: "m-auto"
+  }, react_default.a.createElement("i", {
+    className: " im im-plus"
+  })))));
+};
+
+/* harmony default export */ var ui_NewCard = (NewCard_NewCard);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesList.js
+function SeriesList_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesList_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesList_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesList_typeof(obj); }
+
+function SeriesList_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesList_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesList_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesList_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesList_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesList_possibleConstructorReturn(self, call) { if (call && (SeriesList_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesList_assertThisInitialized(self); }
+
+function SeriesList_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesList_getPrototypeOf(o) { SeriesList_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesList_getPrototypeOf(o); }
+
+function SeriesList_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesList_setPrototypeOf(subClass, superClass); }
+
+function SeriesList_setPrototypeOf(o, p) { SeriesList_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesList_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // CORE COMPONENTS
+
+
+
+var SeriesList_SeriesList =
+/*#__PURE__*/
+function (_Component) {
+  SeriesList_inherits(SeriesList, _Component);
+
+  function SeriesList() {
+    SeriesList_classCallCheck(this, SeriesList);
+
+    return SeriesList_possibleConstructorReturn(this, SeriesList_getPrototypeOf(SeriesList).apply(this, arguments));
+  }
+
+  SeriesList_createClass(SeriesList, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          series = _this$props.series,
+          onClick = _this$props.onClick;
+      return react_default.a.createElement("div", {
+        className: "row"
+      }, series.map(function (series) {
+        return react_default.a.createElement("div", {
+          className: "col-sm-4"
+        }, react_default.a.createElement(components_SeriesCard, {
+          onClick: onClick,
+          series: series
+        }));
+      }), react_default.a.createElement("div", {
+        className: "col-sm-4"
+      }, react_default.a.createElement(ui_NewCard, {
+        text: "Series"
+      })));
+    }
+  }]);
+
+  return SeriesList;
+}(react["Component"]);
+
+/* harmony default export */ var components_SeriesList = (SeriesList_SeriesList);
+// EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
+var lib = __webpack_require__("./node_modules/react-color/lib/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesForm.js
+function SeriesForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesForm_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesForm_typeof(obj); }
+
+function SeriesForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function SeriesForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesForm_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesForm_possibleConstructorReturn(self, call) { if (call && (SeriesForm_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesForm_assertThisInitialized(self); }
+
+function SeriesForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesForm_getPrototypeOf(o) { SeriesForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesForm_getPrototypeOf(o); }
+
+function SeriesForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesForm_setPrototypeOf(subClass, superClass); }
+
+function SeriesForm_setPrototypeOf(o, p) { SeriesForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesForm_setPrototypeOf(o, p); }
+
+//DEPENDANCIES
+
+
+
+ // CONFIG
+
+ // ACTIONS
+
+
+
+var SeriesForm_SeriesForm =
+/*#__PURE__*/
+function (_Component) {
+  SeriesForm_inherits(SeriesForm, _Component);
+
+  function SeriesForm() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    SeriesForm_classCallCheck(this, SeriesForm);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return SeriesForm_possibleConstructorReturn(_this, (_temp = _this = SeriesForm_possibleConstructorReturn(this, (_getPrototypeOf2 = SeriesForm_getPrototypeOf(SeriesForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      name: "",
+      color: "",
+      plot_type: "li"
+    }, _this.onChangeColor = function (color) {
+      _this.setState({
+        color: color.hex
+      });
+    }, _this.update = function (series) {
+      _this.setState({
+        name: series.name,
+        color: series.color,
+        plot_type: series.plot_type
+      });
+    }, _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$props = _this.props,
+          addSeries = _this$props.addSeries,
+          kpi = _this$props.kpi;
+      var _this$state = _this.state,
+          name = _this$state.name,
+          color = _this$state.color,
+          plot_type = _this$state.plot_type;
+      var series = {
+        name: name,
+        color: color,
+        plot_type: plot_type,
+        kpi: kpi
+      };
+      addSeries(series);
+
+      _this.setState({
+        name: "",
+        color: "",
+        plot_type: "li"
+      });
+    }, _this.onChange = function (e) {
+      _this.setState(SeriesForm_defineProperty({}, e.target.name, e.target.value));
+    }, _temp));
+  }
+
+  SeriesForm_createClass(SeriesForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var series = this.props.series;
+      this.setState({
+        name: series.name,
+        color: series.color,
+        plot_type: series.plot_type
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var series = this.props.series;
+      if (series !== prevProps.series) this.update(series);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state2 = this.state,
+          name = _this$state2.name,
+          color = _this$state2.color,
+          plot_type = _this$state2.plot_type;
+      console.log(this.state);
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        noValidate: true,
+        className: "w-100"
+      }, react_default.a.createElement("div", {
+        className: "row m-0"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-6"
+      }, react_default.a.createElement("div", {
+        className: "d-flex flex-column"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "name"
+      }, "Name"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "name",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: name,
+        required: true
+      })), react_default.a.createElement("div", {
+        className: "form-group mt-4"
+      }, react_default.a.createElement("label", {
+        htmlFor: "plot_type"
+      }, "Plot Type"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "plot_type",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: plot_type,
+        required: true
+      }, PLOT_TYPE_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: "choice-".concat(choice.id),
+          value: choice.id
+        }, choice.name);
+      }))))), react_default.a.createElement("div", {
+        className: "col-sm-4 m-auto"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "color"
+      }, "Color"), react_default.a.createElement(lib["ChromePicker"], {
+        color: color,
+        onChangeComplete: this.onChangeColor
+      })))), react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-success",
+        "data-dismiss": "modal"
+      }, "Save Changes")));
+    }
+  }]);
+
+  return SeriesForm;
+}(react["Component"]);
+
+SeriesForm_SeriesForm.propTypes = {
+  addSeries: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var series_SeriesForm = (Object(es["connect"])(null, {
+  addSeries: dashboards_addSeries
+})(SeriesForm_SeriesForm));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesView.js
+function SeriesView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesView_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesView_typeof(obj); }
+
+function SeriesView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesView_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesView_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesView_possibleConstructorReturn(self, call) { if (call && (SeriesView_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesView_assertThisInitialized(self); }
+
+function SeriesView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesView_getPrototypeOf(o) { SeriesView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesView_getPrototypeOf(o); }
+
+function SeriesView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesView_setPrototypeOf(subClass, superClass); }
+
+function SeriesView_setPrototypeOf(o, p) { SeriesView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesView_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // COMPONENTS
+
+
+
+
+var SeriesView_SeriesView =
+/*#__PURE__*/
+function (_Component) {
+  SeriesView_inherits(SeriesView, _Component);
+
+  function SeriesView() {
+    SeriesView_classCallCheck(this, SeriesView);
+
+    return SeriesView_possibleConstructorReturn(this, SeriesView_getPrototypeOf(SeriesView).apply(this, arguments));
+  }
+
+  SeriesView_createClass(SeriesView, [{
+    key: "render",
+    value: function render() {
+      var series = this.props.series;
+      if (!series) return react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "manageSeries",
+        role: "dialog",
+        "aria-labelledby": "manageSeriesLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      })));
+      return react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "manageSeries",
+        role: "dialog",
+        "aria-labelledby": "manageSeriesLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "manageSeriesLabel"
+      }, react_default.a.createElement("span", {
+        className: "im im-chart",
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", "Manage Series - ".concat(series.name)), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement(series_SeriesForm, {
+        series: series
+      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
+        className: "mt-4"
+      }, "Data"), react_default.a.createElement(DataTable, {
+        data: series.entries
+      })), react_default.a.createElement("div", {
+        className: "card-footer"
+      }, react_default.a.createElement("div", {
+        className: "d-flex justify-content-between"
+      }, react_default.a.createElement("button", {
+        className: "btn btn-primary"
+      }, "Back"), react_default.a.createElement("button", {
+        className: "btn btn-danger"
+      }, "Delete"))))))));
+    }
+  }]);
+
+  return SeriesView;
+}(react["Component"]);
+
+/* harmony default export */ var components_SeriesView = (SeriesView_SeriesView);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/KpiView.js
+function KpiView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiView_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiView_typeof(obj); }
+
+function KpiView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function KpiView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function KpiView_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiView_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function KpiView_possibleConstructorReturn(self, call) { if (call && (KpiView_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiView_assertThisInitialized(self); }
+
+function KpiView_getPrototypeOf(o) { KpiView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiView_getPrototypeOf(o); }
+
+function KpiView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function KpiView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiView_setPrototypeOf(subClass, superClass); }
+
+function KpiView_setPrototypeOf(o, p) { KpiView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiView_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // COMPONENTS
+
+
+
+
+
+var KpiView_KpiView =
+/*#__PURE__*/
+function (_Component) {
+  KpiView_inherits(KpiView, _Component);
+
+  function KpiView(props) {
+    var _this;
+
+    KpiView_classCallCheck(this, KpiView);
+
+    _this = KpiView_possibleConstructorReturn(this, KpiView_getPrototypeOf(KpiView).call(this, props));
+
+    _this.onSeriesSelect = function (id) {
+      _this.setState({
+        selectedSeries: id
+      });
+
+      $("#manageSeries").modal("show");
+    };
+
+    _this.state = {
+      selectedSeries: null
+    };
+    _this.onSeriesSelect = _this.onSeriesSelect.bind(KpiView_assertThisInitialized(_this));
+    return _this;
+  }
+
+  KpiView_createClass(KpiView, [{
+    key: "render",
+    value: function render() {
+      var kpi = this.props.kpi;
+      var selectedSeries = this.state.selectedSeries;
+      var series = kpi ? kpi.series : [];
+      var s = series ? series.filter(function (s) {
+        return s.id == selectedSeries;
+      })[0] : [];
+      if (!kpi) return react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "manageKpi",
+        role: "dialog",
+        "aria-labelledby": "manageKpiLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      })));
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "manageKpi",
+        role: "dialog",
+        "aria-labelledby": "manageKpiLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "manageKpiLabel"
+      }, react_default.a.createElement("span", {
+        className: "im im-dashboard",
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", "Manage KPI - ".concat(kpi.name)), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement(kpis_KpiForm, {
+        kpi: kpi
+      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
+        className: "mt-4"
+      }, "Series"), react_default.a.createElement(components_SeriesList, {
+        onClick: this.onSeriesSelect,
+        series: kpi.series
+      })), react_default.a.createElement("div", {
+        className: "card-footer"
+      }, react_default.a.createElement("div", {
+        className: "d-flex justify-content-end"
+      }, react_default.a.createElement("button", {
+        className: "btn btn-danger"
+      }, "Delete")))))))), react_default.a.createElement(components_SeriesView, {
+        series: s
+      }));
+    }
+  }]);
+
+  return KpiView;
+}(react["Component"]);
+
+/* harmony default export */ var components_KpiView = (KpiView_KpiView);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/index.js
+function pillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { pillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillarRoom_typeof(obj); }
+
+function pillarRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function pillarRoom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function pillarRoom_createClass(Constructor, protoProps, staticProps) { if (protoProps) pillarRoom_defineProperties(Constructor.prototype, protoProps); if (staticProps) pillarRoom_defineProperties(Constructor, staticProps); return Constructor; }
+
+function pillarRoom_possibleConstructorReturn(self, call) { if (call && (pillarRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return pillarRoom_assertThisInitialized(self); }
+
+function pillarRoom_getPrototypeOf(o) { pillarRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return pillarRoom_getPrototypeOf(o); }
+
+function pillarRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function pillarRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) pillarRoom_setPrototypeOf(subClass, superClass); }
+
+function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return pillarRoom_setPrototypeOf(o, p); }
+
+// DEPENDACIES
+
+
+
+ // CONFIG
+
+ // CORE COMPONENTS
+
+
+
+
+
+ // ACTIONS
+
+ // NATIVE COMPONENTS
+
+
+
+
+
+/*
+  Definition
+*/
+
+var pillarRoom_pillarRoom =
+/*#__PURE__*/
+function (_Component) {
+  pillarRoom_inherits(pillarRoom, _Component);
 
   function pillarRoom(props) {
     var _this;
 
-    PillarRoom_classCallCheck(this, pillarRoom);
+    pillarRoom_classCallCheck(this, pillarRoom);
 
-    _this = PillarRoom_possibleConstructorReturn(this, PillarRoom_getPrototypeOf(pillarRoom).call(this, props));
+    _this = pillarRoom_possibleConstructorReturn(this, pillarRoom_getPrototypeOf(pillarRoom).call(this, props));
 
     _this.deselect = function () {
       d3["selectAll"](".line").attr("stroke-width", 1.8);
@@ -5740,13 +4788,13 @@ function (_Component) {
       selectedExport: "",
       selectedKpi: null
     };
-    _this.selectSeriesHook = _this.selectSeriesHook.bind(PillarRoom_assertThisInitialized(_this));
-    _this.selectKpiHook = _this.selectKpiHook.bind(PillarRoom_assertThisInitialized(_this));
-    _this.updateExport = _this.updateExport.bind(PillarRoom_assertThisInitialized(_this));
+    _this.selectSeriesHook = _this.selectSeriesHook.bind(pillarRoom_assertThisInitialized(_this));
+    _this.selectKpiHook = _this.selectKpiHook.bind(pillarRoom_assertThisInitialized(_this));
+    _this.updateExport = _this.updateExport.bind(pillarRoom_assertThisInitialized(_this));
     return _this;
   }
 
-  PillarRoom_createClass(pillarRoom, [{
+  pillarRoom_createClass(pillarRoom, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.kpis != this.props.kpis) {//this.selectSeriesHook(null);
@@ -5856,11 +4904,6 @@ function (_Component) {
         }
       }, react_default.a.createElement("button", {
         type: "button",
-        className: "btn btn-primary mt-auto",
-        "data-toggle": "modal",
-        "data-target": "#kpiOptions"
-      }, "Manage KPIs"), react_default.a.createElement("button", {
-        type: "button",
         className: "btn btn-info mt-auto ml-auto",
         "data-toggle": "modal",
         "data-target": "#svgExporter",
@@ -5883,7 +4926,7 @@ function (_Component) {
           display: "flex",
           overflow: "auto"
         }
-      }, react_default.a.createElement(pillarRoom_ChartOptions, {
+      }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,
         selectKpiHook: this.selectKpiHook,
         selectSeriesHook: this.selectSeriesHook,
@@ -5901,12 +4944,10 @@ function (_Component) {
         dashboardId: dashboardId,
         kpis: kpis,
         pillarId: pillarId
-      }), react_default.a.createElement(series_DataOptions, {
+      }), react_default.a.createElement(components_KpiView, {
+        kpi: kpi
+      }), react_default.a.createElement(datapoints_DataOptions, {
         series: s[0]
-      }), react_default.a.createElement(series_SeriesOptions, {
-        series: series,
-        kpi: kpi,
-        deletionHook: this.deselect
       }), react_default.a.createElement(svgExporter, {
         target: selectedExport
       })));
@@ -5916,25 +4957,1218 @@ function (_Component) {
   return pillarRoom;
 }(react["Component"]);
 
-PillarRoom_pillarRoom.propTypes = {
+pillarRoom_pillarRoom.propTypes = {
   getADashboard: prop_types_default.a.func.isRequired,
   kpis: prop_types_default.a.array.isRequired,
   currentDashboard: prop_types_default.a.object
 };
 
-var PillarRoom_mapStateToProps = function mapStateToProps(state) {
+var pillarRoom_mapStateToProps = function mapStateToProps(state) {
   return {
     kpis: state.dashboards.kpis,
     currentDashboard: state.dashboards.currentDashboard
   };
 };
 
-/* harmony default export */ var PillarRoom = (Object(es["connect"])(PillarRoom_mapStateToProps, {
+/* harmony default export */ var scenes_pillarRoom = (Object(es["connect"])(pillarRoom_mapStateToProps, {
   getADashboard: dashboards_getADashboard,
   getKpis: dashboards_getKpis,
   clearKpis: dashboards_clearKpis
-})(PillarRoom_pillarRoom));
-// CONCATENATED MODULE: ./frontend/src/components/App.js
+})(pillarRoom_pillarRoom));
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardDisplayCard.js
+function DashboardDisplayCard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardDisplayCard_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardDisplayCard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardDisplayCard_typeof(obj); }
+
+function DashboardDisplayCard_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DashboardDisplayCard_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DashboardDisplayCard_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardDisplayCard_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardDisplayCard_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DashboardDisplayCard_possibleConstructorReturn(self, call) { if (call && (DashboardDisplayCard_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardDisplayCard_assertThisInitialized(self); }
+
+function DashboardDisplayCard_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DashboardDisplayCard_getPrototypeOf(o) { DashboardDisplayCard_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardDisplayCard_getPrototypeOf(o); }
+
+function DashboardDisplayCard_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardDisplayCard_setPrototypeOf(subClass, superClass); }
+
+function DashboardDisplayCard_setPrototypeOf(o, p) { DashboardDisplayCard_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardDisplayCard_setPrototypeOf(o, p); }
+
+// DEPENDACIES
+
+
+ // ACTIONS
+
+
+
+var DashboardDisplayCard_DashboardDisplayCard =
+/*#__PURE__*/
+function (_Component) {
+  DashboardDisplayCard_inherits(DashboardDisplayCard, _Component);
+
+  function DashboardDisplayCard() {
+    DashboardDisplayCard_classCallCheck(this, DashboardDisplayCard);
+
+    return DashboardDisplayCard_possibleConstructorReturn(this, DashboardDisplayCard_getPrototypeOf(DashboardDisplayCard).apply(this, arguments));
+  }
+
+  DashboardDisplayCard_createClass(DashboardDisplayCard, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          dashboard = _this$props.dashboard,
+          deleteDashboard = _this$props.deleteDashboard,
+          deleteClick = _this$props.deleteClick;
+      return react_default.a.createElement("div", {
+        className: "card m-3"
+      }, react_default.a.createElement("img", {
+        className: "card-img-top",
+        src: "https://via.placeholder.com/320x200.png",
+        alt: "Card image cap"
+      }), react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement("div", {
+        className: "card-title",
+        style: {
+          fontSize: "1.25rem",
+          fontWeight: "bold"
+        }
+      }, dashboard.title, " "), react_default.a.createElement("i", {
+        style: {
+          color: dashboard.background,
+          textAlign: "right"
+        },
+        className: "im im-drop ml-auto"
+      })), react_default.a.createElement("p", {
+        className: "card-text"
+      }, "Author: ", dashboard.author, react_default.a.createElement("br", null), "Level: ", dashboard.level), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement(react_router_dom["Link"], {
+        to: "/boardroom/".concat(dashboard.id),
+        className: "btn btn-primary btn-sm"
+      }, "View"), react_default.a.createElement("button", {
+        onClick: function onClick() {
+          return deleteClick("dashboard", dashboard.title);
+        },
+        className: "btn btn-danger btn-sm ml-auto"
+      }, " ", "Delete"))));
+    }
+  }]);
+
+  return DashboardDisplayCard;
+}(react["Component"]);
+
+/* harmony default export */ var components_DashboardDisplayCard = (Object(es["connect"])(null, {
+  deleteDashboard: dashboards_deleteDashboard
+})(DashboardDisplayCard_DashboardDisplayCard));
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/DeleteConfirmation.js
+function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
+
+function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
+
+function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
+
+function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
+
+function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
+
+
+
+
+var DeleteConfirmation_DeletetionConformation =
+/*#__PURE__*/
+function (_Component) {
+  DeleteConfirmation_inherits(DeletetionConformation, _Component);
+
+  function DeletetionConformation() {
+    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
+
+    return DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).apply(this, arguments));
+  }
+
+  DeleteConfirmation_createClass(DeletetionConformation, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          deletionItem = _this$props.deletionItem,
+          deletionName = _this$props.deletionName;
+      return react_default.a.createElement("div", {
+        className: "modal fade",
+        id: "deletionConfirmation",
+        role: "dialog",
+        "aria-labelledby": "deletionConfirmationLabel",
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document",
+        style: {
+          maxWidth: "fit-content"
+        }
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "deletionConfirmationLabel"
+      }, react_default.a.createElement("span", {
+        className: "im im-data-delete",
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", "Are you absolutely sure?"), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("p", {
+        className: "card-text"
+      }, "This action cannot be undone. This will permanently delete the ".concat(deletionName, " ").concat(deletionItem, " and all associated data."), " "), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        "for": "password"
+      }, "Please enter dashboard password"), react_default.a.createElement("input", {
+        type: "password",
+        className: "form-control"
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        "for": "name"
+      }, "Please type in the name of the ".concat(deletionItem, " to confirm")), react_default.a.createElement("input", {
+        type: "text",
+        className: "form-control"
+      })), react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "checkbox",
+        name: "export",
+        className: "form-check-input"
+      }), react_default.a.createElement("label", {
+        "for": "export",
+        className: "form-check-label mb-3"
+      }, "Do you want to export data?")), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-warning"
+      }, "I understand the consequences, delete this item")))))));
+    }
+  }]);
+
+  return DeletetionConformation;
+}(react["Component"]);
+
+DeleteConfirmation_DeletetionConformation.propTypes = {
+  deletionItem: prop_types_default.a.string.isRequired,
+  deletionName: prop_types_default.a.string.isRequired
+};
+/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardForm.js
+function DashboardForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardForm_typeof(obj); }
+
+function DashboardForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function DashboardForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DashboardForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DashboardForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardForm_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DashboardForm_possibleConstructorReturn(self, call) { if (call && (DashboardForm_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardForm_assertThisInitialized(self); }
+
+function DashboardForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DashboardForm_getPrototypeOf(o) { DashboardForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardForm_getPrototypeOf(o); }
+
+function DashboardForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardForm_setPrototypeOf(subClass, superClass); }
+
+function DashboardForm_setPrototypeOf(o, p) { DashboardForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardForm_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+ // CONFIG
+
+ // ACTIONS
+
+
+
+var DashboardForm_DashboardForm =
+/*#__PURE__*/
+function (_Component) {
+  DashboardForm_inherits(DashboardForm, _Component);
+
+  function DashboardForm() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    DashboardForm_classCallCheck(this, DashboardForm);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return DashboardForm_possibleConstructorReturn(_this, (_temp = _this = DashboardForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DashboardForm_getPrototypeOf(DashboardForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      title: "",
+      author: "",
+      background: "",
+      dashboardType: "0",
+      level: "0",
+      color: "#0"
+    }, _this.onChange = function (e) {
+      return _this.setState(DashboardForm_defineProperty({}, e.target.name, e.target.value));
+    }, _this.onChangeColor = function (color) {
+      _this.setState({
+        background: color.hex
+      });
+    }, _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$state = _this.state,
+          title = _this$state.title,
+          author = _this$state.author,
+          background = _this$state.background,
+          dashboardType = _this$state.dashboardType,
+          level = _this$state.level;
+      var dashboard = {
+        title: title,
+        author: author,
+        background: background,
+        dashboardType: dashboardType,
+        level: level
+      };
+
+      _this.props.addDashboard(dashboard);
+
+      _this.setState({
+        title: "",
+        author: "",
+        background: "#0",
+        level: ""
+      });
+    }, _temp));
+  }
+
+  DashboardForm_createClass(DashboardForm, [{
+    key: "render",
+    value: function render() {
+      var _this$state2 = this.state,
+          title = _this$state2.title,
+          author = _this$state2.author,
+          background = _this$state2.background;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h2", null, "Create Dashboard"), react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("div", {
+        className: "row justify-content-between"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-6"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "title"
+      }, "Title"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "title",
+        onChange: this.onChange,
+        value: title
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "author"
+      }, "Author"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "author",
+        onChange: this.onChange,
+        value: author
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "dashboardType"
+      }, "Type"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "dashboardType",
+        onChange: this.onChange
+      }, DASHBOARD_TYPE_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: "choice-".concat(choice.id),
+          value: choice.id
+        }, choice.name);
+      }))), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "level"
+      }, "Level"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "level",
+        onChange: this.onChange
+      }, LEVEL_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: choice.id,
+          value: choice.id
+        }, choice.name);
+      })))), react_default.a.createElement("div", {
+        className: "col-sm-5"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "color"
+      }, "Background Color"), react_default.a.createElement(lib["ChromePicker"], {
+        color: background,
+        onChangeComplete: this.onChangeColor
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-12"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn\r btn-primary"
+      }, "Submit"))))));
+    }
+  }]);
+
+  return DashboardForm;
+}(react["Component"]);
+
+DashboardForm_DashboardForm.propTypes = {
+  addDashboard: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_DashboardForm = (Object(es["connect"])(null, {
+  addDashboard: dashboards_addDashboard
+})(DashboardForm_DashboardForm));
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardOptions.js
+// DEPENDANCIES
+
+
+
+var DashboardOptions_DashboardOptions = function DashboardOptions(props) {
+  return react_default.a.createElement("div", {
+    className: "modal fade",
+    id: "dashboardOptions",
+    role: "dialog",
+    "aria-labelledby": "dashboardOptionsLabel",
+    "aria-hidden": "true"
+  }, react_default.a.createElement("div", {
+    className: "modal-dialog",
+    role: "document",
+    style: {
+      maxWidth: "fit-content"
+    }
+  }, react_default.a.createElement("div", {
+    className: "modal-content"
+  }, react_default.a.createElement("div", {
+    className: "modal-header"
+  }, react_default.a.createElement("h1", {
+    className: "modal-title",
+    id: "dashboardOptionsLabel"
+  }, react_default.a.createElement("span", {
+    className: "im im-computer",
+    style: {
+      fontSize: "".concat(2.5, "rem"),
+      verticalAlign: "-0.1em"
+    }
+  }), "  ", "Create New Dashboard"), react_default.a.createElement("button", {
+    type: "button",
+    className: "close",
+    "data-dismiss": "modal",
+    "aria-label": "Close"
+  }, react_default.a.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xD7"))), react_default.a.createElement("div", {
+    className: "modal-body",
+    style: {
+      padding: 0
+    }
+  }, react_default.a.createElement("div", {
+    className: "card"
+  }, react_default.a.createElement("div", {
+    className: "card-body"
+  }, react_default.a.createElement(components_DashboardForm, null)))))));
+};
+
+/* harmony default export */ var components_DashboardOptions = (DashboardOptions_DashboardOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardList.js
+function DashboardList_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardList_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardList_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardList_typeof(obj); }
+
+function DashboardList_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DashboardList_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DashboardList_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardList_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardList_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DashboardList_possibleConstructorReturn(self, call) { if (call && (DashboardList_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardList_assertThisInitialized(self); }
+
+function DashboardList_getPrototypeOf(o) { DashboardList_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardList_getPrototypeOf(o); }
+
+function DashboardList_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DashboardList_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardList_setPrototypeOf(subClass, superClass); }
+
+function DashboardList_setPrototypeOf(o, p) { DashboardList_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardList_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+ // ACTIONS
+
+ // CORE COMPONENTS
+
+
+
+ // NATIVE COMPONENTS
+
+
+
+var DashboardList_DashboardList =
+/*#__PURE__*/
+function (_Component) {
+  DashboardList_inherits(DashboardList, _Component);
+
+  function DashboardList(props) {
+    var _this;
+
+    DashboardList_classCallCheck(this, DashboardList);
+
+    _this = DashboardList_possibleConstructorReturn(this, DashboardList_getPrototypeOf(DashboardList).call(this, props));
+
+    _this.newDashboardClick = function () {
+      $("#dashboardOptions").modal("show");
+    };
+
+    _this.deleteClick = function (deletionItem, deletionName) {
+      _this.setState({
+        deletionItem: deletionItem,
+        deletionName: deletionName
+      });
+
+      $("#deletionConfirmation").modal("show");
+    };
+
+    _this.state = {
+      deletionItem: "",
+      deletionName: ""
+    };
+    _this.deleteClick = _this.deleteClick.bind(DashboardList_assertThisInitialized(_this));
+    return _this;
+  }
+
+  DashboardList_createClass(DashboardList, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getDashboards();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          dashboards = _this$props.dashboards,
+          deleteDashboard = _this$props.deleteDashboard;
+      var _this$state = this.state,
+          deletionItem = _this$state.deletionItem,
+          deletionName = _this$state.deletionName;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "row"
+      }, dashboards.map(function (dashboard) {
+        return react_default.a.createElement("div", {
+          key: dashboard.id,
+          className: "col-lg-4 col-sm-12"
+        }, react_default.a.createElement(components_DashboardDisplayCard, {
+          dashboard: dashboard,
+          deleteClick: _this2.deleteClick
+        }));
+      }), react_default.a.createElement("div", {
+        className: "col-lg-4 col-sm-12"
+      }, react_default.a.createElement(ui_NewCard, {
+        text: "Dashboard",
+        handleClick: this.newDashboardClick
+      }))), react_default.a.createElement(components_DashboardOptions, null), react_default.a.createElement(DeleteConfirmation, {
+        deletionItem: deletionItem,
+        deletionName: deletionName
+      }));
+    }
+  }]);
+
+  return DashboardList;
+}(react["Component"]);
+
+DashboardList_DashboardList.propTypes = {
+  dashboards: prop_types_default.a.array.isRequired,
+  getDashboards: prop_types_default.a.func.isRequired,
+  deleteDashboard: prop_types_default.a.func.isRequired
+};
+
+var DashboardList_mapStateToProps = function mapStateToProps(state) {
+  return {
+    dashboards: state.dashboards.dashboards
+  };
+};
+
+/* harmony default export */ var components_DashboardList = (Object(es["connect"])(DashboardList_mapStateToProps, {
+  getDashboards: dashboards_getDashboards,
+  deleteDashboard: dashboards_deleteDashboard
+})(DashboardList_DashboardList));
+// CONCATENATED MODULE: ./frontend/src/scenes/home/index.js
+function home_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { home_typeof = function _typeof(obj) { return typeof obj; }; } else { home_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return home_typeof(obj); }
+
+function home_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function home_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function home_createClass(Constructor, protoProps, staticProps) { if (protoProps) home_defineProperties(Constructor.prototype, protoProps); if (staticProps) home_defineProperties(Constructor, staticProps); return Constructor; }
+
+function home_possibleConstructorReturn(self, call) { if (call && (home_typeof(call) === "object" || typeof call === "function")) { return call; } return home_assertThisInitialized(self); }
+
+function home_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function home_getPrototypeOf(o) { home_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return home_getPrototypeOf(o); }
+
+function home_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) home_setPrototypeOf(subClass, superClass); }
+
+function home_setPrototypeOf(o, p) { home_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return home_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // CORE COMPONENTS
+
+ // NATIVE COMPONENTS
+
+
+
+var home_Dashboard =
+/*#__PURE__*/
+function (_Component) {
+  home_inherits(Dashboard, _Component);
+
+  function Dashboard() {
+    home_classCallCheck(this, Dashboard);
+
+    return home_possibleConstructorReturn(this, home_getPrototypeOf(Dashboard).apply(this, arguments));
+  }
+
+  home_createClass(Dashboard, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props = this.props,
+          clearCurrentDashboard = _this$props.clearCurrentDashboard,
+          clearActionTables = _this$props.clearActionTables;
+      clearCurrentDashboard();
+      clearActionTables();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react_default.a.createElement("div", null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "container"
+      }, react_default.a.createElement(components_DashboardList, null))));
+    }
+  }]);
+
+  return Dashboard;
+}(react["Component"]);
+
+/* harmony default export */ var home = (Object(es["connect"])(null, {
+  clearCurrentDashboard: dashboards_clearCurrentDashboard,
+  clearActionTables: dashboards_clearActionTables
+})(home_Dashboard));
+// CONCATENATED MODULE: ./frontend/src/core/components/layout/Header.js
+function Header_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Header_typeof = function _typeof(obj) { return typeof obj; }; } else { Header_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Header_typeof(obj); }
+
+function Header_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Header_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Header_createClass(Constructor, protoProps, staticProps) { if (protoProps) Header_defineProperties(Constructor.prototype, protoProps); if (staticProps) Header_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Header_possibleConstructorReturn(self, call) { if (call && (Header_typeof(call) === "object" || typeof call === "function")) { return call; } return Header_assertThisInitialized(self); }
+
+function Header_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Header_getPrototypeOf(o) { Header_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Header_getPrototypeOf(o); }
+
+function Header_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Header_setPrototypeOf(subClass, superClass); }
+
+function Header_setPrototypeOf(o, p) { Header_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Header_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+ // ACTIONS
+
+
+/**
+ * Header component for the site
+ */
+
+var Header_Header =
+/*#__PURE__*/
+function (_Component) {
+  Header_inherits(Header, _Component);
+
+  function Header() {
+    Header_classCallCheck(this, Header);
+
+    return Header_possibleConstructorReturn(this, Header_getPrototypeOf(Header).apply(this, arguments));
+  }
+
+  Header_createClass(Header, [{
+    key: "render",
+    value: function render() {
+      var _this$props$auth = this.props.auth,
+          isAuthenticated = _this$props$auth.isAuthenticated,
+          user = _this$props$auth.user;
+      var currentDashboard = this.props.currentDashboard;
+      var authLinks = react_default.a.createElement("ul", {
+        className: "navbar-nav ml-auto mt-2"
+      }, react_default.a.createElement("span", {
+        className: "navbar-text mr-3"
+      }, react_default.a.createElement("strong", null, user ? "Welcome ".concat(user.username) : "")), react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement("button", {
+        onClick: this.props.logout,
+        className: "nav-link btn btn-info btn-sm text-light pl-2 pr-2"
+      }, "Logout")));
+      var guestLinks = react_default.a.createElement("ul", {
+        className: "navbar-nav ml-auto mt-2"
+      }, react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement(react_router_dom["Link"], {
+        to: "/register",
+        className: "nav-link"
+      }, "Register")), react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement(react_router_dom["Link"], {
+        to: "/login",
+        className: "nav-link"
+      }, "Login")));
+      return react_default.a.createElement("nav", {
+        className: "navbar navbar-expand-lg navbar-light bg-light"
+      }, react_default.a.createElement("div", {
+        className: "container-fluid"
+      }, react_default.a.createElement("a", {
+        className: "navbar-brand",
+        href: "#"
+      }, "+QDCI Boards"), react_default.a.createElement("button", {
+        className: "navbar-toggler",
+        type: "button",
+        "data-toggle": "collapse",
+        "data-target": "#navbarNavDropdown",
+        "aria-controls": "navbarNavDropdown",
+        "aria-expanded": "false",
+        "aria-label": "Toggle navigation"
+      }, react_default.a.createElement("span", {
+        className: "navbar-toggler-icon"
+      })), react_default.a.createElement("div", {
+        className: "collapse navbar-collapse",
+        id: "navbarNavDropdown"
+      }, react_default.a.createElement("ul", {
+        className: "navbar-nav"
+      }, react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement("a", {
+        className: "nav-link",
+        href: "#"
+      }, "My Dashboards")), react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement("a", {
+        className: "nav-link",
+        href: "#"
+      }, "Browse")), react_default.a.createElement("li", {
+        className: "nav-item"
+      }, react_default.a.createElement("a", {
+        className: "nav-link",
+        href: "#"
+      }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h2", {
+        className: "m-auto"
+      }, currentDashboard.title), isAuthenticated ? authLinks : guestLinks)));
+    }
+  }]);
+
+  return Header;
+}(react["Component"]);
+
+Header_Header.propTypes = {
+  auth: prop_types_default.a.object.isRequired,
+  logout: prop_types_default.a.func.isRequired
+};
+
+var Header_mapStateToProps = function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+    currentDashboard: state.dashboards.currentDashboard
+  };
+};
+
+/* harmony default export */ var layout_Header = (Object(es["connect"])(Header_mapStateToProps, {
+  logout: auth_logout
+})(Header_Header));
+// CONCATENATED MODULE: ./frontend/src/core/components/layout/Alerts.js
+function Alerts_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Alerts_typeof = function _typeof(obj) { return typeof obj; }; } else { Alerts_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Alerts_typeof(obj); }
+
+function Alerts_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Alerts_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Alerts_createClass(Constructor, protoProps, staticProps) { if (protoProps) Alerts_defineProperties(Constructor.prototype, protoProps); if (staticProps) Alerts_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Alerts_possibleConstructorReturn(self, call) { if (call && (Alerts_typeof(call) === "object" || typeof call === "function")) { return call; } return Alerts_assertThisInitialized(self); }
+
+function Alerts_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Alerts_getPrototypeOf(o) { Alerts_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Alerts_getPrototypeOf(o); }
+
+function Alerts_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Alerts_setPrototypeOf(subClass, superClass); }
+
+function Alerts_setPrototypeOf(o, p) { Alerts_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Alerts_setPrototypeOf(o, p); }
+
+// -----------------------------------------------------------------------------
+//                           ALERT COMPONENT
+//                      Organization: Sanofi Pasteur
+//                         Author: Kyle Thatcher
+//                           Date: 08JUL2019
+// -----------------------------------------------------------------------------
+
+
+
+
+var Alerts_Alerts =
+/*#__PURE__*/
+function (_Component) {
+  Alerts_inherits(Alerts, _Component);
+
+  function Alerts() {
+    Alerts_classCallCheck(this, Alerts);
+
+    return Alerts_possibleConstructorReturn(this, Alerts_getPrototypeOf(Alerts).apply(this, arguments));
+  }
+
+  Alerts_createClass(Alerts, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          error = _this$props.error,
+          alert = _this$props.alert,
+          messages = _this$props.messages;
+
+      if (error !== prevProps.error) {
+        if (error.msg.title) alert.error("Title: ".concat(error.msg.title.join()));
+        if (error.msg.author) alert.error("Author: ".concat(error.msg.author.join()));
+        if (error.msg.background) alert.error("Color: ".concat(error.msg.background.join()));
+        if (error.msg.non_field_errors) alert.error("Author: ".concat(error.msg.non_field_errors.join()));
+        if (error.msg.username) alert.error(error.msg.username.join());
+      }
+
+      if (messages !== prevProps.messages) {
+        if (messages.deleteDashboard) alert.success(messages.deleteDashboard);
+        if (messages.addDashboard) alert.success(messages.addDashboard);
+        if (messages.passwordsNotMatch) alert.error(messages.passwordsNotMatch);
+        if (messages.addKpi) alert.success(messages.addKpi);
+        if (messages.updateKpi) alert.success(messages.updateKpi);
+        if (messages.deleteKpi) alert.success(messages.deleteKpi);
+        if (messages.updateActionTable) alert.success(messages.updateActionTable);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react_default.a.createElement(react["Fragment"], null);
+    }
+  }]);
+
+  return Alerts;
+}(react["Component"]);
+Alerts_Alerts.propTypes = {
+  error: prop_types_default.a.object.isRequired,
+  alert: prop_types_default.a.object.isRequired,
+  messages: prop_types_default.a.object.isRequired
+};
+
+var Alerts_mapStateToProps = function mapStateToProps(state) {
+  return {
+    error: state.errors,
+    messages: state.messages
+  };
+};
+
+/* harmony default export */ var layout_Alerts = (Object(es["connect"])(Alerts_mapStateToProps)(Object(react_alert["withAlert"])()(Alerts_Alerts)));
+// EXTERNAL MODULE: ./node_modules/redux/es/redux.js
+var redux = __webpack_require__("./node_modules/redux/es/redux.js");
+
+// EXTERNAL MODULE: ./node_modules/redux-devtools-extension/index.js
+var redux_devtools_extension = __webpack_require__("./node_modules/redux-devtools-extension/index.js");
+
+// EXTERNAL MODULE: ./node_modules/redux-thunk/es/index.js
+var redux_thunk_es = __webpack_require__("./node_modules/redux-thunk/es/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/core/reducers/dashboards.js
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
+
+function dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var initalState = {
+  dashboards: [],
+  kpis: [],
+  currentDashboard: null,
+  actionTables: []
+};
+/* harmony default export */ var reducers_dashboards = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initalState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_A_DASHBOARD:
+      return dashboards_objectSpread({}, state, {
+        currentDashboard: action.payload
+      });
+
+    case GET_DASHBOARDS:
+      return dashboards_objectSpread({}, state, {
+        dashboards: action.payload
+      });
+
+    case DELETE_DASHBOARD:
+      return dashboards_objectSpread({}, state, {
+        dashboards: state.dashboards.filter(function (dashboard) {
+          return dashboard.id !== action.payload;
+        })
+      });
+
+    case ADD_DASHBOARD:
+      return dashboards_objectSpread({}, state, {
+        dashboards: [].concat(_toConsumableArray(state.dashboards), [action.payload])
+      });
+
+    case GET_KPIS:
+      return dashboards_objectSpread({}, state, {
+        kpis: action.payload
+      });
+
+    case ADD_KPI:
+      return dashboards_objectSpread({}, state, {
+        kpis: [].concat(_toConsumableArray(state.kpis), [action.payload])
+      });
+
+    case UPDATE_KPI:
+      return dashboards_objectSpread({}, state, {
+        kpis: state.kpis.map(function (kpi) {
+          return kpi.id === action.payload.id ? action.payload : kpi;
+        })
+      });
+
+    case DELETE_KPI:
+      return dashboards_objectSpread({}, state, {
+        kpis: state.kpis.filter(function (kpi) {
+          return kpi.id !== action.payload;
+        })
+      });
+
+    case CLEAR_KPIS:
+      return dashboards_objectSpread({}, state, {
+        kpis: []
+      });
+
+    case ADD_SERIES:
+      console.log("added");
+      var kpis = state.kpis.map(function (kpi) {
+        if (kpi.id != action.payload.kpi) return kpi;
+        var series = kpi.series;
+        return dashboards_objectSpread({}, kpi, {
+          series: [].concat(_toConsumableArray(series), [action.payload])
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis
+      });
+
+    case UPDATE_SERIES:
+      var kpis__ = state.kpis.map(function (kpi) {
+        return dashboards_objectSpread({}, kpi, {
+          series: kpi.series.map(function (series) {
+            if (series.id != action.payload.id) return series;else return action.payload;
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis__
+      });
+
+    case GET_SERIES:
+      return dashboards_objectSpread({}, state, {
+        series: action.payload
+      });
+
+    case DELETE_SERIES:
+      var kpis_ = state.kpis.map(function (kpi) {
+        return dashboards_objectSpread({}, kpi, {
+          series: kpi.series.filter(function (series) {
+            return series.id != action.payload;
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis_
+      });
+
+    case UPDATE_DATAPOINT:
+      var kpis = state.kpis.map(function (kpi) {
+        return dashboards_objectSpread({}, kpi, {
+          series: kpi.series.map(function (series) {
+            if (series.id != action.payload.series) return series;
+            return dashboards_objectSpread({}, series, {
+              entries: series.entries.map(function (datapoint) {
+                if (datapoint.id != action.payload.id) return datapoint;else return action.payload;
+              })
+            });
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis
+      });
+
+    case DELETE_DATAPOINT:
+      var kpis = state.kpis.map(function (kpi) {
+        return dashboards_objectSpread({}, kpi, {
+          series: kpi.series.map(function (series) {
+            return dashboards_objectSpread({}, series, {
+              entries: series.entries.filter(function (datapoint) {
+                return datapoint != action.payload;
+              })
+            });
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis
+      });
+
+    case ADD_DATAPOINT:
+      var kpis___ = state.kpis.map(function (kpi) {
+        return dashboards_objectSpread({}, kpi, {
+          series: kpi.series.map(function (series) {
+            if (series.id != action.payload.series) return series;else return dashboards_objectSpread({}, series, {
+              entries: [].concat(_toConsumableArray(series.entries), [action.payload])
+            });
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        kpis: kpis___
+      });
+
+    case GET_ACTION_TABLE:
+      return dashboards_objectSpread({}, state, {
+        actionTables: action.payload
+      });
+
+    case ADD_ACTION:
+      var actionTables = state.actionTables.map(function (at) {
+        if (action.payload.tables.indexOf(at.id) == -1) return at;else return dashboards_objectSpread({}, at, {
+          actions: [].concat(_toConsumableArray(at.actions), [action.payload])
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        actionTables: actionTables
+      });
+
+    case DELETE_ACTION:
+      var actionTables = state.actionTables.map(function (at) {
+        return dashboards_objectSpread({}, at, {
+          actions: at.actions.filter(function (act) {
+            return act.id != action.payload;
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        actionTables: actionTables
+      });
+
+    case UPDATE_ACTION:
+      var actionTables = state.actionTables.map(function (at) {
+        return dashboards_objectSpread({}, at, {
+          actions: at.actions.map(function (act) {
+            if (act.id != action.payload.id) return act;else return action.payload;
+          })
+        });
+      });
+      return dashboards_objectSpread({}, state, {
+        actionTables: actionTables
+      });
+
+    case UPDATE_ACTION_TABLE:
+      var actionTables = state.actionTables.map(function (at) {
+        if (at.id != action.payload.id) return at;else return action.payload;
+      });
+      return dashboards_objectSpread({}, state, {
+        actionTables: actionTables
+      });
+
+    case CLEAR_CURRENT_DASHBOARD:
+      return dashboards_objectSpread({}, state, {
+        actionTables: []
+      });
+
+    case CLEAR_ACTION_TABLES:
+      return dashboards_objectSpread({}, state, {
+        currentDashboard: null
+      });
+
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./frontend/src/core/reducers/errors.js
+
+var initialState = {
+  msg: {},
+  status: null
+};
+/* harmony default export */ var errors = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case GET_ERRORS:
+      return {
+        msg: action.payload.msg,
+        status: action.payload.status
+      };
+
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./frontend/src/core/reducers/messages.js
+
+var messages_initialState = {
+  msg: {},
+  status: null
+};
+/* harmony default export */ var messages = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : messages_initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case CREATE_MESSAGE:
+      return state = action.payload;
+
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./frontend/src/core/reducers/auth.js
+function auth_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { auth_defineProperty(target, key, source[key]); }); } return target; }
+
+function auth_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+var auth_initialState = {
+  token: localStorage.getItem("token"),
+  isAuthenticated: null,
+  isLoading: false,
+  user: null
+};
+/* harmony default export */ var reducers_auth = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : auth_initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case USER_LOADING:
+      return auth_objectSpread({}, state, {
+        isLoading: true
+      });
+
+    case USER_LOADED:
+      return auth_objectSpread({}, state, {
+        isAuthenticated: true,
+        isLoading: false,
+        user: action.payload
+      });
+
+    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
+      localStorage.setItem("token", action.payload.token);
+      return auth_objectSpread({}, state, action.payload, {
+        isAuthenticated: true,
+        isLoading: false
+      });
+
+    case LOGIN_FAIL:
+    case AUTH_ERROR:
+    case LOGOUT_SUCCESS:
+    case REGISTER_FAIL:
+      localStorage.removeItem("token");
+      return auth_objectSpread({}, state, {
+        token: null,
+        user: null,
+        leads: [],
+        isAuthenticated: false,
+        isLoading: false
+      });
+
+    default:
+      return state;
+  }
+});
+// CONCATENATED MODULE: ./frontend/src/core/reducers/index.js
+
+
+
+
+
+/* harmony default export */ var reducers = (Object(redux["combineReducers"])({
+  dashboards: reducers_dashboards,
+  errors: errors,
+  messages: messages,
+  auth: reducers_auth
+}));
+// CONCATENATED MODULE: ./frontend/src/store.js
+// DEPENDANCIES
+
+
+ // COMPONENTS
+
+
+var store_initialState = {};
+var middleware = [redux_thunk_es["default"]];
+var store = Object(redux["createStore"])(reducers, store_initialState, Object(redux_devtools_extension["composeWithDevTools"])(redux["applyMiddleware"].apply(void 0, middleware)));
+/* harmony default export */ var src_store = (store);
+// CONCATENATED MODULE: ./frontend/src/core/components/App.js
 function App_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { App_typeof = function _typeof(obj) { return typeof obj; }; } else { App_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return App_typeof(obj); }
 
 function App_extends() { App_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return App_extends.apply(this, arguments); }
@@ -5955,18 +6189,21 @@ function App_inherits(subClass, superClass) { if (typeof superClass !== "functio
 
 function App_setPrototypeOf(o, p) { App_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return App_setPrototypeOf(o, p); }
 
+//DEPENDANCIES
 
 
 
 
 
 
+ // SCENES
 
 
 
 
 
 
+ // COMPONENTS
 
 
 
@@ -6004,28 +6241,28 @@ function (_Component) {
         store: src_store
       }, react_default.a.createElement(react_alert["Provider"], App_extends({
         template: react_alert_template_basic["default"]
-      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(layout_Header, null), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(common_PrivateRoute, {
+      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(layout_Header, null), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(utils_PrivateRoute, {
         exact: true,
         path: "/",
-        component: hompage_dashboard
+        component: home
       }), react_default.a.createElement(react_router_dom["Route"], {
         exact: true,
         path: "/register",
-        component: accounts_register
+        component: scenes_register
       }), react_default.a.createElement(react_router_dom["Route"], {
         exact: true,
         path: "/login",
-        component: accounts_login
+        component: scenes_login
       }), react_default.a.createElement(react_router_dom["Route"], {
         exact: true,
         path: "/",
-        component: hompage_dashboard
-      }), react_default.a.createElement(common_PrivateRoute, {
+        component: home
+      }), react_default.a.createElement(utils_PrivateRoute, {
         path: "/boardroom/:id",
-        component: boardroom
-      }), react_default.a.createElement(common_PrivateRoute, {
+        component: boardRoom
+      }), react_default.a.createElement(utils_PrivateRoute, {
         path: "/pillar/:dashboardId/:pillarId",
-        component: PillarRoom
+        component: scenes_pillarRoom
       }))))));
     }
   }]);

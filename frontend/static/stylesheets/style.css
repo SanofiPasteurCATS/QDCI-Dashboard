@@ -517,5 +517,16 @@ body {
   bottom: 0;
   right: 0; }
 
+.card-hover {
+  transition: background-color 0.3s ease;
+  background: #ffffff; }
+  .card-hover:hover {
+    background: #ebebeb;
+    transition: all 0.3s ease; }
+  .card-hover:active {
+    background: #bfbfbf; }
+
 .modal-dialog {
-  max-width: 900px; }
+  max-width: 900px;
+  max-height: 800px;
+  overflow: auto; }

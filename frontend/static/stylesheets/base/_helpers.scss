@@ -20,6 +20,7 @@
 .stacked {
   display: block !important;
 }
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -72,4 +73,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.card-hover {
+  transition: background-color 0.3s ease;
+  @include darken-effect(#ffffff);
 }
