@@ -21,11 +21,14 @@ class DashboardList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deletionItem: "",
-      deletionName: ""
+      deletionItem: null
     };
     this.deleteClick = this.deleteClick.bind(this);
+    this.onDeleteConfirmationSubmit = this.onDeleteConfirmationSubmit.bind(
+      this
+    );
   }
+
   static propTypes = {
     dashboards: PropTypes.array.isRequired,
     getDashboards: PropTypes.func.isRequired,
@@ -35,19 +38,30 @@ class DashboardList extends Component {
   componentDidMount() {
     this.props.getDashboards();
   }
+
   newDashboardClick = () => {
     $("#dashboardOptions").modal("show");
   };
-  deleteClick = (deletionItem, deletionName) => {
+
+  deleteClick = deletionItem => {
     this.setState({
-      deletionItem: deletionItem,
-      deletionName: deletionName
+      deletionItem
     });
-    $("#deletionConfirmation").modal("show");
+    $("#deleteConfirmation").modal("show");
   };
+
+  onDeleteConfirmationSubmit = state => {
+    const { deleteDashboard } = this.props;
+    const { deletionItem } = this.state;
+    if (state.name === deletionItem.title) {
+      deleteDashboard(deletionItem.id);
+      return true;
+    } else return false;
+  };
+
   render() {
     const { dashboards, deleteDashboard } = this.props;
-    const { deletionItem, deletionName } = this.state;
+    const { deletionItem } = this.state;
     return (
       <Fragment>
         <div className="row">
@@ -61,13 +75,16 @@ class DashboardList extends Component {
           ))}
 
           <div className="col-lg-4 col-sm-12">
-            <NewCard text={"Dashboard"} handleClick={this.newDashboardClick} />
+            <NewCard text="Dashboard" handleClick={this.newDashboardClick} />
           </div>
         </div>
         <DashboardOptions />
         <DeleteConfirmation
-          deletionItem={deletionItem}
-          deletionName={deletionName}
+          deletionContext={{
+            item: deletionItem,
+            type: "dashboard",
+            onSubmit: this.onDeleteConfirmationSubmit
+          }}
         />
       </Fragment>
     );

@@ -1,5 +1,6 @@
 // DEPENDANCIES
 import React, { Fragment, Component } from "react";
+import { isThursday } from "date-fns";
 
 class ChartOptions extends Component {
   onChange = e => {
@@ -13,8 +14,13 @@ class ChartOptions extends Component {
       this.props.selectKpiHook(this.props.kpis[0].id);
     }
   }
+
+  openKpiNew = () => {
+    $("#newKpi").modal("show");
+  };
+
   render() {
-    const { active, kpis } = this.props;
+    const { active, kpis, setMenuState, menuMode } = this.props;
 
     return (
       <Fragment>
@@ -41,52 +47,44 @@ class ChartOptions extends Component {
         </select>
         <button
           type="button"
-          className="btn btn-primary mt-auto ml-2"
-          data-toggle="modal"
-          data-target="#manageKpi"
+          className={"btn btn-success btn-sm mt-auto ml-3"}
+          style={{ padding: "1px 8px" }}
+          onClick={this.openKpiNew}
         >
-          Manage KPI
+          <i
+            className="im im-plus"
+            style={{ lineHeight: "1.5", fontSize: "20px" }}
+          ></i>
         </button>
-        {/*
-        {kpis[0] ? (
-          <button
-            type="button"
-            className="btn btn-primary mt-auto ml-2"
-            data-toggle="modal"
-            data-target="#seriesOptions"
-          >
-            Manage Series
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-secondary mt-auto ml-2"
-            data-toggle="modal"
-            data-target="#seriesOptions"
-            disabled
-          >
-            Manage Series
-          </button>
-        )}
+        <button
+          type="button"
+          className={`btn btn-sm mt-auto ml-auto ${
+            menuMode ? "btn-secondary" : "btn-primary"
+          }`}
+          onClick={() => setMenuState(false)}
+          style={{ padding: "1px 8px" }}
+          disabled={menuMode ? false : true}
+        >
+          <i
+            className="im im-line-chart-up"
+            style={{ lineHeight: "1.5", fontSize: "20px" }}
+          ></i>
+        </button>
 
-        {active ? (
-          <button
-            type="button"
-            className="btn btn-primary mt-auto ml-auto"
-            data-toggle="modal"
-            data-target="#dataOptions"
-          >
-            Edit Selected
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-secondary mt-auto ml-auto"
-            disabled
-          >
-            Edit Selected
-          </button>
-        )} */}
+        <button
+          type="button"
+          className={`btn btn-sm mt-auto ml-2 ${
+            menuMode ? "btn-primary" : "btn-secondary"
+          }`}
+          onClick={() => setMenuState(true)}
+          style={{ padding: "1px 8px" }}
+          disabled={menuMode ? true : false}
+        >
+          <i
+            className="im im-gear"
+            style={{ lineHeight: "1.5", fontSize: "20px" }}
+          ></i>
+        </button>
       </Fragment>
     );
   }

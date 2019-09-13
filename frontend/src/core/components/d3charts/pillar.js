@@ -5,13 +5,58 @@ import { withFauxDOM } from "react-faux-dom";
 import PropTypes from "prop-types";
 
 // COMPONENTS
-import { primary_color, accent_color } from "../../config/styleConfig";
-
+import { primaryColor, accentColor } from "../../config/styleConfig";
+import {
+  KPI_TYPE_DEVIATION,
+  KPI_TYPE_WIN_LOSE,
+  KPI_TYPE_THRESHOLD,
+  THRESHOLD_TYPE_GREATER,
+  THRESHOLD_TYPE_LESS
+} from "../../config/dashboardConfig";
 /**
  * Pillar component renders individual +QDCI Pillars using d3 and react-faux-dom
  * Recieves props "kpis" which contains all information for kpis
  */
 const xFactor = 4;
+
+const labelData = [
+  {
+    date: "2019-01-01"
+  },
+  {
+    date: "2019-02-01"
+  },
+  {
+    date: "2019-03-01"
+  },
+  {
+    date: "2019-04-01"
+  },
+  {
+    date: "2019-05-01"
+  },
+  {
+    date: "2019-06-01"
+  },
+  {
+    date: "2019-07-01"
+  },
+  {
+    date: "2019-08-01"
+  },
+  {
+    date: "2019-09-01"
+  },
+  {
+    date: "2019-10-01"
+  },
+  {
+    date: "2019-11-01"
+  },
+  {
+    date: "2019-12-01"
+  }
+];
 
 class Pillar extends React.Component {
   static propTypes = {
@@ -63,7 +108,10 @@ class Pillar extends React.Component {
       .classed("svg-content", true);
     const link = svg
       .append("a")
-      .attr("href", `#/pillar/${dashboardId}/${letter}`)
+      .attr(
+        "href",
+        `#/pillar/${dashboardId}/${letter === "+" ? "Plus" : letter}`
+      )
       .style("text-decoration", "none");
 
     const img = link
@@ -72,7 +120,7 @@ class Pillar extends React.Component {
       .attr("cy", plotSize / 2)
       .attr("alignment-baseline", "middle")
       .attr("r", 0)
-      .style("fill", accent_color)
+      .style("fill", accentColor)
       .attr("id", "circle")
       .transition()
       .duration(800)
@@ -88,14 +136,14 @@ class Pillar extends React.Component {
       .attr("id", "text")
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
-      .style("fill", primary_color)
+      .style("fill", primaryColor)
       .style("font-size", plotSize / 2.9)
       .style("text-decoration", "none");
   }
 
   // Handles all D3 updates caused by changes to dataset
   updateD3() {
-    const { kpis, letter, labeled } = this.props;
+    const { kpis, letter, labeled, showTooltip } = this.props;
     const plotSize = 200;
     const radius = plotSize / xFactor;
     const count = kpis.length;
@@ -104,14 +152,14 @@ class Pillar extends React.Component {
     const parseTime = d3.timeParse("%Y-%m-%d");
     const formatTime = d3.timeFormat("%b");
 
-    for (var y in kpis) {
-      for (var x in kpis[y].series) {
+    for (const y in kpis) {
+      for (const x in kpis[y].series) {
         const series = kpis[y].series[x].entries;
         series.sort((a, b) => {
           if (!a.date && b.date) return 1;
           if (a.date && !b.date) return -1;
           if (!a.date && !b.date) return 0;
-          else return new Date(a.date) - new Date(b.date);
+          return new Date(a.date) - new Date(b.date);
         });
       }
     }
@@ -138,6 +186,53 @@ class Pillar extends React.Component {
       .padAngle(0.05)
       .padRadius(80);
 
+    const getColor = ({
+      safe_deviation,
+      danger_deviation,
+      kpi_type,
+      warning_margin,
+      threshold_type,
+      value,
+      target
+    }) => {
+      let color = "#F2F2F2";
+      const deviation = (value / target - 1) * 100;
+      const abs_deviation = Math.abs(deviation);
+      if (value == null) return color;
+      switch (kpi_type) {
+        case KPI_TYPE_DEVIATION:
+          if (abs_deviation < safe_deviation) color = "green";
+          else if (
+            abs_deviation > safe_deviation &&
+            abs_deviation < danger_deviation
+          )
+            color = "orange";
+          else color = "red";
+          break;
+
+        case KPI_TYPE_THRESHOLD:
+          switch (threshold_type) {
+            case THRESHOLD_TYPE_GREATER:
+              if (value >= target) color = "green";
+              else if (deviation < warning_margin) color = "red";
+              else color = "orange";
+              break;
+            case THRESHOLD_TYPE_LESS:
+              if (value <= target) color = "green";
+              else if (deviation > warning_margin) color = "red";
+              else color = "orange";
+              break;
+          }
+          break;
+
+        case KPI_TYPE_WIN_LOSE:
+          if (value >= target) color = "green";
+          else color = "red";
+          break;
+      }
+      return color;
+    };
+
     const faux = this.props.connectFauxDOM("svg", "chart");
 
     d3.select(faux).select("#circle");
@@ -159,8 +254,13 @@ class Pillar extends React.Component {
       .attr("class", "kpi")
       .merge(pathBind)
       .attr("data-index", (d, i) => i)
-      .attr("data-safe", d => d.safe)
-      .attr("data-danger", d => d.danger)
+      .attr("data-safe", d => d.safe_deviation)
+      .attr("data-frequency", d => d.frequency)
+      .attr("data-danger", d => d.danger_deviation)
+      .attr("data-name", d => d.name)
+      .attr("data-thresh-type", d => d.threshold_type)
+      .attr("data-warning", d => d.warning_margin)
+      .attr("data-type", d => d.kpi_type)
       .attr("transform", `translate(${plotSize / 2},${plotSize / 2})`);
     this.props.animateFauxDOM(800);
 
@@ -176,7 +276,7 @@ class Pillar extends React.Component {
       .append("path")
       .attr("class", "ring")
       .attr("id", d => {
-        return "ring_" + d.data.id;
+        return `ring_${d.data.id}`;
       })
       .attr("d", (d, i, j) => {
         const index = $(j)[i].parentNode.getAttribute("data-index");
@@ -188,26 +288,34 @@ class Pillar extends React.Component {
             radius + ((plotSize * labelScale) / 16) * (index + labelOffset) + 4
           )(d);
       })
-      .on("mouseover", d => {
+      .on("mouseover", (d, i, j) => {
+        const kpi_type = $(j)[i].parentNode.getAttribute("data-type");
+        const kpiName = $(j)[i].parentNode.getAttribute("data-name");
         d3.select(`#ring_${d.data.id}`)
           .style("stroke", "#000")
           .attr("stroke-width", "1");
+        showTooltip(true, {
+          x: d3.event.pageX,
+          y: d3.event.pageY,
+          payload: { kpi_type, kpiName, ...d.data }
+        });
       })
       .on("mouseout", d => {
         d3.select(`#ring_${d.data.id}`).style("stroke", "none");
+        showTooltip(false);
       })
       .merge(ringBind)
       .style("fill", (d, i, j) => {
-        const safe = $(j)[i].parentNode.getAttribute("data-safe");
-        const danger = $(j)[i].parentNode.getAttribute("data-danger");
-        let color = "rgba(0,0,0,0.05)";
-        const deviation = Math.abs(d.data.value / d.data.target - 1);
-        if (d.data.value == null) return color;
-
-        if (deviation < safe) color = "green";
-        else if (deviation > safe && deviation < danger) color = "orange";
-        else color = "red";
-        return color;
+        const colorProps = {
+          safe_deviation: $(j)[i].parentNode.getAttribute("data-safe"),
+          danger_deviation: $(j)[i].parentNode.getAttribute("data-danger"),
+          kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
+          warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
+          threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
+          value: d.data.value,
+          target: d.data.target
+        };
+        return getColor(colorProps);
       });
     d3.select(faux)
       .selectAll(".label")
@@ -216,12 +324,12 @@ class Pillar extends React.Component {
       const labels = d3
         .select(faux)
         .selectAll(".label")
-        .data(pie(kpis[count - 1].series[0].entries))
+        .data(pie(labelData))
         .enter()
         .append("text")
-        .text(d => {
+        .text((d, i, j) => {
           if (d.data.date) return formatTime(parseTime(d.data.date));
-          else return "";
+          return "";
         })
         .attr("class", "label")
         .attr("transform", function(d) {
@@ -237,7 +345,7 @@ class Pillar extends React.Component {
           const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
           return midangle < Math.PI ? "start" : "end";
         })
-        .style("fill", accent_color);
+        .style("fill", accentColor);
 
       this.props.animateFauxDOM(800);
     }

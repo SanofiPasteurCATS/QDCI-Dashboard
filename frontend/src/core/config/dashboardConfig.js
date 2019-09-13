@@ -9,6 +9,28 @@ export const DASHBOARD_TYPE_CHOICES = [
   }
 ];
 
+export const KPI_TYPE_CHOICES = [
+  {
+    id: 0,
+    name: "Deviation"
+  },
+  {
+    id: 1,
+    name: "Win-Lose"
+  },
+  {
+    id: 2,
+    name: "Threshold"
+  }
+];
+
+export const THRESHOLD_TYPE_GREATER = 0;
+export const THRESHOLD_TYPE_LESS = 1;
+
+export const KPI_TYPE_DEVIATION = 0;
+export const KPI_TYPE_WIN_LOSE = 1;
+export const KPI_TYPE_THRESHOLD = 2;
+
 export const LEVEL_CHOICES = [
   {
     id: 1,
@@ -44,7 +66,7 @@ export const DATAPOINT_TABLE_HEADERS = [
 ];
 
 export const PILLAR_CHOICES = [
-  { id: "+", name: "Safety" },
+  { id: "Plus", name: "Safety" },
   { id: "Q", name: "Quality" },
   { id: "D", name: "Delivery" },
   { id: "C", name: "Cost" },

@@ -1,79 +1,98 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
+import Modal from "./modal/Modal";
+
 class DeletetionConformation extends Component {
+  constructor(props) {
+    super(props);
+    this.modalRef = React.createRef();
+    this.state = {
+      password: "",
+      exported: false,
+      name: ""
+    };
+  }
   static propTypes = {
-    deletionItem: PropTypes.string.isRequired,
-    deletionName: PropTypes.string.isRequired
+    deletionContext: PropTypes.object
   };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { deletionContext } = this.props;
+    const response = deletionContext.onSubmit(this.state);
+    if (response) $("#deleteConfirmation").modal("hide");
+  };
+
   render() {
-    const { deletionItem, deletionName } = this.props;
-    return (
-      <div
-        className="modal fade"
-        id="deletionConfirmation"
-        role="dialog"
-        aria-labelledby="deletionConfirmationLabel"
-        aria-hidden="true"
-      >
-        <div
-          className="modal-dialog"
-          role="document"
-          style={{ maxWidth: "fit-content" }}
+    const { deletionContext } = this.props;
+    if (!deletionContext)
+      return (
+        <Modal
+          title="Are You Sure?"
+          iconClass="im im-data-delete"
+          id="deleteConfirmation"
         >
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title" id="deletionConfirmationLabel">
-                <span
-                  className="im im-data-delete"
-                  style={{ fontSize: `${2.5}rem`, verticalAlign: "-0.1em" }}
-                />
-                {"  "}
-                {`Are you absolutely sure?`}
-              </h1>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body" style={{ padding: 0 }}>
-              <div className="card">
-                <div className="card-body">
-                  <p className="card-text">
-                    {`This action cannot be undone. This will permanently delete the ${deletionName} ${deletionItem} and all associated data.`}{" "}
-                  </p>
-                  <div className="form-group">
-                    <label for="password">
-                      Please enter dashboard password
-                    </label>
-                    <input type="password" className="form-control"></input>
-                  </div>
-                  <div className="form-group">
-                    <label for="name">{`Please type in the name of the ${deletionItem} to confirm`}</label>
-                    <input type="text" className="form-control"></input>
-                  </div>
-                  <div className="form-check">
-                    <input
-                      type="checkbox"
-                      name="export"
-                      className="form-check-input"
-                    ></input>
-                    <label for="export" className="form-check-label mb-3">
-                      Do you want to export data?
-                    </label>
-                  </div>
-                  <button type="submit" className="btn btn-warning">
-                    I understand the consequences, delete this item
-                  </button>
-                </div>
-              </div>
-            </div>
+          {" "}
+        </Modal>
+      );
+    const { type, item } = deletionContext;
+    const { password, name, exported } = this.state;
+    return (
+      <Modal
+        title="Are You Sure?"
+        iconClass="im im-data-delete"
+        id="deleteConfirmation"
+        ref={this.modalRef}
+      >
+        <form onSubmit={this.onSubmit}>
+          <p className="card-text">
+            This action cannot be undone. This will permanently delete the{" "}
+            <span style={{ color: "red", fontWeight: "bold" }}>
+              {item ? item.name || item.title : "null"}
+            </span>{" "}
+            {`${type} and all associated data.`}{" "}
+          </p>
+          <div className="form-group">
+            <label htmlFor="password">Please enter dashboard password</label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              className="form-control"
+              onChange={this.onChange}
+            />
           </div>
-        </div>
-      </div>
+          <div className="form-group">
+            <label htmlFor="name">{`Please type in the name of the ${type} to confirm`}</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              className="form-control"
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="form-check">
+            <input
+              type="checkbox"
+              name="exported"
+              className="form-check-input"
+              onChange={this.onChange}
+            />
+            <label htmlFor="export" className="form-check-label mb-3">
+              Do you want to export data?
+            </label>
+          </div>
+          <button type="submit" className="btn btn-warning">
+            I understand the consequences, delete this item
+          </button>
+        </form>
+      </Modal>
     );
   }
 }

@@ -34,9 +34,19 @@ export class Alerts extends Component {
       if (messages.addDashboard) alert.success(messages.addDashboard);
       if (messages.passwordsNotMatch) alert.error(messages.passwordsNotMatch);
       if (messages.addKpi) alert.success(messages.addKpi);
-      if (messages.updateKpi) alert.success(messages.updateKpi);
+      if (messages.addSeries) alert.success(messages.addSeries);
+      if (messages.addDatapoint) alert.success(messages.addDatapoint);
+      if (messages.addAction) alert.success(messages.addAction);
       if (messages.deleteKpi) alert.success(messages.deleteKpi);
-      if (messages.updateActionTable) alert.success(messages.updateActionTable);
+      if (messages.deleteAction) alert.success(messages.deleteAction);
+      if (messages.deleteSeries) alert.success(messages.deleteSeries);
+      if (messages.deleteDatapoint) alert.success(messages.deleteDatapoint);
+      if (messages.updateKpi) alert.success(messages.updateKpi);
+      if (messages.updateAction) alert.success(messages.updateAction);
+      if (messages.updateSeries) alert.success(messages.updateSeries);
+      if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
+      if (messages.entriesCreated) alert.success(messages.entriesCreated);
+      if (messages.invalidForm) alert.error(messages.invalidForm);
     }
   }
 

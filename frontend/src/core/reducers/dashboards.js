@@ -86,7 +86,7 @@ export default function(state = initalState, action) {
       console.log("added");
       var kpis = state.kpis.map(kpi => {
         if (kpi.id != action.payload.kpi) return kpi;
-        const series = kpi.series;
+        const { series } = kpi;
         return {
           ...kpi,
           series: [...series, action.payload]
@@ -94,7 +94,7 @@ export default function(state = initalState, action) {
       });
       return {
         ...state,
-        kpis: kpis
+        kpis
       };
 
     case UPDATE_SERIES:
@@ -103,7 +103,7 @@ export default function(state = initalState, action) {
           ...kpi,
           series: kpi.series.map(series => {
             if (series.id != action.payload.id) return series;
-            else return action.payload;
+            return action.payload;
           })
         };
       });
@@ -140,7 +140,7 @@ export default function(state = initalState, action) {
               ...series,
               entries: series.entries.map(datapoint => {
                 if (datapoint.id != action.payload.id) return datapoint;
-                else return action.payload;
+                return action.payload;
               })
             };
           })
@@ -148,7 +148,7 @@ export default function(state = initalState, action) {
       });
       return {
         ...state,
-        kpis: kpis
+        kpis
       };
     case DELETE_DATAPOINT:
       var kpis = state.kpis.map(kpi => {
@@ -166,7 +166,7 @@ export default function(state = initalState, action) {
       });
       return {
         ...state,
-        kpis: kpis
+        kpis
       };
 
     case ADD_DATAPOINT:
@@ -175,11 +175,10 @@ export default function(state = initalState, action) {
           ...kpi,
           series: kpi.series.map(series => {
             if (series.id != action.payload.series) return series;
-            else
-              return {
-                ...series,
-                entries: [...series.entries, action.payload]
-              };
+            return {
+              ...series,
+              entries: [...series.entries, action.payload]
+            };
           })
         };
       });
@@ -193,15 +192,14 @@ export default function(state = initalState, action) {
     case ADD_ACTION:
       var actionTables = state.actionTables.map(at => {
         if (action.payload.tables.indexOf(at.id) == -1) return at;
-        else
-          return {
-            ...at,
-            actions: [...at.actions, action.payload]
-          };
+        return {
+          ...at,
+          actions: [...at.actions, action.payload]
+        };
       });
       return {
         ...state,
-        actionTables: actionTables
+        actionTables
       };
     case DELETE_ACTION:
       var actionTables = state.actionTables.map(at => {
@@ -214,7 +212,7 @@ export default function(state = initalState, action) {
       });
       return {
         ...state,
-        actionTables: actionTables
+        actionTables
       };
     case UPDATE_ACTION:
       var actionTables = state.actionTables.map(at => {
@@ -222,22 +220,22 @@ export default function(state = initalState, action) {
           ...at,
           actions: at.actions.map(act => {
             if (act.id != action.payload.id) return act;
-            else return action.payload;
+            return action.payload;
           })
         };
       });
       return {
         ...state,
-        actionTables: actionTables
+        actionTables
       };
     case UPDATE_ACTION_TABLE:
       var actionTables = state.actionTables.map(at => {
         if (at.id != action.payload.id) return at;
-        else return action.payload;
+        return action.payload;
       });
       return {
         ...state,
-        actionTables: actionTables
+        actionTables
       };
     case CLEAR_CURRENT_DASHBOARD:
       return {

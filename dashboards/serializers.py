@@ -23,7 +23,7 @@ class KpiSerializer(serializers.ModelSerializer):
     series =  SeriesSerializer(many = True, read_only=True)
     class Meta:
         model = Kpi
-        fields = ("pillar", "name", "safe", "danger", "frequency","dashboard",'series','id')
+        fields = ("pillar", "name", "safe_deviation", "danger_deviation", "kpi_type", "threshold_type", "warning_margin" ,"frequency","dashboard",'series','id',"global_target")
 
 class ShallowActionTableSerializer(serializers.ModelSerializer):
 

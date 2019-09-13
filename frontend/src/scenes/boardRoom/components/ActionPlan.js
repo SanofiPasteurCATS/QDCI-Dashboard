@@ -57,13 +57,13 @@ class ActionPlan extends Component {
     return (
       <Fragment>
         <ActionOptions action={currentAction} />
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="card m-4">
+        <div className="row m-0">
+          <div className="col-lg-6 p-0">
+            <div className="card mt-4 ml-2 mr-2">
               <div className="card-body">
                 {st ? (
                   <Fragment>
-                    <h3> Short Term Action Plan</h3>
+                    <h5> Short Term Action Plan</h5>
                     <ActionTable
                       data={st}
                       header={ACTION_TABLE_HEADERS}
@@ -77,7 +77,7 @@ class ActionPlan extends Component {
 
                 {lt ? (
                   <Fragment>
-                    <h3 className="mt-3"> Long Term Action Plan</h3>
+                    <h5 className="mt-3"> Long Term Action Plan</h5>
                     <ActionTable
                       data={lt}
                       header={ACTION_TABLE_HEADERS}
@@ -91,16 +91,13 @@ class ActionPlan extends Component {
               </div>
             </div>
           </div>
-          <div className="col-lg-6">
-            <div className="card m-4">
+          <div className="col-lg-6 p-0">
+            <div className="card mt-4 ml-2 mr-2">
               <div className="card-body">
                 {ul ? (
                   <Fragment>
                     <div className="row" style={{ padding: "0 1rem" }}>
-                      <div style={{ fontSize: 1.75 + "rem", fontWeight: 500 }}>
-                        {" "}
-                        Upper Level Escalation
-                      </div>
+                      <h5> Upper Level Escalation</h5>
                       <button
                         type="button"
                         className="btn btn-primary btn-sm mb-1 ml-auto"
@@ -128,7 +125,7 @@ class ActionPlan extends Component {
                 )}
                 {ll ? (
                   <Fragment>
-                    <h3 className="mt-3"> Lower Level Feed</h3>
+                    <h5 className="mt-3"> Lower Level Feed</h5>
                     <ActionTable
                       data={ll}
                       header={ACTION_TABLE_HEADERS}

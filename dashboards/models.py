@@ -5,7 +5,7 @@ from django.utils import timezone
 
 # Choices for pillar field for kpis
 PILLAR_CHOICES = [
-    ('+','Safety'),
+    ('Plus','Safety'),
     ('Q','Quality'),
     ('D','Delivery'),
     ('C','Cost'),
@@ -33,6 +33,18 @@ FREQUENCY_CHOICES = [
     (2, "Bi-Weekly")
 ]
 
+KPI_TYPE_CHOICES = [
+    (0, "Deviation" ),
+    (1, "Win-lose"),
+    (2, "Threshold")
+]
+
+THRESHOLD_TYPE_CHOICES = [
+    (0, "Greater Than"),
+    (1, "Less Than"),
+]
+
+
 class Dashboard(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=26)
@@ -44,12 +56,16 @@ class Dashboard(models.Model):
 
 class Kpi(models.Model):
     name = models.CharField(max_length=26)
-    pillar = models.CharField(max_length=1,choices=PILLAR_CHOICES)
-    danger = models.FloatField()
-    safe = models.FloatField()
+    pillar = models.CharField(max_length=5,choices=PILLAR_CHOICES)
+    danger_deviation = models.FloatField(null=True)
+    safe_deviation = models.FloatField(null=True)
+    kpi_type = models.IntegerField(choices= KPI_TYPE_CHOICES, default=0)
+    threshold_type = models.IntegerField(choices= THRESHOLD_TYPE_CHOICES, null= False, default=0)
+    warning_margin = models.FloatField(null=True)
     frequency = models.IntegerField(choices=FREQUENCY_CHOICES)
     dashboard = models.ForeignKey(Dashboard,related_name='kpis',on_delete=models.CASCADE)
-
+    global_target = models.FloatField(null=True, default=None)
+    
 class Series(models.Model):
     name = models.CharField(max_length=26)
     plot_type = models.CharField(max_length=2, choices=PLOT_TYPE_CHOICES)

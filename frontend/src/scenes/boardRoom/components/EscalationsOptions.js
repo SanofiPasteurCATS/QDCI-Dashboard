@@ -1,17 +1,23 @@
+// DEPENDaNCIES
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+// CONFIG
+import { accentColor } from "../../../core/config/styleConfig";
+
+// CORE COMPONENTS
 import DashboardCard from "../../../core/components/ui/DashboardCard";
 import { updateActionTable } from "../../../core/actions/dashboards";
-import { accent_color } from "../../../core/config/styleConfig";
 
 class EscalationOptions extends Component {
   static propTypes = {
     updateActionTable: PropTypes.func.isRequired,
-    actionTable: PropTypes.isRequired,
-    dashboards: PropTypes.isRequired,
-    currentDashboard: PropTypes.isRequired
+    actionTable: PropTypes.object.isRequired,
+    dashboards: PropTypes.array.isRequired,
+    currentDashboard: PropTypes.object.isRequired
   };
+
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -111,7 +117,7 @@ class EscalationOptions extends Component {
                             className="card m-3"
                             style={
                               selected == null
-                                ? { border: `2px solid ${accent_color}` }
+                                ? { border: `2px solid ${accentColor}` }
                                 : { border: "1px solid rgba(0,0,0,.125)" }
                             }
                             onClick={() => {

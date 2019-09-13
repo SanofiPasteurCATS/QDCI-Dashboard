@@ -17,6 +17,7 @@ class Dashboard extends Component {
     clearCurrentDashboard();
     clearActionTables();
   }
+
   render() {
     return (
       <div>

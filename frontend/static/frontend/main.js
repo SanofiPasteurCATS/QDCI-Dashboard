@@ -157,18 +157,20 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 53 modules ***!
+  !*** ./frontend/src/index.js + 55 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/parseISO/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/prop-types/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert/dist/esm/react-alert.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-color/lib/index.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-compound-slider/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-datepicker/es/index.js (<- Module uses injected variables (global)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-dom/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-faux-dom/lib/ReactFauxDOM.js (<- Module is not an ECMAScript module) */
@@ -695,7 +697,7 @@ function (_Component) {
       }, react_default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
-      }, "Register")), react_default.a.createElement("p", null, "Already have an account? ", react_default.a.createElement(react_router_dom["Link"], {
+      }, "Register")), react_default.a.createElement("p", null, "Already have an account?", ' ', react_default.a.createElement(react_router_dom["Link"], {
         to: "/login"
       }, " Login!")))));
     }
@@ -762,7 +764,7 @@ var dashboards_deleteDashboard = function deleteDashboard(id) {
       });
     }) // If there is an error, dispatch a error message to reducer
     ["catch"](function (err) {
-      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
     });
   };
 };
@@ -797,7 +799,10 @@ var dashboards_addDashboard = function addDashboard(dashboard) {
       });
     }) // If there is an error, dispatch a error message to reducer
     ["catch"](function (err) {
-      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
     });
   };
 };
@@ -818,7 +823,7 @@ var dashboards_getKpis = function getKpis(id) {
       });
     }) // If there is an error, dispatch a error message to reducer
     ["catch"](function (err) {
-      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
     });
   };
 };
@@ -835,7 +840,10 @@ var dashboards_addKpi = function addKpi(kpi) {
       });
     }) // If there is an error, dispatch a error message to reducer
     ["catch"](function (err) {
-      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -852,6 +860,11 @@ var dashboards_updateKpi = function updateKpi(kpi, id) {
         type: UPDATE_KPI,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -890,10 +903,19 @@ var dashboards_addSeries = function addSeries(series) {
       dispatch(messages_createMessage({
         addSeries: "Series Added!"
       }));
+      var entryCount = res.data.entries.length;
+      dispatch(messages_createMessage({
+        entriesCreated: "".concat(entryCount, " Entries Created")
+      }));
       dispatch({
         type: ADD_SERIES,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -920,6 +942,11 @@ var dashboards_updateSeries = function updateSeries(series, id) {
         type: UPDATE_SERIES,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -946,6 +973,11 @@ var dashboards_updateDatapoint = function updateDatapoint(datapoint, id) {
         type: UPDATE_DATAPOINT,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -953,7 +985,7 @@ var dashboards_deleteDatapoint = function deleteDatapoint(id) {
   return function (dispatch, getState) {
     axios_default.a["delete"]("/api/datapoint/".concat(id, "/"), tokenConfig(getState)).then(function () {
       dispatch(messages_createMessage({
-        deleteDatapoint: "Series Datapoint"
+        deleteDatapoint: "Datapoint Deleted"
       }));
       dispatch({
         type: DELETE_DATAPOINT,
@@ -972,6 +1004,11 @@ var dashboards_addDatapoint = function addDatapoint(datapoint) {
         type: ADD_DATAPOINT,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -985,6 +1022,11 @@ var dashboards_addAction = function addAction(action) {
         type: ADD_ACTION,
         payload: res.data
       });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -1003,6 +1045,9 @@ var dashboards_getActionTable = function getActionTable() {
 var dashboards_deleteAction = function deleteAction(id) {
   return function (dispatch, getState) {
     axios_default.a["delete"]("api/action/".concat(id, "/"), tokenConfig(getState)).then(function () {
+      dispatch(messages_createMessage({
+        deleteAction: "Action Deleted"
+      }));
       dispatch({
         type: DELETE_ACTION,
         payload: id
@@ -1013,12 +1058,18 @@ var dashboards_deleteAction = function deleteAction(id) {
 var dashboards_updateAction = function updateAction(action, id) {
   return function (dispatch, getState) {
     axios_default.a.patch("api/action/".concat(id, "/"), action, tokenConfig(getState)).then(function (res) {
+      dispatch(messages_createMessage({
+        updateAction: "Action Updated"
+      }));
       dispatch({
         type: UPDATE_ACTION,
         payload: res.data
       });
     })["catch"](function (err) {
-      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -1058,9 +1109,9 @@ var core_browser_esm = __webpack_require__("./node_modules/@emotion/core/dist/co
 
 // CONCATENATED MODULE: ./frontend/src/core/config/styleConfig.js
 // COLORS
-var primary_color = "#EEEEEE";
-var secondary_color = "#EEEEEE";
-var accent_color = "#437bb7";
+var primaryColor = "#EEEEEE";
+var secondaryColor = "#EEEEEE";
+var accentColor = "#437bb7";
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/LoadingScreen.js
 // DEPENDANCIES
 
@@ -1071,7 +1122,7 @@ var accent_color = "#437bb7";
 var override =  false ? undefined : {
   name: "qdsigz-override",
   styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;label:override;",
-  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50X2NvbG9yIH0gZnJvbSBcIi4uLy4uL2NvbmZpZy9zdHlsZUNvbmZpZ1wiO1xyXG5cclxuY29uc3Qgb3ZlcnJpZGUgPSBjc3NgXHJcbiAgZGlzcGxheTogZmxleDtcclxuICBtYXJnaW46IDAgYXV0byAyMHB4IGF1dG87XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuYDtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uKCkge1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IGNsYXNzTmFtZT1cImNvbC1tZC02IG0tYXV0b1wiPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImNhcmQgdGV4dC1jZW50ZXIgbXQtNVwiPlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCBjYXJkLWJvZHlcIj5cclxuICAgICAgICAgIDxDaXJjbGVMb2FkZXJcclxuICAgICAgICAgICAgc2l6ZVVuaXQ9e1wicHhcIn1cclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRfY29sb3J9XHJcbiAgICAgICAgICAvPlxyXG4gICAgICAgICAgPGgxIHN0eWxlPXt7IG1hcmdpbjogMCB9fT5Mb2FkaW5nPC9oMT5cclxuICAgICAgICA8L2Rpdj5cclxuICAgICAgPC9kaXY+XHJcbiAgICA8L2Rpdj5cclxuICApO1xyXG59XHJcbiJdfQ== */"
+  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5jb25zdCBvdmVycmlkZSA9IGNzc2BcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIG1hcmdpbjogMCBhdXRvIDIwcHggYXV0bztcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG5gO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sLW1kLTYgbS1hdXRvXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCB0ZXh0LWNlbnRlciBtdC01XCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkIGNhcmQtYm9keVwiPlxyXG4gICAgICAgICAgPENpcmNsZUxvYWRlclxyXG4gICAgICAgICAgICBzaXplVW5pdD1cInB4XCJcclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRDb2xvcn1cclxuICAgICAgICAgIC8+XHJcbiAgICAgICAgICA8aDEgc3R5bGU9e3sgbWFyZ2luOiAwIH19PkxvYWRpbmc8L2gxPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn1cclxuIl19 */"
 };
 /* harmony default export */ var LoadingScreen = (function () {
   return react_default.a.createElement("div", {
@@ -1084,21 +1135,168 @@ var override =  false ? undefined : {
     sizeUnit: "px",
     size: 60,
     css: override,
-    color: accent_color
+    color: accentColor
   }), react_default.a.createElement("h1", {
     style: {
       margin: 0
     }
   }, "Loading"))));
 });
-// EXTERNAL MODULE: ./node_modules/d3/index.js + 515 modules
+// EXTERNAL MODULE: ./node_modules/d3/index.js + 483 modules
 var d3 = __webpack_require__("./node_modules/d3/index.js");
 
 // EXTERNAL MODULE: ./node_modules/react-faux-dom/lib/ReactFauxDOM.js
 var ReactFauxDOM = __webpack_require__("./node_modules/react-faux-dom/lib/ReactFauxDOM.js");
 
+// CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
+// Options for form-controls. This is a temp solution until I can pull the data directly from the database
+var PLOT_TYPE_CHOICES = [{
+  id: "li",
+  name: "Connected Scatter Plot"
+}];
+var DASHBOARD_TYPE_CHOICES = [{
+  id: 0,
+  name: "QDCI Dashboard"
+}];
+var KPI_TYPE_CHOICES = [{
+  id: 0,
+  name: "Deviation"
+}, {
+  id: 1,
+  name: "Win-Lose"
+}, {
+  id: 2,
+  name: "Threshold"
+}];
+var THRESHOLD_TYPE_GREATER = 0;
+var THRESHOLD_TYPE_LESS = 1;
+var KPI_TYPE_DEVIATION = 0;
+var KPI_TYPE_WIN_LOSE = 1;
+var KPI_TYPE_THRESHOLD = 2;
+var LEVEL_CHOICES = [{
+  id: 1,
+  name: "Level 1"
+}, {
+  id: 2,
+  name: "Level 2"
+}, {
+  id: 3,
+  name: "Level 3"
+}, {
+  id: 4,
+  name: "Level 4"
+}];
+var DATAPOINT_TABLE_HEADERS = [{
+  name: "Value",
+  prop: "value"
+}, {
+  name: "Target",
+  prop: "target"
+}, {
+  name: "Date",
+  prop: "date"
+}];
+var PILLAR_CHOICES = [{
+  id: "Plus",
+  name: "Safety"
+}, {
+  id: "Q",
+  name: "Quality"
+}, {
+  id: "D",
+  name: "Delivery"
+}, {
+  id: "C",
+  name: "Cost"
+}, {
+  id: "I",
+  name: "Involvement"
+}];
+var FREQUENCY_CHOICES = [{
+  id: 0,
+  name: "Monthly"
+}, {
+  id: 1,
+  name: "Weekly"
+}, {
+  id: 2,
+  name: "Bi-Weekly"
+}];
+var KPI_TABLE_HEADERS = [{
+  name: "Name",
+  prop: "name"
+}, {
+  name: "Pillar",
+  prop: "pillar"
+}, {
+  name: "Frequency",
+  prop: "frequency"
+}, {
+  name: "Safe Threshold",
+  prop: "safe"
+}, {
+  name: "Danger Threshold",
+  prop: "danger"
+}];
+var SERIES_TABLE_HEADERS = [{
+  name: "Name",
+  prop: "name"
+}, {
+  name: "Plot Type",
+  prop: "plot_type"
+}, {
+  name: "Color",
+  prop: "color"
+}];
+var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
+var ACTION_TABLE_HEADERS = [{
+  name: "Letter",
+  prop: "letter"
+}, {
+  name: "Problem",
+  prop: "problem"
+}, {
+  name: "Root Cause",
+  prop: "root_cause"
+}, {
+  name: "Solution",
+  prop: "solution"
+}, {
+  name: "Leader",
+  prop: "leader"
+}, {
+  name: "Date",
+  prop: "date",
+  date: true
+}];
+var ACTION_TABLE_DUMMY_DATA = [{
+  letter: "Q",
+  problem: "not enough sleep",
+  root_cause: "Insomnia",
+  solution: "take sleeping pills",
+  leader: "Kyle",
+  date: "24-OCT-2019"
+}, {
+  letter: "Q",
+  problem: "Not enough coffee",
+  root_cause: "coffe machine is broken",
+  solution: "fix coffee machine",
+  leader: "Kyle",
+  date: "08-AUG-2019"
+}, {
+  letter: "I",
+  problem: "Not enough GEMBAS",
+  root_cause: "No legs",
+  solution: "Get legs",
+  leader: "Kyle",
+  date: "03-SEP-2019"
+}];
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/pillar.js
 function pillar_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillar_typeof = function _typeof(obj) { return typeof obj; }; } else { pillar_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillar_typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { pillar_defineProperty(target, key, source[key]); }); } return target; }
+
+function pillar_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function pillar_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1123,12 +1321,38 @@ function pillar_setPrototypeOf(o, p) { pillar_setPrototypeOf = Object.setPrototy
  // COMPONENTS
 
 
+
 /**
  * Pillar component renders individual +QDCI Pillars using d3 and react-faux-dom
  * Recieves props "kpis" which contains all information for kpis
  */
 
 var xFactor = 4;
+var labelData = [{
+  date: "2019-01-01"
+}, {
+  date: "2019-02-01"
+}, {
+  date: "2019-03-01"
+}, {
+  date: "2019-04-01"
+}, {
+  date: "2019-05-01"
+}, {
+  date: "2019-06-01"
+}, {
+  date: "2019-07-01"
+}, {
+  date: "2019-08-01"
+}, {
+  date: "2019-09-01"
+}, {
+  date: "2019-10-01"
+}, {
+  date: "2019-11-01"
+}, {
+  date: "2019-12-01"
+}];
 
 var pillar_Pillar =
 /*#__PURE__*/
@@ -1184,10 +1408,10 @@ function (_React$Component) {
       var radius = plotSize / xFactor;
       var labelScale = labeled ? 0.4 : 1;
       var svg = d3["select"](faux).attr("id", "chartPillar").attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink").attr("viewBox", "0 0 ".concat(plotSize, " ").concat(plotSize)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true);
-      var link = svg.append("a").attr("href", "#/pillar/".concat(dashboardId, "/").concat(letter)).style("text-decoration", "none");
-      var img = link.append("circle").attr("cx", plotSize / 2).attr("cy", plotSize / 2).attr("alignment-baseline", "middle").attr("r", 0).style("fill", accent_color).attr("id", "circle").transition().duration(800).attr("r", radius - plotSize / (50 * labelScale));
+      var link = svg.append("a").attr("href", "#/pillar/".concat(dashboardId, "/").concat(letter === "+" ? "Plus" : letter)).style("text-decoration", "none");
+      var img = link.append("circle").attr("cx", plotSize / 2).attr("cy", plotSize / 2).attr("alignment-baseline", "middle").attr("r", 0).style("fill", accentColor).attr("id", "circle").transition().duration(800).attr("r", radius - plotSize / (50 * labelScale));
       this.props.animateFauxDOM(800);
-      link.append("text").text(letter).attr("dx", "50%").attr("dy", "52%").attr("id", "text").attr("text-anchor", "middle").attr("alignment-baseline", "middle").style("fill", primary_color).style("font-size", plotSize / 2.9).style("text-decoration", "none");
+      link.append("text").text(letter).attr("dx", "50%").attr("dy", "52%").attr("id", "text").attr("text-anchor", "middle").attr("alignment-baseline", "middle").style("fill", primaryColor).style("font-size", plotSize / 2.9).style("text-decoration", "none");
     } // Handles all D3 updates caused by changes to dataset
 
   }, {
@@ -1196,7 +1420,8 @@ function (_React$Component) {
       var _this$props2 = this.props,
           kpis = _this$props2.kpis,
           letter = _this$props2.letter,
-          labeled = _this$props2.labeled;
+          labeled = _this$props2.labeled,
+          showTooltip = _this$props2.showTooltip;
       var plotSize = 200;
       var radius = plotSize / xFactor;
       var count = kpis.length;
@@ -1211,7 +1436,8 @@ function (_React$Component) {
           series.sort(function (a, b) {
             if (!a.date && b.date) return 1;
             if (a.date && !b.date) return -1;
-            if (!a.date && !b.date) return 0;else return new Date(a.date) - new Date(b.date);
+            if (!a.date && !b.date) return 0;
+            return new Date(a.date) - new Date(b.date);
           });
         }
       }
@@ -1221,6 +1447,46 @@ function (_React$Component) {
       });
       var arc = d3["arc"]().cornerRadius(2).padAngle(0.6).padRadius(3);
       var labelArc = d3["arc"]().innerRadius(radius * 0.84 + plotSize * labelScale / 21 * (count - 1) * 1.0 + 15).outerRadius(radius * 0.84 + plotSize * labelScale / 20 * (count - 1) * 1.3 + 15).cornerRadius(2).padAngle(0.05).padRadius(80);
+
+      var getColor = function getColor(_ref) {
+        var safe_deviation = _ref.safe_deviation,
+            danger_deviation = _ref.danger_deviation,
+            kpi_type = _ref.kpi_type,
+            warning_margin = _ref.warning_margin,
+            threshold_type = _ref.threshold_type,
+            value = _ref.value,
+            target = _ref.target;
+        var color = "#F2F2F2";
+        var deviation = (value / target - 1) * 100;
+        var abs_deviation = Math.abs(deviation);
+        if (value == null) return color;
+
+        switch (kpi_type) {
+          case KPI_TYPE_DEVIATION:
+            if (abs_deviation < safe_deviation) color = "green";else if (abs_deviation > safe_deviation && abs_deviation < danger_deviation) color = "orange";else color = "red";
+            break;
+
+          case KPI_TYPE_THRESHOLD:
+            switch (threshold_type) {
+              case THRESHOLD_TYPE_GREATER:
+                if (value >= target) color = "green";else if (deviation < warning_margin) color = "red";else color = "orange";
+                break;
+
+              case THRESHOLD_TYPE_LESS:
+                if (value <= target) color = "green";else if (deviation > warning_margin) color = "red";else color = "orange";
+                break;
+            }
+
+            break;
+
+          case KPI_TYPE_WIN_LOSE:
+            if (value >= target) color = "green";else color = "red";
+            break;
+        }
+
+        return color;
+      };
+
       var faux = this.props.connectFauxDOM("svg", "chart");
       d3["select"](faux).select("#circle");
       d3["select"](faux).select("#text").text(letter);
@@ -1229,9 +1495,19 @@ function (_React$Component) {
       var pathEnter = pathBind.enter().append("g").attr("class", "kpi").merge(pathBind).attr("data-index", function (d, i) {
         return i;
       }).attr("data-safe", function (d) {
-        return d.safe;
+        return d.safe_deviation;
+      }).attr("data-frequency", function (d) {
+        return d.frequency;
       }).attr("data-danger", function (d) {
-        return d.danger;
+        return d.danger_deviation;
+      }).attr("data-name", function (d) {
+        return d.name;
+      }).attr("data-thresh-type", function (d) {
+        return d.threshold_type;
+      }).attr("data-warning", function (d) {
+        return d.warning_margin;
+      }).attr("data-type", function (d) {
+        return d.kpi_type;
       }).attr("transform", "translate(".concat(plotSize / 2, ",").concat(plotSize / 2, ")"));
       this.props.animateFauxDOM(800);
       pathEnter.selectAll(".ring").remove();
@@ -1240,28 +1516,43 @@ function (_React$Component) {
         return pie(d.series[0] ? d.series[0].entries : []);
       });
       ringBind.enter().append("path").attr("class", "ring").attr("id", function (d) {
-        return "ring_" + d.data.id;
+        return "ring_".concat(d.data.id);
       }).attr("d", function (d, i, j) {
         var index = $(j)[i].parentNode.getAttribute("data-index");
         return arc.outerRadius(radius + plotSize * labelScale / 16 * (index + 1 + labelOffset)).innerRadius(radius + plotSize * labelScale / 16 * (index + labelOffset) + 4)(d);
-      }).on("mouseover", function (d) {
+      }).on("mouseover", function (d, i, j) {
+        var kpi_type = $(j)[i].parentNode.getAttribute("data-type");
+        var kpiName = $(j)[i].parentNode.getAttribute("data-name");
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "#000").attr("stroke-width", "1");
+        showTooltip(true, {
+          x: d3["event"].pageX,
+          y: d3["event"].pageY,
+          payload: _objectSpread({
+            kpi_type: kpi_type,
+            kpiName: kpiName
+          }, d.data)
+        });
       }).on("mouseout", function (d) {
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "none");
+        showTooltip(false);
       }).merge(ringBind).style("fill", function (d, i, j) {
-        var safe = $(j)[i].parentNode.getAttribute("data-safe");
-        var danger = $(j)[i].parentNode.getAttribute("data-danger");
-        var color = "rgba(0,0,0,0.05)";
-        var deviation = Math.abs(d.data.value / d.data.target - 1);
-        if (d.data.value == null) return color;
-        if (deviation < safe) color = "green";else if (deviation > safe && deviation < danger) color = "orange";else color = "red";
-        return color;
+        var colorProps = {
+          safe_deviation: $(j)[i].parentNode.getAttribute("data-safe"),
+          danger_deviation: $(j)[i].parentNode.getAttribute("data-danger"),
+          kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
+          warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
+          threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
+          value: d.data.value,
+          target: d.data.target
+        };
+        return getColor(colorProps);
       });
       d3["select"](faux).selectAll(".label").remove();
 
       if (kpis[count - 1] && labeled && kpis[count - 1].series[0]) {
-        var labels = d3["select"](faux).selectAll(".label").data(pie(kpis[count - 1].series[0].entries)).enter().append("text").text(function (d) {
-          if (d.data.date) return formatTime(parseTime(d.data.date));else return "";
+        var labels = d3["select"](faux).selectAll(".label").data(pie(labelData)).enter().append("text").text(function (d, i, j) {
+          if (d.data.date) return formatTime(parseTime(d.data.date));
+          return "";
         }).attr("class", "label").attr("transform", function (d) {
           var pos = labelArc.centroid(d);
           var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // ABSOLUTE VALUES! ToDo: Change to relative!
@@ -1272,7 +1563,7 @@ function (_React$Component) {
         }).style("font-size", "0.5rem").style("text-anchor", function (d) {
           var midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
           return midangle < Math.PI ? "start" : "end";
-        }).style("fill", accent_color);
+        }).style("fill", accentColor);
         this.props.animateFauxDOM(800);
       }
     }
@@ -1319,7 +1610,7 @@ var PillarBar_PillarBar = function PillarBar(props) {
   };
 
   return react_default.a.createElement("div", null, react_default.a.createElement(d3charts_pillar, {
-    kpis: filterKpis("+"),
+    kpis: filterKpis("Plus"),
     letter: "+",
     dashboardId: dashboardId
   }), react_default.a.createElement(d3charts_pillar, {
@@ -1362,7 +1653,7 @@ var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Row.js
 function Row_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Row_typeof = function _typeof(obj) { return typeof obj; }; } else { Row_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Row_typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } return target; }
+function Row_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } return target; }
 
 function Row_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1400,7 +1691,7 @@ function (_Component) {
     _this = Row_possibleConstructorReturn(this, Row_getPrototypeOf(Row).call(this, props));
 
     _this.handleChange = function (e) {
-      var current = _objectSpread({}, _this.state.entry);
+      var current = Row_objectSpread({}, _this.state.entry);
 
       current[e.target.name] = e.target.value;
 
@@ -1410,7 +1701,7 @@ function (_Component) {
     };
 
     _this.handleDateChange = function (date, prop) {
-      var current = _objectSpread({}, _this.state.entry);
+      var current = Row_objectSpread({}, _this.state.entry);
 
       current[prop] = date;
 
@@ -1656,19 +1947,22 @@ function (_Component) {
         style: {
           lineHeight: 1.5,
           verticalAlign: "middle",
-          fontSize: 1 + "rem"
+          fontSize: "".concat(1, "rem")
         },
         onClick: this.handleInsert
       }))) : react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "column"
-      }, summary && react_default.a.createElement("h5", {
-        className: "subtitle d-inline"
+      }, summary && react_default.a.createElement("p", {
+        className: "d-inline",
+        style: {
+          fontSize: "0.9rem"
+        }
       }, "Showing ", react_default.a.createElement("strong", null, data.length), " items"), appendable && react_default.a.createElement("i", {
         className: "im im-plus co-primary icon d-line ml-3 pb-1",
         style: {
           lineHeight: 1.5,
           verticalAlign: "middle",
-          fontSize: 1 + "rem"
+          fontSize: "".concat(1, "rem")
         },
         onClick: this.handleInsert
       }), react_default.a.createElement("div", {
@@ -1737,14 +2031,14 @@ Table_Table.propTypes = {
 };
 
 Table_Table.generateUID = function () {
-  return "_" + Math.random().toString(36).substr(2, 9);
+  return "_".concat(Math.random().toString(36).substr(2, 9));
 };
 
 Table_Table.defaultProps = {
   editable: false,
   update: null,
   "delete": null,
-  fontSize: 1 + "rem",
+  fontSize: "".concat(1, "rem"),
   summary: true,
   deletable: false
 };
@@ -1847,6 +2141,7 @@ function (_Component) {
         insert: this.insert,
         rowClick: rowClick,
         deletable: deletable,
+        fontSize: "0.6rem",
         summary: true,
         tooltipMessage: hoverable ? this.tooltipMessage : null
       });
@@ -1876,134 +2171,6 @@ ActionTable_ActionTable.defaultProps = {
   appendable: false,
   rowClick: null
 };
-// CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
-// Options for form-controls. This is a temp solution until I can pull the data directly from the database
-var PLOT_TYPE_CHOICES = [{
-  id: "li",
-  name: "Connected Scatter Plot"
-}];
-var DASHBOARD_TYPE_CHOICES = [{
-  id: 0,
-  name: "QDCI Dashboard"
-}];
-var LEVEL_CHOICES = [{
-  id: 1,
-  name: "Level 1"
-}, {
-  id: 2,
-  name: "Level 2"
-}, {
-  id: 3,
-  name: "Level 3"
-}, {
-  id: 4,
-  name: "Level 4"
-}];
-var DATAPOINT_TABLE_HEADERS = [{
-  name: "Value",
-  prop: "value"
-}, {
-  name: "Target",
-  prop: "target"
-}, {
-  name: "Date",
-  prop: "date"
-}];
-var PILLAR_CHOICES = [{
-  id: "+",
-  name: "Safety"
-}, {
-  id: "Q",
-  name: "Quality"
-}, {
-  id: "D",
-  name: "Delivery"
-}, {
-  id: "C",
-  name: "Cost"
-}, {
-  id: "I",
-  name: "Involvement"
-}];
-var FREQUENCY_CHOICES = [{
-  id: 0,
-  name: "Monthly"
-}, {
-  id: 1,
-  name: "Weekly"
-}, {
-  id: 2,
-  name: "Bi-Weekly"
-}];
-var KPI_TABLE_HEADERS = [{
-  name: "Name",
-  prop: "name"
-}, {
-  name: "Pillar",
-  prop: "pillar"
-}, {
-  name: "Frequency",
-  prop: "frequency"
-}, {
-  name: "Safe Threshold",
-  prop: "safe"
-}, {
-  name: "Danger Threshold",
-  prop: "danger"
-}];
-var SERIES_TABLE_HEADERS = [{
-  name: "Name",
-  prop: "name"
-}, {
-  name: "Plot Type",
-  prop: "plot_type"
-}, {
-  name: "Color",
-  prop: "color"
-}];
-var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
-var ACTION_TABLE_HEADERS = [{
-  name: "Letter",
-  prop: "letter"
-}, {
-  name: "Problem",
-  prop: "problem"
-}, {
-  name: "Root Cause",
-  prop: "root_cause"
-}, {
-  name: "Solution",
-  prop: "solution"
-}, {
-  name: "Leader",
-  prop: "leader"
-}, {
-  name: "Date",
-  prop: "date",
-  date: true
-}];
-var ACTION_TABLE_DUMMY_DATA = [{
-  letter: "Q",
-  problem: "not enough sleep",
-  root_cause: "Insomnia",
-  solution: "take sleeping pills",
-  leader: "Kyle",
-  date: "24-OCT-2019"
-}, {
-  letter: "Q",
-  problem: "Not enough coffee",
-  root_cause: "coffe machine is broken",
-  solution: "fix coffee machine",
-  leader: "Kyle",
-  date: "08-AUG-2019"
-}, {
-  letter: "I",
-  problem: "Not enough GEMBAS",
-  root_cause: "No legs",
-  solution: "Get legs",
-  leader: "Kyle",
-  date: "03-SEP-2019"
-}];
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/DashboardCard.js
 
 
@@ -2013,7 +2180,7 @@ var DashboardCard_DashboardCard = function DashboardCard(props) {
       selection = props.selection,
       handleClick = props.handleClick;
   var highlighted = selection == dashboard.id ? {
-    border: "2px" + " solid " + accent_color
+    border: "".concat("2px" + " solid ").concat(accentColor)
   } : {
     border: "1px solid rgba(0,0,0,.125)"
   };
@@ -2032,7 +2199,7 @@ var DashboardCard_DashboardCard = function DashboardCard(props) {
     className: "card-title"
   }, dashboard.title), react_default.a.createElement("p", {
     className: "card-text"
-  }, "Author: ", dashboard.author, react_default.a.createElement("br", null), "Level: ", dashboard.level)));
+  }, "Author:", ' ', dashboard.author, react_default.a.createElement("br", null), "Level:", ' ', dashboard.level)));
 };
 
 /* harmony default export */ var ui_DashboardCard = (DashboardCard_DashboardCard);
@@ -2055,9 +2222,12 @@ function EscalationsOptions_inherits(subClass, superClass) { if (typeof superCla
 
 function EscalationsOptions_setPrototypeOf(o, p) { EscalationsOptions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return EscalationsOptions_setPrototypeOf(o, p); }
 
+// DEPENDaNCIES
 
 
+ // CONFIG
 
+ // CORE COMPONENTS
 
 
 
@@ -2181,7 +2351,7 @@ function (_Component) {
       }), react_default.a.createElement("div", {
         className: "card m-3",
         style: selected == null ? {
-          border: "2px solid ".concat(accent_color)
+          border: "2px solid ".concat(accentColor)
         } : {
           border: "1px solid rgba(0,0,0,.125)"
         },
@@ -2210,9 +2380,9 @@ function (_Component) {
 
 EscalationsOptions_EscalationOptions.propTypes = {
   updateActionTable: prop_types_default.a.func.isRequired,
-  actionTable: prop_types_default.a.isRequired,
-  dashboards: prop_types_default.a.isRequired,
-  currentDashboard: prop_types_default.a.isRequired
+  actionTable: prop_types_default.a.object.isRequired,
+  dashboards: prop_types_default.a.array.isRequired,
+  currentDashboard: prop_types_default.a.object.isRequired
 };
 /* harmony default export */ var EscalationsOptions = (Object(es["connect"])(null, {
   updateActionTable: dashboards_updateActionTable
@@ -2220,8 +2390,8 @@ EscalationsOptions_EscalationOptions.propTypes = {
 // EXTERNAL MODULE: ./node_modules/date-fns/esm/parseISO/index.js
 var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.js");
 
-// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 28 modules
-var format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
+// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 2 modules
+var esm_format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
 function ActionForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionForm_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionForm_typeof(obj); }
@@ -2244,7 +2414,7 @@ function ActionForm_inherits(subClass, superClass) { if (typeof superClass !== "
 
 function ActionForm_setPrototypeOf(o, p) { ActionForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionForm_setPrototypeOf(o, p); }
 
-//DEPENDANCIES
+// DEPENDANCIES
 
 
 
@@ -2309,7 +2479,7 @@ function (_Component) {
         solution: solution,
         leader: leader
       };
-      newAction.date = Object(format["default"])(date, "yyyy-MM-dd");
+      newAction.date = Object(esm_format["default"])(date, "yyyy-MM-dd");
       updateAction(newAction, action.id);
 
       _this.setState({
@@ -2449,7 +2619,7 @@ function (_Component) {
 }(react["Component"]);
 
 ActionForm_ActionForm.propTypes = {
-  action: prop_types_default.a.object.isRequired,
+  action: prop_types_default.a.object,
   updateAction: prop_types_default.a.func.isRequired,
   deleteAction: prop_types_default.a.func.isRequired
 };
@@ -2599,19 +2769,19 @@ function (_Component) {
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
         action: currentAction
       }), react_default.a.createElement("div", {
-        className: "row"
+        className: "row m-0"
       }, react_default.a.createElement("div", {
-        className: "col-lg-6"
+        className: "col-lg-6 p-0"
       }, react_default.a.createElement("div", {
-        className: "card m-4"
+        className: "card mt-4 ml-2 mr-2"
       }, react_default.a.createElement("div", {
         className: "card-body"
-      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", null, " Short Term Action Plan"), react_default.a.createElement(components_ActionTable, {
+      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", null, " Short Term Action Plan"), react_default.a.createElement(components_ActionTable, {
         data: st,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
         rowClick: this.rowClick
-      })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
+      })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
         className: "mt-3"
       }, " Long Term Action Plan"), react_default.a.createElement(components_ActionTable, {
         data: lt,
@@ -2619,9 +2789,9 @@ function (_Component) {
         appendable: true,
         rowClick: this.rowClick
       })) : react_default.a.createElement(LoadingScreen, null)))), react_default.a.createElement("div", {
-        className: "col-lg-6"
+        className: "col-lg-6 p-0"
       }, react_default.a.createElement("div", {
-        className: "card m-4"
+        className: "card mt-4 ml-2 mr-2"
       }, react_default.a.createElement("div", {
         className: "card-body"
       }, ul ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
@@ -2629,12 +2799,7 @@ function (_Component) {
         style: {
           padding: "0 1rem"
         }
-      }, react_default.a.createElement("div", {
-        style: {
-          fontSize: 1.75 + "rem",
-          fontWeight: 500
-        }
-      }, " ", "Upper Level Escalation"), react_default.a.createElement("button", {
+      }, react_default.a.createElement("h5", null, " Upper Level Escalation"), react_default.a.createElement("button", {
         type: "button",
         className: "btn btn-primary btn-sm mb-1 ml-auto",
         "data-toggle": "modal",
@@ -2648,7 +2813,7 @@ function (_Component) {
         dashboards: dashboards,
         currentDashboard: currentDashboard,
         actionTable: this.filterTables("Upper Level Escalation")
-      })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
+      })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
         className: "mt-3"
       }, " Lower Level Feed"), react_default.a.createElement(components_ActionTable, {
         data: ll,
@@ -2771,14 +2936,14 @@ function (_Component) {
           margin: 0
         }
       }, react_default.a.createElement("div", {
-        className: "col-lg-2"
+        className: "col-lg-2 p-0"
       }, react_default.a.createElement("div", {
-        className: "card card-body m-4"
+        className: "card card-body ml-4 mt-4 mr-2 mb-4"
       }, react_default.a.createElement(components_PillarBar, {
         kpis: kpis,
         dashboardId: id
       }))), react_default.a.createElement("div", {
-        className: "col-lg-10"
+        className: "col-lg-10 p-0"
       }, react_default.a.createElement(components_ActionPlan, {
         tables: actionTables,
         dashboards: dashboards
@@ -2943,20 +3108,23 @@ function (_React$Component) {
           kpis = _this$props.kpis,
           selectedKpi = _this$props.selectedKpi;
 
-      if (kpis !== prevProps.kpis || selectedKpi != prevProps.selectedKpi) {
+      if (kpis !== prevProps.kpis || selectedKpi !== prevProps.selectedKpi) {
         this.updateD3();
       }
     }
   }, {
     key: "render",
     value: function render() {
-      return react_default.a.createElement("div", null, this.props.chart);
+      var chart = this.props.chart;
+      return react_default.a.createElement("div", null, chart);
     }
   }, {
     key: "renderD3",
     value: function renderD3() {
-      var faux = this.props.connectFauxDOM("svg", "chart");
-      var selectSeriesHook = this.props.selectSeriesHook;
+      var _this$props2 = this.props,
+          connectFauxDOM = _this$props2.connectFauxDOM,
+          selectSeriesHook = _this$props2.selectSeriesHook;
+      var faux = connectFauxDOM("svg", "chart");
 
       function highlightLine(id) {
         if (id == null) return;
@@ -2981,17 +3149,19 @@ function (_React$Component) {
 
       svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").text("$ CAD").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
 
-      svg.append("text").attr("x", width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accent_color);
+      svg.append("text").attr("x", width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accentColor);
     }
   }, {
     key: "updateD3",
     value: function updateD3() {
-      var faux = this.props.connectFauxDOM("svg", "chart");
-      var _this$props2 = this.props,
-          kpis = _this$props2.kpis,
-          selectSeriesHook = _this$props2.selectSeriesHook,
-          animateFauxDOM = _this$props2.animateFauxDOM,
-          selectedKpi = _this$props2.selectedKpi;
+      var x;
+      var _this$props3 = this.props,
+          connectFauxDOM = _this$props3.connectFauxDOM,
+          kpis = _this$props3.kpis,
+          selectSeriesHook = _this$props3.selectSeriesHook,
+          animateFauxDOM = _this$props3.animateFauxDOM,
+          selectedKpi = _this$props3.selectedKpi;
+      var faux = connectFauxDOM("svg", "chart");
       var index = kpis.findIndex(function (kpi) {
         return kpi.id == selectedKpi;
       });
@@ -2999,7 +3169,7 @@ function (_React$Component) {
       var data = kpis[index] ? kpis[index].series : [];
       var parseTime = d3["timeParse"]("%Y-%m-%d");
 
-      function highlightLine(id, color) {
+      function highlightLine(id) {
         d3["selectAll"](".line").attr("stroke-width", 1.8);
         d3["selectAll"](".dot").attr("r", 3);
         d3["selectAll"](".dot_".concat(id)).attr("r", 5);
@@ -3009,7 +3179,7 @@ function (_React$Component) {
       } // Sort by Date
 
 
-      for (var x in data) {
+      for (x in data) {
         var series = data[x].entries;
         series.sort(function (a, b) {
           return new Date(a.date) - new Date(b.date);
@@ -3019,7 +3189,7 @@ function (_React$Component) {
 
       var mins = [];
 
-      for (var x in data) {
+      for (x in data) {
         mins.push(d3["min"](data[x].entries, function (d) {
           return d.value;
         }));
@@ -3027,7 +3197,7 @@ function (_React$Component) {
 
       var maxs = [];
 
-      for (var x in data) {
+      for (x in data) {
         maxs.push(d3["max"](data[x].entries, function (d) {
           return d.value;
         }));
@@ -3061,31 +3231,6 @@ function (_React$Component) {
         return xScale(parseTime(d.date));
       });
       var s = d3["select"](faux).select("#plotArea").selectAll(".line");
-      /*
-      d3.select("#chartMsg").remove();
-      if (!kpis[0]) {
-        d3.select(faux)
-          .select("#plotArea")
-          .append("text")
-          .attr("id", "chartMsg")
-          .text("Please select a KPI")
-          .style("fill", accent_color)
-          .attr("font-size", 1.2 + "rem")
-          .attr("y", height / 2)
-          .attr("x", width / 2.3);
-      } else if (!data.length) {
-        d3.select(faux)
-          .select("#plotArea")
-          .append("text")
-          .attr("id", "chartMsg")
-          .text("You don't seem to have any Series for this KPI")
-          .style("fill", accent_color)
-          .attr("font-size", 1.2 + "rem")
-          .attr("y", height / 2)
-          .attr("x", width / 4);
-      }
-      */
-
       var sData = s.data(data);
       var sEnter = sData.enter().append("path").merge(s).attr("d", function (d) {
         return line(d.entries);
@@ -3173,10 +3318,13 @@ function (_React$Component) {
 LineChart_LineChart.propTypes = {
   kpis: prop_types_default.a.array.isRequired,
   selectSeriesHook: prop_types_default.a.func.isRequired,
-  selectedKpi: prop_types_default.a.number
+  chart: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.object]),
+  selectedKpi: prop_types_default.a.number,
+  connectFauxDOM: prop_types_default.a.func.isRequired,
+  animateFauxDOM: prop_types_default.a.func.isRequired
 };
 LineChart_LineChart.defaultProps = {
-  chart: "loading",
+  chart: "Loading",
   selectedKpi: null
 };
 /* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
@@ -3344,6 +3492,99 @@ svgExporter_SvgExporter.propTypes = {
   target: prop_types_default.a.string.isRequired
 };
 /* harmony default export */ var svgExporter = (svgExporter_SvgExporter);
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/modal/Modal.js
+function Modal_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Modal_typeof = function _typeof(obj) { return typeof obj; }; } else { Modal_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Modal_typeof(obj); }
+
+function Modal_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Modal_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Modal_createClass(Constructor, protoProps, staticProps) { if (protoProps) Modal_defineProperties(Constructor.prototype, protoProps); if (staticProps) Modal_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Modal_possibleConstructorReturn(self, call) { if (call && (Modal_typeof(call) === "object" || typeof call === "function")) { return call; } return Modal_assertThisInitialized(self); }
+
+function Modal_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Modal_getPrototypeOf(o) { Modal_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Modal_getPrototypeOf(o); }
+
+function Modal_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Modal_setPrototypeOf(subClass, superClass); }
+
+function Modal_setPrototypeOf(o, p) { Modal_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Modal_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+var Modal_Modal =
+/*#__PURE__*/
+function (_Component) {
+  Modal_inherits(Modal, _Component);
+
+  function Modal(props) {
+    Modal_classCallCheck(this, Modal);
+
+    return Modal_possibleConstructorReturn(this, Modal_getPrototypeOf(Modal).call(this, props));
+  }
+
+  Modal_createClass(Modal, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          title = _this$props.title,
+          iconClass = _this$props.iconClass,
+          id = _this$props.id,
+          children = _this$props.children;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "modal fade",
+        id: id,
+        role: "dialog",
+        "aria-labelledby": "".concat(id, "Label"),
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document",
+        style: {
+          maxWidth: "fit-content"
+        }
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "".concat(id, "Label")
+      }, react_default.a.createElement("span", {
+        className: iconClass,
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", title), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, children)))))));
+    }
+  }]);
+
+  return Modal;
+}(react["Component"]);
+
+/* harmony default export */ var modal_Modal = (Modal_Modal);
+// EXTERNAL MODULE: ./node_modules/date-fns/esm/index.js + 179 modules
+var esm = __webpack_require__("./node_modules/date-fns/esm/index.js");
+
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/ChartOptions.js
 function ChartOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ChartOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { ChartOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ChartOptions_typeof(obj); }
 
@@ -3364,6 +3605,7 @@ function ChartOptions_inherits(subClass, superClass) { if (typeof superClass !==
 function ChartOptions_setPrototypeOf(o, p) { ChartOptions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ChartOptions_setPrototypeOf(o, p); }
 
 // DEPENDANCIES
+
 
 
 var ChartOptions_ChartOptions =
@@ -3388,6 +3630,8 @@ function (_Component) {
       _this.props.selectSeriesHook(null);
 
       _this.props.deselectHook();
+    }, _this.openKpiNew = function () {
+      $("#newKpi").modal("show");
     }, _temp));
   }
 
@@ -3403,7 +3647,9 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           active = _this$props.active,
-          kpis = _this$props.kpis;
+          kpis = _this$props.kpis,
+          setMenuState = _this$props.setMenuState,
+          menuMode = _this$props.menuMode;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h4", {
         style: {
           height: "fit-content",
@@ -3424,10 +3670,50 @@ function (_Component) {
         }, kpi.name);
       })), react_default.a.createElement("button", {
         type: "button",
-        className: "btn btn-primary mt-auto ml-2",
-        "data-toggle": "modal",
-        "data-target": "#manageKpi"
-      }, "Manage KPI"));
+        className: "btn btn-success btn-sm mt-auto ml-3",
+        style: {
+          padding: "1px 8px"
+        },
+        onClick: this.openKpiNew
+      }, react_default.a.createElement("i", {
+        className: "im im-plus",
+        style: {
+          lineHeight: "1.5",
+          fontSize: "20px"
+        }
+      })), react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-sm mt-auto ml-auto ".concat(menuMode ? "btn-secondary" : "btn-primary"),
+        onClick: function onClick() {
+          return setMenuState(false);
+        },
+        style: {
+          padding: "1px 8px"
+        },
+        disabled: menuMode ? false : true
+      }, react_default.a.createElement("i", {
+        className: "im im-line-chart-up",
+        style: {
+          lineHeight: "1.5",
+          fontSize: "20px"
+        }
+      })), react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-sm mt-auto ml-2 ".concat(menuMode ? "btn-primary" : "btn-secondary"),
+        onClick: function onClick() {
+          return setMenuState(true);
+        },
+        style: {
+          padding: "1px 8px"
+        },
+        disabled: menuMode ? true : false
+      }, react_default.a.createElement("i", {
+        className: "im im-gear",
+        style: {
+          lineHeight: "1.5",
+          fontSize: "20px"
+        }
+      })));
     }
   }]);
 
@@ -3435,40 +3721,180 @@ function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var components_ChartOptions = (ChartOptions_ChartOptions);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataInfo.js
+// EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
+var lib = __webpack_require__("./node_modules/react-color/lib/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesEdit.js
+function SeriesEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesEdit_typeof(obj); }
+
+function SeriesEdit_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function SeriesEdit_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesEdit_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesEdit_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesEdit_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesEdit_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesEdit_possibleConstructorReturn(self, call) { if (call && (SeriesEdit_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesEdit_assertThisInitialized(self); }
+
+function SeriesEdit_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesEdit_getPrototypeOf(o) { SeriesEdit_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesEdit_getPrototypeOf(o); }
+
+function SeriesEdit_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesEdit_setPrototypeOf(subClass, superClass); }
+
+function SeriesEdit_setPrototypeOf(o, p) { SeriesEdit_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesEdit_setPrototypeOf(o, p); }
+
 // DEPENDANCIES
 
 
-var DataInfo_DataInfo = function DataInfo() {
-  return react_default.a.createElement("div", {
-    id: "infoData",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Data"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Here you can view and manage all your datapoints. Each datapoint is defined by the following fields."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-file-o mr-2"
-  }), " Value"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " - Defines the quantity of the measurement"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, " ", react_default.a.createElement("i", {
-    className: "im im-target mr-2"
-  }), " Target"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the value at from which deviations are calculated"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-calendar mr-2"
-  }), " Date"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the day which the data was reported ", react_default.a.createElement("br", null), "- Format: YYYY-MM-DD"));
-};
 
-/* harmony default export */ var datapoints_DataInfo = (DataInfo_DataInfo);
+ // CONFIG
+
+ // ACTIONS
+
+
+
+var SeriesEdit_SeriesEdit =
+/*#__PURE__*/
+function (_Component) {
+  SeriesEdit_inherits(SeriesEdit, _Component);
+
+  function SeriesEdit() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    SeriesEdit_classCallCheck(this, SeriesEdit);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return SeriesEdit_possibleConstructorReturn(_this, (_temp = _this = SeriesEdit_possibleConstructorReturn(this, (_getPrototypeOf2 = SeriesEdit_getPrototypeOf(SeriesEdit)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      name: "",
+      color: "",
+      plot_type: "li"
+    }, _this.onChangeColor = function (color) {
+      _this.setState({
+        color: color.hex
+      });
+    }, _this.update = function (series) {
+      _this.setState({
+        name: series.name,
+        color: series.color,
+        plot_type: series.plot_type
+      });
+    }, _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$props = _this.props,
+          kpi = _this$props.kpi,
+          series = _this$props.series,
+          updateSeries = _this$props.updateSeries;
+      var _this$state = _this.state,
+          name = _this$state.name,
+          color = _this$state.color,
+          plot_type = _this$state.plot_type;
+      var s = {
+        name: name,
+        color: color,
+        plot_type: plot_type,
+        kpi: kpi
+      };
+      updateSeries(s, series.id);
+    }, _this.onChange = function (e) {
+      _this.setState(SeriesEdit_defineProperty({}, e.target.name, e.target.value));
+    }, _temp));
+  }
+
+  SeriesEdit_createClass(SeriesEdit, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var series = this.props.series;
+      this.setState({
+        name: series.name,
+        color: series.color,
+        plot_type: series.plot_type
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var series = this.props.series;
+      if (series !== prevProps.series) this.update(series);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state2 = this.state,
+          name = _this$state2.name,
+          color = _this$state2.color,
+          plot_type = _this$state2.plot_type;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        noValidate: true,
+        className: "w-100"
+      }, react_default.a.createElement("div", {
+        className: "row m-0"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-6"
+      }, react_default.a.createElement("div", {
+        className: "d-flex flex-column"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "name"
+      }, "Name"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "name",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: name,
+        required: true
+      })), react_default.a.createElement("div", {
+        className: "form-group mt-4"
+      }, react_default.a.createElement("label", {
+        htmlFor: "plot_type"
+      }, "Plot Type"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "plot_type",
+        onChange: this.onChange,
+        placeholder: "...",
+        value: plot_type,
+        required: true
+      }, PLOT_TYPE_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: "choice-".concat(choice.id),
+          value: choice.id
+        }, choice.name);
+      }))))), react_default.a.createElement("div", {
+        className: "col-sm-4 m-auto"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "color"
+      }, "Color"), react_default.a.createElement(lib["ChromePicker"], {
+        color: color,
+        onChangeComplete: this.onChangeColor
+      })))), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success" //data-dismiss="modal"
+
+      }, "Save Changes")));
+    }
+  }]);
+
+  return SeriesEdit;
+}(react["Component"]);
+
+SeriesEdit_SeriesEdit.propTypes = {
+  updateSeries: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var series_SeriesEdit = (Object(es["connect"])(null, {
+  updateSeries: dashboards_updateSeries
+})(SeriesEdit_SeriesEdit));
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataTable.js
 function DataTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataTable_typeof = function _typeof(obj) { return typeof obj; }; } else { DataTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataTable_typeof(obj); }
 
@@ -3569,567 +3995,113 @@ DataTable_DatapointTable.defaultProps = {
   updateDatapoint: dashboards_updateDatapoint,
   deleteDatapoint: dashboards_deleteDatapoint
 })(DataTable_DatapointTable));
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesView.js
+function SeriesView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesView_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesView_typeof(obj); }
+
+function SeriesView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function SeriesView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function SeriesView_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesView_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function SeriesView_possibleConstructorReturn(self, call) { if (call && (SeriesView_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesView_assertThisInitialized(self); }
+
+function SeriesView_getPrototypeOf(o) { SeriesView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesView_getPrototypeOf(o); }
+
+function SeriesView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function SeriesView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesView_setPrototypeOf(subClass, superClass); }
+
+function SeriesView_setPrototypeOf(o, p) { SeriesView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesView_setPrototypeOf(o, p); }
+
 // DEPENDANCIES
- // CONFIG
+
+
+ // ACTIONS
 
  // COMPONENTS
 
 
 
 
-var DataOptions_DataOptions = function DataOptions(props) {
-  var series = props.series;
-  var data = series ? series : {
-    name: "Error",
-    plot_type: "Error",
-    color: "Error",
-    kpi: "Error",
-    entries: [],
-    id: "Error"
-  };
-  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "dataOptions",
-    role: "dialog",
-    "aria-labelledby": "dataOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document"
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "dataOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-archive",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Edit ", data.name), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-header"
-  }, react_default.a.createElement("ul", {
-    className: "nav nav-tabs card-header-tabs"
-  }, react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#infoData"
-  }, "Info")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link active",
-    "data-toggle": "tab",
-    href: "#viewData"
-  }, "View Data")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#importData"
-  }, "Import")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#exportData"
-  }, "Export")))), react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("div", {
-    className: "tab-content",
-    style: {
-      maxHeight: "".concat(550, "px"),
-      overflow: "auto",
-      overflowX: "auto"
-    }
-  }, react_default.a.createElement(datapoints_DataInfo, null), react_default.a.createElement("div", {
-    id: "viewData",
-    className: "tab-pane fade show active"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Your Data"), react_default.a.createElement(DataTable, {
-    data: data.entries,
-    header: DATAPOINT_TABLE_HEADERS
-  })), react_default.a.createElement("div", {
-    id: "exportData",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "WIP")), react_default.a.createElement("div", {
-    id: "importData",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "WIP"))))))))));
-};
-
-/* harmony default export */ var datapoints_DataOptions = (DataOptions_DataOptions);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiForm.js
-function KpiForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiForm_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiForm_typeof(obj); }
-
-function KpiForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiForm_defineProperty(target, key, source[key]); }); } return target; }
-
-function KpiForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function KpiForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function KpiForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function KpiForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function KpiForm_possibleConstructorReturn(self, call) { if (call && (KpiForm_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiForm_assertThisInitialized(self); }
-
-function KpiForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function KpiForm_getPrototypeOf(o) { KpiForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiForm_getPrototypeOf(o); }
-
-function KpiForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiForm_setPrototypeOf(subClass, superClass); }
-
-function KpiForm_setPrototypeOf(o, p) { KpiForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiForm_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
- // CONFIG
-
- // ACTIONS
-
-
-
-var KpiForm_KpiForm =
+var SeriesView_SeriesView =
 /*#__PURE__*/
 function (_Component) {
-  KpiForm_inherits(KpiForm, _Component);
+  SeriesView_inherits(SeriesView, _Component);
 
-  function KpiForm(props) {
+  function SeriesView(props) {
     var _this;
 
-    KpiForm_classCallCheck(this, KpiForm);
+    SeriesView_classCallCheck(this, SeriesView);
 
-    _this = KpiForm_possibleConstructorReturn(this, KpiForm_getPrototypeOf(KpiForm).call(this, props));
+    _this = SeriesView_possibleConstructorReturn(this, SeriesView_getPrototypeOf(SeriesView).call(this, props));
 
-    _this.update = function (kpi) {
-      _this.setState(KpiForm_objectSpread({}, kpi));
+    _this.onDelete = function () {
+      $("#deleteConfirmation").modal("show");
     };
 
-    _this.onSubmit = function (e) {
-      e.preventDefault();
-      var addKpi = _this.props.addKpi;
-      var _this$state = _this.state,
-          name = _this$state.name,
-          frequency = _this$state.frequency,
-          safe = _this$state.safe,
-          danger = _this$state.danger,
-          dashboard = _this$state.dashboard;
-      var pillar = pillarId;
-      var kpi = {
-        name: name,
-        pillar: pillar,
-        danger: danger,
-        safe: safe,
-        frequency: frequency,
-        dashboard: dashboard
-      };
-      addKpi(kpi);
+    _this.onSubmitDelete = function (state) {
+      var _this$props = _this.props,
+          series = _this$props.series,
+          deleteSeries = _this$props.deleteSeries;
 
-      _this.setState({
-        name: "",
-        danger: "",
-        safe: "",
-        frequency: 0
-      });
+      if (state.name === series.name) {
+        deleteSeries(series.id);
+        return true;
+      } else return false;
     };
 
-    _this.onChange = function (e) {
-      _this.setState(KpiForm_defineProperty({}, e.target.name, e.target.value));
-    };
-
-    _this.state = {
-      name: "",
-      frequency: "",
-      safe: "",
-      danger: "",
-      dashboard: "",
-      pillar: ""
-    };
+    _this.onSubmitDelete = _this.onSubmitDelete.bind(SeriesView_assertThisInitialized(_this));
     return _this;
   }
 
-  KpiForm_createClass(KpiForm, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var kpi = this.props.kpi;
-
-      if (kpi != prevProps.kpi) {
-        this.update(kpi);
-      }
+  SeriesView_createClass(SeriesView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props2 = this.props,
+          onDelete = _this$props2.onDelete,
+          series = _this$props2.series;
+      onDelete({
+        type: "series",
+        item: series,
+        onSubmit: this.onSubmitDelete
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          name = _this$state2.name,
-          frequency = _this$state2.frequency,
-          safe = _this$state2.safe,
-          danger = _this$state2.danger;
-      var _this$props = this.props,
-          pillarId = _this$props.pillarId,
-          kpi = _this$props.kpi;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        className: "w-100 mt-3",
-        noValidate: true
-      }, react_default.a.createElement("div", {
-        className: "row"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Name"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "name",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: name,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "frequency"
-      }, "Frequency"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "frequency",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: frequency,
-        required: true
-      }, FREQUENCY_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
-          key: "choice-".concat(choice.id),
-          value: choice.id
-        }, choice.name);
-      })))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "safe"
-      }, "Safe Range"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "safe",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: safe,
-        required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "danger"
-      }, "Danger Range"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "danger",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: danger,
-        required: true
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "pillar"
-      }, "Pillar"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "pillar",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: kpi ? kpi.pillar : "",
-        required: true,
-        disabled: true
-      })))), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-success mb-4 mt-3"
-      }, "Save Changes")));
+      var _this$props3 = this.props,
+          series = _this$props3.series,
+          onBack = _this$props3.onBack;
+      if (!series) return react_default.a.createElement(react_default.a.Fragment, null);
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "im im-arrow-left mb-4 icon symbol",
+        onClick: onBack
+      }, " "), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement(series_SeriesEdit, {
+        series: series
+      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
+        className: "mt-4"
+      }, "Data"), react_default.a.createElement(DataTable, {
+        data: series.entries
+      }), react_default.a.createElement("div", {
+        className: "d-flex justify-content-end"
+      }, react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-danger",
+        onClick: this.onDelete
+      }, "Delete Series")));
     }
   }]);
 
-  return KpiForm;
+  return SeriesView;
 }(react["Component"]);
 
-KpiForm_KpiForm.propTypes = {
-  addKpi: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var kpis_KpiForm = (Object(es["connect"])(null, {
-  addKpi: dashboards_addKpi
-})(KpiForm_KpiForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiInfo.js
-// DEPENDACIES
-
-
-var KpiInfo_KpiInfo = function KpiInfo() {
-  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "KPIS"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Here you can view and manage all your key preformance indicators. Each KPI is defined by the following fields."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-pencil mr-2"
-  }), " Name"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Give your KPIs distinct and informative labels"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-bank mr-2"
-  }), " Pillar"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " - Defines which pillar the KPI belongs too."), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, " ", react_default.a.createElement("i", {
-    className: "im im-date-o mr-2"
-  }), " Frequency"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the frequency of measurement, ie, 12 for monthly or 52 for weekly"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-check-mark mr-2"
-  }), " Safe Threshold"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the threshold for values which are considered within adequate range of the target", react_default.a.createElement("br", null), "- These values turn green"), react_default.a.createElement("h5", {
-    className: "mt-4"
-  }, react_default.a.createElement("i", {
-    className: "im im-x-mark mr-2"
-  }), " Danger Threshold"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, " ", "- Defines the threshold for values which are not within adequate range of the target ", react_default.a.createElement("br", null), "- These values will turn red and require actions"));
-};
-
-/* harmony default export */ var kpis_KpiInfo = (KpiInfo_KpiInfo);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiTable.js
-function KpiTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiTable_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiTable_typeof(obj); }
-
-function KpiTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function KpiTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function KpiTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function KpiTable_possibleConstructorReturn(self, call) { if (call && (KpiTable_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiTable_assertThisInitialized(self); }
-
-function KpiTable_getPrototypeOf(o) { KpiTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiTable_getPrototypeOf(o); }
-
-function KpiTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function KpiTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiTable_setPrototypeOf(subClass, superClass); }
-
-function KpiTable_setPrototypeOf(o, p) { KpiTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiTable_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
- // CORE COMPONENTS
-
- // ACTIONS
-
-
-
-var KpiTable_KpiTable =
-/*#__PURE__*/
-function (_Component) {
-  KpiTable_inherits(KpiTable, _Component);
-
-  function KpiTable(props) {
-    var _this;
-
-    KpiTable_classCallCheck(this, KpiTable);
-
-    _this = KpiTable_possibleConstructorReturn(this, KpiTable_getPrototypeOf(KpiTable).call(this, props));
-    _this.update = _this.update.bind(KpiTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(KpiTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  KpiTable_createClass(KpiTable, [{
-    key: "delete",
-    value: function _delete(id) {
-      this.props.deleteKpi(id);
-    }
-  }, {
-    key: "update",
-    value: function update(current, id) {
-      this.props.updateKpi(current, id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          header = _this$props.header;
-      return react_default.a.createElement(table_Table, {
-        editable: true,
-        data: data,
-        header: header,
-        update: this.update,
-        "delete": this["delete"],
-        deletable: true
-      });
-    }
-  }]);
-
-  return KpiTable;
-}(react["Component"]);
-
-KpiTable_KpiTable.propTypes = {
-  data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array.isRequired
-};
-/* harmony default export */ var kpis_KpiTable = (Object(es["connect"])(null, {
-  updateKpi: dashboards_updateKpi,
-  deleteKpi: dashboards_deleteKpi
-})(KpiTable_KpiTable));
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiOptions.js
-// DEPENDACIES
- // CONFIG
-
- // COMPONENTS
-
-
-
-
-
-var KpiOptions_KpiOptions = function KpiOptions(props) {
-  var kpiCopy = [];
-
-  for (var i in props.kpis) {
-    var copy = {};
-    var entry = props.kpis[i];
-    copy.name = entry.name;
-    copy.pillar = entry.pillar;
-    copy.frequency = entry.frequency;
-    copy.safe = entry.safe;
-    copy.danger = entry.danger;
-    copy.id = entry.id;
-    kpiCopy.push(copy);
-  }
-
-  var pillarId = props.pillarId;
-  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "kpiOptions",
-    role: "dialog",
-    "aria-labelledby": "kpiOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document"
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "kpiOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-dashboard",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Manage KPIs"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-header"
-  }, react_default.a.createElement("ul", {
-    className: "nav nav-tabs card-header-tabs"
-  }, react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#info"
-  }, "Info")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link active",
-    "data-toggle": "tab",
-    href: "#list"
-  }, "View KPIs")), react_default.a.createElement("li", {
-    className: "nav-item"
-  }, react_default.a.createElement("a", {
-    className: "nav-link",
-    "data-toggle": "tab",
-    href: "#add"
-  }, "Add KPI")))), react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("div", {
-    className: "tab-content",
-    style: {
-      maxHeight: "".concat(550, "px"),
-      overflow: "auto",
-      overflowX: "auto"
-    }
-  }, react_default.a.createElement("div", {
-    id: "info",
-    className: "tab-pane fade"
-  }, react_default.a.createElement(kpis_KpiInfo, null)), react_default.a.createElement("div", {
-    id: "list",
-    className: "tab-pane fade show active"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Your KPIs"), react_default.a.createElement(kpis_KpiTable, {
-    data: kpiCopy,
-    header: KPI_TABLE_HEADERS
-  })), react_default.a.createElement("div", {
-    id: "add",
-    className: "tab-pane fade"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, "Create A New KPI"), react_default.a.createElement(kpis_KpiForm, {
-    dashboardId: props.dashboardId,
-    pillarId: pillarId
-  }))))))))));
-};
-
-/* harmony default export */ var kpis_KpiOptions = (KpiOptions_KpiOptions);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesCard.js
+/* harmony default export */ var series_SeriesView = (Object(es["connect"])(null, {
+  deleteSeries: dashboards_deleteSeries
+})(SeriesView_SeriesView));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesCard.js
 function SeriesCard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesCard_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesCard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesCard_typeof(obj); }
 
 function SeriesCard_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4198,7 +4170,7 @@ function (_Component) {
   return SeriesCard;
 }(react["Component"]);
 
-/* harmony default export */ var components_SeriesCard = (SeriesCard_SeriesCard);
+/* harmony default export */ var series_SeriesCard = (SeriesCard_SeriesCard);
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/NewCard.js
 // DEPENDANCIES
 
@@ -4224,7 +4196,7 @@ var NewCard_NewCard = function NewCard(props) {
 };
 
 /* harmony default export */ var ui_NewCard = (NewCard_NewCard);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesList.js
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesList.js
 function SeriesList_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesList_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesList_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesList_typeof(obj); }
 
 function SeriesList_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4245,6 +4217,8 @@ function SeriesList_setPrototypeOf(o, p) { SeriesList_setPrototypeOf = Object.se
 
 // DEPENDANCIES
 
+
+
  // CORE COMPONENTS
 
 
@@ -4255,29 +4229,50 @@ function (_Component) {
   SeriesList_inherits(SeriesList, _Component);
 
   function SeriesList() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
     SeriesList_classCallCheck(this, SeriesList);
 
-    return SeriesList_possibleConstructorReturn(this, SeriesList_getPrototypeOf(SeriesList).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return SeriesList_possibleConstructorReturn(_this, (_temp = _this = SeriesList_possibleConstructorReturn(this, (_getPrototypeOf2 = SeriesList_getPrototypeOf(SeriesList)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.onNewSeriesClick = function (e) {
+      var _this$props = _this.props,
+          addSeries = _this$props.addSeries,
+          kpiId = _this$props.kpiId;
+      addSeries({
+        kpi: kpiId,
+        color: "#000",
+        name: "New Series",
+        plot_type: "li"
+      });
+    }, _temp));
   }
 
   SeriesList_createClass(SeriesList, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          series = _this$props.series,
-          onClick = _this$props.onClick;
+      var _this$props2 = this.props,
+          series = _this$props2.series,
+          onClick = _this$props2.onClick;
+      if (!series) return react_default.a.createElement("div", null);
       return react_default.a.createElement("div", {
         className: "row"
       }, series.map(function (series) {
         return react_default.a.createElement("div", {
-          className: "col-sm-4"
-        }, react_default.a.createElement(components_SeriesCard, {
+          key: series.id,
+          className: "col-sm-3"
+        }, react_default.a.createElement(series_SeriesCard, {
           onClick: onClick,
           series: series
         }));
       }), react_default.a.createElement("div", {
-        className: "col-sm-4"
+        className: "col-sm-3"
       }, react_default.a.createElement(ui_NewCard, {
+        handleClick: this.onNewSeriesClick,
         text: "Series"
       })));
     }
@@ -4286,132 +4281,888 @@ function (_Component) {
   return SeriesList;
 }(react["Component"]);
 
-/* harmony default export */ var components_SeriesList = (SeriesList_SeriesList);
-// EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
-var lib = __webpack_require__("./node_modules/react-color/lib/index.js");
+/* harmony default export */ var series_SeriesList = (Object(es["connect"])(null, {
+  addSeries: dashboards_addSeries
+})(SeriesList_SeriesList));
+// EXTERNAL MODULE: ./node_modules/react-compound-slider/es/index.js + 33 modules
+var react_compound_slider_es = __webpack_require__("./node_modules/react-compound-slider/es/index.js");
 
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesForm.js
-function SeriesForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesForm_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesForm_typeof(obj); }
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/slider/SliderProps.js
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
-function SeriesForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function SeriesForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function SeriesForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function SeriesForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesForm_defineProperties(Constructor, staticProps); return Constructor; }
+function SliderProps_extends() { SliderProps_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return SliderProps_extends.apply(this, arguments); }
 
-function SeriesForm_possibleConstructorReturn(self, call) { if (call && (SeriesForm_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesForm_assertThisInitialized(self); }
+function SliderProps_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { SliderProps_defineProperty(target, key, source[key]); }); } return target; }
 
-function SeriesForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function SliderProps_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function SeriesForm_getPrototypeOf(o) { SeriesForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesForm_getPrototypeOf(o); }
 
-function SeriesForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesForm_setPrototypeOf(subClass, superClass); }
+ // *******************************************************
+// RAIL
+// *******************************************************
 
-function SeriesForm_setPrototypeOf(o, p) { SeriesForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesForm_setPrototypeOf(o, p); }
+var railOuterStyle = {
+  position: "absolute",
+  width: "100%",
+  height: 42,
+  transform: "translate(0%, -50%)",
+  borderRadius: 7,
+  cursor: "pointer" // border: '1px solid white',
 
-//DEPENDANCIES
+};
+var railInnerStyle = {
+  position: "absolute",
+  width: "100%",
+  height: 14,
+  transform: "translate(0%, -50%)",
+  borderRadius: 7,
+  pointerEvents: "none",
+  backgroundColor: "#218838"
+};
+function SliderRail(_ref) {
+  var getRailProps = _ref.getRailProps,
+      color = _ref.color;
 
+  var style = SliderProps_objectSpread({}, railInnerStyle);
+
+  style.backgroundColor = color;
+  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", SliderProps_extends({
+    style: railOuterStyle
+  }, getRailProps())), react_default.a.createElement("div", {
+    style: style
+  }));
+}
+SliderRail.propTypes = {
+  getRailProps: prop_types_default.a.func.isRequired
+}; // *******************************************************
+// HANDLE COMPONENT
+// *******************************************************
+
+function Handle(_ref2) {
+  var _ref2$domain = _slicedToArray(_ref2.domain, 2),
+      min = _ref2$domain[0],
+      max = _ref2$domain[1],
+      _ref2$handle = _ref2.handle,
+      id = _ref2$handle.id,
+      value = _ref2$handle.value,
+      percent = _ref2$handle.percent,
+      disabled = _ref2.disabled,
+      getHandleProps = _ref2.getHandleProps,
+      noDisplay = _ref2.noDisplay;
+
+  return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", SliderProps_extends({
+    style: {
+      left: "".concat(percent, "%"),
+      position: "absolute",
+      transform: "translate(-50%, -50%)",
+      WebkitTapHighlightColor: "rgba(0,0,0,0)",
+      zIndex: disabled ? 0 : 5,
+      pointerEvents: disabled ? "none" : "auto",
+      width: 28,
+      height: 42,
+      cursor: "pointer",
+      // border: '1px solid white',
+      backgroundColor: "none"
+    }
+  }, getHandleProps(id))), react_default.a.createElement("div", {
+    role: "slider",
+    "aria-valuemin": min,
+    "aria-valuemax": max,
+    "aria-valuenow": value,
+    style: {
+      left: "".concat(percent, "%"),
+      position: "absolute",
+      transform: "translate(-50%, -50%)",
+      zIndex: 2,
+      width: noDisplay ? 0 : 20,
+      height: noDisplay ? 0 : 20,
+      borderRadius: "50%",
+      boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.3)",
+      backgroundColor: disabled ? "#666" : "#ffc400"
+    }
+  }));
+}
+Handle.propTypes = {
+  domain: prop_types_default.a.array.isRequired,
+  handle: prop_types_default.a.shape({
+    id: prop_types_default.a.string.isRequired,
+    value: prop_types_default.a.number.isRequired,
+    percent: prop_types_default.a.number.isRequired
+  }).isRequired,
+  getHandleProps: prop_types_default.a.func.isRequired,
+  disabled: prop_types_default.a.bool
+};
+Handle.defaultProps = {
+  disabled: false
+}; // *******************************************************
+// KEYBOARD HANDLE COMPONENT
+// Uses a button to allow keyboard events
+// *******************************************************
+
+function KeyboardHandle(_ref3) {
+  var _ref3$domain = _slicedToArray(_ref3.domain, 2),
+      min = _ref3$domain[0],
+      max = _ref3$domain[1],
+      _ref3$handle = _ref3.handle,
+      id = _ref3$handle.id,
+      value = _ref3$handle.value,
+      percent = _ref3$handle.percent,
+      disabled = _ref3.disabled,
+      getHandleProps = _ref3.getHandleProps;
+
+  return react_default.a.createElement("button", SliderProps_extends({
+    role: "slider",
+    "aria-valuemin": min,
+    "aria-valuemax": max,
+    "aria-valuenow": value,
+    style: {
+      left: "".concat(percent, "%"),
+      position: "absolute",
+      transform: "translate(-50%, -50%)",
+      zIndex: 2,
+      width: 24,
+      height: 24,
+      borderRadius: "50%",
+      boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.3)",
+      backgroundColor: disabled ? "#666" : "#218838"
+    },
+    disabled: true
+  }, getHandleProps(id)));
+}
+KeyboardHandle.propTypes = {
+  domain: prop_types_default.a.array.isRequired,
+  handle: prop_types_default.a.shape({
+    id: prop_types_default.a.string.isRequired,
+    value: prop_types_default.a.number.isRequired,
+    percent: prop_types_default.a.number.isRequired
+  }).isRequired,
+  getHandleProps: prop_types_default.a.func.isRequired,
+  disabled: prop_types_default.a.bool
+};
+KeyboardHandle.defaultProps = {
+  disabled: false
+}; // *******************************************************
+// TRACK COMPONENT
+// *******************************************************
+
+function Track(_ref4) {
+  var source = _ref4.source,
+      target = _ref4.target,
+      getTrackProps = _ref4.getTrackProps,
+      disabled = _ref4.disabled,
+      color = _ref4.color;
+  return react_default.a.createElement("div", SliderProps_extends({
+    style: {
+      position: "absolute",
+      transform: "translate(0%, -50%)",
+      height: 14,
+      zIndex: 1,
+      backgroundColor: disabled ? "#999" : color,
+      borderRadius: 7,
+      cursor: "pointer",
+      left: "".concat(source.percent, "%"),
+      width: "".concat(target.percent - source.percent, "%")
+    }
+  }, getTrackProps()));
+}
+Track.propTypes = {
+  source: prop_types_default.a.shape({
+    id: prop_types_default.a.string.isRequired,
+    value: prop_types_default.a.number.isRequired,
+    percent: prop_types_default.a.number.isRequired
+  }).isRequired,
+  target: prop_types_default.a.shape({
+    id: prop_types_default.a.string.isRequired,
+    value: prop_types_default.a.number.isRequired,
+    percent: prop_types_default.a.number.isRequired
+  }).isRequired,
+  getTrackProps: prop_types_default.a.func.isRequired,
+  disabled: prop_types_default.a.bool
+};
+Track.defaultProps = {
+  disabled: false
+}; // *******************************************************
+// TICK COMPONENT
+// *******************************************************
+
+function Tick(_ref5) {
+  var tick = _ref5.tick,
+      count = _ref5.count,
+      format = _ref5.format,
+      prefix = _ref5.prefix,
+      suffix = _ref5.suffix,
+      name = _ref5.name;
+  return react_default.a.createElement("div", null, react_default.a.createElement("div", {
+    style: {
+      position: "absolute",
+      marginTop: 14,
+      width: 1,
+      height: 5,
+      backgroundColor: "rgb(200,200,200)",
+      left: "".concat(tick.percent, "%")
+    }
+  }), react_default.a.createElement("div", {
+    style: {
+      position: "absolute",
+      marginTop: 22,
+      fontSize: 10,
+      textAlign: "center",
+      marginLeft: "".concat(-(100 / count) / 2, "%"),
+      width: "".concat(100 / count, "%"),
+      left: "".concat(tick.percent, "%")
+    }
+  }, !name ? format("".concat(prefix).concat(tick.value).concat(suffix)) : name));
+}
+Tick.propTypes = {
+  tick: prop_types_default.a.shape({
+    id: prop_types_default.a.string.isRequired,
+    value: prop_types_default.a.number.isRequired,
+    percent: prop_types_default.a.number.isRequired
+  }).isRequired,
+  count: prop_types_default.a.number.isRequired,
+  format: prop_types_default.a.func.isRequired
+};
+Tick.defaultProps = {
+  format: function format(d) {
+    return d;
+  },
+  prefix: "",
+  suffix: ""
+};
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/slider/DeviationSlider.js
+function DeviationSlider_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeviationSlider_typeof = function _typeof(obj) { return typeof obj; }; } else { DeviationSlider_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeviationSlider_typeof(obj); }
+
+function DeviationSlider_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DeviationSlider_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DeviationSlider_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeviationSlider_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeviationSlider_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DeviationSlider_possibleConstructorReturn(self, call) { if (call && (DeviationSlider_typeof(call) === "object" || typeof call === "function")) { return call; } return DeviationSlider_assertThisInitialized(self); }
+
+function DeviationSlider_getPrototypeOf(o) { DeviationSlider_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeviationSlider_getPrototypeOf(o); }
+
+function DeviationSlider_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DeviationSlider_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeviationSlider_setPrototypeOf(subClass, superClass); }
+
+function DeviationSlider_setPrototypeOf(o, p) { DeviationSlider_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeviationSlider_setPrototypeOf(o, p); }
+
+
+
+ // example render components - source below
+
+var sliderStyle = {
+  position: "relative",
+  width: "100%"
+};
+var domain = [0, 100];
+var defaultValues = [0, 25, 75, 100];
+
+var DeviationSlider_Example =
+/*#__PURE__*/
+function (_Component) {
+  DeviationSlider_inherits(Example, _Component);
+
+  function Example(props) {
+    var _this;
+
+    DeviationSlider_classCallCheck(this, Example);
+
+    _this = DeviationSlider_possibleConstructorReturn(this, DeviationSlider_getPrototypeOf(Example).call(this, props));
+
+    _initialiseProps.call(DeviationSlider_assertThisInitialized(_this));
+
+    var _this$props = _this.props,
+        danger_deviation = _this$props.danger_deviation,
+        safe_deviation = _this$props.safe_deviation;
+    var values = [0, danger_deviation, safe_deviation, 100];
+    _this.state = {
+      values: values.slice(),
+      update: values.slice()
+    };
+    return _this;
+  }
+
+  DeviationSlider_createClass(Example, [{
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          values = _this$state.values,
+          update = _this$state.update;
+      return react_default.a.createElement("div", {
+        className: "mt-5",
+        style: {
+          height: 120,
+          width: "95%"
+        }
+      }, react_default.a.createElement(react_compound_slider_es["Slider"], {
+        mode: 1,
+        step: 1,
+        domain: domain,
+        rootStyle: sliderStyle,
+        onUpdate: this.onUpdate,
+        onChange: this.onChange,
+        values: values
+      }, react_default.a.createElement(react_compound_slider_es["Rail"], null, function (_ref) {
+        var getRailProps = _ref.getRailProps;
+        var props = getRailProps();
+
+        props.onMouseDown = function () {};
+
+        props.onTouchStart = function () {};
+
+        return react_default.a.createElement(SliderRail, {
+          getRailProps: function getRailProps() {
+            props;
+          },
+          color: "#218838"
+        });
+      }), react_default.a.createElement(react_compound_slider_es["Handles"], null, function (_ref2) {
+        var handles = _ref2.handles,
+            getHandleProps = _ref2.getHandleProps;
+        return react_default.a.createElement("div", {
+          className: "slider-handles"
+        }, handles.map(function (handle, i, arr) {
+          if (i === 0) return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: domain,
+            getHandleProps: function getHandleProps() {},
+            disabled: true
+          });
+          if (i + 1 === arr.length) return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: domain,
+            getHandleProps: function getHandleProps() {},
+            disabled: true,
+            noDisplay: true
+          });
+          return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: domain,
+            getHandleProps: getHandleProps
+          });
+        }));
+      }), react_default.a.createElement(react_compound_slider_es["Tracks"], {
+        left: false,
+        right: false
+      }, function (_ref3) {
+        var tracks = _ref3.tracks,
+            getTrackProps = _ref3.getTrackProps;
+        return react_default.a.createElement("div", {
+          className: "slider-tracks"
+        }, tracks.map(function (_ref4, i, arr) {
+          var id = _ref4.id,
+              source = _ref4.source,
+              target = _ref4.target;
+          if (i === 0) return react_default.a.createElement(Track, {
+            key: id,
+            source: source,
+            target: target,
+            getTrackProps: function getTrackProps() {},
+            color: "#218838"
+          });
+          if (i + 1 === arr.length) return react_default.a.createElement(Track, {
+            key: id,
+            source: source,
+            target: target,
+            getTrackProps: function getTrackProps() {},
+            color: "#ff0000"
+          });
+          return react_default.a.createElement(Track, {
+            key: id,
+            source: source,
+            target: target,
+            getTrackProps: function getTrackProps() {},
+            color: "#b28900"
+          });
+        }));
+      }), react_default.a.createElement(react_compound_slider_es["Ticks"], {
+        count: 5
+      }, function (_ref5) {
+        var ticks = _ref5.ticks;
+        return react_default.a.createElement("div", {
+          className: "slider-ticks"
+        }, ticks.map(function (tick, i, arr) {
+          if (i === 0) return react_default.a.createElement(Tick, {
+            key: tick.id,
+            tick: tick,
+            count: ticks.length,
+            name: "Target"
+          });
+          return react_default.a.createElement(Tick, {
+            key: tick.id,
+            tick: tick,
+            count: ticks.length,
+            prefix: "+/-",
+            suffix: "%"
+          });
+        }));
+      })));
+    }
+  }]);
+
+  return Example;
+}(react["Component"]);
+
+var _initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onUpdate = function (update) {
+    var onUpdate = _this2.props.onUpdate;
+    onUpdate(update);
+  };
+
+  this.onChange = function (values) {
+    _this2.setState({
+      values: values
+    });
+  };
+};
+
+/* harmony default export */ var DeviationSlider = (DeviationSlider_Example);
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/slider/ThresholdSlider.js
+function ThresholdSlider_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ThresholdSlider_typeof = function _typeof(obj) { return typeof obj; }; } else { ThresholdSlider_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ThresholdSlider_typeof(obj); }
+
+function ThresholdSlider_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function ThresholdSlider_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function ThresholdSlider_createClass(Constructor, protoProps, staticProps) { if (protoProps) ThresholdSlider_defineProperties(Constructor.prototype, protoProps); if (staticProps) ThresholdSlider_defineProperties(Constructor, staticProps); return Constructor; }
+
+function ThresholdSlider_possibleConstructorReturn(self, call) { if (call && (ThresholdSlider_typeof(call) === "object" || typeof call === "function")) { return call; } return ThresholdSlider_assertThisInitialized(self); }
+
+function ThresholdSlider_getPrototypeOf(o) { ThresholdSlider_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ThresholdSlider_getPrototypeOf(o); }
+
+function ThresholdSlider_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function ThresholdSlider_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ThresholdSlider_setPrototypeOf(subClass, superClass); }
+
+function ThresholdSlider_setPrototypeOf(o, p) { ThresholdSlider_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ThresholdSlider_setPrototypeOf(o, p); }
+
+
+
+ // example render components - source below
+
+
+var ThresholdSlider_sliderStyle = {
+  position: "relative",
+  width: "100%"
+};
+var ThresholdSlider_domain = [-100, 100];
+
+var ThresholdSlider_Example =
+/*#__PURE__*/
+function (_Component) {
+  ThresholdSlider_inherits(Example, _Component);
+
+  function Example(props) {
+    var _this;
+
+    ThresholdSlider_classCallCheck(this, Example);
+
+    _this = ThresholdSlider_possibleConstructorReturn(this, ThresholdSlider_getPrototypeOf(Example).call(this, props));
+
+    ThresholdSlider_initialiseProps.call(ThresholdSlider_assertThisInitialized(_this));
+
+    var threshold_type = props.threshold_type,
+        warning_margin = props.warning_margin;
+    var values = threshold_type === THRESHOLD_TYPE_GREATER ? [warning_margin, 0, 100].slice() : [0, warning_margin, 100].slice();
+    _this.state = {
+      values: values,
+      update: values
+    };
+    return _this;
+  }
+
+  ThresholdSlider_createClass(Example, [{
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          values = _this$state.values,
+          update = _this$state.update;
+      var threshold_type = this.props.threshold_type;
+      return react_default.a.createElement("div", {
+        className: "mt-5",
+        style: {
+          height: 120,
+          width: "95%"
+        }
+      }, react_default.a.createElement(react_compound_slider_es["Slider"], {
+        mode: 2,
+        step: 1,
+        domain: ThresholdSlider_domain,
+        rootStyle: ThresholdSlider_sliderStyle,
+        onUpdate: this.onUpdate,
+        onChange: this.onChange,
+        values: values
+      }, react_default.a.createElement(react_compound_slider_es["Rail"], null, function (_ref) {
+        var getRailProps = _ref.getRailProps;
+        var props = getRailProps();
+
+        props.onMouseDown = function () {};
+
+        props.onTouchStart = function () {};
+
+        return react_default.a.createElement(SliderRail, {
+          getRailProps: function getRailProps() {
+            props;
+          },
+          color: threshold_type === THRESHOLD_TYPE_GREATER ? "#ff0000" : "#218838"
+        });
+      }), react_default.a.createElement(react_compound_slider_es["Handles"], null, function (_ref2) {
+        var handles = _ref2.handles,
+            getHandleProps = _ref2.getHandleProps;
+        return react_default.a.createElement("div", {
+          className: "slider-handles"
+        }, handles.map(function (handle, i, arr) {
+          if (i === (threshold_type === THRESHOLD_TYPE_GREATER ? 1 : 0)) return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: ThresholdSlider_domain,
+            getHandleProps: function getHandleProps() {},
+            disabled: true
+          });
+          if (i + 1 == arr.length) return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: ThresholdSlider_domain,
+            getHandleProps: function getHandleProps() {},
+            disabled: true,
+            noDisplay: true
+          });
+          return react_default.a.createElement(Handle, {
+            key: handle.id,
+            handle: handle,
+            domain: ThresholdSlider_domain,
+            getHandleProps: getHandleProps
+          });
+        }));
+      }), react_default.a.createElement(react_compound_slider_es["Tracks"], {
+        left: false,
+        right: false
+      }, function (_ref3) {
+        var tracks = _ref3.tracks,
+            getTrackProps = _ref3.getTrackProps;
+        return react_default.a.createElement("div", {
+          className: "slider-tracks"
+        }, tracks.map(function (_ref4, i, arr) {
+          var id = _ref4.id,
+              source = _ref4.source,
+              target = _ref4.target;
+          if (i + 1 === arr.length) return react_default.a.createElement(Track, {
+            key: id,
+            source: source,
+            target: target,
+            getTrackProps: function getTrackProps() {},
+            color: threshold_type === THRESHOLD_TYPE_GREATER ? "#218838" : "#ff0000"
+          });
+          return react_default.a.createElement(Track, {
+            key: id,
+            source: source,
+            target: target,
+            getTrackProps: function getTrackProps() {},
+            color: "#b28900"
+          });
+        }));
+      }), react_default.a.createElement(react_compound_slider_es["Ticks"], {
+        count: 5
+      }, function (_ref5) {
+        var ticks = _ref5.ticks;
+        return react_default.a.createElement("div", {
+          className: "slider-ticks"
+        }, ticks.map(function (tick, i, arr) {
+          if (i === Math.floor(arr.length / 2)) return react_default.a.createElement(Tick, {
+            key: tick.id,
+            tick: tick,
+            count: ticks.length,
+            suffix: "%",
+            name: "Target"
+          });
+          if (i > Math.floor(arr.length / 2)) return react_default.a.createElement(Tick, {
+            key: tick.id,
+            tick: tick,
+            count: ticks.length,
+            suffix: "%",
+            prefix: "+"
+          });
+          return react_default.a.createElement(Tick, {
+            key: tick.id,
+            tick: tick,
+            count: ticks.length,
+            suffix: "%"
+          });
+        }));
+      })));
+    }
+  }]);
+
+  return Example;
+}(react["Component"]);
+
+var ThresholdSlider_initialiseProps = function _initialiseProps() {
+  var _this2 = this;
+
+  this.onUpdate = function (update) {
+    var onUpdate = _this2.props.onUpdate;
+    onUpdate(update);
+  };
+
+  this.onChange = function (values) {
+    _this2.setState({
+      values: values
+    });
+  };
+};
+
+/* harmony default export */ var ThresholdSlider = (ThresholdSlider_Example);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiForm.js
+function KpiForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiForm_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiForm_typeof(obj); }
+
+function KpiForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function KpiForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function KpiForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiForm_defineProperties(Constructor, staticProps); return Constructor; }
+
+function KpiForm_possibleConstructorReturn(self, call) { if (call && (KpiForm_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiForm_assertThisInitialized(self); }
+
+function KpiForm_getPrototypeOf(o) { KpiForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiForm_getPrototypeOf(o); }
+
+function KpiForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function KpiForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiForm_setPrototypeOf(subClass, superClass); }
+
+function KpiForm_setPrototypeOf(o, p) { KpiForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiForm_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // CORE COMPONENTS
 
 
  // CONFIG
 
- // ACTIONS
 
 
 
-var SeriesForm_SeriesForm =
+var KpiForm_KpiForm =
 /*#__PURE__*/
 function (_Component) {
-  SeriesForm_inherits(SeriesForm, _Component);
+  KpiForm_inherits(KpiForm, _Component);
 
-  function SeriesForm() {
-    var _getPrototypeOf2;
+  function KpiForm(props) {
+    var _this;
 
-    var _temp, _this;
+    KpiForm_classCallCheck(this, KpiForm);
 
-    SeriesForm_classCallCheck(this, SeriesForm);
+    _this = KpiForm_possibleConstructorReturn(this, KpiForm_getPrototypeOf(KpiForm).call(this, props));
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return SeriesForm_possibleConstructorReturn(_this, (_temp = _this = SeriesForm_possibleConstructorReturn(this, (_getPrototypeOf2 = SeriesForm_getPrototypeOf(SeriesForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      name: "",
-      color: "",
-      plot_type: "li"
-    }, _this.onChangeColor = function (color) {
-      _this.setState({
-        color: color.hex
+    _this.onSliderUpdate = function (update) {
+      var onChange = _this.props.onChange;
+      onChange({
+        target: {
+          name: "safe_deviation",
+          value: update[1]
+        }
       });
-    }, _this.update = function (series) {
-      _this.setState({
-        name: series.name,
-        color: series.color,
-        plot_type: series.plot_type
+      onChange({
+        target: {
+          name: "danger_deviation",
+          value: update[2]
+        }
       });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$props = _this.props,
-          addSeries = _this$props.addSeries,
-          kpi = _this$props.kpi;
-      var _this$state = _this.state,
-          name = _this$state.name,
-          color = _this$state.color,
-          plot_type = _this$state.plot_type;
-      var series = {
-        name: name,
-        color: color,
-        plot_type: plot_type,
-        kpi: kpi
-      };
-      addSeries(series);
+    };
 
-      _this.setState({
-        name: "",
-        color: "",
-        plot_type: "li"
+    _this.onThresholdSliderUpdate = function (update) {
+      var threshold_type = _this.props.values.threshold_type;
+      var onChange = _this.props.onChange;
+      onChange({
+        target: {
+          name: "warning_margin",
+          value: threshold_type === THRESHOLD_TYPE_GREATER ? update[0] : update[1]
+        }
       });
-    }, _this.onChange = function (e) {
-      _this.setState(SeriesForm_defineProperty({}, e.target.name, e.target.value));
-    }, _temp));
+    };
+
+    _this.onKpiTypeChange = function (e) {
+      var onChange = _this.props.onChange;
+      var _this$props$values = _this.props.values,
+          kpi_type = _this$props$values.kpi_type,
+          safe_deviation = _this$props$values.safe_deviation,
+          warning_margin = _this$props$values.warning_margin,
+          danger_deviation = _this$props$values.danger_deviation;
+      if (kpi_type === 0) _this.updateSlider([0, safe_deviation, danger_deviation, 100]);else if (kpi_type === 1) _this.updateSlider([0, warning_margin, 100]);
+      onChange(e);
+    };
+
+    _this.onThresholdTypeChange = function (e) {
+      var onChange = _this.props.onChange;
+
+      if (e.target.id === "greater" && e.target.checked) {
+        _this.updateSlider([-50, 0, 100]);
+
+        onChange({
+          target: {
+            name: "threshold_type",
+            value: 0
+          }
+        });
+        onChange({
+          target: {
+            name: "warning_margin",
+            value: -50
+          }
+        });
+      }
+
+      if (e.target.id === "less" && e.target.checked) {
+        _this.updateSlider([0, 50, 100]);
+
+        onChange({
+          target: {
+            name: "threshold_type",
+            value: 1
+          }
+        });
+        onChange({
+          target: {
+            name: "warning_margin",
+            value: 50
+          }
+        });
+      }
+    };
+
+    _this.onSliderUpdate = _this.onSliderUpdate.bind(KpiForm_assertThisInitialized(_this));
+    _this.slider = react_default.a.createRef();
+    return _this;
   }
 
-  SeriesForm_createClass(SeriesForm, [{
+  KpiForm_createClass(KpiForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var series = this.props.series;
-      this.setState({
-        name: series.name,
-        color: series.color,
-        plot_type: series.plot_type
-      });
+      var _this$props$values2 = this.props.values,
+          danger_deviation = _this$props$values2.danger_deviation,
+          safe_deviation = _this$props$values2.safe_deviation,
+          kpi_type = _this$props$values2.kpi_type,
+          warning_margin = _this$props$values2.warning_margin;
+      if (kpi_type === 0) this.updateSlider([0, safe_deviation, danger_deviation, 100]);else if (kpi_type === 1) this.updateSlider([0, warning_margin, 100]);
     }
   }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var series = this.props.series;
-      if (series !== prevProps.series) this.update(series);
+    key: "updateSlider",
+    value: function updateSlider(values) {
+      if (this.slider.current) this.slider.current.onChange(values);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          name = _this$state2.name,
-          color = _this$state2.color,
-          plot_type = _this$state2.plot_type;
-      console.log(this.state);
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        noValidate: true,
-        className: "w-100"
-      }, react_default.a.createElement("div", {
-        className: "row m-0"
+      var _this$props = this.props,
+          onChange = _this$props.onChange,
+          pillar = _this$props.pillar;
+      var _this$props$values3 = this.props.values,
+          name = _this$props$values3.name,
+          frequency = _this$props$values3.frequency,
+          safe_deviation = _this$props$values3.safe_deviation,
+          danger_deviation = _this$props$values3.danger_deviation,
+          kpi_type = _this$props$values3.kpi_type,
+          warning_margin = _this$props$values3.warning_margin,
+          threshold_type = _this$props$values3.threshold_type,
+          global_target = _this$props$values3.global_target;
+      var sliders = [react_default.a.createElement("div", {
+        className: "d-flex"
       }, react_default.a.createElement("div", {
         className: "col-sm-6"
+      }, react_default.a.createElement(DeviationSlider, {
+        disabledRail: true,
+        onUpdate: this.onSliderUpdate,
+        ref: this.slider,
+        danger_deviation: danger_deviation,
+        safe_deviation: safe_deviation
+      })), react_default.a.createElement("div", {
+        className: "col-sm-2"
       }, react_default.a.createElement("div", {
-        className: "d-flex flex-column"
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "safe"
+      }, "Safe Limit"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "safe_deviation",
+        placeholder: "...",
+        value: "".concat(safe_deviation, "%"),
+        disabled: true
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-2"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "danger"
+      }, "Danger Limit"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "danger_deviation",
+        placeholder: "...",
+        value: "".concat(danger_deviation, "%"),
+        disabled: true
+      })))), react_default.a.createElement("div", null, "Nothing to See"), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-6"
+      }, react_default.a.createElement(ThresholdSlider, {
+        threshold_type: threshold_type,
+        disabledRail: true,
+        onUpdate: this.onThresholdSliderUpdate,
+        ref: this.slider,
+        warning_margin: warning_margin
+      })), react_default.a.createElement("div", {
+        className: "col-sm-2 mt-3"
+      }, react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "radio",
+        name: "threshold_type",
+        className: "form-check-input",
+        id: "greater",
+        onChange: this.onThresholdTypeChange,
+        checked: threshold_type ? false : true
+      }), react_default.a.createElement("label", {
+        htmlFor: "threshold_type",
+        className: "form-check-label mb-3"
+      }, "Greater Than"), react_default.a.createElement("input", {
+        type: "radio",
+        name: "threshold_type",
+        className: "form-check-input",
+        id: "less",
+        onChange: this.onThresholdTypeChange,
+        checked: threshold_type ? true : false
+      }), react_default.a.createElement("label", {
+        htmlFor: "threshold_type",
+        className: "form-check-label mb-3"
+      }, "Less Than"))), react_default.a.createElement("div", {
+        className: "col-sm-2 mt-3"
+      }, react_default.a.createElement("label", {
+        htmlFor: "warning_margin"
+      }, "Warning Limit"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "warning_margin",
+        placeholder: "...",
+        value: "".concat(warning_margin, "%"),
+        disabled: true
+      })))];
+      return react_default.a.createElement("div", {
+        className: "row"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-4"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -4420,169 +5171,216 @@ function (_Component) {
         className: "form-control",
         type: "text",
         name: "name",
-        onChange: this.onChange,
+        onChange: onChange,
         placeholder: "...",
         value: name,
         required: true
       })), react_default.a.createElement("div", {
-        className: "form-group mt-4"
+        className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "plot_type"
-      }, "Plot Type"), react_default.a.createElement("select", {
+        htmlFor: "frequency"
+      }, "Type"), react_default.a.createElement("select", {
         className: "form-control",
         type: "text",
-        name: "plot_type",
-        onChange: this.onChange,
+        name: "kpi_type",
+        onChange: this.onKpiTypeChange,
         placeholder: "...",
-        value: plot_type,
+        value: kpi_type,
         required: true
-      }, PLOT_TYPE_CHOICES.map(function (choice) {
+      }, KPI_TYPE_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      }))))), react_default.a.createElement("div", {
-        className: "col-sm-4 m-auto"
+      })))), react_default.a.createElement("div", {
+        className: "col-sm-4"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "color"
-      }, "Color"), react_default.a.createElement(lib["ChromePicker"], {
-        color: color,
-        onChangeComplete: this.onChangeColor
-      })))), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success",
-        "data-dismiss": "modal"
-      }, "Save Changes")));
+        htmlFor: "frequency"
+      }, "Frequency"), react_default.a.createElement("select", {
+        className: "form-control",
+        type: "text",
+        name: "frequency",
+        onChange: onChange,
+        placeholder: "...",
+        value: frequency,
+        required: true
+      }, FREQUENCY_CHOICES.map(function (choice) {
+        return react_default.a.createElement("option", {
+          key: "choice-".concat(choice.id),
+          value: choice.id
+        }, choice.name);
+      }))), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "global_target"
+      }, "Default Target"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "global_target",
+        onChange: onChange,
+        placeholder: "...",
+        value: global_target
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-4"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "pillar"
+      }, "Pillar"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "pillar",
+        onChange: onChange,
+        placeholder: "...",
+        value: pillar,
+        required: true,
+        disabled: true
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-12"
+      }, sliders[kpi_type]));
     }
   }]);
 
-  return SeriesForm;
+  return KpiForm;
 }(react["Component"]);
 
-SeriesForm_SeriesForm.propTypes = {
-  addSeries: prop_types_default.a.func.isRequired
+KpiForm_KpiForm.propTypes = {
+  onChange: prop_types_default.a.func.isRequired
 };
-/* harmony default export */ var series_SeriesForm = (Object(es["connect"])(null, {
-  addSeries: dashboards_addSeries
-})(SeriesForm_SeriesForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/SeriesView.js
-function SeriesView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesView_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesView_typeof(obj); }
+/* harmony default export */ var kpis_KpiForm = (KpiForm_KpiForm);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiEdit.js
+function KpiEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiEdit_typeof(obj); }
 
-function SeriesView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function KpiEdit_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiEdit_defineProperty(target, key, source[key]); }); } return target; }
 
-function SeriesView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function KpiEdit_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function SeriesView_createClass(Constructor, protoProps, staticProps) { if (protoProps) SeriesView_defineProperties(Constructor.prototype, protoProps); if (staticProps) SeriesView_defineProperties(Constructor, staticProps); return Constructor; }
+function KpiEdit_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function SeriesView_possibleConstructorReturn(self, call) { if (call && (SeriesView_typeof(call) === "object" || typeof call === "function")) { return call; } return SeriesView_assertThisInitialized(self); }
+function KpiEdit_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function SeriesView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function KpiEdit_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiEdit_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiEdit_defineProperties(Constructor, staticProps); return Constructor; }
 
-function SeriesView_getPrototypeOf(o) { SeriesView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return SeriesView_getPrototypeOf(o); }
+function KpiEdit_possibleConstructorReturn(self, call) { if (call && (KpiEdit_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiEdit_assertThisInitialized(self); }
 
-function SeriesView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) SeriesView_setPrototypeOf(subClass, superClass); }
+function KpiEdit_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function SeriesView_setPrototypeOf(o, p) { SeriesView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return SeriesView_setPrototypeOf(o, p); }
+function KpiEdit_getPrototypeOf(o) { KpiEdit_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiEdit_getPrototypeOf(o); }
+
+function KpiEdit_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiEdit_setPrototypeOf(subClass, superClass); }
+
+function KpiEdit_setPrototypeOf(o, p) { KpiEdit_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiEdit_setPrototypeOf(o, p); }
 
 // DEPENDANCIES
 
- // COMPONENTS
+
+ // NATIVE COMPONENTS
+
+ // ACTIONS
 
 
 
-
-var SeriesView_SeriesView =
+var KpiEdit_KpiEdit =
 /*#__PURE__*/
 function (_Component) {
-  SeriesView_inherits(SeriesView, _Component);
+  KpiEdit_inherits(KpiEdit, _Component);
 
-  function SeriesView() {
-    SeriesView_classCallCheck(this, SeriesView);
+  function KpiEdit(props) {
+    var _this;
 
-    return SeriesView_possibleConstructorReturn(this, SeriesView_getPrototypeOf(SeriesView).apply(this, arguments));
+    KpiEdit_classCallCheck(this, KpiEdit);
+
+    _this = KpiEdit_possibleConstructorReturn(this, KpiEdit_getPrototypeOf(KpiEdit).call(this, props));
+
+    _this.update = function (kpi) {
+      _this.setState(KpiEdit_objectSpread({}, kpi));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$props = _this.props,
+          updateKpi = _this$props.updateKpi,
+          kpi = _this$props.kpi;
+      var _this$state = _this.state,
+          name = _this$state.name,
+          frequency = _this$state.frequency,
+          safe_deviation = _this$state.safe_deviation,
+          danger_deviation = _this$state.danger_deviation,
+          warning_margin = _this$state.warning_margin,
+          dashboard = _this$state.dashboard,
+          kpi_type = _this$state.kpi_type,
+          threshold_type = _this$state.threshold_type;
+      var global_target = _this.state.global_target || null;
+      var k = {
+        name: name,
+        danger_deviation: danger_deviation,
+        safe_deviation: safe_deviation,
+        warning_margin: warning_margin,
+        frequency: frequency,
+        dashboard: dashboard,
+        kpi_type: kpi_type,
+        threshold_type: threshold_type,
+        global_target: global_target
+      };
+      updateKpi(k, kpi.id);
+    };
+
+    _this.onChange = function (e) {
+      _this.setState(KpiEdit_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    if (props.kpi) _this.state = KpiEdit_objectSpread({}, props.kpi);else _this.state = {
+      name: "",
+      danger_deviation: "",
+      safe_deviation: "",
+      warning_margin: 0.5,
+      frequency: "",
+      kpi_type: 0,
+      global_target: "",
+      threshold_type: 0
+    };
+    return _this;
   }
 
-  SeriesView_createClass(SeriesView, [{
+  KpiEdit_createClass(KpiEdit, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var kpi = this.props.kpi;
+
+      if (kpi != prevProps.kpi) {
+        this.update(kpi);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var series = this.props.series;
-      if (!series) return react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "manageSeries",
-        role: "dialog",
-        "aria-labelledby": "manageSeriesLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      })));
-      return react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "manageSeries",
-        role: "dialog",
-        "aria-labelledby": "manageSeriesLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "manageSeriesLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-chart",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Manage Series - ".concat(series.name)), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement(series_SeriesForm, {
-        series: series
-      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
-        className: "mt-4"
-      }, "Data"), react_default.a.createElement(DataTable, {
-        data: series.entries
-      })), react_default.a.createElement("div", {
-        className: "card-footer"
-      }, react_default.a.createElement("div", {
-        className: "d-flex justify-content-between"
-      }, react_default.a.createElement("button", {
-        className: "btn btn-primary"
-      }, "Back"), react_default.a.createElement("button", {
-        className: "btn btn-danger"
-      }, "Delete"))))))));
+      var pillarId = this.props.pillarId;
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        className: "w-100 mt-3"
+      }, react_default.a.createElement(kpis_KpiForm, {
+        onChange: this.onChange,
+        pillar: pillarId,
+        values: this.state
+      }), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success mb-4 mt-3"
+      }, "Save Changes"));
     }
   }]);
 
-  return SeriesView;
+  return KpiEdit;
 }(react["Component"]);
 
-/* harmony default export */ var components_SeriesView = (SeriesView_SeriesView);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/KpiView.js
+KpiEdit_KpiEdit.propTypes = {
+  updateKpi: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var kpis_KpiEdit = (Object(es["connect"])(null, {
+  updateKpi: dashboards_updateKpi
+})(KpiEdit_KpiEdit));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiView.js
 function KpiView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiView_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiView_typeof(obj); }
 
 function KpiView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4601,11 +5399,10 @@ function KpiView_inherits(subClass, superClass) { if (typeof superClass !== "fun
 
 function KpiView_setPrototypeOf(o, p) { KpiView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiView_setPrototypeOf(o, p); }
 
-// DEPENDANCIES
-
- // COMPONENTS
 
 
+
+ // ACTIONS
 
 
 
@@ -4621,105 +5418,493 @@ function (_Component) {
 
     _this = KpiView_possibleConstructorReturn(this, KpiView_getPrototypeOf(KpiView).call(this, props));
 
-    _this.onSeriesSelect = function (id) {
-      _this.setState({
-        selectedSeries: id
-      });
-
-      $("#manageSeries").modal("show");
+    _this.onDelete = function () {
+      $("#deleteConfirmation").modal("show");
     };
 
-    _this.state = {
-      selectedSeries: null
+    _this.onSubmitDelete = function (state) {
+      var _this$props = _this.props,
+          kpi = _this$props.kpi,
+          deleteKpi = _this$props.deleteKpi;
+
+      if (state.name === kpi.name) {
+        deleteKpi(kpi.id);
+        return true;
+      } else return false;
     };
-    _this.onSeriesSelect = _this.onSeriesSelect.bind(KpiView_assertThisInitialized(_this));
+
+    _this.onSubmitDelete = _this.onSubmitDelete.bind(KpiView_assertThisInitialized(_this));
     return _this;
   }
 
   KpiView_createClass(KpiView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props2 = this.props,
+          onDelete = _this$props2.onDelete,
+          kpi = _this$props2.kpi;
+      onDelete({
+        type: "kpi",
+        item: kpi,
+        onSubmit: this.onSubmitDelete
+      });
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props3 = this.props,
+          kpi = _this$props3.kpi,
+          onDelete = _this$props3.onDelete;
+      if (prevProps.kpi !== kpi) ;
+      onDelete({
+        type: "kpi",
+        item: kpi,
+        onSubmit: this.onSubmitDelete
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var kpi = this.props.kpi;
-      var selectedSeries = this.state.selectedSeries;
-      var series = kpi ? kpi.series : [];
-      var s = series ? series.filter(function (s) {
-        return s.id == selectedSeries;
-      })[0] : [];
-      if (!kpi) return react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "manageKpi",
-        role: "dialog",
-        "aria-labelledby": "manageKpiLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      })));
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "manageKpi",
-        role: "dialog",
-        "aria-labelledby": "manageKpiLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "manageKpiLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-dashboard",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Manage KPI - ".concat(kpi.name)), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+      var _this$props4 = this.props,
+          kpi = _this$props4.kpi,
+          onSeriesSelect = _this$props4.onSeriesSelect;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
         className: "d-flex"
-      }, react_default.a.createElement(kpis_KpiForm, {
+      }, react_default.a.createElement(kpis_KpiEdit, {
         kpi: kpi
       })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
         className: "mt-4"
-      }, "Series"), react_default.a.createElement(components_SeriesList, {
-        onClick: this.onSeriesSelect,
+      }, "Series"), react_default.a.createElement(series_SeriesList, {
+        kpiId: kpi.id,
+        onClick: onSeriesSelect,
         series: kpi.series
-      })), react_default.a.createElement("div", {
-        className: "card-footer"
-      }, react_default.a.createElement("div", {
+      }), react_default.a.createElement("div", {
         className: "d-flex justify-content-end"
       }, react_default.a.createElement("button", {
-        className: "btn btn-danger"
-      }, "Delete")))))))), react_default.a.createElement(components_SeriesView, {
-        series: s
-      }));
+        className: "btn btn-danger",
+        onClick: this.onDelete
+      }, "Delete Kpi")));
     }
   }]);
 
   return KpiView;
 }(react["Component"]);
 
-/* harmony default export */ var components_KpiView = (KpiView_KpiView);
+/* harmony default export */ var kpis_KpiView = (Object(es["connect"])(null, {
+  deleteKpi: dashboards_deleteKpi
+})(KpiView_KpiView));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/MenuView.js
+function MenuView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { MenuView_typeof = function _typeof(obj) { return typeof obj; }; } else { MenuView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return MenuView_typeof(obj); }
+
+function MenuView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function MenuView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function MenuView_createClass(Constructor, protoProps, staticProps) { if (protoProps) MenuView_defineProperties(Constructor.prototype, protoProps); if (staticProps) MenuView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function MenuView_possibleConstructorReturn(self, call) { if (call && (MenuView_typeof(call) === "object" || typeof call === "function")) { return call; } return MenuView_assertThisInitialized(self); }
+
+function MenuView_getPrototypeOf(o) { MenuView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return MenuView_getPrototypeOf(o); }
+
+function MenuView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function MenuView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) MenuView_setPrototypeOf(subClass, superClass); }
+
+function MenuView_setPrototypeOf(o, p) { MenuView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return MenuView_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+ // COMPONENTS
+
+
+
+var KPI_VIEW = 0;
+var SERIES_VIEW = 1;
+
+var MenuView_MenuView =
+/*#__PURE__*/
+function (_Component) {
+  MenuView_inherits(MenuView, _Component);
+
+  function MenuView(props) {
+    var _this;
+
+    MenuView_classCallCheck(this, MenuView);
+
+    _this = MenuView_possibleConstructorReturn(this, MenuView_getPrototypeOf(MenuView).call(this, props));
+
+    _this.onSeriesSelect = function (id) {
+      _this.setState({
+        selectedSeries: id
+      });
+
+      _this.setViewState(SERIES_VIEW);
+    };
+
+    _this.setViewState = function (view) {
+      _this.setState({
+        view: view
+      });
+    };
+
+    _this.onSeriesBack = function () {
+      _this.setState({
+        view: KPI_VIEW
+      });
+    };
+
+    _this.onDelete = function (deleteItem) {
+      var onDelete = _this.props.onDelete;
+      onDelete(deleteItem);
+    };
+
+    _this.state = {
+      selectedSeries: null,
+      view: 0
+    };
+    _this.onSeriesSelect = _this.onSeriesSelect.bind(MenuView_assertThisInitialized(_this));
+    _this.setViewState = _this.setViewState.bind(MenuView_assertThisInitialized(_this));
+    _this.onSeriesBack = _this.onSeriesBack.bind(MenuView_assertThisInitialized(_this));
+    _this.onDelete = _this.onDelete.bind(MenuView_assertThisInitialized(_this));
+    return _this;
+  }
+
+  MenuView_createClass(MenuView, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          kpi = _this$props.kpi,
+          setMenuState = _this$props.setMenuState,
+          resetKpiSelect = _this$props.resetKpiSelect;
+
+      if (!kpi) {
+        setMenuState(false);
+        resetKpiSelect();
+        return;
+      }
+
+      if (prevProps.kpi.id !== kpi.id || prevProps.kpi.series.length !== kpi.series.length) {
+        this.setState({
+          view: KPI_VIEW
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          kpi = _this$props2.kpi,
+          setMenuState = _this$props2.setMenuState;
+
+      if (!kpi) {
+        setMenuState(false);
+        return react_default.a.createElement("div", null);
+      }
+
+      var _this$state = this.state,
+          selectedSeries = _this$state.selectedSeries,
+          view = _this$state.view;
+      var series = selectedSeries ? kpi.series.filter(function (s) {
+        return s.id === selectedSeries;
+      })[0] : null;
+
+      switch (view) {
+        case KPI_VIEW:
+          return react_default.a.createElement(kpis_KpiView, {
+            kpi: kpi,
+            onSeriesSelect: this.onSeriesSelect,
+            onDelete: this.onDelete
+          });
+
+        case SERIES_VIEW:
+          return react_default.a.createElement(series_SeriesView, {
+            series: series,
+            onBack: this.onSeriesBack,
+            onDelete: this.onDelete
+          });
+
+        default:
+          return "404";
+      }
+    }
+  }]);
+
+  return MenuView;
+}(react["Component"]);
+
+/* harmony default export */ var components_MenuView = (MenuView_MenuView);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiNew.js
+function KpiNew_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiNew_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiNew_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiNew_typeof(obj); }
+
+function KpiNew_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiNew_defineProperty(target, key, source[key]); }); } return target; }
+
+function KpiNew_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function KpiNew_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function KpiNew_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function KpiNew_createClass(Constructor, protoProps, staticProps) { if (protoProps) KpiNew_defineProperties(Constructor.prototype, protoProps); if (staticProps) KpiNew_defineProperties(Constructor, staticProps); return Constructor; }
+
+function KpiNew_possibleConstructorReturn(self, call) { if (call && (KpiNew_typeof(call) === "object" || typeof call === "function")) { return call; } return KpiNew_assertThisInitialized(self); }
+
+function KpiNew_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function KpiNew_getPrototypeOf(o) { KpiNew_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return KpiNew_getPrototypeOf(o); }
+
+function KpiNew_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) KpiNew_setPrototypeOf(subClass, superClass); }
+
+function KpiNew_setPrototypeOf(o, p) { KpiNew_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return KpiNew_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+ // ACTIONS
+
+
+
+var KpiNew_KpiNew =
+/*#__PURE__*/
+function (_Component) {
+  KpiNew_inherits(KpiNew, _Component);
+
+  function KpiNew(props) {
+    var _this;
+
+    KpiNew_classCallCheck(this, KpiNew);
+
+    _this = KpiNew_possibleConstructorReturn(this, KpiNew_getPrototypeOf(KpiNew).call(this, props));
+
+    _this.update = function (kpi) {
+      _this.setState(KpiNew_objectSpread({}, kpi));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$props = _this.props,
+          addKpi = _this$props.addKpi,
+          pillar = _this$props.pillar,
+          dashboard = _this$props.dashboard;
+      var _this$state = _this.state,
+          name = _this$state.name,
+          frequency = _this$state.frequency,
+          safe_deviation = _this$state.safe_deviation,
+          danger_deviation = _this$state.danger_deviation,
+          warning_margin = _this$state.warning_margin,
+          kpi_type = _this$state.kpi_type,
+          threshold_type = _this$state.threshold_type;
+      var global_target = _this.state.global_target || null;
+      var k = {
+        name: name,
+        danger_deviation: danger_deviation,
+        safe_deviation: safe_deviation,
+        frequency: frequency,
+        kpi_type: kpi_type,
+        warning_margin: warning_margin,
+        dashboard: dashboard,
+        pillar: pillar,
+        global_target: global_target,
+        threshold_type: threshold_type
+      };
+      addKpi(k);
+
+      _this.setState({
+        name: "",
+        danger_deviation: "",
+        safe_deviation: "",
+        frequency: 0,
+        warning_margin: -50,
+        kpi_type: 0,
+        global_target: ""
+      });
+
+      $("#newKpi").modal("hide");
+    };
+
+    _this.onChange = function (e) {
+      _this.setState(KpiNew_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    if (props.kpi) _this.state = KpiNew_objectSpread({}, props.kpi);else _this.state = {
+      name: "",
+      kpi_type: 0,
+      danger_deviation: 75,
+      safe_deviation: 25,
+      warning_margin: -50,
+      frequency: 0,
+      global_target: "",
+      threshold_type: 0
+    };
+    return _this;
+  }
+
+  KpiNew_createClass(KpiNew, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var kpi = this.props.kpi;
+
+      if (kpi != prevProps.kpi) {
+        this.update(kpi);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var pillar = this.props.pillar;
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        className: "w-100 mt-3"
+      }, react_default.a.createElement(kpis_KpiForm, {
+        onChange: this.onChange,
+        values: this.state,
+        pillar: pillar
+      }), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success mb-4 mt-3"
+      }, "Create"));
+    }
+  }]);
+
+  return KpiNew;
+}(react["Component"]);
+
+KpiNew_KpiNew.propTypes = {
+  addKpi: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var kpis_KpiNew = (Object(es["connect"])(null, {
+  addKpi: dashboards_addKpi
+})(KpiNew_KpiNew));
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/DeleteConfirmation.js
+function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
+
+function DeleteConfirmation_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
+
+function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
+
+function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
+
+function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
+
+
+
+
+
+var DeleteConfirmation_DeletetionConformation =
+/*#__PURE__*/
+function (_Component) {
+  DeleteConfirmation_inherits(DeletetionConformation, _Component);
+
+  function DeletetionConformation(props) {
+    var _this;
+
+    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
+
+    _this = DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).call(this, props));
+
+    _this.onChange = function (e) {
+      _this.setState(DeleteConfirmation_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var deletionContext = _this.props.deletionContext;
+      var response = deletionContext.onSubmit(_this.state);
+      if (response) $("#deleteConfirmation").modal("hide");
+    };
+
+    _this.modalRef = react_default.a.createRef();
+    _this.state = {
+      password: "",
+      exported: false,
+      name: ""
+    };
+    return _this;
+  }
+
+  DeleteConfirmation_createClass(DeletetionConformation, [{
+    key: "render",
+    value: function render() {
+      var deletionContext = this.props.deletionContext;
+      if (!deletionContext) return react_default.a.createElement(modal_Modal, {
+        title: "Are You Sure?",
+        iconClass: "im im-data-delete",
+        id: "deleteConfirmation"
+      }, " ");
+      var type = deletionContext.type,
+          item = deletionContext.item;
+      var _this$state = this.state,
+          password = _this$state.password,
+          name = _this$state.name,
+          exported = _this$state.exported;
+      return react_default.a.createElement(modal_Modal, {
+        title: "Are You Sure?",
+        iconClass: "im im-data-delete",
+        id: "deleteConfirmation",
+        ref: this.modalRef
+      }, react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("p", {
+        className: "card-text"
+      }, "This action cannot be undone. This will permanently delete the", " ", react_default.a.createElement("span", {
+        style: {
+          color: "red",
+          fontWeight: "bold"
+        }
+      }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "password"
+      }, "Please enter dashboard password"), react_default.a.createElement("input", {
+        type: "password",
+        name: "password",
+        value: password,
+        className: "form-control",
+        onChange: this.onChange
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "name"
+      }, "Please type in the name of the ".concat(type, " to confirm")), react_default.a.createElement("input", {
+        type: "text",
+        name: "name",
+        value: name,
+        className: "form-control",
+        onChange: this.onChange
+      })), react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "checkbox",
+        name: "exported",
+        className: "form-check-input",
+        onChange: this.onChange
+      }), react_default.a.createElement("label", {
+        htmlFor: "export",
+        className: "form-check-label mb-3"
+      }, "Do you want to export data?")), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-warning"
+      }, "I understand the consequences, delete this item")));
+    }
+  }]);
+
+  return DeletetionConformation;
+}(react["Component"]);
+
+DeleteConfirmation_DeletetionConformation.propTypes = {
+  deletionContext: prop_types_default.a.object
+};
+/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/index.js
 function pillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { pillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillarRoom_typeof(obj); }
 
@@ -4751,6 +5936,7 @@ function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.se
 
 
 
+
  // ACTIONS
 
  // NATIVE COMPONENTS
@@ -4759,9 +5945,6 @@ function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.se
 
 
 
-/*
-  Definition
-*/
 
 var pillarRoom_pillarRoom =
 /*#__PURE__*/
@@ -4775,6 +5958,53 @@ function (_Component) {
 
     _this = pillarRoom_possibleConstructorReturn(this, pillarRoom_getPrototypeOf(pillarRoom).call(this, props));
 
+    _this.setMenuState = function (menuMode) {
+      _this.setState({
+        menuMode: menuMode
+      });
+    };
+
+    _this.onDelete = function (deletionContext) {
+      _this.setState({
+        deletionContext: deletionContext
+      });
+    };
+
+    _this.showTooltip = function (show) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      var tooltipMarkdown = function tooltipMarkdown(data) {
+        return "<div className=\"card p-4\">\n          <div className=\"card-body\">\n          <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n          <div className=\"card-text\" style=\"line-height:0.5\">\n            <hr/>\n            <p>Value: ").concat(data.value, "</p>\n            <p>Target: ").concat(data.target, "</p>\n            <p>Date: ").concat(data.date, " </p>\n            <p>Deviation: ").concat(((data.value / data.target - 1) * 100).toFixed(2), "% </p>\n          </div>\n          </div>\n        </div>");
+      };
+
+      var tooltip = _this.tooltip.current;
+
+      if (show) {
+        tooltip.style.display = "block";
+        tooltip.style.opacity = 1;
+      } else {
+        tooltip.style.display = "none";
+        tooltip.style.opacity = 0;
+      }
+
+      if (!data) return;
+
+      if (data.payload) {
+        tooltip.innerHTML = tooltipMarkdown(data.payload);
+        tooltip.style.left = "".concat(data.x + 24, "px");
+        tooltip.style.top = "".concat(data.y, "px");
+      }
+    };
+
+    _this.resetKpiSelect = function () {
+      var kpis = _this.props.kpis;
+      if (!kpis[0]) return;
+
+      _this.setState({
+        selectedKpi: kpis[0].id
+      });
+    };
+
     _this.deselect = function () {
       d3["selectAll"](".line").attr("stroke-width", 1.8);
       d3["selectAll"](".dot").attr("r", 3);
@@ -4786,18 +6016,24 @@ function (_Component) {
     _this.state = {
       selectedSeries: null,
       selectedExport: "",
-      selectedKpi: null
+      selectedKpi: null,
+      menuMode: false,
+      deletionContext: null
     };
     _this.selectSeriesHook = _this.selectSeriesHook.bind(pillarRoom_assertThisInitialized(_this));
     _this.selectKpiHook = _this.selectKpiHook.bind(pillarRoom_assertThisInitialized(_this));
     _this.updateExport = _this.updateExport.bind(pillarRoom_assertThisInitialized(_this));
+    _this.onDelete = _this.onDelete.bind(pillarRoom_assertThisInitialized(_this));
+    _this.resetKpiSelect = _this.resetKpiSelect.bind(pillarRoom_assertThisInitialized(_this));
+    _this.tooltip = react_default.a.createRef();
+    _this.showTooltip = _this.showTooltip.bind(pillarRoom_assertThisInitialized(_this));
     return _this;
   }
 
   pillarRoom_createClass(pillarRoom, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.kpis != this.props.kpis) {//this.selectSeriesHook(null);
+      if (prevProps.kpis != this.props.kpis) {// this.selectSeriesHook(null);
       }
     }
   }, {
@@ -4838,8 +6074,6 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
-
       var _this$props2 = this.props,
           kpis = _this$props2.kpis,
           currentDashboard = _this$props2.currentDashboard;
@@ -4849,7 +6083,9 @@ function (_Component) {
       var _this$state = this.state,
           selectedSeries = _this$state.selectedSeries,
           selectedKpi = _this$state.selectedKpi,
-          selectedExport = _this$state.selectedExport;
+          selectedExport = _this$state.selectedExport,
+          menuMode = _this$state.menuMode,
+          deletionContext = _this$state.deletionContext;
       var kpi = kpis.filter(function (kpi) {
         return kpi.id == selectedKpi;
       })[0];
@@ -4864,25 +6100,30 @@ function (_Component) {
 
       var color = currentDashboard.background;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "container-fluid h-100",
+        className: "container-fluid",
         style: {
           padding: 0,
           background: color,
-          height: "".concat(100, "%")
+          height: "".concat(100, "%"),
+          minHeight: "fit-content"
         }
       }, react_default.a.createElement("div", {
+        className: "qd-tooltip",
+        ref: this.tooltip
+      }), react_default.a.createElement("div", {
         className: "row m-0"
       }, react_default.a.createElement("div", {
         className: "col-lg-4"
       }, react_default.a.createElement("div", {
-        className: "card ml-4 mt-4 mb-4 mr-4"
+        className: "card ml-4 mt-4 mb-4 mr-4 h-95"
       }, react_default.a.createElement("div", {
         className: "card-body"
       }, react_default.a.createElement(d3charts_pillar, {
         kpis: kpis,
-        letter: pillarId,
+        letter: pillarId === "Plus" ? "+" : pillarId,
         dashboardId: dashboardId,
-        labeled: true
+        labeled: true,
+        showTooltip: this.showTooltip
       })), react_default.a.createElement("div", {
         className: "card-footer",
         style: {
@@ -4895,62 +6136,47 @@ function (_Component) {
       }, react_default.a.createElement(table_Table, {
         data: kpis,
         header: KPI_TABLE_HEADERS,
-        fontSize: 0.7 + "rem",
+        fontSize: "".concat(0.7, "rem"),
         summary: false
-      })), react_default.a.createElement("div", {
-        className: "col-lg-12",
-        style: {
-          display: "flex"
-        }
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-info mt-auto ml-auto",
-        "data-toggle": "modal",
-        "data-target": "#svgExporter",
-        onClick: function onClick() {
-          _this2.updateExport("#chartPillar");
-        }
-      }, "Export Pillar")))))), react_default.a.createElement("div", {
+      })))))), react_default.a.createElement("div", {
         className: "col-lg-8"
       }, react_default.a.createElement("div", {
-        className: "card ml-4 mt-4 mb-4 mr-4"
+        className: "card ml-4 mt-4 mb-4 mr-4 h-90 mx-h-90"
       }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement(d3charts_LineChart, {
+        className: "card-body scroll mx-vh-75"
+      }, menuMode ? react_default.a.createElement(components_MenuView, {
+        kpi: kpi,
+        onDelete: this.onDelete,
+        setMenuState: this.setMenuState,
+        menuState: this.menuMode,
+        resetKpiSelect: this.resetKpiSelect
+      }) : react_default.a.createElement(d3charts_LineChart, {
         kpis: kpis,
         selectSeriesHook: this.selectSeriesHook,
         selectedKpi: selectedKpi
       })), react_default.a.createElement("div", {
         className: "card-footer",
         style: {
-          display: "flex",
-          overflow: "auto"
+          display: "flex"
         }
       }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,
         selectKpiHook: this.selectKpiHook,
         selectSeriesHook: this.selectSeriesHook,
         deselectHook: this.deselect,
-        kpis: kpis
-      }), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-info mt-auto ml-lg-auto ml-s-2 ml-xs-2",
-        "data-toggle": "modal",
-        "data-target": "#svgExporter",
-        onClick: function onClick() {
-          _this2.updateExport("#chart");
-        }
-      }, "Export Chart"))))), react_default.a.createElement(kpis_KpiOptions, {
-        dashboardId: dashboardId,
         kpis: kpis,
-        pillarId: pillarId
-      }), react_default.a.createElement(components_KpiView, {
-        kpi: kpi
-      }), react_default.a.createElement(datapoints_DataOptions, {
-        series: s[0]
-      }), react_default.a.createElement(svgExporter, {
-        target: selectedExport
-      })));
+        setMenuState: this.setMenuState,
+        menuMode: menuMode
+      }))))), react_default.a.createElement(modal_Modal, {
+        id: "newKpi",
+        title: "New KPI",
+        iconClass: "im im-dashboard"
+      }, react_default.a.createElement(kpis_KpiNew, {
+        pillar: pillarId,
+        dashboard: currentDashboard.id
+      }))), react_default.a.createElement(DeleteConfirmation, {
+        deletionContext: deletionContext
+      }));
     }
   }]);
 
@@ -5021,11 +6247,7 @@ function (_Component) {
           deleteClick = _this$props.deleteClick;
       return react_default.a.createElement("div", {
         className: "card m-3"
-      }, react_default.a.createElement("img", {
-        className: "card-img-top",
-        src: "https://via.placeholder.com/320x200.png",
-        alt: "Card image cap"
-      }), react_default.a.createElement("div", {
+      }, react_default.a.createElement("div", {
         className: "card-body"
       }, react_default.a.createElement("div", {
         className: "d-flex"
@@ -5050,7 +6272,7 @@ function (_Component) {
         className: "btn btn-primary btn-sm"
       }, "View"), react_default.a.createElement("button", {
         onClick: function onClick() {
-          return deleteClick("dashboard", dashboard.title);
+          return deleteClick(dashboard);
         },
         className: "btn btn-danger btn-sm ml-auto"
       }, " ", "Delete"))));
@@ -5063,126 +6285,6 @@ function (_Component) {
 /* harmony default export */ var components_DashboardDisplayCard = (Object(es["connect"])(null, {
   deleteDashboard: dashboards_deleteDashboard
 })(DashboardDisplayCard_DashboardDisplayCard));
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/DeleteConfirmation.js
-function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
-
-function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
-
-function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
-
-function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
-
-function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
-
-function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
-
-
-
-
-var DeleteConfirmation_DeletetionConformation =
-/*#__PURE__*/
-function (_Component) {
-  DeleteConfirmation_inherits(DeletetionConformation, _Component);
-
-  function DeletetionConformation() {
-    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
-
-    return DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).apply(this, arguments));
-  }
-
-  DeleteConfirmation_createClass(DeletetionConformation, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          deletionItem = _this$props.deletionItem,
-          deletionName = _this$props.deletionName;
-      return react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "deletionConfirmation",
-        role: "dialog",
-        "aria-labelledby": "deletionConfirmationLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document",
-        style: {
-          maxWidth: "fit-content"
-        }
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "deletionConfirmationLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-data-delete",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Are you absolutely sure?"), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("p", {
-        className: "card-text"
-      }, "This action cannot be undone. This will permanently delete the ".concat(deletionName, " ").concat(deletionItem, " and all associated data."), " "), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        "for": "password"
-      }, "Please enter dashboard password"), react_default.a.createElement("input", {
-        type: "password",
-        className: "form-control"
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        "for": "name"
-      }, "Please type in the name of the ".concat(deletionItem, " to confirm")), react_default.a.createElement("input", {
-        type: "text",
-        className: "form-control"
-      })), react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "checkbox",
-        name: "export",
-        className: "form-check-input"
-      }), react_default.a.createElement("label", {
-        "for": "export",
-        className: "form-check-label mb-3"
-      }, "Do you want to export data?")), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-warning"
-      }, "I understand the consequences, delete this item")))))));
-    }
-  }]);
-
-  return DeletetionConformation;
-}(react["Component"]);
-
-DeleteConfirmation_DeletetionConformation.propTypes = {
-  deletionItem: prop_types_default.a.string.isRequired,
-  deletionName: prop_types_default.a.string.isRequired
-};
-/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
 // CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardForm.js
 function DashboardForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardForm_typeof(obj); }
 
@@ -5233,10 +6335,9 @@ function (_Component) {
     return DashboardForm_possibleConstructorReturn(_this, (_temp = _this = DashboardForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DashboardForm_getPrototypeOf(DashboardForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       title: "",
       author: "",
-      background: "",
+      background: "#000",
       dashboardType: "0",
-      level: "0",
-      color: "#0"
+      level: "0"
     }, _this.onChange = function (e) {
       return _this.setState(DashboardForm_defineProperty({}, e.target.name, e.target.value));
     }, _this.onChangeColor = function (color) {
@@ -5258,15 +6359,18 @@ function (_Component) {
         dashboardType: dashboardType,
         level: level
       };
+      console.log(background);
 
       _this.props.addDashboard(dashboard);
 
       _this.setState({
         title: "",
         author: "",
-        background: "#0",
+        background: "#000",
         level: ""
       });
+
+      $("#dashboardOptions").modal("hide");
     }, _temp));
   }
 
@@ -5459,20 +6563,29 @@ function (_Component) {
       $("#dashboardOptions").modal("show");
     };
 
-    _this.deleteClick = function (deletionItem, deletionName) {
+    _this.deleteClick = function (deletionItem) {
       _this.setState({
-        deletionItem: deletionItem,
-        deletionName: deletionName
+        deletionItem: deletionItem
       });
 
-      $("#deletionConfirmation").modal("show");
+      $("#deleteConfirmation").modal("show");
+    };
+
+    _this.onDeleteConfirmationSubmit = function (state) {
+      var deleteDashboard = _this.props.deleteDashboard;
+      var deletionItem = _this.state.deletionItem;
+
+      if (state.name === deletionItem.title) {
+        deleteDashboard(deletionItem.id);
+        return true;
+      } else return false;
     };
 
     _this.state = {
-      deletionItem: "",
-      deletionName: ""
+      deletionItem: null
     };
     _this.deleteClick = _this.deleteClick.bind(DashboardList_assertThisInitialized(_this));
+    _this.onDeleteConfirmationSubmit = _this.onDeleteConfirmationSubmit.bind(DashboardList_assertThisInitialized(_this));
     return _this;
   }
 
@@ -5489,9 +6602,7 @@ function (_Component) {
       var _this$props = this.props,
           dashboards = _this$props.dashboards,
           deleteDashboard = _this$props.deleteDashboard;
-      var _this$state = this.state,
-          deletionItem = _this$state.deletionItem,
-          deletionName = _this$state.deletionName;
+      var deletionItem = this.state.deletionItem;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "row"
       }, dashboards.map(function (dashboard) {
@@ -5508,8 +6619,11 @@ function (_Component) {
         text: "Dashboard",
         handleClick: this.newDashboardClick
       }))), react_default.a.createElement(components_DashboardOptions, null), react_default.a.createElement(DeleteConfirmation, {
-        deletionItem: deletionItem,
-        deletionName: deletionName
+        deletionContext: {
+          item: deletionItem,
+          type: "dashboard",
+          onSubmit: this.onDeleteConfirmationSubmit
+        }
       }));
     }
   }]);
@@ -5789,9 +6903,19 @@ function (_Component) {
         if (messages.addDashboard) alert.success(messages.addDashboard);
         if (messages.passwordsNotMatch) alert.error(messages.passwordsNotMatch);
         if (messages.addKpi) alert.success(messages.addKpi);
-        if (messages.updateKpi) alert.success(messages.updateKpi);
+        if (messages.addSeries) alert.success(messages.addSeries);
+        if (messages.addDatapoint) alert.success(messages.addDatapoint);
+        if (messages.addAction) alert.success(messages.addAction);
         if (messages.deleteKpi) alert.success(messages.deleteKpi);
-        if (messages.updateActionTable) alert.success(messages.updateActionTable);
+        if (messages.deleteAction) alert.success(messages.deleteAction);
+        if (messages.deleteSeries) alert.success(messages.deleteSeries);
+        if (messages.deleteDatapoint) alert.success(messages.deleteDatapoint);
+        if (messages.updateKpi) alert.success(messages.updateKpi);
+        if (messages.updateAction) alert.success(messages.updateAction);
+        if (messages.updateSeries) alert.success(messages.updateSeries);
+        if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
+        if (messages.entriesCreated) alert.success(messages.entriesCreated);
+        if (messages.invalidForm) alert.error(messages.invalidForm);
       }
     }
   }, {
@@ -5919,7 +7043,8 @@ var initalState = {
       var kpis__ = state.kpis.map(function (kpi) {
         return dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
-            if (series.id != action.payload.id) return series;else return action.payload;
+            if (series.id != action.payload.id) return series;
+            return action.payload;
           })
         });
       });
@@ -5951,7 +7076,8 @@ var initalState = {
             if (series.id != action.payload.series) return series;
             return dashboards_objectSpread({}, series, {
               entries: series.entries.map(function (datapoint) {
-                if (datapoint.id != action.payload.id) return datapoint;else return action.payload;
+                if (datapoint.id != action.payload.id) return datapoint;
+                return action.payload;
               })
             });
           })
@@ -5981,7 +7107,8 @@ var initalState = {
       var kpis___ = state.kpis.map(function (kpi) {
         return dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
-            if (series.id != action.payload.series) return series;else return dashboards_objectSpread({}, series, {
+            if (series.id != action.payload.series) return series;
+            return dashboards_objectSpread({}, series, {
               entries: [].concat(_toConsumableArray(series.entries), [action.payload])
             });
           })
@@ -5998,7 +7125,8 @@ var initalState = {
 
     case ADD_ACTION:
       var actionTables = state.actionTables.map(function (at) {
-        if (action.payload.tables.indexOf(at.id) == -1) return at;else return dashboards_objectSpread({}, at, {
+        if (action.payload.tables.indexOf(at.id) == -1) return at;
+        return dashboards_objectSpread({}, at, {
           actions: [].concat(_toConsumableArray(at.actions), [action.payload])
         });
       });
@@ -6022,7 +7150,8 @@ var initalState = {
       var actionTables = state.actionTables.map(function (at) {
         return dashboards_objectSpread({}, at, {
           actions: at.actions.map(function (act) {
-            if (act.id != action.payload.id) return act;else return action.payload;
+            if (act.id != action.payload.id) return act;
+            return action.payload;
           })
         });
       });
@@ -6032,7 +7161,8 @@ var initalState = {
 
     case UPDATE_ACTION_TABLE:
       var actionTables = state.actionTables.map(function (at) {
-        if (at.id != action.payload.id) return at;else return action.payload;
+        if (at.id != action.payload.id) return at;
+        return action.payload;
       });
       return dashboards_objectSpread({}, state, {
         actionTables: actionTables
@@ -6189,7 +7319,7 @@ function App_inherits(subClass, superClass) { if (typeof superClass !== "functio
 
 function App_setPrototypeOf(o, p) { App_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return App_setPrototypeOf(o, p); }
 
-//DEPENDANCIES
+// DEPENDANCIES
 
 
 
@@ -6241,7 +7371,16 @@ function (_Component) {
         store: src_store
       }, react_default.a.createElement(react_alert["Provider"], App_extends({
         template: react_alert_template_basic["default"]
-      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(layout_Header, null), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(utils_PrivateRoute, {
+      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "d-flex flex-column h-100"
+      }, react_default.a.createElement("div", {
+        className: "qd-conatiner--header"
+      }, react_default.a.createElement(layout_Header, null)), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement("div", {
+        className: "qd-container--page",
+        style: {
+          minHeight: "fit-content"
+        }
+      }, react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(utils_PrivateRoute, {
         exact: true,
         path: "/",
         component: home
@@ -6263,7 +7402,7 @@ function (_Component) {
       }), react_default.a.createElement(utils_PrivateRoute, {
         path: "/pillar/:dashboardId/:pillarId",
         component: scenes_pillarRoom
-      }))))));
+      }))))))));
     }
   }]);
 

@@ -82,12 +82,12 @@ class Boardroom extends Component {
           }}
         >
           <div className="row" style={{ margin: 0 }}>
-            <div className="col-lg-2">
-              <div className="card card-body m-4">
+            <div className="col-lg-2 p-0">
+              <div className="card card-body ml-4 mt-4 mr-2 mb-4">
                 <PillarBar kpis={kpis} dashboardId={id} />
               </div>
             </div>
-            <div className="col-lg-10">
+            <div className="col-lg-10 p-0">
               <ActionPlan tables={actionTables} dashboards={dashboards} />
             </div>
           </div>

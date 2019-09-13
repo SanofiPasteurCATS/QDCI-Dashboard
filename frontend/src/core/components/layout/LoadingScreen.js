@@ -4,7 +4,7 @@ import CircleLoader from "react-spinners/CircleLoader";
 import { css } from "@emotion/core";
 
 // CONFIG
-import { accent_color } from "../../config/styleConfig";
+import { accentColor } from "../../config/styleConfig";
 
 const override = css`
   display: flex;
@@ -19,10 +19,10 @@ export default function() {
       <div className="card text-center mt-5">
         <div className="card card-body">
           <CircleLoader
-            sizeUnit={"px"}
+            sizeUnit="px"
             size={60}
             css={override}
-            color={accent_color}
+            color={accentColor}
           />
           <h1 style={{ margin: 0 }}>Loading</h1>
         </div>

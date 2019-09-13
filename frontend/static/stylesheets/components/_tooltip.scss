@@ -1,0 +1,22 @@
+.qd-tooltip {
+  //position: absolute;
+  text-align: center;
+  line-height: 1.5;
+  width: fit-content;
+  height: fit-content;
+  padding: 8px;
+  font: 12px sans-serif;
+  background-color: rgba(236, 236, 236, 0.8);
+  color: #000;
+  border: 0px;
+  border-radius: 8px;
+  z-index: 1000;
+  position: absolute;
+  pointer-events: none;
+  display: none;
+  transition: all 1s ease;
+}
+
+.qd-tooltip hr {
+  size: 40px;
+}

@@ -5,16 +5,12 @@ import { Link } from "react-router-dom";
 
 // ACTIONS
 import { deleteDashboard } from "../../../core/actions/dashboards";
+
 class DashboardDisplayCard extends Component {
   render() {
     const { dashboard, deleteDashboard, deleteClick } = this.props;
     return (
       <div className="card m-3">
-        <img
-          className="card-img-top"
-          src="https://via.placeholder.com/320x200.png"
-          alt="Card image cap"
-        />
         <div className="card-body">
           <div className="d-flex">
             <div
@@ -41,7 +37,7 @@ class DashboardDisplayCard extends Component {
               View
             </Link>
             <button
-              onClick={() => deleteClick("dashboard", dashboard.title)}
+              onClick={() => deleteClick(dashboard)}
               className="btn btn-danger btn-sm ml-auto"
             >
               {" "}

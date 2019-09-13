@@ -1,4 +1,4 @@
 // COLORS
-export const primary_color = "#EEEEEE";
-export const secondary_color = "#EEEEEE";
-export const accent_color = "#437bb7";
+export const primaryColor = "#EEEEEE";
+export const secondaryColor = "#EEEEEE";
+export const accentColor = "#437bb7";

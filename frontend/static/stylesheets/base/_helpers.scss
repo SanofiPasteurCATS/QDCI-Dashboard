@@ -79,3 +79,48 @@
   transition: background-color 0.3s ease;
   @include darken-effect(#ffffff);
 }
+
+.modal-backdrop:nth-child(2n-1) {
+  opacity: 0;
+}
+
+.qd-container {
+  max-width: $max-width;
+  width: 90%;
+
+  &--fluid {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  &--page {
+    margin: 0;
+    max-width: 100%;
+    flex: 1 1 auto;
+  }
+
+  &--header {
+    flex: 0 1 auto;
+  }
+}
+
+.h-95 {
+  height: 95% !important;
+}
+
+.mx-h-95 {
+  max-height: 95% !important;
+}
+
+.mx-vh-75 {
+  max-height: 75vh;
+}
+
+.scroll {
+  overflow: auto;
+}
+
+.symbol {
+  font-size: 2rem;
+}

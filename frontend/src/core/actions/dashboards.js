@@ -65,9 +65,9 @@ export const deleteDashboard = id => (dispatch, getState) => {
       });
     })
     // If there is an error, dispatch a error message to reducer
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 export const getADashboard = id => (dispatch, getState) => {
@@ -102,9 +102,10 @@ export const addDashboard = dashboard => (dispatch, getState) => {
       });
     })
     // If there is an error, dispatch a error message to reducer
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 /*---------------------------------------
@@ -126,9 +127,9 @@ export const getKpis = (id, pillar = "") => (dispatch, getState) => {
       });
     })
     // If there is an error, dispatch a error message to reducer
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 export const addKpi = kpi => (dispatch, getState) => {
@@ -143,22 +144,29 @@ export const addKpi = kpi => (dispatch, getState) => {
       });
     })
     // If there is an error, dispatch a error message to reducer
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
 };
 
 export const updateKpi = (kpi, id) => (dispatch, getState) => {
   // Send request to server
-  axios.patch(`/api/kpis/${id}/`, kpi, tokenConfig(getState)).then(res => {
-    // Message informing user of success
-    dispatch(createMessage({ updateKpi: "KPI Updated!" }));
-    // Send action to reducer. Payload is the object representing updated KPI
-    dispatch({
-      type: UPDATE_KPI,
-      payload: res.data
+  axios
+    .patch(`/api/kpis/${id}/`, kpi, tokenConfig(getState))
+    .then(res => {
+      // Message informing user of success
+      dispatch(createMessage({ updateKpi: "KPI Updated!" }));
+      // Send action to reducer. Payload is the object representing updated KPI
+      dispatch({
+        type: UPDATE_KPI,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
-  });
 };
 
 export const deleteKpi = id => (dispatch, getState) => {
@@ -187,13 +195,25 @@ export const clearKpis = () => dispatch => {
 -----------------------------------------*/
 export const addSeries = series => (dispatch, getState) => {
   // Send request to server
-  axios.post("/api/series/", series, tokenConfig(getState)).then(res => {
-    dispatch(createMessage({ addSeries: "Series Added!" }));
-    dispatch({
-      type: ADD_SERIES,
-      payload: res.data
+  axios
+    .post("/api/series/", series, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ addSeries: "Series Added!" }));
+      const entryCount = res.data.entries.length;
+      dispatch(
+        createMessage({
+          entriesCreated: `${entryCount} Entries Created`
+        })
+      );
+      dispatch({
+        type: ADD_SERIES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
-  });
 };
 
 export const getSeries = (id, kpi = "") => (dispatch, getState) => {
@@ -208,13 +228,19 @@ export const getSeries = (id, kpi = "") => (dispatch, getState) => {
 };
 
 export const updateSeries = (series, id) => (dispatch, getState) => {
-  axios.patch(`/api/series/${id}/`, series, tokenConfig(getState)).then(res => {
-    dispatch(createMessage({ updateSeries: "Series Updated" }));
-    dispatch({
-      type: UPDATE_SERIES,
-      payload: res.data
+  axios
+    .patch(`/api/series/${id}/`, series, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ updateSeries: "Series Updated" }));
+      dispatch({
+        type: UPDATE_SERIES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
-  });
 };
 
 export const deleteSeries = id => (dispatch, getState) => {
@@ -236,12 +262,16 @@ export const updateDatapoint = (datapoint, id) => (dispatch, getState) => {
         type: UPDATE_DATAPOINT,
         payload: res.data
       });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
 };
 
 export const deleteDatapoint = id => (dispatch, getState) => {
   axios.delete(`/api/datapoint/${id}/`, tokenConfig(getState)).then(() => {
-    dispatch(createMessage({ deleteDatapoint: "Series Datapoint" }));
+    dispatch(createMessage({ deleteDatapoint: "Datapoint Deleted" }));
     dispatch({
       type: DELETE_DATAPOINT,
       payload: id
@@ -250,23 +280,35 @@ export const deleteDatapoint = id => (dispatch, getState) => {
 };
 
 export const addDatapoint = datapoint => (dispatch, getState) => {
-  axios.post(`/api/datapoint/`, datapoint, tokenConfig(getState)).then(res => {
-    dispatch(createMessage({ addDatapoint: "Datapoint Added" }));
-    dispatch({
-      type: ADD_DATAPOINT,
-      payload: res.data
+  axios
+    .post(`/api/datapoint/`, datapoint, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ addDatapoint: "Datapoint Added" }));
+      dispatch({
+        type: ADD_DATAPOINT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
-  });
 };
 
 export const addAction = action => (dispatch, getState) => {
-  axios.post("/api/action/", action, tokenConfig(getState)).then(res => {
-    dispatch(createMessage({ addAction: "Action Added" }));
-    dispatch({
-      type: ADD_ACTION,
-      payload: res.data
+  axios
+    .post("/api/action/", action, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ addAction: "Action Added" }));
+      dispatch({
+        type: ADD_ACTION,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
-  });
 };
 
 export const getActionTable = (dashboard = null) => (dispatch, getState) => {
@@ -283,6 +325,7 @@ export const getActionTable = (dashboard = null) => (dispatch, getState) => {
 
 export const deleteAction = id => (dispatch, getState) => {
   axios.delete(`api/action/${id}/`, tokenConfig(getState)).then(() => {
+    dispatch(createMessage({ deleteAction: "Action Deleted" }));
     dispatch({
       type: DELETE_ACTION,
       payload: id
@@ -294,14 +337,16 @@ export const updateAction = (action, id) => (dispatch, getState) => {
   axios
     .patch(`api/action/${id}/`, action, tokenConfig(getState))
     .then(res => {
+      dispatch(createMessage({ updateAction: "Action Updated" }));
       dispatch({
         type: UPDATE_ACTION,
         payload: res.data
       });
     })
-    .catch(err =>
-      dispatch(returnErrors(err.response.data, err.response.status))
-    );
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
 };
 
 export const updateActionTable = (actionTable, id, parent) => (

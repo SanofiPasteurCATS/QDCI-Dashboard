@@ -13,6 +13,7 @@ import Pillar from "../../core/components/d3charts/pillar";
 import LineChart from "../../core/components/d3charts/LineChart";
 import Table from "../../core/components/ui/table/Table";
 import SvgExporter from "../../core/components/ui/svgExporter";
+import Modal from "../../core/components/ui/modal/Modal";
 
 // ACTIONS
 import {
@@ -23,13 +24,10 @@ import {
 
 // NATIVE COMPONENTS
 import ChartOptions from "./components/ChartOptions";
-import DataOptions from "./components/datapoints/DataOptions";
-import KpiOptions from "./components/kpis/KpiOptions";
-import KpiView from "./components/KpiView";
+import MenuView from "./components/MenuView";
+import KpiNew from "./components/kpis/KpiNew";
+import DeletetionConformation from "../../core/components/ui/DeleteConfirmation";
 
-/*
-  Definition
-*/
 class pillarRoom extends Component {
   static propTypes = {
     getADashboard: PropTypes.func.isRequired,
@@ -43,17 +41,23 @@ class pillarRoom extends Component {
     this.state = {
       selectedSeries: null,
       selectedExport: "",
-      selectedKpi: null
+      selectedKpi: null,
+      menuMode: false,
+      deletionContext: null
     };
 
     this.selectSeriesHook = this.selectSeriesHook.bind(this);
     this.selectKpiHook = this.selectKpiHook.bind(this);
     this.updateExport = this.updateExport.bind(this);
+    this.onDelete = this.onDelete.bind(this);
+    this.resetKpiSelect = this.resetKpiSelect.bind(this);
+    this.tooltip = React.createRef();
+    this.showTooltip = this.showTooltip.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.kpis != this.props.kpis) {
-      //this.selectSeriesHook(null);
+      // this.selectSeriesHook(null);
     }
   }
 
@@ -76,6 +80,54 @@ class pillarRoom extends Component {
     getADashboard(this.props.match.params.dashboardId);
     getKpis(dashboardId, pillarId);
   }
+
+  setMenuState = menuMode => {
+    this.setState({
+      menuMode: menuMode
+    });
+  };
+
+  onDelete = deletionContext => {
+    this.setState({ deletionContext: deletionContext });
+  };
+
+  showTooltip = (show, data = null) => {
+    const tooltipMarkdown = data => {
+      return `<div className="card p-4">
+          <div className="card-body">
+          <h5 style="line-height:0.4">${data.kpiName}</h5>
+          <div className="card-text" style="line-height:0.5">
+            <hr/>
+            <p>Value: ${data.value}</p>
+            <p>Target: ${data.target}</p>
+            <p>Date: ${data.date} </p>
+            <p>Deviation: ${((data.value / data.target - 1) * 100).toFixed(
+              2
+            )}% </p>
+          </div>
+          </div>
+        </div>`;
+    };
+    const tooltip = this.tooltip.current;
+    if (show) {
+      tooltip.style.display = "block";
+      tooltip.style.opacity = 1;
+    } else {
+      tooltip.style.display = "none";
+      tooltip.style.opacity = 0;
+    }
+    if (!data) return;
+    if (data.payload) {
+      tooltip.innerHTML = tooltipMarkdown(data.payload);
+      tooltip.style.left = `${data.x + 24}px`;
+      tooltip.style.top = `${data.y}px`;
+    }
+  };
+  resetKpiSelect = () => {
+    const { kpis } = this.props;
+    if (!kpis[0]) return;
+    this.setState({ selectedKpi: kpis[0].id });
+  };
   deselect = () => {
     d3.selectAll(".line").attr("stroke-width", 1.8);
     d3.selectAll(".dot").attr("r", 3);
@@ -84,15 +136,20 @@ class pillarRoom extends Component {
       .attr("font-size", "17");
     this.selectSeriesHook(null);
   };
+
   render() {
     const { kpis, currentDashboard } = this.props;
     const { pillarId, dashboardId } = this.props.match.params;
-    const { selectedSeries, selectedKpi, selectedExport } = this.state;
-
+    const {
+      selectedSeries,
+      selectedKpi,
+      selectedExport,
+      menuMode,
+      deletionContext
+    } = this.state;
     const kpi = kpis.filter(kpi => {
       return kpi.id == selectedKpi;
     })[0];
-
     const series = kpi ? kpi.series : [];
     const s = series
       ? series.filter(s => {
@@ -106,22 +163,25 @@ class pillarRoom extends Component {
     return (
       <Fragment>
         <div
-          className="container-fluid h-100"
+          className="container-fluid"
           style={{
             padding: 0,
             background: color,
-            height: `${100}%`
+            height: `${100}%`,
+            minHeight: "fit-content"
           }}
         >
+          <div className="qd-tooltip" ref={this.tooltip}></div>
           <div className="row m-0">
             <div className="col-lg-4">
-              <div className="card ml-4 mt-4 mb-4 mr-4">
+              <div className="card ml-4 mt-4 mb-4 mr-4 h-95">
                 <div className="card-body">
                   <Pillar
                     kpis={kpis}
-                    letter={pillarId}
+                    letter={pillarId === "Plus" ? "+" : pillarId}
                     dashboardId={dashboardId}
                     labeled
+                    showTooltip={this.showTooltip}
                   />
                 </div>
                 <div className="card-footer" style={{ display: "flex" }}>
@@ -130,90 +190,56 @@ class pillarRoom extends Component {
                       <Table
                         data={kpis}
                         header={KPI_TABLE_HEADERS}
-                        fontSize={0.7 + "rem"}
+                        fontSize={`${0.7}rem`}
                         summary={false}
                       />
-                    </div>
-                    <div className="col-lg-12" style={{ display: "flex" }}>
-                      {/*
-                      <button
-                        type="button"
-                        className="btn btn-primary mt-auto"
-                        data-toggle="modal"
-                        data-target="#kpiOptions"
-                      >
-                        Manage KPIs
-                      </button>
-                      */}
-                      <button
-                        type="button"
-                        className="btn btn-info mt-auto ml-auto"
-                        data-toggle="modal"
-                        data-target="#svgExporter"
-                        onClick={() => {
-                          this.updateExport("#chartPillar");
-                        }}
-                      >
-                        Export Pillar
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-lg-8">
-              <div className="card ml-4 mt-4 mb-4 mr-4">
-                <div className="card-body">
-                  <LineChart
-                    kpis={kpis}
-                    selectSeriesHook={this.selectSeriesHook}
-                    selectedKpi={selectedKpi}
-                  />
+              <div className="card ml-4 mt-4 mb-4 mr-4 h-90 mx-h-90">
+                <div className="card-body scroll mx-vh-75">
+                  {menuMode ? (
+                    <MenuView
+                      kpi={kpi}
+                      onDelete={this.onDelete}
+                      setMenuState={this.setMenuState}
+                      menuState={this.menuMode}
+                      resetKpiSelect={this.resetKpiSelect}
+                    ></MenuView>
+                  ) : (
+                    <LineChart
+                      kpis={kpis}
+                      selectSeriesHook={this.selectSeriesHook}
+                      selectedKpi={selectedKpi}
+                    />
+                  )}
                 </div>
 
-                <div
-                  className="card-footer"
-                  style={{ display: "flex", overflow: "auto" }}
-                >
+                <div className="card-footer" style={{ display: "flex" }}>
                   <ChartOptions
                     active={selectedSeries}
                     selectKpiHook={this.selectKpiHook}
                     selectSeriesHook={this.selectSeriesHook}
                     deselectHook={this.deselect}
                     kpis={kpis}
+                    setMenuState={this.setMenuState}
+                    menuMode={menuMode}
                   />
-
-                  <button
-                    type="button"
-                    className="btn btn-info mt-auto ml-lg-auto ml-s-2 ml-xs-2"
-                    data-toggle="modal"
-                    data-target="#svgExporter"
-                    onClick={() => {
-                      this.updateExport("#chart");
-                    }}
-                  >
-                    Export Chart
-                  </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <KpiOptions
-            dashboardId={dashboardId}
-            kpis={kpis}
-            pillarId={pillarId}
-          />
-          <KpiView kpi={kpi} />
-          <DataOptions series={s[0]} />
-
-          {/*<SeriesOptions
-            series={series}
-            kpi={kpi}
-            deletionHook={this.deselect}
-          />*/}
-          <SvgExporter target={selectedExport} />
+          <Modal id="newKpi" title="New KPI" iconClass="im im-dashboard">
+            <KpiNew pillar={pillarId} dashboard={currentDashboard.id}></KpiNew>
+          </Modal>
         </div>
+        <DeletetionConformation
+          deletionContext={deletionContext}
+        ></DeletetionConformation>
       </Fragment>
     );
   }

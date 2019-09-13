@@ -22,7 +22,7 @@ const PillarBar = props => {
   };
   return (
     <div>
-      <Pillar kpis={filterKpis("+")} letter="+" dashboardId={dashboardId} />
+      <Pillar kpis={filterKpis("Plus")} letter="+" dashboardId={dashboardId} />
       <Pillar kpis={filterKpis("Q")} letter="Q" dashboardId={dashboardId} />
       <Pillar kpis={filterKpis("D")} letter="D" dashboardId={dashboardId} />
       <Pillar kpis={filterKpis("C")} letter="C" dashboardId={dashboardId} />

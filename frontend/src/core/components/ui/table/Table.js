@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 
 // COMPONENTS
 import Row from "./Row";
-import LoadingScreen from "../../../components/layout/LoadingScreen";
+import LoadingScreen from "../../layout/LoadingScreen";
 
 class Table extends Component {
   static propTypes = {
@@ -33,12 +33,9 @@ class Table extends Component {
   }
 
   static generateUID = () => {
-    return (
-      "_" +
-      Math.random()
-        .toString(36)
-        .substr(2, 9)
-    );
+    return `_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
   };
 
   id = this.constructor.generateUID();
@@ -96,7 +93,7 @@ class Table extends Component {
               style={{
                 lineHeight: 1.5,
                 verticalAlign: "middle",
-                fontSize: 1 + "rem"
+                fontSize: `${1}rem`
               }}
               onClick={this.handleInsert}
             />
@@ -107,9 +104,9 @@ class Table extends Component {
       <Fragment>
         <div className="column">
           {summary && (
-            <h5 className="subtitle d-inline">
+            <p className="d-inline" style={{ fontSize: "0.9rem" }}>
               Showing <strong>{data.length}</strong> items
-            </h5>
+            </p>
           )}
           {appendable && (
             <i
@@ -117,12 +114,12 @@ class Table extends Component {
               style={{
                 lineHeight: 1.5,
                 verticalAlign: "middle",
-                fontSize: 1 + "rem"
+                fontSize: `${1}rem`
               }}
               onClick={this.handleInsert}
             />
           )}
-          <div className="table-responsive mt-3" style={{ fontSize: fontSize }}>
+          <div className="table-responsive mt-3" style={{ fontSize }}>
             <table
               className="table is-striped table-sm"
               style={{ textAlign: "center" }}
@@ -138,7 +135,7 @@ class Table extends Component {
               </thead>
               <tbody>
                 {data.map((x, i) => {
-                  let hover = null;
+                  const hover = null;
                   return (
                     <Fragment key={data[i].id}>
                       <Row
@@ -186,7 +183,7 @@ Table.defaultProps = {
   editable: false,
   update: null,
   delete: null,
-  fontSize: 1 + "rem",
+  fontSize: `${1}rem`,
   summary: true,
   deletable: false
 };

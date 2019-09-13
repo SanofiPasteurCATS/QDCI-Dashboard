@@ -43,7 +43,7 @@ class ActionTable extends Component {
 
   tooltipMessage = i => {
     const { data } = this.props;
-    var d = new Date(data.actions[i].date_created);
+    const d = new Date(data.actions[i].date_created);
     d.toDateString();
 
     return (
@@ -83,6 +83,7 @@ class ActionTable extends Component {
         insert={this.insert}
         rowClick={rowClick}
         deletable={deletable}
+        fontSize={"0.6rem"}
         summary
         tooltipMessage={hoverable ? this.tooltipMessage : null}
       />

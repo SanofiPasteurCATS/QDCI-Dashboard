@@ -17,10 +17,9 @@ class DashboardForm extends Component {
   state = {
     title: "",
     author: "",
-    background: "",
+    background: "#000",
     dashboardType: "0",
-    level: "0",
-    color: "#0"
+    level: "0"
   };
 
   static propTypes = {
@@ -43,13 +42,15 @@ class DashboardForm extends Component {
       dashboardType,
       level
     };
+    console.log(background);
     this.props.addDashboard(dashboard);
     this.setState({
       title: "",
       author: "",
-      background: "#0",
+      background: "#000",
       level: ""
     });
+    $("#dashboardOptions").modal("hide");
   };
 
   render() {

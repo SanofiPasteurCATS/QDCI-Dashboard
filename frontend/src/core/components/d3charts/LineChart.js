@@ -5,7 +5,7 @@ import { withFauxDOM } from "react-faux-dom";
 import PropTypes from "prop-types";
 
 // COMPONENTS
-import { accent_color } from "../../config/styleConfig";
+import { accentColor } from "../../config/styleConfig";
 
 const margin = {
   top: 10,
@@ -21,7 +21,10 @@ class LineChart extends React.Component {
   static propTypes = {
     kpis: PropTypes.array.isRequired,
     selectSeriesHook: PropTypes.func.isRequired,
-    selectedKpi: PropTypes.number
+    chart: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    selectedKpi: PropTypes.number,
+    connectFauxDOM: PropTypes.func.isRequired,
+    animateFauxDOM: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -35,22 +38,24 @@ class LineChart extends React.Component {
     this.renderD3();
     this.updateD3();
   }
+
   // Triger D3 update()
   componentDidUpdate(prevProps) {
     const { kpis, selectedKpi } = this.props;
 
-    if (kpis !== prevProps.kpis || selectedKpi != prevProps.selectedKpi) {
+    if (kpis !== prevProps.kpis || selectedKpi !== prevProps.selectedKpi) {
       this.updateD3();
     }
   }
 
   render() {
-    return <div>{this.props.chart}</div>;
+    const { chart } = this.props;
+    return <div>{chart}</div>;
   }
 
   renderD3() {
-    const faux = this.props.connectFauxDOM("svg", "chart");
-    const { selectSeriesHook } = this.props;
+    const { connectFauxDOM, selectSeriesHook } = this.props;
+    const faux = connectFauxDOM("svg", "chart");
     function highlightLine(id) {
       if (id == null) return;
       d3.selectAll(".line").attr("stroke-width", 1.8);
@@ -130,19 +135,27 @@ class LineChart extends React.Component {
       .attr("text-anchor", "middle")
       .style("text-decoration", "underline")
       .style("font-size", "31px")
-      .attr("fill", accent_color);
+      .attr("fill", accentColor);
   }
 
   updateD3() {
-    const faux = this.props.connectFauxDOM("svg", "chart");
-    const { kpis, selectSeriesHook, animateFauxDOM, selectedKpi } = this.props;
-    var index = kpis.findIndex(kpi => {
+    var x;
+    const {
+      connectFauxDOM,
+      kpis,
+      selectSeriesHook,
+      animateFauxDOM,
+      selectedKpi
+    } = this.props;
+
+    const faux = connectFauxDOM("svg", "chart");
+    let index = kpis.findIndex(kpi => {
       return kpi.id == selectedKpi;
     });
     index = index == -1 ? 0 : index;
     const data = kpis[index] ? kpis[index].series : [];
     const parseTime = d3.timeParse("%Y-%m-%d");
-    function highlightLine(id, color) {
+    function highlightLine(id) {
       d3.selectAll(".line").attr("stroke-width", 1.8);
       d3.selectAll(".dot").attr("r", 3);
       d3.selectAll(`.dot_${id}`).attr("r", 5);
@@ -155,18 +168,18 @@ class LineChart extends React.Component {
         .attr("font-size", "20");
     }
     // Sort by Date
-    for (var x in data) {
+    for (x in data) {
       const series = data[x].entries;
       series.sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
     // In order to scale the axes must find minimum and maximum from all series
     const mins = [];
-    for (var x in data) {
+    for (x in data) {
       mins.push(d3.min(data[x].entries, d => d.value));
     }
     const maxs = [];
-    for (var x in data) {
+    for (x in data) {
       maxs.push(d3.max(data[x].entries, d => d.value));
     }
     const minimum = mins.filter(d => {
@@ -222,30 +235,7 @@ class LineChart extends React.Component {
       .select(faux)
       .select("#plotArea")
       .selectAll(".line");
-    /*
-    d3.select("#chartMsg").remove();
-    if (!kpis[0]) {
-      d3.select(faux)
-        .select("#plotArea")
-        .append("text")
-        .attr("id", "chartMsg")
-        .text("Please select a KPI")
-        .style("fill", accent_color)
-        .attr("font-size", 1.2 + "rem")
-        .attr("y", height / 2)
-        .attr("x", width / 2.3);
-    } else if (!data.length) {
-      d3.select(faux)
-        .select("#plotArea")
-        .append("text")
-        .attr("id", "chartMsg")
-        .text("You don't seem to have any Series for this KPI")
-        .style("fill", accent_color)
-        .attr("font-size", 1.2 + "rem")
-        .attr("y", height / 2)
-        .attr("x", width / 4);
-    }
-    */
+
     const sData = s.data(data);
 
     const sEnter = sData
@@ -393,7 +383,7 @@ class LineChart extends React.Component {
 }
 
 LineChart.defaultProps = {
-  chart: "loading",
+  chart: "Loading",
   selectedKpi: null
 };
 

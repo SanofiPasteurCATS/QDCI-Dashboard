@@ -165,18 +165,18 @@ class KpiViewSet(viewsets.ModelViewSet):
             while d.year == year:
                 yield d
                 d += timedelta(days = 14)
-
+        
         if (kpi.frequency == 0):
             for d in monthly():
-                d= Datapoint(series=s, date=d)
+                d= Datapoint(series=s, date=d, target=kpi.global_target)
                 d.save()
         elif (kpi.frequency == 1):
             for d in weekly():
-                d=Datapoint(series=s, date=d)
+                d=Datapoint(series=s, date=d, target=kpi.global_target)
                 d.save()
         elif (kpi.frequency == 2):
             for d in biweekly():
-                d= Datapoint(series=s, date=d)
+                d= Datapoint(series=s, date=d, target=kpi.global_target)
                 d.save()
 
     def put(self, request, *args, **kwargs):

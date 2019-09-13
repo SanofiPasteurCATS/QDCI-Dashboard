@@ -1,4 +1,4 @@
-//DEPENDANCIES
+// DEPENDANCIES
 import React, { Component, Fragment } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -17,7 +17,7 @@ This component makes ALL GET request for Boardroom data
 
 class ActionForm extends Component {
   static propTypes = {
-    action: PropTypes.object.isRequired,
+    action: PropTypes.object,
     updateAction: PropTypes.func.isRequired,
     deleteAction: PropTypes.func.isRequired
   };
@@ -55,7 +55,7 @@ class ActionForm extends Component {
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   onDateChange = date => {
-    this.setState({ date: date });
+    this.setState({ date });
   };
 
   onSubmit = e => {

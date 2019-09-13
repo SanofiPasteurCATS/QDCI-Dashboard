@@ -1,4 +1,4 @@
-//DEPENDANCIES
+// DEPENDANCIES
 import React, { Component, Fragment } from "react";
 import "core-js";
 import ReactDOM from "react-dom";
@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import Login from "../../scenes/portal/scenes/login";
 import Register from "../../scenes/portal/scenes/register";
 import BoardRoom from "../../scenes/boardRoom";
-import PrivateRoute from "../components/utils/PrivateRoute";
+import PrivateRoute from "./utils/PrivateRoute";
 import PillarRoom from "../../scenes/pillarRoom";
 import Dashboard from "../../scenes/home";
 
@@ -41,19 +41,28 @@ class App extends Component {
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
             <Fragment>
-              <Header />
-              <Alerts />
-              <Switch>
-                <PrivateRoute exact path="/" component={Dashboard} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/" component={Dashboard} />
-                <PrivateRoute path="/boardroom/:id" component={BoardRoom} />
-                <PrivateRoute
-                  path="/pillar/:dashboardId/:pillarId"
-                  component={PillarRoom}
-                />
-              </Switch>
+              <div className="d-flex flex-column h-100">
+                <div className="qd-conatiner--header">
+                  <Header />
+                </div>
+                <Alerts />
+                <div
+                  className="qd-container--page"
+                  style={{ minHeight: "fit-content" }}
+                >
+                  <Switch>
+                    <PrivateRoute exact path="/" component={Dashboard} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/" component={Dashboard} />
+                    <PrivateRoute path="/boardroom/:id" component={BoardRoom} />
+                    <PrivateRoute
+                      path="/pillar/:dashboardId/:pillarId"
+                      component={PillarRoom}
+                    />
+                  </Switch>
+                </div>
+              </div>
             </Fragment>
           </Router>
         </AlertProvider>
