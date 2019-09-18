@@ -192,6 +192,7 @@ class Pillar extends React.Component {
       kpi_type,
       warning_margin,
       threshold_type,
+      isPercentage,
       value,
       target
     }) => {
@@ -211,6 +212,13 @@ class Pillar extends React.Component {
           break;
 
         case KPI_TYPE_THRESHOLD:
+          if (!isPercentage)
+            return getAbsoluteColor(
+              target,
+              value,
+              warning_margin,
+              threshold_type
+            );
           switch (threshold_type) {
             case THRESHOLD_TYPE_GREATER:
               if (value >= target) color = "green";
@@ -233,6 +241,28 @@ class Pillar extends React.Component {
       return color;
     };
 
+    const getAbsoluteColor = (
+      target,
+      value,
+      warning_margin,
+      threshold_type
+    ) => {
+      console.log("hello");
+      let color = "#F2F2F2";
+      switch (threshold_type) {
+        case THRESHOLD_TYPE_GREATER:
+          if (value >= target) color = "green";
+          else if (value < target && value >= warning_margin) color = "orange";
+          else color = "red";
+          break;
+        case THRESHOLD_TYPE_LESS:
+          if (value <= target) color = "green";
+          else if (value > target && value <= warning_margin) color = "orange";
+          else color = "red";
+          break;
+      }
+      return color;
+    };
     const faux = this.props.connectFauxDOM("svg", "chart");
 
     d3.select(faux).select("#circle");
@@ -261,6 +291,7 @@ class Pillar extends React.Component {
       .attr("data-thresh-type", d => d.threshold_type)
       .attr("data-warning", d => d.warning_margin)
       .attr("data-type", d => d.kpi_type)
+      .attr("data-isPercentage", d => d.isPercentage)
       .attr("transform", `translate(${plotSize / 2},${plotSize / 2})`);
     this.props.animateFauxDOM(800);
 
@@ -291,17 +322,30 @@ class Pillar extends React.Component {
       .on("mouseover", (d, i, j) => {
         const kpi_type = $(j)[i].parentNode.getAttribute("data-type");
         const kpiName = $(j)[i].parentNode.getAttribute("data-name");
+        const threshold_type = $(j)[i].parentNode.getAttribute(
+          "data-thresh-type"
+        );
+        const warning_margin = $(j)[i].parentNode.getAttribute("data-warning");
+
         d3.select(`#ring_${d.data.id}`)
           .style("stroke", "#000")
           .attr("stroke-width", "1");
+        if (!showTooltip) return;
         showTooltip(true, {
           x: d3.event.pageX,
           y: d3.event.pageY,
-          payload: { kpi_type, kpiName, ...d.data }
+          payload: {
+            kpi_type,
+            kpiName,
+            threshold_type,
+            warning_margin,
+            ...d.data
+          }
         });
       })
       .on("mouseout", d => {
         d3.select(`#ring_${d.data.id}`).style("stroke", "none");
+        if (!showTooltip) return;
         showTooltip(false);
       })
       .merge(ringBind)
@@ -312,6 +356,7 @@ class Pillar extends React.Component {
           kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
           warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
           threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
+          isPercentage: $(j)[i].parentNode.getAttribute("data-isPercentage"),
           value: d.data.value,
           target: d.data.target
         };

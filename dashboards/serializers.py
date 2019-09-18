@@ -1,5 +1,5 @@
 from rest_framework import serializers, fields
-from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable
+from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable, Audit, Win
 
 # Serializers for all Dashboard models (converts python objects to JSON format for REST API endpoints)
 
@@ -23,7 +23,7 @@ class KpiSerializer(serializers.ModelSerializer):
     series =  SeriesSerializer(many = True, read_only=True)
     class Meta:
         model = Kpi
-        fields = ("pillar", "name", "safe_deviation", "danger_deviation", "kpi_type", "threshold_type", "warning_margin" ,"frequency","dashboard",'series','id',"global_target")
+        fields = '__all__'
 
 class ShallowActionTableSerializer(serializers.ModelSerializer):
 
@@ -47,3 +47,12 @@ class ActionTableSerializer(serializers.ModelSerializer):
         model = ActionTable
         fields = ('title', 'actions', 'id', 'parent', "dashboard", "parent_dashboard")
 
+class AuditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Audit
+        fields = '__all__'
+
+class WinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Win 
+        fields = '__all__'

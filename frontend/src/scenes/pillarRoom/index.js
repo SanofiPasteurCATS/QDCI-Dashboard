@@ -5,7 +5,13 @@ import * as d3 from "d3";
 import PropTypes from "prop-types";
 
 // CONFIG
-import { KPI_TABLE_HEADERS } from "../../core/config/dashboardConfig";
+import {
+  KPI_TABLE_HEADERS,
+  THRESHOLD_TYPE_GREATER,
+  KPI_TYPE_THRESHOLD,
+  KPI_TYPE_DEVIATION,
+  KPI_TYPE_WIN_LOSE
+} from "../../core/config/dashboardConfig";
 
 // CORE COMPONENTS
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
@@ -93,20 +99,48 @@ class pillarRoom extends Component {
 
   showTooltip = (show, data = null) => {
     const tooltipMarkdown = data => {
-      return `<div className="card p-4">
-          <div className="card-body">
-          <h5 style="line-height:0.4">${data.kpiName}</h5>
-          <div className="card-text" style="line-height:0.5">
-            <hr/>
-            <p>Value: ${data.value}</p>
-            <p>Target: ${data.target}</p>
-            <p>Date: ${data.date} </p>
-            <p>Deviation: ${((data.value / data.target - 1) * 100).toFixed(
-              2
-            )}% </p>
-          </div>
-          </div>
-        </div>`;
+      switch (data.kpi_type) {
+        case KPI_TYPE_THRESHOLD:
+          return `<div className="card p-4">
+            <div className="card-body">
+            <h5 style="line-height:0.4">${data.kpiName}</h5>
+            <div className="card-text" style="line-height:0.5">
+              <hr/>
+              <p>Value: ${data.value}</p>
+              <p>Target: ${data.target}</p>
+              <p>Date: ${data.date} </p>
+              <p>Warning Margin: ${data.warning_margin} </p>
+            </div>
+            </div>
+          </div>`;
+        case KPI_TYPE_DEVIATION:
+          return `<div className="card p-4">
+            <div className="card-body">
+            <h5 style="line-height:0.4">${data.kpiName}</h5>
+            <div className="card-text" style="line-height:0.5">
+              <hr/>
+              <p>Value: ${data.value}</p>
+              <p>Target: ${data.target}</p>
+              <p>Date: ${data.date} </p>
+              <p>Deviation: ${((data.value / data.target - 1) * 100).toFixed(
+                2
+              )}% </p>
+            </div>
+            </div>
+          </div>`;
+        case KPI_TYPE_WIN_LOSE:
+          return `<div className="card p-4">
+            <div className="card-body">
+            <h5 style="line-height:0.4">${data.kpiName}</h5>
+            <div className="card-text" style="line-height:0.5">
+              <hr/>
+              <p>Value: ${data.value}</p>
+              <p>Target: ${data.target}</p>
+              <p>Date: ${data.date} </p>
+            </div>
+            </div>
+          </div>`;
+      }
     };
     const tooltip = this.tooltip.current;
     if (show) {
@@ -185,7 +219,7 @@ class pillarRoom extends Component {
                   />
                 </div>
                 <div className="card-footer" style={{ display: "flex" }}>
-                  <div className="row">
+                  <div className="row w-100">
                     <div className="col-lg-12">
                       <Table
                         data={kpis}

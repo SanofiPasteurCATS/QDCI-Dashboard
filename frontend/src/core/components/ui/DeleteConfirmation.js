@@ -57,6 +57,7 @@ class DeletetionConformation extends Component {
             </span>{" "}
             {`${type} and all associated data.`}{" "}
           </p>
+          {/*
           <div className="form-group">
             <label htmlFor="password">Please enter dashboard password</label>
             <input
@@ -67,6 +68,7 @@ class DeletetionConformation extends Component {
               onChange={this.onChange}
             />
           </div>
+          */}
           <div className="form-group">
             <label htmlFor="name">{`Please type in the name of the ${type} to confirm`}</label>
             <input
@@ -77,6 +79,7 @@ class DeletetionConformation extends Component {
               onChange={this.onChange}
             />
           </div>
+          {/*
           <div className="form-check">
             <input
               type="checkbox"
@@ -87,7 +90,7 @@ class DeletetionConformation extends Component {
             <label htmlFor="export" className="form-check-label mb-3">
               Do you want to export data?
             </label>
-          </div>
+          </div> */}
           <button type="submit" className="btn btn-warning">
             I understand the consequences, delete this item
           </button>

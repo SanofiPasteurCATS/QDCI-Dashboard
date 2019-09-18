@@ -64,6 +64,13 @@ class KpiForm extends Component {
     onChange(e);
   };
 
+  onGlobalTargetChange = e => {
+    const { onChange } = this.props;
+    const target = e.target.value;
+    if (isNaN(target)) return;
+    else onChange(e);
+  };
+
   onThresholdTypeChange = e => {
     const { onChange } = this.props;
     if (e.target.id === "greater" && e.target.checked) {
@@ -92,11 +99,13 @@ class KpiForm extends Component {
       kpi_type,
       warning_margin,
       threshold_type,
-      global_target
+      global_target,
+      leader,
+      unit
     } = this.props.values;
     const sliders = [
-      <div className="d-flex">
-        <div className="col-sm-6">
+      <div className="row justify-content-center">
+        <div className="col-sm-11">
           <DeviationSlider
             disabledRail
             onUpdate={this.onSliderUpdate}
@@ -105,7 +114,8 @@ class KpiForm extends Component {
             safe_deviation={safe_deviation}
           ></DeviationSlider>
         </div>
-        <div className="col-sm-2">
+
+        <div className="col-sm-4">
           <div className="form-group">
             <label htmlFor="safe">Safe Limit</label>
             <input
@@ -118,7 +128,7 @@ class KpiForm extends Component {
             />
           </div>
         </div>
-        <div className="col-sm-2">
+        <div className="col-sm-4">
           <div className="form-group">
             <label htmlFor="danger">Danger Limit</label>
             <input
@@ -133,14 +143,27 @@ class KpiForm extends Component {
         </div>
       </div>,
       <div>Nothing to See</div>,
-      <div className="d-flex">
-        <div className="col-sm-6">
+      <div className="row justify-content-center">
+        <div className="col-sm-11">
           <ThresholdSlider
             threshold_type={threshold_type}
             disabledRail
             onUpdate={this.onThresholdSliderUpdate}
             ref={this.slider}
             warning_margin={warning_margin}
+            target={global_target}
+            domain={
+              threshold_type === THRESHOLD_TYPE_GREATER
+                ? [
+                    global_target ? 0 : -100,
+                    global_target ? parseInt(global_target) * 1.5 : 100
+                  ]
+                : [
+                    parseInt(global_target) - parseInt(global_target) * 0.5 ||
+                      -100,
+                    global_target ? parseInt(global_target) * 2 : 100
+                  ]
+            }
           ></ThresholdSlider>
         </div>
 
@@ -157,6 +180,9 @@ class KpiForm extends Component {
             <label htmlFor="threshold_type" className="form-check-label mb-3">
               Greater Than
             </label>
+          </div>
+
+          <div className="form-check">
             <input
               type="radio"
               name="threshold_type"
@@ -170,14 +196,27 @@ class KpiForm extends Component {
             </label>
           </div>
         </div>
-        <div className="col-sm-2 mt-3">
+        <div class="col-sm-4">
+          <div className="form-group">
+            <label htmlFor="global_target">Target</label>
+            <input
+              className="form-control"
+              type="text"
+              name="global_target"
+              onChange={this.onGlobalTargetChange}
+              placeholder="..."
+              value={global_target || ""}
+            />
+          </div>
+        </div>
+        <div className="col-sm-4">
           <label htmlFor="warning_margin">Warning Limit</label>
           <input
             className="form-control"
             type="text"
             name="warning_margin"
             placeholder="..."
-            value={`${warning_margin}%`}
+            value={`${warning_margin}${global_target ? "" : "%"}`}
             disabled
           />
         </div>
@@ -185,89 +224,90 @@ class KpiForm extends Component {
     ];
 
     return (
-      <div className="row">
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              onChange={onChange}
-              placeholder="..."
-              value={name}
-              required
-            />
+      <>
+        <div className="row">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input
+                className="form-control"
+                type="text"
+                name="name"
+                onChange={onChange}
+                placeholder="..."
+                value={name}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="frequency">Type</label>
+              <select
+                className="form-control"
+                type="text"
+                name="kpi_type"
+                onChange={this.onKpiTypeChange}
+                placeholder="..."
+                value={kpi_type}
+                required
+              >
+                {KPI_TYPE_CHOICES.map(choice => (
+                  <option key={`choice-${choice.id}`} value={choice.id}>
+                    {choice.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="frequency">Frequency</label>
+              <select
+                className="form-control"
+                type="text"
+                name="frequency"
+                onChange={onChange}
+                placeholder="..."
+                value={frequency}
+                required
+                disabled
+              >
+                {FREQUENCY_CHOICES.map(choice => (
+                  <option key={`choice-${choice.id}`} value={choice.id}>
+                    {choice.name}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="frequency">Type</label>
-            <select
-              className="form-control"
-              type="text"
-              name="kpi_type"
-              onChange={this.onKpiTypeChange}
-              placeholder="..."
-              value={kpi_type}
-              required
-            >
-              {KPI_TYPE_CHOICES.map(choice => (
-                <option key={`choice-${choice.id}`} value={choice.id}>
-                  {choice.name}
-                </option>
-              ))}
-            </select>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="leader">Leader</label>
+              <input
+                className="form-control"
+                type="text"
+                name="leader"
+                onChange={onChange}
+                placeholder="..."
+                value={leader}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="unit">Unit</label>
+              <input
+                className="form-control"
+                type="text"
+                name="unit"
+                onChange={onChange}
+                placeholder="..."
+                value={unit || ""}
+              />
+            </div>
           </div>
         </div>
 
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="frequency">Frequency</label>
-            <select
-              className="form-control"
-              type="text"
-              name="frequency"
-              onChange={onChange}
-              placeholder="..."
-              value={frequency}
-              required
-            >
-              {FREQUENCY_CHOICES.map(choice => (
-                <option key={`choice-${choice.id}`} value={choice.id}>
-                  {choice.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="form-group">
-            <label htmlFor="global_target">Default Target</label>
-            <input
-              className="form-control"
-              type="text"
-              name="global_target"
-              onChange={onChange}
-              placeholder="..."
-              value={global_target}
-            />
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="pillar">Pillar</label>
-            <input
-              className="form-control"
-              type="text"
-              name="pillar"
-              onChange={onChange}
-              placeholder="..."
-              value={pillar}
-              required
-              disabled
-            />
-          </div>
-        </div>
-        <div className="col-sm-12">{sliders[kpi_type]}</div>
-      </div>
+        {sliders[kpi_type]}
+      </>
     );
   }
 }

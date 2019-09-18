@@ -21,14 +21,24 @@ import {
   UPDATE_ACTION,
   UPDATE_ACTION_TABLE,
   CLEAR_CURRENT_DASHBOARD,
-  CLEAR_ACTION_TABLES
+  CLEAR_ACTION_TABLES,
+  ADD_AUDIT,
+  GET_AUDITS,
+  UPDATE_AUDIT,
+  DELETE_AUDIT,
+  GET_WINS,
+  UPDATE_WIN,
+  DELETE_WIN,
+  ADD_WIN
 } from "../actions/types";
 
 const initalState = {
   dashboards: [],
   kpis: [],
   currentDashboard: null,
-  actionTables: []
+  actionTables: [],
+  audits: [],
+  wins: []
 };
 
 export default function(state = initalState, action) {
@@ -247,6 +257,56 @@ export default function(state = initalState, action) {
       return {
         ...state,
         currentDashboard: null
+      };
+    case GET_AUDITS:
+      return {
+        ...state,
+        audits: action.payload
+      };
+    case ADD_AUDIT:
+      return {
+        ...state,
+        audits: [...state.audits, action.payload]
+      };
+    case DELETE_AUDIT:
+      return {
+        ...state,
+        audits: state.audits.filter(audit => {
+          return audit.id != action.payload;
+        })
+      };
+    case UPDATE_AUDIT:
+      return {
+        ...state,
+        audits: state.audits.map(audit => {
+          if (audit.id === action.payload.id) return action.payload;
+          else return audit;
+        })
+      };
+    case GET_WINS:
+      return {
+        ...state,
+        wins: action.payload
+      };
+    case ADD_WIN:
+      return {
+        ...state,
+        wins: [...state.wins, action.payload]
+      };
+    case DELETE_WIN:
+      return {
+        ...state,
+        wins: state.wins.filter(win => {
+          return win.id != action.payload;
+        })
+      };
+    case UPDATE_WIN:
+      return {
+        ...state,
+        wins: state.wins.map(win => {
+          if (win.id === action.payload.id) return action.payload;
+          else return win;
+        })
       };
     default:
       return state;

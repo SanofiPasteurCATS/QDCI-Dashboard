@@ -157,7 +157,7 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 55 modules ***!
+  !*** ./frontend/src/index.js + 59 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
@@ -262,6 +262,14 @@ var UPDATE_ACTION_TABLE = "UPDATE_ACTION_TABLE";
 var GET_ACTION_TABLE = "GET_ACTION_TABLE";
 var CLEAR_CURRENT_DASHBOARD = "CLEAR_CURRENT_DASHBOARD";
 var CLEAR_ACTION_TABLES = "CLEAR_ACTION_TABLE";
+var GET_AUDITS = "GET_AUDITS";
+var ADD_AUDIT = "GET_AUDIT";
+var UPDATE_AUDIT = "UPDATE_AUDIT";
+var DELETE_AUDIT = "DELETE_AUDIT";
+var GET_WINS = "GET_WIN";
+var ADD_WIN = "ADD_WIN";
+var UPDATE_WIN = "UPDATE_WIN";
+var DELETE_WIN = "DELETE_WIN";
 // CONCATENATED MODULE: ./frontend/src/core/actions/messages.js
  // CREATE MESSAGE
 
@@ -1100,6 +1108,130 @@ var dashboards_clearCurrentDashboard = function clearCurrentDashboard() {
     });
   };
 };
+var dashboards_getAudits = function getAudits(dashboardId) {
+  return function (dispatch, getState) {
+    axios_default.a.get("api/audit/?dashboard=".concat(dashboardId), tokenConfig(getState)).then(function (res) {
+      dispatch({
+        type: GET_AUDITS,
+        payload: res.data
+      });
+    });
+  };
+};
+var dashboards_addAudit = function addAudit(audit) {
+  return function (dispatch, getState) {
+    axios_default.a.post("api/audit/", audit, tokenConfig(getState)).then(function (res) {
+      // Dispatch a message action which notifies user of success
+      dispatch(messages_createMessage({
+        addAudit: "Audit Added!"
+      })); // Dispatch the action to reducer. Payload is the dashboard which was added
+
+      dispatch({
+        type: ADD_AUDIT,
+        payload: res.data
+      });
+    }) // If there is an error, dispatch a error message to reducer
+    ["catch"](function (err) {
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+    });
+  };
+};
+var dashboards_updateAudit = function updateAudit(audit, id) {
+  return function (dispatch, getState) {
+    axios_default.a.patch("/api/audit/".concat(id, "/"), audit, tokenConfig(getState)).then(function (res) {
+      dispatch(messages_createMessage({
+        updateAudit: "Audit Updated"
+      }));
+      dispatch({
+        type: UPDATE_AUDIT,
+        payload: res.data
+      });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+    });
+  };
+};
+var dashboards_deleteAudit = function deleteAudit(id) {
+  return function (dispatch, getState) {
+    axios_default.a["delete"]("/api/audit/".concat(id, "/"), tokenConfig(getState)).then(function () {
+      dispatch(messages_createMessage({
+        deleteAudit: "Audit Deleted"
+      }));
+      dispatch({
+        type: DELETE_AUDIT,
+        payload: id
+      });
+    });
+  };
+};
+var dashboards_getWins = function getWins(dashboardId) {
+  return function (dispatch, getState) {
+    axios_default.a.get("api/win/?dashboard=".concat(dashboardId), tokenConfig(getState)).then(function (res) {
+      dispatch({
+        type: GET_WINS,
+        payload: res.data
+      });
+    });
+  };
+};
+var dashboards_addWin = function addWin(win) {
+  return function (dispatch, getState) {
+    axios_default.a.post("api/win/", win, tokenConfig(getState)).then(function (res) {
+      // Dispatch a message action which notifies user of success
+      dispatch(messages_createMessage({
+        addWin: "Win Added!"
+      })); // Dispatch the action to reducer. Payload is the dashboard which was added
+
+      dispatch({
+        type: ADD_WIN,
+        payload: res.data
+      });
+    }) // If there is an error, dispatch a error message to reducer
+    ["catch"](function (err) {
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+    });
+  };
+};
+var dashboards_updateWin = function updateWin(win, id) {
+  return function (dispatch, getState) {
+    axios_default.a.patch("/api/win/".concat(id, "/"), win, tokenConfig(getState)).then(function (res) {
+      dispatch(messages_createMessage({
+        updateWin: "Win Updated"
+      }));
+      dispatch({
+        type: UPDATE_WIN,
+        payload: res.data
+      });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+    });
+  };
+};
+var dashboards_deleteWin = function deleteWin(id) {
+  return function (dispatch, getState) {
+    axios_default.a["delete"]("/api/win/".concat(id, "/"), tokenConfig(getState)).then(function () {
+      dispatch(messages_createMessage({
+        deleteWin: "Win Deleted"
+      }));
+      dispatch({
+        type: DELETE_WIN,
+        payload: id
+      });
+    });
+  };
+};
 // EXTERNAL MODULE: ./node_modules/react-spinners/CircleLoader.js
 var CircleLoader = __webpack_require__("./node_modules/react-spinners/CircleLoader.js");
 var CircleLoader_default = /*#__PURE__*/__webpack_require__.n(CircleLoader);
@@ -1230,13 +1362,16 @@ var KPI_TABLE_HEADERS = [{
   prop: "pillar"
 }, {
   name: "Frequency",
-  prop: "frequency"
+  prop: "frequency",
+  map: function map(frequency) {
+    return FREQUENCY_CHOICES[frequency].name;
+  }
 }, {
-  name: "Safe Threshold",
-  prop: "safe"
-}, {
-  name: "Danger Threshold",
-  prop: "danger"
+  name: "Type",
+  prop: "kpi_type",
+  map: function map(kpi_type) {
+    return KPI_TYPE_CHOICES[kpi_type].name;
+  }
 }];
 var SERIES_TABLE_HEADERS = [{
   name: "Name",
@@ -1249,6 +1384,23 @@ var SERIES_TABLE_HEADERS = [{
   prop: "color"
 }];
 var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
+var AUDIT_TABLE_HEADERS = [{
+  name: "Description",
+  prop: "description"
+}, {
+  name: "Date",
+  prop: "date"
+}];
+var WIN_TABLE_HEADERS = [{
+  name: "Description",
+  prop: "description"
+}, {
+  name: "Participants",
+  prop: "participants"
+}, {
+  name: "Date",
+  prop: "date"
+}];
 var ACTION_TABLE_HEADERS = [{
   name: "Letter",
   prop: "letter"
@@ -1454,6 +1606,7 @@ function (_React$Component) {
             kpi_type = _ref.kpi_type,
             warning_margin = _ref.warning_margin,
             threshold_type = _ref.threshold_type,
+            isPercentage = _ref.isPercentage,
             value = _ref.value,
             target = _ref.target;
         var color = "#F2F2F2";
@@ -1467,6 +1620,8 @@ function (_React$Component) {
             break;
 
           case KPI_TYPE_THRESHOLD:
+            if (!isPercentage) return getAbsoluteColor(target, value, warning_margin, threshold_type);
+
             switch (threshold_type) {
               case THRESHOLD_TYPE_GREATER:
                 if (value >= target) color = "green";else if (deviation < warning_margin) color = "red";else color = "orange";
@@ -1481,6 +1636,23 @@ function (_React$Component) {
 
           case KPI_TYPE_WIN_LOSE:
             if (value >= target) color = "green";else color = "red";
+            break;
+        }
+
+        return color;
+      };
+
+      var getAbsoluteColor = function getAbsoluteColor(target, value, warning_margin, threshold_type) {
+        console.log("hello");
+        var color = "#F2F2F2";
+
+        switch (threshold_type) {
+          case THRESHOLD_TYPE_GREATER:
+            if (value >= target) color = "green";else if (value < target && value >= warning_margin) color = "orange";else color = "red";
+            break;
+
+          case THRESHOLD_TYPE_LESS:
+            if (value <= target) color = "green";else if (value > target && value <= warning_margin) color = "orange";else color = "red";
             break;
         }
 
@@ -1508,6 +1680,8 @@ function (_React$Component) {
         return d.warning_margin;
       }).attr("data-type", function (d) {
         return d.kpi_type;
+      }).attr("data-isPercentage", function (d) {
+        return d.isPercentage;
       }).attr("transform", "translate(".concat(plotSize / 2, ",").concat(plotSize / 2, ")"));
       this.props.animateFauxDOM(800);
       pathEnter.selectAll(".ring").remove();
@@ -1523,17 +1697,23 @@ function (_React$Component) {
       }).on("mouseover", function (d, i, j) {
         var kpi_type = $(j)[i].parentNode.getAttribute("data-type");
         var kpiName = $(j)[i].parentNode.getAttribute("data-name");
+        var threshold_type = $(j)[i].parentNode.getAttribute("data-thresh-type");
+        var warning_margin = $(j)[i].parentNode.getAttribute("data-warning");
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "#000").attr("stroke-width", "1");
+        if (!showTooltip) return;
         showTooltip(true, {
           x: d3["event"].pageX,
           y: d3["event"].pageY,
           payload: _objectSpread({
             kpi_type: kpi_type,
-            kpiName: kpiName
+            kpiName: kpiName,
+            threshold_type: threshold_type,
+            warning_margin: warning_margin
           }, d.data)
         });
       }).on("mouseout", function (d) {
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "none");
+        if (!showTooltip) return;
         showTooltip(false);
       }).merge(ringBind).style("fill", function (d, i, j) {
         var colorProps = {
@@ -1542,6 +1722,7 @@ function (_React$Component) {
           kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
           warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
           threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
+          isPercentage: $(j)[i].parentNode.getAttribute("data-isPercentage"),
           value: d.data.value,
           target: d.data.target
         };
@@ -1730,6 +1911,11 @@ function (_Component) {
       this.props.stopEditingHook(e, this.props.id, current);
     }
   }, {
+    key: "renderCellData",
+    value: function renderCellData(y) {
+      if (y.map) return y.map(this.props.data[y.prop]);else return this.props.data[y.prop];
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
@@ -1778,7 +1964,7 @@ function (_Component) {
             style: {
               width: "".concat(100, "%")
             }
-          }) : _this2.props.data[y.prop] != null ? _this2.props.data[y.prop] : "NULL");
+          }) : _this2.props.data[y.prop] != null ? _this2.renderCellData(y) : "NULL");
         }), currentlyEditing ? react_default.a.createElement("td", {
           key: "done",
           className: "im im-check-mark icon co-primary",
@@ -1819,7 +2005,7 @@ function (_Component) {
       }, header.map(function (y, k) {
         return react_default.a.createElement("td", {
           key: "trc-".concat(k)
-        }, _this2.props.data[y.prop] != null ? _this2.props.data[y.prop] : "NULL");
+        }, _this2.props.data[y.prop] != null ? _this2.renderCellData(y) : "NULL");
       }), deletable && react_default.a.createElement("td", {
         style: {
           display: "table-cell"
@@ -2684,6 +2870,671 @@ ActionOptions_ActionOptions.propTypes = {
   action: prop_types_default.a.object
 };
 /* harmony default export */ var components_ActionOptions = (ActionOptions_ActionOptions);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditTable.js
+function AuditTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AuditTable_typeof = function _typeof(obj) { return typeof obj; }; } else { AuditTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AuditTable_typeof(obj); }
+
+function AuditTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function AuditTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function AuditTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) AuditTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) AuditTable_defineProperties(Constructor, staticProps); return Constructor; }
+
+function AuditTable_possibleConstructorReturn(self, call) { if (call && (AuditTable_typeof(call) === "object" || typeof call === "function")) { return call; } return AuditTable_assertThisInitialized(self); }
+
+function AuditTable_getPrototypeOf(o) { AuditTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return AuditTable_getPrototypeOf(o); }
+
+function AuditTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function AuditTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) AuditTable_setPrototypeOf(subClass, superClass); }
+
+function AuditTable_setPrototypeOf(o, p) { AuditTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return AuditTable_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+var AuditTable_AuditTable =
+/*#__PURE__*/
+function (_Component) {
+  AuditTable_inherits(AuditTable, _Component);
+
+  function AuditTable(props) {
+    var _this;
+
+    AuditTable_classCallCheck(this, AuditTable);
+
+    _this = AuditTable_possibleConstructorReturn(this, AuditTable_getPrototypeOf(AuditTable).call(this, props));
+    _this.update = _this.update.bind(AuditTable_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(AuditTable_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(AuditTable_assertThisInitialized(_this));
+    return _this;
+  }
+
+  AuditTable_createClass(AuditTable, [{
+    key: "update",
+    value: function update(current, id) {
+      var updateAudit = this.props.updateAudit;
+      updateAudit(current, id);
+    }
+  }, {
+    key: "insert",
+    value: function insert() {
+      var addAudit = this.props.addAudit;
+      var audit = {
+        description: null,
+        date: null
+      };
+      addAudit(audit);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(id) {
+      var deleteAudit = this.props.deleteAudit;
+      deleteAudit(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          editable = _this$props.editable,
+          appendable = _this$props.appendable,
+          rowClick = _this$props.rowClick,
+          deletable = _this$props.deletable;
+      return react_default.a.createElement(table_Table, {
+        editable: editable,
+        appendable: appendable,
+        data: data,
+        header: AUDIT_TABLE_HEADERS,
+        update: this.update,
+        "delete": this["delete"],
+        insert: this.insert,
+        rowClick: rowClick,
+        deletable: deletable,
+        fontSize: "0.6rem",
+        summary: true
+      });
+    }
+  }]);
+
+  return AuditTable;
+}(react["Component"]);
+
+AuditTable_AuditTable.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_AuditTable = (Object(es["connect"])(null, {
+  updateAudit: dashboards_updateAudit,
+  deleteAudit: dashboards_deleteAudit,
+  addAudit: dashboards_addAudit
+})(AuditTable_AuditTable));
+AuditTable_AuditTable.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/modal/Modal.js
+function Modal_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Modal_typeof = function _typeof(obj) { return typeof obj; }; } else { Modal_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Modal_typeof(obj); }
+
+function Modal_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Modal_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Modal_createClass(Constructor, protoProps, staticProps) { if (protoProps) Modal_defineProperties(Constructor.prototype, protoProps); if (staticProps) Modal_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Modal_possibleConstructorReturn(self, call) { if (call && (Modal_typeof(call) === "object" || typeof call === "function")) { return call; } return Modal_assertThisInitialized(self); }
+
+function Modal_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Modal_getPrototypeOf(o) { Modal_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Modal_getPrototypeOf(o); }
+
+function Modal_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Modal_setPrototypeOf(subClass, superClass); }
+
+function Modal_setPrototypeOf(o, p) { Modal_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Modal_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+var Modal_Modal =
+/*#__PURE__*/
+function (_Component) {
+  Modal_inherits(Modal, _Component);
+
+  function Modal(props) {
+    Modal_classCallCheck(this, Modal);
+
+    return Modal_possibleConstructorReturn(this, Modal_getPrototypeOf(Modal).call(this, props));
+  }
+
+  Modal_createClass(Modal, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          title = _this$props.title,
+          iconClass = _this$props.iconClass,
+          id = _this$props.id,
+          children = _this$props.children;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "modal fade",
+        id: id,
+        role: "dialog",
+        "aria-labelledby": "".concat(id, "Label"),
+        "aria-hidden": "true"
+      }, react_default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document",
+        style: {
+          maxWidth: "fit-content",
+          overflow: "visible"
+        }
+      }, react_default.a.createElement("div", {
+        className: "modal-content"
+      }, react_default.a.createElement("div", {
+        className: "modal-header"
+      }, react_default.a.createElement("h1", {
+        className: "modal-title",
+        id: "".concat(id, "Label")
+      }, react_default.a.createElement("span", {
+        className: iconClass,
+        style: {
+          fontSize: "".concat(2.5, "rem"),
+          verticalAlign: "-0.1em"
+        }
+      }), "  ", title), react_default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react_default.a.createElement("span", {
+        "aria-hidden": "true"
+      }, "\xD7"))), react_default.a.createElement("div", {
+        className: "modal-body",
+        style: {
+          padding: 0
+        }
+      }, react_default.a.createElement("div", {
+        className: "card"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, children)))))));
+    }
+  }]);
+
+  return Modal;
+}(react["Component"]);
+
+/* harmony default export */ var modal_Modal = (Modal_Modal);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditForm.js
+function AuditForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AuditForm_typeof = function _typeof(obj) { return typeof obj; }; } else { AuditForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AuditForm_typeof(obj); }
+
+function AuditForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function AuditForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function AuditForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function AuditForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) AuditForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) AuditForm_defineProperties(Constructor, staticProps); return Constructor; }
+
+function AuditForm_possibleConstructorReturn(self, call) { if (call && (AuditForm_typeof(call) === "object" || typeof call === "function")) { return call; } return AuditForm_assertThisInitialized(self); }
+
+function AuditForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function AuditForm_getPrototypeOf(o) { AuditForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return AuditForm_getPrototypeOf(o); }
+
+function AuditForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) AuditForm_setPrototypeOf(subClass, superClass); }
+
+function AuditForm_setPrototypeOf(o, p) { AuditForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return AuditForm_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+
+
+
+ // ACTIONS
+
+
+/* The boardroom is the landing page for all dashboards
+Parent of all boardroom components Contains pillar widgets and action tables
+This component makes ALL GET request for Boardroom data
+*/
+
+var AuditForm_AuditForm =
+/*#__PURE__*/
+function (_Component) {
+  AuditForm_inherits(AuditForm, _Component);
+
+  function AuditForm() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    AuditForm_classCallCheck(this, AuditForm);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return AuditForm_possibleConstructorReturn(_this, (_temp = _this = AuditForm_possibleConstructorReturn(this, (_getPrototypeOf2 = AuditForm_getPrototypeOf(AuditForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      description: "",
+      date: new Date()
+    }, _this.onUpdate = function (hook) {
+      hook();
+    }, _this.onChange = function (e) {
+      return _this.setState(AuditForm_defineProperty({}, e.target.name, e.target.value));
+    }, _this.onDateChange = function (date) {
+      _this.setState({
+        date: date
+      });
+    }, _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$state = _this.state,
+          description = _this$state.description,
+          date = _this$state.date;
+      var _this$props = _this.props,
+          audit = _this$props.audit,
+          updateAudit = _this$props.updateAudit;
+      var newAudit = {
+        description: description
+      };
+      newAudit.date = Object(esm_format["default"])(date, "yyyy-MM-dd");
+      updateAudit(newAudit, audit.id);
+
+      _this.setState({
+        description: "",
+        date: Object(parseISO["default"])("2019-01-01")
+      });
+    }, _this["delete"] = function () {
+      var _this$props2 = _this.props,
+          deleteAudit = _this$props2.deleteAudit,
+          audit = _this$props2.audit;
+      deleteAudit(audit.id);
+      $("#auditOptions").modal("hide");
+    }, _temp));
+  }
+
+  AuditForm_createClass(AuditForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
+      var audit = this.props.audit;
+
+      if (prevProps.audit !== audit) {
+        if (!audit) return;
+        this.onUpdate(function () {
+          _this2.setState({
+            description: audit.description,
+            date: audit.date ? Object(parseISO["default"])(audit.date) : new Date()
+          });
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$state2 = this.state,
+          description = _this$state2.description,
+          date = _this$state2.date;
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("div", {
+        className: "row justify-content-between"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-12"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "description",
+        onChange: this.onChange,
+        value: description
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "date",
+        className: "d-block"
+      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
+        className: "form-control",
+        onChange: function onChange(date) {
+          return _this3.onDateChange(date);
+        },
+        selected: date,
+        dateFormat: "yyyy-MM-dd"
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-12 d-flex justify-content-end"
+      }, react_default.a.createElement("button", {
+        type: "button",
+        className: "btn\r btn-danger mr-4",
+        onClick: this["delete"]
+      }, "Delete"), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn\r btn-primary"
+      }, "Submit"))));
+    }
+  }]);
+
+  return AuditForm;
+}(react["Component"]);
+
+AuditForm_AuditForm.propTypes = {
+  audit: prop_types_default.a.object,
+  updateAudit: prop_types_default.a.func.isRequired,
+  deleteAudit: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_AuditForm = (Object(es["connect"])(null, {
+  updateAudit: dashboards_updateAudit,
+  deleteAudit: dashboards_deleteAudit
+})(AuditForm_AuditForm));
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinTable.js
+function WinTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WinTable_typeof = function _typeof(obj) { return typeof obj; }; } else { WinTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WinTable_typeof(obj); }
+
+function WinTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function WinTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function WinTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) WinTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) WinTable_defineProperties(Constructor, staticProps); return Constructor; }
+
+function WinTable_possibleConstructorReturn(self, call) { if (call && (WinTable_typeof(call) === "object" || typeof call === "function")) { return call; } return WinTable_assertThisInitialized(self); }
+
+function WinTable_getPrototypeOf(o) { WinTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WinTable_getPrototypeOf(o); }
+
+function WinTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function WinTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WinTable_setPrototypeOf(subClass, superClass); }
+
+function WinTable_setPrototypeOf(o, p) { WinTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WinTable_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+var WinTable_WinTable =
+/*#__PURE__*/
+function (_Component) {
+  WinTable_inherits(WinTable, _Component);
+
+  function WinTable(props) {
+    var _this;
+
+    WinTable_classCallCheck(this, WinTable);
+
+    _this = WinTable_possibleConstructorReturn(this, WinTable_getPrototypeOf(WinTable).call(this, props));
+    _this.update = _this.update.bind(WinTable_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(WinTable_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(WinTable_assertThisInitialized(_this));
+    return _this;
+  }
+
+  WinTable_createClass(WinTable, [{
+    key: "update",
+    value: function update(current, id) {
+      var updateWin = this.props.updateWin;
+      updateWin(current, id);
+    }
+  }, {
+    key: "insert",
+    value: function insert() {
+      var addWin = this.props.addWin;
+      var win = {
+        description: null,
+        participants: null,
+        date: null
+      };
+      addWin(win);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(id) {
+      var deleteWin = this.props.deleteWin;
+      deleteWin(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          data = _this$props.data,
+          editable = _this$props.editable,
+          appendable = _this$props.appendable,
+          rowClick = _this$props.rowClick,
+          deletable = _this$props.deletable;
+      return react_default.a.createElement(table_Table, {
+        editable: editable,
+        appendable: appendable,
+        data: data,
+        header: WIN_TABLE_HEADERS,
+        update: this.update,
+        "delete": this["delete"],
+        insert: this.insert,
+        rowClick: rowClick,
+        deletable: deletable,
+        fontSize: "0.6rem",
+        summary: true
+      });
+    }
+  }]);
+
+  return WinTable;
+}(react["Component"]);
+
+WinTable_WinTable.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_WinTable = (Object(es["connect"])(null, {
+  updateWin: dashboards_updateWin,
+  deleteWin: dashboards_deleteWin,
+  addWin: dashboards_addWin
+})(WinTable_WinTable));
+WinTable_WinTable.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinForm.js
+function WinForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WinForm_typeof = function _typeof(obj) { return typeof obj; }; } else { WinForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WinForm_typeof(obj); }
+
+function WinForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function WinForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function WinForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function WinForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) WinForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) WinForm_defineProperties(Constructor, staticProps); return Constructor; }
+
+function WinForm_possibleConstructorReturn(self, call) { if (call && (WinForm_typeof(call) === "object" || typeof call === "function")) { return call; } return WinForm_assertThisInitialized(self); }
+
+function WinForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function WinForm_getPrototypeOf(o) { WinForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WinForm_getPrototypeOf(o); }
+
+function WinForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WinForm_setPrototypeOf(subClass, superClass); }
+
+function WinForm_setPrototypeOf(o, p) { WinForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WinForm_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+
+
+
+ // ACTIONS
+
+
+/* The boardroom is the landing page for all dashboards
+Parent of all boardroom components Contains pillar widgets and action tables
+This component makes ALL GET request for Boardroom data
+*/
+
+var WinForm_WinForm =
+/*#__PURE__*/
+function (_Component) {
+  WinForm_inherits(WinForm, _Component);
+
+  function WinForm() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    WinForm_classCallCheck(this, WinForm);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return WinForm_possibleConstructorReturn(_this, (_temp = _this = WinForm_possibleConstructorReturn(this, (_getPrototypeOf2 = WinForm_getPrototypeOf(WinForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      description: "",
+      participants: "",
+      date: new Date()
+    }, _this.onUpdate = function (hook) {
+      hook();
+    }, _this.onChange = function (e) {
+      return _this.setState(WinForm_defineProperty({}, e.target.name, e.target.value));
+    }, _this.onDateChange = function (date) {
+      _this.setState({
+        date: date
+      });
+    }, _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$state = _this.state,
+          description = _this$state.description,
+          date = _this$state.date,
+          participants = _this$state.participants;
+      var _this$props = _this.props,
+          win = _this$props.win,
+          updateWin = _this$props.updateWin;
+      var newWin = {
+        description: description,
+        participants: participants
+      };
+      newWin.date = Object(esm_format["default"])(date, "yyyy-MM-dd");
+      updateWin(newWin, win.id);
+
+      _this.setState({
+        description: "",
+        date: Object(parseISO["default"])("2019-01-01")
+      });
+    }, _this["delete"] = function () {
+      var _this$props2 = _this.props,
+          deleteWin = _this$props2.deleteWin,
+          win = _this$props2.win;
+      deleteWin(win.id);
+      $("#winOptions").modal("hide");
+    }, _temp));
+  }
+
+  WinForm_createClass(WinForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this2 = this;
+
+      var win = this.props.win;
+
+      if (prevProps.win !== win) {
+        if (!win) return;
+        this.onUpdate(function () {
+          _this2.setState({
+            description: win.description,
+            participants: win.participants,
+            date: win.date ? Object(parseISO["default"])(win.date) : new Date()
+          });
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var _this$state2 = this.state,
+          description = _this$state2.description,
+          date = _this$state2.date,
+          participants = _this$state2.participants;
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit
+      }, react_default.a.createElement("div", {
+        className: "row justify-content-between"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-12"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "description"
+      }, "Description"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "description",
+        onChange: this.onChange,
+        value: description
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "participants"
+      }, "Participants"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "participants",
+        onChange: this.onChange,
+        value: participants
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "date",
+        className: "d-block"
+      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
+        className: "form-control",
+        onChange: function onChange(date) {
+          return _this3.onDateChange(date);
+        },
+        selected: date,
+        dateFormat: "yyyy-MM-dd"
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-12 d-flex justify-content-end"
+      }, react_default.a.createElement("button", {
+        type: "button",
+        className: "btn\r btn-danger mr-4",
+        onClick: this["delete"]
+      }, "Delete"), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn\r btn-primary"
+      }, "Submit"))));
+    }
+  }]);
+
+  return WinForm;
+}(react["Component"]);
+
+WinForm_WinForm.propTypes = {
+  win: prop_types_default.a.object,
+  updateWin: prop_types_default.a.func.isRequired,
+  deleteWin: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_WinForm = (Object(es["connect"])(null, {
+  updateWin: dashboards_updateWin,
+  deleteWin: dashboards_deleteWin
+})(WinForm_WinForm));
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionPlan.js
 function ActionPlan_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionPlan_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionPlan_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionPlan_typeof(obj); }
 
@@ -2713,6 +3564,12 @@ function ActionPlan_setPrototypeOf(o, p) { ActionPlan_setPrototypeOf = Object.se
 
 
 
+
+
+
+
+
+
 var ActionPlan_ActionPlan =
 /*#__PURE__*/
 function (_Component) {
@@ -2724,9 +3581,12 @@ function (_Component) {
     ActionPlan_classCallCheck(this, ActionPlan);
 
     _this = ActionPlan_possibleConstructorReturn(this, ActionPlan_getPrototypeOf(ActionPlan).call(this, props));
-    _this.rowClick = _this.rowClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.rowActionClick = _this.rowActionClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.rowAuditClick = _this.rowAuditClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.rowWinClick = _this.rowWinClick.bind(ActionPlan_assertThisInitialized(_this));
     _this.state = {
-      currentActionId: null
+      currentActionId: null,
+      currentWinId: null
     };
     return _this;
   }
@@ -2741,12 +3601,28 @@ function (_Component) {
       return payload ? payload[0] : null;
     }
   }, {
-    key: "rowClick",
-    value: function rowClick(id) {
+    key: "rowActionClick",
+    value: function rowActionClick(id) {
       this.setState({
         currentActionId: id
       });
       $("#actionOptions").modal("show");
+    }
+  }, {
+    key: "rowAuditClick",
+    value: function rowAuditClick(id) {
+      this.setState({
+        currentAuditId: id
+      });
+      $("#auditOptions").modal("show");
+    }
+  }, {
+    key: "rowWinClick",
+    value: function rowWinClick(id) {
+      this.setState({
+        currentWinId: id
+      });
+      $("#winOptions").modal("show");
     }
   }, {
     key: "render",
@@ -2754,21 +3630,44 @@ function (_Component) {
       var _this$props = this.props,
           tables = _this$props.tables,
           dashboards = _this$props.dashboards,
-          currentDashboard = _this$props.currentDashboard;
-      var currentActionId = this.state.currentActionId;
+          currentDashboard = _this$props.currentDashboard,
+          audits = _this$props.audits,
+          wins = _this$props.wins;
+      var _this$state = this.state,
+          currentActionId = _this$state.currentActionId,
+          currentAuditId = _this$state.currentAuditId,
+          currentWinId = _this$state.currentWinId;
       var actionQuery = tables.map(function (table) {
         return table.actions.filter(function (action) {
           return action.id === currentActionId;
         });
       }).flat();
       var currentAction = actionQuery ? actionQuery[0] : null;
+      var auditQuery = audits.filter(function (audit) {
+        return audit.id === currentAuditId;
+      });
+      var winQuery = wins.filter(function (win) {
+        return win.id === currentWinId;
+      });
+      var currentAudit = auditQuery ? auditQuery[0] : null;
+      var currentWin = winQuery ? winQuery[0] : null;
       var ul = this.filterTables("Upper Level Escalation");
       var ll = this.filterTables("Lower Level Feed");
       var lt = this.filterTables("Long Term Action Plan");
       var st = this.filterTables("Short Term Action Plan");
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
         action: currentAction
-      }), react_default.a.createElement("div", {
+      }), react_default.a.createElement(modal_Modal, {
+        title: "Update Audit",
+        id: "auditOptions"
+      }, react_default.a.createElement(components_AuditForm, {
+        audit: currentAudit
+      })), react_default.a.createElement(modal_Modal, {
+        title: "Update WIN",
+        id: "winOptions"
+      }, react_default.a.createElement(components_WinForm, {
+        win: currentWin
+      })), react_default.a.createElement("div", {
         className: "row m-0"
       }, react_default.a.createElement("div", {
         className: "col-lg-6 p-0"
@@ -2780,15 +3679,25 @@ function (_Component) {
         data: st,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
-        rowClick: this.rowClick
+        rowClick: this.rowActionClick
       })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
         className: "mt-3"
       }, " Long Term Action Plan"), react_default.a.createElement(components_ActionTable, {
         data: lt,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
-        rowClick: this.rowClick
-      })) : react_default.a.createElement(LoadingScreen, null)))), react_default.a.createElement("div", {
+        rowClick: this.rowActionClick
+      })) : react_default.a.createElement(LoadingScreen, null))), react_default.a.createElement("div", {
+        className: "card mt-4 ml-2 mr-2"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h5", {
+        className: "mt-3"
+      }, "Audits"), react_default.a.createElement(components_AuditTable, {
+        data: audits,
+        rowClick: this.rowAuditClick,
+        appendable: true
+      })))), react_default.a.createElement("div", {
         className: "col-lg-6 p-0"
       }, react_default.a.createElement("div", {
         className: "card mt-4 ml-2 mr-2"
@@ -2808,7 +3717,7 @@ function (_Component) {
         data: ul,
         header: ACTION_TABLE_HEADERS,
         appendable: true,
-        rowClick: this.rowClick
+        rowClick: this.rowActionClick
       }), react_default.a.createElement(EscalationsOptions, {
         dashboards: dashboards,
         currentDashboard: currentDashboard,
@@ -2819,7 +3728,17 @@ function (_Component) {
         data: ll,
         header: ACTION_TABLE_HEADERS,
         hoverable: true
-      })) : react_default.a.createElement(LoadingScreen, null))))));
+      })) : react_default.a.createElement(LoadingScreen, null))), react_default.a.createElement("div", {
+        className: "card mt-4 ml-2 mr-2"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h5", {
+        className: "mt-3"
+      }, "WINS"), react_default.a.createElement(components_WinTable, {
+        data: wins,
+        rowClick: this.rowWinClick,
+        appendable: true
+      }))))));
     }
   }]);
 
@@ -2829,7 +3748,8 @@ function (_Component) {
 ActionPlan_ActionPlan.propTypes = {
   tables: prop_types_default.a.array.isRequired,
   dashboards: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired,
-  currentDashboard: prop_types_default.a.object.isRequired
+  currentDashboard: prop_types_default.a.object.isRequired,
+  audit: prop_types_default.a.array
 };
 
 var ActionPlan_mapStateToProps = function mapStateToProps(state) {
@@ -2899,7 +3819,9 @@ function (_Component) {
           getADashboard = _this$props.getADashboard,
           getKpis = _this$props.getKpis,
           getActionTable = _this$props.getActionTable,
-          getDashboards = _this$props.getDashboards; // Fetch data from server
+          getDashboards = _this$props.getDashboards,
+          getAudits = _this$props.getAudits,
+          getWins = _this$props.getWins; // Fetch data from server
       // Source of ALL data for boardroom
 
       var id = this.props.match.params.id;
@@ -2907,6 +3829,8 @@ function (_Component) {
       getADashboard(id);
       getActionTable(id);
       getKpis(id);
+      getAudits(id);
+      getWins(id);
     }
   }, {
     key: "render",
@@ -2915,7 +3839,9 @@ function (_Component) {
           currentDashboard = _this$props2.currentDashboard,
           kpis = _this$props2.kpis,
           actionTables = _this$props2.actionTables,
-          dashboards = _this$props2.dashboards;
+          dashboards = _this$props2.dashboards,
+          audits = _this$props2.audits,
+          wins = _this$props2.wins;
       var id = this.props.match.params.id; // If there is no current dashboard show the loading screen
 
       if (currentDashboard == null) {
@@ -2946,6 +3872,8 @@ function (_Component) {
         className: "col-lg-10 p-0"
       }, react_default.a.createElement(components_ActionPlan, {
         tables: actionTables,
+        audits: audits,
+        wins: wins,
         dashboards: dashboards
       })))));
     }
@@ -2975,7 +3903,9 @@ var boardRoom_mapStateToProps = function mapStateToProps(state) {
     kpis: state.dashboards.kpis,
     isAuthenticated: state.auth.isAuthenticated,
     actionTables: state.dashboards.actionTables,
-    currentDashboard: state.dashboards.currentDashboard
+    currentDashboard: state.dashboards.currentDashboard,
+    audits: state.dashboards.audits,
+    wins: state.dashboards.wins
   };
 };
 
@@ -2984,7 +3914,9 @@ var boardRoom_mapStateToProps = function mapStateToProps(state) {
   getDashboards: dashboards_getDashboards,
   getADashboard: dashboards_getADashboard,
   clearKpis: dashboards_clearKpis,
-  getActionTable: dashboards_getActionTable
+  getActionTable: dashboards_getActionTable,
+  getAudits: dashboards_getAudits,
+  getWins: dashboards_getWins
 })(boardRoom_Boardroom));
 // CONCATENATED MODULE: ./frontend/src/core/components/utils/PrivateRoute.js
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
@@ -3147,7 +4079,7 @@ function (_React$Component) {
 
       svg.append("g").attr("class", "myXaxis").attr("transform", "translate(0, ".concat(height - margin.bottom, ")")).style("color", "black").style("font-size", "0.8rem"); // Y-axis Unit
 
-      svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").text("$ CAD").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
+      svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
 
       svg.append("text").attr("x", width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accentColor);
     }
@@ -3300,12 +4232,9 @@ function (_React$Component) {
       d3["select"](faux).select("#title").text(function () {
         return kpis[index] ? kpis[index].name : "";
       });
-      /*
-      svg
-        .select("#chart")
-        .select("#y_unit")
-        .text(context[i].units); */
-
+      d3["select"](faux).select("#y_unit").text(function () {
+        return kpis[index] ? kpis[index].unit || "" : "";
+      });
       d3["select"](faux).select("#plotArea").selectAll("#curtain").remove();
       d3["select"](faux).select("#plotArea").append("rect").attr("id", "curtain").style("fill", "#ffffff").attr("x", 0).attr("width", width).attr("height", height - margin.bottom).transition().delay(500).ease(d3["easeExp"]).duration(4000).attr("x", width + 5);
       animateFauxDOM(9000);
@@ -3492,96 +4421,6 @@ svgExporter_SvgExporter.propTypes = {
   target: prop_types_default.a.string.isRequired
 };
 /* harmony default export */ var svgExporter = (svgExporter_SvgExporter);
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/modal/Modal.js
-function Modal_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Modal_typeof = function _typeof(obj) { return typeof obj; }; } else { Modal_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Modal_typeof(obj); }
-
-function Modal_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Modal_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Modal_createClass(Constructor, protoProps, staticProps) { if (protoProps) Modal_defineProperties(Constructor.prototype, protoProps); if (staticProps) Modal_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Modal_possibleConstructorReturn(self, call) { if (call && (Modal_typeof(call) === "object" || typeof call === "function")) { return call; } return Modal_assertThisInitialized(self); }
-
-function Modal_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Modal_getPrototypeOf(o) { Modal_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Modal_getPrototypeOf(o); }
-
-function Modal_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Modal_setPrototypeOf(subClass, superClass); }
-
-function Modal_setPrototypeOf(o, p) { Modal_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Modal_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
-var Modal_Modal =
-/*#__PURE__*/
-function (_Component) {
-  Modal_inherits(Modal, _Component);
-
-  function Modal(props) {
-    Modal_classCallCheck(this, Modal);
-
-    return Modal_possibleConstructorReturn(this, Modal_getPrototypeOf(Modal).call(this, props));
-  }
-
-  Modal_createClass(Modal, [{
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          title = _this$props.title,
-          iconClass = _this$props.iconClass,
-          id = _this$props.id,
-          children = _this$props.children;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "modal fade",
-        id: id,
-        role: "dialog",
-        "aria-labelledby": "".concat(id, "Label"),
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document",
-        style: {
-          maxWidth: "fit-content"
-        }
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "".concat(id, "Label")
-      }, react_default.a.createElement("span", {
-        className: iconClass,
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", title), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, children)))))));
-    }
-  }]);
-
-  return Modal;
-}(react["Component"]);
-
-/* harmony default export */ var modal_Modal = (Modal_Modal);
 // EXTERNAL MODULE: ./node_modules/date-fns/esm/index.js + 179 modules
 var esm = __webpack_require__("./node_modules/date-fns/esm/index.js");
 
@@ -4562,7 +5401,7 @@ var sliderStyle = {
   position: "relative",
   width: "100%"
 };
-var domain = [0, 100];
+var DeviationSlider_domain = [0, 100];
 var defaultValues = [0, 25, 75, 100];
 
 var DeviationSlider_Example =
@@ -4577,7 +5416,7 @@ function (_Component) {
 
     _this = DeviationSlider_possibleConstructorReturn(this, DeviationSlider_getPrototypeOf(Example).call(this, props));
 
-    _initialiseProps.call(DeviationSlider_assertThisInitialized(_this));
+    DeviationSlider_initialiseProps.call(DeviationSlider_assertThisInitialized(_this));
 
     var _this$props = _this.props,
         danger_deviation = _this$props.danger_deviation,
@@ -4599,13 +5438,13 @@ function (_Component) {
       return react_default.a.createElement("div", {
         className: "mt-5",
         style: {
-          height: 120,
+          height: 70,
           width: "95%"
         }
       }, react_default.a.createElement(react_compound_slider_es["Slider"], {
         mode: 1,
         step: 1,
-        domain: domain,
+        domain: DeviationSlider_domain,
         rootStyle: sliderStyle,
         onUpdate: this.onUpdate,
         onChange: this.onChange,
@@ -4633,14 +5472,14 @@ function (_Component) {
           if (i === 0) return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: domain,
+            domain: DeviationSlider_domain,
             getHandleProps: function getHandleProps() {},
             disabled: true
           });
           if (i + 1 === arr.length) return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: domain,
+            domain: DeviationSlider_domain,
             getHandleProps: function getHandleProps() {},
             disabled: true,
             noDisplay: true
@@ -4648,7 +5487,7 @@ function (_Component) {
           return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: domain,
+            domain: DeviationSlider_domain,
             getHandleProps: getHandleProps
           });
         }));
@@ -4714,7 +5553,7 @@ function (_Component) {
   return Example;
 }(react["Component"]);
 
-var _initialiseProps = function _initialiseProps() {
+var DeviationSlider_initialiseProps = function _initialiseProps() {
   var _this2 = this;
 
   this.onUpdate = function (update) {
@@ -4774,9 +5613,8 @@ function (_Component) {
 
     ThresholdSlider_initialiseProps.call(ThresholdSlider_assertThisInitialized(_this));
 
-    var threshold_type = props.threshold_type,
-        warning_margin = props.warning_margin;
-    var values = threshold_type === THRESHOLD_TYPE_GREATER ? [warning_margin, 0, 100].slice() : [0, warning_margin, 100].slice();
+    var values = _this.getValues();
+
     _this.state = {
       values: values,
       update: values
@@ -4785,22 +5623,54 @@ function (_Component) {
   }
 
   ThresholdSlider_createClass(Example, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          target = _this$props.target,
+          threshold_type = _this$props.threshold_type;
+
+      if (prevProps.target !== target || prevProps.threshold_type !== threshold_type) {
+        var _this$props2 = this.props,
+            _target = _this$props2.target,
+            warning_margin = _this$props2.warning_margin,
+            _threshold_type = _this$props2.threshold_type;
+        var values = [0, 0];
+        var newTarget = parseInt(_target);
+
+        if (!_target) {
+          values = _threshold_type === THRESHOLD_TYPE_GREATER ? [-75, 0, 100].slice() : [0, 75, 100].slice();
+        } else {
+          values = _threshold_type === THRESHOLD_TYPE_GREATER ? [Math.round(newTarget - newTarget * 0.5), newTarget, newTarget * 2] : [newTarget, Math.round(newTarget * 1.5), newTarget * 2];
+        }
+
+        console.log(values);
+        this.setState({
+          values: values.slice(),
+          update: values.slice()
+        });
+        this.onUpdate(values);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
           values = _this$state.values,
           update = _this$state.update;
-      var threshold_type = this.props.threshold_type;
+      var _this$props3 = this.props,
+          threshold_type = _this$props3.threshold_type,
+          target = _this$props3.target,
+          domain = _this$props3.domain;
       return react_default.a.createElement("div", {
         className: "mt-5",
         style: {
-          height: 120,
+          height: 70,
           width: "95%"
         }
       }, react_default.a.createElement(react_compound_slider_es["Slider"], {
         mode: 2,
         step: 1,
-        domain: ThresholdSlider_domain,
+        domain: domain,
         rootStyle: ThresholdSlider_sliderStyle,
         onUpdate: this.onUpdate,
         onChange: this.onChange,
@@ -4828,14 +5698,14 @@ function (_Component) {
           if (i === (threshold_type === THRESHOLD_TYPE_GREATER ? 1 : 0)) return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: ThresholdSlider_domain,
+            domain: domain,
             getHandleProps: function getHandleProps() {},
             disabled: true
           });
           if (i + 1 == arr.length) return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: ThresholdSlider_domain,
+            domain: domain,
             getHandleProps: function getHandleProps() {},
             disabled: true,
             noDisplay: true
@@ -4843,7 +5713,7 @@ function (_Component) {
           return react_default.a.createElement(Handle, {
             key: handle.id,
             handle: handle,
-            domain: ThresholdSlider_domain,
+            domain: domain,
             getHandleProps: getHandleProps
           });
         }));
@@ -4885,21 +5755,21 @@ function (_Component) {
             key: tick.id,
             tick: tick,
             count: ticks.length,
-            suffix: "%",
-            name: "Target"
+            suffix: target ? "" : "%",
+            name: target ? null : "Target"
           });
           if (i > Math.floor(arr.length / 2)) return react_default.a.createElement(Tick, {
             key: tick.id,
             tick: tick,
             count: ticks.length,
-            suffix: "%",
+            suffix: target ? "" : "%",
             prefix: "+"
           });
           return react_default.a.createElement(Tick, {
             key: tick.id,
             tick: tick,
             count: ticks.length,
-            suffix: "%"
+            suffix: target ? "" : "%"
           });
         }));
       })));
@@ -4911,6 +5781,23 @@ function (_Component) {
 
 var ThresholdSlider_initialiseProps = function _initialiseProps() {
   var _this2 = this;
+
+  this.getValues = function () {
+    var _this2$props = _this2.props,
+        target = _this2$props.target,
+        warning_margin = _this2$props.warning_margin,
+        threshold_type = _this2$props.threshold_type;
+    var values = [0, 0];
+    var newTarget = parseInt(target);
+
+    if (!target) {
+      values = threshold_type === THRESHOLD_TYPE_GREATER ? [warning_margin, 0, 100].slice() : [0, warning_margin, 100].slice();
+    } else {
+      values = threshold_type === THRESHOLD_TYPE_GREATER ? [warning_margin || Math.round(newTarget - newTarget * 0.5), newTarget, newTarget * 2] : [newTarget, warning_margin || Math.round(newTarget * 1.5), newTarget * 2];
+    }
+
+    return values;
+  };
 
   this.onUpdate = function (update) {
     var onUpdate = _this2.props.onUpdate;
@@ -5004,6 +5891,12 @@ function (_Component) {
       onChange(e);
     };
 
+    _this.onGlobalTargetChange = function (e) {
+      var onChange = _this.props.onChange;
+      var target = e.target.value;
+      if (isNaN(target)) return;else onChange(e);
+    };
+
     _this.onThresholdTypeChange = function (e) {
       var onChange = _this.props.onChange;
 
@@ -5076,11 +5969,13 @@ function (_Component) {
           kpi_type = _this$props$values3.kpi_type,
           warning_margin = _this$props$values3.warning_margin,
           threshold_type = _this$props$values3.threshold_type,
-          global_target = _this$props$values3.global_target;
+          global_target = _this$props$values3.global_target,
+          leader = _this$props$values3.leader,
+          unit = _this$props$values3.unit;
       var sliders = [react_default.a.createElement("div", {
-        className: "d-flex"
+        className: "row justify-content-center"
       }, react_default.a.createElement("div", {
-        className: "col-sm-6"
+        className: "col-sm-11"
       }, react_default.a.createElement(DeviationSlider, {
         disabledRail: true,
         onUpdate: this.onSliderUpdate,
@@ -5088,7 +5983,7 @@ function (_Component) {
         danger_deviation: danger_deviation,
         safe_deviation: safe_deviation
       })), react_default.a.createElement("div", {
-        className: "col-sm-2"
+        className: "col-sm-4"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -5101,7 +5996,7 @@ function (_Component) {
         value: "".concat(safe_deviation, "%"),
         disabled: true
       }))), react_default.a.createElement("div", {
-        className: "col-sm-2"
+        className: "col-sm-4"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -5114,15 +6009,17 @@ function (_Component) {
         value: "".concat(danger_deviation, "%"),
         disabled: true
       })))), react_default.a.createElement("div", null, "Nothing to See"), react_default.a.createElement("div", {
-        className: "d-flex"
+        className: "row justify-content-center"
       }, react_default.a.createElement("div", {
-        className: "col-sm-6"
+        className: "col-sm-11"
       }, react_default.a.createElement(ThresholdSlider, {
         threshold_type: threshold_type,
         disabledRail: true,
         onUpdate: this.onThresholdSliderUpdate,
         ref: this.slider,
-        warning_margin: warning_margin
+        warning_margin: warning_margin,
+        target: global_target,
+        domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
       })), react_default.a.createElement("div", {
         className: "col-sm-2 mt-3"
       }, react_default.a.createElement("div", {
@@ -5137,7 +6034,9 @@ function (_Component) {
       }), react_default.a.createElement("label", {
         htmlFor: "threshold_type",
         className: "form-check-label mb-3"
-      }, "Greater Than"), react_default.a.createElement("input", {
+      }, "Greater Than")), react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
         type: "radio",
         name: "threshold_type",
         className: "form-check-input",
@@ -5148,7 +6047,20 @@ function (_Component) {
         htmlFor: "threshold_type",
         className: "form-check-label mb-3"
       }, "Less Than"))), react_default.a.createElement("div", {
-        className: "col-sm-2 mt-3"
+        "class": "col-sm-4"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "global_target"
+      }, "Target"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "global_target",
+        onChange: this.onGlobalTargetChange,
+        placeholder: "...",
+        value: global_target || ""
+      }))), react_default.a.createElement("div", {
+        className: "col-sm-4"
       }, react_default.a.createElement("label", {
         htmlFor: "warning_margin"
       }, "Warning Limit"), react_default.a.createElement("input", {
@@ -5156,13 +6068,13 @@ function (_Component) {
         type: "text",
         name: "warning_margin",
         placeholder: "...",
-        value: "".concat(warning_margin, "%"),
+        value: "".concat(warning_margin).concat(global_target ? "" : "%"),
         disabled: true
       })))];
-      return react_default.a.createElement("div", {
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("div", {
         className: "row"
       }, react_default.a.createElement("div", {
-        className: "col-sm-4"
+        className: "col-sm-6"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -5192,9 +6104,7 @@ function (_Component) {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      })))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
+      }))), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
         htmlFor: "frequency"
@@ -5205,41 +6115,39 @@ function (_Component) {
         onChange: onChange,
         placeholder: "...",
         value: frequency,
-        required: true
+        required: true,
+        disabled: true
       }, FREQUENCY_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      }))), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "global_target"
-      }, "Default Target"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "global_target",
-        onChange: onChange,
-        placeholder: "...",
-        value: global_target
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-4"
+      })))), react_default.a.createElement("div", {
+        className: "col-sm-6"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "pillar"
-      }, "Pillar"), react_default.a.createElement("input", {
+        htmlFor: "leader"
+      }, "Leader"), react_default.a.createElement("input", {
         className: "form-control",
         type: "text",
-        name: "pillar",
+        name: "leader",
         onChange: onChange,
         placeholder: "...",
-        value: pillar,
-        required: true,
-        disabled: true
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12"
-      }, sliders[kpi_type]));
+        value: leader,
+        required: true
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "unit"
+      }, "Unit"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "unit",
+        onChange: onChange,
+        placeholder: "...",
+        value: unit || ""
+      })))), sliders[kpi_type]);
     }
   }]);
 
@@ -5311,8 +6219,11 @@ function (_Component) {
           warning_margin = _this$state.warning_margin,
           dashboard = _this$state.dashboard,
           kpi_type = _this$state.kpi_type,
-          threshold_type = _this$state.threshold_type;
+          threshold_type = _this$state.threshold_type,
+          leader = _this$state.leader,
+          unit = _this$state.unit;
       var global_target = _this.state.global_target || null;
+      var isPercentage = global_target ? false : true;
       var k = {
         name: name,
         danger_deviation: danger_deviation,
@@ -5322,7 +6233,10 @@ function (_Component) {
         dashboard: dashboard,
         kpi_type: kpi_type,
         threshold_type: threshold_type,
-        global_target: global_target
+        global_target: global_target,
+        leader: leader,
+        unit: unit,
+        isPercentage: isPercentage
       };
       updateKpi(k, kpi.id);
     };
@@ -5339,7 +6253,9 @@ function (_Component) {
       frequency: "",
       kpi_type: 0,
       global_target: "",
-      threshold_type: 0
+      threshold_type: 0,
+      leader: "",
+      unit: ""
     };
     return _this;
   }
@@ -5356,13 +6272,13 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var pillarId = this.props.pillarId;
+      var kpi = this.props.kpi;
       return react_default.a.createElement("form", {
         onSubmit: this.onSubmit,
         className: "w-100 mt-3"
       }, react_default.a.createElement(kpis_KpiForm, {
         onChange: this.onChange,
-        pillar: pillarId,
+        pillar: kpi.pillar,
         values: this.state
       }), react_default.a.createElement("button", {
         type: "submit",
@@ -5693,8 +6609,11 @@ function (_Component) {
           danger_deviation = _this$state.danger_deviation,
           warning_margin = _this$state.warning_margin,
           kpi_type = _this$state.kpi_type,
-          threshold_type = _this$state.threshold_type;
+          leader = _this$state.leader,
+          threshold_type = _this$state.threshold_type,
+          unit = _this$state.unit;
       var global_target = _this.state.global_target || null;
+      var isPercentage = global_target ? false : true;
       var k = {
         name: name,
         danger_deviation: danger_deviation,
@@ -5703,9 +6622,12 @@ function (_Component) {
         kpi_type: kpi_type,
         warning_margin: warning_margin,
         dashboard: dashboard,
+        leader: leader,
         pillar: pillar,
         global_target: global_target,
-        threshold_type: threshold_type
+        threshold_type: threshold_type,
+        unit: unit,
+        isPercentage: isPercentage
       };
       addKpi(k);
 
@@ -5716,7 +6638,9 @@ function (_Component) {
         frequency: 0,
         warning_margin: -50,
         kpi_type: 0,
-        global_target: ""
+        leader: "",
+        global_target: "",
+        unit: ""
       });
 
       $("#newKpi").modal("hide");
@@ -5734,7 +6658,9 @@ function (_Component) {
       warning_margin: -50,
       frequency: 0,
       global_target: "",
-      threshold_type: 0
+      threshold_type: 0,
+      leader: "",
+      unit: ""
     };
     return _this;
   }
@@ -5864,16 +6790,6 @@ function (_Component) {
       }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "password"
-      }, "Please enter dashboard password"), react_default.a.createElement("input", {
-        type: "password",
-        name: "password",
-        value: password,
-        className: "form-control",
-        onChange: this.onChange
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
         htmlFor: "name"
       }, "Please type in the name of the ".concat(type, " to confirm")), react_default.a.createElement("input", {
         type: "text",
@@ -5881,17 +6797,7 @@ function (_Component) {
         value: name,
         className: "form-control",
         onChange: this.onChange
-      })), react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "checkbox",
-        name: "exported",
-        className: "form-check-input",
-        onChange: this.onChange
-      }), react_default.a.createElement("label", {
-        htmlFor: "export",
-        className: "form-check-label mb-3"
-      }, "Do you want to export data?")), react_default.a.createElement("button", {
+      })), react_default.a.createElement("button", {
         type: "submit",
         className: "btn btn-warning"
       }, "I understand the consequences, delete this item")));
@@ -5974,7 +6880,16 @@ function (_Component) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
       var tooltipMarkdown = function tooltipMarkdown(data) {
-        return "<div className=\"card p-4\">\n          <div className=\"card-body\">\n          <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n          <div className=\"card-text\" style=\"line-height:0.5\">\n            <hr/>\n            <p>Value: ").concat(data.value, "</p>\n            <p>Target: ").concat(data.target, "</p>\n            <p>Date: ").concat(data.date, " </p>\n            <p>Deviation: ").concat(((data.value / data.target - 1) * 100).toFixed(2), "% </p>\n          </div>\n          </div>\n        </div>");
+        switch (data.kpi_type) {
+          case KPI_TYPE_THRESHOLD:
+            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n              <p>Warning Margin: ").concat(data.warning_margin, " </p>\n            </div>\n            </div>\n          </div>");
+
+          case KPI_TYPE_DEVIATION:
+            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n              <p>Deviation: ").concat(((data.value / data.target - 1) * 100).toFixed(2), "% </p>\n            </div>\n            </div>\n          </div>");
+
+          case KPI_TYPE_WIN_LOSE:
+            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n            </div>\n            </div>\n          </div>");
+        }
       };
 
       var tooltip = _this.tooltip.current;
@@ -6130,7 +7045,7 @@ function (_Component) {
           display: "flex"
         }
       }, react_default.a.createElement("div", {
-        className: "row"
+        className: "row w-100"
       }, react_default.a.createElement("div", {
         className: "col-lg-12"
       }, react_default.a.createElement(table_Table, {
@@ -6813,11 +7728,6 @@ function (_Component) {
       }, react_default.a.createElement("a", {
         className: "nav-link",
         href: "#"
-      }, "Browse")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#"
       }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h2", {
         className: "m-auto"
       }, currentDashboard.title), isAuthenticated ? authLinks : guestLinks)));
@@ -6968,7 +7878,9 @@ var initalState = {
   dashboards: [],
   kpis: [],
   currentDashboard: null,
-  actionTables: []
+  actionTables: [],
+  audits: [],
+  wins: []
 };
 /* harmony default export */ var reducers_dashboards = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initalState;
@@ -7176,6 +8088,54 @@ var initalState = {
     case CLEAR_ACTION_TABLES:
       return dashboards_objectSpread({}, state, {
         currentDashboard: null
+      });
+
+    case GET_AUDITS:
+      return dashboards_objectSpread({}, state, {
+        audits: action.payload
+      });
+
+    case ADD_AUDIT:
+      return dashboards_objectSpread({}, state, {
+        audits: [].concat(_toConsumableArray(state.audits), [action.payload])
+      });
+
+    case DELETE_AUDIT:
+      return dashboards_objectSpread({}, state, {
+        audits: state.audits.filter(function (audit) {
+          return audit.id != action.payload;
+        })
+      });
+
+    case UPDATE_AUDIT:
+      return dashboards_objectSpread({}, state, {
+        audits: state.audits.map(function (audit) {
+          if (audit.id === action.payload.id) return action.payload;else return audit;
+        })
+      });
+
+    case GET_WINS:
+      return dashboards_objectSpread({}, state, {
+        wins: action.payload
+      });
+
+    case ADD_WIN:
+      return dashboards_objectSpread({}, state, {
+        wins: [].concat(_toConsumableArray(state.wins), [action.payload])
+      });
+
+    case DELETE_WIN:
+      return dashboards_objectSpread({}, state, {
+        wins: state.wins.filter(function (win) {
+          return win.id != action.payload;
+        })
+      });
+
+    case UPDATE_WIN:
+      return dashboards_objectSpread({}, state, {
+        wins: state.wins.map(function (win) {
+          if (win.id === action.payload.id) return action.payload;else return win;
+        })
       });
 
     default:

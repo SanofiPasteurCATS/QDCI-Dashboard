@@ -13,16 +13,73 @@ const domain = [-100, 100];
 class Example extends Component {
   constructor(props) {
     super(props);
-    const { threshold_type, warning_margin } = props;
-    const values =
-      threshold_type === THRESHOLD_TYPE_GREATER
-        ? [warning_margin, 0, 100].slice()
-        : [0, warning_margin, 100].slice();
 
+    const values = this.getValues();
     this.state = {
       values: values,
       update: values
     };
+  }
+
+  getValues = () => {
+    const { target, warning_margin, threshold_type } = this.props;
+    let values = [0, 0];
+
+    const newTarget = parseInt(target);
+    if (!target) {
+      values =
+        threshold_type === THRESHOLD_TYPE_GREATER
+          ? [warning_margin, 0, 100].slice()
+          : [0, warning_margin, 100].slice();
+    } else {
+      values =
+        threshold_type === THRESHOLD_TYPE_GREATER
+          ? [
+              warning_margin || Math.round(newTarget - newTarget * 0.5),
+              newTarget,
+              newTarget * 2
+            ]
+          : [
+              newTarget,
+              warning_margin || Math.round(newTarget * 1.5),
+              newTarget * 2
+            ];
+    }
+    return values;
+  };
+
+  componentDidUpdate(prevProps) {
+    const { target, threshold_type } = this.props;
+    if (
+      prevProps.target !== target ||
+      prevProps.threshold_type !== threshold_type
+    ) {
+      const { target, warning_margin, threshold_type } = this.props;
+      let values = [0, 0];
+
+      const newTarget = parseInt(target);
+      if (!target) {
+        values =
+          threshold_type === THRESHOLD_TYPE_GREATER
+            ? [-75, 0, 100].slice()
+            : [0, 75, 100].slice();
+      } else {
+        values =
+          threshold_type === THRESHOLD_TYPE_GREATER
+            ? [
+                Math.round(newTarget - newTarget * 0.5),
+                newTarget,
+                newTarget * 2
+              ]
+            : [newTarget, Math.round(newTarget * 1.5), newTarget * 2];
+      }
+      console.log(values);
+      this.setState({
+        values: values.slice(),
+        update: values.slice()
+      });
+      this.onUpdate(values);
+    }
   }
 
   onUpdate = update => {
@@ -38,9 +95,9 @@ class Example extends Component {
     const {
       state: { values, update }
     } = this;
-    const { threshold_type } = this.props;
+    const { threshold_type, target, domain } = this.props;
     return (
-      <div className="mt-5" style={{ height: 120, width: "95%" }}>
+      <div className="mt-5" style={{ height: 70, width: "95%" }}>
         <Slider
           mode={2}
           step={1}
@@ -147,8 +204,8 @@ class Example extends Component {
                         key={tick.id}
                         tick={tick}
                         count={ticks.length}
-                        suffix="%"
-                        name="Target"
+                        suffix={target ? "" : "%"}
+                        name={target ? null : "Target"}
                       />
                     );
 
@@ -158,7 +215,7 @@ class Example extends Component {
                         key={tick.id}
                         tick={tick}
                         count={ticks.length}
-                        suffix="%"
+                        suffix={target ? "" : "%"}
                         prefix="+"
                       />
                     );
@@ -167,7 +224,7 @@ class Example extends Component {
                       key={tick.id}
                       tick={tick}
                       count={ticks.length}
-                      suffix="%"
+                      suffix={target ? "" : "%"}
                     />
                   );
                 })}

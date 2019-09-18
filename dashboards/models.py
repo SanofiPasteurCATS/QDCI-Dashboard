@@ -65,6 +65,9 @@ class Kpi(models.Model):
     frequency = models.IntegerField(choices=FREQUENCY_CHOICES)
     dashboard = models.ForeignKey(Dashboard,related_name='kpis',on_delete=models.CASCADE)
     global_target = models.FloatField(null=True, default=None)
+    leader = models.CharField(max_length=256, null=True)
+    unit = models.CharField(max_length=26, null=True)
+    isPercentage = models.BooleanField(default= True)
     
 class Series(models.Model):
     name = models.CharField(max_length=26)
@@ -95,5 +98,17 @@ class Action(models.Model):
     leader = models.CharField(null=True,max_length=50)
     date = models.DateField(default=None, null=True)
     date_created = models.DateTimeField(default=timezone.now, null=False)
+
+class Win(models.Model):
+    description = models.CharField(max_length=50, null=True)
+    participants = models.CharField(max_length = 50, null=True)
+    date= models.CharField(max_length=50, null=True)
+
+
+
+class Audit(models.Model):
+    description = models.CharField(max_length=50, null= True)
+    date = models.DateField(default= None, null=True)
+
 
 

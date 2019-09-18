@@ -25,7 +25,9 @@ class KpiEdit extends Component {
         frequency: "",
         kpi_type: 0,
         global_target: "",
-        threshold_type: 0
+        threshold_type: 0,
+        leader: "",
+        unit: ""
       };
   }
 
@@ -55,9 +57,12 @@ class KpiEdit extends Component {
       warning_margin,
       dashboard,
       kpi_type,
-      threshold_type
+      threshold_type,
+      leader,
+      unit
     } = this.state;
     const global_target = this.state.global_target || null;
+    const isPercentage = global_target ? false : true;
     const k = {
       name,
       danger_deviation,
@@ -67,7 +72,10 @@ class KpiEdit extends Component {
       dashboard,
       kpi_type,
       threshold_type,
-      global_target
+      global_target,
+      leader,
+      unit,
+      isPercentage
     };
     updateKpi(k, kpi.id);
   };
@@ -77,12 +85,12 @@ class KpiEdit extends Component {
   };
 
   render() {
-    const { pillarId } = this.props;
+    const { kpi } = this.props;
     return (
       <form onSubmit={this.onSubmit} className="w-100 mt-3">
         <KpiForm
           onChange={this.onChange}
-          pillar={pillarId}
+          pillar={kpi.pillar}
           values={this.state}
         />
         <button type="submit" className="btn btn-success mb-4 mt-3">

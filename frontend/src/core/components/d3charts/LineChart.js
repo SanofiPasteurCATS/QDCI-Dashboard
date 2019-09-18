@@ -121,7 +121,6 @@ class LineChart extends React.Component {
       .attr("x", 0 - margin.left / 4)
       .attr("y", 0 - margin.top)
       .attr("id", "y_unit")
-      .text("$ CAD")
       .style("fill", "black")
       .attr("text-anchor", "middle")
       .style("font-size", "15px");
@@ -355,11 +354,10 @@ class LineChart extends React.Component {
       .text(() => {
         return kpis[index] ? kpis[index].name : "";
       });
-    /*
-    svg
-      .select("#chart")
+
+    d3.select(faux)
       .select("#y_unit")
-      .text(context[i].units); */
+      .text(() => (kpis[index] ? kpis[index].unit || "" : ""));
     d3.select(faux)
       .select("#plotArea")
       .selectAll("#curtain")

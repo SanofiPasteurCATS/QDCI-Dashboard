@@ -1,10 +1,8 @@
-import xlwt
-from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action
+
+from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action, Audit, Win
 from rest_framework import viewsets, permissions
-from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer
+from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer, AuditSerializer, WinSerializer
 from datetime import datetime, time, date, timedelta 
-from drf_renderer_xlsx.mixins import XLSXFileMixin
-from drf_renderer_xlsx.renderers import XLSXRenderer
 from rest_framework.viewsets import ReadOnlyModelViewSet
 # Dashboard viewset
 
@@ -110,13 +108,6 @@ class SeriesViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
         
-class ExportKpiViewSet(XLSXFileMixin, ReadOnlyModelViewSet):
-    queryset = Dashboard.objects.all()
-    serializer_class = DashboardSerializer
-    renderer_classes = [XLSXRenderer]
-    filename = 'my_export.xlsx'
-
-
 # Kpi Viewset 
 # Takes a query param 'dashboard' to filter kpis by dashboard
 class KpiViewSet(viewsets.ModelViewSet):
@@ -235,4 +226,41 @@ class ActionViewSet(viewsets.ModelViewSet):
         serializer = ActionSerializer(action, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()       
-    
+
+class AuditViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = AuditSerializer
+
+    def get_queryset(self):
+        return Audit.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+
+    def patch(self, request, pk):
+        audit = self.get_object(pk)
+        serializer = AuditSerializer(audit, data = request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+class WinViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = WinSerializer
+
+    def get_queryset(self):
+        return Win.objects.all()
+
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+        
+    def patch(self, request, pk):
+        win = self.get_object(pk)
+        serializer = WinSerializer(win, data = request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()

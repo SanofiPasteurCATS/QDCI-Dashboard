@@ -36,3 +36,13 @@ export const UPDATE_ACTION_TABLE = "UPDATE_ACTION_TABLE";
 export const GET_ACTION_TABLE = "GET_ACTION_TABLE";
 export const CLEAR_CURRENT_DASHBOARD = "CLEAR_CURRENT_DASHBOARD";
 export const CLEAR_ACTION_TABLES = "CLEAR_ACTION_TABLE";
+
+export const GET_AUDITS = "GET_AUDITS";
+export const ADD_AUDIT = "GET_AUDIT";
+export const UPDATE_AUDIT = "UPDATE_AUDIT";
+export const DELETE_AUDIT = "DELETE_AUDIT";
+
+export const GET_WINS = "GET_WIN";
+export const ADD_WIN = "ADD_WIN";
+export const UPDATE_WIN = "UPDATE_WIN";
+export const DELETE_WIN = "DELETE_WIN";

@@ -33,6 +33,11 @@ class Row extends Component {
     this.setState({ entry: current });
   };
 
+  renderCellData(y) {
+    if (y.map) return y.map(this.props.data[y.prop]);
+    else return this.props.data[y.prop];
+  }
+
   render() {
     const {
       editIdx,
@@ -88,7 +93,7 @@ class Row extends Component {
                     }}
                   />
                 ) : this.props.data[y.prop] != null ? (
-                  this.props.data[y.prop]
+                  this.renderCellData(y)
                 ) : (
                   "NULL"
                 )}
@@ -133,7 +138,7 @@ class Row extends Component {
       >
         {header.map((y, k) => (
           <td key={`trc-${k}`}>
-            {this.props.data[y.prop] != null ? this.props.data[y.prop] : "NULL"}
+            {this.props.data[y.prop] != null ? this.renderCellData(y) : "NULL"}
           </td>
         ))}
         {deletable && (

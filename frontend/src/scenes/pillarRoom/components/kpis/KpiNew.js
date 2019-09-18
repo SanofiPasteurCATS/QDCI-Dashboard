@@ -23,7 +23,9 @@ class KpiNew extends Component {
         warning_margin: -50,
         frequency: 0,
         global_target: "",
-        threshold_type: 0
+        threshold_type: 0,
+        leader: "",
+        unit: ""
       };
   }
 
@@ -52,9 +54,12 @@ class KpiNew extends Component {
       danger_deviation,
       warning_margin,
       kpi_type,
-      threshold_type
+      leader,
+      threshold_type,
+      unit
     } = this.state;
     const global_target = this.state.global_target || null;
+    const isPercentage = global_target ? false : true;
     const k = {
       name,
       danger_deviation,
@@ -63,9 +68,12 @@ class KpiNew extends Component {
       kpi_type,
       warning_margin,
       dashboard,
+      leader,
       pillar,
       global_target,
-      threshold_type
+      threshold_type,
+      unit,
+      isPercentage
     };
 
     addKpi(k);
@@ -76,7 +84,9 @@ class KpiNew extends Component {
       frequency: 0,
       warning_margin: -50,
       kpi_type: 0,
-      global_target: ""
+      leader: "",
+      global_target: "",
+      unit: ""
     });
     $("#newKpi").modal("hide");
   };

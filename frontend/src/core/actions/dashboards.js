@@ -24,7 +24,15 @@ import {
   DELETE_ACTION,
   UPDATE_ACTION_TABLE,
   CLEAR_ACTION_TABLES,
-  CLEAR_CURRENT_DASHBOARD
+  CLEAR_CURRENT_DASHBOARD,
+  UPDATE_AUDIT,
+  DELETE_AUDIT,
+  ADD_AUDIT,
+  GET_AUDITS,
+  UPDATE_WIN,
+  DELETE_WIN,
+  ADD_WIN,
+  GET_WINS
 } from "./types";
 
 /*---------------------------------------
@@ -377,5 +385,117 @@ export const clearActionTables = () => dispatch => {
 export const clearCurrentDashboard = () => dispatch => {
   dispatch({
     type: CLEAR_CURRENT_DASHBOARD
+  });
+};
+
+export const getAudits = dashboardId => (dispatch, getState) => {
+  axios
+    .get(`api/audit/?dashboard=${dashboardId}`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_AUDITS,
+        payload: res.data
+      });
+    });
+};
+
+export const addAudit = audit => (dispatch, getState) => {
+  axios
+    .post(`api/audit/`, audit, tokenConfig(getState))
+    .then(res => {
+      // Dispatch a message action which notifies user of success
+      dispatch(createMessage({ addAudit: "Audit Added!" }));
+      // Dispatch the action to reducer. Payload is the dashboard which was added
+      dispatch({
+        type: ADD_AUDIT,
+        payload: res.data
+      });
+    })
+    // If there is an error, dispatch a error message to reducer
+    .catch(err => {
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const updateAudit = (audit, id) => (dispatch, getState) => {
+  axios
+    .patch(`/api/audit/${id}/`, audit, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ updateAudit: "Audit Updated" }));
+      dispatch({
+        type: UPDATE_AUDIT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
+};
+
+export const deleteAudit = id => (dispatch, getState) => {
+  axios.delete(`/api/audit/${id}/`, tokenConfig(getState)).then(() => {
+    dispatch(createMessage({ deleteAudit: "Audit Deleted" }));
+    dispatch({
+      type: DELETE_AUDIT,
+      payload: id
+    });
+  });
+};
+
+export const getWins = dashboardId => (dispatch, getState) => {
+  axios
+    .get(`api/win/?dashboard=${dashboardId}`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_WINS,
+        payload: res.data
+      });
+    });
+};
+
+export const addWin = win => (dispatch, getState) => {
+  axios
+    .post(`api/win/`, win, tokenConfig(getState))
+    .then(res => {
+      // Dispatch a message action which notifies user of success
+      dispatch(createMessage({ addWin: "Win Added!" }));
+      // Dispatch the action to reducer. Payload is the dashboard which was added
+      dispatch({
+        type: ADD_WIN,
+        payload: res.data
+      });
+    })
+    // If there is an error, dispatch a error message to reducer
+    .catch(err => {
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const updateWin = (win, id) => (dispatch, getState) => {
+  axios
+    .patch(`/api/win/${id}/`, win, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ updateWin: "Win Updated" }));
+      dispatch({
+        type: UPDATE_WIN,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
+};
+
+export const deleteWin = id => (dispatch, getState) => {
+  axios.delete(`/api/win/${id}/`, tokenConfig(getState)).then(() => {
+    dispatch(createMessage({ deleteWin: "Win Deleted" }));
+    dispatch({
+      type: DELETE_WIN,
+      payload: id
+    });
   });
 };

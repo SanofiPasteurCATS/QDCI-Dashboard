@@ -22,7 +22,9 @@ import {
   getDashboards,
   getADashboard,
   clearKpis,
-  getActionTable
+  getActionTable,
+  getAudits,
+  getWins
 } from "../../core/actions/dashboards";
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
 
@@ -47,7 +49,9 @@ class Boardroom extends Component {
       getADashboard,
       getKpis,
       getActionTable,
-      getDashboards
+      getDashboards,
+      getAudits,
+      getWins
     } = this.props;
 
     // Fetch data from server
@@ -57,10 +61,19 @@ class Boardroom extends Component {
     getADashboard(id);
     getActionTable(id);
     getKpis(id);
+    getAudits(id);
+    getWins(id);
   }
 
   render() {
-    const { currentDashboard, kpis, actionTables, dashboards } = this.props;
+    const {
+      currentDashboard,
+      kpis,
+      actionTables,
+      dashboards,
+      audits,
+      wins
+    } = this.props;
     const { id } = this.props.match.params;
 
     // If there is no current dashboard show the loading screen
@@ -88,7 +101,12 @@ class Boardroom extends Component {
               </div>
             </div>
             <div className="col-lg-10 p-0">
-              <ActionPlan tables={actionTables} dashboards={dashboards} />
+              <ActionPlan
+                tables={actionTables}
+                audits={audits}
+                wins={wins}
+                dashboards={dashboards}
+              />
             </div>
           </div>
         </div>
@@ -107,7 +125,9 @@ const mapStateToProps = state => ({
   kpis: state.dashboards.kpis,
   isAuthenticated: state.auth.isAuthenticated,
   actionTables: state.dashboards.actionTables,
-  currentDashboard: state.dashboards.currentDashboard
+  currentDashboard: state.dashboards.currentDashboard,
+  audits: state.dashboards.audits,
+  wins: state.dashboards.wins
 });
 
 export default connect(
@@ -117,6 +137,8 @@ export default connect(
     getDashboards,
     getADashboard,
     clearKpis,
-    getActionTable
+    getActionTable,
+    getAudits,
+    getWins
   }
 )(Boardroom);

@@ -88,15 +88,17 @@ export const KPI_TABLE_HEADERS = [
   },
   {
     name: "Frequency",
-    prop: "frequency"
+    prop: "frequency",
+    map: function(frequency) {
+      return FREQUENCY_CHOICES[frequency].name;
+    }
   },
   {
-    name: "Safe Threshold",
-    prop: "safe"
-  },
-  {
-    name: "Danger Threshold",
-    prop: "danger"
+    name: "Type",
+    prop: "kpi_type",
+    map: function(kpi_type) {
+      return KPI_TYPE_CHOICES[kpi_type].name;
+    }
   }
 ];
 
@@ -120,6 +122,23 @@ export const DEFAULT_ACTION_TABLES = [
   "Mid Term Action Plan",
   "Upper Level Escalations",
   "Lower Level Escalations"
+];
+
+export const AUDIT_TABLE_HEADERS = [
+  {
+    name: "Description",
+    prop: "description"
+  },
+  { name: "Date", prop: "date" }
+];
+
+export const WIN_TABLE_HEADERS = [
+  {
+    name: "Description",
+    prop: "description"
+  },
+  { name: "Participants", prop: "participants" },
+  { name: "Date", prop: "date" }
 ];
 
 export const ACTION_TABLE_HEADERS = [

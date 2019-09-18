@@ -21,7 +21,7 @@ class Modal extends Component {
           <div
             className="modal-dialog"
             role="document"
-            style={{ maxWidth: "fit-content" }}
+            style={{ maxWidth: "fit-content", overflow: "visible" }}
           >
             <div className="modal-content">
               <div className="modal-header">
