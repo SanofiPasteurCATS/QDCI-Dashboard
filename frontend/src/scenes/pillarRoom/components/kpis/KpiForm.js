@@ -268,7 +268,6 @@ class KpiForm extends Component {
                 placeholder="..."
                 value={frequency}
                 required
-                disabled
               >
                 {FREQUENCY_CHOICES.map(choice => (
                   <option key={`choice-${choice.id}`} value={choice.id}>
