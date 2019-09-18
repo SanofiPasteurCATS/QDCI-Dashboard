@@ -55,11 +55,11 @@ class KpiNew extends Component {
       warning_margin,
       kpi_type,
       leader,
-      threshold_type,
-      unit
+      threshold_type
     } = this.state;
     const global_target = this.state.global_target || null;
     const isPercentage = global_target ? false : true;
+    const unit = this.state.unit || null;
     const k = {
       name,
       danger_deviation,
@@ -79,8 +79,8 @@ class KpiNew extends Component {
     addKpi(k);
     this.setState({
       name: "",
-      danger_deviation: "",
-      safe_deviation: "",
+      danger_deviation: 75,
+      safe_deviation: 25,
       frequency: 0,
       warning_margin: -50,
       kpi_type: 0,
@@ -99,7 +99,12 @@ class KpiNew extends Component {
     const { pillar } = this.props;
     return (
       <form onSubmit={this.onSubmit} className="w-100 mt-3">
-        <KpiForm onChange={this.onChange} values={this.state} pillar={pillar} />
+        <KpiForm
+          onChange={this.onChange}
+          values={this.state}
+          pillar={pillar}
+          editFrequency
+        />
         <button type="submit" className="btn btn-success mb-4 mt-3">
           Create
         </button>

@@ -142,7 +142,51 @@ class KpiForm extends Component {
           </div>
         </div>
       </div>,
-      <div>Nothing to See</div>,
+      <div className="row justify-content-center">
+        <div className="col-sm-6 mt-3">
+          <div className="form-check">
+            <input
+              type="radio"
+              name="threshold_type"
+              className="form-check-input"
+              id="greater"
+              onChange={this.onThresholdTypeChange}
+              checked={threshold_type ? false : true}
+            />
+            <label htmlFor="threshold_type" className="form-check-label mb-3">
+              Greater Than
+            </label>
+          </div>
+
+          <div className="form-check">
+            <input
+              type="radio"
+              name="threshold_type"
+              className="form-check-input"
+              id="less"
+              onChange={this.onThresholdTypeChange}
+              checked={threshold_type ? true : false}
+            />
+            <label htmlFor="threshold_type" className="form-check-label mb-3">
+              Less Than
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+          <div className="form-group">
+            <label htmlFor="global_target">Target</label>
+            <input
+              className="form-control"
+              type="text"
+              name="global_target"
+              onChange={this.onGlobalTargetChange}
+              placeholder="..."
+              value={global_target || ""}
+              required
+            />
+          </div>
+        </div>
+      </div>,
       <div className="row justify-content-center">
         <div className="col-sm-11">
           <ThresholdSlider
@@ -167,7 +211,7 @@ class KpiForm extends Component {
           ></ThresholdSlider>
         </div>
 
-        <div className="col-sm-2 mt-3">
+        <div className="col-sm-2">
           <div className="form-check">
             <input
               type="radio"
@@ -241,7 +285,7 @@ class KpiForm extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="frequency">Type</label>
+              <label htmlFor="kpi_type">Type</label>
               <select
                 className="form-control"
                 type="text"
@@ -268,6 +312,7 @@ class KpiForm extends Component {
                 placeholder="..."
                 value={frequency}
                 required
+                disabled={!editFrequency}
               >
                 {FREQUENCY_CHOICES.map(choice => (
                   <option key={`choice-${choice.id}`} value={choice.id}>

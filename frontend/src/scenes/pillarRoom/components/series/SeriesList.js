@@ -13,7 +13,7 @@ class SeriesList extends Component {
     addSeries({
       kpi: kpiId,
       color: "#000",
-      name: "New Series",
+      name: "My Series",
       plot_type: "li"
     });
   };

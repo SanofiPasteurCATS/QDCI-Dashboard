@@ -1635,8 +1635,16 @@ function (_React$Component) {
             break;
 
           case KPI_TYPE_WIN_LOSE:
-            if (value >= target) color = "green";else color = "red";
-            break;
+            switch (threshold_type) {
+              case THRESHOLD_TYPE_GREATER:
+                if (value >= target) color = "green";else color = "red";
+                break;
+
+              case THRESHOLD_TYPE_LESS:
+                if (value <= target) color = "green";else color = "red";
+                break;
+            }
+
         }
 
         return color;
@@ -4913,10 +4921,21 @@ function (_Component) {
           series = _this$props3.series,
           onBack = _this$props3.onBack;
       if (!series) return react_default.a.createElement(react_default.a.Fragment, null);
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "im im-arrow-left mb-4 icon symbol",
-        onClick: onBack
-      }, " "), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("button", {
+        className: "mb-4 btn btn-sm btn-primary",
+        onClick: onBack,
+        style: {
+          padding: "1px 8px",
+          position: "fixed",
+          zIndex: 1000
+        }
+      }, react_default.a.createElement("i", {
+        className: "im im-arrow-left icon",
+        style: {
+          lineHeight: 1.5,
+          fontSize: "20px"
+        }
+      })), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
         className: "d-flex"
       }, react_default.a.createElement(series_SeriesEdit, {
         series: series
@@ -5085,7 +5104,7 @@ function (_Component) {
       addSeries({
         kpi: kpiId,
         color: "#000",
-        name: "New Series",
+        name: "My Series",
         plot_type: "li"
       });
     }, _temp));
@@ -6009,7 +6028,49 @@ function (_Component) {
         placeholder: "...",
         value: "".concat(danger_deviation, "%"),
         disabled: true
-      })))), react_default.a.createElement("div", null, "Nothing to See"), react_default.a.createElement("div", {
+      })))), react_default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, react_default.a.createElement("div", {
+        className: "col-sm-6 mt-3"
+      }, react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "radio",
+        name: "threshold_type",
+        className: "form-check-input",
+        id: "greater",
+        onChange: this.onThresholdTypeChange,
+        checked: threshold_type ? false : true
+      }), react_default.a.createElement("label", {
+        htmlFor: "threshold_type",
+        className: "form-check-label mb-3"
+      }, "Greater Than")), react_default.a.createElement("div", {
+        className: "form-check"
+      }, react_default.a.createElement("input", {
+        type: "radio",
+        name: "threshold_type",
+        className: "form-check-input",
+        id: "less",
+        onChange: this.onThresholdTypeChange,
+        checked: threshold_type ? true : false
+      }), react_default.a.createElement("label", {
+        htmlFor: "threshold_type",
+        className: "form-check-label mb-3"
+      }, "Less Than"))), react_default.a.createElement("div", {
+        "class": "col-sm-6 mt-3"
+      }, react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "global_target"
+      }, "Target"), react_default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "global_target",
+        onChange: this.onGlobalTargetChange,
+        placeholder: "...",
+        value: global_target || "",
+        required: true
+      })))), react_default.a.createElement("div", {
         className: "row justify-content-center"
       }, react_default.a.createElement("div", {
         className: "col-sm-11"
@@ -6022,7 +6083,7 @@ function (_Component) {
         target: global_target,
         domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
       })), react_default.a.createElement("div", {
-        className: "col-sm-2 mt-3"
+        className: "col-sm-2"
       }, react_default.a.createElement("div", {
         className: "form-check"
       }, react_default.a.createElement("input", {
@@ -6091,7 +6152,7 @@ function (_Component) {
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "frequency"
+        htmlFor: "kpi_type"
       }, "Type"), react_default.a.createElement("select", {
         className: "form-control",
         type: "text",
@@ -6116,7 +6177,8 @@ function (_Component) {
         onChange: onChange,
         placeholder: "...",
         value: frequency,
-        required: true
+        required: true,
+        disabled: !editFrequency
       }, FREQUENCY_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: "choice-".concat(choice.id),
@@ -6610,10 +6672,10 @@ function (_Component) {
           warning_margin = _this$state.warning_margin,
           kpi_type = _this$state.kpi_type,
           leader = _this$state.leader,
-          threshold_type = _this$state.threshold_type,
-          unit = _this$state.unit;
+          threshold_type = _this$state.threshold_type;
       var global_target = _this.state.global_target || null;
       var isPercentage = global_target ? false : true;
+      var unit = _this.state.unit || null;
       var k = {
         name: name,
         danger_deviation: danger_deviation,
@@ -6633,8 +6695,8 @@ function (_Component) {
 
       _this.setState({
         name: "",
-        danger_deviation: "",
-        safe_deviation: "",
+        danger_deviation: 75,
+        safe_deviation: 25,
         frequency: 0,
         warning_margin: -50,
         kpi_type: 0,
@@ -6684,7 +6746,8 @@ function (_Component) {
       }, react_default.a.createElement(kpis_KpiForm, {
         onChange: this.onChange,
         values: this.state,
-        pillar: pillar
+        pillar: pillar,
+        editFrequency: true
       }), react_default.a.createElement("button", {
         type: "submit",
         className: "btn btn-success mb-4 mt-3"
@@ -7822,6 +7885,7 @@ function (_Component) {
         if (messages.deleteDatapoint) alert.success(messages.deleteDatapoint);
         if (messages.updateKpi) alert.success(messages.updateKpi);
         if (messages.updateAction) alert.success(messages.updateAction);
+        if (messages.updateActionTable) alert.success(messages.updateActionTable);
         if (messages.updateSeries) alert.success(messages.updateSeries);
         if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
         if (messages.entriesCreated) alert.success(messages.entriesCreated);

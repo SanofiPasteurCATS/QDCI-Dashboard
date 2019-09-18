@@ -234,9 +234,16 @@ class Pillar extends React.Component {
           break;
 
         case KPI_TYPE_WIN_LOSE:
-          if (value >= target) color = "green";
-          else color = "red";
-          break;
+          switch (threshold_type) {
+            case THRESHOLD_TYPE_GREATER:
+              if (value >= target) color = "green";
+              else color = "red";
+              break;
+            case THRESHOLD_TYPE_LESS:
+              if (value <= target) color = "green";
+              else color = "red";
+              break;
+          }
       }
       return color;
     };

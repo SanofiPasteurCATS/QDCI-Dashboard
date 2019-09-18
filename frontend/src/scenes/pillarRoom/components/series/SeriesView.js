@@ -38,9 +38,16 @@ class SeriesView extends Component {
     if (!series) return <></>;
     return (
       <Fragment>
-        <div className="im im-arrow-left mb-4 icon symbol" onClick={onBack}>
-          {" "}
-        </div>
+        <button
+          className="mb-4 btn btn-sm btn-primary"
+          onClick={onBack}
+          style={{ padding: "1px 8px", position: "fixed", zIndex: 1000 }}
+        >
+          <i
+            className="im im-arrow-left icon"
+            style={{ lineHeight: 1.5, fontSize: "20px" }}
+          ></i>
+        </button>
         <h3>Properties</h3>
         <div className="d-flex">
           <SeriesEdit series={series} />

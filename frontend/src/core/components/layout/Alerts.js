@@ -43,6 +43,7 @@ export class Alerts extends Component {
       if (messages.deleteDatapoint) alert.success(messages.deleteDatapoint);
       if (messages.updateKpi) alert.success(messages.updateKpi);
       if (messages.updateAction) alert.success(messages.updateAction);
+      if (messages.updateActionTable) alert.success(messages.updateActionTable);
       if (messages.updateSeries) alert.success(messages.updateSeries);
       if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
       if (messages.entriesCreated) alert.success(messages.entriesCreated);
