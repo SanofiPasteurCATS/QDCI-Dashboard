@@ -5960,7 +5960,8 @@ function (_Component) {
     value: function render() {
       var _this$props = this.props,
           onChange = _this$props.onChange,
-          pillar = _this$props.pillar;
+          pillar = _this$props.pillar,
+          editFrequency = _this$props.editFrequency;
       var _this$props$values3 = this.props.values,
           name = _this$props$values3.name,
           frequency = _this$props$values3.frequency,
@@ -6115,8 +6116,7 @@ function (_Component) {
         onChange: onChange,
         placeholder: "...",
         value: frequency,
-        required: true,
-        disabled: true
+        required: true
       }, FREQUENCY_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: "choice-".concat(choice.id),

@@ -90,7 +90,7 @@ class KpiForm extends Component {
   }
 
   render() {
-    const { onChange, pillar } = this.props;
+    const { onChange, pillar, editFrequency } = this.props;
     const {
       name,
       frequency,
