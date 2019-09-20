@@ -5,21 +5,15 @@ import * as d3 from "d3";
 import PropTypes from "prop-types";
 
 // CONFIG
-import {
-  KPI_TABLE_HEADERS,
-  THRESHOLD_TYPE_GREATER,
-  KPI_TYPE_THRESHOLD,
-  KPI_TYPE_DEVIATION,
-  KPI_TYPE_WIN_LOSE
-} from "../../core/config/dashboardConfig";
+import { KPI_TABLE_HEADERS } from "../../core/config/dashboardConfig";
 
 // CORE COMPONENTS
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
 import Pillar from "../../core/components/d3charts/pillar";
 import LineChart from "../../core/components/d3charts/LineChart";
 import Table from "../../core/components/ui/table/Table";
-import SvgExporter from "../../core/components/ui/svgExporter";
 import Modal from "../../core/components/ui/modal/Modal";
+import { getItem } from "../../core/helpers/Filters";
 
 // ACTIONS
 import {
@@ -32,7 +26,8 @@ import {
 import ChartOptions from "./components/ChartOptions";
 import MenuView from "./components/MenuView";
 import KpiNew from "./components/kpis/KpiNew";
-import DeletetionConformation from "../../core/components/ui/DeleteConfirmation";
+import RemoveConformation from "../../core/components/ui/RemoveConfirmation";
+import Tooltip from "./components/Tooltip";
 
 class pillarRoom extends Component {
   static propTypes = {
@@ -49,15 +44,15 @@ class pillarRoom extends Component {
       selectedExport: "",
       selectedKpi: null,
       menuMode: false,
-      deletionContext: null
+      removeContext: null,
+      toolTipData: null,
+      toolTipShow: false
     };
 
-    this.selectSeriesHook = this.selectSeriesHook.bind(this);
-    this.selectKpiHook = this.selectKpiHook.bind(this);
-    this.updateExport = this.updateExport.bind(this);
-    this.onDelete = this.onDelete.bind(this);
+    this.selectSeries = this.selectSeries.bind(this);
+    this.selectKpi = this.selectKpi.bind(this);
+    this.setRemove = this.setRemove.bind(this);
     this.resetKpiSelect = this.resetKpiSelect.bind(this);
-    this.tooltip = React.createRef();
     this.showTooltip = this.showTooltip.bind(this);
   }
 
@@ -65,18 +60,6 @@ class pillarRoom extends Component {
     if (prevProps.kpis != this.props.kpis) {
       // this.selectSeriesHook(null);
     }
-  }
-
-  selectSeriesHook(id) {
-    this.setState({ selectedSeries: id });
-  }
-
-  selectKpiHook(id) {
-    this.setState({ selectedKpi: id });
-  }
-
-  updateExport(target) {
-    this.setState({ selectedExport: target });
   }
 
   componentDidMount() {
@@ -93,82 +76,40 @@ class pillarRoom extends Component {
     });
   };
 
-  onDelete = deletionContext => {
-    this.setState({ deletionContext: deletionContext });
+  setRemove = removeContext => {
+    this.setState({ removeContext: removeContext });
   };
 
   showTooltip = (show, data = null) => {
-    const tooltipMarkdown = data => {
-      switch (data.kpi_type) {
-        case KPI_TYPE_THRESHOLD:
-          return `<div className="card p-4">
-            <div className="card-body">
-            <h5 style="line-height:0.4">${data.kpiName}</h5>
-            <div className="card-text" style="line-height:0.5">
-              <hr/>
-              <p>Value: ${data.value}</p>
-              <p>Target: ${data.target}</p>
-              <p>Date: ${data.date} </p>
-              <p>Warning Margin: ${data.warning_margin} </p>
-            </div>
-            </div>
-          </div>`;
-        case KPI_TYPE_DEVIATION:
-          return `<div className="card p-4">
-            <div className="card-body">
-            <h5 style="line-height:0.4">${data.kpiName}</h5>
-            <div className="card-text" style="line-height:0.5">
-              <hr/>
-              <p>Value: ${data.value}</p>
-              <p>Target: ${data.target}</p>
-              <p>Date: ${data.date} </p>
-              <p>Deviation: ${((data.value / data.target - 1) * 100).toFixed(
-                2
-              )}% </p>
-            </div>
-            </div>
-          </div>`;
-        case KPI_TYPE_WIN_LOSE:
-          return `<div className="card p-4">
-            <div className="card-body">
-            <h5 style="line-height:0.4">${data.kpiName}</h5>
-            <div className="card-text" style="line-height:0.5">
-              <hr/>
-              <p>Value: ${data.value}</p>
-              <p>Target: ${data.target}</p>
-              <p>Date: ${data.date} </p>
-            </div>
-            </div>
-          </div>`;
-      }
-    };
-    const tooltip = this.tooltip.current;
-    if (show) {
-      tooltip.style.display = "block";
-      tooltip.style.opacity = 1;
-    } else {
-      tooltip.style.display = "none";
-      tooltip.style.opacity = 0;
-    }
+    this.setState({ toolTipShow: show });
+
     if (!data) return;
     if (data.payload) {
-      tooltip.innerHTML = tooltipMarkdown(data.payload);
-      tooltip.style.left = `${data.x + 24}px`;
-      tooltip.style.top = `${data.y}px`;
+      this.setState({ toolTipData: data.payload });
     }
   };
+
   resetKpiSelect = () => {
     const { kpis } = this.props;
     if (!kpis[0]) return;
     this.setState({ selectedKpi: kpis[0].id });
   };
+
+  selectSeries(id) {
+    this.setState({ selectedSeries: id });
+  }
+
+  selectKpi(id) {
+    this.setState({ selectedKpi: id });
+  }
+
   deselect = () => {
     d3.selectAll(".line").attr("stroke-width", 1.8);
     d3.selectAll(".dot").attr("r", 3);
     d3.selectAll(`.legend`)
       .attr("font-weight", "normal")
       .attr("font-size", "17");
-    this.selectSeriesHook(null);
+    this.selectSeries(null);
   };
 
   render() {
@@ -177,19 +118,14 @@ class pillarRoom extends Component {
     const {
       selectedSeries,
       selectedKpi,
-      selectedExport,
       menuMode,
-      deletionContext
+      removeContext,
+      toolTipData,
+      toolTipShow
     } = this.state;
-    const kpi = kpis.filter(kpi => {
-      return kpi.id == selectedKpi;
-    })[0];
-    const series = kpi ? kpi.series : [];
-    const s = series
-      ? series.filter(s => {
-          return s.id == selectedSeries;
-        })
-      : [];
+
+    const kpi = getItem(selectedKpi, kpis, "id");
+
     if (currentDashboard == null) {
       return <LoadingScreen />;
     }
@@ -205,7 +141,7 @@ class pillarRoom extends Component {
             minHeight: "fit-content"
           }}
         >
-          <div className="qd-tooltip" ref={this.tooltip}></div>
+          <Tooltip data={toolTipData} show={toolTipShow} />
           <div className="row m-0">
             <div className="col-lg-4">
               <div className="card ml-4 mt-4 mb-4 mr-4 h-95">
@@ -215,7 +151,7 @@ class pillarRoom extends Component {
                     letter={pillarId === "Plus" ? "+" : pillarId}
                     dashboardId={dashboardId}
                     labeled
-                    showTooltip={this.showTooltip}
+                    onHover={this.showTooltip}
                   />
                 </div>
                 <div className="card-footer" style={{ display: "flex" }}>
@@ -238,15 +174,15 @@ class pillarRoom extends Component {
                   {menuMode ? (
                     <MenuView
                       kpi={kpi}
-                      onDelete={this.onDelete}
-                      setMenuState={this.setMenuState}
+                      setRemove={this.setRemove}
+                      changeMenu={this.setMenuState}
                       menuState={this.menuMode}
                       resetKpiSelect={this.resetKpiSelect}
                     ></MenuView>
                   ) : (
                     <LineChart
                       kpis={kpis}
-                      selectSeriesHook={this.selectSeriesHook}
+                      selectSeries={this.selectSeries}
                       selectedKpi={selectedKpi}
                     />
                   )}
@@ -255,12 +191,13 @@ class pillarRoom extends Component {
                 <div className="card-footer" style={{ display: "flex" }}>
                   <ChartOptions
                     active={selectedSeries}
-                    selectKpiHook={this.selectKpiHook}
-                    selectSeriesHook={this.selectSeriesHook}
-                    deselectHook={this.deselect}
+                    selectKpi={this.selectKpi}
+                    selectSeries={this.selectSeries}
+                    deselect={this.deselect}
                     kpis={kpis}
-                    setMenuState={this.setMenuState}
+                    changeMenu={this.setMenuState}
                     menuMode={menuMode}
+                    kpi={kpi}
                   />
                 </div>
               </div>
@@ -271,9 +208,7 @@ class pillarRoom extends Component {
             <KpiNew pillar={pillarId} dashboard={currentDashboard.id}></KpiNew>
           </Modal>
         </div>
-        <DeletetionConformation
-          deletionContext={deletionContext}
-        ></DeletetionConformation>
+        <RemoveConformation removeContext={removeContext}></RemoveConformation>
       </Fragment>
     );
   }

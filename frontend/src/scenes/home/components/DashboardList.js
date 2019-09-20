@@ -12,7 +12,7 @@ import {
 // CORE COMPONENTS
 import DashboardDisplayCard from "./DashboardDisplayCard";
 import NewCard from "../../../core/components/ui/NewCard";
-import DeleteConfirmation from "../../../core/components/ui/DeleteConfirmation";
+import RemoveConfirmation from "../../../core/components/ui/RemoveConfirmation";
 
 // NATIVE COMPONENTS
 import DashboardOptions from "./DashboardOptions";
@@ -21,10 +21,10 @@ class DashboardList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deletionItem: null
+      removeItem: null
     };
-    this.deleteClick = this.deleteClick.bind(this);
-    this.onDeleteConfirmationSubmit = this.onDeleteConfirmationSubmit.bind(
+    this.setRemove = this.setRemove.bind(this);
+    this.onRemoveConfirmationSubmit = this.onRemoveConfirmationSubmit.bind(
       this
     );
   }
@@ -43,25 +43,25 @@ class DashboardList extends Component {
     $("#dashboardOptions").modal("show");
   };
 
-  deleteClick = deletionItem => {
+  setRemove = removeItem => {
     this.setState({
-      deletionItem
+      removeItem
     });
-    $("#deleteConfirmation").modal("show");
+    $("#removeConfirmation").modal("show");
   };
 
-  onDeleteConfirmationSubmit = state => {
+  onRemoveConfirmationSubmit = state => {
     const { deleteDashboard } = this.props;
-    const { deletionItem } = this.state;
-    if (state.name === deletionItem.title) {
-      deleteDashboard(deletionItem.id);
+    const { removeItem } = this.state;
+    if (state.name === removeItem.title) {
+      deleteDashboard(removeItem.id);
       return true;
     } else return false;
   };
 
   render() {
-    const { dashboards, deleteDashboard } = this.props;
-    const { deletionItem } = this.state;
+    const { dashboards } = this.props;
+    const { removeItem } = this.state;
     return (
       <Fragment>
         <div className="row">
@@ -69,7 +69,7 @@ class DashboardList extends Component {
             <div key={dashboard.id} className="col-lg-4 col-sm-12">
               <DashboardDisplayCard
                 dashboard={dashboard}
-                deleteClick={this.deleteClick}
+                onRemoveClick={this.setRemove}
               />
             </div>
           ))}
@@ -79,11 +79,11 @@ class DashboardList extends Component {
           </div>
         </div>
         <DashboardOptions />
-        <DeleteConfirmation
-          deletionContext={{
-            item: deletionItem,
+        <RemoveConfirmation
+          removeContext={{
+            item: removeItem,
             type: "dashboard",
-            onSubmit: this.onDeleteConfirmationSubmit
+            onSubmit: this.onRemoveConfirmationSubmit
           }}
         />
       </Fragment>

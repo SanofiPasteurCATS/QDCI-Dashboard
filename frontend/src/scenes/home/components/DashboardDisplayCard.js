@@ -8,7 +8,7 @@ import { deleteDashboard } from "../../../core/actions/dashboards";
 
 class DashboardDisplayCard extends Component {
   render() {
-    const { dashboard, deleteDashboard, deleteClick } = this.props;
+    const { dashboard, deleteDashboard, onRemoveClick } = this.props;
     return (
       <div className="card m-3">
         <div className="card-body">
@@ -37,7 +37,7 @@ class DashboardDisplayCard extends Component {
               View
             </Link>
             <button
-              onClick={() => deleteClick(dashboard)}
+              onClick={() => onRemoveClick(dashboard)}
               className="btn btn-danger btn-sm ml-auto"
             >
               {" "}

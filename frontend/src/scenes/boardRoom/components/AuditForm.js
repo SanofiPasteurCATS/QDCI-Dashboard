@@ -46,8 +46,8 @@ class AuditForm extends Component {
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
-  onDateChange = date => {
-    this.setState({ date });
+  onDateChange = (date, key) => {
+    this.setState({ [key]: date });
   };
 
   onSubmit = e => {
@@ -73,7 +73,7 @@ class AuditForm extends Component {
   };
 
   render() {
-    const { description, date } = this.state;
+    const { description, end_date, start_date } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <div className="row justify-content-between">
@@ -89,13 +89,24 @@ class AuditForm extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="date" className="d-block">
-                Date
+              <label htmlFor="start_date" className="d-block">
+                Start Date
               </label>
               <DatePicker
                 className="form-control"
-                onChange={date => this.onDateChange(date)}
-                selected={date}
+                onChange={date => this.onDateChange(date, "start_date")}
+                selected={start_date}
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="end_date" className="d-block">
+                End Date
+              </label>
+              <DatePicker
+                className="form-control"
+                onChange={date => this.onDateChange(date, "end_date")}
+                selected={end_date}
                 dateFormat="yyyy-MM-dd"
               />
             </div>

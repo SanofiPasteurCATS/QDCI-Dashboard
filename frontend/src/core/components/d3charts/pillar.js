@@ -4,66 +4,24 @@ import * as d3 from "d3";
 import { withFauxDOM } from "react-faux-dom";
 import PropTypes from "prop-types";
 
+import { getColor } from "./ColorHelpers";
 // COMPONENTS
 import { primaryColor, accentColor } from "../../config/styleConfig";
-import {
-  KPI_TYPE_DEVIATION,
-  KPI_TYPE_WIN_LOSE,
-  KPI_TYPE_THRESHOLD,
-  THRESHOLD_TYPE_GREATER,
-  THRESHOLD_TYPE_LESS
-} from "../../config/dashboardConfig";
+import { PILLAR_LABELS } from "../../config/dashboardConfig";
 /**
  * Pillar component renders individual +QDCI Pillars using d3 and react-faux-dom
  * Recieves props "kpis" which contains all information for kpis
  */
 const xFactor = 4;
 
-const labelData = [
-  {
-    date: "2019-01-01"
-  },
-  {
-    date: "2019-02-01"
-  },
-  {
-    date: "2019-03-01"
-  },
-  {
-    date: "2019-04-01"
-  },
-  {
-    date: "2019-05-01"
-  },
-  {
-    date: "2019-06-01"
-  },
-  {
-    date: "2019-07-01"
-  },
-  {
-    date: "2019-08-01"
-  },
-  {
-    date: "2019-09-01"
-  },
-  {
-    date: "2019-10-01"
-  },
-  {
-    date: "2019-11-01"
-  },
-  {
-    date: "2019-12-01"
-  }
-];
-
 class Pillar extends React.Component {
   static propTypes = {
     kpis: PropTypes.array.isRequired,
     letter: PropTypes.string.isRequired,
     dashboardId: PropTypes.string.isRequired,
-    labeled: PropTypes.bool
+    labeled: PropTypes.bool,
+    onHover: PropTypes.func,
+    connectFauxDOM: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -80,19 +38,23 @@ class Pillar extends React.Component {
 
   // Triger D3 update()
   componentDidUpdate(prevProps) {
-    if (this.props.kpis !== prevProps.kpis) {
+    const { kpis } = this.props;
+    if (kpis !== prevProps.kpis) {
       this.updateD3();
     }
   }
 
   // Renders svg markup in the chart props
   render() {
-    return <div style={{ margin: `${10}px ${0}` }}>{this.props.chart}</div>;
+    const { chart } = this.props;
+    return <div style={{ margin: `${10}px ${0}` }}>{chart}</div>;
   }
 
   // Renders D3 chart to the faux DOM
   renderD3() {
-    const faux = this.props.connectFauxDOM("svg", "chart");
+    const { connectFauxDOM, animateFauxDOM } = this.props;
+
+    const faux = connectFauxDOM("svg", "chart");
 
     const plotSize = 200;
     const { letter, dashboardId, labeled } = this.props;
@@ -106,6 +68,7 @@ class Pillar extends React.Component {
       .attr("viewBox", `0 0 ${plotSize} ${plotSize}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .classed("svg-content", true);
+
     const link = svg
       .append("a")
       .attr(
@@ -114,7 +77,7 @@ class Pillar extends React.Component {
       )
       .style("text-decoration", "none");
 
-    const img = link
+    link
       .append("circle")
       .attr("cx", plotSize / 2)
       .attr("cy", plotSize / 2)
@@ -126,7 +89,7 @@ class Pillar extends React.Component {
       .duration(800)
       .attr("r", radius - plotSize / (50 * labelScale));
 
-    this.props.animateFauxDOM(800);
+    animateFauxDOM(800);
 
     link
       .append("text")
@@ -143,7 +106,7 @@ class Pillar extends React.Component {
 
   // Handles all D3 updates caused by changes to dataset
   updateD3() {
-    const { kpis, letter, labeled, showTooltip } = this.props;
+    const { kpis, letter, labeled, onHover } = this.props;
     const plotSize = 200;
     const radius = plotSize / xFactor;
     const count = kpis.length;
@@ -151,7 +114,7 @@ class Pillar extends React.Component {
     const labelScale = labeled ? 0.9 : 1;
     const parseTime = d3.timeParse("%Y-%m-%d");
     const formatTime = d3.timeFormat("%b");
-
+    // Sorting all data points in chronological order
     for (const y in kpis) {
       for (const x in kpis[y].series) {
         const series = kpis[y].series[x].entries;
@@ -168,6 +131,7 @@ class Pillar extends React.Component {
       .pie()
       .sort(null)
       .value(d => 1);
+
     const arc = d3
       .arc()
       .cornerRadius(2)
@@ -186,90 +150,6 @@ class Pillar extends React.Component {
       .padAngle(0.05)
       .padRadius(80);
 
-    const getColor = ({
-      safe_deviation,
-      danger_deviation,
-      kpi_type,
-      warning_margin,
-      threshold_type,
-      isPercentage,
-      value,
-      target
-    }) => {
-      let color = "#F2F2F2";
-      const deviation = (value / target - 1) * 100;
-      const abs_deviation = Math.abs(deviation);
-      if (value == null) return color;
-      switch (kpi_type) {
-        case KPI_TYPE_DEVIATION:
-          if (abs_deviation < safe_deviation) color = "green";
-          else if (
-            abs_deviation > safe_deviation &&
-            abs_deviation < danger_deviation
-          )
-            color = "orange";
-          else color = "red";
-          break;
-
-        case KPI_TYPE_THRESHOLD:
-          if (!isPercentage)
-            return getAbsoluteColor(
-              target,
-              value,
-              warning_margin,
-              threshold_type
-            );
-          switch (threshold_type) {
-            case THRESHOLD_TYPE_GREATER:
-              if (value >= target) color = "green";
-              else if (deviation < warning_margin) color = "red";
-              else color = "orange";
-              break;
-            case THRESHOLD_TYPE_LESS:
-              if (value <= target) color = "green";
-              else if (deviation > warning_margin) color = "red";
-              else color = "orange";
-              break;
-          }
-          break;
-
-        case KPI_TYPE_WIN_LOSE:
-          switch (threshold_type) {
-            case THRESHOLD_TYPE_GREATER:
-              if (value >= target) color = "green";
-              else color = "red";
-              break;
-            case THRESHOLD_TYPE_LESS:
-              if (value <= target) color = "green";
-              else color = "red";
-              break;
-          }
-      }
-      return color;
-    };
-
-    const getAbsoluteColor = (
-      target,
-      value,
-      warning_margin,
-      threshold_type
-    ) => {
-      console.log("hello");
-      let color = "#F2F2F2";
-      switch (threshold_type) {
-        case THRESHOLD_TYPE_GREATER:
-          if (value >= target) color = "green";
-          else if (value < target && value >= warning_margin) color = "orange";
-          else color = "red";
-          break;
-        case THRESHOLD_TYPE_LESS:
-          if (value <= target) color = "green";
-          else if (value > target && value <= warning_margin) color = "orange";
-          else color = "red";
-          break;
-      }
-      return color;
-    };
     const faux = this.props.connectFauxDOM("svg", "chart");
 
     d3.select(faux).select("#circle");
@@ -298,7 +178,7 @@ class Pillar extends React.Component {
       .attr("data-thresh-type", d => d.threshold_type)
       .attr("data-warning", d => d.warning_margin)
       .attr("data-type", d => d.kpi_type)
-      .attr("data-isPercentage", d => d.isPercentage)
+      .attr("data-is-percentage", d => d.isPercentage)
       .attr("transform", `translate(${plotSize / 2},${plotSize / 2})`);
     this.props.animateFauxDOM(800);
 
@@ -337,11 +217,11 @@ class Pillar extends React.Component {
         d3.select(`#ring_${d.data.id}`)
           .style("stroke", "#000")
           .attr("stroke-width", "1");
-        if (!showTooltip) return;
-        showTooltip(true, {
-          x: d3.event.pageX,
-          y: d3.event.pageY,
+        if (!onHover) return;
+        onHover(true, {
           payload: {
+            x: d3.event.pageX,
+            y: d3.event.pageY,
             kpi_type,
             kpiName,
             threshold_type,
@@ -352,8 +232,8 @@ class Pillar extends React.Component {
       })
       .on("mouseout", d => {
         d3.select(`#ring_${d.data.id}`).style("stroke", "none");
-        if (!showTooltip) return;
-        showTooltip(false);
+        if (!onHover) return;
+        onHover(false);
       })
       .merge(ringBind)
       .style("fill", (d, i, j) => {
@@ -363,7 +243,7 @@ class Pillar extends React.Component {
           kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
           warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
           threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
-          isPercentage: $(j)[i].parentNode.getAttribute("data-isPercentage"),
+          isPercentage: $(j)[i].parentNode.getAttribute("data-is-percentage"),
           value: d.data.value,
           target: d.data.target
         };
@@ -376,7 +256,7 @@ class Pillar extends React.Component {
       const labels = d3
         .select(faux)
         .selectAll(".label")
-        .data(pie(labelData))
+        .data(pie(PILLAR_LABELS))
         .enter()
         .append("text")
         .text((d, i, j) => {
@@ -406,7 +286,8 @@ class Pillar extends React.Component {
 
 Pillar.defaultProps = {
   chart: "loading",
-  labeled: false
+  labeled: false,
+  onHover: null
 };
 
 export default withFauxDOM(Pillar);

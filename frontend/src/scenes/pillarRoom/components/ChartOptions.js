@@ -1,17 +1,18 @@
 // DEPENDANCIES
 import React, { Fragment, Component } from "react";
-import { isThursday } from "date-fns";
 
 class ChartOptions extends Component {
   onChange = e => {
-    this.props.selectKpiHook(e.target.value);
-    this.props.selectSeriesHook(null);
-    this.props.deselectHook();
+    const { selectKpi, selectSeries, deselect } = this.props;
+    selectKpi(e.target.value);
+    selectSeries(null);
+    deselect();
   };
 
   componentDidUpdate(prevProps) {
+    const { selectKpi } = this.props;
     if (!prevProps.kpis[0] && this.props.kpis[0]) {
-      this.props.selectKpiHook(this.props.kpis[0].id);
+      selectKpi(this.props.kpis[0].id);
     }
   }
 
@@ -20,7 +21,7 @@ class ChartOptions extends Component {
   };
 
   render() {
-    const { active, kpis, setMenuState, menuMode } = this.props;
+    const { kpis, changeMenu, menuMode, kpi } = this.props;
 
     return (
       <Fragment>
@@ -56,35 +57,38 @@ class ChartOptions extends Component {
             style={{ lineHeight: "1.5", fontSize: "20px" }}
           ></i>
         </button>
-        <button
-          type="button"
-          className={`btn btn-sm mt-auto ml-auto ${
-            menuMode ? "btn-secondary" : "btn-primary"
-          }`}
-          onClick={() => setMenuState(false)}
-          style={{ padding: "1px 8px" }}
-          disabled={menuMode ? false : true}
-        >
-          <i
-            className="im im-line-chart-up"
-            style={{ lineHeight: "1.5", fontSize: "20px" }}
-          ></i>
-        </button>
-
-        <button
-          type="button"
-          className={`btn btn-sm mt-auto ml-2 ${
-            menuMode ? "btn-primary" : "btn-secondary"
-          }`}
-          onClick={() => setMenuState(true)}
-          style={{ padding: "1px 8px" }}
-          disabled={menuMode ? true : false}
-        >
-          <i
-            className="im im-gear"
-            style={{ lineHeight: "1.5", fontSize: "20px" }}
-          ></i>
-        </button>
+        {kpi && (
+          <>
+            <button
+              type="button"
+              className={`btn btn-sm mt-auto ml-auto ${
+                menuMode ? "btn-secondary" : "btn-primary"
+              }`}
+              onClick={() => changeMenu(false)}
+              style={{ padding: "1px 8px" }}
+              disabled={menuMode ? false : true}
+            >
+              <i
+                className="im im-line-chart-up"
+                style={{ lineHeight: "1.5", fontSize: "20px" }}
+              ></i>
+            </button>
+            <button
+              type="button"
+              className={`btn btn-sm mt-auto ml-2 ${
+                menuMode ? "btn-primary" : "btn-secondary"
+              }`}
+              onClick={() => changeMenu(true)}
+              style={{ padding: "1px 8px" }}
+              disabled={menuMode ? true : false}
+            >
+              <i
+                className="im im-gear"
+                style={{ lineHeight: "1.5", fontSize: "20px" }}
+              ></i>
+            </button>{" "}
+          </>
+        )}
       </Fragment>
     );
   }

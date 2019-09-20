@@ -20,7 +20,7 @@ const height = 600 - margin.top - margin.bottom;
 class LineChart extends React.Component {
   static propTypes = {
     kpis: PropTypes.array.isRequired,
-    selectSeriesHook: PropTypes.func.isRequired,
+    selectSeries: PropTypes.func.isRequired,
     chart: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     selectedKpi: PropTypes.number,
     connectFauxDOM: PropTypes.func.isRequired,
@@ -54,7 +54,7 @@ class LineChart extends React.Component {
   }
 
   renderD3() {
-    const { connectFauxDOM, selectSeriesHook } = this.props;
+    const { connectFauxDOM, selectSeries } = this.props;
     const faux = connectFauxDOM("svg", "chart");
     function highlightLine(id) {
       if (id == null) return;
@@ -97,7 +97,7 @@ class LineChart extends React.Component {
       .attr("id", "facade")
       .on("click", function() {
         highlightLine("null");
-        selectSeriesHook(null);
+        selectSeries(null);
       });
 
     // Y-axis
@@ -142,7 +142,7 @@ class LineChart extends React.Component {
     const {
       connectFauxDOM,
       kpis,
-      selectSeriesHook,
+      selectSeries,
       animateFauxDOM,
       selectedKpi
     } = this.props;
@@ -151,8 +151,28 @@ class LineChart extends React.Component {
     let index = kpis.findIndex(kpi => {
       return kpi.id == selectedKpi;
     });
+
     index = index == -1 ? 0 : index;
-    const data = kpis[index] ? kpis[index].series : [];
+
+    let data = kpis[index] ? kpis[index].series : [];
+
+    let test = {};
+    if (kpis[index] && kpis[index].series) {
+      test = { ...kpis[index].series[0] };
+      let entries = [...kpis[index].series[0].entries];
+      test.entries = entries.map(datapoint => {
+        return {
+          value: datapoint.target,
+          date: datapoint.date,
+          target: datapoint.target
+        };
+      });
+      test.color = "#ff0000";
+      test.name = `${test.name} Threshold`;
+      data = [test, ...data];
+    }
+    console.log(test);
+    console.log(data);
     const parseTime = d3.timeParse("%Y-%m-%d");
     function highlightLine(id) {
       d3.selectAll(".line").attr("stroke-width", 1.8);
@@ -347,7 +367,7 @@ class LineChart extends React.Component {
       })
       .on("click", function(d) {
         highlightLine(d.id);
-        selectSeriesHook(d.id);
+        selectSeries(d.id);
       });
     d3.select(faux)
       .select("#title")

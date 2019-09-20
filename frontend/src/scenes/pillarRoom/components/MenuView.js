@@ -2,7 +2,10 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
-// COMPONENTS
+// CORE COMPONENTS
+import { getItem } from "../../../core/helpers/Filters";
+
+// NATIVE COMPONENTS
 import SeriesView from "./series/SeriesView";
 import KpiView from "./kpis/KpiView";
 
@@ -19,13 +22,13 @@ class MenuView extends Component {
     this.onSeriesSelect = this.onSeriesSelect.bind(this);
     this.setViewState = this.setViewState.bind(this);
     this.onSeriesBack = this.onSeriesBack.bind(this);
-    this.onDelete = this.onDelete.bind(this);
+    this.setRemove = this.setRemove.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    const { kpi, setMenuState, resetKpiSelect } = this.props;
+    const { kpi, changeMenu, resetKpiSelect } = this.props;
     if (!kpi) {
-      setMenuState(false);
+      changeMenu(false);
       resetKpiSelect();
       return;
     }
@@ -50,24 +53,20 @@ class MenuView extends Component {
     this.setState({ view: KPI_VIEW });
   };
 
-  onDelete = deleteItem => {
-    const { onDelete } = this.props;
-    onDelete(deleteItem);
+  setRemove = removeItem => {
+    const { setRemove } = this.props;
+    setRemove(removeItem);
   };
 
   render() {
-    const { kpi, setMenuState } = this.props;
+    const { kpi, changeMenu } = this.props;
     if (!kpi) {
-      setMenuState(false);
+      changeMenu(false);
       return <div></div>;
     }
     const { selectedSeries, view } = this.state;
 
-    const series = selectedSeries
-      ? kpi.series.filter(s => {
-          return s.id === selectedSeries;
-        })[0]
-      : null;
+    const series = getItem(selectedSeries, kpi.series, "id");
 
     switch (view) {
       case KPI_VIEW:
@@ -75,7 +74,7 @@ class MenuView extends Component {
           <KpiView
             kpi={kpi}
             onSeriesSelect={this.onSeriesSelect}
-            onDelete={this.onDelete}
+            setRemove={this.setRemove}
           ></KpiView>
         );
       case SERIES_VIEW:
@@ -83,7 +82,7 @@ class MenuView extends Component {
           <SeriesView
             series={series}
             onBack={this.onSeriesBack}
-            onDelete={this.onDelete}
+            setRemove={this.setRemove}
           ></SeriesView>
         );
       default:

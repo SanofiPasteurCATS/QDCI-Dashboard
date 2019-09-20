@@ -129,7 +129,8 @@ export const AUDIT_TABLE_HEADERS = [
     name: "Description",
     prop: "description"
   },
-  { name: "Date", prop: "date" }
+  { name: "Start Date", prop: "start_date" },
+  { name: "End Date", prop: "end_date" }
 ];
 
 export const WIN_TABLE_HEADERS = [
@@ -193,5 +194,44 @@ export const ACTION_TABLE_DUMMY_DATA = [
     solution: "Get legs",
     leader: "Kyle",
     date: "03-SEP-2019"
+  }
+];
+
+export const PILLAR_LABELS = [
+  {
+    date: "2019-01-01"
+  },
+  {
+    date: "2019-02-01"
+  },
+  {
+    date: "2019-03-01"
+  },
+  {
+    date: "2019-04-01"
+  },
+  {
+    date: "2019-05-01"
+  },
+  {
+    date: "2019-06-01"
+  },
+  {
+    date: "2019-07-01"
+  },
+  {
+    date: "2019-08-01"
+  },
+  {
+    date: "2019-09-01"
+  },
+  {
+    date: "2019-10-01"
+  },
+  {
+    date: "2019-11-01"
+  },
+  {
+    date: "2019-12-01"
   }
 ];

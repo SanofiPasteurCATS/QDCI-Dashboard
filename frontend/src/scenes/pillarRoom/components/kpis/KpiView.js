@@ -10,24 +10,24 @@ import { deleteKpi } from "../../../../core/actions/dashboards";
 class KpiView extends Component {
   constructor(props) {
     super(props);
-    this.onSubmitDelete = this.onSubmitDelete.bind(this);
+    this.onSubmitRemove = this.onSubmitRemove.bind(this);
   }
 
   componentDidMount() {
-    const { onDelete, kpi } = this.props;
-    onDelete({ type: "kpi", item: kpi, onSubmit: this.onSubmitDelete });
+    const { setRemove, kpi } = this.props;
+    setRemove({ type: "kpi", item: kpi, onSubmit: this.onSubmitRemove });
   }
 
   componentDidUpdate(prevProps) {
-    const { kpi, onDelete } = this.props;
+    const { kpi, setRemove } = this.props;
     if (prevProps.kpi !== kpi);
-    onDelete({ type: "kpi", item: kpi, onSubmit: this.onSubmitDelete });
+    setRemove({ type: "kpi", item: kpi, onSubmit: this.onSubmitRemove });
   }
-  onDelete = () => {
-    $("#deleteConfirmation").modal("show");
+  onRemove = () => {
+    $("#removeConfirmation").modal("show");
   };
 
-  onSubmitDelete = state => {
+  onSubmitRemove = state => {
     const { kpi, deleteKpi } = this.props;
     if (state.name === kpi.name) {
       deleteKpi(kpi.id);
@@ -53,7 +53,7 @@ class KpiView extends Component {
         />
 
         <div className="d-flex justify-content-end">
-          <button className="btn btn-danger" onClick={this.onDelete}>
+          <button className="btn btn-danger" onClick={this.onRemove}>
             Delete Kpi
           </button>
         </div>

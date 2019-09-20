@@ -13,19 +13,19 @@ import DataTable from "../datapoints/DataTable";
 class SeriesView extends Component {
   constructor(props) {
     super(props);
-    this.onSubmitDelete = this.onSubmitDelete.bind(this);
+    this.onSubmitRemove = this.onSubmitRemove.bind(this);
   }
 
   componentDidMount() {
-    const { onDelete, series } = this.props;
-    onDelete({ type: "series", item: series, onSubmit: this.onSubmitDelete });
+    const { setRemove, series } = this.props;
+    setRemove({ type: "series", item: series, onSubmit: this.onSubmitRemove });
   }
 
-  onDelete = () => {
-    $("#deleteConfirmation").modal("show");
+  setRemove = () => {
+    $("#removeConfirmation").modal("show");
   };
 
-  onSubmitDelete = state => {
+  onSubmitRemove = state => {
     const { series, deleteSeries } = this.props;
     if (state.name === series.name) {
       deleteSeries(series.id);
@@ -59,7 +59,7 @@ class SeriesView extends Component {
           <button
             type="button"
             className="btn btn-danger"
-            onClick={this.onDelete}
+            onClick={this.setRemove}
           >
             Delete Series
           </button>

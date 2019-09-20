@@ -108,7 +108,8 @@ class Win(models.Model):
 
 class Audit(models.Model):
     description = models.CharField(max_length=256, null= True)
-    date = models.DateField(default= None, null=True)
+    start_date = models.DateField(default= None, null=True)
+    end_date = models.DateField(default= None, null=True)
 
 
 

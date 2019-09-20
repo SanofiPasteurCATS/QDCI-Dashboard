@@ -157,14 +157,13 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 59 modules ***!
+  !*** ./frontend/src/index.js + 61 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/parseISO/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/prop-types/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js */
@@ -1388,8 +1387,11 @@ var AUDIT_TABLE_HEADERS = [{
   name: "Description",
   prop: "description"
 }, {
-  name: "Date",
-  prop: "date"
+  name: "Start Date",
+  prop: "start_date"
+}, {
+  name: "End Date",
+  prop: "end_date"
 }];
 var WIN_TABLE_HEADERS = [{
   name: "Description",
@@ -1443,6 +1445,98 @@ var ACTION_TABLE_DUMMY_DATA = [{
   leader: "Kyle",
   date: "03-SEP-2019"
 }];
+var PILLAR_LABELS = [{
+  date: "2019-01-01"
+}, {
+  date: "2019-02-01"
+}, {
+  date: "2019-03-01"
+}, {
+  date: "2019-04-01"
+}, {
+  date: "2019-05-01"
+}, {
+  date: "2019-06-01"
+}, {
+  date: "2019-07-01"
+}, {
+  date: "2019-08-01"
+}, {
+  date: "2019-09-01"
+}, {
+  date: "2019-10-01"
+}, {
+  date: "2019-11-01"
+}, {
+  date: "2019-12-01"
+}];
+// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/ColorHelpers.js
+
+var ColorHelpers_getColor = function getColor(_ref) {
+  var safe_deviation = _ref.safe_deviation,
+      danger_deviation = _ref.danger_deviation,
+      kpi_type = _ref.kpi_type,
+      warning_margin = _ref.warning_margin,
+      threshold_type = _ref.threshold_type,
+      isPercentage = _ref.isPercentage,
+      value = _ref.value,
+      target = _ref.target;
+  var color = "#F2F2F2";
+  var deviation = (value / target - 1) * 100;
+  var abs_deviation = Math.abs(deviation);
+  if (value == null) return color;
+
+  switch (kpi_type) {
+    case KPI_TYPE_DEVIATION:
+      if (abs_deviation < safe_deviation) color = "green";else if (abs_deviation > safe_deviation && abs_deviation < danger_deviation) color = "orange";else color = "red";
+      break;
+
+    case KPI_TYPE_THRESHOLD:
+      if (!isPercentage) return ColorHelpers_getAbsoluteColor(target, value, warning_margin, threshold_type);
+
+      switch (threshold_type) {
+        case THRESHOLD_TYPE_GREATER:
+          if (value >= target) color = "green";else if (deviation < warning_margin) color = "red";else color = "orange";
+          break;
+
+        case THRESHOLD_TYPE_LESS:
+          if (value <= target) color = "green";else if (deviation > warning_margin) color = "red";else color = "orange";
+          break;
+      }
+
+      break;
+
+    case KPI_TYPE_WIN_LOSE:
+      switch (threshold_type) {
+        case THRESHOLD_TYPE_GREATER:
+          if (value >= target) color = "green";else color = "red";
+          break;
+
+        case THRESHOLD_TYPE_LESS:
+          if (value <= target) color = "green";else color = "red";
+          break;
+      }
+
+  }
+
+  return color;
+};
+
+var ColorHelpers_getAbsoluteColor = function getAbsoluteColor(target, value, warning_margin, threshold_type) {
+  var color = "#F2F2F2";
+
+  switch (threshold_type) {
+    case THRESHOLD_TYPE_GREATER:
+      if (value >= target) color = "green";else if (value < target && value >= warning_margin) color = "orange";else color = "red";
+      break;
+
+    case THRESHOLD_TYPE_LESS:
+      if (value <= target) color = "green";else if (value > target && value <= warning_margin) color = "orange";else color = "red";
+      break;
+  }
+
+  return color;
+};
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/pillar.js
 function pillar_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillar_typeof = function _typeof(obj) { return typeof obj; }; } else { pillar_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillar_typeof(obj); }
 
@@ -1470,6 +1564,7 @@ function pillar_setPrototypeOf(o, p) { pillar_setPrototypeOf = Object.setPrototy
 
 
 
+
  // COMPONENTS
 
 
@@ -1480,31 +1575,6 @@ function pillar_setPrototypeOf(o, p) { pillar_setPrototypeOf = Object.setPrototy
  */
 
 var xFactor = 4;
-var labelData = [{
-  date: "2019-01-01"
-}, {
-  date: "2019-02-01"
-}, {
-  date: "2019-03-01"
-}, {
-  date: "2019-04-01"
-}, {
-  date: "2019-05-01"
-}, {
-  date: "2019-06-01"
-}, {
-  date: "2019-07-01"
-}, {
-  date: "2019-08-01"
-}, {
-  date: "2019-09-01"
-}, {
-  date: "2019-10-01"
-}, {
-  date: "2019-11-01"
-}, {
-  date: "2019-12-01"
-}];
 
 var pillar_Pillar =
 /*#__PURE__*/
@@ -1533,7 +1603,9 @@ function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (this.props.kpis !== prevProps.kpis) {
+      var kpis = this.props.kpis;
+
+      if (kpis !== prevProps.kpis) {
         this.updateD3();
       }
     } // Renders svg markup in the chart props
@@ -1541,46 +1613,50 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var chart = this.props.chart;
       return react_default.a.createElement("div", {
         style: {
           margin: "".concat(10, "px ", 0)
         }
-      }, this.props.chart);
+      }, chart);
     } // Renders D3 chart to the faux DOM
 
   }, {
     key: "renderD3",
     value: function renderD3() {
-      var faux = this.props.connectFauxDOM("svg", "chart");
-      var plotSize = 200;
       var _this$props = this.props,
-          letter = _this$props.letter,
-          dashboardId = _this$props.dashboardId,
-          labeled = _this$props.labeled;
+          connectFauxDOM = _this$props.connectFauxDOM,
+          animateFauxDOM = _this$props.animateFauxDOM;
+      var faux = connectFauxDOM("svg", "chart");
+      var plotSize = 200;
+      var _this$props2 = this.props,
+          letter = _this$props2.letter,
+          dashboardId = _this$props2.dashboardId,
+          labeled = _this$props2.labeled;
       var radius = plotSize / xFactor;
       var labelScale = labeled ? 0.4 : 1;
       var svg = d3["select"](faux).attr("id", "chartPillar").attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink").attr("viewBox", "0 0 ".concat(plotSize, " ").concat(plotSize)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true);
       var link = svg.append("a").attr("href", "#/pillar/".concat(dashboardId, "/").concat(letter === "+" ? "Plus" : letter)).style("text-decoration", "none");
-      var img = link.append("circle").attr("cx", plotSize / 2).attr("cy", plotSize / 2).attr("alignment-baseline", "middle").attr("r", 0).style("fill", accentColor).attr("id", "circle").transition().duration(800).attr("r", radius - plotSize / (50 * labelScale));
-      this.props.animateFauxDOM(800);
+      link.append("circle").attr("cx", plotSize / 2).attr("cy", plotSize / 2).attr("alignment-baseline", "middle").attr("r", 0).style("fill", accentColor).attr("id", "circle").transition().duration(800).attr("r", radius - plotSize / (50 * labelScale));
+      animateFauxDOM(800);
       link.append("text").text(letter).attr("dx", "50%").attr("dy", "52%").attr("id", "text").attr("text-anchor", "middle").attr("alignment-baseline", "middle").style("fill", primaryColor).style("font-size", plotSize / 2.9).style("text-decoration", "none");
     } // Handles all D3 updates caused by changes to dataset
 
   }, {
     key: "updateD3",
     value: function updateD3() {
-      var _this$props2 = this.props,
-          kpis = _this$props2.kpis,
-          letter = _this$props2.letter,
-          labeled = _this$props2.labeled,
-          showTooltip = _this$props2.showTooltip;
+      var _this$props3 = this.props,
+          kpis = _this$props3.kpis,
+          letter = _this$props3.letter,
+          labeled = _this$props3.labeled,
+          onHover = _this$props3.onHover;
       var plotSize = 200;
       var radius = plotSize / xFactor;
       var count = kpis.length;
       var labelOffset = labeled ? -1 : 0;
       var labelScale = labeled ? 0.9 : 1;
       var parseTime = d3["timeParse"]("%Y-%m-%d");
-      var formatTime = d3["timeFormat"]("%b");
+      var formatTime = d3["timeFormat"]("%b"); // Sorting all data points in chronological order
 
       for (var y in kpis) {
         for (var x in kpis[y].series) {
@@ -1599,74 +1675,6 @@ function (_React$Component) {
       });
       var arc = d3["arc"]().cornerRadius(2).padAngle(0.6).padRadius(3);
       var labelArc = d3["arc"]().innerRadius(radius * 0.84 + plotSize * labelScale / 21 * (count - 1) * 1.0 + 15).outerRadius(radius * 0.84 + plotSize * labelScale / 20 * (count - 1) * 1.3 + 15).cornerRadius(2).padAngle(0.05).padRadius(80);
-
-      var getColor = function getColor(_ref) {
-        var safe_deviation = _ref.safe_deviation,
-            danger_deviation = _ref.danger_deviation,
-            kpi_type = _ref.kpi_type,
-            warning_margin = _ref.warning_margin,
-            threshold_type = _ref.threshold_type,
-            isPercentage = _ref.isPercentage,
-            value = _ref.value,
-            target = _ref.target;
-        var color = "#F2F2F2";
-        var deviation = (value / target - 1) * 100;
-        var abs_deviation = Math.abs(deviation);
-        if (value == null) return color;
-
-        switch (kpi_type) {
-          case KPI_TYPE_DEVIATION:
-            if (abs_deviation < safe_deviation) color = "green";else if (abs_deviation > safe_deviation && abs_deviation < danger_deviation) color = "orange";else color = "red";
-            break;
-
-          case KPI_TYPE_THRESHOLD:
-            if (!isPercentage) return getAbsoluteColor(target, value, warning_margin, threshold_type);
-
-            switch (threshold_type) {
-              case THRESHOLD_TYPE_GREATER:
-                if (value >= target) color = "green";else if (deviation < warning_margin) color = "red";else color = "orange";
-                break;
-
-              case THRESHOLD_TYPE_LESS:
-                if (value <= target) color = "green";else if (deviation > warning_margin) color = "red";else color = "orange";
-                break;
-            }
-
-            break;
-
-          case KPI_TYPE_WIN_LOSE:
-            switch (threshold_type) {
-              case THRESHOLD_TYPE_GREATER:
-                if (value >= target) color = "green";else color = "red";
-                break;
-
-              case THRESHOLD_TYPE_LESS:
-                if (value <= target) color = "green";else color = "red";
-                break;
-            }
-
-        }
-
-        return color;
-      };
-
-      var getAbsoluteColor = function getAbsoluteColor(target, value, warning_margin, threshold_type) {
-        console.log("hello");
-        var color = "#F2F2F2";
-
-        switch (threshold_type) {
-          case THRESHOLD_TYPE_GREATER:
-            if (value >= target) color = "green";else if (value < target && value >= warning_margin) color = "orange";else color = "red";
-            break;
-
-          case THRESHOLD_TYPE_LESS:
-            if (value <= target) color = "green";else if (value > target && value <= warning_margin) color = "orange";else color = "red";
-            break;
-        }
-
-        return color;
-      };
-
       var faux = this.props.connectFauxDOM("svg", "chart");
       d3["select"](faux).select("#circle");
       d3["select"](faux).select("#text").text(letter);
@@ -1688,7 +1696,7 @@ function (_React$Component) {
         return d.warning_margin;
       }).attr("data-type", function (d) {
         return d.kpi_type;
-      }).attr("data-isPercentage", function (d) {
+      }).attr("data-is-percentage", function (d) {
         return d.isPercentage;
       }).attr("transform", "translate(".concat(plotSize / 2, ",").concat(plotSize / 2, ")"));
       this.props.animateFauxDOM(800);
@@ -1708,11 +1716,11 @@ function (_React$Component) {
         var threshold_type = $(j)[i].parentNode.getAttribute("data-thresh-type");
         var warning_margin = $(j)[i].parentNode.getAttribute("data-warning");
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "#000").attr("stroke-width", "1");
-        if (!showTooltip) return;
-        showTooltip(true, {
-          x: d3["event"].pageX,
-          y: d3["event"].pageY,
+        if (!onHover) return;
+        onHover(true, {
           payload: _objectSpread({
+            x: d3["event"].pageX,
+            y: d3["event"].pageY,
             kpi_type: kpi_type,
             kpiName: kpiName,
             threshold_type: threshold_type,
@@ -1721,8 +1729,8 @@ function (_React$Component) {
         });
       }).on("mouseout", function (d) {
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "none");
-        if (!showTooltip) return;
-        showTooltip(false);
+        if (!onHover) return;
+        onHover(false);
       }).merge(ringBind).style("fill", function (d, i, j) {
         var colorProps = {
           safe_deviation: $(j)[i].parentNode.getAttribute("data-safe"),
@@ -1730,16 +1738,16 @@ function (_React$Component) {
           kpi_type: $(j)[i].parentNode.getAttribute("data-type"),
           warning_margin: $(j)[i].parentNode.getAttribute("data-warning"),
           threshold_type: $(j)[i].parentNode.getAttribute("data-thresh-type"),
-          isPercentage: $(j)[i].parentNode.getAttribute("data-isPercentage"),
+          isPercentage: $(j)[i].parentNode.getAttribute("data-is-percentage"),
           value: d.data.value,
           target: d.data.target
         };
-        return getColor(colorProps);
+        return ColorHelpers_getColor(colorProps);
       });
       d3["select"](faux).selectAll(".label").remove();
 
       if (kpis[count - 1] && labeled && kpis[count - 1].series[0]) {
-        var labels = d3["select"](faux).selectAll(".label").data(pie(labelData)).enter().append("text").text(function (d, i, j) {
+        var labels = d3["select"](faux).selectAll(".label").data(pie(PILLAR_LABELS)).enter().append("text").text(function (d, i, j) {
           if (d.data.date) return formatTime(parseTime(d.data.date));
           return "";
         }).attr("class", "label").attr("transform", function (d) {
@@ -1765,11 +1773,14 @@ pillar_Pillar.propTypes = {
   kpis: prop_types_default.a.array.isRequired,
   letter: prop_types_default.a.string.isRequired,
   dashboardId: prop_types_default.a.string.isRequired,
-  labeled: prop_types_default.a.bool
+  labeled: prop_types_default.a.bool,
+  onHover: prop_types_default.a.func,
+  connectFauxDOM: prop_types_default.a.func.isRequired
 };
 pillar_Pillar.defaultProps = {
   chart: "loading",
-  labeled: false
+  labeled: false,
+  onHover: null
 };
 /* harmony default export */ var d3charts_pillar = (Object(ReactFauxDOM["withFauxDOM"])(pillar_Pillar));
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/PillarBar.js
@@ -2584,7 +2595,7 @@ EscalationsOptions_EscalationOptions.propTypes = {
 // EXTERNAL MODULE: ./node_modules/date-fns/esm/parseISO/index.js
 var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.js");
 
-// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 2 modules
+// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 28 modules
 var esm_format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
@@ -3139,10 +3150,8 @@ function (_Component) {
       hook();
     }, _this.onChange = function (e) {
       return _this.setState(AuditForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onDateChange = function (date) {
-      _this.setState({
-        date: date
-      });
+    }, _this.onDateChange = function (date, key) {
+      _this.setState(AuditForm_defineProperty({}, key, date));
     }, _this.onSubmit = function (e) {
       e.preventDefault();
       var _this$state = _this.state,
@@ -3194,7 +3203,8 @@ function (_Component) {
 
       var _this$state2 = this.state,
           description = _this$state2.description,
-          date = _this$state2.date;
+          end_date = _this$state2.end_date,
+          start_date = _this$state2.start_date;
       return react_default.a.createElement("form", {
         onSubmit: this.onSubmit
       }, react_default.a.createElement("div", {
@@ -3214,14 +3224,26 @@ function (_Component) {
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "date",
+        htmlFor: "start_date",
         className: "d-block"
-      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
+      }, "Start Date"), react_default.a.createElement(react_datepicker_es["default"], {
         className: "form-control",
         onChange: function onChange(date) {
-          return _this3.onDateChange(date);
+          return _this3.onDateChange(date, "start_date");
         },
-        selected: date,
+        selected: start_date,
+        dateFormat: "yyyy-MM-dd"
+      })), react_default.a.createElement("div", {
+        className: "form-group"
+      }, react_default.a.createElement("label", {
+        htmlFor: "end_date",
+        className: "d-block"
+      }, "End Date"), react_default.a.createElement(react_datepicker_es["default"], {
+        className: "form-control",
+        onChange: function onChange(date) {
+          return _this3.onDateChange(date, "end_date");
+        },
+        selected: end_date,
         dateFormat: "yyyy-MM-dd"
       }))), react_default.a.createElement("div", {
         className: "col-sm-12 d-flex justify-content-end"
@@ -3985,6 +4007,18 @@ PrivateRoute_PrivateRoute.propTypes = {
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
 function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function LineChart_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { LineChart_defineProperty(target, key, source[key]); }); } return target; }
+
+function LineChart_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function LineChart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function LineChart_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -4063,7 +4097,7 @@ function (_React$Component) {
     value: function renderD3() {
       var _this$props2 = this.props,
           connectFauxDOM = _this$props2.connectFauxDOM,
-          selectSeriesHook = _this$props2.selectSeriesHook;
+          selectSeries = _this$props2.selectSeries;
       var faux = connectFauxDOM("svg", "chart");
 
       function highlightLine(id) {
@@ -4080,7 +4114,7 @@ function (_React$Component) {
       .style("margin", "20px 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
       svg.append("rect").attr("width", width).attr("height", height).style("opacity", 0).attr("id", "facade").on("click", function () {
         highlightLine("null");
-        selectSeriesHook(null);
+        selectSeries(null);
       }); // Y-axis
 
       svg.append("g").attr("class", "myYaxis").style("color", "black").style("font-size", "0.8rem"); // X-axis
@@ -4098,7 +4132,7 @@ function (_React$Component) {
       var _this$props3 = this.props,
           connectFauxDOM = _this$props3.connectFauxDOM,
           kpis = _this$props3.kpis,
-          selectSeriesHook = _this$props3.selectSeriesHook,
+          selectSeries = _this$props3.selectSeries,
           animateFauxDOM = _this$props3.animateFauxDOM,
           selectedKpi = _this$props3.selectedKpi;
       var faux = connectFauxDOM("svg", "chart");
@@ -4107,6 +4141,27 @@ function (_React$Component) {
       });
       index = index == -1 ? 0 : index;
       var data = kpis[index] ? kpis[index].series : [];
+      var test = {};
+
+      if (kpis[index] && kpis[index].series) {
+        test = LineChart_objectSpread({}, kpis[index].series[0]);
+
+        var entries = _toConsumableArray(kpis[index].series[0].entries);
+
+        test.entries = entries.map(function (datapoint) {
+          return {
+            value: datapoint.target,
+            date: datapoint.date,
+            target: datapoint.target
+          };
+        });
+        test.color = "#ff0000";
+        test.name = "".concat(test.name, " Threshold");
+        data = [test].concat(_toConsumableArray(data));
+      }
+
+      console.log(test);
+      console.log(data);
       var parseTime = d3["timeParse"]("%Y-%m-%d");
 
       function highlightLine(id) {
@@ -4235,7 +4290,7 @@ function (_React$Component) {
         return d.name;
       }).on("click", function (d) {
         highlightLine(d.id);
-        selectSeriesHook(d.id);
+        selectSeries(d.id);
       });
       d3["select"](faux).select("#title").text(function () {
         return kpis[index] ? kpis[index].name : "";
@@ -4254,7 +4309,7 @@ function (_React$Component) {
 
 LineChart_LineChart.propTypes = {
   kpis: prop_types_default.a.array.isRequired,
-  selectSeriesHook: prop_types_default.a.func.isRequired,
+  selectSeries: prop_types_default.a.func.isRequired,
   chart: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.object]),
   selectedKpi: prop_types_default.a.number,
   connectFauxDOM: prop_types_default.a.func.isRequired,
@@ -4265,173 +4320,14 @@ LineChart_LineChart.defaultProps = {
   selectedKpi: null
 };
 /* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/svgExporter.js
-function svgExporter_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { svgExporter_typeof = function _typeof(obj) { return typeof obj; }; } else { svgExporter_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return svgExporter_typeof(obj); }
-
-function svgExporter_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function svgExporter_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function svgExporter_createClass(Constructor, protoProps, staticProps) { if (protoProps) svgExporter_defineProperties(Constructor.prototype, protoProps); if (staticProps) svgExporter_defineProperties(Constructor, staticProps); return Constructor; }
-
-function svgExporter_possibleConstructorReturn(self, call) { if (call && (svgExporter_typeof(call) === "object" || typeof call === "function")) { return call; } return svgExporter_assertThisInitialized(self); }
-
-function svgExporter_getPrototypeOf(o) { svgExporter_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return svgExporter_getPrototypeOf(o); }
-
-function svgExporter_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function svgExporter_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) svgExporter_setPrototypeOf(subClass, superClass); }
-
-function svgExporter_setPrototypeOf(o, p) { svgExporter_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return svgExporter_setPrototypeOf(o, p); }
-
-// DEPENDACIES
-
-
-
-var svgExporter_SvgExporter =
-/*#__PURE__*/
-function (_Component) {
-  svgExporter_inherits(SvgExporter, _Component);
-
-  function SvgExporter(props) {
-    var _this;
-
-    svgExporter_classCallCheck(this, SvgExporter);
-
-    _this = svgExporter_possibleConstructorReturn(this, svgExporter_getPrototypeOf(SvgExporter).call(this, props));
-    _this["export"] = _this["export"].bind(svgExporter_assertThisInitialized(_this));
-    _this.preview = _this.preview.bind(svgExporter_assertThisInitialized(_this));
-    return _this;
-  }
-
-  svgExporter_createClass(SvgExporter, [{
-    key: "export",
-    value: function _export() {
-      var svgData = $(this.props.target)[0].outerHTML;
-      var svgBlob = new Blob([svgData], {
-        type: "image/svg+xml;charset=utf-8"
-      });
-      var svgUrl = URL.createObjectURL(svgBlob);
-      var downloadLink = document.createElement("a");
-      downloadLink.href = svgUrl;
-      downloadLink.download = "kpi_chart.svg";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-  }, {
-    key: "preview",
-    value: function preview() {
-      var svgData = $(this.props.target)[0].outerHTML;
-      var preview = document.createElement("div");
-      preview.innerHTML = svgData;
-      $("#preview").empty();
-      $("#preview").append(preview);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "svgExporter",
-        role: "dialog",
-        "aria-labelledby": "svgExporterLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "svgExporterLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-picture-o",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Export SVG"), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-header"
-      }, react_default.a.createElement("ul", {
-        className: "nav nav-tabs card-header-tabs"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link active",
-        "data-toggle": "tab",
-        href: "#export"
-      }, "Export")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        "data-toggle": "tab",
-        href: "#settings"
-      }, "Settings")))), react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("div", {
-        className: "tab-content",
-        style: {
-          maxHeight: "".concat(550, "px"),
-          overflow: "auto",
-          overflowX: "auto"
-        }
-      }, react_default.a.createElement("div", {
-        id: "export",
-        className: "tab-pane fade show active"
-      }, react_default.a.createElement("h5", null, "Preview"), react_default.a.createElement("button", {
-        type: "button",
-        onClick: this.preview,
-        className: "btn btn-info"
-      }, "Generate Preview"), react_default.a.createElement("div", {
-        className: "container",
-        id: "preview"
-      }), react_default.a.createElement("h5", {
-        className: "card-title mt-4"
-      }, "Export Your SVG"), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success",
-        onClick: this["export"]
-      }, react_default.a.createElement("span", {
-        className: "im im-download",
-        style: {
-          fontSize: "".concat(1, "rem")
-        }
-      }), "  ", "Export")), react_default.a.createElement("div", {
-        id: "settings",
-        className: "tab-pane fade"
-      }, react_default.a.createElement("h5", {
-        className: "card-title"
-      }, "WIP"))))))))));
-    }
-  }]);
-
-  return SvgExporter;
-}(react["Component"]);
-
-svgExporter_SvgExporter.propTypes = {
-  target: prop_types_default.a.string.isRequired
+// CONCATENATED MODULE: ./frontend/src/core/helpers/Filters.js
+var getItem = function getItem(id, arr, prop) {
+  if (!arr) return null;
+  var query = arr.filter(function (item) {
+    return item[prop] == id;
+  });
+  if (!query.length) return null;else return query[0];
 };
-/* harmony default export */ var svgExporter = (svgExporter_SvgExporter);
-// EXTERNAL MODULE: ./node_modules/date-fns/esm/index.js + 179 modules
-var esm = __webpack_require__("./node_modules/date-fns/esm/index.js");
-
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/ChartOptions.js
 function ChartOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ChartOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { ChartOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ChartOptions_typeof(obj); }
 
@@ -4454,7 +4350,6 @@ function ChartOptions_setPrototypeOf(o, p) { ChartOptions_setPrototypeOf = Objec
 // DEPENDANCIES
 
 
-
 var ChartOptions_ChartOptions =
 /*#__PURE__*/
 function (_Component) {
@@ -4472,11 +4367,13 @@ function (_Component) {
     }
 
     return ChartOptions_possibleConstructorReturn(_this, (_temp = _this = ChartOptions_possibleConstructorReturn(this, (_getPrototypeOf2 = ChartOptions_getPrototypeOf(ChartOptions)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.onChange = function (e) {
-      _this.props.selectKpiHook(e.target.value);
-
-      _this.props.selectSeriesHook(null);
-
-      _this.props.deselectHook();
+      var _this$props = _this.props,
+          selectKpi = _this$props.selectKpi,
+          selectSeries = _this$props.selectSeries,
+          deselect = _this$props.deselect;
+      selectKpi(e.target.value);
+      selectSeries(null);
+      deselect();
     }, _this.openKpiNew = function () {
       $("#newKpi").modal("show");
     }, _temp));
@@ -4485,18 +4382,20 @@ function (_Component) {
   ChartOptions_createClass(ChartOptions, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      var selectKpi = this.props.selectKpi;
+
       if (!prevProps.kpis[0] && this.props.kpis[0]) {
-        this.props.selectKpiHook(this.props.kpis[0].id);
+        selectKpi(this.props.kpis[0].id);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          active = _this$props.active,
-          kpis = _this$props.kpis,
-          setMenuState = _this$props.setMenuState,
-          menuMode = _this$props.menuMode;
+      var _this$props2 = this.props,
+          kpis = _this$props2.kpis,
+          changeMenu = _this$props2.changeMenu,
+          menuMode = _this$props2.menuMode,
+          kpi = _this$props2.kpi;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h4", {
         style: {
           height: "fit-content",
@@ -4528,11 +4427,11 @@ function (_Component) {
           lineHeight: "1.5",
           fontSize: "20px"
         }
-      })), react_default.a.createElement("button", {
+      })), kpi && react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("button", {
         type: "button",
         className: "btn btn-sm mt-auto ml-auto ".concat(menuMode ? "btn-secondary" : "btn-primary"),
         onClick: function onClick() {
-          return setMenuState(false);
+          return changeMenu(false);
         },
         style: {
           padding: "1px 8px"
@@ -4548,7 +4447,7 @@ function (_Component) {
         type: "button",
         className: "btn btn-sm mt-auto ml-2 ".concat(menuMode ? "btn-primary" : "btn-secondary"),
         onClick: function onClick() {
-          return setMenuState(true);
+          return changeMenu(true);
         },
         style: {
           padding: "1px 8px"
@@ -4560,7 +4459,7 @@ function (_Component) {
           lineHeight: "1.5",
           fontSize: "20px"
         }
-      })));
+      })), " "));
     }
   }]);
 
@@ -4883,11 +4782,11 @@ function (_Component) {
 
     _this = SeriesView_possibleConstructorReturn(this, SeriesView_getPrototypeOf(SeriesView).call(this, props));
 
-    _this.onDelete = function () {
-      $("#deleteConfirmation").modal("show");
+    _this.setRemove = function () {
+      $("#removeConfirmation").modal("show");
     };
 
-    _this.onSubmitDelete = function (state) {
+    _this.onSubmitRemove = function (state) {
       var _this$props = _this.props,
           series = _this$props.series,
           deleteSeries = _this$props.deleteSeries;
@@ -4898,7 +4797,7 @@ function (_Component) {
       } else return false;
     };
 
-    _this.onSubmitDelete = _this.onSubmitDelete.bind(SeriesView_assertThisInitialized(_this));
+    _this.onSubmitRemove = _this.onSubmitRemove.bind(SeriesView_assertThisInitialized(_this));
     return _this;
   }
 
@@ -4906,12 +4805,12 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props2 = this.props,
-          onDelete = _this$props2.onDelete,
+          setRemove = _this$props2.setRemove,
           series = _this$props2.series;
-      onDelete({
+      setRemove({
         type: "series",
         item: series,
-        onSubmit: this.onSubmitDelete
+        onSubmit: this.onSubmitRemove
       });
     }
   }, {
@@ -4948,7 +4847,7 @@ function (_Component) {
       }, react_default.a.createElement("button", {
         type: "button",
         className: "btn btn-danger",
-        onClick: this.onDelete
+        onClick: this.setRemove
       }, "Delete Series")));
     }
   }]);
@@ -6396,11 +6295,11 @@ function (_Component) {
 
     _this = KpiView_possibleConstructorReturn(this, KpiView_getPrototypeOf(KpiView).call(this, props));
 
-    _this.onDelete = function () {
-      $("#deleteConfirmation").modal("show");
+    _this.onRemove = function () {
+      $("#removeConfirmation").modal("show");
     };
 
-    _this.onSubmitDelete = function (state) {
+    _this.onSubmitRemove = function (state) {
       var _this$props = _this.props,
           kpi = _this$props.kpi,
           deleteKpi = _this$props.deleteKpi;
@@ -6411,7 +6310,7 @@ function (_Component) {
       } else return false;
     };
 
-    _this.onSubmitDelete = _this.onSubmitDelete.bind(KpiView_assertThisInitialized(_this));
+    _this.onSubmitRemove = _this.onSubmitRemove.bind(KpiView_assertThisInitialized(_this));
     return _this;
   }
 
@@ -6419,12 +6318,12 @@ function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props2 = this.props,
-          onDelete = _this$props2.onDelete,
+          setRemove = _this$props2.setRemove,
           kpi = _this$props2.kpi;
-      onDelete({
+      setRemove({
         type: "kpi",
         item: kpi,
-        onSubmit: this.onSubmitDelete
+        onSubmit: this.onSubmitRemove
       });
     }
   }, {
@@ -6432,12 +6331,12 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _this$props3 = this.props,
           kpi = _this$props3.kpi,
-          onDelete = _this$props3.onDelete;
+          setRemove = _this$props3.setRemove;
       if (prevProps.kpi !== kpi) ;
-      onDelete({
+      setRemove({
         type: "kpi",
         item: kpi,
-        onSubmit: this.onSubmitDelete
+        onSubmit: this.onSubmitRemove
       });
     }
   }, {
@@ -6460,7 +6359,7 @@ function (_Component) {
         className: "d-flex justify-content-end"
       }, react_default.a.createElement("button", {
         className: "btn btn-danger",
-        onClick: this.onDelete
+        onClick: this.onRemove
       }, "Delete Kpi")));
     }
   }]);
@@ -6492,7 +6391,9 @@ function MenuView_setPrototypeOf(o, p) { MenuView_setPrototypeOf = Object.setPro
 
 // DEPENDANCIES
 
- // COMPONENTS
+ // CORE COMPONENTS
+
+ // NATIVE COMPONENTS
 
 
 
@@ -6531,9 +6432,9 @@ function (_Component) {
       });
     };
 
-    _this.onDelete = function (deleteItem) {
-      var onDelete = _this.props.onDelete;
-      onDelete(deleteItem);
+    _this.setRemove = function (removeItem) {
+      var setRemove = _this.props.setRemove;
+      setRemove(removeItem);
     };
 
     _this.state = {
@@ -6543,7 +6444,7 @@ function (_Component) {
     _this.onSeriesSelect = _this.onSeriesSelect.bind(MenuView_assertThisInitialized(_this));
     _this.setViewState = _this.setViewState.bind(MenuView_assertThisInitialized(_this));
     _this.onSeriesBack = _this.onSeriesBack.bind(MenuView_assertThisInitialized(_this));
-    _this.onDelete = _this.onDelete.bind(MenuView_assertThisInitialized(_this));
+    _this.setRemove = _this.setRemove.bind(MenuView_assertThisInitialized(_this));
     return _this;
   }
 
@@ -6552,11 +6453,11 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _this$props = this.props,
           kpi = _this$props.kpi,
-          setMenuState = _this$props.setMenuState,
+          changeMenu = _this$props.changeMenu,
           resetKpiSelect = _this$props.resetKpiSelect;
 
       if (!kpi) {
-        setMenuState(false);
+        changeMenu(false);
         resetKpiSelect();
         return;
       }
@@ -6572,33 +6473,31 @@ function (_Component) {
     value: function render() {
       var _this$props2 = this.props,
           kpi = _this$props2.kpi,
-          setMenuState = _this$props2.setMenuState;
+          changeMenu = _this$props2.changeMenu;
 
       if (!kpi) {
-        setMenuState(false);
+        changeMenu(false);
         return react_default.a.createElement("div", null);
       }
 
       var _this$state = this.state,
           selectedSeries = _this$state.selectedSeries,
           view = _this$state.view;
-      var series = selectedSeries ? kpi.series.filter(function (s) {
-        return s.id === selectedSeries;
-      })[0] : null;
+      var series = getItem(selectedSeries, kpi.series, "id");
 
       switch (view) {
         case KPI_VIEW:
           return react_default.a.createElement(kpis_KpiView, {
             kpi: kpi,
             onSeriesSelect: this.onSeriesSelect,
-            onDelete: this.onDelete
+            setRemove: this.setRemove
           });
 
         case SERIES_VIEW:
           return react_default.a.createElement(series_SeriesView, {
             series: series,
             onBack: this.onSeriesBack,
-            onDelete: this.onDelete
+            setRemove: this.setRemove
           });
 
         default:
@@ -6764,52 +6663,52 @@ KpiNew_KpiNew.propTypes = {
 /* harmony default export */ var kpis_KpiNew = (Object(es["connect"])(null, {
   addKpi: dashboards_addKpi
 })(KpiNew_KpiNew));
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/DeleteConfirmation.js
-function DeleteConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DeleteConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { DeleteConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DeleteConfirmation_typeof(obj); }
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/RemoveConfirmation.js
+function RemoveConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { RemoveConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { RemoveConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return RemoveConfirmation_typeof(obj); }
 
-function DeleteConfirmation_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function RemoveConfirmation_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function DeleteConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function RemoveConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function DeleteConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function RemoveConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function DeleteConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) DeleteConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) DeleteConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
+function RemoveConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) RemoveConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) RemoveConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
 
-function DeleteConfirmation_possibleConstructorReturn(self, call) { if (call && (DeleteConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return DeleteConfirmation_assertThisInitialized(self); }
+function RemoveConfirmation_possibleConstructorReturn(self, call) { if (call && (RemoveConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return RemoveConfirmation_assertThisInitialized(self); }
 
-function DeleteConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function RemoveConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function DeleteConfirmation_getPrototypeOf(o) { DeleteConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DeleteConfirmation_getPrototypeOf(o); }
+function RemoveConfirmation_getPrototypeOf(o) { RemoveConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return RemoveConfirmation_getPrototypeOf(o); }
 
-function DeleteConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DeleteConfirmation_setPrototypeOf(subClass, superClass); }
+function RemoveConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) RemoveConfirmation_setPrototypeOf(subClass, superClass); }
 
-function DeleteConfirmation_setPrototypeOf(o, p) { DeleteConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DeleteConfirmation_setPrototypeOf(o, p); }
-
-
+function RemoveConfirmation_setPrototypeOf(o, p) { RemoveConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return RemoveConfirmation_setPrototypeOf(o, p); }
 
 
 
-var DeleteConfirmation_DeletetionConformation =
+
+
+var RemoveConfirmation_RemoveConformation =
 /*#__PURE__*/
 function (_Component) {
-  DeleteConfirmation_inherits(DeletetionConformation, _Component);
+  RemoveConfirmation_inherits(RemoveConformation, _Component);
 
-  function DeletetionConformation(props) {
+  function RemoveConformation(props) {
     var _this;
 
-    DeleteConfirmation_classCallCheck(this, DeletetionConformation);
+    RemoveConfirmation_classCallCheck(this, RemoveConformation);
 
-    _this = DeleteConfirmation_possibleConstructorReturn(this, DeleteConfirmation_getPrototypeOf(DeletetionConformation).call(this, props));
+    _this = RemoveConfirmation_possibleConstructorReturn(this, RemoveConfirmation_getPrototypeOf(RemoveConformation).call(this, props));
 
     _this.onChange = function (e) {
-      _this.setState(DeleteConfirmation_defineProperty({}, e.target.name, e.target.value));
+      _this.setState(RemoveConfirmation_defineProperty({}, e.target.name, e.target.value));
     };
 
     _this.onSubmit = function (e) {
       e.preventDefault();
-      var deletionContext = _this.props.deletionContext;
-      var response = deletionContext.onSubmit(_this.state);
-      if (response) $("#deleteConfirmation").modal("hide");
+      var removeContext = _this.props.removeContext;
+      var response = removeContext.onSubmit(_this.state);
+      if (response) $("#removeConfirmation").modal("hide");
     };
 
     _this.modalRef = react_default.a.createRef();
@@ -6821,31 +6720,31 @@ function (_Component) {
     return _this;
   }
 
-  DeleteConfirmation_createClass(DeletetionConformation, [{
+  RemoveConfirmation_createClass(RemoveConformation, [{
     key: "render",
     value: function render() {
-      var deletionContext = this.props.deletionContext;
-      if (!deletionContext) return react_default.a.createElement(modal_Modal, {
+      var removeContext = this.props.removeContext;
+      if (!removeContext) return react_default.a.createElement(modal_Modal, {
         title: "Are You Sure?",
-        iconClass: "im im-data-delete",
-        id: "deleteConfirmation"
+        iconClass: "im im-data-remove",
+        id: "removeConfirmation"
       }, " ");
-      var type = deletionContext.type,
-          item = deletionContext.item;
+      var type = removeContext.type,
+          item = removeContext.item;
       var _this$state = this.state,
           password = _this$state.password,
           name = _this$state.name,
           exported = _this$state.exported;
       return react_default.a.createElement(modal_Modal, {
         title: "Are You Sure?",
-        iconClass: "im im-data-delete",
-        id: "deleteConfirmation",
+        iconClass: "im im-data-remove",
+        id: "removeConfirmation",
         ref: this.modalRef
       }, react_default.a.createElement("form", {
         onSubmit: this.onSubmit
       }, react_default.a.createElement("p", {
         className: "card-text"
-      }, "This action cannot be undone. This will permanently delete the", " ", react_default.a.createElement("span", {
+      }, "This action cannot be undone. This will permanently remove the", " ", react_default.a.createElement("span", {
         style: {
           color: "red",
           fontWeight: "bold"
@@ -6863,17 +6762,102 @@ function (_Component) {
       })), react_default.a.createElement("button", {
         type: "submit",
         className: "btn btn-warning"
-      }, "I understand the consequences, delete this item")));
+      }, "I understand the consequences, remove this item")));
     }
   }]);
 
-  return DeletetionConformation;
+  return RemoveConformation;
 }(react["Component"]);
 
-DeleteConfirmation_DeletetionConformation.propTypes = {
-  deletionContext: prop_types_default.a.object
+RemoveConfirmation_RemoveConformation.propTypes = {
+  removeContext: prop_types_default.a.object
 };
-/* harmony default export */ var DeleteConfirmation = (DeleteConfirmation_DeletetionConformation);
+/* harmony default export */ var RemoveConfirmation = (RemoveConfirmation_RemoveConformation);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Tooltip.js
+
+
+
+var Tooltip_Tooltip = function Tooltip(props) {
+  console.log(props.show);
+  if (!props.show || !props.data) return react_default.a.createElement(react_default.a.Fragment, null);
+  var _props$data = props.data,
+      kpiName = _props$data.kpiName,
+      warning_margin = _props$data.warning_margin,
+      target = _props$data.target,
+      date = _props$data.date,
+      value = _props$data.value,
+      kpi_type = _props$data.kpi_type,
+      x = _props$data.x,
+      y = _props$data.y;
+  console.log(x);
+
+  switch (kpi_type) {
+    case KPI_TYPE_THRESHOLD:
+      return react_default.a.createElement("div", {
+        className: "card p-2 qd-tooltip",
+        style: {
+          left: x + "px",
+          top: y + "px",
+          display: "block"
+        }
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h5", {
+        style: {
+          lineHeight: 0.4
+        }
+      }, kpiName), react_default.a.createElement("div", {
+        className: "card-text",
+        style: {
+          lineHeight: 0.5
+        }
+      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "), react_default.a.createElement("p", null, "Warning Margin: ", warning_margin, " "))));
+
+    case KPI_TYPE_DEVIATION:
+      return react_default.a.createElement("div", {
+        className: "card p-2 qd-tooltip",
+        style: {
+          left: x + "px",
+          top: y + "px",
+          display: "block"
+        }
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h5", {
+        style: {
+          lineHeight: 0.4
+        }
+      }, kpiName), react_default.a.createElement("div", {
+        className: "card-text",
+        style: {
+          lineHeight: 0.5
+        }
+      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "), react_default.a.createElement("p", null, "Deviation: ", ((value / target - 1) * 100).toFixed(2), "% "))));
+
+    case KPI_TYPE_WIN_LOSE:
+      return react_default.a.createElement("div", {
+        className: "card p-2 qd-tooltip",
+        style: {
+          left: x + "px",
+          top: y + "px",
+          display: "block"
+        }
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement("h5", {
+        style: {
+          lineHeight: 0.4
+        }
+      }, kpiName), react_default.a.createElement("div", {
+        className: "card-text",
+        style: {
+          lineHeight: 0.5
+        }
+      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "))));
+  }
+};
+
+/* harmony default export */ var components_Tooltip = (Tooltip_Tooltip);
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/index.js
 function pillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { pillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillarRoom_typeof(obj); }
 
@@ -6915,6 +6899,7 @@ function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.se
 
 
 
+
 var pillarRoom_pillarRoom =
 /*#__PURE__*/
 function (_Component) {
@@ -6933,44 +6918,25 @@ function (_Component) {
       });
     };
 
-    _this.onDelete = function (deletionContext) {
+    _this.setRemove = function (removeContext) {
       _this.setState({
-        deletionContext: deletionContext
+        removeContext: removeContext
       });
     };
 
     _this.showTooltip = function (show) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      var tooltipMarkdown = function tooltipMarkdown(data) {
-        switch (data.kpi_type) {
-          case KPI_TYPE_THRESHOLD:
-            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n              <p>Warning Margin: ").concat(data.warning_margin, " </p>\n            </div>\n            </div>\n          </div>");
-
-          case KPI_TYPE_DEVIATION:
-            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n              <p>Deviation: ").concat(((data.value / data.target - 1) * 100).toFixed(2), "% </p>\n            </div>\n            </div>\n          </div>");
-
-          case KPI_TYPE_WIN_LOSE:
-            return "<div className=\"card p-4\">\n            <div className=\"card-body\">\n            <h5 style=\"line-height:0.4\">".concat(data.kpiName, "</h5>\n            <div className=\"card-text\" style=\"line-height:0.5\">\n              <hr/>\n              <p>Value: ").concat(data.value, "</p>\n              <p>Target: ").concat(data.target, "</p>\n              <p>Date: ").concat(data.date, " </p>\n            </div>\n            </div>\n          </div>");
-        }
-      };
-
-      var tooltip = _this.tooltip.current;
-
-      if (show) {
-        tooltip.style.display = "block";
-        tooltip.style.opacity = 1;
-      } else {
-        tooltip.style.display = "none";
-        tooltip.style.opacity = 0;
-      }
+      _this.setState({
+        toolTipShow: show
+      });
 
       if (!data) return;
 
       if (data.payload) {
-        tooltip.innerHTML = tooltipMarkdown(data.payload);
-        tooltip.style.left = "".concat(data.x + 24, "px");
-        tooltip.style.top = "".concat(data.y, "px");
+        _this.setState({
+          toolTipData: data.payload
+        });
       }
     };
 
@@ -6988,7 +6954,7 @@ function (_Component) {
       d3["selectAll"](".dot").attr("r", 3);
       d3["selectAll"](".legend").attr("font-weight", "normal").attr("font-size", "17");
 
-      _this.selectSeriesHook(null);
+      _this.selectSeries(null);
     };
 
     _this.state = {
@@ -6996,14 +6962,14 @@ function (_Component) {
       selectedExport: "",
       selectedKpi: null,
       menuMode: false,
-      deletionContext: null
+      removeContext: null,
+      toolTipData: null,
+      toolTipShow: false
     };
-    _this.selectSeriesHook = _this.selectSeriesHook.bind(pillarRoom_assertThisInitialized(_this));
-    _this.selectKpiHook = _this.selectKpiHook.bind(pillarRoom_assertThisInitialized(_this));
-    _this.updateExport = _this.updateExport.bind(pillarRoom_assertThisInitialized(_this));
-    _this.onDelete = _this.onDelete.bind(pillarRoom_assertThisInitialized(_this));
+    _this.selectSeries = _this.selectSeries.bind(pillarRoom_assertThisInitialized(_this));
+    _this.selectKpi = _this.selectKpi.bind(pillarRoom_assertThisInitialized(_this));
+    _this.setRemove = _this.setRemove.bind(pillarRoom_assertThisInitialized(_this));
     _this.resetKpiSelect = _this.resetKpiSelect.bind(pillarRoom_assertThisInitialized(_this));
-    _this.tooltip = react_default.a.createRef();
     _this.showTooltip = _this.showTooltip.bind(pillarRoom_assertThisInitialized(_this));
     return _this;
   }
@@ -7013,27 +6979,6 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       if (prevProps.kpis != this.props.kpis) {// this.selectSeriesHook(null);
       }
-    }
-  }, {
-    key: "selectSeriesHook",
-    value: function selectSeriesHook(id) {
-      this.setState({
-        selectedSeries: id
-      });
-    }
-  }, {
-    key: "selectKpiHook",
-    value: function selectKpiHook(id) {
-      this.setState({
-        selectedKpi: id
-      });
-    }
-  }, {
-    key: "updateExport",
-    value: function updateExport(target) {
-      this.setState({
-        selectedExport: target
-      });
     }
   }, {
     key: "componentDidMount",
@@ -7050,6 +6995,20 @@ function (_Component) {
       getKpis(dashboardId, pillarId);
     }
   }, {
+    key: "selectSeries",
+    value: function selectSeries(id) {
+      this.setState({
+        selectedSeries: id
+      });
+    }
+  }, {
+    key: "selectKpi",
+    value: function selectKpi(id) {
+      this.setState({
+        selectedKpi: id
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props2 = this.props,
@@ -7061,16 +7020,11 @@ function (_Component) {
       var _this$state = this.state,
           selectedSeries = _this$state.selectedSeries,
           selectedKpi = _this$state.selectedKpi,
-          selectedExport = _this$state.selectedExport,
           menuMode = _this$state.menuMode,
-          deletionContext = _this$state.deletionContext;
-      var kpi = kpis.filter(function (kpi) {
-        return kpi.id == selectedKpi;
-      })[0];
-      var series = kpi ? kpi.series : [];
-      var s = series ? series.filter(function (s) {
-        return s.id == selectedSeries;
-      }) : [];
+          removeContext = _this$state.removeContext,
+          toolTipData = _this$state.toolTipData,
+          toolTipShow = _this$state.toolTipShow;
+      var kpi = getItem(selectedKpi, kpis, "id");
 
       if (currentDashboard == null) {
         return react_default.a.createElement(LoadingScreen, null);
@@ -7085,9 +7039,9 @@ function (_Component) {
           height: "".concat(100, "%"),
           minHeight: "fit-content"
         }
-      }, react_default.a.createElement("div", {
-        className: "qd-tooltip",
-        ref: this.tooltip
+      }, react_default.a.createElement(components_Tooltip, {
+        data: toolTipData,
+        show: toolTipShow
       }), react_default.a.createElement("div", {
         className: "row m-0"
       }, react_default.a.createElement("div", {
@@ -7101,7 +7055,7 @@ function (_Component) {
         letter: pillarId === "Plus" ? "+" : pillarId,
         dashboardId: dashboardId,
         labeled: true,
-        showTooltip: this.showTooltip
+        onHover: this.showTooltip
       })), react_default.a.createElement("div", {
         className: "card-footer",
         style: {
@@ -7124,13 +7078,13 @@ function (_Component) {
         className: "card-body scroll mx-vh-75"
       }, menuMode ? react_default.a.createElement(components_MenuView, {
         kpi: kpi,
-        onDelete: this.onDelete,
-        setMenuState: this.setMenuState,
+        setRemove: this.setRemove,
+        changeMenu: this.setMenuState,
         menuState: this.menuMode,
         resetKpiSelect: this.resetKpiSelect
       }) : react_default.a.createElement(d3charts_LineChart, {
         kpis: kpis,
-        selectSeriesHook: this.selectSeriesHook,
+        selectSeries: this.selectSeries,
         selectedKpi: selectedKpi
       })), react_default.a.createElement("div", {
         className: "card-footer",
@@ -7139,12 +7093,13 @@ function (_Component) {
         }
       }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,
-        selectKpiHook: this.selectKpiHook,
-        selectSeriesHook: this.selectSeriesHook,
-        deselectHook: this.deselect,
+        selectKpi: this.selectKpi,
+        selectSeries: this.selectSeries,
+        deselect: this.deselect,
         kpis: kpis,
-        setMenuState: this.setMenuState,
-        menuMode: menuMode
+        changeMenu: this.setMenuState,
+        menuMode: menuMode,
+        kpi: kpi
       }))))), react_default.a.createElement(modal_Modal, {
         id: "newKpi",
         title: "New KPI",
@@ -7152,8 +7107,8 @@ function (_Component) {
       }, react_default.a.createElement(kpis_KpiNew, {
         pillar: pillarId,
         dashboard: currentDashboard.id
-      }))), react_default.a.createElement(DeleteConfirmation, {
-        deletionContext: deletionContext
+      }))), react_default.a.createElement(RemoveConfirmation, {
+        removeContext: removeContext
       }));
     }
   }]);
@@ -7222,7 +7177,7 @@ function (_Component) {
       var _this$props = this.props,
           dashboard = _this$props.dashboard,
           deleteDashboard = _this$props.deleteDashboard,
-          deleteClick = _this$props.deleteClick;
+          onRemoveClick = _this$props.onRemoveClick;
       return react_default.a.createElement("div", {
         className: "card m-3"
       }, react_default.a.createElement("div", {
@@ -7250,7 +7205,7 @@ function (_Component) {
         className: "btn btn-primary btn-sm"
       }, "View"), react_default.a.createElement("button", {
         onClick: function onClick() {
-          return deleteClick(dashboard);
+          return onRemoveClick(dashboard);
         },
         className: "btn btn-danger btn-sm ml-auto"
       }, " ", "Delete"))));
@@ -7541,29 +7496,29 @@ function (_Component) {
       $("#dashboardOptions").modal("show");
     };
 
-    _this.deleteClick = function (deletionItem) {
+    _this.setRemove = function (removeItem) {
       _this.setState({
-        deletionItem: deletionItem
+        removeItem: removeItem
       });
 
-      $("#deleteConfirmation").modal("show");
+      $("#removeConfirmation").modal("show");
     };
 
-    _this.onDeleteConfirmationSubmit = function (state) {
+    _this.onRemoveConfirmationSubmit = function (state) {
       var deleteDashboard = _this.props.deleteDashboard;
-      var deletionItem = _this.state.deletionItem;
+      var removeItem = _this.state.removeItem;
 
-      if (state.name === deletionItem.title) {
-        deleteDashboard(deletionItem.id);
+      if (state.name === removeItem.title) {
+        deleteDashboard(removeItem.id);
         return true;
       } else return false;
     };
 
     _this.state = {
-      deletionItem: null
+      removeItem: null
     };
-    _this.deleteClick = _this.deleteClick.bind(DashboardList_assertThisInitialized(_this));
-    _this.onDeleteConfirmationSubmit = _this.onDeleteConfirmationSubmit.bind(DashboardList_assertThisInitialized(_this));
+    _this.setRemove = _this.setRemove.bind(DashboardList_assertThisInitialized(_this));
+    _this.onRemoveConfirmationSubmit = _this.onRemoveConfirmationSubmit.bind(DashboardList_assertThisInitialized(_this));
     return _this;
   }
 
@@ -7577,10 +7532,8 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _this$props = this.props,
-          dashboards = _this$props.dashboards,
-          deleteDashboard = _this$props.deleteDashboard;
-      var deletionItem = this.state.deletionItem;
+      var dashboards = this.props.dashboards;
+      var removeItem = this.state.removeItem;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "row"
       }, dashboards.map(function (dashboard) {
@@ -7589,18 +7542,18 @@ function (_Component) {
           className: "col-lg-4 col-sm-12"
         }, react_default.a.createElement(components_DashboardDisplayCard, {
           dashboard: dashboard,
-          deleteClick: _this2.deleteClick
+          onRemoveClick: _this2.setRemove
         }));
       }), react_default.a.createElement("div", {
         className: "col-lg-4 col-sm-12"
       }, react_default.a.createElement(ui_NewCard, {
         text: "Dashboard",
         handleClick: this.newDashboardClick
-      }))), react_default.a.createElement(components_DashboardOptions, null), react_default.a.createElement(DeleteConfirmation, {
-        deletionContext: {
-          item: deletionItem,
+      }))), react_default.a.createElement(components_DashboardOptions, null), react_default.a.createElement(RemoveConfirmation, {
+        removeContext: {
+          item: removeItem,
           type: "dashboard",
-          onSubmit: this.onDeleteConfirmationSubmit
+          onSubmit: this.onRemoveConfirmationSubmit
         }
       }));
     }
@@ -7925,13 +7878,13 @@ var redux_devtools_extension = __webpack_require__("./node_modules/redux-devtool
 var redux_thunk_es = __webpack_require__("./node_modules/redux-thunk/es/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/core/reducers/dashboards.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function dashboards_toConsumableArray(arr) { return dashboards_arrayWithoutHoles(arr) || dashboards_iterableToArray(arr) || dashboards_nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function dashboards_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function dashboards_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function dashboards_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
 
@@ -7970,7 +7923,7 @@ var initalState = {
 
     case ADD_DASHBOARD:
       return dashboards_objectSpread({}, state, {
-        dashboards: [].concat(_toConsumableArray(state.dashboards), [action.payload])
+        dashboards: [].concat(dashboards_toConsumableArray(state.dashboards), [action.payload])
       });
 
     case GET_KPIS:
@@ -7980,7 +7933,7 @@ var initalState = {
 
     case ADD_KPI:
       return dashboards_objectSpread({}, state, {
-        kpis: [].concat(_toConsumableArray(state.kpis), [action.payload])
+        kpis: [].concat(dashboards_toConsumableArray(state.kpis), [action.payload])
       });
 
     case UPDATE_KPI:
@@ -8008,7 +7961,7 @@ var initalState = {
         if (kpi.id != action.payload.kpi) return kpi;
         var series = kpi.series;
         return dashboards_objectSpread({}, kpi, {
-          series: [].concat(_toConsumableArray(series), [action.payload])
+          series: [].concat(dashboards_toConsumableArray(series), [action.payload])
         });
       });
       return dashboards_objectSpread({}, state, {
@@ -8085,7 +8038,7 @@ var initalState = {
           series: kpi.series.map(function (series) {
             if (series.id != action.payload.series) return series;
             return dashboards_objectSpread({}, series, {
-              entries: [].concat(_toConsumableArray(series.entries), [action.payload])
+              entries: [].concat(dashboards_toConsumableArray(series.entries), [action.payload])
             });
           })
         });
@@ -8103,7 +8056,7 @@ var initalState = {
       var actionTables = state.actionTables.map(function (at) {
         if (action.payload.tables.indexOf(at.id) == -1) return at;
         return dashboards_objectSpread({}, at, {
-          actions: [].concat(_toConsumableArray(at.actions), [action.payload])
+          actions: [].concat(dashboards_toConsumableArray(at.actions), [action.payload])
         });
       });
       return dashboards_objectSpread({}, state, {
@@ -8161,7 +8114,7 @@ var initalState = {
 
     case ADD_AUDIT:
       return dashboards_objectSpread({}, state, {
-        audits: [].concat(_toConsumableArray(state.audits), [action.payload])
+        audits: [].concat(dashboards_toConsumableArray(state.audits), [action.payload])
       });
 
     case DELETE_AUDIT:
@@ -8185,7 +8138,7 @@ var initalState = {
 
     case ADD_WIN:
       return dashboards_objectSpread({}, state, {
-        wins: [].concat(_toConsumableArray(state.wins), [action.payload])
+        wins: [].concat(dashboards_toConsumableArray(state.wins), [action.payload])
       });
 
     case DELETE_WIN:
