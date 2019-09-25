@@ -46,3 +46,6 @@ export const GET_WINS = "GET_WIN";
 export const ADD_WIN = "ADD_WIN";
 export const UPDATE_WIN = "UPDATE_WIN";
 export const DELETE_WIN = "DELETE_WIN";
+
+export const GET_HEAT = "GET_HEAT";
+export const UPDATE_HEAT = "UPDATE_HEAT";

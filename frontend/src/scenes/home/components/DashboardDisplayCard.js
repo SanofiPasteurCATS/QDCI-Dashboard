@@ -8,7 +8,12 @@ import { deleteDashboard } from "../../../core/actions/dashboards";
 
 class DashboardDisplayCard extends Component {
   render() {
-    const { dashboard, deleteDashboard, onRemoveClick } = this.props;
+    const {
+      dashboard,
+      deleteDashboard,
+      onRemoveClick,
+      onEditClick
+    } = this.props;
     return (
       <div className="card m-3">
         <div className="card-body">
@@ -22,6 +27,11 @@ class DashboardDisplayCard extends Component {
             <i
               style={{ color: dashboard.background, textAlign: "right" }}
               className="im im-drop ml-auto"
+            />
+            <i
+              style={{ textAlign: "right" }}
+              className="im im-gear ml-3 gear-anim"
+              onClick={() => onEditClick(dashboard)}
             />
           </div>
           <p className="card-text">

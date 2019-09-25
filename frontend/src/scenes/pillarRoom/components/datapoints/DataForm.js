@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addDatapoint } from "../../../actions/dashboards";
-import { PLOT_TYPE_CHOICES } from "../../../common/dashboardOptions";
+import { addDatapoint } from "../../../../core/actions/dashboards";
 
 class DataForm extends Component {
   state = {

@@ -32,7 +32,9 @@ import {
   UPDATE_WIN,
   DELETE_WIN,
   ADD_WIN,
-  GET_WINS
+  GET_WINS,
+  UPDATE_HEAT,
+  GET_HEAT
 } from "./types";
 
 /*---------------------------------------
@@ -498,4 +500,30 @@ export const deleteWin = id => (dispatch, getState) => {
       payload: id
     });
   });
+};
+
+export const updateHeat = (heat, id) => (dispatch, getState) => {
+  axios
+    .patch(`/api/heat/${id}/`, heat, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: UPDATE_HEAT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
+};
+
+export const getHeat = dashboardId => (dispatch, getState) => {
+  axios
+    .get(`api/heat/?dashboard=${dashboardId}`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_HEAT,
+        payload: res.data
+      });
+    });
 };

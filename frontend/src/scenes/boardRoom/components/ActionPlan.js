@@ -94,105 +94,103 @@ class ActionPlan extends Component {
         <Modal title="Update WIN" id="winOptions">
           <WinForm win={currentWin}></WinForm>
         </Modal>
-        <div className="row m-0">
-          <div className="col-lg-6 p-0">
-            <div className="card mt-4 ml-2 mr-2">
-              <div className="card-body">
-                {st ? (
-                  <Fragment>
-                    <h5> Short Term Action Plan</h5>
-                    <ActionTable
-                      data={st}
-                      header={ACTION_TABLE_HEADERS}
-                      appendable
-                      rowClick={this.rowActionClick}
-                    />
-                  </Fragment>
-                ) : (
-                  <LoadingScreen />
-                )}
+        <div className="col-lg-6 p-0">
+          <div className="card mt-4 ml-2 mr-2">
+            <div className="card-body">
+              {st ? (
+                <Fragment>
+                  <h5> Short Term Action Plan</h5>
+                  <ActionTable
+                    data={st}
+                    header={ACTION_TABLE_HEADERS}
+                    appendable
+                    rowClick={this.rowActionClick}
+                  />
+                </Fragment>
+              ) : (
+                <LoadingScreen />
+              )}
 
-                {lt ? (
-                  <Fragment>
-                    <h5 className="mt-3"> Long Term Action Plan</h5>
-                    <ActionTable
-                      data={lt}
-                      header={ACTION_TABLE_HEADERS}
-                      appendable
-                      rowClick={this.rowActionClick}
-                    />
-                  </Fragment>
-                ) : (
-                  <LoadingScreen />
-                )}
-              </div>
-            </div>
-            <div className="card mt-4 ml-2 mr-2">
-              <div className="card-body">
-                <h5 className="mt-3">Audits</h5>
-                <AuditTable
-                  data={audits}
-                  rowClick={this.rowAuditClick}
-                  appendable
-                ></AuditTable>
-              </div>
+              {lt ? (
+                <Fragment>
+                  <h5 className="mt-3"> Long Term Action Plan</h5>
+                  <ActionTable
+                    data={lt}
+                    header={ACTION_TABLE_HEADERS}
+                    appendable
+                    rowClick={this.rowActionClick}
+                  />
+                </Fragment>
+              ) : (
+                <LoadingScreen />
+              )}
             </div>
           </div>
-          <div className="col-lg-6 p-0">
-            <div className="card mt-4 ml-2 mr-2">
-              <div className="card-body">
-                {ul ? (
-                  <Fragment>
-                    <div className="row" style={{ padding: "0 1rem" }}>
-                      <h5> Upper Level Escalation</h5>
-                      <button
-                        type="button"
-                        className="btn btn-primary btn-sm mb-1 ml-auto"
-                        data-toggle="modal"
-                        data-target="#escalationOptions"
-                      >
-                        Manage Escalations
-                      </button>
-                    </div>
-
-                    <ActionTable
-                      data={ul}
-                      header={ACTION_TABLE_HEADERS}
-                      appendable
-                      rowClick={this.rowActionClick}
-                    />
-                    <EscalationOptions
-                      dashboards={dashboards}
-                      currentDashboard={currentDashboard}
-                      actionTable={this.filterTables("Upper Level Escalation")}
-                    />
-                  </Fragment>
-                ) : (
-                  <LoadingScreen />
-                )}
-                {ll ? (
-                  <Fragment>
-                    <h5 className="mt-3"> Lower Level Feed</h5>
-                    <ActionTable
-                      data={ll}
-                      header={ACTION_TABLE_HEADERS}
-                      hoverable
-                    />
-                  </Fragment>
-                ) : (
-                  <LoadingScreen />
-                )}
-              </div>
+          <div className="card mt-4 ml-2 mr-2">
+            <div className="card-body">
+              <h5 className="mt-3">Audits</h5>
+              <AuditTable
+                data={audits}
+                rowClick={this.rowAuditClick}
+                appendable
+              ></AuditTable>
             </div>
-            <div className="card mt-4 ml-2 mr-2">
-              <div className="card-body">
-                <h5 className="mt-3">WINS</h5>
-                <WinTable
-                  data={wins}
-                  rowClick={this.rowWinClick}
-                  appendable
-                ></WinTable>
-              </div>
+          </div>
+        </div>
+        <div className="col-lg-6 p-0">
+          <div className="card mt-4 ml-2 mr-2">
+            <div className="card-body">
+              {ul ? (
+                <Fragment>
+                  <div className="row" style={{ padding: "0 1rem" }}>
+                    <h5> Upper Level Escalation</h5>
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm mb-1 ml-auto"
+                      data-toggle="modal"
+                      data-target="#escalationOptions"
+                    >
+                      Manage Escalations
+                    </button>
+                  </div>
+
+                  <ActionTable
+                    data={ul}
+                    header={ACTION_TABLE_HEADERS}
+                    appendable
+                    rowClick={this.rowActionClick}
+                  />
+                  <EscalationOptions
+                    dashboards={dashboards}
+                    currentDashboard={currentDashboard}
+                    actionTable={this.filterTables("Upper Level Escalation")}
+                  />
+                </Fragment>
+              ) : (
+                <LoadingScreen />
+              )}
+              {ll ? (
+                <Fragment>
+                  <h5 className="mt-3"> Lower Level Feed</h5>
+                  <ActionTable
+                    data={ll}
+                    header={ACTION_TABLE_HEADERS}
+                    hoverable
+                  />
+                </Fragment>
+              ) : (
+                <LoadingScreen />
+              )}
+            </div>
+          </div>
+          <div className="card mt-4 ml-2 mr-2">
+            <div className="card-body">
+              <h5 className="mt-3">WINS</h5>
+              <WinTable
+                data={wins}
+                rowClick={this.rowWinClick}
+                appendable
+              ></WinTable>
             </div>
           </div>
         </div>

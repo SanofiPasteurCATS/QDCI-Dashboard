@@ -1,12 +1,18 @@
 from rest_framework import serializers, fields
-from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable, Audit, Win
+from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable, Audit, Win, Heat, Image
 
 # Serializers for all Dashboard models (converts python objects to JSON format for REST API endpoints)
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = '__all__'
+
 class DashboardSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many = True, read_only=True)
     class Meta:
         model = Dashboard
-        fields = '__all__'
+        fields = ('title', 'author', 'background', 'dashboard_type', 'level', 'owner', 'images', 'id')
 
 class DatapointSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,3 +62,9 @@ class WinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Win 
         fields = '__all__'
+
+class HeatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Heat
+        fields = '__all__'
+

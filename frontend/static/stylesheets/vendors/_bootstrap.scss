@@ -3,3 +3,17 @@
   max-height: 800px;
   overflow: auto;
 }
+
+.card {
+  border: none;
+  border-radius: 0;
+  @extend .z-depth-2;
+}
+
+.navbar {
+  @extend .z-depth-2;
+}
+
+.carousel {
+  width: fit-content;
+}

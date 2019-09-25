@@ -29,8 +29,11 @@ import {
   GET_WINS,
   UPDATE_WIN,
   DELETE_WIN,
-  ADD_WIN
+  ADD_WIN,
+  GET_HEAT,
+  UPDATE_HEAT
 } from "../actions/types";
+import { HashLoader } from "react-spinners";
 
 const initalState = {
   dashboards: [],
@@ -93,7 +96,6 @@ export default function(state = initalState, action) {
         kpis: []
       };
     case ADD_SERIES:
-      console.log("added");
       var kpis = state.kpis.map(kpi => {
         if (kpi.id != action.payload.kpi) return kpi;
         const { series } = kpi;
@@ -307,6 +309,19 @@ export default function(state = initalState, action) {
           if (win.id === action.payload.id) return action.payload;
           else return win;
         })
+      };
+    case UPDATE_HEAT:
+      return {
+        ...state,
+        heat: state.heat.map(h => {
+          if (h.id === action.payload.id) return action.payload;
+          else return h;
+        })
+      };
+    case GET_HEAT:
+      return {
+        ...state,
+        heat: action.payload
       };
     default:
       return state;

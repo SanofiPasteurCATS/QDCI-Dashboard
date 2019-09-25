@@ -75,7 +75,7 @@ class Row extends Component {
                   ) : this.props.data[y.prop] != null ? (
                     this.props.data[y.prop]
                   ) : (
-                    "NULL"
+                    "---"
                   )}
                 </td>
               );
@@ -95,7 +95,7 @@ class Row extends Component {
                 ) : this.props.data[y.prop] != null ? (
                   this.renderCellData(y)
                 ) : (
-                  "NULL"
+                  "---"
                 )}
               </td>
             );
@@ -138,7 +138,7 @@ class Row extends Component {
       >
         {header.map((y, k) => (
           <td key={`trc-${k}`}>
-            {this.props.data[y.prop] != null ? this.renderCellData(y) : "NULL"}
+            {this.props.data[y.prop] != null ? this.renderCellData(y) : "---"}
           </td>
         ))}
         {deletable && (

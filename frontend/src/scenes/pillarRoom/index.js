@@ -131,85 +131,83 @@ class pillarRoom extends Component {
     }
     const color = currentDashboard.background;
     return (
-      <Fragment>
-        <div
-          className="container-fluid"
-          style={{
-            padding: 0,
-            background: color,
-            height: `${100}%`,
-            minHeight: "fit-content"
-          }}
-        >
-          <Tooltip data={toolTipData} show={toolTipShow} />
-          <div className="row m-0">
-            <div className="col-lg-4">
-              <div className="card ml-4 mt-4 mb-4 mr-4 h-95">
-                <div className="card-body">
-                  <Pillar
-                    kpis={kpis}
-                    letter={pillarId === "Plus" ? "+" : pillarId}
-                    dashboardId={dashboardId}
-                    labeled
-                    onHover={this.showTooltip}
-                  />
-                </div>
-                <div className="card-footer" style={{ display: "flex" }}>
-                  <div className="row w-100">
-                    <div className="col-lg-12">
-                      <Table
-                        data={kpis}
-                        header={KPI_TABLE_HEADERS}
-                        fontSize={`${0.7}rem`}
-                        summary={false}
-                      />
-                    </div>
+      <div
+        className="container-fluid"
+        style={{
+          padding: 0,
+          background: color,
+          height: `${100}%`,
+          minHeight: "fit-content"
+        }}
+      >
+        <Tooltip data={toolTipData} show={toolTipShow} />
+        <div className="row m-0">
+          <div className="col-lg-4">
+            <div className="card ml-4 mt-4 mb-4 mr-4 h-95">
+              <div className="card-body">
+                <Pillar
+                  kpis={kpis}
+                  letter={pillarId === "Plus" ? "+" : pillarId}
+                  dashboardId={dashboardId}
+                  labeled
+                  onHover={this.showTooltip}
+                />
+              </div>
+              <div className="card-footer" style={{ display: "flex" }}>
+                <div className="row w-100">
+                  <div className="col-lg-12">
+                    <Table
+                      data={kpis}
+                      header={KPI_TABLE_HEADERS}
+                      fontSize={`${0.7}rem`}
+                      summary={false}
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-8">
-              <div className="card ml-4 mt-4 mb-4 mr-4 h-90 mx-h-90">
-                <div className="card-body scroll mx-vh-75">
-                  {menuMode ? (
-                    <MenuView
-                      kpi={kpi}
-                      setRemove={this.setRemove}
-                      changeMenu={this.setMenuState}
-                      menuState={this.menuMode}
-                      resetKpiSelect={this.resetKpiSelect}
-                    ></MenuView>
-                  ) : (
-                    <LineChart
-                      kpis={kpis}
-                      selectSeries={this.selectSeries}
-                      selectedKpi={selectedKpi}
-                    />
-                  )}
-                </div>
-
-                <div className="card-footer" style={{ display: "flex" }}>
-                  <ChartOptions
-                    active={selectedSeries}
-                    selectKpi={this.selectKpi}
-                    selectSeries={this.selectSeries}
-                    deselect={this.deselect}
-                    kpis={kpis}
-                    changeMenu={this.setMenuState}
-                    menuMode={menuMode}
+          </div>
+          <div className="col-lg-8">
+            <div className="card ml-4 mt-4 mb-4 mr-4 h-90 mx-h-90">
+              <div className="card-body scroll mx-vh-75">
+                {menuMode ? (
+                  <MenuView
                     kpi={kpi}
+                    setRemove={this.setRemove}
+                    changeMenu={this.setMenuState}
+                    menuState={this.menuMode}
+                    resetKpiSelect={this.resetKpiSelect}
+                  ></MenuView>
+                ) : (
+                  <LineChart
+                    kpis={kpis}
+                    selectSeries={this.selectSeries}
+                    selectedKpi={selectedKpi}
                   />
-                </div>
+                )}
+              </div>
+
+              <div className="card-footer" style={{ display: "flex" }}>
+                <ChartOptions
+                  active={selectedSeries}
+                  selectKpi={this.selectKpi}
+                  selectSeries={this.selectSeries}
+                  deselect={this.deselect}
+                  kpis={kpis}
+                  changeMenu={this.setMenuState}
+                  menuMode={menuMode}
+                  kpi={kpi}
+                />
               </div>
             </div>
           </div>
-
-          <Modal id="newKpi" title="New KPI" iconClass="im im-dashboard">
-            <KpiNew pillar={pillarId} dashboard={currentDashboard.id}></KpiNew>
-          </Modal>
         </div>
+
+        <Modal id="newKpi" title="New KPI" iconClass="im im-dashboard">
+          <KpiNew pillar={pillarId} dashboard={currentDashboard.id}></KpiNew>
+        </Modal>
         <RemoveConformation removeContext={removeContext}></RemoveConformation>
-      </Fragment>
+      </div>
     );
   }
 }

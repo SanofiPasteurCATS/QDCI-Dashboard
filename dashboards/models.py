@@ -104,6 +104,11 @@ class Win(models.Model):
     participants = models.CharField(max_length = 256, null=True)
     date= models.CharField(max_length=50, null=True)
 
+class Heat(models.Model):
+    dashboard = models.ForeignKey(Dashboard, related_name="heat", on_delete=models.CASCADE, default= None, null=True)
+    name = models.CharField(max_length=256)
+    value = models.IntegerField(default = 0)
+    color = models.CharField(max_length=7)
 
 
 class Audit(models.Model):
@@ -112,4 +117,7 @@ class Audit(models.Model):
     end_date = models.DateField(default= None, null=True)
 
 
-
+class Image(models.Model):
+    dashboard = models.ForeignKey(Dashboard,related_name='images',on_delete=models.CASCADE )
+    image = models.ImageField(default="default.png")
+    

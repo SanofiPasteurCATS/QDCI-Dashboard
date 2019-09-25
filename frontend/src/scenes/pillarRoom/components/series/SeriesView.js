@@ -9,12 +9,19 @@ import { deleteSeries } from "../../../../core/actions/dashboards";
 // COMPONENTS
 import SeriesEdit from "./SeriesEdit";
 import DataTable from "../datapoints/DataTable";
+import { getItem } from "../../../../core/helpers/Filters";
+import Modal from "../../../../core/components/ui/modal/Modal";
+import DataForm from "../datapoints/DataForm";
 
 class SeriesView extends Component {
   constructor(props) {
     super(props);
     this.onSubmitRemove = this.onSubmitRemove.bind(this);
   }
+
+  state = {
+    selectedDatapoint: null
+  };
 
   componentDidMount() {
     const { setRemove, series } = this.props;
@@ -32,10 +39,20 @@ class SeriesView extends Component {
       return true;
     } else return false;
   };
-
+  selectDatapoint = id => {
+    this.setState({ selectedDatapoint: id });
+    $("#dataOptions").modal("show");
+  };
   render() {
     const { series, onBack } = this.props;
+    const { selectedDatapoint } = this.state;
     if (!series) return <></>;
+    let datapoint = {};
+
+    if (series.entries) {
+      datapoint = getItem(selectedDatapoint, series.entries, "id");
+    }
+
     return (
       <Fragment>
         <button
@@ -54,7 +71,10 @@ class SeriesView extends Component {
         </div>
         <hr />
         <h3 className="mt-4">Data</h3>
-        <DataTable data={series.entries} />
+        <DataTable data={series.entries} rowClick={this.selectDatapoint} />
+        <Modal title="Update Data" id="dataOptions">
+          <DataForm datapoint={datapoint}></DataForm>
+        </Modal>
         <div className="d-flex justify-content-end">
           <button
             type="button"

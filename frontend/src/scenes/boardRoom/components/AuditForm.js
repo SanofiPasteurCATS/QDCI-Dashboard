@@ -24,7 +24,8 @@ class AuditForm extends Component {
 
   state = {
     description: "",
-    date: new Date()
+    start_date: new Date(),
+    end_date: new Date()
   };
 
   componentDidUpdate(prevProps) {
@@ -34,7 +35,10 @@ class AuditForm extends Component {
       this.onUpdate(() => {
         this.setState({
           description: audit.description,
-          date: audit.date ? parseISO(audit.date) : new Date()
+          start_date: audit.start_date
+            ? parseISO(audit.start_date)
+            : new Date(),
+          end_date: audit.end_date ? parseISO(audit.end_date) : new Date()
         });
       });
     }
@@ -52,17 +56,19 @@ class AuditForm extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { description, date } = this.state;
+    const { description, start_date, end_date } = this.state;
     const { audit, updateAudit } = this.props;
     const newAudit = {
       description
     };
-    newAudit.date = format(date, "yyyy-MM-dd");
+    newAudit.start_date = format(start_date, "yyyy-MM-dd");
+    newAudit.end_date = format(end_date, "yyyy-MM-dd");
 
     updateAudit(newAudit, audit.id);
     this.setState({
       description: "",
-      date: parseISO("2019-01-01")
+      start_date: parseISO("2019-01-01"),
+      end_date: parseISO("2019-01-01")
     });
   };
 

@@ -13,20 +13,24 @@ import {
 import DashboardDisplayCard from "./DashboardDisplayCard";
 import NewCard from "../../../core/components/ui/NewCard";
 import RemoveConfirmation from "../../../core/components/ui/RemoveConfirmation";
+import Modal from "../../../core/components/ui/modal/Modal";
 
 // NATIVE COMPONENTS
 import DashboardOptions from "./DashboardOptions";
+import DashboardForm from "./DashboardForm";
 
 class DashboardList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      removeItem: null
+      removeItem: null,
+      editItem: null
     };
     this.setRemove = this.setRemove.bind(this);
     this.onRemoveConfirmationSubmit = this.onRemoveConfirmationSubmit.bind(
       this
     );
+    this.setEdit = this.setEdit.bind(this);
   }
 
   static propTypes = {
@@ -50,6 +54,13 @@ class DashboardList extends Component {
     $("#removeConfirmation").modal("show");
   };
 
+  setEdit = dashboard => {
+    this.setState({
+      editItem: dashboard
+    });
+    $("#dashboardEdit").modal("show");
+  };
+
   onRemoveConfirmationSubmit = state => {
     const { deleteDashboard } = this.props;
     const { removeItem } = this.state;
@@ -70,6 +81,7 @@ class DashboardList extends Component {
               <DashboardDisplayCard
                 dashboard={dashboard}
                 onRemoveClick={this.setRemove}
+                onEditClick={this.setEdit}
               />
             </div>
           ))}
@@ -86,6 +98,9 @@ class DashboardList extends Component {
             onSubmit: this.onRemoveConfirmationSubmit
           }}
         />
+        <Modal title="Edit Dashboard" id="dashboardEdit">
+          <DashboardForm></DashboardForm>
+        </Modal>
       </Fragment>
     );
   }

@@ -1,18 +1,16 @@
 
-from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action, Audit, Win
+from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action, Audit, Win, Heat, Image
 from rest_framework import viewsets, permissions
-from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer, AuditSerializer, WinSerializer
+from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer, AuditSerializer, WinSerializer, HeatSerializer, ImageSerializer
 from datetime import datetime, time, date, timedelta 
 from rest_framework.viewsets import ReadOnlyModelViewSet
 # Dashboard viewset
 
 class DashboardViewSet(viewsets.ModelViewSet):
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
+
     serializer_class = DashboardSerializer
     def get_queryset(self):
-        return self.request.user.dashboards.all()
+        return Dashboard.objects.all()
 
     def perform_create(self, serializer):
         dashboard = serializer.save(owner=self.request.user)
@@ -24,7 +22,12 @@ class DashboardViewSet(viewsets.ModelViewSet):
         ul.save()
         ll = ActionTable(dashboard=dashboard, title="Lower Level Feed")
         ll.save()
-        
+        heat = Heat(name="Good", color="#008000", dashboard=dashboard)
+        heat.save()
+        heat = Heat(name="Okay", color="#FFA500", dashboard=dashboard)
+        heat.save()
+        heat = Heat(name="Bad", color="#EF0000", dashboard=dashboard)
+        heat.save()
 
 class DatapointViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -264,3 +267,35 @@ class WinViewSet(viewsets.ModelViewSet):
         serializer = WinSerializer(win, data = request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
+
+class HeatViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = HeatSerializer
+
+    def get_queryset(self):
+        queryset = Heat.objects.all()
+        dashboard = self.request.query_params.get('dashboard', None)
+        if dashboard is not None:
+            queryset = queryset.filter(dashboard=dashboard)
+        return queryset
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+        
+    def patch(self, request, pk):
+        heat = self.get_object(pk)
+        serializer = HeatSerializer(heat, data = request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+class ImageViewSet(viewsets.ModelViewSet):
+    serializer_class = ImageSerializer
+    
+    def perform_create(self, serializer):
+        image = serializer.save()
+
+    def get_queryset(self):
+        return Image.objects.all()

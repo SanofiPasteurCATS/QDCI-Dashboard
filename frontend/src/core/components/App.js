@@ -42,7 +42,7 @@ class App extends Component {
           <Router>
             <Fragment>
               <div className="d-flex flex-column h-100">
-                <div className="qd-conatiner--header">
+                <div className="qd-container--header">
                   <Header />
                 </div>
                 <Alerts />

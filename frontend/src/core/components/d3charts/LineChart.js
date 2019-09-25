@@ -160,19 +160,20 @@ class LineChart extends React.Component {
     if (kpis[index] && kpis[index].series) {
       test = { ...kpis[index].series[0] };
       let entries = [...kpis[index].series[0].entries];
+      test.id = Math.round(Math.random() * 500000);
       test.entries = entries.map(datapoint => {
         return {
           value: datapoint.target,
           date: datapoint.date,
-          target: datapoint.target
+          target: datapoint.target,
+          id: Math.round(Math.random() * 500000)
         };
       });
-      test.color = "#ff0000";
+      test.color = "#008000";
       test.name = `${test.name} Threshold`;
       data = [test, ...data];
     }
-    console.log(test);
-    console.log(data);
+
     const parseTime = d3.timeParse("%Y-%m-%d");
     function highlightLine(id) {
       d3.selectAll(".line").attr("stroke-width", 1.8);

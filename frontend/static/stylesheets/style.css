@@ -16,6 +16,13 @@ $accent-color: #444492; //Dark Slate Blue
   max-height: 800px;
   overflow: auto; }
 
+.card {
+  border: none;
+  border-radius: 0; }
+
+.carousel {
+  width: fit-content; }
+
 /**
  * Set up a decent box model on the root element
  */
@@ -159,6 +166,71 @@ body {
 .symbol {
   font-size: 2rem; }
 
+.z-depth-0 {
+  box-shadow: none !important; }
+
+/* 2dp elevation modified*/
+.z-depth-1 {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); }
+
+.z-depth-1-half {
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2); }
+
+/* 6dp elevation modified*/
+.z-depth-2, .card, .navbar {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3); }
+
+/* 12dp elevation modified*/
+.z-depth-3 {
+  box-shadow: 0 8px 17px 2px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); }
+
+/* 16dp elevation */
+.z-depth-4 {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2); }
+
+/* 24dp elevation */
+.z-depth-5 {
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2); }
+
+.hover {
+  transition: all ease 0.2s;
+  cursor: pointer; }
+  .hover:hover {
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%); }
+
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(30deg); } }
+
+@-moz-keyframes spin {
+  100% {
+    -webkit-transform: rotate(30deg); } }
+
+@-ms-keyframes spin {
+  100% {
+    -webkit-transform: rotate(30deg); } }
+
+@-o-keyframes spin {
+  100% {
+    -webkit-transform: rotate(30deg); } }
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(30deg); } }
+
+.gear-anim {
+  height: fit-content;
+  transition: all ease 0.3s; }
+  .gear-anim:hover {
+    filter: brightness(70%);
+    -webkit-filter: brightness(70%);
+    -webkit-animation: spin 0.2s linear 2 alternate;
+    -moz-animation: spin 0.2s linear 2 alternate;
+    -ms-animation: spin 0.2s linear 2 alternate;
+    -o-animation: spin 0.2s linear 2 alternate;
+    animation: spin 0.2s linear 2 alternate; }
+
 .qd-tooltip {
   text-align: center;
   line-height: 1.5;
@@ -166,7 +238,7 @@ body {
   height: fit-content;
   padding: 8px;
   font: 12px sans-serif;
-  background-color: rgba(236, 236, 236, 0.8);
+  background-color: rgba(236, 236, 236, 0.9);
   color: #000;
   border: 0px;
   border-radius: 8px;
