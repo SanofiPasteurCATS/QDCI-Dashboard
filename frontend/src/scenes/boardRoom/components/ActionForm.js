@@ -10,11 +10,6 @@ import PropTypes from "prop-types";
 // ACTIONS
 import { updateAction, deleteAction } from "../../../core/actions/dashboards";
 
-/* The boardroom is the landing page for all dashboards
-Parent of all boardroom components Contains pillar widgets and action tables
-This component makes ALL GET request for Boardroom data
-*/
-
 class ActionForm extends Component {
   static propTypes = {
     action: PropTypes.object,
@@ -35,21 +30,19 @@ class ActionForm extends Component {
     const { action } = this.props;
     if (prevProps.action !== action) {
       if (!action) return;
-      this.onUpdate(() => {
-        this.setState({
-          letter: action.letter || "",
-          problem: action.problem || "",
-          root_cause: action.root_cause || "",
-          solution: action.solution || "",
-          leader: action.leader || "",
-          date: action.date ? parseISO(action.date) : new Date()
-        });
+      this.update({
+        letter: action.letter || "",
+        problem: action.problem || "",
+        root_cause: action.root_cause || "",
+        solution: action.solution || "",
+        leader: action.leader || "",
+        date: action.date ? parseISO(action.date) : new Date()
       });
     }
   }
 
-  onUpdate = hook => {
-    hook();
+  update = state => {
+    this.setState(state);
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -184,6 +177,10 @@ class ActionForm extends Component {
     );
   }
 }
+
+ActionForm.defaultProps = {
+  action: null
+};
 
 export default connect(
   null,

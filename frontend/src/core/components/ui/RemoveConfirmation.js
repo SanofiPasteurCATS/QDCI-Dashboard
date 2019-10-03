@@ -57,18 +57,6 @@ class RemoveConformation extends Component {
             </span>{" "}
             {`${type} and all associated data.`}{" "}
           </p>
-          {/*
-          <div className="form-group">
-            <label htmlFor="password">Please enter dashboard password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              className="form-control"
-              onChange={this.onChange}
-            />
-          </div>
-          */}
           <div className="form-group">
             <label htmlFor="name">{`Please type in the name of the ${type} to confirm`}</label>
             <input
@@ -79,18 +67,6 @@ class RemoveConformation extends Component {
               onChange={this.onChange}
             />
           </div>
-          {/*
-          <div className="form-check">
-            <input
-              type="checkbox"
-              name="exported"
-              className="form-check-input"
-              onChange={this.onChange}
-            />
-            <label htmlFor="export" className="form-check-label mb-3">
-              Do you want to export data?
-            </label>
-          </div> */}
           <button type="submit" className="btn btn-warning">
             I understand the consequences, remove this item
           </button>

@@ -34,12 +34,18 @@ import {
   ADD_WIN,
   GET_WINS,
   UPDATE_HEAT,
-  GET_HEAT
+  GET_HEAT,
+  UPDATE_DASHBOARD,
+  ADD_IMAGE,
+  DELETE_IMAGE
 } from "./types";
 
 /*---------------------------------------
           DASHBOARD ACTIONS
 -----------------------------------------*/
+
+// Thunk actions which consume and request the server's RestFUL API
+
 export const getDashboards = () => (dispatch, getState) => {
   // Send request to server
   axios
@@ -77,6 +83,25 @@ export const deleteDashboard = id => (dispatch, getState) => {
     // If there is an error, dispatch a error message to reducer
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const updateDashboard = (dashboard, id) => (dispatch, getState) => {
+  // Send request to server
+  axios
+    .patch(`/api/dashboards/${id}/`, dashboard, tokenConfig(getState))
+    .then(res => {
+      // Message informing user of success
+      dispatch(createMessage({ updateDashboard: "Dashboard Updated!" }));
+      // Send action to reducer. Payload is the object representing updated KPI
+      dispatch({
+        type: UPDATE_DASHBOARD,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
     });
 };
 
@@ -526,4 +551,48 @@ export const getHeat = dashboardId => (dispatch, getState) => {
         payload: res.data
       });
     });
+};
+
+export const addImage = image => (dispatch, getState) => {
+  let formData = new FormData();
+  formData.append("dashboard", JSON.stringify(image.dashboard));
+  formData.append("image", image.image);
+  axios
+    .post(`api/image/`, formData, {
+      headers: {
+        ...tokenConfig(getState).headers,
+        "Content-Type": "multipart/form-data"
+      }
+    })
+    .then(res => {
+      // Dispatch a message action which notifies user of success
+      dispatch(createMessage({ addImage: "Image Added!" }));
+      // Dispatch the action to reducer. Payload is the dashboard which was added
+      dispatch({
+        type: ADD_IMAGE,
+        payload: res.data
+      });
+    })
+    // If there is an error, dispatch a error message to reducer
+    .catch(err => {
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+      dispatch(returnErrors(err, err));
+    });
+};
+
+export const deleteImage = id => (dispatch, getState) => {
+  // Send request to server
+  axios
+    // Payload is id for filtering the store state
+    .delete(`/api/image/${id}/`, tokenConfig(getState))
+    .then(() => {
+      dispatch(createMessage({ deleteImage: "Image deleted" }));
+      dispatch({
+        type: DELETE_IMAGE,
+        payload: id
+      });
+    })
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 };

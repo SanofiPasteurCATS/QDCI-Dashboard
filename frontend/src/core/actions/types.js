@@ -1,7 +1,8 @@
-// Reference this list for action types
+// Reference this list for Redux action types
 export const GET_DASHBOARDS = "GET_DASHBOARDS";
 export const DELETE_DASHBOARD = "DELETE_DASHBOARD";
 export const ADD_DASHBOARD = "ADD_DASHBOARD";
+export const UPDATE_DASHBOARD = "UPDATE_DASHBOARD";
 export const GET_ERRORS = "GET_ERRORS";
 export const GET_A_DASHBOARD = "GET_A_DASHBOARD";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
@@ -49,3 +50,6 @@ export const DELETE_WIN = "DELETE_WIN";
 
 export const GET_HEAT = "GET_HEAT";
 export const UPDATE_HEAT = "UPDATE_HEAT";
+
+export const ADD_IMAGE = "ADD_IMAGE";
+export const DELETE_IMAGE = "DELETE_IMAGE";

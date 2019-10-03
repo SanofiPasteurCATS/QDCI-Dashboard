@@ -28,6 +28,15 @@ class DashboardViewSet(viewsets.ModelViewSet):
         heat.save()
         heat = Heat(name="Bad", color="#EF0000", dashboard=dashboard)
         heat.save()
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+    
+    def patch(self, request, pk):
+        dashboard = self.get_objects(pk)
+        serializer = DashboardSerializer(dashboard, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
 
 class DatapointViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -219,7 +228,11 @@ class ActionViewSet(viewsets.ModelViewSet):
     serializer_class = ActionSerializer
 
     def get_queryset(self):
-        return Action.objects.all()
+        queryset = Action.objects.all()
+        dashboard = self.request.query_params.get('dashboard', None)
+        if dashboard is not None:
+            queryset = queryset.filter(dashboard=dashboard)
+        return queryset
 
     def put(self, request, *args, **kwargs):
         return self.update(self, request, *args, **kwargs)
@@ -238,7 +251,11 @@ class AuditViewSet(viewsets.ModelViewSet):
     serializer_class = AuditSerializer
 
     def get_queryset(self):
-        return Audit.objects.all()
+        queryset = Audit.objects.all()
+        dashboard = self.request.query_params.get('dashboard', None)
+        if dashboard is not None:
+            queryset = queryset.filter(dashboard=dashboard)
+        return queryset
 
     def put(self, request, *args, **kwargs):
         return self.update(self, request, *args, **kwargs)
@@ -257,7 +274,11 @@ class WinViewSet(viewsets.ModelViewSet):
     serializer_class = WinSerializer
 
     def get_queryset(self):
-        return Win.objects.all()
+        queryset =  Win.objects.all()
+        dashboard = self.request.query_params.get('dashboard', None)
+        if dashboard is not None:
+            queryset = queryset.filter(dashboard=dashboard)
+        return queryset
 
     def put(self, request, *args, **kwargs):
         return self.update(self, request, *args, **kwargs)
@@ -292,6 +313,10 @@ class HeatViewSet(viewsets.ModelViewSet):
             serializer.save()
 
 class ImageViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
     serializer_class = ImageSerializer
     
     def perform_create(self, serializer):

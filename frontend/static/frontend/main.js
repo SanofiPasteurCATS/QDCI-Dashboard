@@ -157,7 +157,7 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 64 modules ***!
+  !*** ./frontend/src/index.js + 67 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
@@ -176,7 +176,6 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-redux/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-router-dom/esm/react-router-dom.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-spinners/CircleLoader.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-spinners/dist/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-tooltip/dist/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/redux-devtools-extension/index.js (<- Module is not an ECMAScript module) */
@@ -225,10 +224,11 @@ var axios = __webpack_require__("./node_modules/axios/index.js");
 var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
 
 // CONCATENATED MODULE: ./frontend/src/core/actions/types.js
-// Reference this list for action types
+// Reference this list for Redux action types
 var GET_DASHBOARDS = "GET_DASHBOARDS";
 var DELETE_DASHBOARD = "DELETE_DASHBOARD";
 var ADD_DASHBOARD = "ADD_DASHBOARD";
+var UPDATE_DASHBOARD = "UPDATE_DASHBOARD";
 var GET_ERRORS = "GET_ERRORS";
 var GET_A_DASHBOARD = "GET_A_DASHBOARD";
 var CREATE_MESSAGE = "CREATE_MESSAGE";
@@ -272,6 +272,8 @@ var UPDATE_WIN = "UPDATE_WIN";
 var DELETE_WIN = "DELETE_WIN";
 var GET_HEAT = "GET_HEAT";
 var UPDATE_HEAT = "UPDATE_HEAT";
+var ADD_IMAGE = "ADD_IMAGE";
+var DELETE_IMAGE = "DELETE_IMAGE";
 // CONCATENATED MODULE: ./frontend/src/core/actions/messages.js
  // CREATE MESSAGE
 
@@ -732,6 +734,10 @@ var register_mapStateToProps = function mapStateToProps(state) {
   createMessage: messages_createMessage
 })(register_Register));
 // CONCATENATED MODULE: ./frontend/src/core/actions/dashboards.js
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
+
+function dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -739,6 +745,7 @@ var register_mapStateToProps = function mapStateToProps(state) {
 /*---------------------------------------
           DASHBOARD ACTIONS
 -----------------------------------------*/
+// Thunk actions which consume and request the server's RestFUL API
 
 var dashboards_getDashboards = function getDashboards() {
   return function (dispatch, getState) {
@@ -775,6 +782,27 @@ var dashboards_deleteDashboard = function deleteDashboard(id) {
     }) // If there is an error, dispatch a error message to reducer
     ["catch"](function (err) {
       dispatch(messages_returnErrors(err.response.data, err.response.status));
+    });
+  };
+};
+var dashboards_updateDashboard = function updateDashboard(dashboard, id) {
+  return function (dispatch, getState) {
+    // Send request to server
+    axios_default.a.patch("/api/dashboards/".concat(id, "/"), dashboard, tokenConfig(getState)).then(function (res) {
+      // Message informing user of success
+      dispatch(messages_createMessage({
+        updateDashboard: "Dashboard Updated!"
+      })); // Send action to reducer. Payload is the object representing updated KPI
+
+      dispatch({
+        type: UPDATE_DASHBOARD,
+        payload: res.data
+      });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
     });
   };
 };
@@ -1259,6 +1287,51 @@ var dashboards_getHeat = function getHeat(dashboardId) {
     });
   };
 };
+var dashboards_addImage = function addImage(image) {
+  return function (dispatch, getState) {
+    var formData = new FormData();
+    formData.append("dashboard", JSON.stringify(image.dashboard));
+    formData.append("image", image.image);
+    axios_default.a.post("api/image/", formData, {
+      headers: _objectSpread({}, tokenConfig(getState).headers, {
+        "Content-Type": "multipart/form-data"
+      })
+    }).then(function (res) {
+      // Dispatch a message action which notifies user of success
+      dispatch(messages_createMessage({
+        addImage: "Image Added!"
+      })); // Dispatch the action to reducer. Payload is the dashboard which was added
+
+      dispatch({
+        type: ADD_IMAGE,
+        payload: res.data
+      });
+    }) // If there is an error, dispatch a error message to reducer
+    ["catch"](function (err) {
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+      dispatch(messages_returnErrors(err, err));
+    });
+  };
+};
+var dashboards_deleteImage = function deleteImage(id) {
+  return function (dispatch, getState) {
+    // Send request to server
+    axios_default.a // Payload is id for filtering the store state
+    ["delete"]("/api/image/".concat(id, "/"), tokenConfig(getState)).then(function () {
+      dispatch(messages_createMessage({
+        deleteImage: "Image deleted"
+      }));
+      dispatch({
+        type: DELETE_IMAGE,
+        payload: id
+      });
+    })["catch"](function (err) {
+      return dispatch(messages_returnErrors(err.response.data, err.response.status));
+    });
+  };
+};
 // EXTERNAL MODULE: ./node_modules/react-spinners/CircleLoader.js
 var CircleLoader = __webpack_require__("./node_modules/react-spinners/CircleLoader.js");
 var CircleLoader_default = /*#__PURE__*/__webpack_require__.n(CircleLoader);
@@ -1270,7 +1343,7 @@ var core_browser_esm = __webpack_require__("./node_modules/@emotion/core/dist/co
 // COLORS
 var primaryColor = "#EEEEEE";
 var secondaryColor = "#EEEEEE";
-var accentColor = "#437bb7";
+var accentColor = "#9BB0DB";
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/LoadingScreen.js
 // DEPENDANCIES
 
@@ -1394,7 +1467,13 @@ var d3 = __webpack_require__("./node_modules/d3/index.js");
 var ReactFauxDOM = __webpack_require__("./node_modules/react-faux-dom/lib/ReactFauxDOM.js");
 
 // CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
-// Options for form-controls. This is a temp solution until I can pull the data directly from the database
+// Configuration for table headers and form controls
+
+/********************************************
+ *
+ * FORM CONTROL CHOICES
+ *
+ ********************************************/
 var PLOT_TYPE_CHOICES = [{
   id: "li",
   name: "Connected Scatter Plot"
@@ -1413,11 +1492,6 @@ var KPI_TYPE_CHOICES = [{
   id: 2,
   name: "Threshold"
 }];
-var THRESHOLD_TYPE_GREATER = 0;
-var THRESHOLD_TYPE_LESS = 1;
-var KPI_TYPE_DEVIATION = 0;
-var KPI_TYPE_WIN_LOSE = 1;
-var KPI_TYPE_THRESHOLD = 2;
 var LEVEL_CHOICES = [{
   id: 1,
   name: "Level 1"
@@ -1430,16 +1504,6 @@ var LEVEL_CHOICES = [{
 }, {
   id: 4,
   name: "Level 4"
-}];
-var DATAPOINT_TABLE_HEADERS = [{
-  name: "Value",
-  prop: "value"
-}, {
-  name: "Target",
-  prop: "target"
-}, {
-  name: "Date",
-  prop: "date"
 }];
 var PILLAR_CHOICES = [{
   id: "Plus",
@@ -1467,12 +1531,33 @@ var FREQUENCY_CHOICES = [{
   id: 2,
   name: "Bi-Weekly"
 }];
+/********************************************
+ *
+ * TABLE HEADERS
+ *
+ ********************************************/
+
+var DATAPOINT_TABLE_HEADERS = [{
+  name: "Value",
+  prop: "value"
+}, {
+  name: "Target",
+  prop: "target"
+}, {
+  name: "Date",
+  prop: "date"
+}];
 var KPI_TABLE_HEADERS = [{
   name: "Name",
   prop: "name"
 }, {
   name: "Pillar",
-  prop: "pillar"
+  prop: "pillar",
+  map: function map(pillar) {
+    return PILLAR_CHOICES.filter(function (choice) {
+      return choice.id === pillar;
+    })[0].name;
+  }
 }, {
   name: "Frequency",
   prop: "frequency",
@@ -1496,7 +1581,6 @@ var SERIES_TABLE_HEADERS = [{
   name: "Color",
   prop: "color"
 }];
-var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
 var AUDIT_TABLE_HEADERS = [{
   name: "Description",
   prop: "description"
@@ -1537,28 +1621,12 @@ var ACTION_TABLE_HEADERS = [{
   prop: "date",
   date: true
 }];
-var ACTION_TABLE_DUMMY_DATA = [{
-  letter: "Q",
-  problem: "not enough sleep",
-  root_cause: "Insomnia",
-  solution: "take sleeping pills",
-  leader: "Kyle",
-  date: "24-OCT-2019"
-}, {
-  letter: "Q",
-  problem: "Not enough coffee",
-  root_cause: "coffe machine is broken",
-  solution: "fix coffee machine",
-  leader: "Kyle",
-  date: "08-AUG-2019"
-}, {
-  letter: "I",
-  problem: "Not enough GEMBAS",
-  root_cause: "No legs",
-  solution: "Get legs",
-  leader: "Kyle",
-  date: "03-SEP-2019"
-}];
+/********************************************
+ *
+ * MISCELLANEOUS
+ *
+ ********************************************/
+
 var PILLAR_LABELS = [{
   date: "2019-01-01"
 }, {
@@ -1584,6 +1652,12 @@ var PILLAR_LABELS = [{
 }, {
   date: "2019-12-01"
 }];
+var DEFAULT_ACTION_TABLES = ["Short Term Action Plan", "Mid Term Action Plan", "Upper Level Escalations", "Lower Level Escalations"];
+var THRESHOLD_TYPE_GREATER = 0;
+var THRESHOLD_TYPE_LESS = 1;
+var KPI_TYPE_DEVIATION = 0;
+var KPI_TYPE_WIN_LOSE = 1;
+var KPI_TYPE_THRESHOLD = 2;
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/ColorHelpers.js
 
 var ColorHelpers_getColor = function getColor(_ref) {
@@ -1654,7 +1728,7 @@ var ColorHelpers_getAbsoluteColor = function getAbsoluteColor(target, value, war
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/pillar.js
 function pillar_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillar_typeof = function _typeof(obj) { return typeof obj; }; } else { pillar_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillar_typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { pillar_defineProperty(target, key, source[key]); }); } return target; }
+function pillar_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { pillar_defineProperty(target, key, source[key]); }); } return target; }
 
 function pillar_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1790,7 +1864,6 @@ function (_React$Component) {
       var arc = d3["arc"]().cornerRadius(2).padAngle(0.6).padRadius(3);
       var labelArc = d3["arc"]().innerRadius(radius * 0.84 + plotSize * labelScale / 21 * (count - 1) * 1.0 + 15).outerRadius(radius * 0.84 + plotSize * labelScale / 20 * (count - 1) * 1.3 + 15).cornerRadius(2).padAngle(0.05).padRadius(80);
       var faux = this.props.connectFauxDOM("svg", "chart");
-      d3["select"](faux).select("#circle");
       d3["select"](faux).select("#text").text(letter);
       var pathBind = d3["select"](faux).selectAll(".kpi").data(kpis);
       pathBind.exit().remove();
@@ -1832,7 +1905,7 @@ function (_React$Component) {
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "#000").attr("stroke-width", "1");
         if (!onHover) return;
         onHover(true, {
-          payload: _objectSpread({
+          payload: pillar_objectSpread({
             x: d3["event"].pageX,
             y: d3["event"].pageY,
             kpi_type: kpi_type,
@@ -2743,10 +2816,6 @@ function ActionForm_setPrototypeOf(o, p) { ActionForm_setPrototypeOf = Object.se
  // ACTIONS
 
 
-/* The boardroom is the landing page for all dashboards
-Parent of all boardroom components Contains pillar widgets and action tables
-This component makes ALL GET request for Boardroom data
-*/
 
 var ActionForm_ActionForm =
 /*#__PURE__*/
@@ -2771,8 +2840,8 @@ function (_Component) {
       solution: "",
       leader: "",
       date: new Date()
-    }, _this.onUpdate = function (hook) {
-      hook();
+    }, _this.update = function (state) {
+      _this.setState(state);
     }, _this.onChange = function (e) {
       return _this.setState(ActionForm_defineProperty({}, e.target.name, e.target.value));
     }, _this.onDateChange = function (date) {
@@ -2821,28 +2890,24 @@ function (_Component) {
   ActionForm_createClass(ActionForm, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this2 = this;
-
       var action = this.props.action;
 
       if (prevProps.action !== action) {
         if (!action) return;
-        this.onUpdate(function () {
-          _this2.setState({
-            letter: action.letter || "",
-            problem: action.problem || "",
-            root_cause: action.root_cause || "",
-            solution: action.solution || "",
-            leader: action.leader || "",
-            date: action.date ? Object(parseISO["default"])(action.date) : new Date()
-          });
+        this.update({
+          letter: action.letter || "",
+          problem: action.problem || "",
+          root_cause: action.root_cause || "",
+          solution: action.solution || "",
+          leader: action.leader || "",
+          date: action.date ? Object(parseISO["default"])(action.date) : new Date()
         });
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var _this$state2 = this.state,
           letter = _this$state2.letter,
@@ -2917,7 +2982,7 @@ function (_Component) {
       }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
         className: "form-control",
         onChange: function onChange(date) {
-          return _this3.onDateChange(date);
+          return _this2.onDateChange(date);
         },
         selected: date,
         dateFormat: "yyyy-MM-dd"
@@ -2941,6 +3006,9 @@ ActionForm_ActionForm.propTypes = {
   action: prop_types_default.a.object,
   updateAction: prop_types_default.a.func.isRequired,
   deleteAction: prop_types_default.a.func.isRequired
+};
+ActionForm_ActionForm.defaultProps = {
+  action: null
 };
 /* harmony default export */ var components_ActionForm = (Object(es["connect"])(null, {
   updateAction: dashboards_updateAction,
@@ -3055,10 +3123,13 @@ function (_Component) {
   }, {
     key: "insert",
     value: function insert() {
-      var addAudit = this.props.addAudit;
+      var _this$props = this.props,
+          addAudit = _this$props.addAudit,
+          dashboardId = _this$props.dashboardId;
       var audit = {
         description: null,
-        date: null
+        date: null,
+        dashboard: dashboardId
       };
       addAudit(audit);
     }
@@ -3071,12 +3142,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          editable = _this$props.editable,
-          appendable = _this$props.appendable,
-          rowClick = _this$props.rowClick,
-          deletable = _this$props.deletable;
+      var _this$props2 = this.props,
+          data = _this$props2.data,
+          editable = _this$props2.editable,
+          appendable = _this$props2.appendable,
+          rowClick = _this$props2.rowClick,
+          deletable = _this$props2.deletable;
       return react_default.a.createElement(table_Table, {
         editable: editable,
         appendable: appendable,
@@ -3154,7 +3225,8 @@ function (_Component) {
           title = _this$props.title,
           iconClass = _this$props.iconClass,
           id = _this$props.id,
-          children = _this$props.children;
+          children = _this$props.children,
+          overflow = _this$props.overflow;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "modal fade",
         id: id,
@@ -3169,7 +3241,10 @@ function (_Component) {
           overflow: "visible"
         }
       }, react_default.a.createElement("div", {
-        className: "modal-content"
+        className: "modal-content",
+        style: {
+          overflow: overflow || "auto"
+        }
       }, react_default.a.createElement("div", {
         className: "modal-header"
       }, react_default.a.createElement("h1", {
@@ -3236,10 +3311,6 @@ function AuditForm_setPrototypeOf(o, p) { AuditForm_setPrototypeOf = Object.setP
  // ACTIONS
 
 
-/* The boardroom is the landing page for all dashboards
-Parent of all boardroom components Contains pillar widgets and action tables
-This component makes ALL GET request for Boardroom data
-*/
 
 var AuditForm_AuditForm =
 /*#__PURE__*/
@@ -3441,11 +3512,14 @@ function (_Component) {
   }, {
     key: "insert",
     value: function insert() {
-      var addWin = this.props.addWin;
+      var _this$props = this.props,
+          addWin = _this$props.addWin,
+          dashboardId = _this$props.dashboardId;
       var win = {
         description: null,
         participants: null,
-        date: null
+        date: null,
+        dashboard: dashboardId
       };
       addWin(win);
     }
@@ -3458,12 +3532,12 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          editable = _this$props.editable,
-          appendable = _this$props.appendable,
-          rowClick = _this$props.rowClick,
-          deletable = _this$props.deletable;
+      var _this$props2 = this.props,
+          data = _this$props2.data,
+          editable = _this$props2.editable,
+          appendable = _this$props2.appendable,
+          rowClick = _this$props2.rowClick,
+          deletable = _this$props2.deletable;
       return react_default.a.createElement(table_Table, {
         editable: editable,
         appendable: appendable,
@@ -3684,228 +3758,6 @@ WinForm_WinForm.propTypes = {
   updateWin: dashboards_updateWin,
   deleteWin: dashboards_deleteWin
 })(WinForm_WinForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionPlan.js
-function ActionPlan_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionPlan_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionPlan_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionPlan_typeof(obj); }
-
-function ActionPlan_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function ActionPlan_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function ActionPlan_createClass(Constructor, protoProps, staticProps) { if (protoProps) ActionPlan_defineProperties(Constructor.prototype, protoProps); if (staticProps) ActionPlan_defineProperties(Constructor, staticProps); return Constructor; }
-
-function ActionPlan_possibleConstructorReturn(self, call) { if (call && (ActionPlan_typeof(call) === "object" || typeof call === "function")) { return call; } return ActionPlan_assertThisInitialized(self); }
-
-function ActionPlan_getPrototypeOf(o) { ActionPlan_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ActionPlan_getPrototypeOf(o); }
-
-function ActionPlan_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function ActionPlan_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ActionPlan_setPrototypeOf(subClass, superClass); }
-
-function ActionPlan_setPrototypeOf(o, p) { ActionPlan_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionPlan_setPrototypeOf(o, p); }
-
-
-
- // COMPONENTS
-
-
-
-
-
-
-
-
-
-
-
-
-
-var ActionPlan_ActionPlan =
-/*#__PURE__*/
-function (_Component) {
-  ActionPlan_inherits(ActionPlan, _Component);
-
-  function ActionPlan(props) {
-    var _this;
-
-    ActionPlan_classCallCheck(this, ActionPlan);
-
-    _this = ActionPlan_possibleConstructorReturn(this, ActionPlan_getPrototypeOf(ActionPlan).call(this, props));
-    _this.rowActionClick = _this.rowActionClick.bind(ActionPlan_assertThisInitialized(_this));
-    _this.rowAuditClick = _this.rowAuditClick.bind(ActionPlan_assertThisInitialized(_this));
-    _this.rowWinClick = _this.rowWinClick.bind(ActionPlan_assertThisInitialized(_this));
-    _this.state = {
-      currentActionId: null,
-      currentWinId: null
-    };
-    return _this;
-  }
-
-  ActionPlan_createClass(ActionPlan, [{
-    key: "filterTables",
-    value: function filterTables(title) {
-      var tables = this.props.tables;
-      var payload = tables.filter(function (table) {
-        return table.title === title;
-      });
-      return payload ? payload[0] : null;
-    }
-  }, {
-    key: "rowActionClick",
-    value: function rowActionClick(id) {
-      this.setState({
-        currentActionId: id
-      });
-      $("#actionOptions").modal("show");
-    }
-  }, {
-    key: "rowAuditClick",
-    value: function rowAuditClick(id) {
-      this.setState({
-        currentAuditId: id
-      });
-      $("#auditOptions").modal("show");
-    }
-  }, {
-    key: "rowWinClick",
-    value: function rowWinClick(id) {
-      this.setState({
-        currentWinId: id
-      });
-      $("#winOptions").modal("show");
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          tables = _this$props.tables,
-          dashboards = _this$props.dashboards,
-          currentDashboard = _this$props.currentDashboard,
-          audits = _this$props.audits,
-          wins = _this$props.wins;
-      var _this$state = this.state,
-          currentActionId = _this$state.currentActionId,
-          currentAuditId = _this$state.currentAuditId,
-          currentWinId = _this$state.currentWinId;
-      var actionQuery = tables.map(function (table) {
-        return table.actions.filter(function (action) {
-          return action.id === currentActionId;
-        });
-      }).flat();
-      var currentAction = actionQuery ? actionQuery[0] : null;
-      var auditQuery = audits.filter(function (audit) {
-        return audit.id === currentAuditId;
-      });
-      var winQuery = wins.filter(function (win) {
-        return win.id === currentWinId;
-      });
-      var currentAudit = auditQuery ? auditQuery[0] : null;
-      var currentWin = winQuery ? winQuery[0] : null;
-      var ul = this.filterTables("Upper Level Escalation");
-      var ll = this.filterTables("Lower Level Feed");
-      var lt = this.filterTables("Long Term Action Plan");
-      var st = this.filterTables("Short Term Action Plan");
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
-        action: currentAction
-      }), react_default.a.createElement(modal_Modal, {
-        title: "Update Audit",
-        id: "auditOptions"
-      }, react_default.a.createElement(components_AuditForm, {
-        audit: currentAudit
-      })), react_default.a.createElement(modal_Modal, {
-        title: "Update WIN",
-        id: "winOptions"
-      }, react_default.a.createElement(components_WinForm, {
-        win: currentWin
-      })), react_default.a.createElement("div", {
-        className: "col-lg-6 p-0"
-      }, react_default.a.createElement("div", {
-        className: "card mt-4 ml-2 mr-2"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", null, " Short Term Action Plan"), react_default.a.createElement(components_ActionTable, {
-        data: st,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, " Long Term Action Plan"), react_default.a.createElement(components_ActionTable, {
-        data: lt,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      })) : react_default.a.createElement(LoadingScreen, null))), react_default.a.createElement("div", {
-        className: "card mt-4 ml-2 mr-2"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, "Audits"), react_default.a.createElement(components_AuditTable, {
-        data: audits,
-        rowClick: this.rowAuditClick,
-        appendable: true
-      })))), react_default.a.createElement("div", {
-        className: "col-lg-6 p-0"
-      }, react_default.a.createElement("div", {
-        className: "card mt-4 ml-2 mr-2"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, ul ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "row",
-        style: {
-          padding: "0 1rem"
-        }
-      }, react_default.a.createElement("h5", null, " Upper Level Escalation"), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary btn-sm mb-1 ml-auto",
-        "data-toggle": "modal",
-        "data-target": "#escalationOptions"
-      }, "Manage Escalations")), react_default.a.createElement(components_ActionTable, {
-        data: ul,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      }), react_default.a.createElement(EscalationsOptions, {
-        dashboards: dashboards,
-        currentDashboard: currentDashboard,
-        actionTable: this.filterTables("Upper Level Escalation")
-      })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, " Lower Level Feed"), react_default.a.createElement(components_ActionTable, {
-        data: ll,
-        header: ACTION_TABLE_HEADERS,
-        hoverable: true
-      })) : react_default.a.createElement(LoadingScreen, null))), react_default.a.createElement("div", {
-        className: "card mt-4 ml-2 mr-2"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, "WINS"), react_default.a.createElement(components_WinTable, {
-        data: wins,
-        rowClick: this.rowWinClick,
-        appendable: true
-      })))));
-    }
-  }]);
-
-  return ActionPlan;
-}(react["Component"]);
-
-ActionPlan_ActionPlan.propTypes = {
-  tables: prop_types_default.a.array.isRequired,
-  dashboards: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired,
-  currentDashboard: prop_types_default.a.object.isRequired,
-  audit: prop_types_default.a.array
-};
-
-var ActionPlan_mapStateToProps = function mapStateToProps(state) {
-  return {
-    currentDashboard: state.dashboards.currentDashboard
-  };
-};
-
-/* harmony default export */ var components_ActionPlan = (Object(es["connect"])(ActionPlan_mapStateToProps)(ActionPlan_ActionPlan));
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/HeatCheck.js
 function HeatCheck_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { HeatCheck_typeof = function _typeof(obj) { return typeof obj; }; } else { HeatCheck_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return HeatCheck_typeof(obj); }
 
@@ -3967,7 +3819,7 @@ function (_Component) {
     value: function render() {
       var chart = this.props.chart;
       return react_default.a.createElement("div", {
-        "class": "d-flex justify-content-center"
+        className: "d-flex justify-content-center"
       }, " ", chart, " ");
     }
   }, {
@@ -4031,12 +3883,285 @@ HeatCheck_HeatCheck.defaultProps = {
   chart: "Loading"
 };
 /* harmony default export */ var d3charts_HeatCheck = (Object(ReactFauxDOM["withFauxDOM"])(HeatCheck_HeatCheck));
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionPlan.js
+function ActionPlan_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionPlan_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionPlan_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionPlan_typeof(obj); }
+
+function ActionPlan_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { ActionPlan_defineProperty(target, key, source[key]); }); } return target; }
+
+function ActionPlan_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function ActionPlan_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function ActionPlan_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function ActionPlan_createClass(Constructor, protoProps, staticProps) { if (protoProps) ActionPlan_defineProperties(Constructor.prototype, protoProps); if (staticProps) ActionPlan_defineProperties(Constructor, staticProps); return Constructor; }
+
+function ActionPlan_possibleConstructorReturn(self, call) { if (call && (ActionPlan_typeof(call) === "object" || typeof call === "function")) { return call; } return ActionPlan_assertThisInitialized(self); }
+
+function ActionPlan_getPrototypeOf(o) { ActionPlan_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ActionPlan_getPrototypeOf(o); }
+
+function ActionPlan_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function ActionPlan_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ActionPlan_setPrototypeOf(subClass, superClass); }
+
+function ActionPlan_setPrototypeOf(o, p) { ActionPlan_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionPlan_setPrototypeOf(o, p); }
+
+
+
+ // COMPONENTS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ActionPlan_ActionPlan =
+/*#__PURE__*/
+function (_Component) {
+  ActionPlan_inherits(ActionPlan, _Component);
+
+  function ActionPlan(props) {
+    var _this;
+
+    ActionPlan_classCallCheck(this, ActionPlan);
+
+    _this = ActionPlan_possibleConstructorReturn(this, ActionPlan_getPrototypeOf(ActionPlan).call(this, props));
+    _this.rowActionClick = _this.rowActionClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.rowAuditClick = _this.rowAuditClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.rowWinClick = _this.rowWinClick.bind(ActionPlan_assertThisInitialized(_this));
+    _this.resetHeat = _this.resetHeat.bind(ActionPlan_assertThisInitialized(_this));
+    _this.state = {
+      currentActionId: null,
+      currentWinId: null
+    };
+    return _this;
+  }
+
+  ActionPlan_createClass(ActionPlan, [{
+    key: "filterTables",
+    value: function filterTables(title) {
+      var tables = this.props.tables;
+      var payload = tables.filter(function (table) {
+        return table.title === title;
+      });
+      return payload ? payload[0] : null;
+    }
+  }, {
+    key: "rowActionClick",
+    value: function rowActionClick(id) {
+      this.setState({
+        currentActionId: id
+      });
+      $("#actionOptions").modal("show");
+    }
+  }, {
+    key: "rowAuditClick",
+    value: function rowAuditClick(id) {
+      this.setState({
+        currentAuditId: id
+      });
+      $("#auditOptions").modal("show");
+    }
+  }, {
+    key: "rowWinClick",
+    value: function rowWinClick(id) {
+      this.setState({
+        currentWinId: id
+      });
+      $("#winOptions").modal("show");
+    }
+  }, {
+    key: "resetHeat",
+    value: function resetHeat() {
+      var _this$props = this.props,
+          updateHeat = _this$props.updateHeat,
+          heat = _this$props.heat;
+
+      for (var i in heat) {
+        var h = ActionPlan_objectSpread({}, heat[i]);
+
+        h.value = 0;
+        updateHeat(h, h.id);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          tables = _this$props2.tables,
+          dashboards = _this$props2.dashboards,
+          currentDashboard = _this$props2.currentDashboard,
+          audits = _this$props2.audits,
+          wins = _this$props2.wins,
+          heat = _this$props2.heat,
+          updateHeat = _this$props2.updateHeat;
+      var _this$state = this.state,
+          currentActionId = _this$state.currentActionId,
+          currentAuditId = _this$state.currentAuditId,
+          currentWinId = _this$state.currentWinId;
+      var actionQuery = tables.map(function (table) {
+        return table.actions.filter(function (action) {
+          return action.id === currentActionId;
+        });
+      }).flat();
+      var currentAction = actionQuery ? actionQuery[0] : null;
+      var auditQuery = audits.filter(function (audit) {
+        return audit.id === currentAuditId;
+      });
+      var winQuery = wins.filter(function (win) {
+        return win.id === currentWinId;
+      });
+      var currentAudit = auditQuery ? auditQuery[0] : null;
+      var currentWin = winQuery ? winQuery[0] : null;
+      var ul = this.filterTables("Upper Level Escalation");
+      var ll = this.filterTables("Lower Level Feed");
+      var lt = this.filterTables("Long Term Action Plan");
+      var st = this.filterTables("Short Term Action Plan");
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
+        action: currentAction
+      }), react_default.a.createElement(modal_Modal, {
+        title: "Update Audit",
+        id: "auditOptions"
+      }, react_default.a.createElement(components_AuditForm, {
+        audit: currentAudit
+      })), react_default.a.createElement(modal_Modal, {
+        title: "Update WIN",
+        id: "winOptions"
+      }, react_default.a.createElement(components_WinForm, {
+        win: currentWin
+      })), react_default.a.createElement("div", {
+        className: "col-lg-6 p-0"
+      }, react_default.a.createElement("h2", {
+        className: "ml-2 mb-1 color-text-action-plans"
+      }, "Action Plans", react_default.a.createElement("span", {
+        className: "im im-date-o ml-3"
+      })), react_default.a.createElement("div", {
+        className: "card mt-1 ml-2 mr-2 border-action-plans"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", null, " Short Term"), react_default.a.createElement(components_ActionTable, {
+        data: st,
+        header: ACTION_TABLE_HEADERS,
+        appendable: true,
+        rowClick: this.rowActionClick
+      })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
+        className: "mt-3"
+      }, " Long Term"), react_default.a.createElement(components_ActionTable, {
+        data: lt,
+        header: ACTION_TABLE_HEADERS,
+        appendable: true,
+        rowClick: this.rowActionClick
+      })) : react_default.a.createElement(LoadingScreen, null), ul ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
+        className: "row",
+        style: {
+          padding: "0 1rem"
+        }
+      }, react_default.a.createElement("h5", null, "Escalation"), react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-primary btn-sm mb-1 ml-auto",
+        "data-toggle": "modal",
+        "data-target": "#escalationOptions"
+      }, "Manage Escalations")), react_default.a.createElement(components_ActionTable, {
+        data: ul,
+        header: ACTION_TABLE_HEADERS,
+        appendable: true,
+        rowClick: this.rowActionClick
+      }), react_default.a.createElement(EscalationsOptions, {
+        dashboards: dashboards,
+        currentDashboard: currentDashboard,
+        actionTable: this.filterTables("Upper Level Escalation")
+      })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
+        className: "mt-3"
+      }, " Lower Level Feed"), react_default.a.createElement(components_ActionTable, {
+        data: ll,
+        header: ACTION_TABLE_HEADERS,
+        hoverable: true
+      })) : react_default.a.createElement(LoadingScreen, null)))), react_default.a.createElement("div", {
+        className: "col-lg-6 p-0"
+      }, react_default.a.createElement("div", {
+        className: "row m-0"
+      }, react_default.a.createElement("div", {
+        className: "col-lg-6"
+      }, react_default.a.createElement("h2", {
+        className: "ml-2 mb-1 color-text-audits"
+      }, "Audits", react_default.a.createElement("span", {
+        className: "im im-thumb-up ml-3"
+      })), react_default.a.createElement("div", {
+        className: "card mt-1 ml-2 mr-2 border-audits"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement(components_AuditTable, {
+        data: audits,
+        rowClick: this.rowAuditClick,
+        appendable: true,
+        dashboardId: currentDashboard.id
+      }))), react_default.a.createElement("h2", {
+        className: "ml-2 mt-4 mb-1 color-text-heat-check"
+      }, "Heat Check", react_default.a.createElement("span", {
+        className: "im im-fire ml-3"
+      })), react_default.a.createElement("div", {
+        className: "card card-body ml-2 mt-1 mr-2 mb-4 border-heat-check"
+      }, react_default.a.createElement("div", {
+        className: "row",
+        style: {
+          padding: "0px 1rem"
+        }
+      }, react_default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-primary btn-sm mb-1 ml-auto",
+        onClick: this.resetHeat
+      }, "Reset")), react_default.a.createElement(d3charts_HeatCheck, {
+        heat: heat,
+        onClick: updateHeat
+      }))), react_default.a.createElement("div", {
+        className: "col-lg-6"
+      }, react_default.a.createElement("h2", {
+        className: "ml-2 mb-1 color-text-wins"
+      }, "Wins", react_default.a.createElement("span", {
+        className: "im im-trophy ml-3"
+      })), react_default.a.createElement("div", {
+        className: "card mt-1 ml-2 mr-2 border-wins"
+      }, react_default.a.createElement("div", {
+        className: "card-body"
+      }, react_default.a.createElement(components_WinTable, {
+        data: wins,
+        rowClick: this.rowWinClick,
+        appendable: true,
+        dashboardId: currentDashboard.id
+      })))))));
+    }
+  }]);
+
+  return ActionPlan;
+}(react["Component"]);
+
+ActionPlan_ActionPlan.propTypes = {
+  tables: prop_types_default.a.array.isRequired,
+  dashboards: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired,
+  currentDashboard: prop_types_default.a.object.isRequired,
+  audit: prop_types_default.a.array
+};
+
+var ActionPlan_mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentDashboard: state.dashboards.currentDashboard
+  };
+};
+
+/* harmony default export */ var components_ActionPlan = (Object(es["connect"])(ActionPlan_mapStateToProps, {
+  updateHeat: dashboards_updateHeat
+})(ActionPlan_ActionPlan));
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/index.js
 function boardRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardRoom_typeof(obj); }
-
-function boardRoom_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { boardRoom_defineProperty(target, key, source[key]); }); } return target; }
-
-function boardRoom_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function boardRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -4046,9 +4171,9 @@ function boardRoom_createClass(Constructor, protoProps, staticProps) { if (proto
 
 function boardRoom_possibleConstructorReturn(self, call) { if (call && (boardRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return boardRoom_assertThisInitialized(self); }
 
-function boardRoom_getPrototypeOf(o) { boardRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardRoom_getPrototypeOf(o); }
-
 function boardRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function boardRoom_getPrototypeOf(o) { boardRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardRoom_getPrototypeOf(o); }
 
 function boardRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) boardRoom_setPrototypeOf(subClass, superClass); }
 
@@ -4078,20 +4203,15 @@ function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setP
 
 
 
-
 var boardRoom_Boardroom =
 /*#__PURE__*/
 function (_Component) {
   boardRoom_inherits(Boardroom, _Component);
 
-  function Boardroom(props) {
-    var _this;
-
+  function Boardroom() {
     boardRoom_classCallCheck(this, Boardroom);
 
-    _this = boardRoom_possibleConstructorReturn(this, boardRoom_getPrototypeOf(Boardroom).call(this, props));
-    _this.resetHeat = _this.resetHeat.bind(boardRoom_assertThisInitialized(_this));
-    return _this;
+    return boardRoom_possibleConstructorReturn(this, boardRoom_getPrototypeOf(Boardroom).apply(this, arguments));
   }
 
   boardRoom_createClass(Boardroom, [{
@@ -4117,31 +4237,16 @@ function (_Component) {
       getHeat(id);
     }
   }, {
-    key: "resetHeat",
-    value: function resetHeat() {
-      var _this$props2 = this.props,
-          updateHeat = _this$props2.updateHeat,
-          heat = _this$props2.heat;
-
-      for (var i in heat) {
-        var h = boardRoom_objectSpread({}, heat[i]);
-
-        h.value = 0;
-        updateHeat(h, h.id);
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          currentDashboard = _this$props3.currentDashboard,
-          kpis = _this$props3.kpis,
-          actionTables = _this$props3.actionTables,
-          dashboards = _this$props3.dashboards,
-          audits = _this$props3.audits,
-          wins = _this$props3.wins,
-          heat = _this$props3.heat,
-          updateHeat = _this$props3.updateHeat;
+      var _this$props2 = this.props,
+          currentDashboard = _this$props2.currentDashboard,
+          kpis = _this$props2.kpis,
+          actionTables = _this$props2.actionTables,
+          dashboards = _this$props2.dashboards,
+          audits = _this$props2.audits,
+          wins = _this$props2.wins,
+          heat = _this$props2.heat;
       var id = this.props.match.params.id; // If there is no current dashboard show the loading screen
 
       if (currentDashboard == null) {
@@ -4164,7 +4269,7 @@ function (_Component) {
       }, react_default.a.createElement("div", {
         className: "col-lg-2 p-0"
       }, react_default.a.createElement("div", {
-        className: "card card-body ml-4 mt-4 mr-2 mb-4"
+        className: "card card-body ml-4 mt-4 mr-2 mb-4 border-pillars"
       }, react_default.a.createElement(components_PillarBar, {
         kpis: kpis,
         dashboardId: id
@@ -4176,34 +4281,17 @@ function (_Component) {
         className: "col-lg-12 mt-4"
       }, react_default.a.createElement("div", {
         className: "row"
-      }, react_default.a.createElement("div", {
-        className: "col-lg-6"
+      }, currentDashboard.images.length ? react_default.a.createElement("div", {
+        className: "col-lg-6 mb-4"
       }, react_default.a.createElement(ui_Carousel, {
         images: currentDashboard.images
-      })))), react_default.a.createElement(components_ActionPlan, {
+      })) : react_default.a.createElement(react_default.a.Fragment, null))), react_default.a.createElement(components_ActionPlan, {
         tables: actionTables,
         audits: audits,
         wins: wins,
-        dashboards: dashboards
-      })), react_default.a.createElement("div", {
-        className: "col-lg-6 p-0"
-      }, react_default.a.createElement("div", {
-        className: "card card-body ml-2 mt-4 mr-2 mb-4"
-      }, react_default.a.createElement("div", {
-        className: "row",
-        style: {
-          padding: "0px 1rem"
-        }
-      }, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, " Heat Check"), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary btn-sm mb-1 ml-auto",
-        onClick: this.resetHeat
-      }, "Reset")), react_default.a.createElement(d3charts_HeatCheck, {
         heat: heat,
-        onClick: updateHeat
-      }))))));
+        dashboards: dashboards
+      })))));
     }
   }]);
 
@@ -4256,12 +4344,6 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-// -----------------------------------------------------------------------------
-//                        PRIVATE ROUTE COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
 
 
 
@@ -4269,7 +4351,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 /**
  * Component will check if user is authenticatd before preceding to mount component
- * @param {} param0
  */
 
 var PrivateRoute_PrivateRoute = function PrivateRoute(_ref) {
@@ -4345,7 +4426,7 @@ function LineChart_setPrototypeOf(o, p) { LineChart_setPrototypeOf = Object.setP
 
 var margin = {
   top: 10,
-  right: 100,
+  right: 150,
   bottom: 30,
   left: 50
 };
@@ -4522,7 +4603,7 @@ function (_React$Component) {
       var line = d3["line"]().y(function (d) {
         return yScale(d.value);
       }).defined(function (d) {
-        return d.value;
+        return d.value != null;
       }).x(function (d) {
         return xScale(parseTime(d.date));
       });
@@ -4581,7 +4662,7 @@ function (_React$Component) {
         return "translate(".concat(0, ",", i * 20, ")");
       }); // Legend text explaining the symbols
 
-      legend.append("text").attr("x", LineChart_width - 12).attr("y", function (d, i) {
+      legend.append("text").attr("x", LineChart_width + margin.right).attr("y", function (d, i) {
         return LineChart_height / 2 + 20 * i;
       }).attr("id", function (d) {
         return "legend_".concat(d.id);
@@ -4622,10 +4703,11 @@ LineChart_LineChart.defaultProps = {
 };
 /* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
 // CONCATENATED MODULE: ./frontend/src/core/helpers/Filters.js
-var getItem = function getItem(id, arr, prop) {
+// Find the first object in an array whose property defined by prop matches value
+var getItem = function getItem(value, arr, prop) {
   if (!arr) return null;
   var query = arr.filter(function (item) {
-    return item[prop] == id;
+    return item[prop] == value;
   });
   if (!query.length) return null;else return query[0];
 };
@@ -5017,13 +5099,13 @@ function (_Component) {
           data = _this$props.data,
           header = _this$props.header,
           rowClick = _this$props.rowClick;
-      return react_default.a.createElement(table_Table, {
-        editable: true,
+      return react_default.a.createElement(table_Table //editable
+      , {
         data: data,
         header: header,
-        update: this.update,
-        "delete": this["delete"],
-        deletable: true,
+        update: this.update //delete={this.delete}
+        //deletable
+        ,
         rowClick: rowClick,
         formatRow: this.formatRow
       });
@@ -5047,6 +5129,8 @@ DataTable_DatapointTable.defaultProps = {
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataForm.js
 function DataForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DataForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataForm_typeof(obj); }
 
+function DataForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { DataForm_defineProperty(target, key, source[key]); }); } return target; }
+
 function DataForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function DataForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5064,6 +5148,10 @@ function DataForm_getPrototypeOf(o) { DataForm_getPrototypeOf = Object.setProtot
 function DataForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DataForm_setPrototypeOf(subClass, superClass); }
 
 function DataForm_setPrototypeOf(o, p) { DataForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DataForm_setPrototypeOf(o, p); }
+
+
+
+
 
 
 
@@ -5089,36 +5177,52 @@ function (_Component) {
     return DataForm_possibleConstructorReturn(_this, (_temp = _this = DataForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DataForm_getPrototypeOf(DataForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
       value: "",
       target: "",
-      date: ""
+      date: new Date()
+    }, _this.update = function (payload) {
+      _this.setState(DataForm_objectSpread({}, payload));
     }, _this.onSubmit = function (e) {
       e.preventDefault();
       var _this$props = _this.props,
-          addDatapoint = _this$props.addDatapoint,
+          updateDatapoint = _this$props.updateDatapoint,
           series = _this$props.series;
       var _this$state = _this.state,
           value = _this$state.value,
           target = _this$state.target,
-          date = _this$state.date;
+          date = _this$state.date,
+          id = _this$state.id;
       var datapoint = {
         value: value,
         target: target,
-        date: date,
-        series: series
+        series: series,
+        date: Object(esm_format["default"])(date, "yyyy-MM-dd")
       };
-      addDatapoint(datapoint);
-
-      _this.setState({
-        value: "",
-        date: ""
-      });
+      updateDatapoint(datapoint, id);
+      $("#dataOptions").modal("hide");
     }, _this.onChange = function (e) {
       _this.setState(DataForm_defineProperty({}, e.target.name, e.target.value));
+    }, _this.onDateChange = function (date) {
+      _this.setState({
+        date: date
+      });
     }, _temp));
   }
 
   DataForm_createClass(DataForm, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var datapoint = this.props.datapoint;
+
+      if (prevProps.datapoint !== datapoint) {
+        this.update(DataForm_objectSpread({}, datapoint, {
+          date: datapoint.date ? Object(parseISO["default"])(datapoint.date) : new Date()
+        }));
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$state2 = this.state,
           value = _this$state2.value,
           target = _this$state2.target,
@@ -5136,7 +5240,7 @@ function (_Component) {
         name: "value",
         onChange: this.onChange,
         placeholder: "...",
-        value: value,
+        value: value != null ? value : "",
         required: true
       })), react_default.a.createElement("div", {
         className: "form-group"
@@ -5148,20 +5252,20 @@ function (_Component) {
         name: "target",
         onChange: this.onChange,
         placeholder: "...",
-        value: target,
+        value: target != null ? target : "",
         required: true
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "color"
-      }, "Date"), react_default.a.createElement("input", {
+        htmlFor: "date",
+        className: "d-block"
+      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
         className: "form-control",
-        type: "text",
-        name: "date",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: date,
-        required: true
+        onChange: function onChange(date) {
+          return _this2.onDateChange(date);
+        },
+        selected: date,
+        dateFormat: "yyyy-MM-dd"
       })), react_default.a.createElement("div", {
         className: "modal-footer"
       }, react_default.a.createElement("button", {
@@ -5171,7 +5275,7 @@ function (_Component) {
       }, "Close"), react_default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary"
-      }, "Create Datapoint"))));
+      }, "Update Datapoint"))));
     }
   }]);
 
@@ -5179,10 +5283,16 @@ function (_Component) {
 }(react["Component"]);
 
 DataForm_DataForm.propTypes = {
-  addDatapoint: prop_types_default.a.func.isRequired
+  datapoint: prop_types_default.a.object,
+  updateDatapoint: prop_types_default.a.func.isRequired,
+  series: prop_types_default.a.number
+};
+DataForm_DataForm.defaultProps = {
+  datapoint: null,
+  series: null
 };
 /* harmony default export */ var datapoints_DataForm = (Object(es["connect"])(null, {
-  addDatapoint: dashboards_addDatapoint
+  updateDatapoint: dashboards_updateDatapoint
 })(DataForm_DataForm));
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesView.js
 function SeriesView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesView_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesView_typeof(obj); }
@@ -5309,9 +5419,11 @@ function (_Component) {
         rowClick: this.selectDatapoint
       }), react_default.a.createElement(modal_Modal, {
         title: "Update Data",
-        id: "dataOptions"
+        id: "dataOptions",
+        overflow: "visible"
       }, react_default.a.createElement(datapoints_DataForm, {
-        datapoint: datapoint
+        datapoint: datapoint,
+        series: series.id
       })), react_default.a.createElement("div", {
         className: "d-flex justify-content-end"
       }, react_default.a.createElement("button", {
@@ -6426,7 +6538,7 @@ function (_Component) {
         htmlFor: "threshold_type",
         className: "form-check-label mb-3"
       }, "Less Than"))), react_default.a.createElement("div", {
-        "class": "col-sm-6 mt-3"
+        className: "col-sm-6 mt-3"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -6478,7 +6590,7 @@ function (_Component) {
         htmlFor: "threshold_type",
         className: "form-check-label mb-3"
       }, "Less Than"))), react_default.a.createElement("div", {
-        "class": "col-sm-4"
+        className: "col-sm-4"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -7248,7 +7360,6 @@ RemoveConfirmation_RemoveConformation.propTypes = {
 
 
 var Tooltip_Tooltip = function Tooltip(props) {
-  console.log(props.show);
   if (!props.show || !props.data) return react_default.a.createElement(react_default.a.Fragment, null);
   var _props$data = props.data,
       kpiName = _props$data.kpiName,
@@ -7259,12 +7370,11 @@ var Tooltip_Tooltip = function Tooltip(props) {
       kpi_type = _props$data.kpi_type,
       x = _props$data.x,
       y = _props$data.y;
-  console.log(x);
 
   switch (kpi_type) {
     case KPI_TYPE_THRESHOLD:
       return react_default.a.createElement("div", {
-        className: "card p-2 qd-tooltip",
+        className: "card qd-tooltip",
         style: {
           left: x + "px",
           top: y + "px",
@@ -7697,10 +7807,107 @@ function (_Component) {
 /* harmony default export */ var components_DashboardDisplayCard = (Object(es["connect"])(null, {
   deleteDashboard: dashboards_deleteDashboard
 })(DashboardDisplayCard_DashboardDisplayCard));
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/ImageList.js
+function ImageList_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ImageList_typeof = function _typeof(obj) { return typeof obj; }; } else { ImageList_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ImageList_typeof(obj); }
+
+function ImageList_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function ImageList_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function ImageList_createClass(Constructor, protoProps, staticProps) { if (protoProps) ImageList_defineProperties(Constructor.prototype, protoProps); if (staticProps) ImageList_defineProperties(Constructor, staticProps); return Constructor; }
+
+function ImageList_possibleConstructorReturn(self, call) { if (call && (ImageList_typeof(call) === "object" || typeof call === "function")) { return call; } return ImageList_assertThisInitialized(self); }
+
+function ImageList_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function ImageList_getPrototypeOf(o) { ImageList_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ImageList_getPrototypeOf(o); }
+
+function ImageList_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ImageList_setPrototypeOf(subClass, superClass); }
+
+function ImageList_setPrototypeOf(o, p) { ImageList_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ImageList_setPrototypeOf(o, p); }
+
+
+
+
+
+var ImageList_ImageList =
+/*#__PURE__*/
+function (_Component) {
+  ImageList_inherits(ImageList, _Component);
+
+  function ImageList() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    ImageList_classCallCheck(this, ImageList);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return ImageList_possibleConstructorReturn(_this, (_temp = _this = ImageList_possibleConstructorReturn(this, (_getPrototypeOf2 = ImageList_getPrototypeOf(ImageList)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      deleteMode: false
+    }, _this.onToggleDeleteMode = function () {
+      _this.setState({
+        deleteMode: !_this.state.deleteMode
+      });
+    }, _this.onDelete = function (id) {
+      var deleteImage = _this.props.deleteImage;
+      deleteImage(id);
+
+      _this.setState({
+        deleteMode: !_this.state.deleteMode
+      });
+    }, _temp));
+  }
+
+  ImageList_createClass(ImageList, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var images = this.props.images;
+      var deleteMode = this.state.deleteMode;
+      if (!images) return react_default.a.createElement(react_default.a.Fragment, null);
+      if (!images.length) return react_default.a.createElement(react_default.a.Fragment, null);
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("label", {
+        htmlFor: "image",
+        style: {
+          marginBottom: "-20px"
+        }
+      }, "Infographics"), react_default.a.createElement("div", {
+        className: "container"
+      }, react_default.a.createElement("div", {
+        className: "container--fluid"
+      }, images.map(function (image) {
+        return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("div", {
+          "class": "image-container"
+        }, react_default.a.createElement("img", {
+          className: "image",
+          src: image.image
+        }), deleteMode && react_default.a.createElement("i", {
+          "class": "image-delete im im-x-mark",
+          onClick: function onClick(e) {
+            return _this2.onDelete(image.id);
+          }
+        })));
+      }))), !deleteMode && react_default.a.createElement("button", {
+        onClick: this.onToggleDeleteMode,
+        type: "button",
+        className: "btn ".concat(deleteMode ? "btn-success" : "btn-danger", " btn-sm mt-3")
+      }, deleteMode ? "Done" : "Delete Mode"));
+    }
+  }]);
+
+  return ImageList;
+}(react["Component"]);
+
+/* harmony default export */ var components_ImageList = (Object(es["connect"])(null, {
+  deleteImage: dashboards_deleteImage
+})(ImageList_ImageList));
 // CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardForm.js
 function DashboardForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardForm_typeof(obj); }
-
-function DashboardForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function DashboardForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7728,6 +7935,7 @@ function DashboardForm_setPrototypeOf(o, p) { DashboardForm_setPrototypeOf = Obj
 
 
 
+
 var DashboardForm_DashboardForm =
 /*#__PURE__*/
 function (_Component) {
@@ -7744,58 +7952,39 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return DashboardForm_possibleConstructorReturn(_this, (_temp = _this = DashboardForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DashboardForm_getPrototypeOf(DashboardForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      title: "",
-      author: "",
-      background: "#000",
-      dashboardType: "0",
-      level: "0"
-    }, _this.onChange = function (e) {
-      return _this.setState(DashboardForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onChangeColor = function (color) {
-      _this.setState({
-        background: color.hex
+    return DashboardForm_possibleConstructorReturn(_this, (_temp = _this = DashboardForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DashboardForm_getPrototypeOf(DashboardForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.onChangeColor = function (color) {
+      var onChange = _this.props.onChange;
+      onChange({
+        target: {
+          name: "background",
+          value: color.hex
+        }
       });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$state = _this.state,
-          title = _this$state.title,
-          author = _this$state.author,
-          background = _this$state.background,
-          dashboardType = _this$state.dashboardType,
-          level = _this$state.level;
-      var dashboard = {
-        title: title,
-        author: author,
-        background: background,
-        dashboardType: dashboardType,
-        level: level
-      };
-      console.log(background);
-
-      _this.props.addDashboard(dashboard);
-
-      _this.setState({
-        title: "",
-        author: "",
-        background: "#000",
-        level: ""
+    }, _this.onChangeFile = function (e) {
+      var onChange = _this.props.onChange;
+      onChange({
+        target: {
+          name: "image",
+          value: e.target.files[0]
+        }
       });
-
-      $("#dashboardOptions").modal("hide");
     }, _temp));
   }
 
   DashboardForm_createClass(DashboardForm, [{
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-          title = _this$state2.title,
-          author = _this$state2.author,
-          background = _this$state2.background;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h2", null, "Create Dashboard"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
+      var _this$props$values = this.props.values,
+          title = _this$props$values.title,
+          author = _this$props$values.author,
+          background = _this$props$values.background,
+          dashboard_type = _this$props$values.dashboard_type,
+          level = _this$props$values.level;
+      var images = this.props.images;
+      var _this$props = this.props,
+          onChange = _this$props.onChange,
+          showImageField = _this$props.showImageField;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
         className: "row justify-content-between"
       }, react_default.a.createElement("div", {
         className: "col-sm-6"
@@ -7807,7 +7996,7 @@ function (_Component) {
         className: "form-control",
         type: "text",
         name: "title",
-        onChange: this.onChange,
+        onChange: onChange,
         value: title
       })), react_default.a.createElement("div", {
         className: "form-group"
@@ -7817,17 +8006,18 @@ function (_Component) {
         className: "form-control",
         type: "text",
         name: "author",
-        onChange: this.onChange,
+        onChange: onChange,
         value: author
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
-        htmlFor: "dashboardType"
+        htmlFor: "dashboard_type"
       }, "Type"), react_default.a.createElement("select", {
         className: "form-control",
         type: "text",
-        name: "dashboardType",
-        onChange: this.onChange
+        name: "dashboard_type",
+        onChange: onChange,
+        value: dashboard_type
       }, DASHBOARD_TYPE_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: "choice-".concat(choice.id),
@@ -7841,14 +8031,15 @@ function (_Component) {
         className: "form-control",
         type: "text",
         name: "level",
-        onChange: this.onChange
+        value: level,
+        onChange: onChange
       }, LEVEL_CHOICES.map(function (choice) {
         return react_default.a.createElement("option", {
           key: choice.id,
           value: choice.id
         }, choice.name);
       })))), react_default.a.createElement("div", {
-        className: "col-sm-5"
+        className: "col-sm-6"
       }, react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -7856,14 +8047,22 @@ function (_Component) {
       }, "Background Color"), react_default.a.createElement(lib["ChromePicker"], {
         color: background,
         onChangeComplete: this.onChangeColor
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12"
+      }))), showImageField && react_default.a.createElement("div", {
+        className: "col-12 mr-2"
+      }, react_default.a.createElement(components_ImageList, {
+        images: images
+      })), showImageField && react_default.a.createElement("div", {
+        className: "col-12 mt-2"
       }, react_default.a.createElement("div", {
         className: "form-group"
-      }, react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn\r btn-primary"
-      }, "Submit"))))));
+      }, react_default.a.createElement("label", {
+        htmlFor: "image"
+      }, "Add Infographic"), react_default.a.createElement("input", {
+        type: "file",
+        name: "image",
+        className: "form-control-file",
+        onChange: this.onChangeFile
+      })))));
     }
   }]);
 
@@ -7876,57 +8075,262 @@ DashboardForm_DashboardForm.propTypes = {
 /* harmony default export */ var components_DashboardForm = (Object(es["connect"])(null, {
   addDashboard: dashboards_addDashboard
 })(DashboardForm_DashboardForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardOptions.js
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardNew.js
+function DashboardNew_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardNew_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardNew_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardNew_typeof(obj); }
+
+function DashboardNew_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { DashboardNew_defineProperty(target, key, source[key]); }); } return target; }
+
+function DashboardNew_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function DashboardNew_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DashboardNew_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DashboardNew_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardNew_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardNew_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DashboardNew_possibleConstructorReturn(self, call) { if (call && (DashboardNew_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardNew_assertThisInitialized(self); }
+
+function DashboardNew_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DashboardNew_getPrototypeOf(o) { DashboardNew_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardNew_getPrototypeOf(o); }
+
+function DashboardNew_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardNew_setPrototypeOf(subClass, superClass); }
+
+function DashboardNew_setPrototypeOf(o, p) { DashboardNew_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardNew_setPrototypeOf(o, p); }
+
 // DEPENDANCIES
 
 
 
-var DashboardOptions_DashboardOptions = function DashboardOptions(props) {
-  return react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "dashboardOptions",
-    role: "dialog",
-    "aria-labelledby": "dashboardOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document",
-    style: {
-      maxWidth: "fit-content"
-    }
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "dashboardOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-computer",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Create New Dashboard"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement(components_DashboardForm, null)))))));
-};
+ // ACTIONS
 
-/* harmony default export */ var components_DashboardOptions = (DashboardOptions_DashboardOptions);
+
+
+var DashboardNew_DashboardNew =
+/*#__PURE__*/
+function (_Component) {
+  DashboardNew_inherits(DashboardNew, _Component);
+
+  function DashboardNew(props) {
+    var _this;
+
+    DashboardNew_classCallCheck(this, DashboardNew);
+
+    _this = DashboardNew_possibleConstructorReturn(this, DashboardNew_getPrototypeOf(DashboardNew).call(this, props));
+
+    _this.update = function (dashboard) {
+      _this.setState(DashboardNew_objectSpread({}, dashboard));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var addDashboard = _this.props.addDashboard;
+      var _this$state = _this.state,
+          title = _this$state.title,
+          author = _this$state.author,
+          background = _this$state.background,
+          dashboard_type = _this$state.dashboard_type,
+          level = _this$state.level;
+      var dashboard = {
+        title: title,
+        author: author,
+        background: background,
+        dashboard_type: dashboard_type,
+        level: level
+      };
+      addDashboard(dashboard);
+
+      _this.setState({
+        title: "",
+        author: "",
+        background: "#ffffff",
+        dashboard_type: "0",
+        level: "0"
+      });
+
+      $("#newDashboard").modal("hide");
+    };
+
+    _this.onChange = function (e) {
+      _this.setState(DashboardNew_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    if (props.dashboard) _this.state = DashboardNew_objectSpread({}, props.dashboard);else _this.state = {
+      title: "",
+      author: "",
+      background: "#ffffff",
+      dashboard_type: "0",
+      level: "0"
+    };
+    return _this;
+  }
+
+  DashboardNew_createClass(DashboardNew, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var dashboard = this.props.dashboard;
+
+      if (dashboard != prevProps.dashboard) {
+        this.update(dashboard);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        className: "w-100 mt-3"
+      }, react_default.a.createElement(components_DashboardForm, {
+        showImageField: true,
+        onChange: this.onChange,
+        values: this.state
+      }), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success mb-4 mt-3"
+      }, "Create"));
+    }
+  }]);
+
+  return DashboardNew;
+}(react["Component"]);
+
+DashboardNew_DashboardNew.propTypes = {
+  addDashboard: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_DashboardNew = (Object(es["connect"])(null, {
+  addDashboard: dashboards_addDashboard
+})(DashboardNew_DashboardNew));
+// CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardEdit.js
+function DashboardEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardEdit_typeof(obj); }
+
+function DashboardEdit_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { DashboardEdit_defineProperty(target, key, source[key]); }); } return target; }
+
+function DashboardEdit_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function DashboardEdit_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DashboardEdit_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DashboardEdit_createClass(Constructor, protoProps, staticProps) { if (protoProps) DashboardEdit_defineProperties(Constructor.prototype, protoProps); if (staticProps) DashboardEdit_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DashboardEdit_possibleConstructorReturn(self, call) { if (call && (DashboardEdit_typeof(call) === "object" || typeof call === "function")) { return call; } return DashboardEdit_assertThisInitialized(self); }
+
+function DashboardEdit_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DashboardEdit_getPrototypeOf(o) { DashboardEdit_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DashboardEdit_getPrototypeOf(o); }
+
+function DashboardEdit_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DashboardEdit_setPrototypeOf(subClass, superClass); }
+
+function DashboardEdit_setPrototypeOf(o, p) { DashboardEdit_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DashboardEdit_setPrototypeOf(o, p); }
+
+// DEPENDANCIES
+
+
+
+ // ACTIONS
+
+
+
+var DashboardEdit_DashboardEdit =
+/*#__PURE__*/
+function (_Component) {
+  DashboardEdit_inherits(DashboardEdit, _Component);
+
+  function DashboardEdit(props) {
+    var _this;
+
+    DashboardEdit_classCallCheck(this, DashboardEdit);
+
+    _this = DashboardEdit_possibleConstructorReturn(this, DashboardEdit_getPrototypeOf(DashboardEdit).call(this, props));
+
+    _this.update = function (dashboard) {
+      _this.setState(DashboardEdit_objectSpread({}, dashboard));
+    };
+
+    _this.onSubmit = function (e) {
+      e.preventDefault();
+      var _this$props = _this.props,
+          updateDashboard = _this$props.updateDashboard,
+          dashboard = _this$props.dashboard,
+          addImage = _this$props.addImage;
+      var _this$state = _this.state,
+          title = _this$state.title,
+          author = _this$state.author,
+          background = _this$state.background,
+          dashboard_type = _this$state.dashboard_type,
+          level = _this$state.level,
+          image = _this$state.image;
+      var newDashboard = {
+        title: title,
+        author: author,
+        background: background,
+        dashboard_type: dashboard_type,
+        level: level
+      };
+      newDashboard.id = dashboard.id;
+      updateDashboard(newDashboard, newDashboard.id);
+
+      if (image) {
+        var newImage = {
+          image: image,
+          dashboard: dashboard.id
+        };
+        addImage(newImage);
+      }
+    };
+
+    _this.onChange = function (e) {
+      _this.setState(DashboardEdit_defineProperty({}, e.target.name, e.target.value));
+    };
+
+    if (props.dashboard) _this.state = DashboardEdit_objectSpread({}, props.dashboard);else _this.state = {
+      title: "",
+      author: "",
+      background: "#ffffff",
+      dashboard_type: "0",
+      level: "0"
+    };
+    return _this;
+  }
+
+  DashboardEdit_createClass(DashboardEdit, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var dashboard = this.props.dashboard;
+
+      if (dashboard != prevProps.dashboard) {
+        this.update(dashboard);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var dashboard = this.props.dashboard;
+      return react_default.a.createElement("form", {
+        onSubmit: this.onSubmit,
+        className: "w-100 mt-3"
+      }, react_default.a.createElement(components_DashboardForm, {
+        showImageField: true,
+        onChange: this.onChange,
+        values: this.state,
+        images: dashboard ? dashboard.images : null
+      }), react_default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-success mb-4 mt-3"
+      }, "Save"));
+    }
+  }]);
+
+  return DashboardEdit;
+}(react["Component"]);
+
+DashboardEdit_DashboardEdit.propTypes = {
+  updateDashboard: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_DashboardEdit = (Object(es["connect"])(null, {
+  updateDashboard: dashboards_updateDashboard,
+  addImage: dashboards_addImage
+})(DashboardEdit_DashboardEdit));
 // CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardList.js
 function DashboardList_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardList_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardList_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardList_typeof(obj); }
 
@@ -7956,6 +8360,7 @@ function DashboardList_setPrototypeOf(o, p) { DashboardList_setPrototypeOf = Obj
 
 
 
+
  // NATIVE COMPONENTS
 
 
@@ -7974,7 +8379,7 @@ function (_Component) {
     _this = DashboardList_possibleConstructorReturn(this, DashboardList_getPrototypeOf(DashboardList).call(this, props));
 
     _this.newDashboardClick = function () {
-      $("#dashboardOptions").modal("show");
+      $("#dashboardNew").modal("show");
     };
 
     _this.setRemove = function (removeItem) {
@@ -8024,9 +8429,13 @@ function (_Component) {
       var _this2 = this;
 
       var dashboards = this.props.dashboards;
-      var removeItem = this.state.removeItem;
+      var _this$state = this.state,
+          removeItem = _this$state.removeItem,
+          editItem = _this$state.editItem;
+      var editableDashboard = {};
+      if (editItem) editableDashboard = getItem(editItem.id, dashboards, "id");
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "row"
+        className: "row m-0"
       }, dashboards.map(function (dashboard) {
         return react_default.a.createElement("div", {
           key: dashboard.id,
@@ -8041,7 +8450,7 @@ function (_Component) {
       }, react_default.a.createElement(ui_NewCard, {
         text: "Dashboard",
         handleClick: this.newDashboardClick
-      }))), react_default.a.createElement(components_DashboardOptions, null), react_default.a.createElement(RemoveConfirmation, {
+      }))), react_default.a.createElement(RemoveConfirmation, {
         removeContext: {
           item: removeItem,
           type: "dashboard",
@@ -8050,7 +8459,12 @@ function (_Component) {
       }), react_default.a.createElement(modal_Modal, {
         title: "Edit Dashboard",
         id: "dashboardEdit"
-      }, react_default.a.createElement(components_DashboardForm, null)));
+      }, react_default.a.createElement(components_DashboardEdit, {
+        dashboard: editableDashboard
+      })), react_default.a.createElement(modal_Modal, {
+        title: "New Dashboard",
+        id: "dashboardNew"
+      }, react_default.a.createElement(components_DashboardNew, null)));
     }
   }]);
 
@@ -8096,9 +8510,7 @@ function home_setPrototypeOf(o, p) { home_setPrototypeOf = Object.setPrototypeOf
 
  // CORE COMPONENTS
 
-
  // NATIVE COMPONENTS
-
 
 
 
@@ -8138,6 +8550,34 @@ function (_Component) {
   clearCurrentDashboard: dashboards_clearCurrentDashboard,
   clearActionTables: dashboards_clearActionTables
 })(home_Dashboard));
+// CONCATENATED MODULE: ./frontend/src/scenes/contact/index.js
+
+
+var contact_Contact = function Contact(props) {
+  return react_default.a.createElement("div", {
+    className: "row justify-content-center m-0"
+  }, react_default.a.createElement("div", {
+    className: "col-lg-5 mt-5"
+  }, react_default.a.createElement("div", {
+    className: "card"
+  }, react_default.a.createElement("div", {
+    className: "card-body"
+  }, react_default.a.createElement("h1", {
+    className: "card-title"
+  }, "Contact"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, react_default.a.createElement("span", {
+    className: "im-user-male im mr-3"
+  }), "Kyle Thatcher - Co-op Student"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, react_default.a.createElement("span", {
+    className: "im im-mail mr-3"
+  }), "kyle.thatcher@sanofi.com"), react_default.a.createElement("p", {
+    className: "card-text"
+  }, "Please contact for any and all bugs and issues encountered")))));
+};
+
+/* harmony default export */ var contact = (contact_Contact);
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/Header.js
 function Header_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Header_typeof = function _typeof(obj) { return typeof obj; }; } else { Header_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Header_typeof(obj); }
 
@@ -8174,18 +8614,61 @@ function (_Component) {
   Header_inherits(Header, _Component);
 
   function Header() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
     Header_classCallCheck(this, Header);
 
-    return Header_possibleConstructorReturn(this, Header_getPrototypeOf(Header).apply(this, arguments));
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return Header_possibleConstructorReturn(_this, (_temp = _this = Header_possibleConstructorReturn(this, (_getPrototypeOf2 = Header_getPrototypeOf(Header)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
+      curTime: new Date().toLocaleString(),
+      weekNum: 0
+    }, _temp));
   }
 
   Header_createClass(Header, [{
+    key: "getWeekNumber",
+    value: function getWeekNumber(d) {
+      // Copy date so don't modify original
+      d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
+      // Make Sunday's day number 7
+
+      d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
+
+      var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
+
+      var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
+
+      return weekNo;
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      setInterval(function () {
+        _this2.setState({
+          curTime: new Date().toLocaleString()
+        });
+      }, 1000);
+      this.setState({
+        weekNum: this.getWeekNumber(new Date())
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props$auth = this.props.auth,
           isAuthenticated = _this$props$auth.isAuthenticated,
           user = _this$props$auth.user;
       var currentDashboard = this.props.currentDashboard;
+      var _this$state = this.state,
+          curTime = _this$state.curTime,
+          weekNum = _this$state.weekNum;
       var authLinks = react_default.a.createElement("ul", {
         className: "navbar-nav ml-auto mt-2"
       }, react_default.a.createElement("span", {
@@ -8210,11 +8693,18 @@ function (_Component) {
         className: "nav-link"
       }, "Login")));
       return react_default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg navbar-light bg-light"
+        className: "navbar navbar-expand-lg co-accent"
       }, react_default.a.createElement("div", {
         className: "container-fluid"
-      }, react_default.a.createElement("a", {
-        className: "navbar-brand",
+      }, react_default.a.createElement("img", {
+        src: "../../../../static/media/sms-logo.png",
+        style: {
+          height: "50px",
+          width: "50px"
+        },
+        className: "mr-3 p-1"
+      }), react_default.a.createElement("a", {
+        className: "navbar-brand brand",
         href: "#"
       }, "+QDCI Boards"), react_default.a.createElement("button", {
         className: "navbar-toggler",
@@ -8240,10 +8730,12 @@ function (_Component) {
         className: "nav-item"
       }, react_default.a.createElement("a", {
         className: "nav-link",
-        href: "#"
-      }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h2", {
+        href: "#/contact"
+      }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h4", {
         className: "m-auto"
-      }, currentDashboard.title), isAuthenticated ? authLinks : guestLinks)));
+      }, currentDashboard.title), react_default.a.createElement("h5", {
+        className: "m-auto"
+      }, curTime, ", Week #: ", weekNum), isAuthenticated ? authLinks : guestLinks)));
     }
   }]);
 
@@ -8340,6 +8832,7 @@ function (_Component) {
         if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
         if (messages.entriesCreated) alert.success(messages.entriesCreated);
         if (messages.invalidForm) alert.error(messages.invalidForm);
+        if (messages.updateDashboard) alert.success(messages.updateDashboard);
       }
     }
   }, {
@@ -8374,9 +8867,6 @@ var redux_devtools_extension = __webpack_require__("./node_modules/redux-devtool
 // EXTERNAL MODULE: ./node_modules/redux-thunk/es/index.js
 var redux_thunk_es = __webpack_require__("./node_modules/redux-thunk/es/index.js");
 
-// EXTERNAL MODULE: ./node_modules/react-spinners/dist/index.js + 24 modules
-var react_spinners_dist = __webpack_require__("./node_modules/react-spinners/dist/index.js");
-
 // CONCATENATED MODULE: ./frontend/src/core/reducers/dashboards.js
 function dashboards_toConsumableArray(arr) { return dashboards_arrayWithoutHoles(arr) || dashboards_iterableToArray(arr) || dashboards_nonIterableSpread(); }
 
@@ -8386,10 +8876,9 @@ function dashboards_iterableToArray(iter) { if (Symbol.iterator in Object(iter) 
 
 function dashboards_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
+function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { reducers_dashboards_defineProperty(target, key, source[key]); }); } return target; }
 
-function dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function reducers_dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 var initalState = {
@@ -8425,6 +8914,13 @@ var initalState = {
     case ADD_DASHBOARD:
       return dashboards_objectSpread({}, state, {
         dashboards: [].concat(dashboards_toConsumableArray(state.dashboards), [action.payload])
+      });
+
+    case UPDATE_DASHBOARD:
+      return dashboards_objectSpread({}, state, {
+        dashboards: state.dashboards.map(function (dashboard) {
+          if (dashboard.id === action.payload.id) return action.payload;else return dashboard;
+        })
       });
 
     case GET_KPIS:
@@ -8667,6 +9163,26 @@ var initalState = {
         heat: action.payload
       });
 
+    case ADD_IMAGE:
+      return dashboards_objectSpread({}, state, {
+        dashboards: state.dashboards.map(function (dashboard) {
+          if (dashboard.id != action.payload.dashboard) return dashboard;else return dashboards_objectSpread({}, dashboard, {
+            images: [].concat(dashboards_toConsumableArray(dashboard.images), [action.payload])
+          });
+        })
+      });
+
+    case DELETE_IMAGE:
+      return dashboards_objectSpread({}, state, {
+        dashboards: state.dashboards.map(function (dashboard) {
+          return dashboards_objectSpread({}, dashboard, {
+            images: dashboard.images.filter(function (image) {
+              return image.id !== action.payload;
+            })
+          });
+        })
+      });
+
     default:
       return state;
   }
@@ -8822,6 +9338,7 @@ function App_setPrototypeOf(o, p) { App_setPrototypeOf = Object.setPrototypeOf |
 
 
 
+
  // COMPONENTS
 
 
@@ -8885,6 +9402,10 @@ function (_Component) {
         exact: true,
         path: "/",
         component: home
+      }), react_default.a.createElement(react_router_dom["Route"], {
+        exact: true,
+        path: "/contact",
+        component: contact
       }), react_default.a.createElement(utils_PrivateRoute, {
         path: "/boardroom/:id",
         component: boardRoom

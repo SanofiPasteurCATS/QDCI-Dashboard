@@ -53,12 +53,12 @@ class DatapointTable extends Component {
     const { data, header, rowClick } = this.props;
     return (
       <Table
-        editable
+        //editable
         data={data}
         header={header}
         update={this.update}
-        delete={this.delete}
-        deletable
+        //delete={this.delete}
+        //deletable
         rowClick={rowClick}
         formatRow={this.formatRow}
       />

@@ -1,38 +1,59 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addDatapoint } from "../../../../core/actions/dashboards";
+import { updateDatapoint } from "../../../../core/actions/dashboards";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import parseISO from "date-fns/parseISO";
+import format from "date-fns/format";
 
 class DataForm extends Component {
   state = {
     value: "",
     target: "",
-    date: ""
+    date: new Date()
   };
 
   static propTypes = {
-    addDatapoint: PropTypes.func.isRequired
+    datapoint: PropTypes.object,
+    updateDatapoint: PropTypes.func.isRequired,
+    series: PropTypes.number
   };
+
+  update = payload => {
+    this.setState({ ...payload });
+  };
+
+  componentDidUpdate(prevProps) {
+    const { datapoint } = this.props;
+    if (prevProps.datapoint !== datapoint) {
+      this.update({
+        ...datapoint,
+        date: datapoint.date ? parseISO(datapoint.date) : new Date()
+      });
+    }
+  }
 
   onSubmit = e => {
     e.preventDefault();
-    const { addDatapoint, series } = this.props;
-    const { value, target, date } = this.state;
+    const { updateDatapoint, series } = this.props;
+    const { value, target, date, id } = this.state;
     const datapoint = {
-      value,
-      target,
-      date,
-      series
+      value: value,
+      target: target,
+      series: series,
+      date: format(date, "yyyy-MM-dd")
     };
-    addDatapoint(datapoint);
-    this.setState({
-      value: "",
-      date: ""
-    });
+    updateDatapoint(datapoint, id);
+    $("#dataOptions").modal("hide");
   };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onDateChange = date => {
+    this.setState({ date });
   };
 
   render() {
@@ -48,7 +69,7 @@ class DataForm extends Component {
               name="value"
               onChange={this.onChange}
               placeholder="..."
-              value={value}
+              value={value != null ? value : ""}
               required
             />
           </div>
@@ -61,21 +82,20 @@ class DataForm extends Component {
               name="target"
               onChange={this.onChange}
               placeholder="..."
-              value={target}
+              value={target != null ? target : ""}
               required
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="color">Date</label>
-            <input
+            <label htmlFor="date" className="d-block">
+              Date
+            </label>
+            <DatePicker
               className="form-control"
-              type="text"
-              name="date"
-              onChange={this.onChange}
-              placeholder="..."
-              value={date}
-              required
+              onChange={date => this.onDateChange(date)}
+              selected={date}
+              dateFormat="yyyy-MM-dd"
             />
           </div>
           <div className="modal-footer">
@@ -87,7 +107,7 @@ class DataForm extends Component {
               Close
             </button>
             <button type="submit" className="btn btn-primary">
-              Create Datapoint
+              Update Datapoint
             </button>
           </div>
         </form>
@@ -96,7 +116,12 @@ class DataForm extends Component {
   }
 }
 
+DataForm.defaultProps = {
+  datapoint: null,
+  series: null
+};
+
 export default connect(
   null,
-  { addDatapoint }
+  { updateDatapoint }
 )(DataForm);

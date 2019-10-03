@@ -1,10 +1,3 @@
-// -----------------------------------------------------------------------------
-//                        PRIVATE ROUTE COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-// -----------------------------------------------------------------------------
-
 import React from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
@@ -13,7 +6,6 @@ import LoadingScreen from "../layout/LoadingScreen";
 
 /**
  * Component will check if user is authenticatd before preceding to mount component
- * @param {} param0
  */
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
   <Route

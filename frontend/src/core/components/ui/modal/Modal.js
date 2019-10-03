@@ -7,8 +7,7 @@ class Modal extends Component {
   }
 
   render() {
-    const { title, iconClass, id, children } = this.props;
-
+    const { title, iconClass, id, children, overflow } = this.props;
     return (
       <Fragment>
         <div
@@ -23,7 +22,10 @@ class Modal extends Component {
             role="document"
             style={{ maxWidth: "fit-content", overflow: "visible" }}
           >
-            <div className="modal-content">
+            <div
+              className="modal-content"
+              style={{ overflow: overflow || "auto" }}
+            >
               <div className="modal-header">
                 <h1 className="modal-title" id={`${id}Label`}>
                   <span

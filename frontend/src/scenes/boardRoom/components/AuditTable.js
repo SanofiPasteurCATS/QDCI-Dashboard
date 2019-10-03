@@ -31,10 +31,11 @@ class AuditTable extends Component {
   }
 
   insert() {
-    const { addAudit } = this.props;
+    const { addAudit, dashboardId } = this.props;
     const audit = {
       description: null,
-      date: null
+      date: null,
+      dashboard: dashboardId
     };
     addAudit(audit);
   }

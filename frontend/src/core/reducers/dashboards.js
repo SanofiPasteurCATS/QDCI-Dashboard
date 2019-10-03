@@ -31,9 +31,11 @@ import {
   DELETE_WIN,
   ADD_WIN,
   GET_HEAT,
-  UPDATE_HEAT
+  UPDATE_HEAT,
+  UPDATE_DASHBOARD,
+  ADD_IMAGE,
+  DELETE_IMAGE
 } from "../actions/types";
-import { HashLoader } from "react-spinners";
 
 const initalState = {
   dashboards: [],
@@ -67,6 +69,14 @@ export default function(state = initalState, action) {
       return {
         ...state,
         dashboards: [...state.dashboards, action.payload]
+      };
+    case UPDATE_DASHBOARD:
+      return {
+        ...state,
+        dashboards: state.dashboards.map(dashboard => {
+          if (dashboard.id === action.payload.id) return action.payload;
+          else return dashboard;
+        })
       };
     case GET_KPIS:
       return {
@@ -322,6 +332,30 @@ export default function(state = initalState, action) {
       return {
         ...state,
         heat: action.payload
+      };
+    case ADD_IMAGE:
+      return {
+        ...state,
+        dashboards: state.dashboards.map(dashboard => {
+          if (dashboard.id != action.payload.dashboard) return dashboard;
+          else
+            return {
+              ...dashboard,
+              images: [...dashboard.images, action.payload]
+            };
+        })
+      };
+    case DELETE_IMAGE:
+      return {
+        ...state,
+        dashboards: state.dashboards.map(dashboard => {
+          return {
+            ...dashboard,
+            images: dashboard.images.filter(image => {
+              return image.id !== action.payload;
+            })
+          };
+        })
       };
     default:
       return state;

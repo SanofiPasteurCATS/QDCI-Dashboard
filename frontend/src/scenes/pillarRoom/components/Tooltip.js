@@ -6,7 +6,6 @@ import {
 } from "../../../core/config/dashboardConfig";
 
 const Tooltip = props => {
-  console.log(props.show);
   if (!props.show || !props.data) return <></>;
   const {
     kpiName,
@@ -18,12 +17,11 @@ const Tooltip = props => {
     x,
     y
   } = props.data;
-  console.log(x);
   switch (kpi_type) {
     case KPI_TYPE_THRESHOLD:
       return (
         <div
-          className="card p-2 qd-tooltip"
+          className="card qd-tooltip"
           style={{ left: x + "px", top: y + "px", display: "block" }}
         >
           <div className="card-body">

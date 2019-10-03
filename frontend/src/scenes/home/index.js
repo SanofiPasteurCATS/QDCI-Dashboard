@@ -7,11 +7,9 @@ import {
   clearCurrentDashboard,
   clearActionTables
 } from "../../core/actions/dashboards";
-import Modal from "../../core/components/ui/modal/Modal";
 
 // NATIVE COMPONENTS
 import DashboardList from "./components/DashboardList";
-import DashboardOptions from "./components/DashboardOptions";
 
 class Dashboard extends Component {
   componentDidMount() {

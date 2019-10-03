@@ -9,7 +9,7 @@ import { accentColor } from "../../config/styleConfig";
 
 const margin = {
   top: 10,
-  right: 100,
+  right: 150,
   bottom: 30,
   left: 50
 };
@@ -248,7 +248,7 @@ class LineChart extends React.Component {
     const line = d3
       .line()
       .y(d => yScale(d.value))
-      .defined(d => d.value)
+      .defined(d => d.value != null)
       .x(d => xScale(parseTime(d.date)));
 
     const s = d3
@@ -347,7 +347,7 @@ class LineChart extends React.Component {
     // Legend text explaining the symbols
     legend
       .append("text")
-      .attr("x", width - 12)
+      .attr("x", width + margin.right)
       .attr("y", function(d, i) {
         return height / 2 + 20 * i;
       })

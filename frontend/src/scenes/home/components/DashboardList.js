@@ -14,10 +14,11 @@ import DashboardDisplayCard from "./DashboardDisplayCard";
 import NewCard from "../../../core/components/ui/NewCard";
 import RemoveConfirmation from "../../../core/components/ui/RemoveConfirmation";
 import Modal from "../../../core/components/ui/modal/Modal";
+import { getItem } from "../../../core/helpers/Filters";
 
 // NATIVE COMPONENTS
-import DashboardOptions from "./DashboardOptions";
-import DashboardForm from "./DashboardForm";
+import DashboardNew from "./DashboardNew";
+import DashboardEdit from "./DashboardEdit";
 
 class DashboardList extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class DashboardList extends Component {
   }
 
   newDashboardClick = () => {
-    $("#dashboardOptions").modal("show");
+    $("#dashboardNew").modal("show");
   };
 
   setRemove = removeItem => {
@@ -72,10 +73,12 @@ class DashboardList extends Component {
 
   render() {
     const { dashboards } = this.props;
-    const { removeItem } = this.state;
+    const { removeItem, editItem } = this.state;
+    let editableDashboard = {};
+    if (editItem) editableDashboard = getItem(editItem.id, dashboards, "id");
     return (
       <Fragment>
-        <div className="row">
+        <div className="row m-0">
           {dashboards.map(dashboard => (
             <div key={dashboard.id} className="col-lg-4 col-sm-12">
               <DashboardDisplayCard
@@ -90,7 +93,6 @@ class DashboardList extends Component {
             <NewCard text="Dashboard" handleClick={this.newDashboardClick} />
           </div>
         </div>
-        <DashboardOptions />
         <RemoveConfirmation
           removeContext={{
             item: removeItem,
@@ -99,7 +101,10 @@ class DashboardList extends Component {
           }}
         />
         <Modal title="Edit Dashboard" id="dashboardEdit">
-          <DashboardForm></DashboardForm>
+          <DashboardEdit dashboard={editableDashboard}></DashboardEdit>
+        </Modal>
+        <Modal title="New Dashboard" id="dashboardNew">
+          <DashboardNew></DashboardNew>
         </Modal>
       </Fragment>
     );

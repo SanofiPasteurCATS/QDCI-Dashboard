@@ -172,7 +172,7 @@ class KpiForm extends Component {
             </label>
           </div>
         </div>
-        <div class="col-sm-6 mt-3">
+        <div className="col-sm-6 mt-3">
           <div className="form-group">
             <label htmlFor="global_target">Target</label>
             <input
@@ -240,7 +240,7 @@ class KpiForm extends Component {
             </label>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div className="col-sm-4">
           <div className="form-group">
             <label htmlFor="global_target">Target</label>
             <input

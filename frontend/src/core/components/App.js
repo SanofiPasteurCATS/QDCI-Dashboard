@@ -14,6 +14,7 @@ import BoardRoom from "../../scenes/boardRoom";
 import PrivateRoute from "./utils/PrivateRoute";
 import PillarRoom from "../../scenes/pillarRoom";
 import Dashboard from "../../scenes/home";
+import Contact from "../../scenes/contact";
 
 // COMPONENTS
 import { loadUser } from "../actions/auth";
@@ -55,6 +56,7 @@ class App extends Component {
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/" component={Dashboard} />
+                    <Route exact path="/contact" component={Contact} />
                     <PrivateRoute path="/boardroom/:id" component={BoardRoom} />
                     <PrivateRoute
                       path="/pillar/:dashboardId/:pillarId"

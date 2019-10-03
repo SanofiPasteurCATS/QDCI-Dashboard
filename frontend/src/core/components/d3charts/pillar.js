@@ -152,8 +152,6 @@ class Pillar extends React.Component {
 
     const faux = this.props.connectFauxDOM("svg", "chart");
 
-    d3.select(faux).select("#circle");
-
     d3.select(faux)
       .select("#text")
       .text(letter);

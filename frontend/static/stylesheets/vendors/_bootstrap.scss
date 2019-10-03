@@ -1,6 +1,10 @@
 .modal-dialog {
-  max-width: 900px;
-  max-height: 800px;
+  max-width: 40% !important;
+  max-height: 70% !important;
+}
+
+.modal-content {
+  max-height: 700px !important;
   overflow: auto;
 }
 
@@ -14,6 +18,13 @@
   @extend .z-depth-2;
 }
 
-.carousel {
-  width: fit-content;
+.carousel-inner {
+  min-height: 300px !important;
+}
+
+.carousel-item > img {
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important;
 }

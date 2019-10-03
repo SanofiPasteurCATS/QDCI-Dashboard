@@ -1,4 +1,10 @@
-// Options for form-controls. This is a temp solution until I can pull the data directly from the database
+// Configuration for table headers and form controls
+
+/********************************************
+ *
+ * FORM CONTROL CHOICES
+ *
+ ********************************************/
 
 export const PLOT_TYPE_CHOICES = [{ id: "li", name: "Connected Scatter Plot" }];
 
@@ -24,13 +30,6 @@ export const KPI_TYPE_CHOICES = [
   }
 ];
 
-export const THRESHOLD_TYPE_GREATER = 0;
-export const THRESHOLD_TYPE_LESS = 1;
-
-export const KPI_TYPE_DEVIATION = 0;
-export const KPI_TYPE_WIN_LOSE = 1;
-export const KPI_TYPE_THRESHOLD = 2;
-
 export const LEVEL_CHOICES = [
   {
     id: 1,
@@ -50,6 +49,25 @@ export const LEVEL_CHOICES = [
   }
 ];
 
+export const PILLAR_CHOICES = [
+  { id: "Plus", name: "Safety" },
+  { id: "Q", name: "Quality" },
+  { id: "D", name: "Delivery" },
+  { id: "C", name: "Cost" },
+  { id: "I", name: "Involvement" }
+];
+export const FREQUENCY_CHOICES = [
+  { id: 0, name: "Monthly" },
+  { id: 1, name: "Weekly" },
+  { id: 2, name: "Bi-Weekly" }
+];
+
+/********************************************
+ *
+ * TABLE HEADERS
+ *
+ ********************************************/
+
 export const DATAPOINT_TABLE_HEADERS = [
   {
     name: "Value",
@@ -65,18 +83,6 @@ export const DATAPOINT_TABLE_HEADERS = [
   }
 ];
 
-export const PILLAR_CHOICES = [
-  { id: "Plus", name: "Safety" },
-  { id: "Q", name: "Quality" },
-  { id: "D", name: "Delivery" },
-  { id: "C", name: "Cost" },
-  { id: "I", name: "Involvement" }
-];
-export const FREQUENCY_CHOICES = [
-  { id: 0, name: "Monthly" },
-  { id: 1, name: "Weekly" },
-  { id: 2, name: "Bi-Weekly" }
-];
 export const KPI_TABLE_HEADERS = [
   {
     name: "Name",
@@ -84,7 +90,10 @@ export const KPI_TABLE_HEADERS = [
   },
   {
     name: "Pillar",
-    prop: "pillar"
+    prop: "pillar",
+    map: function(pillar) {
+      return PILLAR_CHOICES.filter(choice => choice.id === pillar)[0].name;
+    }
   },
   {
     name: "Frequency",
@@ -115,13 +124,6 @@ export const SERIES_TABLE_HEADERS = [
     name: "Color",
     prop: "color"
   }
-];
-
-export const DEFAULT_ACTION_TABLES = [
-  "Short Term Action Plan",
-  "Mid Term Action Plan",
-  "Upper Level Escalations",
-  "Lower Level Escalations"
 ];
 
 export const AUDIT_TABLE_HEADERS = [
@@ -170,32 +172,11 @@ export const ACTION_TABLE_HEADERS = [
   }
 ];
 
-export const ACTION_TABLE_DUMMY_DATA = [
-  {
-    letter: "Q",
-    problem: "not enough sleep",
-    root_cause: "Insomnia",
-    solution: "take sleeping pills",
-    leader: "Kyle",
-    date: "24-OCT-2019"
-  },
-  {
-    letter: "Q",
-    problem: "Not enough coffee",
-    root_cause: "coffe machine is broken",
-    solution: "fix coffee machine",
-    leader: "Kyle",
-    date: "08-AUG-2019"
-  },
-  {
-    letter: "I",
-    problem: "Not enough GEMBAS",
-    root_cause: "No legs",
-    solution: "Get legs",
-    leader: "Kyle",
-    date: "03-SEP-2019"
-  }
-];
+/********************************************
+ *
+ * MISCELLANEOUS
+ *
+ ********************************************/
 
 export const PILLAR_LABELS = [
   {
@@ -235,3 +216,17 @@ export const PILLAR_LABELS = [
     date: "2019-12-01"
   }
 ];
+
+export const DEFAULT_ACTION_TABLES = [
+  "Short Term Action Plan",
+  "Mid Term Action Plan",
+  "Upper Level Escalations",
+  "Lower Level Escalations"
+];
+
+export const THRESHOLD_TYPE_GREATER = 0;
+export const THRESHOLD_TYPE_LESS = 1;
+
+export const KPI_TYPE_DEVIATION = 0;
+export const KPI_TYPE_WIN_LOSE = 1;
+export const KPI_TYPE_THRESHOLD = 2;

@@ -13,6 +13,8 @@ import Modal from "../../../core/components/ui/modal/Modal";
 import AuditForm from "./AuditForm";
 import WinTable from "./WinTable";
 import WinForm from "./WinForm";
+import HeatCheck from "../../../core/components/d3charts/HeatCheck";
+import { updateHeat } from "../../../core/actions/dashboards";
 import { CLEAR_CURRENT_DASHBOARD } from "../../../core/actions/types";
 
 class ActionPlan extends Component {
@@ -28,6 +30,7 @@ class ActionPlan extends Component {
     this.rowActionClick = this.rowActionClick.bind(this);
     this.rowAuditClick = this.rowAuditClick.bind(this);
     this.rowWinClick = this.rowWinClick.bind(this);
+    this.resetHeat = this.resetHeat.bind(this);
     this.state = {
       currentActionId: null,
       currentWinId: null
@@ -57,8 +60,25 @@ class ActionPlan extends Component {
     $("#winOptions").modal("show");
   }
 
+  resetHeat() {
+    const { updateHeat, heat } = this.props;
+    for (let i in heat) {
+      let h = { ...heat[i] };
+      h.value = 0;
+      updateHeat(h, h.id);
+    }
+  }
+
   render() {
-    const { tables, dashboards, currentDashboard, audits, wins } = this.props;
+    const {
+      tables,
+      dashboards,
+      currentDashboard,
+      audits,
+      wins,
+      heat,
+      updateHeat
+    } = this.props;
     const { currentActionId, currentAuditId, currentWinId } = this.state;
 
     const actionQuery = tables
@@ -95,11 +115,14 @@ class ActionPlan extends Component {
           <WinForm win={currentWin}></WinForm>
         </Modal>
         <div className="col-lg-6 p-0">
-          <div className="card mt-4 ml-2 mr-2">
+          <h2 className="ml-2 mb-1 color-text-action-plans">
+            Action Plans<span className="im im-date-o ml-3"></span>
+          </h2>
+          <div className="card mt-1 ml-2 mr-2 border-action-plans">
             <div className="card-body">
               {st ? (
                 <Fragment>
-                  <h5> Short Term Action Plan</h5>
+                  <h5> Short Term</h5>
                   <ActionTable
                     data={st}
                     header={ACTION_TABLE_HEADERS}
@@ -113,7 +136,7 @@ class ActionPlan extends Component {
 
               {lt ? (
                 <Fragment>
-                  <h5 className="mt-3"> Long Term Action Plan</h5>
+                  <h5 className="mt-3"> Long Term</h5>
                   <ActionTable
                     data={lt}
                     header={ACTION_TABLE_HEADERS}
@@ -124,26 +147,11 @@ class ActionPlan extends Component {
               ) : (
                 <LoadingScreen />
               )}
-            </div>
-          </div>
-          <div className="card mt-4 ml-2 mr-2">
-            <div className="card-body">
-              <h5 className="mt-3">Audits</h5>
-              <AuditTable
-                data={audits}
-                rowClick={this.rowAuditClick}
-                appendable
-              ></AuditTable>
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 p-0">
-          <div className="card mt-4 ml-2 mr-2">
-            <div className="card-body">
+
               {ul ? (
                 <Fragment>
                   <div className="row" style={{ padding: "0 1rem" }}>
-                    <h5> Upper Level Escalation</h5>
+                    <h5>Escalation</h5>
                     <button
                       type="button"
                       className="btn btn-primary btn-sm mb-1 ml-auto"
@@ -183,14 +191,55 @@ class ActionPlan extends Component {
               )}
             </div>
           </div>
-          <div className="card mt-4 ml-2 mr-2">
-            <div className="card-body">
-              <h5 className="mt-3">WINS</h5>
-              <WinTable
-                data={wins}
-                rowClick={this.rowWinClick}
-                appendable
-              ></WinTable>
+        </div>
+        <div className="col-lg-6 p-0">
+          <div className="row m-0">
+            <div className="col-lg-6">
+              <h2 className="ml-2 mb-1 color-text-audits">
+                Audits<span className="im im-thumb-up ml-3"></span>
+              </h2>
+              <div className="card mt-1 ml-2 mr-2 border-audits">
+                <div className="card-body">
+                  <AuditTable
+                    data={audits}
+                    rowClick={this.rowAuditClick}
+                    appendable
+                    dashboardId={currentDashboard.id}
+                  ></AuditTable>
+                </div>
+              </div>
+
+              <h2 className="ml-2 mt-4 mb-1 color-text-heat-check">
+                Heat Check<span className="im im-fire ml-3"></span>
+              </h2>
+              <div className="card card-body ml-2 mt-1 mr-2 mb-4 border-heat-check">
+                <div className="row" style={{ padding: "0px 1rem" }}>
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm mb-1 ml-auto"
+                    onClick={this.resetHeat}
+                  >
+                    Reset
+                  </button>
+                </div>
+
+                <HeatCheck heat={heat} onClick={updateHeat}></HeatCheck>
+              </div>
+            </div>
+            <div className="col-lg-6">
+              <h2 className="ml-2 mb-1 color-text-wins">
+                Wins<span className="im im-trophy ml-3"></span>
+              </h2>
+              <div className="card mt-1 ml-2 mr-2 border-wins">
+                <div className="card-body">
+                  <WinTable
+                    data={wins}
+                    rowClick={this.rowWinClick}
+                    appendable
+                    dashboardId={currentDashboard.id}
+                  ></WinTable>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -203,4 +252,7 @@ const mapStateToProps = state => ({
   currentDashboard: state.dashboards.currentDashboard
 });
 
-export default connect(mapStateToProps)(ActionPlan);
+export default connect(
+  mapStateToProps,
+  { updateHeat }
+)(ActionPlan);

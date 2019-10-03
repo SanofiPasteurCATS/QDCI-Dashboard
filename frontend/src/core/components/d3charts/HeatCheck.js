@@ -25,7 +25,7 @@ class HeatCheck extends Component {
 
   render() {
     const { chart } = this.props;
-    return <div class="d-flex justify-content-center"> {chart} </div>;
+    return <div className="d-flex justify-content-center"> {chart} </div>;
   }
 
   renderD3() {

@@ -27,11 +27,12 @@ class WinTable extends Component {
   }
 
   insert() {
-    const { addWin } = this.props;
+    const { addWin, dashboardId } = this.props;
     const win = {
       description: null,
       participants: null,
-      date: null
+      date: null,
+      dashboard: dashboardId
     };
     addWin(win);
   }

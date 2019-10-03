@@ -12,128 +12,129 @@ import {
 
 // ACTIONS
 import { addDashboard } from "../../../core/actions/dashboards";
+import ImageList from "./ImageList";
 
 class DashboardForm extends Component {
-  state = {
-    title: "",
-    author: "",
-    background: "#000",
-    dashboardType: "0",
-    level: "0"
-  };
-
   static propTypes = {
     addDashboard: PropTypes.func.isRequired
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
   onChangeColor = color => {
-    this.setState({ background: color.hex });
+    const { onChange } = this.props;
+    onChange({
+      target: {
+        name: "background",
+        value: color.hex
+      }
+    });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-    const { title, author, background, dashboardType, level } = this.state;
-    const dashboard = {
-      title,
-      author,
-      background,
-      dashboardType,
-      level
-    };
-    console.log(background);
-    this.props.addDashboard(dashboard);
-    this.setState({
-      title: "",
-      author: "",
-      background: "#000",
-      level: ""
+  onChangeFile = e => {
+    const { onChange } = this.props;
+    onChange({
+      target: {
+        name: "image",
+        value: e.target.files[0]
+      }
     });
-    $("#dashboardOptions").modal("hide");
   };
 
   render() {
-    const { title, author, background } = this.state;
+    const {
+      title,
+      author,
+      background,
+      dashboard_type,
+      level
+    } = this.props.values;
+    const { images } = this.props;
+    const { onChange, showImageField } = this.props;
     return (
       <Fragment>
-        <h2>Create Dashboard</h2>
-        <form onSubmit={this.onSubmit}>
-          <div className="row justify-content-between">
-            <div className="col-sm-6">
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="title"
-                  onChange={this.onChange}
-                  value={title}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="author">Author</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="author"
-                  onChange={this.onChange}
-                  value={author}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="dashboardType">Type</label>
-                <select
-                  className="form-control"
-                  type="text"
-                  name="dashboardType"
-                  onChange={this.onChange}
-                >
-                  {DASHBOARD_TYPE_CHOICES.map(choice => (
-                    <option key={`choice-${choice.id}`} value={choice.id}>
-                      {choice.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="level">Level</label>
-                <select
-                  className="form-control"
-                  type="text"
-                  name="level"
-                  onChange={this.onChange}
-                >
-                  {LEVEL_CHOICES.map(choice => (
-                    <option key={choice.id} value={choice.id}>
-                      {choice.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        <div className="row justify-content-between">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="title">Title</label>
+              <input
+                className="form-control"
+                type="text"
+                name="title"
+                onChange={onChange}
+                value={title}
+              />
             </div>
-            <div className="col-sm-5">
-              <div className="form-group">
-                <label htmlFor="color">Background Color</label>
-                <ChromePicker
-                  color={background}
-                  onChangeComplete={this.onChangeColor}
-                />
-              </div>
+            <div className="form-group">
+              <label htmlFor="author">Author</label>
+              <input
+                className="form-control"
+                type="text"
+                name="author"
+                onChange={onChange}
+                value={author}
+              />
             </div>
-            <div className="col-sm-12">
-              <div className="form-group">
-                <button
-                  type="submit"
-                  className="btn
-            btn-primary"
-                >
-                  Submit
-                </button>
-              </div>
+            <div className="form-group">
+              <label htmlFor="dashboard_type">Type</label>
+              <select
+                className="form-control"
+                type="text"
+                name="dashboard_type"
+                onChange={onChange}
+                value={dashboard_type}
+              >
+                {DASHBOARD_TYPE_CHOICES.map(choice => (
+                  <option key={`choice-${choice.id}`} value={choice.id}>
+                    {choice.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="level">Level</label>
+              <select
+                className="form-control"
+                type="text"
+                name="level"
+                value={level}
+                onChange={onChange}
+              >
+                {LEVEL_CHOICES.map(choice => (
+                  <option key={choice.id} value={choice.id}>
+                    {choice.name}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
-        </form>
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="color">Background Color</label>
+              <ChromePicker
+                color={background}
+                onChangeComplete={this.onChangeColor}
+              />
+            </div>
+          </div>
+
+          {showImageField && (
+            <div className="col-12 mr-2">
+              <ImageList images={images}></ImageList>
+            </div>
+          )}
+          {showImageField && (
+            <div className="col-12 mt-2">
+              <div className="form-group">
+                <label htmlFor="image">Add Infographic</label>
+                <input
+                  type="file"
+                  name="image"
+                  className="form-control-file"
+                  onChange={this.onChangeFile}
+                ></input>
+              </div>
+            </div>
+          )}
+        </div>
       </Fragment>
     );
   }

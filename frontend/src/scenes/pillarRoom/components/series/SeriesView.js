@@ -52,7 +52,6 @@ class SeriesView extends Component {
     if (series.entries) {
       datapoint = getItem(selectedDatapoint, series.entries, "id");
     }
-
     return (
       <Fragment>
         <button
@@ -72,8 +71,8 @@ class SeriesView extends Component {
         <hr />
         <h3 className="mt-4">Data</h3>
         <DataTable data={series.entries} rowClick={this.selectDatapoint} />
-        <Modal title="Update Data" id="dataOptions">
-          <DataForm datapoint={datapoint}></DataForm>
+        <Modal title="Update Data" id="dataOptions" overflow="visible">
+          <DataForm datapoint={datapoint} series={series.id}></DataForm>
         </Modal>
         <div className="d-flex justify-content-end">
           <button

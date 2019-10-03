@@ -34,13 +34,8 @@ import Carousel from "../../core/components/ui/Carousel";
 // NATIVE COMPONENTS
 import PillarBar from "./components/PillarBar";
 import ActionPlan from "./components/ActionPlan";
-import HeatCheck from "../../core/components/d3charts/HeatCheck";
 
 class Boardroom extends Component {
-  constructor(props) {
-    super(props);
-    this.resetHeat = this.resetHeat.bind(this);
-  }
   static propTypes = {
     dashboards: PropTypes.array,
     kpis: PropTypes.array.isRequired,
@@ -75,15 +70,6 @@ class Boardroom extends Component {
     getHeat(id);
   }
 
-  resetHeat() {
-    const { updateHeat, heat } = this.props;
-    for (let i in heat) {
-      let h = { ...heat[i] };
-      h.value = 0;
-      updateHeat(h, h.id);
-    }
-  }
-
   render() {
     const {
       currentDashboard,
@@ -92,8 +78,7 @@ class Boardroom extends Component {
       dashboards,
       audits,
       wins,
-      heat,
-      updateHeat
+      heat
     } = this.props;
     const { id } = this.props.match.params;
 
@@ -116,7 +101,7 @@ class Boardroom extends Component {
       >
         <div className="row" style={{ margin: 0 }}>
           <div className="col-lg-2 p-0">
-            <div className="card card-body ml-4 mt-4 mr-2 mb-4">
+            <div className="card card-body ml-4 mt-4 mr-2 mb-4 border-pillars">
               <PillarBar kpis={kpis} dashboardId={id} />
             </div>
           </div>
@@ -124,9 +109,13 @@ class Boardroom extends Component {
             <div className="row m-0">
               <div className="col-lg-12 mt-4">
                 <div className="row">
-                  <div className="col-lg-6">
-                    <Carousel images={currentDashboard.images}></Carousel>
-                  </div>
+                  {currentDashboard.images.length ? (
+                    <div className="col-lg-6 mb-4">
+                      <Carousel images={currentDashboard.images}></Carousel>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
 
@@ -134,24 +123,9 @@ class Boardroom extends Component {
                 tables={actionTables}
                 audits={audits}
                 wins={wins}
+                heat={heat}
                 dashboards={dashboards}
               />
-            </div>
-            <div className="col-lg-6 p-0">
-              <div className="card card-body ml-2 mt-4 mr-2 mb-4">
-                <div className="row" style={{ padding: "0px 1rem" }}>
-                  <h5 className="mt-3"> Heat Check</h5>
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-sm mb-1 ml-auto"
-                    onClick={this.resetHeat}
-                  >
-                    Reset
-                  </button>
-                </div>
-
-                <HeatCheck heat={heat} onClick={updateHeat}></HeatCheck>
-              </div>
             </div>
           </div>
         </div>

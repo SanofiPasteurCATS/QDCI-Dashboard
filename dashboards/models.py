@@ -100,6 +100,7 @@ class Action(models.Model):
     date_created = models.DateTimeField(default=timezone.now, null=False)
 
 class Win(models.Model):
+    dashboard = models.ForeignKey(Dashboard, related_name="wins", on_delete=models.CASCADE, default= None, null=True)
     description = models.CharField(max_length=256, null=True)
     participants = models.CharField(max_length = 256, null=True)
     date= models.CharField(max_length=50, null=True)
@@ -112,12 +113,13 @@ class Heat(models.Model):
 
 
 class Audit(models.Model):
+    dashboard = models.ForeignKey(Dashboard, related_name="audits", on_delete=models.CASCADE, default= None, null=True)
     description = models.CharField(max_length=256, null= True)
     start_date = models.DateField(default= None, null=True)
     end_date = models.DateField(default= None, null=True)
 
 
 class Image(models.Model):
-    dashboard = models.ForeignKey(Dashboard,related_name='images',on_delete=models.CASCADE )
+    dashboard = models.ForeignKey(Dashboard,related_name='images',on_delete=models.CASCADE, null=True )
     image = models.ImageField(default="default.png")
     

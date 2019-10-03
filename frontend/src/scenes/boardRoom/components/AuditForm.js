@@ -10,11 +10,6 @@ import PropTypes from "prop-types";
 // ACTIONS
 import { updateAudit, deleteAudit } from "../../../core/actions/dashboards";
 
-/* The boardroom is the landing page for all dashboards
-Parent of all boardroom components Contains pillar widgets and action tables
-This component makes ALL GET request for Boardroom data
-*/
-
 class AuditForm extends Component {
   static propTypes = {
     audit: PropTypes.object,
