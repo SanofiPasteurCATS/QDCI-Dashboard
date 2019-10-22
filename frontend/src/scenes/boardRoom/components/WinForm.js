@@ -67,6 +67,7 @@ class WinForm extends Component {
       description: "",
       date: parseISO("2019-01-01")
     });
+    $("#winOptions").modal("hide");
   };
 
   delete = () => {

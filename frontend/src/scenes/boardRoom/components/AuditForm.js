@@ -65,6 +65,7 @@ class AuditForm extends Component {
       start_date: parseISO("2019-01-01"),
       end_date: parseISO("2019-01-01")
     });
+    $("#auditOptions").modal("hide");
   };
 
   delete = () => {

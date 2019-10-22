@@ -60,7 +60,7 @@ class DashboardNew extends Component {
       dashboard_type: "0",
       level: "0"
     });
-    $("#newDashboard").modal("hide");
+    $("#dashboardNew").modal("hide");
   };
 
   onChange = e => {

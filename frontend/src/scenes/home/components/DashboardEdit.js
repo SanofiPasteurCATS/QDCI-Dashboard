@@ -68,6 +68,7 @@ class DashboardEdit extends Component {
       };
       addImage(newImage);
     }
+    $("#dashboardEdit").modal("hide");
   };
 
   onChange = e => {

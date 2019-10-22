@@ -73,6 +73,7 @@ class ActionForm extends Component {
       leader: "",
       date: parseISO("2019-01-01")
     });
+    $("#actionOptions").modal("hide");
   };
 
   delete = () => {

@@ -2878,6 +2878,8 @@ function (_Component) {
         leader: "",
         date: Object(parseISO["default"])("2019-01-01")
       });
+
+      $("#actionOptions").modal("hide");
     }, _this["delete"] = function () {
       var _this$props2 = _this.props,
           deleteAction = _this$props2.deleteAction,
@@ -3359,6 +3361,8 @@ function (_Component) {
         start_date: Object(parseISO["default"])("2019-01-01"),
         end_date: Object(parseISO["default"])("2019-01-01")
       });
+
+      $("#auditOptions").modal("hide");
     }, _this["delete"] = function () {
       var _this$props2 = _this.props,
           deleteAudit = _this$props2.deleteAudit,
@@ -3659,6 +3663,8 @@ function (_Component) {
         description: "",
         date: Object(parseISO["default"])("2019-01-01")
       });
+
+      $("#winOptions").modal("hide");
     }, _this["delete"] = function () {
       var _this$props2 = _this.props,
           deleteWin = _this$props2.deleteWin,
@@ -8148,7 +8154,7 @@ function (_Component) {
         level: "0"
       });
 
-      $("#newDashboard").modal("hide");
+      $("#dashboardNew").modal("hide");
     };
 
     _this.onChange = function (e) {
@@ -8278,6 +8284,8 @@ function (_Component) {
         };
         addImage(newImage);
       }
+
+      $("#dashboardEdit").modal("hide");
     };
 
     _this.onChange = function (e) {
