@@ -60,7 +60,7 @@ class DashboardForm extends Component {
                 type="text"
                 name="title"
                 onChange={onChange}
-                value={title}
+                value={title || ""}
               />
             </div>
             <div className="form-group">
@@ -70,7 +70,7 @@ class DashboardForm extends Component {
                 type="text"
                 name="author"
                 onChange={onChange}
-                value={author}
+                value={author || ""}
               />
             </div>
             <div className="form-group">

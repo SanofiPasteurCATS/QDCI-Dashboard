@@ -2931,7 +2931,7 @@ function (_Component) {
         type: "text",
         name: "letter",
         onChange: this.onChange,
-        value: letter
+        value: letter || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -3243,7 +3243,7 @@ function (_Component) {
       }, react_default.a.createElement("div", {
         className: "modal-content",
         style: {
-          overflow: overflow || "auto"
+          overflow: overflow || "visible"
         }
       }, react_default.a.createElement("div", {
         className: "modal-header"
@@ -3410,7 +3410,7 @@ function (_Component) {
         type: "text",
         name: "description",
         onChange: this.onChange,
-        value: description
+        value: description || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -3710,7 +3710,7 @@ function (_Component) {
         type: "text",
         name: "description",
         onChange: this.onChange,
-        value: description
+        value: description || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -3720,7 +3720,7 @@ function (_Component) {
         type: "text",
         name: "participants",
         onChange: this.onChange,
-        value: participants
+        value: participants || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -7997,7 +7997,7 @@ function (_Component) {
         type: "text",
         name: "title",
         onChange: onChange,
-        value: title
+        value: title || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -8007,7 +8007,7 @@ function (_Component) {
         type: "text",
         name: "author",
         onChange: onChange,
-        value: author
+        value: author || ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -8155,13 +8155,14 @@ function (_Component) {
       _this.setState(DashboardNew_defineProperty({}, e.target.name, e.target.value));
     };
 
-    if (props.dashboard) _this.state = DashboardNew_objectSpread({}, props.dashboard);else _this.state = {
+    _this.state = {
       title: "",
       author: "",
       background: "#ffffff",
       dashboard_type: "0",
       level: "0"
     };
+    if (props.dashboard) _this.state = DashboardNew_objectSpread({}, props.dashboard);
     return _this;
   }
 
@@ -8283,13 +8284,14 @@ function (_Component) {
       _this.setState(DashboardEdit_defineProperty({}, e.target.name, e.target.value));
     };
 
-    if (props.dashboard) _this.state = DashboardEdit_objectSpread({}, props.dashboard);else _this.state = {
+    _this.state = {
       title: "",
       author: "",
       background: "#ffffff",
       dashboard_type: "0",
       level: "0"
     };
+    if (props.dashboard) _this.state = DashboardEdit_objectSpread({}, props.dashboard);
     return _this;
   }
 
@@ -8735,7 +8737,7 @@ function (_Component) {
         className: "m-auto"
       }, currentDashboard.title), react_default.a.createElement("h5", {
         className: "m-auto"
-      }, curTime, ", Week #: ", weekNum), isAuthenticated ? authLinks : guestLinks)));
+      }, curTime, ", Week # ", weekNum), isAuthenticated ? authLinks : guestLinks)));
     }
   }]);
 

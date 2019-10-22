@@ -88,7 +88,7 @@ class WinForm extends Component {
                 type="text"
                 name="description"
                 onChange={this.onChange}
-                value={description}
+                value={description || ""}
               />
             </div>
             <div className="form-group">
@@ -98,7 +98,7 @@ class WinForm extends Component {
                 type="text"
                 name="participants"
                 onChange={this.onChange}
-                value={participants}
+                value={participants || ""}
               />
             </div>
             <div className="form-group">

@@ -24,7 +24,7 @@ class Modal extends Component {
           >
             <div
               className="modal-content"
-              style={{ overflow: overflow || "auto" }}
+              style={{ overflow: overflow || "visible" }}
             >
               <div className="modal-header">
                 <h1 className="modal-title" id={`${id}Label`}>

@@ -121,7 +121,7 @@ class Header extends Component {
               <h4 className="m-auto">{currentDashboard.title}</h4>
             )}
             <h5 className="m-auto">
-              {curTime}, Week #: {weekNum}
+              {curTime}, Week # {weekNum}
             </h5>
 
             {isAuthenticated ? authLinks : guestLinks}

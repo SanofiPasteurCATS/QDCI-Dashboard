@@ -86,7 +86,7 @@ class AuditForm extends Component {
                 type="text"
                 name="description"
                 onChange={this.onChange}
-                value={description}
+                value={description || ""}
               />
             </div>
             <div className="form-group">

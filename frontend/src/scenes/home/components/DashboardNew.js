@@ -10,17 +10,16 @@ import { addDashboard } from "../../../core/actions/dashboards";
 class DashboardNew extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      title: "",
+      author: "",
+      background: "#ffffff",
+      dashboard_type: "0",
+      level: "0"
+    };
     if (props.dashboard)
       this.state = {
         ...props.dashboard
-      };
-    else
-      this.state = {
-        title: "",
-        author: "",
-        background: "#ffffff",
-        dashboard_type: "0",
-        level: "0"
       };
   }
 

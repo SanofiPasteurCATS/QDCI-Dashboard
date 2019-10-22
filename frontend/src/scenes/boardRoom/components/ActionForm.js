@@ -96,7 +96,7 @@ class ActionForm extends Component {
                   type="text"
                   name="letter"
                   onChange={this.onChange}
-                  value={letter}
+                  value={letter || ""}
                 />
               </div>
               <div className="form-group">
