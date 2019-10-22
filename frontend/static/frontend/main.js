@@ -8681,9 +8681,7 @@ function (_Component) {
           weekNum = _this$state.weekNum;
       var authLinks = react_default.a.createElement("ul", {
         className: "navbar-nav ml-auto mt-2"
-      }, react_default.a.createElement("span", {
-        className: "navbar-text mr-3"
-      }, react_default.a.createElement("strong", null, user ? "Welcome ".concat(user.username) : "")), react_default.a.createElement("li", {
+      }, react_default.a.createElement("li", {
         className: "nav-item"
       }, react_default.a.createElement("button", {
         onClick: this.props.logout,
@@ -8705,7 +8703,10 @@ function (_Component) {
       return react_default.a.createElement("nav", {
         className: "navbar navbar-expand-lg co-accent"
       }, react_default.a.createElement("div", {
-        className: "container-fluid"
+        className: "container-fluid",
+        style: {
+          fontSize: 18 + "px"
+        }
       }, react_default.a.createElement("img", {
         src: "../../../../static/media/sms-logo.png",
         style: {

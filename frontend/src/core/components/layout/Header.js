@@ -51,9 +51,6 @@ class Header extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2">
-        <span className="navbar-text mr-3">
-          <strong>{user ? `Welcome ${user.username}` : ""}</strong>
-        </span>
         <li className="nav-item">
           <button
             onClick={this.props.logout}
@@ -81,7 +78,7 @@ class Header extends Component {
     );
     return (
       <nav className="navbar navbar-expand-lg co-accent">
-        <div className="container-fluid">
+        <div className="container-fluid" style={{ fontSize: 18 + "px" }}>
           <img
             src="../../../../static/media/sms-logo.png"
             style={{
