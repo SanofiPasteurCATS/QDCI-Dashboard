@@ -4,3 +4,4 @@ env
 __pycache__
 settings.py
 node_modules
+qdci_startup
