@@ -70,7 +70,6 @@ class DataForm extends Component {
               onChange={this.onChange}
               placeholder="..."
               value={value != null ? value : ""}
-              required
             />
           </div>
 
@@ -83,7 +82,6 @@ class DataForm extends Component {
               onChange={this.onChange}
               placeholder="..."
               value={target != null ? target : ""}
-              required
             />
           </div>
 

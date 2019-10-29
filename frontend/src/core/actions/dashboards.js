@@ -289,6 +289,7 @@ export const deleteSeries = id => (dispatch, getState) => {
 };
 
 export const updateDatapoint = (datapoint, id) => (dispatch, getState) => {
+  console.log(datapoint);
   axios
     .patch(`/api/datapoint/${id}/`, datapoint, tokenConfig(getState))
     .then(res => {

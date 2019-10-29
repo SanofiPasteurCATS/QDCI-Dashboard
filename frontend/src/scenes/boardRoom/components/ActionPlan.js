@@ -155,8 +155,9 @@ class ActionPlan extends Component {
                     <button
                       type="button"
                       className="btn btn-primary btn-sm mb-1 ml-auto"
-                      data-toggle="modal"
-                      data-target="#escalationOptions"
+                      onClick={e => {
+                        $("#escalationOptions").modal("show");
+                      }}
                     >
                       Manage Escalations
                     </button>

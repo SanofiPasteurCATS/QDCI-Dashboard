@@ -49,13 +49,13 @@ class DatapointViewSet(viewsets.ModelViewSet):
         if series is not None:
             queryset = queryset.filter(series=series)
         return queryset
-    def put(self, *args, **kwargs):
-        return self.update(self, request, *args, **kwargs)
-    def patch(self, request, pk):
-        datapoint = self.get_objects(pk)
-        serializer = DatapointSerializer(datapoint, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+    def partial_update(self, request, *args, **kwargs):
+        if(request.data["value"] == ""):
+            request.data["value"] = None
+        if(request.data["target"] == ""):
+            request.data["target"] = None
+        kwargs['partial'] = True
+        return self.update(request, *args, **kwargs)
         
 class SeriesViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -207,10 +207,10 @@ class ActionTableViewSet(viewsets.ModelViewSet):
 
 
     def partial_update(self, request, *args, **kwargs):
+        print("hello")
         kwargs['partial'] = True
         parent_dashboard = self.request.query_params.get('parent', None)
         if parent_dashboard is not None:
-            print(parent_dashboard)
             if parent_dashboard != "null":
                 parent = ActionTable.objects.get(dashboard=parent_dashboard, title="Lower Level Feed")
                 request.data["parent"] = parent.id
@@ -218,7 +218,7 @@ class ActionTableViewSet(viewsets.ModelViewSet):
             else:
                 request.data["parent"] = None
                 request.data["parent_dashboard"] = None
-        
+
         return self.update(request, *args, **kwargs)
 
 class ActionViewSet(viewsets.ModelViewSet):
@@ -233,15 +233,14 @@ class ActionViewSet(viewsets.ModelViewSet):
         if dashboard is not None:
             queryset = queryset.filter(dashboard=dashboard)
         return queryset
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        data = self.request.data
+        for key in data:
+            if data[key] == "":
+                data[key] = None  
+        return self.update(request, *args, **kwargs)
 
-    def put(self, request, *args, **kwargs):
-        return self.update(self, request, *args, **kwargs)
-
-    def patch(self, request, pk):
-        action = self.get_object(pk)
-        serializer = ActionSerializer(action, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()       
 
 class AuditViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -257,14 +256,13 @@ class AuditViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(dashboard=dashboard)
         return queryset
 
-    def put(self, request, *args, **kwargs):
-        return self.update(self, request, *args, **kwargs)
-
-    def patch(self, request, pk):
-        audit = self.get_object(pk)
-        serializer = AuditSerializer(audit, data = request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        data = self.request.data
+        for key in data:
+            if data[key] == "":
+                data[key] = None  
+        return self.update(request, *args, **kwargs)
 
 class WinViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -280,14 +278,13 @@ class WinViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(dashboard=dashboard)
         return queryset
 
-    def put(self, request, *args, **kwargs):
-        return self.update(self, request, *args, **kwargs)
-        
-    def patch(self, request, pk):
-        win = self.get_object(pk)
-        serializer = WinSerializer(win, data = request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+    def partial_update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        data = self.request.data
+        for key in data:
+            if data[key] == "":
+                data[key] = None  
+        return self.update(request, *args, **kwargs)
 
 class HeatViewSet(viewsets.ModelViewSet):
     permission_classes = [

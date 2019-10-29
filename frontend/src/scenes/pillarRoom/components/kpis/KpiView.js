@@ -40,17 +40,17 @@ class KpiView extends Component {
 
     return (
       <Fragment>
-        <h3>Properties</h3>
-        <div className="d-flex">
-          <KpiEdit kpi={kpi} />
-        </div>
-        <hr />
         <h3 className="mt-4">Series</h3>
         <SeriesList
           kpiId={kpi.id}
           onClick={onSeriesSelect}
           series={kpi.series}
         />
+        <h3>Properties</h3>
+        <div className="d-flex">
+          <KpiEdit kpi={kpi} />
+        </div>
+        <hr />
 
         <div className="d-flex justify-content-end">
           <button className="btn btn-danger" onClick={this.onRemove}>

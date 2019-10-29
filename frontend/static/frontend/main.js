@@ -1003,6 +1003,7 @@ var dashboards_deleteSeries = function deleteSeries(id) {
 };
 var dashboards_updateDatapoint = function updateDatapoint(datapoint, id) {
   return function (dispatch, getState) {
+    console.log(datapoint);
     axios_default.a.patch("/api/datapoint/".concat(id, "/"), datapoint, tokenConfig(getState)).then(function (res) {
       dispatch(messages_createMessage({
         updateDatapoint: "Datapoint Updated"
@@ -2649,6 +2650,7 @@ function (_Component) {
       var selected = _this.state.selected;
       e.preventDefault();
       updateActionTable(actionTable, actionTable.id, selected);
+      $("#escalationOptions").modal("hide");
     };
 
     _this.handleClick = _this.handleClick.bind(EscalationsOptions_assertThisInitialized(_this));
@@ -4074,8 +4076,9 @@ function (_Component) {
       }, react_default.a.createElement("h5", null, "Escalation"), react_default.a.createElement("button", {
         type: "button",
         className: "btn btn-primary btn-sm mb-1 ml-auto",
-        "data-toggle": "modal",
-        "data-target": "#escalationOptions"
+        onClick: function onClick(e) {
+          $("#escalationOptions").modal("show");
+        }
       }, "Manage Escalations")), react_default.a.createElement(components_ActionTable, {
         data: ul,
         header: ACTION_TABLE_HEADERS,
@@ -5246,8 +5249,7 @@ function (_Component) {
         name: "value",
         onChange: this.onChange,
         placeholder: "...",
-        value: value != null ? value : "",
-        required: true
+        value: value != null ? value : ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -5258,8 +5260,7 @@ function (_Component) {
         name: "target",
         onChange: this.onChange,
         placeholder: "...",
-        value: target != null ? target : "",
-        required: true
+        value: target != null ? target : ""
       })), react_default.a.createElement("div", {
         className: "form-group"
       }, react_default.a.createElement("label", {
@@ -6933,17 +6934,17 @@ function (_Component) {
       var _this$props4 = this.props,
           kpi = _this$props4.kpi,
           onSeriesSelect = _this$props4.onSeriesSelect;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement(kpis_KpiEdit, {
-        kpi: kpi
-      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
         className: "mt-4"
       }, "Series"), react_default.a.createElement(series_SeriesList, {
         kpiId: kpi.id,
         onClick: onSeriesSelect,
         series: kpi.series
-      }), react_default.a.createElement("div", {
+      }), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
+        className: "d-flex"
+      }, react_default.a.createElement(kpis_KpiEdit, {
+        kpi: kpi
+      })), react_default.a.createElement("hr", null), react_default.a.createElement("div", {
         className: "d-flex justify-content-end"
       }, react_default.a.createElement("button", {
         className: "btn btn-danger",
@@ -8841,6 +8842,8 @@ function (_Component) {
         if (messages.updateActionTable) alert.success(messages.updateActionTable);
         if (messages.updateSeries) alert.success(messages.updateSeries);
         if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
+        if (messages.updateAudit) alert.success(messages.updateAudit);
+        if (messages.updateWin) alert.success(messages.updateWin);
         if (messages.entriesCreated) alert.success(messages.entriesCreated);
         if (messages.invalidForm) alert.error(messages.invalidForm);
         if (messages.updateDashboard) alert.success(messages.updateDashboard);

@@ -46,6 +46,8 @@ export class Alerts extends Component {
       if (messages.updateActionTable) alert.success(messages.updateActionTable);
       if (messages.updateSeries) alert.success(messages.updateSeries);
       if (messages.updateDatapoint) alert.success(messages.updateDatapoint);
+      if (messages.updateAudit) alert.success(messages.updateAudit);
+      if (messages.updateWin) alert.success(messages.updateWin);
       if (messages.entriesCreated) alert.success(messages.entriesCreated);
       if (messages.invalidForm) alert.error(messages.invalidForm);
       if (messages.updateDashboard) alert.success(messages.updateDashboard);

@@ -37,6 +37,7 @@ class EscalationOptions extends Component {
     const { selected } = this.state;
     e.preventDefault();
     updateActionTable(actionTable, actionTable.id, selected);
+    $("#escalationOptions").modal("hide");
   };
 
   render() {
