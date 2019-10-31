@@ -7632,7 +7632,7 @@ function (_Component) {
       }), react_default.a.createElement("div", {
         className: "row m-0 h-100"
       }, react_default.a.createElement("div", {
-        className: "col-lg-4"
+        className: "col-lg-4 mx-vh-90"
       }, react_default.a.createElement("div", {
         className: "card h-100"
       }, react_default.a.createElement("div", {
@@ -7658,7 +7658,7 @@ function (_Component) {
         fontSize: "".concat(0.7, "rem"),
         summary: false
       })))))), react_default.a.createElement("div", {
-        className: "col-lg-8"
+        className: "col-lg-8 mx-vh-90"
       }, react_default.a.createElement("div", {
         className: "card h-100"
       }, react_default.a.createElement("div", {

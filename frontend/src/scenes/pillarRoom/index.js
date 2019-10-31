@@ -142,7 +142,7 @@ class pillarRoom extends Component {
       >
         <Tooltip data={toolTipData} show={toolTipShow} />
         <div className="row m-0 h-100">
-          <div className="col-lg-4">
+          <div className="col-lg-4 mx-vh-90">
             <div className="card h-100">
               <div className="card-body">
                 <Pillar
@@ -167,7 +167,7 @@ class pillarRoom extends Component {
               </div>
             </div>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-8 mx-vh-90">
             <div className="card h-100">
               <div className="card-body scroll">
                 {menuMode ? (
