@@ -17,7 +17,11 @@ class Header extends Component {
   };
 
   state = {
-    curTime: new Date().toLocaleString(),
+    curTime: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate()
+    ).toLocaleDateString(),
     weekNum: 0
   };
 
@@ -38,7 +42,11 @@ class Header extends Component {
   componentDidMount() {
     setInterval(() => {
       this.setState({
-        curTime: new Date().toLocaleString()
+        curTime: new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate()
+        ).toLocaleDateString()
       });
     }, 1000);
     this.setState({ weekNum: this.getWeekNumber(new Date()) });

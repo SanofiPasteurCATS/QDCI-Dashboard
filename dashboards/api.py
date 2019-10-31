@@ -29,14 +29,6 @@ class DashboardViewSet(viewsets.ModelViewSet):
         heat = Heat(name="Bad", color="#EF0000", dashboard=dashboard)
         heat.save()
     
-    def put(self, request, *args, **kwargs):
-        return self.update(self, request, *args, **kwargs)
-    
-    def patch(self, request, pk):
-        dashboard = self.get_objects(pk)
-        serializer = DashboardSerializer(dashboard, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
 
 class DatapointViewSet(viewsets.ModelViewSet):
     permission_classes = [

@@ -132,7 +132,7 @@ class pillarRoom extends Component {
     const color = currentDashboard.background;
     return (
       <div
-        className="container-fluid"
+        className="container-fluid pt-4 pb-4"
         style={{
           padding: 0,
           background: color,
@@ -141,9 +141,9 @@ class pillarRoom extends Component {
         }}
       >
         <Tooltip data={toolTipData} show={toolTipShow} />
-        <div className="row m-0">
+        <div className="row m-0 h-100">
           <div className="col-lg-4">
-            <div className="card ml-4 mt-4 mb-4 mr-4 h-95">
+            <div className="card h-100">
               <div className="card-body">
                 <Pillar
                   kpis={kpis}
@@ -168,8 +168,8 @@ class pillarRoom extends Component {
             </div>
           </div>
           <div className="col-lg-8">
-            <div className="card ml-4 mt-4 mb-4 mr-4 h-90 mx-h-90">
-              <div className="card-body scroll mx-vh-75">
+            <div className="card h-100">
+              <div className="card-body scroll">
                 {menuMode ? (
                   <MenuView
                     kpi={kpi}
