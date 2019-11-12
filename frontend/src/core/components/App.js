@@ -21,7 +21,7 @@ import { loadUser } from "../actions/auth";
 import Header from "./layout/Header";
 import Alerts from "./layout/Alerts";
 import store from "../../store";
-
+import Navbar from "../../core/components/layout/Navbar";
 // Alert Options
 const alertOptions = {
   timeout: 3000,
@@ -41,31 +41,20 @@ class App extends Component {
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
-            <Fragment>
-              <div className="d-flex flex-column h-100">
-                <div className="qd-container--header">
-                  <Header />
-                </div>
-                <Alerts />
-                <div
-                  className="qd-container--page"
-                  style={{ minHeight: "fit-content" }}
-                >
-                  <Switch>
-                    <PrivateRoute exact path="/" component={Dashboard} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/" component={Dashboard} />
-                    <Route exact path="/contact" component={Contact} />
-                    <PrivateRoute path="/boardroom/:id" component={BoardRoom} />
-                    <PrivateRoute
-                      path="/pillar/:dashboardId/:pillarId"
-                      component={PillarRoom}
-                    />
-                  </Switch>
-                </div>
-              </div>
-            </Fragment>
+            <Navbar />
+            <Alerts />
+
+            <Switch>
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/contact" component={Contact} />
+              <PrivateRoute path="/boardroom/:id" component={BoardRoom} />
+              <PrivateRoute
+                path="/pillar/:dashboardId/:pillarId"
+                component={PillarRoom}
+              />
+            </Switch>
           </Router>
         </AlertProvider>
       </Provider>

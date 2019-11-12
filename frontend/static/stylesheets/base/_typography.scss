@@ -6,8 +6,9 @@ body {
   color: $secondary-color;
   height: 100vh;
   overflow: auto;
-  font-size: calc(8px + (18 - 8) * ((100vw - 300px) / (1600 - 300)));
-  line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 16px;
+  //font-size: calc(8px + (18 - 8) * ((100vw - 300px) / (1600 - 300)));
+  //line-height: calc(1.3em + (1.5 - 1.2) * ((100vw - 300px) / (1600 - 300)));
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

@@ -15,7 +15,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
+      /*  {
         test: /\.jsx?$/,
         enforce: "pre",
         loader: "eslint-loader",
@@ -24,7 +24,7 @@ module.exports = {
           emitWarning: true,
           configFile: "./.eslintrc.json"
         }
-      },
+      },*/
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
       { test: /\.png$/, loader: "url-loader?limit=100000" },
       { test: /\.jpg$/, loader: "file-loader" },

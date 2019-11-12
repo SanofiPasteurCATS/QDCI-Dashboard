@@ -1,16 +1,3 @@
-// -----------------------------------------------------------------------------
-//                          BOARDROOM SCENE
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-//
-//
-//          * The boardroom is the landing page for all dashboards
-//                  * Parent of all boardroom components
-//               * Contains pillar widgets and action tables
-//         * This component makes ALL GET request for Boardroom data
-// -----------------------------------------------------------------------------
-
 // DEPENDACIES
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -33,7 +20,9 @@ import Carousel from "../../core/components/ui/Carousel";
 
 // NATIVE COMPONENTS
 import PillarBar from "./components/PillarBar";
-import ActionPlan from "./components/ActionPlan";
+import WidgetView from "./components/WidgetView";
+
+import Grid from "@material-ui/core/Grid";
 
 class Boardroom extends Component {
   static propTypes = {
@@ -92,11 +81,11 @@ class Boardroom extends Component {
 
     return (
       <div
-        className="container-fluid h-100"
+        className="container-fluid"
         style={{
           padding: 0,
           background: color,
-          height: `${100}%`
+          height: "fit-content"
         }}
       >
         <div className="row" style={{ margin: 0 }}>
@@ -119,7 +108,7 @@ class Boardroom extends Component {
                 </div>
               </div>
 
-              <ActionPlan
+              <WidgetView
                 tables={actionTables}
                 audits={audits}
                 wins={wins}

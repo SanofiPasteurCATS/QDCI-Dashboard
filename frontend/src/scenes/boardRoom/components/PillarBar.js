@@ -1,14 +1,3 @@
-// -----------------------------------------------------------------------------
-//                          PillarBar COMPONENT
-//                      Organization: Sanofi Pasteur
-//                         Author: Kyle Thatcher
-//                           Date: 08JUL2019
-//
-//
-//* The boardroom/PillarBar component mounts all Pillar components to the board room
-//               * Filters KPIs into there respective pillars
-// -----------------------------------------------------------------------------
-
 import React from "react";
 import PropTypes from "prop-types";
 import Pillar from "../../../core/components/d3charts/pillar";

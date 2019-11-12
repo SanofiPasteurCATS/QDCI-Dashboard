@@ -5,7 +5,7 @@ const DashboardCard = props => {
   const { dashboard, selection, handleClick } = props;
   const highlighted =
     selection == dashboard.id
-      ? { border: `${"2px" + " solid "}${  accentColor}` }
+      ? { border: `${"2px" + " solid "}${accentColor}` }
       : { border: "1px solid rgba(0,0,0,.125)" };
 
   const onClick = () => {
@@ -17,13 +17,9 @@ const DashboardCard = props => {
       <div className="card-body">
         <h5 className="card-title">{dashboard.title}</h5>
         <p className="card-text">
-          Author: 
-          {' '}
-          {dashboard.author}
+          Author: {dashboard.author}
           <br />
-          Level: 
-          {' '}
-          {dashboard.level}
+          Level: {dashboard.level}
         </p>
       </div>
     </div>

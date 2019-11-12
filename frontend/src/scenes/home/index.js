@@ -1,15 +1,26 @@
 // DEPENDANCIES
-import React, { Fragment, Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-// CORE COMPONENTS
+// REDUX
+import { connect } from "react-redux";
 import {
   clearCurrentDashboard,
   clearActionTables
 } from "../../core/actions/dashboards";
 
+// MATERIAL-UI
+import { withStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+
 // NATIVE COMPONENTS
-import DashboardList from "./components/DashboardList";
+import DashboardView from "./components/DashboardView";
+
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing(6)
+  }
+});
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -19,15 +30,20 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
-      <div className="container mt-5">
-        <DashboardList />
-      </div>
+      <Container maxWidth="lg" className={classes.root}>
+        <DashboardView />
+      </Container>
     );
   }
 }
 
+Dashboard.propType = {
+  classes: PropTypes.object
+};
+
 export default connect(
   null,
   { clearCurrentDashboard, clearActionTables }
-)(Dashboard);
+)(withStyles(styles)(Dashboard));

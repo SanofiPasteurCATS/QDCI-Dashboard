@@ -25,11 +25,14 @@ html {
  * Basic styles for links
  */
 a {
-  color: $secondary-color;
+  color: inherit;
   text-decoration: none;
-
-  @include on-event {
-    color: $secondary-color;
-    text-decoration: underline;
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+  &:hover {
+    color: inherit;
+    text-decoration: none;
   }
 }
