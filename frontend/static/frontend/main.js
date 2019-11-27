@@ -2095,7 +2095,7 @@ function (_React$Component) {
       var chart = this.props.chart;
       return react_default.a.createElement("div", {
         style: {
-          margin: "".concat(10, "px ", 0)
+          margin: "".concat(10, "px ", 10, "px")
         }
       }, chart);
     } // Renders D3 chart to the faux DOM
@@ -2714,7 +2714,8 @@ function EnhancedTable(props) {
   }, react_default.a.createElement(esm_Table["default"], {
     className: classes.table,
     "aria-labelledby": "tableTitle",
-    "aria-label": "enhanced table"
+    "aria-label": "enhanced table",
+    size: "small"
   }, react_default.a.createElement(EnhancedTableHead, {
     classes: classes,
     numSelected: selected.length,
@@ -2752,7 +2753,7 @@ function EnhancedTable(props) {
     }));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
-      height: 53 * emptyRows
+      height: 32.67 * emptyRows
     }
   }, react_default.a.createElement(TableCell["default"], {
     colSpan: 6
@@ -3919,7 +3920,8 @@ function ActionTable_EnhancedTable(props) {
   }, react_default.a.createElement(esm_Table["default"], {
     className: classes.table,
     "aria-labelledby": "tableTitle",
-    "aria-label": "enhanced table"
+    "aria-label": "enhanced table",
+    size: "small"
   }, react_default.a.createElement(ActionTable_EnhancedTableHead, {
     classes: classes,
     numSelected: selected.length,
@@ -3959,7 +3961,7 @@ function ActionTable_EnhancedTable(props) {
     }, getStatus(row)));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
-      height: 53 * emptyRows
+      height: 32.67 * emptyRows
     }
   }, react_default.a.createElement(TableCell["default"], {
     colSpan: 6
@@ -4815,15 +4817,13 @@ var boardRoom_styles = function styles(theme) {
     nestedGrid: {
       display: "flex"
     },
-    pillarBarContainer: {
-      flexBasis: "15%"
+    pillarBarContainer: {//flexBasis: "20%"
     },
     column: {
       flexDirection: "column"
     },
-    mediaContainer: {
-      flexBasis: "85%",
-      maxWidth: "85%"
+    mediaContainer: {//flexBasis: "80%",
+      //maxWidth: "80%"
     },
     card: {
       maxWidth: "100%"
@@ -4960,7 +4960,7 @@ function (_Component) {
       }, react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
-        lg: 7,
+        lg: 8,
         className: classes.column,
         spacing: 2
       }, react_default.a.createElement(Card["default"], {
@@ -4973,7 +4973,7 @@ function (_Component) {
       }))), react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
-        lg: 5,
+        lg: 4,
         className: classes.column
       }, react_default.a.createElement(Card["default"], {
         className: classes.stackedCard

@@ -381,6 +381,7 @@ export default function EnhancedTable(props) {
           className={classes.table}
           aria-labelledby="tableTitle"
           aria-label="enhanced table"
+          size="small"
         >
           <EnhancedTableHead
             classes={classes}
@@ -427,7 +428,7 @@ export default function EnhancedTable(props) {
                 );
               })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
+              <TableRow style={{ height: 32.67 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
