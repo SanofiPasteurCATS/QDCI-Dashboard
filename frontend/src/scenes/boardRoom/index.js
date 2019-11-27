@@ -175,7 +175,7 @@ class Boardroom extends Component {
           </Grid>
 
           <Grid item container spacing={4}>
-            <Grid item container lg={8} className={classes.column} spacing={2}>
+            <Grid item container lg={7} className={classes.column} spacing={2}>
               <Card className={classes.card}>
                 <ActionView
                   tables={actionTables}
@@ -186,7 +186,7 @@ class Boardroom extends Component {
               </Card>
             </Grid>
 
-            <Grid item container lg={4} className={classes.column}>
+            <Grid item container lg={5} className={classes.column}>
               <Card className={classes.stackedCard}>
                 <AuditView data={audits} dashboardId={currentDashboard.id} />
               </Card>

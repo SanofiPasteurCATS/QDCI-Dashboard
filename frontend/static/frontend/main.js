@@ -2477,7 +2477,7 @@ function EnhancedTableHead(props) {
     return react_default.a.createElement(TableCell["default"], {
       key: field.name,
       align: field.numeric ? "right" : "left",
-      padding: field.disablePadding ? "none" : "default",
+      className: classes.tableHeadCell,
       sortDirection: orderBy === field.prop ? order : false
     }, react_default.a.createElement(TableSortLabel["default"], {
       active: orderBy === field.prop,
@@ -2603,6 +2603,15 @@ var useStyles = Object(esm_styles["makeStyles"])(function (theme) {
       position: "absolute",
       top: 20,
       width: 1
+    },
+    tableCell: {
+      fontSize: "0.6rem",
+      paddingLeft: "5px",
+      paddingRight: "5px"
+    },
+    tableHeadCell: {
+      paddingLeft: "5px",
+      paddingRight: "5px"
     }
   };
 });
@@ -2748,7 +2757,8 @@ function EnhancedTable(props) {
     })), tableMeta.map(function (field) {
       return react_default.a.createElement(TableCell["default"], {
         align: "left",
-        id: row.id
+        id: row.id,
+        className: classes.tableCell
       }, row[field.prop] === null ? "---" : row[field.prop]);
     }));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
@@ -3423,7 +3433,7 @@ var Carousel_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
       display: "block",
       maxWidth: "100%",
       overflow: "hidden",
-      maxHeight: "300px"
+      maxHeight: "250px"
     }, Carousel_defineProperty(_img, "maxWidth", "1500px"), Carousel_defineProperty(_img, "marginLeft", "auto"), Carousel_defineProperty(_img, "marginRight", "auto"), _img),
     stepper: {
       position: "relative",
@@ -3643,7 +3653,7 @@ function ActionTable_EnhancedTableHead(props) {
     return react_default.a.createElement(TableCell["default"], {
       key: field.name,
       align: field.numeric ? "right" : "left",
-      padding: field.disablePadding ? "none" : "default",
+      className: classes.tableHeadCell,
       sortDirection: orderBy === field.prop ? order : false
     }, react_default.a.createElement(TableSortLabel["default"], {
       active: orderBy === field.prop,
@@ -3786,6 +3796,15 @@ var ActionTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
       position: "absolute",
       top: 20,
       width: 1
+    },
+    tableCell: {
+      fontSize: "0.6rem",
+      paddingLeft: "5px",
+      paddingRight: "5px"
+    },
+    tableHeadCell: {
+      paddingLeft: "5px",
+      paddingRight: "5px"
     }
   };
 });
@@ -3954,7 +3973,8 @@ function ActionTable_EnhancedTable(props) {
     })), tableMeta.map(function (field) {
       return react_default.a.createElement(TableCell["default"], {
         align: "left",
-        id: row.id
+        id: row.id,
+        className: classes.tableCell
       }, row[field.prop] === null ? "---" : row[field.prop]);
     }), react_default.a.createElement(TableCell["default"], {
       align: "left"
@@ -4960,7 +4980,7 @@ function (_Component) {
       }, react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
-        lg: 8,
+        lg: 7,
         className: classes.column,
         spacing: 2
       }, react_default.a.createElement(Card["default"], {
@@ -4973,7 +4993,7 @@ function (_Component) {
       }))), react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
-        lg: 4,
+        lg: 5,
         className: classes.column
       }, react_default.a.createElement(Card["default"], {
         className: classes.stackedCard

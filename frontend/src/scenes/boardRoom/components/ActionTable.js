@@ -82,7 +82,7 @@ function EnhancedTableHead(props) {
           <TableCell
             key={field.name}
             align={field.numeric ? "right" : "left"}
-            padding={field.disablePadding ? "none" : "default"}
+            className={classes.tableHeadCell}
             sortDirection={orderBy === field.prop ? order : false}
           >
             <TableSortLabel
@@ -259,6 +259,15 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     top: 20,
     width: 1
+  },
+  tableCell: {
+    fontSize: "0.6rem",
+    paddingLeft: "5px",
+    paddingRight: "5px"
+  },
+  tableHeadCell: {
+    paddingLeft: "5px",
+    paddingRight: "5px"
   }
 }));
 
@@ -418,7 +427,11 @@ export default function EnhancedTable(props) {
                     </TableCell>
                     {tableMeta.map(field => {
                       return (
-                        <TableCell align="left" id={row.id}>
+                        <TableCell
+                          align="left"
+                          id={row.id}
+                          className={classes.tableCell}
+                        >
                           {row[field.prop] === null ? "---" : row[field.prop]}
                         </TableCell>
                       );
