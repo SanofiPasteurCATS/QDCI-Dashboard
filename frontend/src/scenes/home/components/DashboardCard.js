@@ -104,7 +104,7 @@ export default function DashboardCard(props) {
         <MenuItem
           onClick={() => {
             handleClose();
-            onRemoveClick();
+            onRemoveClick(props.dashboard);
           }}
         >
           Delete

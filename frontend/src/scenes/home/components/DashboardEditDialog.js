@@ -159,7 +159,6 @@ DashboardEditDialog.propTypes = {
   open: PropTypes.bool
 };
 
-export default connect(
-  null,
-  { updateDashboard, addImage }
-)(withStyles(styles)(DashboardEditDialog));
+export default connect(null, { updateDashboard, addImage })(
+  withStyles(styles)(DashboardEditDialog)
+);

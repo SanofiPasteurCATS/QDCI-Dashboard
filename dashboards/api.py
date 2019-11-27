@@ -199,12 +199,12 @@ class ActionTableViewSet(viewsets.ModelViewSet):
 
 
     def partial_update(self, request, *args, **kwargs):
-        print("hello")
         kwargs['partial'] = True
         parent_dashboard = self.request.query_params.get('parent', None)
+        tableName = self.request.query_params.get('tableName', None)
         if parent_dashboard is not None:
             if parent_dashboard != "null":
-                parent = ActionTable.objects.get(dashboard=parent_dashboard, title="Lower Level Feed")
+                parent = ActionTable.objects.get(dashboard=parent_dashboard, title=tableName)
                 request.data["parent"] = parent.id
                 request.data["parent_dashboard"] = parent_dashboard
             else:

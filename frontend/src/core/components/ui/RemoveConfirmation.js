@@ -3,77 +3,88 @@ import PropTypes from "prop-types";
 
 import Modal from "./modal/Modal";
 
-class RemoveConformation extends Component {
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import Button from "@material-ui/core/Button";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
+
+class RemoveConfirmation extends Component {
   constructor(props) {
     super(props);
     this.modalRef = React.createRef();
     this.state = {
       password: "",
       exported: false,
-      name: ""
+      name: "",
+      open: false
     };
   }
-  static propTypes = {
-    removeContext: PropTypes.object
-  };
-
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { removeContext } = this.props;
-    const response = removeContext.onSubmit(this.state);
-    if (response) $("#removeConfirmation").modal("hide");
-  };
 
   render() {
     const { removeContext } = this.props;
-    if (!removeContext)
-      return (
-        <Modal
-          title="Are You Sure?"
-          iconClass="im im-data-remove"
-          id="removeConfirmation"
-        >
-          {" "}
-        </Modal>
-      );
+    if (!removeContext) return <></>;
     const { type, item } = removeContext;
-    const { password, name, exported } = this.state;
+    const { name, open } = this.state;
     return (
-      <Modal
-        title="Are You Sure?"
-        iconClass="im im-data-remove"
-        id="removeConfirmation"
-        ref={this.modalRef}
+      <Dialog
+        open={open}
+        onClose={this.handleToggleOpen(false)}
+        aria-labelledby="form-dialog-title"
       >
-        <form onSubmit={this.onSubmit}>
-          <p className="card-text">
-            This action cannot be undone. This will permanently remove the{" "}
-            <span style={{ color: "red", fontWeight: "bold" }}>
+        <DialogTitle id="form-dialog-title">Are You Sure?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            This action cannot be undone. This will permanetly remove the{" "}
+            <span style={{ color: "#3F51B5", fontWeight: "bold" }}>
               {item ? item.name || item.title : "null"}
             </span>{" "}
             {`${type} and all associated data.`}{" "}
-          </p>
-          <div className="form-group">
-            <label htmlFor="name">{`Please type in the name of the ${type} to confirm`}</label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              className="form-control"
-              onChange={this.onChange}
-            />
-          </div>
-          <button type="submit" className="btn btn-warning">
-            I understand the consequences, remove this item
-          </button>
-        </form>
-      </Modal>
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Confirm name"
+            type="text"
+            fullWidth
+            name="name"
+            onChange={this.handleChange}
+            value={name}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleToggleOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.handleSubmit} color="primary">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleToggleOpen = state => () => {
+    this.setState({ open: state });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { removeContext } = this.props;
+    const response = removeContext.onSubmit(this.state);
+    if (response) this.setState({ open: false });
+  };
 }
 
-export default RemoveConformation;
+RemoveConfirmation.propTypes = {
+  removeContext: PropTypes.object
+};
+
+export default RemoveConfirmation;

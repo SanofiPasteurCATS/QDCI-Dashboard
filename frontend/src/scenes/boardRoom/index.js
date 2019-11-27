@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import HeatCheck from "../../core/components/d3charts/HeatCheck";
 
 // CORE COMPONENTS
 import {
@@ -13,16 +14,65 @@ import {
   getAudits,
   getWins,
   getHeat,
-  updateHeat
+  updateHeat,
+  addWin
 } from "../../core/actions/dashboards";
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
-import Carousel from "../../core/components/ui/Carousel";
+//import Carousel from "../../core/components/ui/Carousel";
 
 // NATIVE COMPONENTS
 import PillarBar from "./components/PillarBar";
-import WidgetView from "./components/WidgetView";
+import AuditView from "./components/AuditView";
+import WinView from "./components/WinView";
+import Table from "./components/Table";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import Carousel from "./components/Carousel";
+import Toolbar from "@material-ui/core/Toolbar";
+import ReplayIcon from "@material-ui/icons/Replay";
+import ActionView from "./components/ActionView";
 
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+
+const styles = theme => ({
+  rootContainer: {
+    margin: 0,
+    width: "100%",
+    marginTop: theme.spacing(2)
+  },
+  carouselContainer: {
+    display: "flex",
+    justifyContent: "center",
+    height: "fit-content"
+  },
+  nestedGrid: {
+    display: "flex"
+  },
+  pillarBarContainer: {
+    flexBasis: "15%"
+  },
+  column: {
+    flexDirection: "column"
+  },
+  mediaContainer: {
+    flexBasis: "85%",
+    maxWidth: "85%"
+  },
+  card: {
+    maxWidth: "100%"
+  },
+  stackedCard: {
+    marginBottom: theme.spacing(4)
+  },
+  title: {
+    flex: "1 1 100%",
+    color: "rgba(0, 0, 0, 0.87)"
+  }
+});
 
 class Boardroom extends Component {
   static propTypes = {
@@ -67,60 +117,97 @@ class Boardroom extends Component {
       dashboards,
       audits,
       wins,
-      heat
+      heat,
+      classes,
+      updateHeat
     } = this.props;
     const { id } = this.props.match.params;
-
     // If there is no current dashboard show the loading screen
 
     if (currentDashboard == null) {
       return <LoadingScreen />;
     }
 
-    const color = currentDashboard.background;
-
+    const images = currentDashboard.images;
     return (
-      <div
-        className="container-fluid"
-        style={{
-          padding: 0,
-          background: color,
-          height: "fit-content"
-        }}
-      >
-        <div className="row" style={{ margin: 0 }}>
-          <div className="col-lg-2 p-0">
-            <div className="card card-body ml-4 mt-4 mr-2 mb-4 border-pillars">
-              <PillarBar kpis={kpis} dashboardId={id} />
-            </div>
-          </div>
-          <div className="col-lg-10 p-0">
-            <div className="row m-0">
-              <div className="col-lg-12 mt-4">
-                <div className="row">
-                  {currentDashboard.images.length ? (
-                    <div className="col-lg-6 mb-4">
-                      <Carousel images={currentDashboard.images}></Carousel>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-              </div>
+      <Grid container spacing={4} className={classes.rootContainer}>
+        <Grid item lg={2} className={classes.pillarBarContainer}>
+          <Card>
+            <PillarBar kpis={kpis} dashboardId={id} />
+          </Card>
+        </Grid>
 
-              <WidgetView
-                tables={actionTables}
-                audits={audits}
-                wins={wins}
-                heat={heat}
-                dashboards={dashboards}
+        <Grid
+          item
+          container
+          lg={10}
+          spacing={1}
+          className={classes.mediaContainer}
+        >
+          <Grid item lg={6} className={classes.carouselContainer}>
+            {images.length ? (
+              <Carousel
+                slides={images.map(image => {
+                  return { imgPath: image.image };
+                })}
               />
-            </div>
-          </div>
-        </div>
-      </div>
+            ) : null}
+          </Grid>
+
+          <Grid item lg={6}>
+            <Toolbar>
+              <Typography
+                className={classes.title}
+                variant="h6"
+                id="heatCheckTitle"
+                color="inherit"
+              >
+                Heat Check
+              </Typography>
+              <Tooltip title="Reset">
+                <IconButton onClick={this.resetHeat} aria-label="reset">
+                  <ReplayIcon />
+                </IconButton>
+              </Tooltip>
+            </Toolbar>
+
+            <HeatCheck heat={heat} onClick={updateHeat}></HeatCheck>
+          </Grid>
+
+          <Grid item container spacing={4}>
+            <Grid item container lg={7} className={classes.column} spacing={2}>
+              <Card className={classes.card}>
+                <ActionView
+                  tables={actionTables}
+                  dashboardId={currentDashboard.id}
+                  dashboards={dashboards}
+                  currentDashboard={currentDashboard}
+                />
+              </Card>
+            </Grid>
+
+            <Grid item container lg={5} className={classes.column}>
+              <Card className={classes.stackedCard}>
+                <AuditView data={audits} dashboardId={currentDashboard.id} />
+              </Card>
+
+              <Card>
+                <WinView data={wins} dashboardId={currentDashboard.id} />
+              </Card>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
+  resetHeat = () => {
+    const { updateHeat, heat } = this.props;
+    for (let i in heat) {
+      let h = { ...heat[i] };
+      h.value = 0;
+      updateHeat(h, h.id);
+    }
+  };
 }
 
 Boardroom.defaultProps = {
@@ -139,17 +226,15 @@ const mapStateToProps = state => ({
   heat: state.dashboards.heat
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    getKpis,
-    getDashboards,
-    getADashboard,
-    clearKpis,
-    getActionTable,
-    getAudits,
-    getWins,
-    getHeat,
-    updateHeat
-  }
-)(Boardroom);
+export default connect(mapStateToProps, {
+  getKpis,
+  getDashboards,
+  getADashboard,
+  clearKpis,
+  getActionTable,
+  getAudits,
+  getWins,
+  getHeat,
+  updateHeat,
+  addWin
+})(withStyles(styles)(Boardroom));

@@ -28,6 +28,7 @@ class DashboardView extends Component {
       editIsOpen: false,
       newIsOpen: false
     };
+    this.RemoveConfirmation = React.createRef();
   }
 
   componentDidMount() {
@@ -62,6 +63,7 @@ class DashboardView extends Component {
             type: "dashboard",
             onSubmit: this.onRemoveConfirmationSubmit
           }}
+          ref={this.RemoveConfirmation}
         />
         <DashboardEditDialog
           open={editIsOpen}
@@ -80,6 +82,7 @@ class DashboardView extends Component {
     this.setState({
       removeItem
     });
+    this.RemoveConfirmation.current.handleToggleOpen(true)();
   };
 
   setEdit = dashboard => {

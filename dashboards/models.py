@@ -96,7 +96,7 @@ class Action(models.Model):
     root_cause = models.CharField(null=True,max_length=256)
     solution = models.CharField(null=True,max_length=256)
     leader = models.CharField(null=True,max_length=256)
-    date = models.DateField(default=None, null=True)
+    date = models.CharField(max_length=50, null=True)
     date_created = models.DateTimeField(default=timezone.now, null=False)
 
 class Win(models.Model):
@@ -115,8 +115,8 @@ class Heat(models.Model):
 class Audit(models.Model):
     dashboard = models.ForeignKey(Dashboard, related_name="audits", on_delete=models.CASCADE, default= None, null=True)
     description = models.CharField(max_length=256, null= True)
-    start_date = models.DateField(default= None, null=True)
-    end_date = models.DateField(default= None, null=True)
+    start_date = models.CharField(max_length=50, null=True)
+    end_date = models.CharField(max_length=50, null=True)
 
 
 class Image(models.Model):

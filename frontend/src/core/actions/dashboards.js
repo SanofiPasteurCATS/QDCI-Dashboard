@@ -385,13 +385,14 @@ export const updateAction = (action, id) => (dispatch, getState) => {
     });
 };
 
-export const updateActionTable = (actionTable, id, parent) => (
+export const updateActionTable = (actionTable, id, parent, tableName) => (
   dispatch,
   getState
 ) => {
   axios
     .patch(
-      `api/actionTable/${id}/?parent=${parent || "null"}`,
+      `api/actionTable/${id}/?parent=${parent ||
+        "null"}&tableName=${tableName || "null"}`,
       actionTable,
       tokenConfig(getState)
     )

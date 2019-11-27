@@ -10,7 +10,7 @@
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -160,16 +160,23 @@
   !*** ./frontend/src/index.js + 71 modules ***!
   \********************************************/
 /*! no exports provided */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@date-io/date-fns/build/index.esm.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/AppBar/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Button/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/CardActions/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/CardContent/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Card/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Checkbox/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Container/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/DialogActions/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/DialogContentText/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/DialogContent/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/DialogTitle/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Dialog/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Drawer/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Fab/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/FormControlLabel/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/FormControl/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/GridListTileBar/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/GridListTile/index.js */
@@ -184,40 +191,64 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/List/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/MenuItem/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Menu/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/MobileStepper/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Paper/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Select/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Slide/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/StepLabel/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Step/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Stepper/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Switch/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TableBody/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TableCell/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TableHead/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TablePagination/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TableRow/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TableSortLabel/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Table/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/TextField/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Toolbar/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Tooltip/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Typography/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/styles/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/AccountCircle.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Add.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/ArrowDownward.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/ArrowUpward.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Close.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Dashboard.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Delete.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/DeleteForever.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Edit.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/FilterList.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/KeyboardArrowLeft.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/KeyboardArrowRight.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Menu.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/MoreHoriz.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Publish.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Replay.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/School.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Settings.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/SupervisorAccount.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/pickers/esm/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/clsx/dist/clsx.m.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/parseISO/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/format/index.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-datepicker/dist/react-datepicker.min.js (referenced with cjs require)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/date-fns/esm/parseISO/index.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-datepicker/dist/react-datepicker.min.js (referenced with cjs require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/prop-types/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert/dist/esm/react-alert.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-color/lib/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-compound-slider/es/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-datepicker/es/index.js (<- Module uses injected variables (global)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-datepicker/dist/react-datepicker.min.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-dom/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-faux-dom/lib/ReactFauxDOM.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-redux/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-router-dom/esm/react-router-dom.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-spinners/CircleLoader.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-swipeable-views-utils/lib/index.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-swipeable-views/lib/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-tooltip/dist/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/redux-devtools-extension/index.js (<- Module is not an ECMAScript module) */
@@ -254,7 +285,7 @@ var react_alert = __webpack_require__("./node_modules/react-alert/dist/esm/react
 // EXTERNAL MODULE: ./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js
 var react_alert_template_basic = __webpack_require__("./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js");
 
-// EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 21 modules
+// EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 24 modules
 var es = __webpack_require__("./node_modules/react-redux/es/index.js");
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
@@ -448,11 +479,11 @@ var auth_logout = function logout() {
   };
 };
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/styles/index.js + 7 modules
-var styles = __webpack_require__("./node_modules/@material-ui/core/esm/styles/index.js");
+var esm_styles = __webpack_require__("./node_modules/@material-ui/core/esm/styles/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/Theme.js
 
-var primaryTheme = Object(styles["createMuiTheme"])({
+var primaryTheme = Object(esm_styles["createMuiTheme"])({
   palette: {
     secondary: {
       main: "#9BB0DB"
@@ -586,7 +617,7 @@ function (_Component) {
       var _this$state2 = this.state,
           username = _this$state2.username,
           password = _this$state2.password;
-      return react_default.a.createElement(styles["ThemeProvider"], {
+      return react_default.a.createElement(esm_styles["ThemeProvider"], {
         theme: primaryTheme
       }, react_default.a.createElement("form", {
         onSubmit: this.onSubmit
@@ -671,7 +702,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ var scenes_login = (Object(es["connect"])(mapStateToProps, {
   login: auth_login
-})(Object(styles["withStyles"])(login_styles)(login_Login)));
+})(Object(esm_styles["withStyles"])(login_styles)(login_Login)));
 // CONCATENATED MODULE: ./frontend/src/scenes/portal/scenes/register/index.js
 function register_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { register_typeof = function _typeof(obj) { return typeof obj; }; } else { register_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return register_typeof(obj); }
 
@@ -809,7 +840,7 @@ function (_Component) {
           email = _this$state2.email,
           password = _this$state2.password,
           password2 = _this$state2.password2;
-      return react_default.a.createElement(styles["ThemeProvider"], {
+      return react_default.a.createElement(esm_styles["ThemeProvider"], {
         theme: primaryTheme
       }, react_default.a.createElement("form", {
         onSubmit: this.onSubmit
@@ -940,9 +971,147 @@ var register_mapStateToProps = function mapStateToProps(state) {
 /* harmony default export */ var scenes_register = (Object(es["connect"])(register_mapStateToProps, {
   register: auth_register,
   createMessage: messages_createMessage
-})(Object(styles["withStyles"])(register_styles)(register_Register)));
+})(Object(esm_styles["withStyles"])(register_styles)(register_Register)));
+// EXTERNAL MODULE: ./node_modules/d3/index.js + 488 modules
+var d3 = __webpack_require__("./node_modules/d3/index.js");
+
+// EXTERNAL MODULE: ./node_modules/react-faux-dom/lib/ReactFauxDOM.js
+var ReactFauxDOM = __webpack_require__("./node_modules/react-faux-dom/lib/ReactFauxDOM.js");
+
+// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/HeatCheck.js
+function HeatCheck_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { HeatCheck_typeof = function _typeof(obj) { return typeof obj; }; } else { HeatCheck_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return HeatCheck_typeof(obj); }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { HeatCheck_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function HeatCheck_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function HeatCheck_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function HeatCheck_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function HeatCheck_createClass(Constructor, protoProps, staticProps) { if (protoProps) HeatCheck_defineProperties(Constructor.prototype, protoProps); if (staticProps) HeatCheck_defineProperties(Constructor, staticProps); return Constructor; }
+
+function HeatCheck_possibleConstructorReturn(self, call) { if (call && (HeatCheck_typeof(call) === "object" || typeof call === "function")) { return call; } return HeatCheck_assertThisInitialized(self); }
+
+function HeatCheck_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function HeatCheck_getPrototypeOf(o) { HeatCheck_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return HeatCheck_getPrototypeOf(o); }
+
+function HeatCheck_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) HeatCheck_setPrototypeOf(subClass, superClass); }
+
+function HeatCheck_setPrototypeOf(o, p) { HeatCheck_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return HeatCheck_setPrototypeOf(o, p); }
+
+
+
+
+
+var width = 400;
+var height = 130;
+
+var HeatCheck_HeatCheck =
+/*#__PURE__*/
+function (_Component) {
+  HeatCheck_inherits(HeatCheck, _Component);
+
+  function HeatCheck(props) {
+    HeatCheck_classCallCheck(this, HeatCheck);
+
+    return HeatCheck_possibleConstructorReturn(this, HeatCheck_getPrototypeOf(HeatCheck).call(this, props));
+  }
+
+  HeatCheck_createClass(HeatCheck, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.renderD3();
+      this.updateD3();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var heat = this.props.heat;
+
+      if (prevProps.heat != heat) {
+        this.updateD3();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var chart = this.props.chart;
+      return react_default.a.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "center"
+        }
+      }, chart);
+    }
+  }, {
+    key: "renderD3",
+    value: function renderD3() {
+      var connectFauxDOM = this.props.connectFauxDOM;
+      var faux = connectFauxDOM("svg", "chart");
+      var chart = d3["select"](faux);
+      chart.attr("viewBox", "0 0 ".concat(width, " ").concat(height)).attr("height", height).attr("width", width).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink");
+    }
+  }, {
+    key: "updateD3",
+    value: function updateD3() {
+      var _this$props = this.props,
+          connectFauxDOM = _this$props.connectFauxDOM,
+          animateFauxDOM = _this$props.animateFauxDOM,
+          heat = _this$props.heat,
+          onClick = _this$props.onClick;
+      var faux = connectFauxDOM("svg", "chart");
+      var chart = d3["select"](faux);
+      if (!heat) return; // Scale used to size the heat range circles
+
+      var heatValues = heat.map(function (h) {
+        return h.value;
+      });
+      var radiusScale = d3["scaleLinear"]().domain([d3["min"](heatValues), d3["max"](heatValues)]).range([30, 50]); // Creates the text fields inside the circles which will display the heat number
+
+      var texts = chart.selectAll("text");
+      var textsData = texts.data(heat);
+      var text = textsData.enter().append("text").merge(texts).style("font-size", "24px").style("font-weight", "bold").attr("dx", function (d, i) {
+        return 56 + 120 * i + d.value.toString().length * -9;
+      }).attr("dy", function (d, i) {
+        return 76;
+      }).style("opacity", 1).text(function (d) {
+        return "".concat(d.value);
+      });
+      var circles = chart.selectAll("circle"); // DATA BIND
+
+      var circlesData = circles.data(heat); // ENTER SECLECTION
+
+      var circleEnter = circlesData.enter().append("circle").attr("r", 0).merge(circles).attr("cy", 70).attr("cx", function (d, i) {
+        return 53 + 120 * i;
+      }).style("opacity", 0.6).on("click", function (d) {
+        var newHeat = _objectSpread({}, d);
+
+        newHeat.value += 1;
+        onClick(newHeat, newHeat.id);
+      }).transition().duration(500).attr("r", function (d) {
+        return radiusScale(parseInt(d.value));
+      }).transition().duration(500).style("fill", function (d) {
+        return d.color;
+      });
+      animateFauxDOM(2500);
+    }
+  }]);
+
+  return HeatCheck;
+}(react["Component"]);
+
+HeatCheck_HeatCheck.defaultProps = {
+  chart: "Loading"
+};
+/* harmony default export */ var d3charts_HeatCheck = (Object(ReactFauxDOM["withFauxDOM"])(HeatCheck_HeatCheck));
 // CONCATENATED MODULE: ./frontend/src/core/actions/dashboards.js
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } return target; }
+function dashboards_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { dashboards_ownKeys(Object(source), true).forEach(function (key) { dashboards_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { dashboards_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -1320,9 +1489,9 @@ var dashboards_updateAction = function updateAction(action, id) {
     });
   };
 };
-var dashboards_updateActionTable = function updateActionTable(actionTable, id, parent) {
+var dashboards_updateActionTable = function updateActionTable(actionTable, id, parent, tableName) {
   return function (dispatch, getState) {
-    axios_default.a.patch("api/actionTable/".concat(id, "/?parent=").concat(parent || "null"), actionTable, tokenConfig(getState)).then(function (res) {
+    axios_default.a.patch("api/actionTable/".concat(id, "/?parent=").concat(parent || "null", "&tableName=").concat(tableName || "null"), actionTable, tokenConfig(getState)).then(function (res) {
       dispatch(messages_createMessage({
         updateActionTable: "Connection Made"
       }));
@@ -1502,7 +1671,7 @@ var dashboards_addImage = function addImage(image) {
     formData.append("dashboard", JSON.stringify(image.dashboard));
     formData.append("image", image.image);
     axios_default.a.post("api/image/", formData, {
-      headers: _objectSpread({}, tokenConfig(getState).headers, {
+      headers: dashboards_objectSpread({}, tokenConfig(getState).headers, {
         "Content-Type": "multipart/form-data"
       })
     }).then(function (res) {
@@ -1554,6 +1723,8 @@ var primaryColor = "#EEEEEE";
 var secondaryColor = "#EEEEEE";
 var accentColor = "#9BB0DB";
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/LoadingScreen.js
+function _EMOTION_STRINGIFIED_CSS_ERROR__() { return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop)."; }
+
 // DEPENDANCIES
 
 
@@ -1561,9 +1732,10 @@ var accentColor = "#9BB0DB";
 
 
 var override =  false ? undefined : {
-  name: "qdsigz-override",
-  styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;label:override;",
-  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5jb25zdCBvdmVycmlkZSA9IGNzc2BcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIG1hcmdpbjogMCBhdXRvIDIwcHggYXV0bztcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG5gO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sLW1kLTYgbS1hdXRvXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCB0ZXh0LWNlbnRlciBtdC01XCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkIGNhcmQtYm9keVwiPlxyXG4gICAgICAgICAgPENpcmNsZUxvYWRlclxyXG4gICAgICAgICAgICBzaXplVW5pdD1cInB4XCJcclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRDb2xvcn1cclxuICAgICAgICAgIC8+XHJcbiAgICAgICAgICA8aDEgc3R5bGU9e3sgbWFyZ2luOiAwIH19PkxvYWRpbmc8L2gxPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn1cclxuIl19 */"
+  name: "11wvrmk-override",
+  styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;;label:override;",
+  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5jb25zdCBvdmVycmlkZSA9IGNzc2BcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIG1hcmdpbjogMCBhdXRvIDIwcHggYXV0bztcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG5gO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sLW1kLTYgbS1hdXRvXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCB0ZXh0LWNlbnRlciBtdC01XCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkIGNhcmQtYm9keVwiPlxyXG4gICAgICAgICAgPENpcmNsZUxvYWRlclxyXG4gICAgICAgICAgICBzaXplVW5pdD1cInB4XCJcclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRDb2xvcn1cclxuICAgICAgICAgIC8+XHJcbiAgICAgICAgICA8aDEgc3R5bGU9e3sgbWFyZ2luOiAwIH19PkxvYWRpbmc8L2gxPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn1cclxuIl19 */",
+  toString: _EMOTION_STRINGIFIED_CSS_ERROR__
 };
 /* harmony default export */ var LoadingScreen = (function () {
   return react_default.a.createElement("div", {
@@ -1583,98 +1755,6 @@ var override =  false ? undefined : {
     }
   }, "Loading"))));
 });
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/Carousel.js
-function Carousel_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Carousel_typeof = function _typeof(obj) { return typeof obj; }; } else { Carousel_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Carousel_typeof(obj); }
-
-function Carousel_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Carousel_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Carousel_createClass(Constructor, protoProps, staticProps) { if (protoProps) Carousel_defineProperties(Constructor.prototype, protoProps); if (staticProps) Carousel_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Carousel_possibleConstructorReturn(self, call) { if (call && (Carousel_typeof(call) === "object" || typeof call === "function")) { return call; } return Carousel_assertThisInitialized(self); }
-
-function Carousel_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Carousel_getPrototypeOf(o) { Carousel_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Carousel_getPrototypeOf(o); }
-
-function Carousel_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Carousel_setPrototypeOf(subClass, superClass); }
-
-function Carousel_setPrototypeOf(o, p) { Carousel_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Carousel_setPrototypeOf(o, p); }
-
-
-
-
-
-var Carousel_Carousel =
-/*#__PURE__*/
-function (_Component) {
-  Carousel_inherits(Carousel, _Component);
-
-  function Carousel(props) {
-    Carousel_classCallCheck(this, Carousel);
-
-    return Carousel_possibleConstructorReturn(this, Carousel_getPrototypeOf(Carousel).call(this, props));
-  }
-
-  Carousel_createClass(Carousel, [{
-    key: "render",
-    value: function render() {
-      var images = this.props.images;
-      return react_default.a.createElement("div", {
-        id: "demo",
-        className: "carousel slide ml-auto mr-auto",
-        "data-ride": "carousel"
-      }, react_default.a.createElement("ul", {
-        className: "carousel-indicators"
-      }, images.map(function (image, i) {
-        return react_default.a.createElement("li", {
-          "data-target": "#demo",
-          className: i === 0 ? "active" : "",
-          "data-slide-to": i
-        });
-      })), react_default.a.createElement("div", {
-        className: "carousel-inner"
-      }, images.map(function (image, i) {
-        return react_default.a.createElement("div", {
-          className: "carousel-item ".concat(i === 0 ? "active" : "")
-        }, react_default.a.createElement("img", {
-          style: {
-            maxHeight: "300px",
-            maxWidth: "1500px"
-          },
-          src: image.image,
-          alt: true
-        }));
-      })), react_default.a.createElement("a", {
-        className: "carousel-control-prev",
-        href: "#demo",
-        "data-slide": "prev"
-      }, react_default.a.createElement("span", {
-        className: "carousel-control-prev-icon"
-      })), react_default.a.createElement("a", {
-        className: "carousel-control-next",
-        href: "#demo",
-        "data-slide": "next"
-      }, react_default.a.createElement("span", {
-        className: "carousel-control-next-icon"
-      })));
-    }
-  }]);
-
-  return Carousel;
-}(react["Component"]);
-
-Carousel_Carousel.propTypes = {
-  images: prop_types_default.a.array.isRequired
-};
-/* harmony default export */ var ui_Carousel = (Carousel_Carousel);
-// EXTERNAL MODULE: ./node_modules/d3/index.js + 483 modules
-var d3 = __webpack_require__("./node_modules/d3/index.js");
-
-// EXTERNAL MODULE: ./node_modules/react-faux-dom/lib/ReactFauxDOM.js
-var ReactFauxDOM = __webpack_require__("./node_modules/react-faux-dom/lib/ReactFauxDOM.js");
-
 // CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
 // Configuration for table headers and form controls
 
@@ -1937,7 +2017,9 @@ var ColorHelpers_getAbsoluteColor = function getAbsoluteColor(target, value, war
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/pillar.js
 function pillar_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillar_typeof = function _typeof(obj) { return typeof obj; }; } else { pillar_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillar_typeof(obj); }
 
-function pillar_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { pillar_defineProperty(target, key, source[key]); }); } return target; }
+function pillar_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function pillar_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { pillar_ownKeys(Object(source), true).forEach(function (key) { pillar_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { pillar_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function pillar_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2226,12 +2308,3102 @@ PillarBar_PillarBar.defaultProps = {
   kpis: null
 };
 /* harmony default export */ var components_PillarBar = (PillarBar_PillarBar);
+// EXTERNAL MODULE: ./node_modules/clsx/dist/clsx.m.js
+var clsx_m = __webpack_require__("./node_modules/clsx/dist/clsx.m.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Table/index.js + 1 modules
+var esm_Table = __webpack_require__("./node_modules/@material-ui/core/esm/Table/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableBody/index.js + 1 modules
+var TableBody = __webpack_require__("./node_modules/@material-ui/core/esm/TableBody/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableCell/index.js + 1 modules
+var TableCell = __webpack_require__("./node_modules/@material-ui/core/esm/TableCell/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableHead/index.js + 1 modules
+var TableHead = __webpack_require__("./node_modules/@material-ui/core/esm/TableHead/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TablePagination/index.js + 2 modules
+var TablePagination = __webpack_require__("./node_modules/@material-ui/core/esm/TablePagination/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableRow/index.js + 1 modules
+var TableRow = __webpack_require__("./node_modules/@material-ui/core/esm/TableRow/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableSortLabel/index.js + 2 modules
+var TableSortLabel = __webpack_require__("./node_modules/@material-ui/core/esm/TableSortLabel/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Toolbar/index.js + 1 modules
+var Toolbar = __webpack_require__("./node_modules/@material-ui/core/esm/Toolbar/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Paper/index.js + 1 modules
+var Paper = __webpack_require__("./node_modules/@material-ui/core/esm/Paper/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Checkbox/index.js + 4 modules
+var Checkbox = __webpack_require__("./node_modules/@material-ui/core/esm/Checkbox/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/IconButton/index.js + 1 modules
+var IconButton = __webpack_require__("./node_modules/@material-ui/core/esm/IconButton/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Edit.js
+var Edit = __webpack_require__("./node_modules/@material-ui/icons/Edit.js");
+var Edit_default = /*#__PURE__*/__webpack_require__.n(Edit);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Tooltip/index.js + 3 modules
+var esm_Tooltip = __webpack_require__("./node_modules/@material-ui/core/esm/Tooltip/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/FormControlLabel/index.js + 1 modules
+var FormControlLabel = __webpack_require__("./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Switch/index.js + 1 modules
+var Switch = __webpack_require__("./node_modules/@material-ui/core/esm/Switch/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Delete.js
+var Delete = __webpack_require__("./node_modules/@material-ui/icons/Delete.js");
+var Delete_default = /*#__PURE__*/__webpack_require__.n(Delete);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Add.js
+var Add = __webpack_require__("./node_modules/@material-ui/icons/Add.js");
+var Add_default = /*#__PURE__*/__webpack_require__.n(Add);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/FilterList.js
+var FilterList = __webpack_require__("./node_modules/@material-ui/icons/FilterList.js");
+var FilterList_default = /*#__PURE__*/__webpack_require__.n(FilterList);
+
+// CONCATENATED MODULE: ./frontend/src/core/helpers/Filters.js
+// Find the first object in an array whose property defined by prop matches value
+var getItem = function getItem(value, arr, prop) {
+  if (!arr) return null;
+  var query = arr.filter(function (item) {
+    return item[prop] == value;
+  });
+  if (!query.length) return null;else return query[0];
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/Table.js
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function Table_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function getSorting(order, orderBy) {
+  return order === "desc" ? function (a, b) {
+    return desc(a, b, orderBy);
+  } : function (a, b) {
+    return -desc(a, b, orderBy);
+  };
+}
+
+function EnhancedTableHead(props) {
+  var classes = props.classes,
+      onSelectAllClick = props.onSelectAllClick,
+      order = props.order,
+      orderBy = props.orderBy,
+      numSelected = props.numSelected,
+      rowCount = props.rowCount,
+      onRequestSort = props.onRequestSort,
+      tableMeta = props.tableMeta;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react_default.a.createElement(TableHead["default"], null, react_default.a.createElement(TableRow["default"], null, react_default.a.createElement(TableCell["default"], {
+    padding: "checkbox"
+  }, react_default.a.createElement(Checkbox["default"], {
+    indeterminate: numSelected > 0 && numSelected < rowCount,
+    checked: numSelected === rowCount && rowCount != 0,
+    onChange: onSelectAllClick,
+    inputProps: {
+      "aria-label": "select all"
+    }
+  })), tableMeta.map(function (field, i) {
+    return react_default.a.createElement(TableCell["default"], {
+      key: field.name,
+      align: field.numeric ? "right" : "left",
+      padding: field.disablePadding ? "none" : "default",
+      sortDirection: orderBy === field.prop ? order : false
+    }, react_default.a.createElement(TableSortLabel["default"], {
+      active: orderBy === field.prop,
+      direction: order,
+      onClick: createSortHandler(field.prop)
+    }, field.name, orderBy === field.prop ? react_default.a.createElement("span", {
+      className: classes.visuallyHidden
+    }, order === "desc" ? "sorted descending" : "sorted ascending") : null));
+  })));
+}
+
+EnhancedTableHead.propTypes = {
+  classes: prop_types_default.a.object.isRequired,
+  numSelected: prop_types_default.a.number.isRequired,
+  onRequestSort: prop_types_default.a.func.isRequired,
+  onSelectAllClick: prop_types_default.a.func.isRequired,
+  order: prop_types_default.a.oneOf(["asc", "desc"]).isRequired,
+  orderBy: prop_types_default.a.string.isRequired,
+  rowCount: prop_types_default.a.number.isRequired
+};
+var useToolbarStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1)
+    },
+    highlight: theme.palette.type === "light" ? {
+      color: theme.palette.secondary.main,
+      backgroundColor: Object(esm_styles["lighten"])(theme.palette.secondary.light, 0.85)
+    } : {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    title: {
+      flex: "1 1 100%"
+    }
+  };
+});
+
+var Table_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
+  var classes = useToolbarStyles();
+  var numSelected = props.numSelected,
+      title = props.title,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      data = props.data;
+
+  var handleClickEdit = function handleClickEdit() {
+    var onClickEdit = props.onClickEdit,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickEdit(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickDelete = function handleClickDelete() {
+    var onClickDelete = props.onClickDelete,
+        selected = props.selected,
+        setSelected = props.setSelected;
+    onClickDelete(selected);
+    setSelected([]);
+  };
+
+  return react_default.a.createElement(Toolbar["default"], {
+    className: Object(clsx_m["default"])(classes.root, Table_defineProperty({}, classes.highlight, numSelected > 0))
+  }, numSelected > 0 ? react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    color: "inherit",
+    variant: "subtitle1"
+  }, numSelected, " selected") : react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    variant: "h6",
+    id: "tableTitle"
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickEdit && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Edit"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickEdit,
+    "aria-label": "edit"
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Delete"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickDelete,
+    "aria-label": "delete"
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Add entry"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "add",
+    onClick: onClickAdd
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Filter list"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "filter list"
+  }, react_default.a.createElement(FilterList_default.a, null)))));
+};
+
+Table_EnhancedTableToolbar.propTypes = {
+  numSelected: prop_types_default.a.number.isRequired
+};
+var useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: "100%",
+      marginTop: theme.spacing(1),
+      maxWidth: "100%"
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      maxWidth: "100%"
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1
+    }
+  };
+});
+function EnhancedTable(props) {
+  var title = props.title,
+      data = props.data,
+      tableMeta = props.tableMeta,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit;
+  var classes = useStyles();
+
+  var _React$useState = react_default.a.useState("asc"),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react_default.a.useState(tableMeta[0].name),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState([]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(0),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      page = _React$useState8[0],
+      setPage = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(false),
+      _React$useState10 = _slicedToArray(_React$useState9, 2),
+      dense = _React$useState10[0],
+      setDense = _React$useState10[1];
+
+  var _React$useState11 = react_default.a.useState(5),
+      _React$useState12 = _slicedToArray(_React$useState11, 2),
+      rowsPerPage = _React$useState12[0],
+      setRowsPerPage = _React$useState12[1];
+
+  var handleRequestSort = function handleRequestSort(event, property) {
+    var isDesc = orderBy === property && order === "desc";
+    setOrder(isDesc ? "asc" : "desc");
+    setOrderBy(property);
+  };
+
+  var handleSelectAllClick = function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      var newSelecteds = data.map(function (entry) {
+        return entry.id;
+      });
+      setSelected(newSelecteds);
+      return;
+    }
+
+    setSelected([]);
+  };
+
+  var setSelectedHook = function setSelectedHook(newSelected) {
+    setSelected(newSelected);
+  };
+
+  var handleClick = function handleClick(event, id) {
+    var selectedIndex = selected.indexOf(id);
+    var newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+
+    setSelected(newSelected);
+  };
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var handleChangeRowsPerPage = function handleChangeRowsPerPage(event) {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  var isSelected = function isSelected(id) {
+    return selected.indexOf(id) !== -1;
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement(Table_EnhancedTableToolbar, {
+    title: title,
+    numSelected: selected.length,
+    onClickAdd: onClickAdd,
+    onClickDelete: onClickDelete,
+    onClickEdit: onClickEdit,
+    selected: selected,
+    setSelected: setSelectedHook,
+    data: data
+  }), react_default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react_default.a.createElement(esm_Table["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    "aria-label": "enhanced table"
+  }, react_default.a.createElement(EnhancedTableHead, {
+    classes: classes,
+    numSelected: selected.length,
+    order: order,
+    orderBy: orderBy,
+    onSelectAllClick: handleSelectAllClick,
+    onRequestSort: handleRequestSort,
+    rowCount: data.length,
+    tableMeta: tableMeta
+  }), react_default.a.createElement(TableBody["default"], null, stableSort(data, getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    var isItemSelected = isSelected(row.id);
+    var labelId = "enhanced-table-checkbox-".concat(index);
+    return react_default.a.createElement(TableRow["default"], {
+      hover: true,
+      onClick: function onClick(event) {
+        return handleClick(event, row.id);
+      },
+      role: "checkbox",
+      "aria-checked": isItemSelected,
+      tabIndex: -1,
+      key: row.id,
+      selected: isItemSelected
+    }, react_default.a.createElement(TableCell["default"], {
+      padding: "checkbox"
+    }, react_default.a.createElement(Checkbox["default"], {
+      checked: isItemSelected,
+      inputProps: {
+        "aria-labelledby": labelId
+      }
+    })), tableMeta.map(function (field) {
+      return react_default.a.createElement(TableCell["default"], {
+        align: "left",
+        id: row.id
+      }, row[field.prop] === null ? "---" : row[field.prop]);
+    }));
+  }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
+    style: {
+      height: 53 * emptyRows
+    }
+  }, react_default.a.createElement(TableCell["default"], {
+    colSpan: 6
+  }))))), react_default.a.createElement(TablePagination["default"], {
+    rowsPerPageOptions: [],
+    component: "div",
+    count: data.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      "aria-label": "previous page"
+    },
+    nextIconButtonProps: {
+      "aria-label": "next page"
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  }));
+}
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Dialog/index.js + 1 modules
+var Dialog = __webpack_require__("./node_modules/@material-ui/core/esm/Dialog/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogActions/index.js + 1 modules
+var DialogActions = __webpack_require__("./node_modules/@material-ui/core/esm/DialogActions/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogContent/index.js + 1 modules
+var DialogContent = __webpack_require__("./node_modules/@material-ui/core/esm/DialogContent/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogContentText/index.js + 1 modules
+var DialogContentText = __webpack_require__("./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogTitle/index.js + 1 modules
+var DialogTitle = __webpack_require__("./node_modules/@material-ui/core/esm/DialogTitle/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/pickers/esm/index.js + 57 modules
+var esm = __webpack_require__("./node_modules/@material-ui/pickers/esm/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@date-io/date-fns/build/index.esm.js + 3 modules
+var index_esm = __webpack_require__("./node_modules/@date-io/date-fns/build/index.esm.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditForm.js
+// DEPENDANCIES
+
+ // MATERIAL-UI
+
+
+
+
+
+
+var AuditForm_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    textField: {
+      marginBottom: theme.spacing(5),
+      width: "100%"
+    }
+  };
+});
+
+function AuditForm(props) {
+  var _props$audit = props.audit,
+      description = _props$audit.description,
+      start_date = _props$audit.start_date,
+      end_date = _props$audit.end_date;
+  var onChange = props.onChange;
+  var classes = AuditForm_useStyles();
+
+  var handleDateChange = function handleDateChange(date, name) {
+    var onChange = props.onChange;
+    onChange({
+      target: {
+        value: date.toLocaleDateString(),
+        name: name
+      }
+    });
+  };
+
+  return react_default.a.createElement(Grid["default"], {
+    container: true
+  }, react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "description",
+    label: "Description",
+    className: classes.textField,
+    onChange: onChange,
+    value: description || "",
+    name: "description"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+    utils: index_esm["default"]
+  }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+    disableToolbar: true,
+    variant: "inline",
+    format: "MM/dd/yyyy",
+    margin: "normal",
+    className: classes.textField,
+    id: "start_date",
+    label: "Start Date",
+    value: start_date,
+    onChange: function onChange(date) {
+      handleDateChange(date, "start_date");
+    },
+    KeyboardButtonProps: {
+      "aria-label": "change date"
+    }
+  }))), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+    utils: index_esm["default"]
+  }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+    disableToolbar: true,
+    variant: "inline",
+    format: "MM/dd/yyyy",
+    margin: "normal",
+    id: "end_date",
+    className: classes.textField,
+    label: "End Date",
+    value: end_date,
+    onChange: function onChange(date) {
+      handleDateChange(date, "end_date");
+    },
+    KeyboardButtonProps: {
+      "aria-label": "change date"
+    }
+  }))));
+}
+
+/* harmony default export */ var components_AuditForm = (AuditForm);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditView.js
+function AuditView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AuditView_typeof = function _typeof(obj) { return typeof obj; }; } else { AuditView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AuditView_typeof(obj); }
+
+function AuditView_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function AuditView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { AuditView_ownKeys(Object(source), true).forEach(function (key) { AuditView_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { AuditView_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function AuditView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function AuditView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function AuditView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function AuditView_createClass(Constructor, protoProps, staticProps) { if (protoProps) AuditView_defineProperties(Constructor.prototype, protoProps); if (staticProps) AuditView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function AuditView_possibleConstructorReturn(self, call) { if (call && (AuditView_typeof(call) === "object" || typeof call === "function")) { return call; } return AuditView_assertThisInitialized(self); }
+
+function AuditView_getPrototypeOf(o) { AuditView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return AuditView_getPrototypeOf(o); }
+
+function AuditView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function AuditView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) AuditView_setPrototypeOf(subClass, superClass); }
+
+function AuditView_setPrototypeOf(o, p) { AuditView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return AuditView_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var AuditView_AuditView =
+/*#__PURE__*/
+function (_Component) {
+  AuditView_inherits(AuditView, _Component);
+
+  function AuditView(props) {
+    var _this;
+
+    AuditView_classCallCheck(this, AuditView);
+
+    _this = AuditView_possibleConstructorReturn(this, AuditView_getPrototypeOf(AuditView).call(this, props));
+
+    _this.edit = function (selection) {
+      _this.setState({
+        open: true,
+        formState: selection
+      });
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.onChange = function (e) {
+      _this.setState({
+        formState: AuditView_objectSpread({}, _this.state.formState, AuditView_defineProperty({}, e.target.name, e.target.value))
+      });
+    };
+
+    _this.handleUpdate = function (e) {
+      _this.setState({
+        open: false
+      });
+
+      var updateAudit = _this.props.updateAudit;
+      var formState = _this.state.formState;
+
+      var audit = AuditView_objectSpread({}, formState);
+
+      updateAudit(audit, audit.id);
+
+      _this.setState({
+        formState: {
+          description: "",
+          start_date: "",
+          end_date: ""
+        }
+      });
+    };
+
+    _this.update = _this.update.bind(AuditView_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(AuditView_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(AuditView_assertThisInitialized(_this));
+    _this.state = {
+      open: false,
+      formState: {}
+    };
+    return _this;
+  }
+
+  AuditView_createClass(AuditView, [{
+    key: "render",
+    value: function render() {
+      var data = this.props.data;
+      var _this$state = this.state,
+          open = _this$state.open,
+          formState = _this$state.formState;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(EnhancedTable, {
+        title: "Audits",
+        onClickDelete: this["delete"],
+        onClickEdit: this.edit,
+        onClickAdd: this.insert,
+        data: data,
+        tableMeta: AUDIT_TABLE_HEADERS
+      }), react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Edit Audit"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(components_AuditForm, {
+        audit: formState,
+        onChange: this.onChange
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleUpdate,
+        color: "primary"
+      }, "Confirm"))));
+    }
+  }, {
+    key: "insert",
+    value: function insert() {
+      var _this$props = this.props,
+          addAudit = _this$props.addAudit,
+          dashboardId = _this$props.dashboardId;
+      var audit = {
+        description: null,
+        end_date: null,
+        start_date: null,
+        dashboard: dashboardId
+      };
+      addAudit(audit);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(selection) {
+      var deleteAudit = this.props.deleteAudit;
+
+      for (var i in selection) {
+        deleteAudit(selection[i]);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      var updateAudit = this.props.updateAudit;
+      updateAudit(current, id);
+    }
+  }]);
+
+  return AuditView;
+}(react["Component"]);
+
+AuditView_AuditView.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_AuditView = (Object(es["connect"])(null, {
+  updateAudit: dashboards_updateAudit,
+  deleteAudit: dashboards_deleteAudit,
+  addAudit: dashboards_addAudit
+})(AuditView_AuditView));
+AuditView_AuditView.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinForm.js
+// DEPENDANCIES
+
+ // MATERIAL-UI
+
+
+
+
+
+
+var WinForm_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    textField: {
+      marginBottom: theme.spacing(5),
+      width: "100%"
+    }
+  };
+});
+
+function WinForm(props) {
+  var _props$win = props.win,
+      description = _props$win.description,
+      date = _props$win.date,
+      participants = _props$win.participants;
+  var onChange = props.onChange;
+  var classes = WinForm_useStyles();
+
+  var handleDateChange = function handleDateChange(date) {
+    var onChange = props.onChange;
+    onChange({
+      target: {
+        value: date.toLocaleDateString(),
+        name: "date"
+      }
+    });
+  };
+
+  return react_default.a.createElement(Grid["default"], {
+    container: true
+  }, react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "description",
+    label: "Description",
+    className: classes.textField,
+    onChange: onChange,
+    value: description || "",
+    name: "description"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "participants",
+    label: "Participants",
+    className: classes.textField,
+    onChange: onChange,
+    value: participants || "",
+    name: "participants"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+    utils: index_esm["default"]
+  }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+    disableToolbar: true,
+    variant: "inline",
+    format: "MM/dd/yyyy",
+    margin: "normal",
+    id: "date",
+    label: "Date",
+    className: classes.textField,
+    value: date,
+    onChange: handleDateChange,
+    KeyboardButtonProps: {
+      "aria-label": "change date"
+    }
+  }))));
+}
+
+WinForm.propTypes = {
+  win: prop_types_default.a.object,
+  updateWin: prop_types_default.a.func.isRequired,
+  deleteWin: prop_types_default.a.func.isRequired
+};
+/* harmony default export */ var components_WinForm = (WinForm);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinView.js
+function WinView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WinView_typeof = function _typeof(obj) { return typeof obj; }; } else { WinView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WinView_typeof(obj); }
+
+function WinView_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function WinView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { WinView_ownKeys(Object(source), true).forEach(function (key) { WinView_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { WinView_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function WinView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function WinView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function WinView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function WinView_createClass(Constructor, protoProps, staticProps) { if (protoProps) WinView_defineProperties(Constructor.prototype, protoProps); if (staticProps) WinView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function WinView_possibleConstructorReturn(self, call) { if (call && (WinView_typeof(call) === "object" || typeof call === "function")) { return call; } return WinView_assertThisInitialized(self); }
+
+function WinView_getPrototypeOf(o) { WinView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WinView_getPrototypeOf(o); }
+
+function WinView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function WinView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WinView_setPrototypeOf(subClass, superClass); }
+
+function WinView_setPrototypeOf(o, p) { WinView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WinView_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var WinView_WinView =
+/*#__PURE__*/
+function (_Component) {
+  WinView_inherits(WinView, _Component);
+
+  function WinView(props) {
+    var _this;
+
+    WinView_classCallCheck(this, WinView);
+
+    _this = WinView_possibleConstructorReturn(this, WinView_getPrototypeOf(WinView).call(this, props));
+
+    _this.edit = function (selection) {
+      _this.setState({
+        open: true,
+        formState: selection
+      });
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.onChange = function (e) {
+      _this.setState({
+        formState: WinView_objectSpread({}, _this.state.formState, WinView_defineProperty({}, e.target.name, e.target.value))
+      });
+    };
+
+    _this.handleUpdate = function (e) {
+      var updateWin = _this.props.updateWin;
+      var formState = _this.state.formState;
+
+      var win = WinView_objectSpread({}, formState);
+
+      updateWin(win, win.id);
+
+      _this.setState({
+        formState: {
+          description: "",
+          participants: ""
+        }
+      });
+
+      _this.setState({
+        open: false
+      });
+    };
+
+    _this.update = _this.update.bind(WinView_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(WinView_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(WinView_assertThisInitialized(_this));
+    _this.state = {
+      open: false,
+      formState: {}
+    };
+    return _this;
+  }
+
+  WinView_createClass(WinView, [{
+    key: "render",
+    value: function render() {
+      var data = this.props.data;
+      var _this$state = this.state,
+          open = _this$state.open,
+          formState = _this$state.formState;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(EnhancedTable, {
+        title: "Wins",
+        onClickDelete: this["delete"],
+        onClickEdit: this.edit,
+        onClickAdd: this.insert,
+        data: data,
+        tableMeta: WIN_TABLE_HEADERS
+      }), react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Edit Win"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(components_WinForm, {
+        win: formState,
+        onChange: this.onChange
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleUpdate,
+        color: "primary"
+      }, "Confirm"))));
+    }
+  }, {
+    key: "insert",
+    value: function insert() {
+      var _this$props = this.props,
+          addWin = _this$props.addWin,
+          dashboardId = _this$props.dashboardId;
+      var win = {
+        description: null,
+        participants: null,
+        date: null,
+        dashboard: dashboardId
+      };
+      addWin(win);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(selection) {
+      var deleteWin = this.props.deleteWin;
+
+      for (var i in selection) {
+        deleteWin(selection[i]);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      var updateWin = this.props.updateWin;
+      updateWin(current, id);
+    }
+  }]);
+
+  return WinView;
+}(react["Component"]);
+
+WinView_WinView.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_WinView = (Object(es["connect"])(null, {
+  updateWin: dashboards_updateWin,
+  deleteWin: dashboards_deleteWin,
+  addWin: dashboards_addWin
+})(WinView_WinView));
+WinView_WinView.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/MobileStepper/index.js + 3 modules
+var MobileStepper = __webpack_require__("./node_modules/@material-ui/core/esm/MobileStepper/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/KeyboardArrowLeft.js
+var KeyboardArrowLeft = __webpack_require__("./node_modules/@material-ui/icons/KeyboardArrowLeft.js");
+var KeyboardArrowLeft_default = /*#__PURE__*/__webpack_require__.n(KeyboardArrowLeft);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/KeyboardArrowRight.js
+var KeyboardArrowRight = __webpack_require__("./node_modules/@material-ui/icons/KeyboardArrowRight.js");
+var KeyboardArrowRight_default = /*#__PURE__*/__webpack_require__.n(KeyboardArrowRight);
+
+// EXTERNAL MODULE: ./node_modules/react-swipeable-views/lib/index.js
+var lib = __webpack_require__("./node_modules/react-swipeable-views/lib/index.js");
+var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
+
+// EXTERNAL MODULE: ./node_modules/react-swipeable-views-utils/lib/index.js
+var react_swipeable_views_utils_lib = __webpack_require__("./node_modules/react-swipeable-views-utils/lib/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/Carousel.js
+function Carousel_slicedToArray(arr, i) { return Carousel_arrayWithHoles(arr) || Carousel_iterableToArrayLimit(arr, i) || Carousel_nonIterableRest(); }
+
+function Carousel_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function Carousel_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function Carousel_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function Carousel_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+var AutoPlaySwipeableViews = Object(react_swipeable_views_utils_lib["autoPlay"])(lib_default.a);
+var Carousel_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  var _img;
+
+  return {
+    root: {
+      maxWidth: "100%",
+      flexGrow: 1,
+      display: "flex",
+      flexDirection: "column",
+      position: "relative"
+    },
+    header: {
+      color: "white",
+      display: "flex",
+      alignItems: "center",
+      height: 50,
+      width: "100%",
+      paddingLeft: theme.spacing(1),
+      backgroundColor: "rgba(0, 0, 0, 0.1)",
+      position: "absolute",
+      top: 0,
+      left: 0
+    },
+    img: (_img = {
+      display: "block",
+      maxWidth: "100%",
+      overflow: "hidden",
+      maxHeight: "300px"
+    }, Carousel_defineProperty(_img, "maxWidth", "1500px"), Carousel_defineProperty(_img, "marginLeft", "auto"), Carousel_defineProperty(_img, "marginRight", "auto"), _img),
+    stepper: {
+      position: "relative",
+      top: -32,
+      backgroundColor: "transparent"
+    },
+    buttonsContainer: {
+      position: "absolute",
+      height: "100%",
+      width: "100%",
+      padding: theme.spacing(3)
+    },
+    buttons: {
+      display: "flex",
+      justifyContent: "space-between",
+      height: "100%",
+      alignItems: "center"
+    },
+    button: {
+      backgroundColor: "rgba(0, 0, 0, 0.1)",
+      color: "white",
+      margin: "0 8px"
+    }
+  };
+});
+
+function SwipeableTextMobileStepper(props) {
+  var classes = Carousel_useStyles();
+  var theme = Object(esm_styles["useTheme"])();
+  var slides = props.slides;
+
+  var _React$useState = react_default.a.useState(0),
+      _React$useState2 = Carousel_slicedToArray(_React$useState, 2),
+      activeStep = _React$useState2[0],
+      setActiveStep = _React$useState2[1];
+
+  var maxSteps = slides.length;
+
+  function handleNext() {
+    setActiveStep(function (prevActiveStep) {
+      return prevActiveStep + 1;
+    });
+  }
+
+  function handleBack() {
+    setActiveStep(function (prevActiveStep) {
+      return prevActiveStep - 1;
+    });
+  }
+
+  function handleStepChange(step) {
+    setActiveStep(step);
+  }
+
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement(AutoPlaySwipeableViews, {
+    axis: theme.direction === "rtl" ? "x-reverse" : "x",
+    index: activeStep,
+    enableMouseEvents: true
+  }, slides.map(function (step, index) {
+    return react_default.a.createElement("div", {
+      key: step.label
+    }, Math.abs(activeStep - index) <= 2 ? react_default.a.createElement("img", {
+      className: classes.img,
+      src: step.imgPath,
+      alt: step.label
+    }) : null);
+  })), react_default.a.createElement("div", {
+    className: classes.buttonsContainer
+  }, react_default.a.createElement("div", {
+    className: classes.buttons
+  }, react_default.a.createElement(IconButton["default"], {
+    size: "small",
+    onClick: handleBack,
+    disabled: activeStep === 0,
+    className: classes.button
+  }, theme.direction === "rtl" ? react_default.a.createElement(KeyboardArrowRight_default.a, null) : react_default.a.createElement(KeyboardArrowLeft_default.a, null)), react_default.a.createElement(IconButton["default"], {
+    size: "small",
+    onClick: handleNext,
+    disabled: activeStep === maxSteps - 1,
+    className: classes.button
+  }, theme.direction === "rtl" ? react_default.a.createElement(KeyboardArrowLeft_default.a, null) : react_default.a.createElement(KeyboardArrowRight_default.a, null)))), react_default.a.createElement(MobileStepper["default"], {
+    steps: maxSteps,
+    position: "static",
+    variant: "dots",
+    dotActive: {
+      color: "red"
+    },
+    activeStep: activeStep,
+    className: classes.stepper,
+    backButton: react_default.a.createElement("div", null),
+    nextButton: react_default.a.createElement("div", null)
+  }));
+}
+
+/* harmony default export */ var Carousel = (SwipeableTextMobileStepper);
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Replay.js
+var Replay = __webpack_require__("./node_modules/@material-ui/icons/Replay.js");
+var Replay_default = /*#__PURE__*/__webpack_require__.n(Replay);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/ArrowDownward.js
+var ArrowDownward = __webpack_require__("./node_modules/@material-ui/icons/ArrowDownward.js");
+var ArrowDownward_default = /*#__PURE__*/__webpack_require__.n(ArrowDownward);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Settings.js
+var Settings = __webpack_require__("./node_modules/@material-ui/icons/Settings.js");
+var Settings_default = /*#__PURE__*/__webpack_require__.n(Settings);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/DynamicFeed.js
+var DynamicFeed = __webpack_require__("./node_modules/@material-ui/icons/DynamicFeed.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/ArrowUpward.js
+var ArrowUpward = __webpack_require__("./node_modules/@material-ui/icons/ArrowUpward.js");
+var ArrowUpward_default = /*#__PURE__*/__webpack_require__.n(ArrowUpward);
+
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionTable.js
+function ActionTable_slicedToArray(arr, i) { return ActionTable_arrayWithHoles(arr) || ActionTable_iterableToArrayLimit(arr, i) || ActionTable_nonIterableRest(); }
+
+function ActionTable_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function ActionTable_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function ActionTable_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ActionTable_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ActionTable_desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function ActionTable_stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function ActionTable_getSorting(order, orderBy) {
+  return order === "desc" ? function (a, b) {
+    return ActionTable_desc(a, b, orderBy);
+  } : function (a, b) {
+    return -ActionTable_desc(a, b, orderBy);
+  };
+}
+
+function ActionTable_EnhancedTableHead(props) {
+  var classes = props.classes,
+      onSelectAllClick = props.onSelectAllClick,
+      order = props.order,
+      orderBy = props.orderBy,
+      numSelected = props.numSelected,
+      rowCount = props.rowCount,
+      onRequestSort = props.onRequestSort,
+      tableMeta = props.tableMeta;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react_default.a.createElement(TableHead["default"], null, react_default.a.createElement(TableRow["default"], null, react_default.a.createElement(TableCell["default"], {
+    padding: "checkbox"
+  }, react_default.a.createElement(Checkbox["default"], {
+    indeterminate: numSelected > 0 && numSelected < rowCount,
+    checked: numSelected === rowCount && rowCount != 0,
+    onChange: onSelectAllClick,
+    inputProps: {
+      "aria-label": "select all"
+    }
+  })), tableMeta.map(function (field, i) {
+    return react_default.a.createElement(TableCell["default"], {
+      key: field.name,
+      align: field.numeric ? "right" : "left",
+      padding: field.disablePadding ? "none" : "default",
+      sortDirection: orderBy === field.prop ? order : false
+    }, react_default.a.createElement(TableSortLabel["default"], {
+      active: orderBy === field.prop,
+      direction: order,
+      onClick: createSortHandler(field.prop)
+    }, field.name, orderBy === field.prop ? react_default.a.createElement("span", {
+      className: classes.visuallyHidden
+    }, order === "desc" ? "sorted descending" : "sorted ascending") : null));
+  }), react_default.a.createElement(TableCell["default"], {
+    align: "left"
+  }, "Status")));
+}
+
+ActionTable_EnhancedTableHead.propTypes = {
+  classes: prop_types_default.a.object.isRequired,
+  numSelected: prop_types_default.a.number.isRequired,
+  onRequestSort: prop_types_default.a.func.isRequired,
+  onSelectAllClick: prop_types_default.a.func.isRequired,
+  order: prop_types_default.a.oneOf(["asc", "desc"]).isRequired,
+  orderBy: prop_types_default.a.string.isRequired,
+  rowCount: prop_types_default.a.number.isRequired
+};
+var ActionTable_useToolbarStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1)
+    },
+    highlight: theme.palette.type === "light" ? {
+      color: theme.palette.secondary.main,
+      backgroundColor: Object(esm_styles["lighten"])(theme.palette.secondary.light, 0.85)
+    } : {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    title: {
+      flex: "1 1 100%"
+    }
+  };
+});
+
+var ActionTable_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
+  var classes = ActionTable_useToolbarStyles();
+  var numSelected = props.numSelected,
+      title = props.title,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      onManageClick = props.onManageClick,
+      data = props.data;
+
+  var handleClickEdit = function handleClickEdit() {
+    var onClickEdit = props.onClickEdit,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickEdit(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickDelete = function handleClickDelete() {
+    var onClickDelete = props.onClickDelete,
+        selected = props.selected,
+        setSelected = props.setSelected;
+    onClickDelete(selected);
+    setSelected([]);
+  };
+
+  var handleClickEscalate = function handleClickEscalate() {
+    var onClickEscalate = props.onClickEscalate,
+        selected = props.selected,
+        setSelected = props.setSelected;
+    onClickEscalate(getItem(selected[0], data, "id"));
+    setSelected([]);
+  };
+
+  return react_default.a.createElement(Toolbar["default"], {
+    className: Object(clsx_m["default"])(classes.root, ActionTable_defineProperty({}, classes.highlight, numSelected > 0))
+  }, numSelected > 0 ? react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    color: "inherit",
+    variant: "subtitle1"
+  }, numSelected, " selected") : react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    variant: "h6",
+    id: "tableTitle"
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickDelete && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Escalate"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickEscalate,
+    "aria-label": "delete"
+  }, react_default.a.createElement(ArrowUpward_default.a, null))), onClickEdit && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Edit"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickEdit,
+    "aria-label": "edit"
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Delete"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickDelete,
+    "aria-label": "delete"
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Add entry"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "add",
+    onClick: onClickAdd
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(esm_Tooltip["default"], {
+    title: "Manage Escaltions"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "manage escalations",
+    onClick: onManageClick
+  }, react_default.a.createElement(Settings_default.a, null)))));
+};
+
+ActionTable_EnhancedTableToolbar.propTypes = {
+  numSelected: prop_types_default.a.number.isRequired
+};
+var ActionTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: "100%",
+      marginTop: theme.spacing(1),
+      maxWidth: "100%"
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      maxWidth: "100%"
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1
+    }
+  };
+});
+function ActionTable_EnhancedTable(props) {
+  var title = props.title,
+      data = props.data,
+      tableMeta = props.tableMeta,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      onClickEscalate = props.onClickEscalate,
+      onManageClick = props.onManageClick,
+      currentDashboardId = props.currentDashboardId;
+  var classes = ActionTable_useStyles();
+
+  var _React$useState = react_default.a.useState("asc"),
+      _React$useState2 = ActionTable_slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react_default.a.useState(tableMeta[0].name),
+      _React$useState4 = ActionTable_slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState([]),
+      _React$useState6 = ActionTable_slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(0),
+      _React$useState8 = ActionTable_slicedToArray(_React$useState7, 2),
+      page = _React$useState8[0],
+      setPage = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(false),
+      _React$useState10 = ActionTable_slicedToArray(_React$useState9, 2),
+      dense = _React$useState10[0],
+      setDense = _React$useState10[1];
+
+  var _React$useState11 = react_default.a.useState(5),
+      _React$useState12 = ActionTable_slicedToArray(_React$useState11, 2),
+      rowsPerPage = _React$useState12[0],
+      setRowsPerPage = _React$useState12[1];
+
+  var handleRequestSort = function handleRequestSort(event, property) {
+    var isDesc = orderBy === property && order === "desc";
+    setOrder(isDesc ? "asc" : "desc");
+    setOrderBy(property);
+  };
+
+  var handleSelectAllClick = function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      var newSelecteds = data.map(function (entry) {
+        return entry.id;
+      });
+      setSelected(newSelecteds);
+      return;
+    }
+
+    setSelected([]);
+  };
+
+  var setSelectedHook = function setSelectedHook(newSelected) {
+    setSelected(newSelected);
+  };
+
+  var handleClick = function handleClick(event, id) {
+    var selectedIndex = selected.indexOf(id);
+    var newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+
+    setSelected(newSelected);
+  };
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var handleChangeRowsPerPage = function handleChangeRowsPerPage(event) {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  var getStatus = function getStatus(entry) {
+    if (!entry.tables) return "---";
+
+    if (entry.tables.length > 1) {
+      if (entry.source.dashboard.id != currentDashboardId) return react_default.a.createElement(esm_Tooltip["default"], {
+        disableFocusListener: true,
+        disableTouchListener: true,
+        title: "Source - ".concat(entry.source.dashboard.title)
+      }, react_default.a.createElement(ArrowDownward_default.a, null));else return react_default.a.createElement(esm_Tooltip["default"], {
+        disableFocusListener: true,
+        disableTouchListener: true,
+        title: "Escalated upward"
+      }, react_default.a.createElement(ArrowUpward_default.a, null));
+    }
+
+    return "---";
+  };
+
+  var isSelected = function isSelected(id) {
+    return selected.indexOf(id) !== -1;
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement(ActionTable_EnhancedTableToolbar, {
+    title: title,
+    numSelected: selected.length,
+    onClickAdd: onClickAdd,
+    onClickDelete: onClickDelete,
+    onClickEdit: onClickEdit,
+    selected: selected,
+    onClickEscalate: onClickEscalate,
+    onManageClick: onManageClick,
+    setSelected: setSelectedHook,
+    data: data
+  }), react_default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react_default.a.createElement(esm_Table["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    "aria-label": "enhanced table"
+  }, react_default.a.createElement(ActionTable_EnhancedTableHead, {
+    classes: classes,
+    numSelected: selected.length,
+    order: order,
+    orderBy: orderBy,
+    onSelectAllClick: handleSelectAllClick,
+    onRequestSort: handleRequestSort,
+    rowCount: data.length,
+    tableMeta: tableMeta
+  }), react_default.a.createElement(TableBody["default"], null, ActionTable_stableSort(data, ActionTable_getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    var isItemSelected = isSelected(row.id);
+    var labelId = "enhanced-table-checkbox-".concat(index);
+    return react_default.a.createElement(TableRow["default"], {
+      hover: true,
+      onClick: function onClick(event) {
+        return handleClick(event, row.id);
+      },
+      role: "checkbox",
+      "aria-checked": isItemSelected,
+      tabIndex: -1,
+      key: row.id,
+      selected: isItemSelected
+    }, react_default.a.createElement(TableCell["default"], {
+      padding: "checkbox"
+    }, react_default.a.createElement(Checkbox["default"], {
+      checked: isItemSelected,
+      inputProps: {
+        "aria-labelledby": labelId
+      }
+    })), tableMeta.map(function (field) {
+      return react_default.a.createElement(TableCell["default"], {
+        align: "left",
+        id: row.id
+      }, row[field.prop] === null ? "---" : row[field.prop]);
+    }), react_default.a.createElement(TableCell["default"], {
+      align: "left"
+    }, getStatus(row)));
+  }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
+    style: {
+      height: 53 * emptyRows
+    }
+  }, react_default.a.createElement(TableCell["default"], {
+    colSpan: 6
+  }))))), react_default.a.createElement(TablePagination["default"], {
+    rowsPerPageOptions: [],
+    component: "div",
+    count: data.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      "aria-label": "previous page"
+    },
+    nextIconButtonProps: {
+      "aria-label": "next page"
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  }));
+}
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Close.js
+var Close = __webpack_require__("./node_modules/@material-ui/icons/Close.js");
+var Close_default = /*#__PURE__*/__webpack_require__.n(Close);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Slide/index.js + 1 modules
+var Slide = __webpack_require__("./node_modules/@material-ui/core/esm/Slide/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/AppBar/index.js + 1 modules
+var AppBar = __webpack_require__("./node_modules/@material-ui/core/esm/AppBar/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Card/index.js + 1 modules
+var Card = __webpack_require__("./node_modules/@material-ui/core/esm/Card/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/CardContent/index.js + 1 modules
+var CardContent = __webpack_require__("./node_modules/@material-ui/core/esm/CardContent/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/CardActions/index.js + 1 modules
+var CardActions = __webpack_require__("./node_modules/@material-ui/core/esm/CardActions/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/EscalationCard.js
+
+ // MATERIAL_UI
+
+
+
+
+
+
+
+var EscalationCard_useStyles = Object(esm_styles["makeStyles"])({
+  card: {
+    minWidth: 275,
+    marginBottom: "20px"
+  },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)"
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginTop: "5px"
+  },
+  viewBtn: {
+    marginLeft: "auto"
+  }
+});
+function EscalationCard(props) {
+  var classes = EscalationCard_useStyles();
+  var selected = props.selected,
+      handleClick = props.handleClick;
+  var _props$dashboard = props.dashboard,
+      author = _props$dashboard.author,
+      title = _props$dashboard.title,
+      level = _props$dashboard.level,
+      id = _props$dashboard.id;
+  var styles = selected === id ? {
+    border: "#9BB0DB solid 2px"
+  } : {};
+  return react_default.a.createElement(Card["default"], {
+    className: classes.card,
+    style: styles
+  }, react_default.a.createElement(CardContent["default"], null, react_default.a.createElement(Typography["default"], {
+    variant: "h5",
+    component: "h2"
+  }, title), react_default.a.createElement(Typography["default"], {
+    className: classes.pos,
+    color: "textSecondary"
+  }, "Author: ", author), react_default.a.createElement(Typography["default"], {
+    color: "textSecondary"
+  }, "Level: ", level)), react_default.a.createElement(CardActions["default"], null, react_default.a.createElement(Button["default"], {
+    size: "medium",
+    onClick: function onClick() {
+      return handleClick(id);
+    }
+  }, "SELECT")));
+}
+EscalationCard.propTypes = {
+  dashboard: prop_types_default.a.shape({
+    title: prop_types_default.a.string,
+    author: prop_types_default.a.string,
+    level: prop_types_default.a.number,
+    dashboard_type: prop_types_default.a.dashboard_type,
+    id: prop_types_default.a.number
+  })
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/EscalationView.js
+function EscalationView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { EscalationView_typeof = function _typeof(obj) { return typeof obj; }; } else { EscalationView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return EscalationView_typeof(obj); }
+
+function EscalationView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function EscalationView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function EscalationView_createClass(Constructor, protoProps, staticProps) { if (protoProps) EscalationView_defineProperties(Constructor.prototype, protoProps); if (staticProps) EscalationView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function EscalationView_possibleConstructorReturn(self, call) { if (call && (EscalationView_typeof(call) === "object" || typeof call === "function")) { return call; } return EscalationView_assertThisInitialized(self); }
+
+function EscalationView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function EscalationView_getPrototypeOf(o) { EscalationView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return EscalationView_getPrototypeOf(o); }
+
+function EscalationView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) EscalationView_setPrototypeOf(subClass, superClass); }
+
+function EscalationView_setPrototypeOf(o, p) { EscalationView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return EscalationView_setPrototypeOf(o, p); }
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var EscalationView_Transition = react_default.a.forwardRef(function Transition(props, ref) {
+  return react_default.a.createElement(Slide["default"], _extends({
+    direction: "up",
+    ref: ref
+  }, props));
+});
+
+var EscalationView_styles = function styles(theme) {
+  return {
+    appBar: {
+      position: "relative",
+      background: "#9BB0DB"
+    },
+    title: {
+      marginLeft: theme.spacing(2),
+      flex: 1
+    },
+    container: {
+      padding: theme.spacing(4)
+    }
+  };
+};
+
+var EscalationView_ActionView =
+/*#__PURE__*/
+function (_Component) {
+  EscalationView_inherits(ActionView, _Component);
+
+  function ActionView(props) {
+    var _this;
+
+    EscalationView_classCallCheck(this, ActionView);
+
+    _this = EscalationView_possibleConstructorReturn(this, EscalationView_getPrototypeOf(ActionView).call(this, props));
+
+    _this.handleClick = function (id) {
+      _this.setState({
+        selected: id
+      });
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        var toggleOpen = _this.props.toggleOpen;
+        toggleOpen(state)();
+
+        _this.setDefaultSelected();
+      };
+    };
+
+    _this.handleUpdate = function () {
+      var _this$props = _this.props,
+          updateActionTable = _this$props.updateActionTable,
+          toggleOpen = _this$props.toggleOpen;
+      var selected = _this.state.selected;
+
+      var stap = _this.filterTables("Short Term Action Plan");
+
+      var ltap = _this.filterTables("Long Term Action Plan");
+
+      updateActionTable(stap, stap.id, selected, stap.title);
+      updateActionTable(ltap, ltap.id, selected, ltap.title);
+      toggleOpen(false)();
+    };
+
+    _this.state = {
+      selected: null
+    };
+    return _this;
+  }
+
+  EscalationView_createClass(ActionView, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var actionTables = this.props.actionTables;
+      if (prevProps.actionTables === actionTables) return;
+      this.setDefaultSelected();
+    }
+  }, {
+    key: "setDefaultSelected",
+    value: function setDefaultSelected() {
+      var actionTables = this.props.actionTables;
+      if (!actionTables) return;
+      var parent = actionTables[0].parent_dashboard;
+      this.setState({
+        selected: parent
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          open = _this$props2.open,
+          dashboards = _this$props2.dashboards,
+          currentDashboard = _this$props2.currentDashboard,
+          classes = _this$props2.classes;
+      var selected = this.state.selected;
+      return react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title",
+        fullScreen: true,
+        TransitionComponent: EscalationView_Transition
+      }, react_default.a.createElement(AppBar["default"], {
+        className: classes.appBar
+      }, react_default.a.createElement(Toolbar["default"], null, react_default.a.createElement(IconButton["default"], {
+        edge: "start",
+        color: "inherit",
+        onClick: this.handleToggleOpen(false),
+        "aria-label": "close"
+      }, react_default.a.createElement(Close_default.a, null)), react_default.a.createElement(Typography["default"], {
+        variant: "h6",
+        className: classes.title
+      }, "Manage Escalation"), react_default.a.createElement(Button["default"], {
+        autoFocus: true,
+        color: "inherit",
+        onClick: this.handleUpdate
+      }, "save"))), react_default.a.createElement("div", {
+        className: classes.container
+      }, react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 3
+      }, dashboards.filter(function (dashboard) {
+        return dashboard.id !== currentDashboard.id;
+      }).map(function (dashboard) {
+        return react_default.a.createElement(Grid["default"], {
+          item: true,
+          lg: 3,
+          key: dashboard.id
+        }, react_default.a.createElement(EscalationCard, {
+          dashboard: dashboard,
+          selected: selected,
+          handleClick: _this2.handleClick,
+          key: dashboard.id
+        }));
+      }))));
+    }
+  }, {
+    key: "filterTables",
+    value: function filterTables(title) {
+      var actionTables = this.props.actionTables;
+      var payload = actionTables.filter(function (table) {
+        return table.title === title;
+      });
+      return payload ? payload[0] : null;
+    }
+  }]);
+
+  return ActionView;
+}(react["Component"]);
+
+EscalationView_ActionView.propTypes = {
+  open: prop_types_default.a.bool
+};
+/* harmony default export */ var EscalationView = (Object(es["connect"])(null, {
+  updateActionTable: dashboards_updateActionTable
+})(Object(esm_styles["withStyles"])(EscalationView_styles)(EscalationView_ActionView)));
+EscalationView_ActionView.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
+// DEPENDANCIES
+
+
+ // MATERIAL-UI
+
+
+
+
+
+
+var ActionForm_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    textField: {
+      marginBottom: theme.spacing(5),
+      width: "100%"
+    }
+  };
+});
+
+function ActionForm(props) {
+  var onChange = props.onChange;
+  var classes = ActionForm_useStyles();
+
+  var handleDateChange = function handleDateChange(date, name) {
+    var onChange = props.onChange;
+    onChange({
+      target: {
+        value: date.toLocaleDateString(),
+        name: name
+      }
+    });
+  };
+
+  var _props$action = props.action,
+      letter = _props$action.letter,
+      problem = _props$action.problem,
+      root_cause = _props$action.root_cause,
+      solution = _props$action.solution,
+      leader = _props$action.leader,
+      date = _props$action.date;
+  return react_default.a.createElement(Grid["default"], {
+    container: true
+  }, react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "letter",
+    label: "Letter",
+    className: classes.textField,
+    onChange: onChange,
+    value: letter || "",
+    name: "letter"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "problem",
+    label: "Problem",
+    className: classes.textField,
+    onChange: onChange,
+    value: problem || "",
+    name: "problem"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "root_cause",
+    label: "Root Cause",
+    className: classes.textField,
+    onChange: onChange,
+    value: root_cause || "",
+    name: "root_cause"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "solution",
+    label: "Solution",
+    className: classes.textField,
+    onChange: onChange,
+    value: solution || "",
+    name: "solution"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "leader",
+    label: "Leader",
+    className: classes.textField,
+    onChange: onChange,
+    value: leader || "",
+    name: "leader"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+    utils: index_esm["default"]
+  }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+    disableToolbar: true,
+    variant: "inline",
+    format: "MM/dd/yyyy",
+    margin: "normal",
+    id: "date",
+    className: classes.textField,
+    label: "Due Date",
+    value: date,
+    onChange: function onChange(date) {
+      handleDateChange(date, "date");
+    },
+    KeyboardButtonProps: {
+      "aria-label": "change date"
+    }
+  }))))
+  /*
+    <Fragment>
+      <h2>Edit Action</h2>
+      <form onSubmit={this.onSubmit}>
+        <div className="row justify-content-between">
+          <div className="col-sm-6">
+            <div className="form-group">
+              <label htmlFor="letter">Letter</label>
+              <input
+                className="form-control"
+                type="text"
+                name="letter"
+                onChange={this.onChange}
+                value={letter || ""}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="problem">Problem</label>
+              <input
+                className="form-control"
+                type="text"
+                name="problem"
+                onChange={this.onChange}
+                value={problem}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="root_cause">Root Cause</label>
+              <input
+                className="form-control"
+                type="text"
+                name="root_cause"
+                onChange={this.onChange}
+                value={root_cause}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="solution">Solution</label>
+              <input
+                className="form-control"
+                type="text"
+                name="solution"
+                onChange={this.onChange}
+                value={solution}
+              />
+            </div>
+          </div>
+          <div className="col-sm-5">
+            <div className="form-group">
+              <label htmlFor="leader">Leader</label>
+              <input
+                className="form-control"
+                type="text"
+                name="leader"
+                onChange={this.onChange}
+                value={leader}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="date" className="d-block">
+                Date
+              </label>
+              <DatePicker
+                className="form-control"
+                onChange={date => this.onDateChange(date)}
+                selected={date}
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
+          </div>
+            <div className="col-sm-12 d-flex justify-content-end">
+            <button
+              type="button"
+              className="btn
+          btn-danger mr-4"
+              onClick={this.delete}
+            >
+              Delete
+            </button>
+            <button
+              type="submit"
+              className="btn
+          btn-primary"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </Fragment>
+    */
+  ;
+}
+
+ActionForm.defaultProps = {
+  action: null
+};
+/* harmony default export */ var components_ActionForm = (ActionForm);
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionView.js
+function ActionView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionView_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionView_typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function ActionView_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function ActionView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ActionView_ownKeys(Object(source), true).forEach(function (key) { ActionView_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ActionView_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function ActionView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function ActionView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function ActionView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function ActionView_createClass(Constructor, protoProps, staticProps) { if (protoProps) ActionView_defineProperties(Constructor.prototype, protoProps); if (staticProps) ActionView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function ActionView_possibleConstructorReturn(self, call) { if (call && (ActionView_typeof(call) === "object" || typeof call === "function")) { return call; } return ActionView_assertThisInitialized(self); }
+
+function ActionView_getPrototypeOf(o) { ActionView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ActionView_getPrototypeOf(o); }
+
+function ActionView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function ActionView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ActionView_setPrototypeOf(subClass, superClass); }
+
+function ActionView_setPrototypeOf(o, p) { ActionView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionView_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ActionView_ActionView =
+/*#__PURE__*/
+function (_Component) {
+  ActionView_inherits(ActionView, _Component);
+
+  function ActionView(props) {
+    var _this;
+
+    ActionView_classCallCheck(this, ActionView);
+
+    _this = ActionView_possibleConstructorReturn(this, ActionView_getPrototypeOf(ActionView).call(this, props));
+
+    _this.insert = function (source) {
+      return function () {
+        if (!source) return;
+        var addAction = _this.props.addAction;
+        var action = {
+          tables: [source.id],
+          source_id: source.id
+        };
+        addAction(action);
+      };
+    };
+
+    _this.escalate = function (table) {
+      return function (selection) {
+        var updateAction = _this.props.updateAction;
+
+        var action = ActionView_objectSpread({}, selection, {
+          tables: [].concat(_toConsumableArray(selection.tables), [table.parent])
+        });
+
+        updateAction(action, action.id);
+      };
+    };
+
+    _this.toggleEscalationOpen = function (state) {
+      return function () {
+        _this.setState({
+          escalationOpen: state
+        });
+      };
+    };
+
+    _this.edit = function (selection) {
+      _this.setState({
+        open: true,
+        formState: selection
+      });
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.onChange = function (e) {
+      _this.setState({
+        formState: ActionView_objectSpread({}, _this.state.formState, ActionView_defineProperty({}, e.target.name, e.target.value))
+      });
+    };
+
+    _this.handleUpdate = function (e) {
+      _this.setState({
+        open: false
+      });
+
+      var updateAction = _this.props.updateAction;
+      var formState = _this.state.formState;
+
+      var action = ActionView_objectSpread({}, formState);
+
+      updateAction(action, action.id);
+
+      _this.setState({
+        formState: {
+          letter: "",
+          problem: "",
+          root_cause: "",
+          solution: "",
+          leader: ""
+        }
+      });
+    };
+
+    _this.update = _this.update.bind(ActionView_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(ActionView_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(ActionView_assertThisInitialized(_this));
+    _this.state = {
+      open: false,
+      formState: {},
+      escalationOpen: false
+    };
+    return _this;
+  }
+
+  ActionView_createClass(ActionView, [{
+    key: "filterTables",
+    value: function filterTables(title) {
+      var tables = this.props.tables;
+      var payload = tables.filter(function (table) {
+        return table.title === title;
+      });
+      return payload ? payload[0] : null;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          open = _this$state.open,
+          formState = _this$state.formState,
+          escalationOpen = _this$state.escalationOpen;
+      var _this$props = this.props,
+          tables = _this$props.tables,
+          dashboards = _this$props.dashboards,
+          currentDashboard = _this$props.currentDashboard;
+      var stap = this.filterTables("Short Term Action Plan");
+      var ltap = this.filterTables("Long Term Action Plan");
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(ActionTable_EnhancedTable, {
+        title: "Short Term Actions",
+        onClickDelete: this["delete"],
+        onClickEdit: this.edit,
+        onClickAdd: this.insert(stap),
+        onClickEscalate: this.escalate(stap),
+        onManageClick: this.toggleEscalationOpen(true),
+        data: stap ? stap.actions : [],
+        tableMeta: ACTION_TABLE_HEADERS,
+        currentDashboardId: currentDashboard.id
+      }), react_default.a.createElement(ActionTable_EnhancedTable, {
+        title: "Long Term Actions",
+        onClickDelete: this["delete"],
+        onClickEdit: this.edit,
+        onClickAdd: this.insert(ltap),
+        onClickEscalate: this.escalate(ltap),
+        onManageClick: this.toggleEscalationOpen(true),
+        data: ltap ? ltap.actions : [],
+        tableMeta: ACTION_TABLE_HEADERS,
+        currentDashboardId: currentDashboard.id
+      }), react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Edit Action"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(components_ActionForm, {
+        action: formState,
+        onChange: this.onChange
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleUpdate,
+        color: "primary"
+      }, "Confirm"))), react_default.a.createElement(EscalationView, {
+        toggleOpen: this.toggleEscalationOpen,
+        open: escalationOpen,
+        actionTables: tables,
+        dashboards: dashboards,
+        currentDashboard: currentDashboard
+      }));
+    }
+  }, {
+    key: "delete",
+    value: function _delete(selection) {
+      var deleteAction = this.props.deleteAction;
+
+      for (var i in selection) {
+        deleteAction(selection[i]);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      var updateAction = this.props.updateAction;
+      updateAction(current, id);
+    }
+  }]);
+
+  return ActionView;
+}(react["Component"]);
+
+ActionView_ActionView.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_ActionView = (Object(es["connect"])(null, {
+  updateAction: dashboards_updateAction,
+  deleteAction: dashboards_deleteAction,
+  addAction: dashboards_addAction
+})(ActionView_ActionView));
+ActionView_ActionView.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/index.js
+function boardRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardRoom_typeof(obj); }
+
+function boardRoom_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function boardRoom_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { boardRoom_ownKeys(Object(source), true).forEach(function (key) { boardRoom_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { boardRoom_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function boardRoom_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function boardRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function boardRoom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function boardRoom_createClass(Constructor, protoProps, staticProps) { if (protoProps) boardRoom_defineProperties(Constructor.prototype, protoProps); if (staticProps) boardRoom_defineProperties(Constructor, staticProps); return Constructor; }
+
+function boardRoom_possibleConstructorReturn(self, call) { if (call && (boardRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return boardRoom_assertThisInitialized(self); }
+
+function boardRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function boardRoom_getPrototypeOf(o) { boardRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardRoom_getPrototypeOf(o); }
+
+function boardRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) boardRoom_setPrototypeOf(subClass, superClass); }
+
+function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return boardRoom_setPrototypeOf(o, p); }
+
+// DEPENDACIES
+
+
+
+ // CORE COMPONENTS
+
+
+ //import Carousel from "../../core/components/ui/Carousel";
+// NATIVE COMPONENTS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var boardRoom_styles = function styles(theme) {
+  return {
+    rootContainer: {
+      margin: 0,
+      width: "100%",
+      marginTop: theme.spacing(2)
+    },
+    carouselContainer: {
+      display: "flex",
+      justifyContent: "center",
+      height: "fit-content"
+    },
+    nestedGrid: {
+      display: "flex"
+    },
+    pillarBarContainer: {
+      flexBasis: "15%"
+    },
+    column: {
+      flexDirection: "column"
+    },
+    mediaContainer: {
+      flexBasis: "85%",
+      maxWidth: "85%"
+    },
+    card: {
+      maxWidth: "100%"
+    },
+    stackedCard: {
+      marginBottom: theme.spacing(4)
+    },
+    title: {
+      flex: "1 1 100%",
+      color: "rgba(0, 0, 0, 0.87)"
+    }
+  };
+};
+
+var boardRoom_Boardroom =
+/*#__PURE__*/
+function (_Component) {
+  boardRoom_inherits(Boardroom, _Component);
+
+  function Boardroom() {
+    var _getPrototypeOf2;
+
+    var _temp, _this;
+
+    boardRoom_classCallCheck(this, Boardroom);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return boardRoom_possibleConstructorReturn(_this, (_temp = _this = boardRoom_possibleConstructorReturn(this, (_getPrototypeOf2 = boardRoom_getPrototypeOf(Boardroom)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.resetHeat = function () {
+      var _this$props = _this.props,
+          updateHeat = _this$props.updateHeat,
+          heat = _this$props.heat;
+
+      for (var i in heat) {
+        var h = boardRoom_objectSpread({}, heat[i]);
+
+        h.value = 0;
+        updateHeat(h, h.id);
+      }
+    }, _temp));
+  }
+
+  boardRoom_createClass(Boardroom, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this$props2 = this.props,
+          getADashboard = _this$props2.getADashboard,
+          getKpis = _this$props2.getKpis,
+          getActionTable = _this$props2.getActionTable,
+          getDashboards = _this$props2.getDashboards,
+          getAudits = _this$props2.getAudits,
+          getWins = _this$props2.getWins,
+          getHeat = _this$props2.getHeat; // Fetch data from server
+      // Source of ALL data for boardroom
+
+      var id = this.props.match.params.id;
+      getDashboards();
+      getADashboard(id);
+      getActionTable(id);
+      getKpis(id);
+      getAudits(id);
+      getWins(id);
+      getHeat(id);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props3 = this.props,
+          currentDashboard = _this$props3.currentDashboard,
+          kpis = _this$props3.kpis,
+          actionTables = _this$props3.actionTables,
+          dashboards = _this$props3.dashboards,
+          audits = _this$props3.audits,
+          wins = _this$props3.wins,
+          heat = _this$props3.heat,
+          classes = _this$props3.classes,
+          updateHeat = _this$props3.updateHeat;
+      var id = this.props.match.params.id; // If there is no current dashboard show the loading screen
+
+      if (currentDashboard == null) {
+        return react_default.a.createElement(LoadingScreen, null);
+      }
+
+      var images = currentDashboard.images;
+      return react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 4,
+        className: classes.rootContainer
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 2,
+        className: classes.pillarBarContainer
+      }, react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_PillarBar, {
+        kpis: kpis,
+        dashboardId: id
+      }))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        container: true,
+        lg: 10,
+        spacing: 1,
+        className: classes.mediaContainer
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 6,
+        className: classes.carouselContainer
+      }, images.length ? react_default.a.createElement(Carousel, {
+        slides: images.map(function (image) {
+          return {
+            imgPath: image.image
+          };
+        })
+      }) : null), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 6
+      }, react_default.a.createElement(Toolbar["default"], null, react_default.a.createElement(Typography["default"], {
+        className: classes.title,
+        variant: "h6",
+        id: "heatCheckTitle",
+        color: "inherit"
+      }, "Heat Check"), react_default.a.createElement(esm_Tooltip["default"], {
+        title: "Reset"
+      }, react_default.a.createElement(IconButton["default"], {
+        onClick: this.resetHeat,
+        "aria-label": "reset"
+      }, react_default.a.createElement(Replay_default.a, null)))), react_default.a.createElement(d3charts_HeatCheck, {
+        heat: heat,
+        onClick: updateHeat
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        container: true,
+        spacing: 4
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        container: true,
+        lg: 7,
+        className: classes.column,
+        spacing: 2
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.card
+      }, react_default.a.createElement(components_ActionView, {
+        tables: actionTables,
+        dashboardId: currentDashboard.id,
+        dashboards: dashboards,
+        currentDashboard: currentDashboard
+      }))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        container: true,
+        lg: 5,
+        className: classes.column
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.stackedCard
+      }, react_default.a.createElement(components_AuditView, {
+        data: audits,
+        dashboardId: currentDashboard.id
+      })), react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_WinView, {
+        data: wins,
+        dashboardId: currentDashboard.id
+      }))))));
+    }
+  }]);
+
+  return Boardroom;
+}(react["Component"]);
+
+boardRoom_Boardroom.propTypes = {
+  dashboards: prop_types_default.a.array,
+  kpis: prop_types_default.a.array.isRequired,
+  getDashboards: prop_types_default.a.func.isRequired,
+  getADashboard: prop_types_default.a.func.isRequired,
+  getKpis: prop_types_default.a.func.isRequired,
+  getActionTable: prop_types_default.a.func.isRequired,
+  currentDashboard: prop_types_default.a.object,
+  actionTables: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired
+};
+boardRoom_Boardroom.defaultProps = {
+  dashboards: null,
+  currentDashboard: null
+};
+
+var boardRoom_mapStateToProps = function mapStateToProps(state) {
+  return {
+    dashboards: state.dashboards.dashboards,
+    kpis: state.dashboards.kpis,
+    isAuthenticated: state.auth.isAuthenticated,
+    actionTables: state.dashboards.actionTables,
+    currentDashboard: state.dashboards.currentDashboard,
+    audits: state.dashboards.audits,
+    wins: state.dashboards.wins,
+    heat: state.dashboards.heat
+  };
+};
+
+/* harmony default export */ var boardRoom = (Object(es["connect"])(boardRoom_mapStateToProps, {
+  getKpis: dashboards_getKpis,
+  getDashboards: dashboards_getDashboards,
+  getADashboard: dashboards_getADashboard,
+  clearKpis: dashboards_clearKpis,
+  getActionTable: dashboards_getActionTable,
+  getAudits: dashboards_getAudits,
+  getWins: dashboards_getWins,
+  getHeat: dashboards_getHeat,
+  updateHeat: dashboards_updateHeat,
+  addWin: dashboards_addWin
+})(Object(esm_styles["withStyles"])(boardRoom_styles)(boardRoom_Boardroom)));
+// CONCATENATED MODULE: ./frontend/src/core/components/utils/PrivateRoute.js
+function PrivateRoute_extends() { PrivateRoute_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return PrivateRoute_extends.apply(this, arguments); }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+
+
+
+/**
+ * Component will check if user is authenticatd before preceding to mount component
+ */
+
+var PrivateRoute_PrivateRoute = function PrivateRoute(_ref) {
+  var Component = _ref.component,
+      auth = _ref.auth,
+      rest = _objectWithoutProperties(_ref, ["component", "auth"]);
+
+  return react_default.a.createElement(react_router_dom["Route"], PrivateRoute_extends({}, rest, {
+    render: function render(props) {
+      if (auth.isLoading) {
+        return react_default.a.createElement(LoadingScreen, null);
+      }
+
+      if (auth.isAuthenticated === false) {
+        return react_default.a.createElement(react_router_dom["Redirect"], {
+          to: "/login"
+        });
+      }
+
+      return react_default.a.createElement(Component, props);
+    }
+  }));
+};
+
+var PrivateRoute_mapStateToProps = function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+};
+
+PrivateRoute_PrivateRoute.propTypes = {
+  component: prop_types_default.a.object,
+  auth: prop_types_default.a.object
+};
+/* harmony default export */ var utils_PrivateRoute = (Object(es["connect"])(PrivateRoute_mapStateToProps)(PrivateRoute_PrivateRoute));
+// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
+function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
+
+function LineChart_toConsumableArray(arr) { return LineChart_arrayWithoutHoles(arr) || LineChart_iterableToArray(arr) || LineChart_nonIterableSpread(); }
+
+function LineChart_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function LineChart_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function LineChart_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function LineChart_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function LineChart_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { LineChart_ownKeys(Object(source), true).forEach(function (key) { LineChart_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { LineChart_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function LineChart_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function LineChart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function LineChart_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function LineChart_createClass(Constructor, protoProps, staticProps) { if (protoProps) LineChart_defineProperties(Constructor.prototype, protoProps); if (staticProps) LineChart_defineProperties(Constructor, staticProps); return Constructor; }
+
+function LineChart_possibleConstructorReturn(self, call) { if (call && (LineChart_typeof(call) === "object" || typeof call === "function")) { return call; } return LineChart_assertThisInitialized(self); }
+
+function LineChart_getPrototypeOf(o) { LineChart_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return LineChart_getPrototypeOf(o); }
+
+function LineChart_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function LineChart_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) LineChart_setPrototypeOf(subClass, superClass); }
+
+function LineChart_setPrototypeOf(o, p) { LineChart_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return LineChart_setPrototypeOf(o, p); }
+
+// DEPENDACIES
+
+
+
+ // COMPONENTS
+
+
+var margin = {
+  top: 10,
+  right: 150,
+  bottom: 30,
+  left: 50
+};
+var LineChart_width = 1100 - margin.left - margin.right;
+var LineChart_height = 600 - margin.top - margin.bottom;
+
+var LineChart_LineChart =
+/*#__PURE__*/
+function (_React$Component) {
+  LineChart_inherits(LineChart, _React$Component);
+
+  function LineChart(props) {
+    var _this;
+
+    LineChart_classCallCheck(this, LineChart);
+
+    _this = LineChart_possibleConstructorReturn(this, LineChart_getPrototypeOf(LineChart).call(this, props));
+    _this.renderD3 = _this.renderD3.bind(LineChart_assertThisInitialized(_this));
+    _this.updateD3 = _this.updateD3.bind(LineChart_assertThisInitialized(_this));
+    return _this;
+  } // Trigger D3 intial render()
+
+
+  LineChart_createClass(LineChart, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.renderD3();
+      this.updateD3();
+    } // Triger D3 update()
+
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          kpis = _this$props.kpis,
+          selectedKpi = _this$props.selectedKpi;
+
+      if (kpis !== prevProps.kpis || selectedKpi !== prevProps.selectedKpi) {
+        this.updateD3();
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var chart = this.props.chart;
+      return react_default.a.createElement("div", null, chart);
+    }
+  }, {
+    key: "renderD3",
+    value: function renderD3() {
+      var _this$props2 = this.props,
+          connectFauxDOM = _this$props2.connectFauxDOM,
+          selectSeries = _this$props2.selectSeries;
+      var faux = connectFauxDOM("svg", "chart");
+
+      function highlightLine(id) {
+        if (id == null) return;
+        d3["selectAll"](".line").attr("stroke-width", 1.8);
+        d3["selectAll"](".dot").attr("r", 3);
+        d3["selectAll"](".dot_".concat(id)).attr("r", 5);
+        d3["select"]("#line_".concat(id)).attr("stroke-width", 4.5);
+        d3["selectAll"](".legend").attr("font-weight", "normal").attr("font-size", "17");
+        d3["select"]("#legend_".concat(id)).attr("font-weight", "bold").attr("font-size", "20");
+      }
+
+      var svg = d3["select"](faux).attr("id", "chart").attr("viewBox", "0 0 ".concat(LineChart_width + margin.left + margin.right, " ").concat(LineChart_height + margin.bottom + margin.top)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink") // CSS Styles
+      .style("margin", "20px 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
+      svg.append("rect").attr("width", LineChart_width).attr("height", LineChart_height).style("opacity", 0).attr("id", "facade").on("click", function () {
+        highlightLine("null");
+        selectSeries(null);
+      }); // Y-axis
+
+      svg.append("g").attr("class", "myYaxis").style("color", "black").style("font-size", "0.8rem"); // X-axis
+
+      svg.append("g").attr("class", "myXaxis").attr("transform", "translate(0, ".concat(LineChart_height - margin.bottom, ")")).style("color", "black").style("font-size", "0.8rem"); // Y-axis Unit
+
+      svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
+
+      svg.append("text").attr("x", LineChart_width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accentColor);
+    }
+  }, {
+    key: "updateD3",
+    value: function updateD3() {
+      var x;
+      var _this$props3 = this.props,
+          connectFauxDOM = _this$props3.connectFauxDOM,
+          kpis = _this$props3.kpis,
+          selectSeries = _this$props3.selectSeries,
+          animateFauxDOM = _this$props3.animateFauxDOM,
+          selectedKpi = _this$props3.selectedKpi;
+      var faux = connectFauxDOM("svg", "chart");
+      var index = kpis.findIndex(function (kpi) {
+        return kpi.id == selectedKpi;
+      });
+      index = index == -1 ? 0 : index;
+      var data = kpis[index] ? kpis[index].series : [];
+      var test = {};
+
+      if (kpis[index] && kpis[index].series) {
+        test = LineChart_objectSpread({}, kpis[index].series[0]);
+
+        var entries = LineChart_toConsumableArray(kpis[index].series[0].entries);
+
+        test.id = Math.round(Math.random() * 500000);
+        test.entries = entries.map(function (datapoint) {
+          return {
+            value: datapoint.target,
+            date: datapoint.date,
+            target: datapoint.target,
+            id: Math.round(Math.random() * 500000)
+          };
+        });
+        test.color = "#008000";
+        test.name = "".concat(test.name, " Threshold");
+        data = [test].concat(LineChart_toConsumableArray(data));
+      }
+
+      var parseTime = d3["timeParse"]("%Y-%m-%d");
+
+      function highlightLine(id) {
+        d3["selectAll"](".line").attr("stroke-width", 1.8);
+        d3["selectAll"](".dot").attr("r", 3);
+        d3["selectAll"](".dot_".concat(id)).attr("r", 5);
+        d3["select"]("#line_".concat(id)).attr("stroke-width", 4.5);
+        d3["selectAll"](".legend").attr("font-weight", "normal").attr("font-size", "17");
+        d3["select"]("#legend_".concat(id)).attr("font-weight", "bold").attr("font-size", "20");
+      } // Sort by Date
+
+
+      for (x in data) {
+        var series = data[x].entries;
+        series.sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        });
+      } // In order to scale the axes must find minimum and maximum from all series
+
+
+      var mins = [];
+
+      for (x in data) {
+        mins.push(d3["min"](data[x].entries, function (d) {
+          return d.value;
+        }));
+      }
+
+      var maxs = [];
+
+      for (x in data) {
+        maxs.push(d3["max"](data[x].entries, function (d) {
+          return d.value;
+        }));
+      }
+
+      var minimum = mins.filter(function (d) {
+        return d != null;
+      });
+      var maximum = maxs.filter(function (d) {
+        return d != null;
+      }); // -----------------------------------------------------------------------------
+      // AXES & SCALES
+      // -----------------------------------------------------------------------------
+
+      var xScale = d3["scaleTime"]().domain([new Date("2019-01-01"), new Date("2019-12-31")]).range([0, LineChart_width]);
+      var yScale = d3["scaleLinear"]().domain(minimum.length ? [d3["min"](minimum) * 0.8, d3["max"](maximum) * 1.2] : [0, 100]).range([LineChart_height - margin.bottom, 0]);
+      var y_axis = d3["axisLeft"](yScale);
+      var x_axis = d3["axisBottom"](xScale).tickFormat(d3["timeFormat"]("%b")); // Update the X_Axis
+
+      d3["select"](faux).selectAll(".myXaxis").transition().duration(1000).call(x_axis); // Update the Y_Axis
+
+      d3["select"](faux).selectAll(".myYaxis").transition().duration(1000).call(y_axis); // -----------------------------------------------------------------------------
+      // LINES
+      // -----------------------------------------------------------------------------
+
+      var line = d3["line"]().y(function (d) {
+        return yScale(d.value);
+      }).defined(function (d) {
+        return d.value != null;
+      }).x(function (d) {
+        return xScale(parseTime(d.date));
+      });
+      var s = d3["select"](faux).select("#plotArea").selectAll(".line");
+      var sData = s.data(data);
+      var sEnter = sData.enter().append("path").merge(s).attr("d", function (d) {
+        return line(d.entries);
+      }).style("opacity", 1).attr("id", function (d) {
+        return "line_".concat(d.id);
+      }).attr("class", "line").attr("fill", "none").attr("stroke-width", 1.8).attr("stroke", function (d) {
+        return d.color;
+      }); // Then the following lines transition the line so that the gap is hidden...
+
+      sData.exit().remove(); // -----------------------------------------------------------------------------
+      // POINTS
+      // -----------------------------------------------------------------------------
+
+      var d = d3["select"](faux).selectAll(".dots");
+      d.remove();
+      var dotBind = d3["select"](faux).select("#plotArea").selectAll(".dots").data(data);
+      dotBind.enter().append("g").attr("class", "dots").attr("data-id", function (d) {
+        return d.id;
+      }).style("fill", function (d) {
+        return d3["rgb"](d.color).darker(1);
+      }) // Second we need to enter in the 'values' part of this group
+      .selectAll(".dot").data(function (d) {
+        return d.entries;
+      }).enter().append("circle")
+      /* .attr("class", function(d) {
+        var color = "grey";
+        var deviation = Math.abs(d.val / d.target - 1);
+        if (d.val == null) return color;
+        // Calculating color
+        if (deviation < safe) color = "green";
+        else if (deviation > safe && deviation < danger) color = "orange";
+        else color = "red";
+        return color;
+      }) */
+      .attr("cx", function (d) {
+        return xScale(parseTime(d.date));
+      }).attr("cy", function (d) {
+        return yScale(d.value ? d.value : -50);
+      }).attr("r", 3).style("opacity", 0).attr("class", function (d, i, j) {
+        var id = $(j).parent().attr("data-id");
+        return "dot_".concat(id, " ") + "dot";
+      }).attr("stroke", function (d) {
+        return d3["rgb"](d.color).darker(1);
+      }).attr("stroke-width", "1").attr("stroke-opacity", "0").transition().delay(500).duration(1000).style("opacity", 1);
+      animateFauxDOM(3000); // -----------------------------------------------------------------------------
+      // LEGEND
+      // -----------------------------------------------------------------------------
+
+      var w = d3["select"](faux).selectAll(".legend");
+      w.remove();
+      var legend = d3["select"](faux).selectAll(".legend").data(data).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+        return "translate(".concat(0, ",", i * 20, ")");
+      }); // Legend text explaining the symbols
+
+      legend.append("text").attr("x", LineChart_width + margin.right).attr("y", function (d, i) {
+        return LineChart_height / 2 + 20 * i;
+      }).attr("id", function (d) {
+        return "legend_".concat(d.id);
+      }).attr("class", "legend").style("opacity", 1).style("cursor", "pointer").attr("dy", ".35em").attr("font-size", 17).attr("fill", function (d) {
+        return d.color;
+      }).style("text-anchor", "end").text(function (d) {
+        return d.name;
+      }).on("click", function (d) {
+        highlightLine(d.id);
+        selectSeries(d.id);
+      });
+      d3["select"](faux).select("#title").text(function () {
+        return kpis[index] ? kpis[index].name : "";
+      });
+      d3["select"](faux).select("#y_unit").text(function () {
+        return kpis[index] ? kpis[index].unit || "" : "";
+      });
+      d3["select"](faux).select("#plotArea").selectAll("#curtain").remove();
+      d3["select"](faux).select("#plotArea").append("rect").attr("id", "curtain").style("fill", "#ffffff").attr("x", 0).attr("width", LineChart_width).attr("height", LineChart_height - margin.bottom).transition().delay(500).ease(d3["easeExp"]).duration(4000).attr("x", LineChart_width + 5);
+      animateFauxDOM(9000);
+    }
+  }]);
+
+  return LineChart;
+}(react_default.a.Component);
+
+LineChart_LineChart.propTypes = {
+  kpis: prop_types_default.a.array.isRequired,
+  selectSeries: prop_types_default.a.func.isRequired,
+  chart: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.object]),
+  selectedKpi: prop_types_default.a.number,
+  connectFauxDOM: prop_types_default.a.func.isRequired,
+  animateFauxDOM: prop_types_default.a.func.isRequired
+};
+LineChart_LineChart.defaultProps = {
+  chart: "Loading",
+  selectedKpi: null
+};
+/* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
 // EXTERNAL MODULE: ./node_modules/react-tooltip/dist/index.js
 var dist = __webpack_require__("./node_modules/react-tooltip/dist/index.js");
 var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
 
-// EXTERNAL MODULE: ./node_modules/react-datepicker/es/index.js
-var react_datepicker_es = __webpack_require__("./node_modules/react-datepicker/es/index.js");
+// EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.min.js
+var react_datepicker_min = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.min.js");
+var react_datepicker_min_default = /*#__PURE__*/__webpack_require__.n(react_datepicker_min);
 
 // EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.css
 var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.css");
@@ -2239,7 +5411,9 @@ var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Row.js
 function Row_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Row_typeof = function _typeof(obj) { return typeof obj; }; } else { Row_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Row_typeof(obj); }
 
-function Row_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } return target; }
+function Row_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function Row_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Row_ownKeys(Object(source), true).forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Row_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function Row_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2350,7 +5524,7 @@ function (_Component) {
         }, header.map(function (y, k) {
           if (y.date) return react_default.a.createElement("td", {
             key: "trc-".concat(k)
-          }, currentlyEditing ? react_default.a.createElement(react_datepicker_es["default"], {
+          }, currentlyEditing ? react_default.a.createElement(react_datepicker_min_default.a, {
             onChange: function onChange(date) {
               return _this2.handleDateChange(date, y.prop);
             },
@@ -2634,759 +5808,6 @@ Table_Table.defaultProps = {
   deletable: false
 };
 /* harmony default export */ var table_Table = (Table_Table);
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionTable.js
-function ActionTable_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function ActionTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionTable_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionTable_typeof(obj); }
-
-function ActionTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function ActionTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function ActionTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) ActionTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) ActionTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function ActionTable_possibleConstructorReturn(self, call) { if (call && (ActionTable_typeof(call) === "object" || typeof call === "function")) { return call; } return ActionTable_assertThisInitialized(self); }
-
-function ActionTable_getPrototypeOf(o) { ActionTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ActionTable_getPrototypeOf(o); }
-
-function ActionTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function ActionTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ActionTable_setPrototypeOf(subClass, superClass); }
-
-function ActionTable_setPrototypeOf(o, p) { ActionTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionTable_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var ActionTable_ActionTable =
-/*#__PURE__*/
-function (_Component) {
-  ActionTable_inherits(ActionTable, _Component);
-
-  function ActionTable(props) {
-    var _this;
-
-    ActionTable_classCallCheck(this, ActionTable);
-
-    _this = ActionTable_possibleConstructorReturn(this, ActionTable_getPrototypeOf(ActionTable).call(this, props));
-
-    _this.tooltipMessage = function (i) {
-      var data = _this.props.data;
-      var d = new Date(data.actions[i].date_created);
-      d.toDateString();
-      return react_default.a.createElement("div", null, react_default.a.createElement("h5", null, data.actions[i].source.dashboard.title), react_default.a.createElement("p", null, "Date Created:", d.toGMTString()));
-    };
-
-    _this.update = _this.update.bind(ActionTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(ActionTable_assertThisInitialized(_this));
-    _this.insert = _this.insert.bind(ActionTable_assertThisInitialized(_this));
-    _this.tooltipMessage = _this.tooltipMessage.bind(ActionTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  ActionTable_createClass(ActionTable, [{
-    key: "update",
-    value: function update(current, id) {
-      var updateAction = this.props.updateAction;
-      updateAction(current, id);
-    }
-  }, {
-    key: "insert",
-    value: function insert() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          addAction = _this$props.addAction;
-      var action = {
-        tables: data.parent ? [data.id, data.parent] : [data.id],
-        source_id: data.id
-      };
-      addAction(action);
-    }
-  }, {
-    key: "delete",
-    value: function _delete(id) {
-      var deleteAction = this.props.deleteAction;
-      deleteAction(id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          data = _this$props2.data,
-          header = _this$props2.header,
-          editable = _this$props2.editable,
-          appendable = _this$props2.appendable,
-          rowClick = _this$props2.rowClick,
-          hoverable = _this$props2.hoverable,
-          deletable = _this$props2.deletable;
-      return react_default.a.createElement(table_Table, {
-        editable: editable,
-        appendable: appendable,
-        data: data.actions,
-        header: header,
-        update: this.update,
-        "delete": this["delete"],
-        insert: this.insert,
-        rowClick: rowClick,
-        deletable: deletable,
-        fontSize: "0.6rem",
-        summary: true,
-        tooltipMessage: hoverable ? this.tooltipMessage : null
-      });
-    }
-  }]);
-
-  return ActionTable;
-}(react["Component"]);
-
-ActionTable_ActionTable.propTypes = ActionTable_defineProperty({
-  data: prop_types_default.a.object.isRequired,
-  header: prop_types_default.a.array.isRequired,
-  editable: prop_types_default.a.bool,
-  rowClick: prop_types_default.a.func,
-  hoverable: prop_types_default.a.bool,
-  deletable: prop_types_default.a.bool
-}, "hoverable", prop_types_default.a.bool);
-/* harmony default export */ var components_ActionTable = (Object(es["connect"])(null, {
-  updateAction: dashboards_updateAction,
-  deleteAction: dashboards_deleteAction,
-  addAction: dashboards_addAction
-})(ActionTable_ActionTable));
-ActionTable_ActionTable.defaultProps = {
-  hoverable: false,
-  editable: false,
-  deletable: false,
-  appendable: false,
-  rowClick: null
-};
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/DashboardCard.js
-
-
-
-var DashboardCard_DashboardCard = function DashboardCard(props) {
-  var dashboard = props.dashboard,
-      selection = props.selection,
-      handleClick = props.handleClick;
-  var highlighted = selection == dashboard.id ? {
-    border: "".concat("2px" + " solid ").concat(accentColor)
-  } : {
-    border: "1px solid rgba(0,0,0,.125)"
-  };
-
-  var onClick = function onClick() {
-    handleClick(dashboard.id);
-  };
-
-  return react_default.a.createElement("div", {
-    className: "card m-3",
-    onClick: onClick,
-    style: highlighted
-  }, react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("h5", {
-    className: "card-title"
-  }, dashboard.title), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Author: ", dashboard.author, react_default.a.createElement("br", null), "Level: ", dashboard.level)));
-};
-
-/* harmony default export */ var ui_DashboardCard = (DashboardCard_DashboardCard);
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/EscalationsOptions.js
-function EscalationsOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { EscalationsOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { EscalationsOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return EscalationsOptions_typeof(obj); }
-
-function EscalationsOptions_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function EscalationsOptions_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function EscalationsOptions_createClass(Constructor, protoProps, staticProps) { if (protoProps) EscalationsOptions_defineProperties(Constructor.prototype, protoProps); if (staticProps) EscalationsOptions_defineProperties(Constructor, staticProps); return Constructor; }
-
-function EscalationsOptions_possibleConstructorReturn(self, call) { if (call && (EscalationsOptions_typeof(call) === "object" || typeof call === "function")) { return call; } return EscalationsOptions_assertThisInitialized(self); }
-
-function EscalationsOptions_getPrototypeOf(o) { EscalationsOptions_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return EscalationsOptions_getPrototypeOf(o); }
-
-function EscalationsOptions_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function EscalationsOptions_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) EscalationsOptions_setPrototypeOf(subClass, superClass); }
-
-function EscalationsOptions_setPrototypeOf(o, p) { EscalationsOptions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return EscalationsOptions_setPrototypeOf(o, p); }
-
-// DEPENDaNCIES
-
-
- // CONFIG
-
- // CORE COMPONENTS
-
-
-
-
-var EscalationsOptions_EscalationOptions =
-/*#__PURE__*/
-function (_Component) {
-  EscalationsOptions_inherits(EscalationOptions, _Component);
-
-  function EscalationOptions(props) {
-    var _this;
-
-    EscalationsOptions_classCallCheck(this, EscalationOptions);
-
-    _this = EscalationsOptions_possibleConstructorReturn(this, EscalationsOptions_getPrototypeOf(EscalationOptions).call(this, props));
-
-    _this.handleClick = function (id) {
-      _this.setState({
-        selected: id
-      });
-    };
-
-    _this.onSubmit = function (e) {
-      var _this$props = _this.props,
-          updateActionTable = _this$props.updateActionTable,
-          actionTable = _this$props.actionTable;
-      var selected = _this.state.selected;
-      e.preventDefault();
-      updateActionTable(actionTable, actionTable.id, selected);
-      $("#escalationOptions").modal("hide");
-    };
-
-    _this.handleClick = _this.handleClick.bind(EscalationsOptions_assertThisInitialized(_this));
-    _this.state = {
-      selected: _this.props.actionTable.parent_dashboard ? _this.props.actionTable.parent_dashboard : null
-    };
-    return _this;
-  }
-
-  EscalationsOptions_createClass(EscalationOptions, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props2 = this.props,
-          dashboards = _this$props2.dashboards,
-          currentDashboard = _this$props2.currentDashboard;
-      var selected = this.state.selected;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "modal fade",
-        id: "escalationOptions",
-        role: "dialog",
-        "aria-labelledby": "escalationOptionsLabel",
-        "aria-hidden": "true"
-      }, react_default.a.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, react_default.a.createElement("div", {
-        className: "modal-content"
-      }, react_default.a.createElement("div", {
-        className: "modal-header"
-      }, react_default.a.createElement("h1", {
-        className: "modal-title",
-        id: "escalationOptionsLabel"
-      }, react_default.a.createElement("span", {
-        className: "im im-link",
-        style: {
-          fontSize: "".concat(2.5, "rem"),
-          verticalAlign: "-0.1em"
-        }
-      }), "  ", "Manage Escalation"), react_default.a.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react_default.a.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), react_default.a.createElement("div", {
-        className: "modal-body",
-        style: {
-          padding: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "card"
-      }, react_default.a.createElement("div", {
-        className: "card-header"
-      }, react_default.a.createElement("ul", {
-        className: "nav nav-tabs card-header-tabs"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link active",
-        "data-toggle": "tab",
-        href: "#options"
-      }, "Options")))), react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("div", {
-        className: "tab-content",
-        style: {
-          maxHeight: "".concat(550, "px"),
-          overflow: "auto",
-          overflowX: "auto"
-        }
-      }, react_default.a.createElement("h5", {
-        className: "card-title"
-      }, "Select a Parent Board"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "row"
-      }, dashboards.filter(function (dashboard) {
-        return dashboard.id !== currentDashboard.id;
-      }).map(function (dashboard) {
-        return react_default.a.createElement("div", {
-          className: "col-lrg-3",
-          key: dashboard.id
-        }, react_default.a.createElement(ui_DashboardCard, {
-          dashboard: dashboard,
-          selection: selected,
-          handleClick: _this2.handleClick,
-          key: dashboard.id
-        }));
-      }), react_default.a.createElement("div", {
-        className: "card m-3",
-        style: selected == null ? {
-          border: "2px solid ".concat(accentColor)
-        } : {
-          border: "1px solid rgba(0,0,0,.125)"
-        },
-        onClick: function onClick() {
-          _this2.handleClick(null);
-        }
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        className: "card-title"
-      }, "None")))), react_default.a.createElement("div", {
-        className: "modal-footer"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "Close"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Confirm")))))))))));
-    }
-  }]);
-
-  return EscalationOptions;
-}(react["Component"]);
-
-EscalationsOptions_EscalationOptions.propTypes = {
-  updateActionTable: prop_types_default.a.func.isRequired,
-  actionTable: prop_types_default.a.object.isRequired,
-  dashboards: prop_types_default.a.array.isRequired,
-  currentDashboard: prop_types_default.a.object.isRequired
-};
-/* harmony default export */ var EscalationsOptions = (Object(es["connect"])(null, {
-  updateActionTable: dashboards_updateActionTable
-})(EscalationsOptions_EscalationOptions));
-// EXTERNAL MODULE: ./node_modules/date-fns/esm/parseISO/index.js
-var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.js");
-
-// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 28 modules
-var esm_format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
-
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
-function ActionForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ActionForm_typeof = function _typeof(obj) { return typeof obj; }; } else { ActionForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ActionForm_typeof(obj); }
-
-function ActionForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function ActionForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function ActionForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function ActionForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) ActionForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) ActionForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function ActionForm_possibleConstructorReturn(self, call) { if (call && (ActionForm_typeof(call) === "object" || typeof call === "function")) { return call; } return ActionForm_assertThisInitialized(self); }
-
-function ActionForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function ActionForm_getPrototypeOf(o) { ActionForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return ActionForm_getPrototypeOf(o); }
-
-function ActionForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) ActionForm_setPrototypeOf(subClass, superClass); }
-
-function ActionForm_setPrototypeOf(o, p) { ActionForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ActionForm_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
-
-
-
-
- // ACTIONS
-
-
-
-var ActionForm_ActionForm =
-/*#__PURE__*/
-function (_Component) {
-  ActionForm_inherits(ActionForm, _Component);
-
-  function ActionForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    ActionForm_classCallCheck(this, ActionForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return ActionForm_possibleConstructorReturn(_this, (_temp = _this = ActionForm_possibleConstructorReturn(this, (_getPrototypeOf2 = ActionForm_getPrototypeOf(ActionForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      letter: "",
-      problem: "",
-      root_cause: "",
-      solution: "",
-      leader: "",
-      date: new Date()
-    }, _this.update = function (state) {
-      _this.setState(state);
-    }, _this.onChange = function (e) {
-      return _this.setState(ActionForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onDateChange = function (date) {
-      _this.setState({
-        date: date
-      });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$state = _this.state,
-          letter = _this$state.letter,
-          problem = _this$state.problem,
-          root_cause = _this$state.root_cause,
-          solution = _this$state.solution,
-          leader = _this$state.leader,
-          date = _this$state.date;
-      var _this$props = _this.props,
-          action = _this$props.action,
-          updateAction = _this$props.updateAction;
-      var newAction = {
-        letter: letter,
-        problem: problem,
-        root_cause: root_cause,
-        solution: solution,
-        leader: leader
-      };
-      newAction.date = Object(esm_format["default"])(date, "yyyy-MM-dd");
-      updateAction(newAction, action.id);
-
-      _this.setState({
-        letter: "",
-        problem: "",
-        root_cause: "",
-        solution: "",
-        leader: "",
-        date: Object(parseISO["default"])("2019-01-01")
-      });
-
-      $("#actionOptions").modal("hide");
-    }, _this["delete"] = function () {
-      var _this$props2 = _this.props,
-          deleteAction = _this$props2.deleteAction,
-          action = _this$props2.action;
-      deleteAction(action.id);
-      $("#actionOptions").modal("hide");
-    }, _temp));
-  }
-
-  ActionForm_createClass(ActionForm, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var action = this.props.action;
-
-      if (prevProps.action !== action) {
-        if (!action) return;
-        this.update({
-          letter: action.letter || "",
-          problem: action.problem || "",
-          root_cause: action.root_cause || "",
-          solution: action.solution || "",
-          leader: action.leader || "",
-          date: action.date ? Object(parseISO["default"])(action.date) : new Date()
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$state2 = this.state,
-          letter = _this$state2.letter,
-          problem = _this$state2.problem,
-          root_cause = _this$state2.root_cause,
-          solution = _this$state2.solution,
-          leader = _this$state2.leader,
-          date = _this$state2.date;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h2", null, "Edit Action"), react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "row justify-content-between"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "letter"
-      }, "Letter"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "letter",
-        onChange: this.onChange,
-        value: letter || ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "problem"
-      }, "Problem"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "problem",
-        onChange: this.onChange,
-        value: problem
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "root_cause"
-      }, "Root Cause"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "root_cause",
-        onChange: this.onChange,
-        value: root_cause
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "solution"
-      }, "Solution"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "solution",
-        onChange: this.onChange,
-        value: solution
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-5"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "leader"
-      }, "Leader"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "leader",
-        onChange: this.onChange,
-        value: leader
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "date",
-        className: "d-block"
-      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
-        className: "form-control",
-        onChange: function onChange(date) {
-          return _this2.onDateChange(date);
-        },
-        selected: date,
-        dateFormat: "yyyy-MM-dd"
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12 d-flex justify-content-end"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn\r btn-danger mr-4",
-        onClick: this["delete"]
-      }, "Delete"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn\r btn-primary"
-      }, "Submit")))));
-    }
-  }]);
-
-  return ActionForm;
-}(react["Component"]);
-
-ActionForm_ActionForm.propTypes = {
-  action: prop_types_default.a.object,
-  updateAction: prop_types_default.a.func.isRequired,
-  deleteAction: prop_types_default.a.func.isRequired
-};
-ActionForm_ActionForm.defaultProps = {
-  action: null
-};
-/* harmony default export */ var components_ActionForm = (Object(es["connect"])(null, {
-  updateAction: dashboards_updateAction,
-  deleteAction: dashboards_deleteAction
-})(ActionForm_ActionForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionOptions.js
-
-
-
-
-var ActionOptions_ActionOptions = function ActionOptions(props) {
-  var action = props.action;
-  return react_default.a.createElement("div", {
-    className: "modal fade",
-    id: "actionOptions",
-    role: "dialog",
-    "aria-labelledby": "actionOptionsLabel",
-    "aria-hidden": "true"
-  }, react_default.a.createElement("div", {
-    className: "modal-dialog",
-    role: "document",
-    style: {
-      maxWidth: "fit-content"
-    }
-  }, react_default.a.createElement("div", {
-    className: "modal-content"
-  }, react_default.a.createElement("div", {
-    className: "modal-header"
-  }, react_default.a.createElement("h1", {
-    className: "modal-title",
-    id: "actionOptionsLabel"
-  }, react_default.a.createElement("span", {
-    className: "im im-pin",
-    style: {
-      fontSize: "".concat(2.5, "rem"),
-      verticalAlign: "-0.1em"
-    }
-  }), "  ", "Edit Action"), react_default.a.createElement("button", {
-    type: "button",
-    className: "close",
-    "data-dismiss": "modal",
-    "aria-label": "Close"
-  }, react_default.a.createElement("span", {
-    "aria-hidden": "true"
-  }, "\xD7"))), react_default.a.createElement("div", {
-    className: "modal-body",
-    style: {
-      padding: 0
-    }
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement(components_ActionForm, {
-    action: action
-  })))))));
-};
-
-ActionOptions_ActionOptions.propTypes = {
-  action: prop_types_default.a.object
-};
-/* harmony default export */ var components_ActionOptions = (ActionOptions_ActionOptions);
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditTable.js
-function AuditTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AuditTable_typeof = function _typeof(obj) { return typeof obj; }; } else { AuditTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AuditTable_typeof(obj); }
-
-function AuditTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function AuditTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function AuditTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) AuditTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) AuditTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function AuditTable_possibleConstructorReturn(self, call) { if (call && (AuditTable_typeof(call) === "object" || typeof call === "function")) { return call; } return AuditTable_assertThisInitialized(self); }
-
-function AuditTable_getPrototypeOf(o) { AuditTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return AuditTable_getPrototypeOf(o); }
-
-function AuditTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function AuditTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) AuditTable_setPrototypeOf(subClass, superClass); }
-
-function AuditTable_setPrototypeOf(o, p) { AuditTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return AuditTable_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var AuditTable_AuditTable =
-/*#__PURE__*/
-function (_Component) {
-  AuditTable_inherits(AuditTable, _Component);
-
-  function AuditTable(props) {
-    var _this;
-
-    AuditTable_classCallCheck(this, AuditTable);
-
-    _this = AuditTable_possibleConstructorReturn(this, AuditTable_getPrototypeOf(AuditTable).call(this, props));
-    _this.update = _this.update.bind(AuditTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(AuditTable_assertThisInitialized(_this));
-    _this.insert = _this.insert.bind(AuditTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  AuditTable_createClass(AuditTable, [{
-    key: "update",
-    value: function update(current, id) {
-      var updateAudit = this.props.updateAudit;
-      updateAudit(current, id);
-    }
-  }, {
-    key: "insert",
-    value: function insert() {
-      var _this$props = this.props,
-          addAudit = _this$props.addAudit,
-          dashboardId = _this$props.dashboardId;
-      var audit = {
-        description: null,
-        date: null,
-        dashboard: dashboardId
-      };
-      addAudit(audit);
-    }
-  }, {
-    key: "delete",
-    value: function _delete(id) {
-      var deleteAudit = this.props.deleteAudit;
-      deleteAudit(id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          data = _this$props2.data,
-          editable = _this$props2.editable,
-          appendable = _this$props2.appendable,
-          rowClick = _this$props2.rowClick,
-          deletable = _this$props2.deletable;
-      return react_default.a.createElement(table_Table, {
-        editable: editable,
-        appendable: appendable,
-        data: data,
-        header: AUDIT_TABLE_HEADERS,
-        update: this.update,
-        "delete": this["delete"],
-        insert: this.insert,
-        rowClick: rowClick,
-        deletable: deletable,
-        fontSize: "0.6rem",
-        summary: true
-      });
-    }
-  }]);
-
-  return AuditTable;
-}(react["Component"]);
-
-AuditTable_AuditTable.propTypes = {
-  data: prop_types_default.a.array,
-  editable: prop_types_default.a.bool,
-  rowClick: prop_types_default.a.func,
-  deletable: prop_types_default.a.bool
-};
-/* harmony default export */ var components_AuditTable = (Object(es["connect"])(null, {
-  updateAudit: dashboards_updateAudit,
-  deleteAudit: dashboards_deleteAudit,
-  addAudit: dashboards_addAudit
-})(AuditTable_AuditTable));
-AuditTable_AuditTable.defaultProps = {
-  hoverable: false,
-  editable: false,
-  deletable: false,
-  appendable: false,
-  rowClick: null
-};
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/modal/Modal.js
 function Modal_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Modal_typeof = function _typeof(obj) { return typeof obj; }; } else { Modal_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Modal_typeof(obj); }
 
@@ -3482,1432 +5903,6 @@ function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var modal_Modal = (Modal_Modal);
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/AuditForm.js
-function AuditForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { AuditForm_typeof = function _typeof(obj) { return typeof obj; }; } else { AuditForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return AuditForm_typeof(obj); }
-
-function AuditForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function AuditForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function AuditForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function AuditForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) AuditForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) AuditForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function AuditForm_possibleConstructorReturn(self, call) { if (call && (AuditForm_typeof(call) === "object" || typeof call === "function")) { return call; } return AuditForm_assertThisInitialized(self); }
-
-function AuditForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function AuditForm_getPrototypeOf(o) { AuditForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return AuditForm_getPrototypeOf(o); }
-
-function AuditForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) AuditForm_setPrototypeOf(subClass, superClass); }
-
-function AuditForm_setPrototypeOf(o, p) { AuditForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return AuditForm_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
-
-
-
-
- // ACTIONS
-
-
-
-var AuditForm_AuditForm =
-/*#__PURE__*/
-function (_Component) {
-  AuditForm_inherits(AuditForm, _Component);
-
-  function AuditForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    AuditForm_classCallCheck(this, AuditForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return AuditForm_possibleConstructorReturn(_this, (_temp = _this = AuditForm_possibleConstructorReturn(this, (_getPrototypeOf2 = AuditForm_getPrototypeOf(AuditForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      description: "",
-      start_date: new Date(),
-      end_date: new Date()
-    }, _this.onUpdate = function (hook) {
-      hook();
-    }, _this.onChange = function (e) {
-      return _this.setState(AuditForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onDateChange = function (date, key) {
-      _this.setState(AuditForm_defineProperty({}, key, date));
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$state = _this.state,
-          description = _this$state.description,
-          start_date = _this$state.start_date,
-          end_date = _this$state.end_date;
-      var _this$props = _this.props,
-          audit = _this$props.audit,
-          updateAudit = _this$props.updateAudit;
-      var newAudit = {
-        description: description
-      };
-      newAudit.start_date = Object(esm_format["default"])(start_date, "yyyy-MM-dd");
-      newAudit.end_date = Object(esm_format["default"])(end_date, "yyyy-MM-dd");
-      updateAudit(newAudit, audit.id);
-
-      _this.setState({
-        description: "",
-        start_date: Object(parseISO["default"])("2019-01-01"),
-        end_date: Object(parseISO["default"])("2019-01-01")
-      });
-
-      $("#auditOptions").modal("hide");
-    }, _this["delete"] = function () {
-      var _this$props2 = _this.props,
-          deleteAudit = _this$props2.deleteAudit,
-          audit = _this$props2.audit;
-      deleteAudit(audit.id);
-      $("#auditOptions").modal("hide");
-    }, _temp));
-  }
-
-  AuditForm_createClass(AuditForm, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this2 = this;
-
-      var audit = this.props.audit;
-
-      if (prevProps.audit !== audit) {
-        if (!audit) return;
-        this.onUpdate(function () {
-          _this2.setState({
-            description: audit.description,
-            start_date: audit.start_date ? Object(parseISO["default"])(audit.start_date) : new Date(),
-            end_date: audit.end_date ? Object(parseISO["default"])(audit.end_date) : new Date()
-          });
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var _this$state2 = this.state,
-          description = _this$state2.description,
-          end_date = _this$state2.end_date,
-          start_date = _this$state2.start_date;
-      return react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "row justify-content-between"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-12"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "description"
-      }, "Description"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "description",
-        onChange: this.onChange,
-        value: description || ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "start_date",
-        className: "d-block"
-      }, "Start Date"), react_default.a.createElement(react_datepicker_es["default"], {
-        className: "form-control",
-        onChange: function onChange(date) {
-          return _this3.onDateChange(date, "start_date");
-        },
-        selected: start_date,
-        dateFormat: "yyyy-MM-dd"
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "end_date",
-        className: "d-block"
-      }, "End Date"), react_default.a.createElement(react_datepicker_es["default"], {
-        className: "form-control",
-        onChange: function onChange(date) {
-          return _this3.onDateChange(date, "end_date");
-        },
-        selected: end_date,
-        dateFormat: "yyyy-MM-dd"
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12 d-flex justify-content-end"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn\r btn-danger mr-4",
-        onClick: this["delete"]
-      }, "Delete"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn\r btn-primary"
-      }, "Submit"))));
-    }
-  }]);
-
-  return AuditForm;
-}(react["Component"]);
-
-AuditForm_AuditForm.propTypes = {
-  audit: prop_types_default.a.object,
-  updateAudit: prop_types_default.a.func.isRequired,
-  deleteAudit: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var components_AuditForm = (Object(es["connect"])(null, {
-  updateAudit: dashboards_updateAudit,
-  deleteAudit: dashboards_deleteAudit
-})(AuditForm_AuditForm));
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinTable.js
-function WinTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WinTable_typeof = function _typeof(obj) { return typeof obj; }; } else { WinTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WinTable_typeof(obj); }
-
-function WinTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function WinTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function WinTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) WinTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) WinTable_defineProperties(Constructor, staticProps); return Constructor; }
-
-function WinTable_possibleConstructorReturn(self, call) { if (call && (WinTable_typeof(call) === "object" || typeof call === "function")) { return call; } return WinTable_assertThisInitialized(self); }
-
-function WinTable_getPrototypeOf(o) { WinTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WinTable_getPrototypeOf(o); }
-
-function WinTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function WinTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WinTable_setPrototypeOf(subClass, superClass); }
-
-function WinTable_setPrototypeOf(o, p) { WinTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WinTable_setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var WinTable_WinTable =
-/*#__PURE__*/
-function (_Component) {
-  WinTable_inherits(WinTable, _Component);
-
-  function WinTable(props) {
-    var _this;
-
-    WinTable_classCallCheck(this, WinTable);
-
-    _this = WinTable_possibleConstructorReturn(this, WinTable_getPrototypeOf(WinTable).call(this, props));
-    _this.update = _this.update.bind(WinTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(WinTable_assertThisInitialized(_this));
-    _this.insert = _this.insert.bind(WinTable_assertThisInitialized(_this));
-    return _this;
-  }
-
-  WinTable_createClass(WinTable, [{
-    key: "update",
-    value: function update(current, id) {
-      var updateWin = this.props.updateWin;
-      updateWin(current, id);
-    }
-  }, {
-    key: "insert",
-    value: function insert() {
-      var _this$props = this.props,
-          addWin = _this$props.addWin,
-          dashboardId = _this$props.dashboardId;
-      var win = {
-        description: null,
-        participants: null,
-        date: null,
-        dashboard: dashboardId
-      };
-      addWin(win);
-    }
-  }, {
-    key: "delete",
-    value: function _delete(id) {
-      var deleteWin = this.props.deleteWin;
-      deleteWin(id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          data = _this$props2.data,
-          editable = _this$props2.editable,
-          appendable = _this$props2.appendable,
-          rowClick = _this$props2.rowClick,
-          deletable = _this$props2.deletable;
-      return react_default.a.createElement(table_Table, {
-        editable: editable,
-        appendable: appendable,
-        data: data,
-        header: WIN_TABLE_HEADERS,
-        update: this.update,
-        "delete": this["delete"],
-        insert: this.insert,
-        rowClick: rowClick,
-        deletable: deletable,
-        fontSize: "0.6rem",
-        summary: true
-      });
-    }
-  }]);
-
-  return WinTable;
-}(react["Component"]);
-
-WinTable_WinTable.propTypes = {
-  data: prop_types_default.a.array,
-  editable: prop_types_default.a.bool,
-  rowClick: prop_types_default.a.func,
-  deletable: prop_types_default.a.bool
-};
-/* harmony default export */ var components_WinTable = (Object(es["connect"])(null, {
-  updateWin: dashboards_updateWin,
-  deleteWin: dashboards_deleteWin,
-  addWin: dashboards_addWin
-})(WinTable_WinTable));
-WinTable_WinTable.defaultProps = {
-  hoverable: false,
-  editable: false,
-  deletable: false,
-  appendable: false,
-  rowClick: null
-};
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinForm.js
-function WinForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WinForm_typeof = function _typeof(obj) { return typeof obj; }; } else { WinForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WinForm_typeof(obj); }
-
-function WinForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function WinForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function WinForm_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function WinForm_createClass(Constructor, protoProps, staticProps) { if (protoProps) WinForm_defineProperties(Constructor.prototype, protoProps); if (staticProps) WinForm_defineProperties(Constructor, staticProps); return Constructor; }
-
-function WinForm_possibleConstructorReturn(self, call) { if (call && (WinForm_typeof(call) === "object" || typeof call === "function")) { return call; } return WinForm_assertThisInitialized(self); }
-
-function WinForm_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function WinForm_getPrototypeOf(o) { WinForm_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WinForm_getPrototypeOf(o); }
-
-function WinForm_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WinForm_setPrototypeOf(subClass, superClass); }
-
-function WinForm_setPrototypeOf(o, p) { WinForm_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WinForm_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
-
-
-
-
- // ACTIONS
-
-
-/* The boardroom is the landing page for all dashboards
-Parent of all boardroom components Contains pillar widgets and action tables
-This component makes ALL GET request for Boardroom data
-*/
-
-var WinForm_WinForm =
-/*#__PURE__*/
-function (_Component) {
-  WinForm_inherits(WinForm, _Component);
-
-  function WinForm() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    WinForm_classCallCheck(this, WinForm);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return WinForm_possibleConstructorReturn(_this, (_temp = _this = WinForm_possibleConstructorReturn(this, (_getPrototypeOf2 = WinForm_getPrototypeOf(WinForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      description: "",
-      participants: "",
-      date: new Date()
-    }, _this.onUpdate = function (hook) {
-      hook();
-    }, _this.onChange = function (e) {
-      return _this.setState(WinForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onDateChange = function (date) {
-      _this.setState({
-        date: date
-      });
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$state = _this.state,
-          description = _this$state.description,
-          date = _this$state.date,
-          participants = _this$state.participants;
-      var _this$props = _this.props,
-          win = _this$props.win,
-          updateWin = _this$props.updateWin;
-      var newWin = {
-        description: description,
-        participants: participants
-      };
-      newWin.date = Object(esm_format["default"])(date, "yyyy-MM-dd");
-      updateWin(newWin, win.id);
-
-      _this.setState({
-        description: "",
-        date: Object(parseISO["default"])("2019-01-01")
-      });
-
-      $("#winOptions").modal("hide");
-    }, _this["delete"] = function () {
-      var _this$props2 = _this.props,
-          deleteWin = _this$props2.deleteWin,
-          win = _this$props2.win;
-      deleteWin(win.id);
-      $("#winOptions").modal("hide");
-    }, _temp));
-  }
-
-  WinForm_createClass(WinForm, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this2 = this;
-
-      var win = this.props.win;
-
-      if (prevProps.win !== win) {
-        if (!win) return;
-        this.onUpdate(function () {
-          _this2.setState({
-            description: win.description,
-            participants: win.participants,
-            date: win.date ? Object(parseISO["default"])(win.date) : new Date()
-          });
-        });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      var _this$state2 = this.state,
-          description = _this$state2.description,
-          date = _this$state2.date,
-          participants = _this$state2.participants;
-      return react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("div", {
-        className: "row justify-content-between"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-12"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "description"
-      }, "Description"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "description",
-        onChange: this.onChange,
-        value: description || ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "participants"
-      }, "Participants"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "participants",
-        onChange: this.onChange,
-        value: participants || ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "date",
-        className: "d-block"
-      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
-        className: "form-control",
-        onChange: function onChange(date) {
-          return _this3.onDateChange(date);
-        },
-        selected: date,
-        dateFormat: "yyyy-MM-dd"
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-12 d-flex justify-content-end"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn\r btn-danger mr-4",
-        onClick: this["delete"]
-      }, "Delete"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn\r btn-primary"
-      }, "Submit"))));
-    }
-  }]);
-
-  return WinForm;
-}(react["Component"]);
-
-WinForm_WinForm.propTypes = {
-  win: prop_types_default.a.object,
-  updateWin: prop_types_default.a.func.isRequired,
-  deleteWin: prop_types_default.a.func.isRequired
-};
-/* harmony default export */ var components_WinForm = (Object(es["connect"])(null, {
-  updateWin: dashboards_updateWin,
-  deleteWin: dashboards_deleteWin
-})(WinForm_WinForm));
-// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/HeatCheck.js
-function HeatCheck_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { HeatCheck_typeof = function _typeof(obj) { return typeof obj; }; } else { HeatCheck_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return HeatCheck_typeof(obj); }
-
-function HeatCheck_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { HeatCheck_defineProperty(target, key, source[key]); }); } return target; }
-
-function HeatCheck_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function HeatCheck_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function HeatCheck_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function HeatCheck_createClass(Constructor, protoProps, staticProps) { if (protoProps) HeatCheck_defineProperties(Constructor.prototype, protoProps); if (staticProps) HeatCheck_defineProperties(Constructor, staticProps); return Constructor; }
-
-function HeatCheck_possibleConstructorReturn(self, call) { if (call && (HeatCheck_typeof(call) === "object" || typeof call === "function")) { return call; } return HeatCheck_assertThisInitialized(self); }
-
-function HeatCheck_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function HeatCheck_getPrototypeOf(o) { HeatCheck_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return HeatCheck_getPrototypeOf(o); }
-
-function HeatCheck_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) HeatCheck_setPrototypeOf(subClass, superClass); }
-
-function HeatCheck_setPrototypeOf(o, p) { HeatCheck_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return HeatCheck_setPrototypeOf(o, p); }
-
-
-
-
-
-var width = 400;
-var height = 130;
-
-var HeatCheck_HeatCheck =
-/*#__PURE__*/
-function (_Component) {
-  HeatCheck_inherits(HeatCheck, _Component);
-
-  function HeatCheck(props) {
-    HeatCheck_classCallCheck(this, HeatCheck);
-
-    return HeatCheck_possibleConstructorReturn(this, HeatCheck_getPrototypeOf(HeatCheck).call(this, props));
-  }
-
-  HeatCheck_createClass(HeatCheck, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.renderD3();
-      this.updateD3();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var heat = this.props.heat;
-
-      if (prevProps.heat != heat) {
-        this.updateD3();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var chart = this.props.chart;
-      return react_default.a.createElement("div", {
-        className: "d-flex justify-content-center"
-      }, " ", chart, " ");
-    }
-  }, {
-    key: "renderD3",
-    value: function renderD3() {
-      var connectFauxDOM = this.props.connectFauxDOM;
-      var faux = connectFauxDOM("svg", "chart");
-      var chart = d3["select"](faux);
-      chart.attr("viewBox", "0 0 ".concat(width, " ").concat(height)).attr("height", height).attr("width", width).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink");
-    }
-  }, {
-    key: "updateD3",
-    value: function updateD3() {
-      var _this$props = this.props,
-          connectFauxDOM = _this$props.connectFauxDOM,
-          animateFauxDOM = _this$props.animateFauxDOM,
-          heat = _this$props.heat,
-          onClick = _this$props.onClick;
-      var faux = connectFauxDOM("svg", "chart");
-      var chart = d3["select"](faux);
-      if (!heat) return; // Scale used to size the heat range circles
-
-      var heatValues = heat.map(function (h) {
-        return h.value;
-      });
-      var radiusScale = d3["scaleLinear"]().domain([d3["min"](heatValues), d3["max"](heatValues)]).range([30, 50]); // Creates the text fields inside the circles which will display the heat number
-
-      var texts = chart.selectAll("text");
-      var textsData = texts.data(heat);
-      var text = textsData.enter().append("text").merge(texts).attr("dx", function (d, i) {
-        return 56 + 120 * i + d.value.toString().length * -9;
-      }).attr("dy", function (d, i) {
-        return 76;
-      }).style("opacity", 1).text(function (d) {
-        return "".concat(d.value);
-      });
-      var circles = chart.selectAll("circle"); // DATA BIND
-
-      var circlesData = circles.data(heat); // ENTER SECLECTION
-
-      var circleEnter = circlesData.enter().append("circle").attr("r", 0).merge(circles).attr("cy", 70).attr("cx", function (d, i) {
-        return 53 + 120 * i;
-      }).style("opacity", 0.6).on("click", function (d) {
-        var newHeat = HeatCheck_objectSpread({}, d);
-
-        newHeat.value += 1;
-        onClick(newHeat, newHeat.id);
-      }).transition().duration(500).attr("r", function (d) {
-        return radiusScale(parseInt(d.value));
-      }).transition().duration(500).style("fill", function (d) {
-        return d.color;
-      });
-      animateFauxDOM(2500);
-    }
-  }]);
-
-  return HeatCheck;
-}(react["Component"]);
-
-HeatCheck_HeatCheck.defaultProps = {
-  chart: "Loading"
-};
-/* harmony default export */ var d3charts_HeatCheck = (Object(ReactFauxDOM["withFauxDOM"])(HeatCheck_HeatCheck));
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WidgetView.js
-function WidgetView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { WidgetView_typeof = function _typeof(obj) { return typeof obj; }; } else { WidgetView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return WidgetView_typeof(obj); }
-
-function WidgetView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { WidgetView_defineProperty(target, key, source[key]); }); } return target; }
-
-function WidgetView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function WidgetView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function WidgetView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function WidgetView_createClass(Constructor, protoProps, staticProps) { if (protoProps) WidgetView_defineProperties(Constructor.prototype, protoProps); if (staticProps) WidgetView_defineProperties(Constructor, staticProps); return Constructor; }
-
-function WidgetView_possibleConstructorReturn(self, call) { if (call && (WidgetView_typeof(call) === "object" || typeof call === "function")) { return call; } return WidgetView_assertThisInitialized(self); }
-
-function WidgetView_getPrototypeOf(o) { WidgetView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return WidgetView_getPrototypeOf(o); }
-
-function WidgetView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function WidgetView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) WidgetView_setPrototypeOf(subClass, superClass); }
-
-function WidgetView_setPrototypeOf(o, p) { WidgetView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return WidgetView_setPrototypeOf(o, p); }
-
-
-
- // COMPONENTS
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var WidgetView_WidgetView =
-/*#__PURE__*/
-function (_Component) {
-  WidgetView_inherits(WidgetView, _Component);
-
-  function WidgetView(props) {
-    var _this;
-
-    WidgetView_classCallCheck(this, WidgetView);
-
-    _this = WidgetView_possibleConstructorReturn(this, WidgetView_getPrototypeOf(WidgetView).call(this, props));
-    _this.rowActionClick = _this.rowActionClick.bind(WidgetView_assertThisInitialized(_this));
-    _this.rowAuditClick = _this.rowAuditClick.bind(WidgetView_assertThisInitialized(_this));
-    _this.rowWinClick = _this.rowWinClick.bind(WidgetView_assertThisInitialized(_this));
-    _this.resetHeat = _this.resetHeat.bind(WidgetView_assertThisInitialized(_this));
-    _this.state = {
-      currentActionId: null,
-      currentWinId: null
-    };
-    return _this;
-  }
-
-  WidgetView_createClass(WidgetView, [{
-    key: "filterTables",
-    value: function filterTables(title) {
-      var tables = this.props.tables;
-      var payload = tables.filter(function (table) {
-        return table.title === title;
-      });
-      return payload ? payload[0] : null;
-    }
-  }, {
-    key: "rowActionClick",
-    value: function rowActionClick(id) {
-      this.setState({
-        currentActionId: id
-      });
-      $("#actionOptions").modal("show");
-    }
-  }, {
-    key: "rowAuditClick",
-    value: function rowAuditClick(id) {
-      this.setState({
-        currentAuditId: id
-      });
-      $("#auditOptions").modal("show");
-    }
-  }, {
-    key: "rowWinClick",
-    value: function rowWinClick(id) {
-      this.setState({
-        currentWinId: id
-      });
-      $("#winOptions").modal("show");
-    }
-  }, {
-    key: "resetHeat",
-    value: function resetHeat() {
-      var _this$props = this.props,
-          updateHeat = _this$props.updateHeat,
-          heat = _this$props.heat;
-
-      for (var i in heat) {
-        var h = WidgetView_objectSpread({}, heat[i]);
-
-        h.value = 0;
-        updateHeat(h, h.id);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          tables = _this$props2.tables,
-          dashboards = _this$props2.dashboards,
-          currentDashboard = _this$props2.currentDashboard,
-          audits = _this$props2.audits,
-          wins = _this$props2.wins,
-          heat = _this$props2.heat,
-          updateHeat = _this$props2.updateHeat;
-      var _this$state = this.state,
-          currentActionId = _this$state.currentActionId,
-          currentAuditId = _this$state.currentAuditId,
-          currentWinId = _this$state.currentWinId;
-      var actionQuery = tables.map(function (table) {
-        return table.actions.filter(function (action) {
-          return action.id === currentActionId;
-        });
-      }).flat();
-      var currentAction = actionQuery ? actionQuery[0] : null;
-      var auditQuery = audits.filter(function (audit) {
-        return audit.id === currentAuditId;
-      });
-      var winQuery = wins.filter(function (win) {
-        return win.id === currentWinId;
-      });
-      var currentAudit = auditQuery ? auditQuery[0] : null;
-      var currentWin = winQuery ? winQuery[0] : null;
-      var ul = this.filterTables("Upper Level Escalation");
-      var ll = this.filterTables("Lower Level Feed");
-      var lt = this.filterTables("Long Term Action Plan");
-      var st = this.filterTables("Short Term Action Plan");
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(components_ActionOptions, {
-        action: currentAction
-      }), react_default.a.createElement(modal_Modal, {
-        title: "Update Audit",
-        id: "auditOptions"
-      }, react_default.a.createElement(components_AuditForm, {
-        audit: currentAudit
-      })), react_default.a.createElement(modal_Modal, {
-        title: "Update WIN",
-        id: "winOptions"
-      }, react_default.a.createElement(components_WinForm, {
-        win: currentWin
-      })), react_default.a.createElement("div", {
-        className: "col-lg-6 p-0"
-      }, react_default.a.createElement("h2", {
-        className: "ml-2 mb-1 color-text-action-plans"
-      }, "Action Plans", react_default.a.createElement("span", {
-        className: "im im-date-o ml-3"
-      })), react_default.a.createElement("div", {
-        className: "card mt-1 ml-2 mr-2 border-action-plans"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, st ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", null, " Short Term"), react_default.a.createElement(components_ActionTable, {
-        data: st,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      })) : react_default.a.createElement(LoadingScreen, null), lt ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, " Long Term"), react_default.a.createElement(components_ActionTable, {
-        data: lt,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      })) : react_default.a.createElement(LoadingScreen, null), ul ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "row",
-        style: {
-          padding: "0 1rem"
-        }
-      }, react_default.a.createElement("h5", null, "Escalation"), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary btn-sm mb-1 ml-auto",
-        onClick: function onClick(e) {
-          $("#escalationOptions").modal("show");
-        }
-      }, "Manage Escalations")), react_default.a.createElement(components_ActionTable, {
-        data: ul,
-        header: ACTION_TABLE_HEADERS,
-        appendable: true,
-        rowClick: this.rowActionClick
-      }), react_default.a.createElement(EscalationsOptions, {
-        dashboards: dashboards,
-        currentDashboard: currentDashboard,
-        actionTable: this.filterTables("Upper Level Escalation")
-      })) : react_default.a.createElement(LoadingScreen, null), ll ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h5", {
-        className: "mt-3"
-      }, " Lower Level Feed"), react_default.a.createElement(components_ActionTable, {
-        data: ll,
-        header: ACTION_TABLE_HEADERS,
-        hoverable: true
-      })) : react_default.a.createElement(LoadingScreen, null)))), react_default.a.createElement("div", {
-        className: "col-lg-6 p-0"
-      }, react_default.a.createElement("div", {
-        className: "row m-0"
-      }, react_default.a.createElement("div", {
-        className: "col-lg-6"
-      }, react_default.a.createElement("h2", {
-        className: "ml-2 mb-1 color-text-audits"
-      }, "Audits", react_default.a.createElement("span", {
-        className: "im im-thumb-up ml-3"
-      })), react_default.a.createElement("div", {
-        className: "card mt-1 ml-2 mr-2 border-audits"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement(components_AuditTable, {
-        data: audits,
-        rowClick: this.rowAuditClick,
-        appendable: true,
-        dashboardId: currentDashboard.id
-      }))), react_default.a.createElement("h2", {
-        className: "ml-2 mt-4 mb-1 color-text-heat-check"
-      }, "Heat Check", react_default.a.createElement("span", {
-        className: "im im-fire ml-3"
-      })), react_default.a.createElement("div", {
-        className: "card card-body ml-2 mt-1 mr-2 mb-4 border-heat-check"
-      }, react_default.a.createElement("div", {
-        className: "row",
-        style: {
-          padding: "0px 1rem"
-        }
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-primary btn-sm mb-1 ml-auto",
-        onClick: this.resetHeat
-      }, "Reset")), react_default.a.createElement(d3charts_HeatCheck, {
-        heat: heat,
-        onClick: updateHeat
-      }))), react_default.a.createElement("div", {
-        className: "col-lg-6"
-      }, react_default.a.createElement("h2", {
-        className: "ml-2 mb-1 color-text-wins"
-      }, "Wins", react_default.a.createElement("span", {
-        className: "im im-trophy ml-3"
-      })), react_default.a.createElement("div", {
-        className: "card mt-1 ml-2 mr-2 border-wins"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement(components_WinTable, {
-        data: wins,
-        rowClick: this.rowWinClick,
-        appendable: true,
-        dashboardId: currentDashboard.id
-      })))))));
-    }
-  }]);
-
-  return WidgetView;
-}(react["Component"]);
-
-WidgetView_WidgetView.propTypes = {
-  tables: prop_types_default.a.array.isRequired,
-  dashboards: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired,
-  currentDashboard: prop_types_default.a.object.isRequired,
-  audit: prop_types_default.a.array
-};
-
-var WidgetView_mapStateToProps = function mapStateToProps(state) {
-  return {
-    currentDashboard: state.dashboards.currentDashboard
-  };
-};
-
-/* harmony default export */ var components_WidgetView = (Object(es["connect"])(WidgetView_mapStateToProps, {
-  updateHeat: dashboards_updateHeat
-})(WidgetView_WidgetView));
-// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/index.js
-function boardRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardRoom_typeof(obj); }
-
-function boardRoom_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function boardRoom_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function boardRoom_createClass(Constructor, protoProps, staticProps) { if (protoProps) boardRoom_defineProperties(Constructor.prototype, protoProps); if (staticProps) boardRoom_defineProperties(Constructor, staticProps); return Constructor; }
-
-function boardRoom_possibleConstructorReturn(self, call) { if (call && (boardRoom_typeof(call) === "object" || typeof call === "function")) { return call; } return boardRoom_assertThisInitialized(self); }
-
-function boardRoom_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function boardRoom_getPrototypeOf(o) { boardRoom_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return boardRoom_getPrototypeOf(o); }
-
-function boardRoom_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) boardRoom_setPrototypeOf(subClass, superClass); }
-
-function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return boardRoom_setPrototypeOf(o, p); }
-
-// DEPENDACIES
-
-
- // CORE COMPONENTS
-
-
-
- // NATIVE COMPONENTS
-
-
-
-
-
-var boardRoom_Boardroom =
-/*#__PURE__*/
-function (_Component) {
-  boardRoom_inherits(Boardroom, _Component);
-
-  function Boardroom() {
-    boardRoom_classCallCheck(this, Boardroom);
-
-    return boardRoom_possibleConstructorReturn(this, boardRoom_getPrototypeOf(Boardroom).apply(this, arguments));
-  }
-
-  boardRoom_createClass(Boardroom, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props = this.props,
-          getADashboard = _this$props.getADashboard,
-          getKpis = _this$props.getKpis,
-          getActionTable = _this$props.getActionTable,
-          getDashboards = _this$props.getDashboards,
-          getAudits = _this$props.getAudits,
-          getWins = _this$props.getWins,
-          getHeat = _this$props.getHeat; // Fetch data from server
-      // Source of ALL data for boardroom
-
-      var id = this.props.match.params.id;
-      getDashboards();
-      getADashboard(id);
-      getActionTable(id);
-      getKpis(id);
-      getAudits(id);
-      getWins(id);
-      getHeat(id);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props2 = this.props,
-          currentDashboard = _this$props2.currentDashboard,
-          kpis = _this$props2.kpis,
-          actionTables = _this$props2.actionTables,
-          dashboards = _this$props2.dashboards,
-          audits = _this$props2.audits,
-          wins = _this$props2.wins,
-          heat = _this$props2.heat;
-      var id = this.props.match.params.id; // If there is no current dashboard show the loading screen
-
-      if (currentDashboard == null) {
-        return react_default.a.createElement(LoadingScreen, null);
-      }
-
-      var color = currentDashboard.background;
-      return react_default.a.createElement("div", {
-        className: "container-fluid",
-        style: {
-          padding: 0,
-          background: color,
-          height: "fit-content"
-        }
-      }, react_default.a.createElement("div", {
-        className: "row",
-        style: {
-          margin: 0
-        }
-      }, react_default.a.createElement("div", {
-        className: "col-lg-2 p-0"
-      }, react_default.a.createElement("div", {
-        className: "card card-body ml-4 mt-4 mr-2 mb-4 border-pillars"
-      }, react_default.a.createElement(components_PillarBar, {
-        kpis: kpis,
-        dashboardId: id
-      }))), react_default.a.createElement("div", {
-        className: "col-lg-10 p-0"
-      }, react_default.a.createElement("div", {
-        className: "row m-0"
-      }, react_default.a.createElement("div", {
-        className: "col-lg-12 mt-4"
-      }, react_default.a.createElement("div", {
-        className: "row"
-      }, currentDashboard.images.length ? react_default.a.createElement("div", {
-        className: "col-lg-6 mb-4"
-      }, react_default.a.createElement(ui_Carousel, {
-        images: currentDashboard.images
-      })) : react_default.a.createElement(react_default.a.Fragment, null))), react_default.a.createElement(components_WidgetView, {
-        tables: actionTables,
-        audits: audits,
-        wins: wins,
-        heat: heat,
-        dashboards: dashboards
-      })))));
-    }
-  }]);
-
-  return Boardroom;
-}(react["Component"]);
-
-boardRoom_Boardroom.propTypes = {
-  dashboards: prop_types_default.a.array,
-  kpis: prop_types_default.a.array.isRequired,
-  getDashboards: prop_types_default.a.func.isRequired,
-  getADashboard: prop_types_default.a.func.isRequired,
-  getKpis: prop_types_default.a.func.isRequired,
-  getActionTable: prop_types_default.a.func.isRequired,
-  currentDashboard: prop_types_default.a.object,
-  actionTables: prop_types_default.a.arrayOf(prop_types_default.a.object).isRequired
-};
-boardRoom_Boardroom.defaultProps = {
-  dashboards: null,
-  currentDashboard: null
-};
-
-var boardRoom_mapStateToProps = function mapStateToProps(state) {
-  return {
-    dashboards: state.dashboards.dashboards,
-    kpis: state.dashboards.kpis,
-    isAuthenticated: state.auth.isAuthenticated,
-    actionTables: state.dashboards.actionTables,
-    currentDashboard: state.dashboards.currentDashboard,
-    audits: state.dashboards.audits,
-    wins: state.dashboards.wins,
-    heat: state.dashboards.heat
-  };
-};
-
-/* harmony default export */ var boardRoom = (Object(es["connect"])(boardRoom_mapStateToProps, {
-  getKpis: dashboards_getKpis,
-  getDashboards: dashboards_getDashboards,
-  getADashboard: dashboards_getADashboard,
-  clearKpis: dashboards_clearKpis,
-  getActionTable: dashboards_getActionTable,
-  getAudits: dashboards_getAudits,
-  getWins: dashboards_getWins,
-  getHeat: dashboards_getHeat,
-  updateHeat: dashboards_updateHeat
-})(boardRoom_Boardroom));
-// CONCATENATED MODULE: ./frontend/src/core/components/utils/PrivateRoute.js
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-
-
-
-
-
-/**
- * Component will check if user is authenticatd before preceding to mount component
- */
-
-var PrivateRoute_PrivateRoute = function PrivateRoute(_ref) {
-  var Component = _ref.component,
-      auth = _ref.auth,
-      rest = _objectWithoutProperties(_ref, ["component", "auth"]);
-
-  return react_default.a.createElement(react_router_dom["Route"], _extends({}, rest, {
-    render: function render(props) {
-      if (auth.isLoading) {
-        return react_default.a.createElement(LoadingScreen, null);
-      }
-
-      if (auth.isAuthenticated === false) {
-        return react_default.a.createElement(react_router_dom["Redirect"], {
-          to: "/login"
-        });
-      }
-
-      return react_default.a.createElement(Component, props);
-    }
-  }));
-};
-
-var PrivateRoute_mapStateToProps = function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  };
-};
-
-PrivateRoute_PrivateRoute.propTypes = {
-  component: prop_types_default.a.object,
-  auth: prop_types_default.a.object
-};
-/* harmony default export */ var utils_PrivateRoute = (Object(es["connect"])(PrivateRoute_mapStateToProps)(PrivateRoute_PrivateRoute));
-// CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
-function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function LineChart_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { LineChart_defineProperty(target, key, source[key]); }); } return target; }
-
-function LineChart_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function LineChart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function LineChart_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function LineChart_createClass(Constructor, protoProps, staticProps) { if (protoProps) LineChart_defineProperties(Constructor.prototype, protoProps); if (staticProps) LineChart_defineProperties(Constructor, staticProps); return Constructor; }
-
-function LineChart_possibleConstructorReturn(self, call) { if (call && (LineChart_typeof(call) === "object" || typeof call === "function")) { return call; } return LineChart_assertThisInitialized(self); }
-
-function LineChart_getPrototypeOf(o) { LineChart_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return LineChart_getPrototypeOf(o); }
-
-function LineChart_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function LineChart_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) LineChart_setPrototypeOf(subClass, superClass); }
-
-function LineChart_setPrototypeOf(o, p) { LineChart_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return LineChart_setPrototypeOf(o, p); }
-
-// DEPENDACIES
-
-
-
- // COMPONENTS
-
-
-var margin = {
-  top: 10,
-  right: 150,
-  bottom: 30,
-  left: 50
-};
-var LineChart_width = 1100 - margin.left - margin.right;
-var LineChart_height = 600 - margin.top - margin.bottom;
-
-var LineChart_LineChart =
-/*#__PURE__*/
-function (_React$Component) {
-  LineChart_inherits(LineChart, _React$Component);
-
-  function LineChart(props) {
-    var _this;
-
-    LineChart_classCallCheck(this, LineChart);
-
-    _this = LineChart_possibleConstructorReturn(this, LineChart_getPrototypeOf(LineChart).call(this, props));
-    _this.renderD3 = _this.renderD3.bind(LineChart_assertThisInitialized(_this));
-    _this.updateD3 = _this.updateD3.bind(LineChart_assertThisInitialized(_this));
-    return _this;
-  } // Trigger D3 intial render()
-
-
-  LineChart_createClass(LineChart, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.renderD3();
-      this.updateD3();
-    } // Triger D3 update()
-
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this$props = this.props,
-          kpis = _this$props.kpis,
-          selectedKpi = _this$props.selectedKpi;
-
-      if (kpis !== prevProps.kpis || selectedKpi !== prevProps.selectedKpi) {
-        this.updateD3();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var chart = this.props.chart;
-      return react_default.a.createElement("div", null, chart);
-    }
-  }, {
-    key: "renderD3",
-    value: function renderD3() {
-      var _this$props2 = this.props,
-          connectFauxDOM = _this$props2.connectFauxDOM,
-          selectSeries = _this$props2.selectSeries;
-      var faux = connectFauxDOM("svg", "chart");
-
-      function highlightLine(id) {
-        if (id == null) return;
-        d3["selectAll"](".line").attr("stroke-width", 1.8);
-        d3["selectAll"](".dot").attr("r", 3);
-        d3["selectAll"](".dot_".concat(id)).attr("r", 5);
-        d3["select"]("#line_".concat(id)).attr("stroke-width", 4.5);
-        d3["selectAll"](".legend").attr("font-weight", "normal").attr("font-size", "17");
-        d3["select"]("#legend_".concat(id)).attr("font-weight", "bold").attr("font-size", "20");
-      }
-
-      var svg = d3["select"](faux).attr("id", "chart").attr("viewBox", "0 0 ".concat(LineChart_width + margin.left + margin.right, " ").concat(LineChart_height + margin.bottom + margin.top)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink") // CSS Styles
-      .style("margin", "20px 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
-      svg.append("rect").attr("width", LineChart_width).attr("height", LineChart_height).style("opacity", 0).attr("id", "facade").on("click", function () {
-        highlightLine("null");
-        selectSeries(null);
-      }); // Y-axis
-
-      svg.append("g").attr("class", "myYaxis").style("color", "black").style("font-size", "0.8rem"); // X-axis
-
-      svg.append("g").attr("class", "myXaxis").attr("transform", "translate(0, ".concat(LineChart_height - margin.bottom, ")")).style("color", "black").style("font-size", "0.8rem"); // Y-axis Unit
-
-      svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
-
-      svg.append("text").attr("x", LineChart_width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accentColor);
-    }
-  }, {
-    key: "updateD3",
-    value: function updateD3() {
-      var x;
-      var _this$props3 = this.props,
-          connectFauxDOM = _this$props3.connectFauxDOM,
-          kpis = _this$props3.kpis,
-          selectSeries = _this$props3.selectSeries,
-          animateFauxDOM = _this$props3.animateFauxDOM,
-          selectedKpi = _this$props3.selectedKpi;
-      var faux = connectFauxDOM("svg", "chart");
-      var index = kpis.findIndex(function (kpi) {
-        return kpi.id == selectedKpi;
-      });
-      index = index == -1 ? 0 : index;
-      var data = kpis[index] ? kpis[index].series : [];
-      var test = {};
-
-      if (kpis[index] && kpis[index].series) {
-        test = LineChart_objectSpread({}, kpis[index].series[0]);
-
-        var entries = _toConsumableArray(kpis[index].series[0].entries);
-
-        test.id = Math.round(Math.random() * 500000);
-        test.entries = entries.map(function (datapoint) {
-          return {
-            value: datapoint.target,
-            date: datapoint.date,
-            target: datapoint.target,
-            id: Math.round(Math.random() * 500000)
-          };
-        });
-        test.color = "#008000";
-        test.name = "".concat(test.name, " Threshold");
-        data = [test].concat(_toConsumableArray(data));
-      }
-
-      var parseTime = d3["timeParse"]("%Y-%m-%d");
-
-      function highlightLine(id) {
-        d3["selectAll"](".line").attr("stroke-width", 1.8);
-        d3["selectAll"](".dot").attr("r", 3);
-        d3["selectAll"](".dot_".concat(id)).attr("r", 5);
-        d3["select"]("#line_".concat(id)).attr("stroke-width", 4.5);
-        d3["selectAll"](".legend").attr("font-weight", "normal").attr("font-size", "17");
-        d3["select"]("#legend_".concat(id)).attr("font-weight", "bold").attr("font-size", "20");
-      } // Sort by Date
-
-
-      for (x in data) {
-        var series = data[x].entries;
-        series.sort(function (a, b) {
-          return new Date(a.date) - new Date(b.date);
-        });
-      } // In order to scale the axes must find minimum and maximum from all series
-
-
-      var mins = [];
-
-      for (x in data) {
-        mins.push(d3["min"](data[x].entries, function (d) {
-          return d.value;
-        }));
-      }
-
-      var maxs = [];
-
-      for (x in data) {
-        maxs.push(d3["max"](data[x].entries, function (d) {
-          return d.value;
-        }));
-      }
-
-      var minimum = mins.filter(function (d) {
-        return d != null;
-      });
-      var maximum = maxs.filter(function (d) {
-        return d != null;
-      }); // -----------------------------------------------------------------------------
-      // AXES & SCALES
-      // -----------------------------------------------------------------------------
-
-      var xScale = d3["scaleTime"]().domain([new Date("2019-01-01"), new Date("2019-12-31")]).range([0, LineChart_width]);
-      var yScale = d3["scaleLinear"]().domain(minimum.length ? [d3["min"](minimum) * 0.8, d3["max"](maximum) * 1.2] : [0, 100]).range([LineChart_height - margin.bottom, 0]);
-      var y_axis = d3["axisLeft"](yScale);
-      var x_axis = d3["axisBottom"](xScale).tickFormat(d3["timeFormat"]("%b")); // Update the X_Axis
-
-      d3["select"](faux).selectAll(".myXaxis").transition().duration(1000).call(x_axis); // Update the Y_Axis
-
-      d3["select"](faux).selectAll(".myYaxis").transition().duration(1000).call(y_axis); // -----------------------------------------------------------------------------
-      // LINES
-      // -----------------------------------------------------------------------------
-
-      var line = d3["line"]().y(function (d) {
-        return yScale(d.value);
-      }).defined(function (d) {
-        return d.value != null;
-      }).x(function (d) {
-        return xScale(parseTime(d.date));
-      });
-      var s = d3["select"](faux).select("#plotArea").selectAll(".line");
-      var sData = s.data(data);
-      var sEnter = sData.enter().append("path").merge(s).attr("d", function (d) {
-        return line(d.entries);
-      }).style("opacity", 1).attr("id", function (d) {
-        return "line_".concat(d.id);
-      }).attr("class", "line").attr("fill", "none").attr("stroke-width", 1.8).attr("stroke", function (d) {
-        return d.color;
-      }); // Then the following lines transition the line so that the gap is hidden...
-
-      sData.exit().remove(); // -----------------------------------------------------------------------------
-      // POINTS
-      // -----------------------------------------------------------------------------
-
-      var d = d3["select"](faux).selectAll(".dots");
-      d.remove();
-      var dotBind = d3["select"](faux).select("#plotArea").selectAll(".dots").data(data);
-      dotBind.enter().append("g").attr("class", "dots").attr("data-id", function (d) {
-        return d.id;
-      }).style("fill", function (d) {
-        return d3["rgb"](d.color).darker(1);
-      }) // Second we need to enter in the 'values' part of this group
-      .selectAll(".dot").data(function (d) {
-        return d.entries;
-      }).enter().append("circle")
-      /* .attr("class", function(d) {
-        var color = "grey";
-        var deviation = Math.abs(d.val / d.target - 1);
-        if (d.val == null) return color;
-        // Calculating color
-        if (deviation < safe) color = "green";
-        else if (deviation > safe && deviation < danger) color = "orange";
-        else color = "red";
-        return color;
-      }) */
-      .attr("cx", function (d) {
-        return xScale(parseTime(d.date));
-      }).attr("cy", function (d) {
-        return yScale(d.value ? d.value : -50);
-      }).attr("r", 3).style("opacity", 0).attr("class", function (d, i, j) {
-        var id = $(j).parent().attr("data-id");
-        return "dot_".concat(id, " ") + "dot";
-      }).attr("stroke", function (d) {
-        return d3["rgb"](d.color).darker(1);
-      }).attr("stroke-width", "1").attr("stroke-opacity", "0").transition().delay(500).duration(1000).style("opacity", 1);
-      animateFauxDOM(3000); // -----------------------------------------------------------------------------
-      // LEGEND
-      // -----------------------------------------------------------------------------
-
-      var w = d3["select"](faux).selectAll(".legend");
-      w.remove();
-      var legend = d3["select"](faux).selectAll(".legend").data(data).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-        return "translate(".concat(0, ",", i * 20, ")");
-      }); // Legend text explaining the symbols
-
-      legend.append("text").attr("x", LineChart_width + margin.right).attr("y", function (d, i) {
-        return LineChart_height / 2 + 20 * i;
-      }).attr("id", function (d) {
-        return "legend_".concat(d.id);
-      }).attr("class", "legend").style("opacity", 1).style("cursor", "pointer").attr("dy", ".35em").attr("font-size", 17).attr("fill", function (d) {
-        return d.color;
-      }).style("text-anchor", "end").text(function (d) {
-        return d.name;
-      }).on("click", function (d) {
-        highlightLine(d.id);
-        selectSeries(d.id);
-      });
-      d3["select"](faux).select("#title").text(function () {
-        return kpis[index] ? kpis[index].name : "";
-      });
-      d3["select"](faux).select("#y_unit").text(function () {
-        return kpis[index] ? kpis[index].unit || "" : "";
-      });
-      d3["select"](faux).select("#plotArea").selectAll("#curtain").remove();
-      d3["select"](faux).select("#plotArea").append("rect").attr("id", "curtain").style("fill", "#ffffff").attr("x", 0).attr("width", LineChart_width).attr("height", LineChart_height - margin.bottom).transition().delay(500).ease(d3["easeExp"]).duration(4000).attr("x", LineChart_width + 5);
-      animateFauxDOM(9000);
-    }
-  }]);
-
-  return LineChart;
-}(react_default.a.Component);
-
-LineChart_LineChart.propTypes = {
-  kpis: prop_types_default.a.array.isRequired,
-  selectSeries: prop_types_default.a.func.isRequired,
-  chart: prop_types_default.a.oneOfType([prop_types_default.a.string, prop_types_default.a.object]),
-  selectedKpi: prop_types_default.a.number,
-  connectFauxDOM: prop_types_default.a.func.isRequired,
-  animateFauxDOM: prop_types_default.a.func.isRequired
-};
-LineChart_LineChart.defaultProps = {
-  chart: "Loading",
-  selectedKpi: null
-};
-/* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
-// CONCATENATED MODULE: ./frontend/src/core/helpers/Filters.js
-// Find the first object in an array whose property defined by prop matches value
-var getItem = function getItem(value, arr, prop) {
-  if (!arr) return null;
-  var query = arr.filter(function (item) {
-    return item[prop] == value;
-  });
-  if (!query.length) return null;else return query[0];
-};
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/ChartOptions.js
 function ChartOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ChartOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { ChartOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ChartOptions_typeof(obj); }
 
@@ -5048,7 +6043,7 @@ function (_Component) {
 
 /* harmony default export */ var components_ChartOptions = (ChartOptions_ChartOptions);
 // EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
-var lib = __webpack_require__("./node_modules/react-color/lib/index.js");
+var react_color_lib = __webpack_require__("./node_modules/react-color/lib/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesEdit.js
 function SeriesEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesEdit_typeof(obj); }
@@ -5201,7 +6196,7 @@ function (_Component) {
         className: "form-group"
       }, react_default.a.createElement("label", {
         htmlFor: "color"
-      }, "Color"), react_default.a.createElement(lib["ChromePicker"], {
+      }, "Color"), react_default.a.createElement(react_color_lib["ChromePicker"], {
         color: color,
         onChangeComplete: this.onChangeColor
       })))), react_default.a.createElement("button", {
@@ -5323,10 +6318,18 @@ DataTable_DatapointTable.defaultProps = {
   updateDatapoint: dashboards_updateDatapoint,
   deleteDatapoint: dashboards_deleteDatapoint
 })(DataTable_DatapointTable));
+// EXTERNAL MODULE: ./node_modules/date-fns/esm/parseISO/index.js
+var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.js");
+
+// EXTERNAL MODULE: ./node_modules/date-fns/esm/format/index.js + 4 modules
+var esm_format = __webpack_require__("./node_modules/date-fns/esm/format/index.js");
+
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataForm.js
 function DataForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DataForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataForm_typeof(obj); }
 
-function DataForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { DataForm_defineProperty(target, key, source[key]); }); } return target; }
+function DataForm_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function DataForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { DataForm_ownKeys(Object(source), true).forEach(function (key) { DataForm_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { DataForm_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function DataForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -5454,7 +6457,7 @@ function (_Component) {
       }, react_default.a.createElement("label", {
         htmlFor: "date",
         className: "d-block"
-      }, "Date"), react_default.a.createElement(react_datepicker_es["default"], {
+      }, "Date"), react_default.a.createElement(react_datepicker_min_default.a, {
         className: "form-control",
         onChange: function onChange(date) {
           return _this2.onDateChange(date);
@@ -5705,22 +6708,6 @@ function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var series_SeriesCard = (SeriesCard_SeriesCard);
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Card/index.js + 1 modules
-var Card = __webpack_require__("./node_modules/@material-ui/core/esm/Card/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/CardActions/index.js + 1 modules
-var CardActions = __webpack_require__("./node_modules/@material-ui/core/esm/CardActions/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/CardContent/index.js + 1 modules
-var CardContent = __webpack_require__("./node_modules/@material-ui/core/esm/CardContent/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/IconButton/index.js + 1 modules
-var IconButton = __webpack_require__("./node_modules/@material-ui/core/esm/IconButton/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Add.js
-var Add = __webpack_require__("./node_modules/@material-ui/icons/Add.js");
-var Add_default = /*#__PURE__*/__webpack_require__.n(Add);
-
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/NewCard.js
 // DEPENDANCIES
 
@@ -5733,7 +6720,7 @@ var Add_default = /*#__PURE__*/__webpack_require__.n(Add);
 
 
 
-var useStyles = Object(styles["makeStyles"])({
+var NewCard_useStyles = Object(esm_styles["makeStyles"])({
   root: {
     display: "flex",
     justifyContent: "center",
@@ -5759,7 +6746,7 @@ var useStyles = Object(styles["makeStyles"])({
 });
 
 var NewCard_NewCard = function NewCard(props) {
-  var classes = useStyles();
+  var classes = NewCard_useStyles();
   var handleClick = props.handleClick;
   return react_default.a.createElement(Grid["default"], {
     container: true,
@@ -5866,17 +6853,19 @@ function (_Component) {
 var react_compound_slider_es = __webpack_require__("./node_modules/react-compound-slider/es/index.js");
 
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/slider/SliderProps.js
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+function SliderProps_slicedToArray(arr, i) { return SliderProps_arrayWithHoles(arr) || SliderProps_iterableToArrayLimit(arr, i) || SliderProps_nonIterableRest(); }
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+function SliderProps_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function SliderProps_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function SliderProps_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function SliderProps_extends() { SliderProps_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return SliderProps_extends.apply(this, arguments); }
 
-function SliderProps_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { SliderProps_defineProperty(target, key, source[key]); }); } return target; }
+function SliderProps_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function SliderProps_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { SliderProps_ownKeys(Object(source), true).forEach(function (key) { SliderProps_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { SliderProps_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function SliderProps_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -5923,7 +6912,7 @@ SliderRail.propTypes = {
 // *******************************************************
 
 function Handle(_ref2) {
-  var _ref2$domain = _slicedToArray(_ref2.domain, 2),
+  var _ref2$domain = SliderProps_slicedToArray(_ref2.domain, 2),
       min = _ref2$domain[0],
       max = _ref2$domain[1],
       _ref2$handle = _ref2.handle,
@@ -5984,7 +6973,7 @@ Handle.defaultProps = {
 // *******************************************************
 
 function KeyboardHandle(_ref3) {
-  var _ref3$domain = _slicedToArray(_ref3.domain, 2),
+  var _ref3$domain = SliderProps_slicedToArray(_ref3.domain, 2),
       min = _ref3$domain[0],
       max = _ref3$domain[1],
       _ref3$handle = _ref3.handle,
@@ -6943,7 +7932,9 @@ KpiForm_KpiForm.propTypes = {
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiEdit.js
 function KpiEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiEdit_typeof(obj); }
 
-function KpiEdit_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiEdit_defineProperty(target, key, source[key]); }); } return target; }
+function KpiEdit_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function KpiEdit_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { KpiEdit_ownKeys(Object(source), true).forEach(function (key) { KpiEdit_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { KpiEdit_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function KpiEdit_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -7334,7 +8325,9 @@ function (_Component) {
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiNew.js
 function KpiNew_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiNew_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiNew_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiNew_typeof(obj); }
 
-function KpiNew_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { KpiNew_defineProperty(target, key, source[key]); }); } return target; }
+function KpiNew_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function KpiNew_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { KpiNew_ownKeys(Object(source), true).forEach(function (key) { KpiNew_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { KpiNew_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function KpiNew_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -7509,91 +8502,104 @@ function RemoveConfirmation_setPrototypeOf(o, p) { RemoveConfirmation_setPrototy
 
 
 
-var RemoveConfirmation_RemoveConformation =
+
+
+
+
+
+
+
+var RemoveConfirmation_RemoveConfirmation =
 /*#__PURE__*/
 function (_Component) {
-  RemoveConfirmation_inherits(RemoveConformation, _Component);
+  RemoveConfirmation_inherits(RemoveConfirmation, _Component);
 
-  function RemoveConformation(props) {
+  function RemoveConfirmation(props) {
     var _this;
 
-    RemoveConfirmation_classCallCheck(this, RemoveConformation);
+    RemoveConfirmation_classCallCheck(this, RemoveConfirmation);
 
-    _this = RemoveConfirmation_possibleConstructorReturn(this, RemoveConfirmation_getPrototypeOf(RemoveConformation).call(this, props));
+    _this = RemoveConfirmation_possibleConstructorReturn(this, RemoveConfirmation_getPrototypeOf(RemoveConfirmation).call(this, props));
 
-    _this.onChange = function (e) {
+    _this.handleChange = function (e) {
       _this.setState(RemoveConfirmation_defineProperty({}, e.target.name, e.target.value));
     };
 
-    _this.onSubmit = function (e) {
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.handleSubmit = function (e) {
       e.preventDefault();
       var removeContext = _this.props.removeContext;
       var response = removeContext.onSubmit(_this.state);
-      if (response) $("#removeConfirmation").modal("hide");
+      if (response) _this.setState({
+        open: false
+      });
     };
 
     _this.modalRef = react_default.a.createRef();
     _this.state = {
       password: "",
       exported: false,
-      name: ""
+      name: "",
+      open: false
     };
     return _this;
   }
 
-  RemoveConfirmation_createClass(RemoveConformation, [{
+  RemoveConfirmation_createClass(RemoveConfirmation, [{
     key: "render",
     value: function render() {
       var removeContext = this.props.removeContext;
-      if (!removeContext) return react_default.a.createElement(modal_Modal, {
-        title: "Are You Sure?",
-        iconClass: "im im-data-remove",
-        id: "removeConfirmation"
-      }, " ");
+      if (!removeContext) return react_default.a.createElement(react_default.a.Fragment, null);
       var type = removeContext.type,
           item = removeContext.item;
       var _this$state = this.state,
-          password = _this$state.password,
           name = _this$state.name,
-          exported = _this$state.exported;
-      return react_default.a.createElement(modal_Modal, {
-        title: "Are You Sure?",
-        iconClass: "im im-data-remove",
-        id: "removeConfirmation",
-        ref: this.modalRef
-      }, react_default.a.createElement("form", {
-        onSubmit: this.onSubmit
-      }, react_default.a.createElement("p", {
-        className: "card-text"
-      }, "This action cannot be undone. This will permanently remove the", " ", react_default.a.createElement("span", {
+          open = _this$state.open;
+      return react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Are You Sure?"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(DialogContentText["default"], null, "This action cannot be undone. This will permanetly remove the", " ", react_default.a.createElement("span", {
         style: {
-          color: "red",
+          color: "#3F51B5",
           fontWeight: "bold"
         }
-      }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Please type in the name of the ".concat(type, " to confirm")), react_default.a.createElement("input", {
+      }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement(TextField["default"], {
+        autoFocus: true,
+        margin: "dense",
+        id: "name",
+        label: "Confirm name",
         type: "text",
+        fullWidth: true,
         name: "name",
-        value: name,
-        className: "form-control",
-        onChange: this.onChange
-      })), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-warning"
-      }, "I understand the consequences, remove this item")));
+        onChange: this.handleChange,
+        value: name
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleSubmit,
+        color: "primary"
+      }, "Confirm")));
     }
   }]);
 
-  return RemoveConformation;
+  return RemoveConfirmation;
 }(react["Component"]);
 
-RemoveConfirmation_RemoveConformation.propTypes = {
+RemoveConfirmation_RemoveConfirmation.propTypes = {
   removeContext: prop_types_default.a.object
 };
-/* harmony default export */ var RemoveConfirmation = (RemoveConfirmation_RemoveConformation);
+/* harmony default export */ var ui_RemoveConfirmation = (RemoveConfirmation_RemoveConfirmation);
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Tooltip.js
 
 
@@ -7926,7 +8932,7 @@ function (_Component) {
       }, react_default.a.createElement(kpis_KpiNew, {
         pillar: pillarId,
         dashboard: currentDashboard.id
-      })), react_default.a.createElement(RemoveConfirmation, {
+      })), react_default.a.createElement(ui_RemoveConfirmation, {
         removeContext: removeContext
       }));
     }
@@ -7955,22 +8961,6 @@ var pillarRoom_mapStateToProps = function mapStateToProps(state) {
 })(pillarRoom_pillarRoom));
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Container/index.js + 1 modules
 var Container = __webpack_require__("./node_modules/@material-ui/core/esm/Container/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Dialog/index.js + 1 modules
-var Dialog = __webpack_require__("./node_modules/@material-ui/core/esm/Dialog/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Slide/index.js + 1 modules
-var Slide = __webpack_require__("./node_modules/@material-ui/core/esm/Slide/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/AppBar/index.js + 1 modules
-var AppBar = __webpack_require__("./node_modules/@material-ui/core/esm/AppBar/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Toolbar/index.js + 1 modules
-var Toolbar = __webpack_require__("./node_modules/@material-ui/core/esm/Toolbar/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Close.js
-var Close = __webpack_require__("./node_modules/@material-ui/icons/Close.js");
-var Close_default = /*#__PURE__*/__webpack_require__.n(Close);
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/MenuItem/index.js + 1 modules
 var MenuItem = __webpack_require__("./node_modules/@material-ui/core/esm/MenuItem/index.js");
@@ -8018,7 +9008,7 @@ var DeleteForever_default = /*#__PURE__*/__webpack_require__.n(DeleteForever);
 
 
 
-var ImageList_useStyles = Object(styles["makeStyles"])(function (theme) {
+var ImageList_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
   return {
     root: {
       display: "flex",
@@ -8114,7 +9104,7 @@ ImageList_ImageList.propTypes = {
  // CONFIG
 
 
-var DashboardForm_useStyles = Object(styles["makeStyles"])(function (theme) {
+var DashboardForm_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
   return {
     container: {
       display: "flex",
@@ -8164,7 +9154,7 @@ var DashboardForm_DashboardForm = function DashboardForm(props) {
     });
   };
 
-  return react_default.a.createElement(styles["ThemeProvider"], {
+  return react_default.a.createElement(esm_styles["ThemeProvider"], {
     theme: primaryTheme
   }, react_default.a.createElement(Grid["default"], {
     container: true,
@@ -8245,7 +9235,7 @@ var DashboardForm_DashboardForm = function DashboardForm(props) {
     className: classes.textField
   }, react_default.a.createElement("label", {
     htmlFor: "color"
-  }, "Background Color"), react_default.a.createElement(lib["ChromePicker"], {
+  }, "Background Color"), react_default.a.createElement(react_color_lib["ChromePicker"], {
     color: background,
     onChangeComplete: onChangeColor
   })))));
@@ -8267,7 +9257,9 @@ DashboardForm_DashboardForm.propTypes = {
 // CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardEditDialog.js
 function DashboardEditDialog_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DashboardEditDialog_typeof = function _typeof(obj) { return typeof obj; }; } else { DashboardEditDialog_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DashboardEditDialog_typeof(obj); }
 
-function DashboardEditDialog_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { DashboardEditDialog_defineProperty(target, key, source[key]); }); } return target; }
+function DashboardEditDialog_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function DashboardEditDialog_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { DashboardEditDialog_ownKeys(Object(source), true).forEach(function (key) { DashboardEditDialog_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { DashboardEditDialog_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function DashboardEditDialog_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -8454,7 +9446,7 @@ DashboardEditDialog_DashboardEditDialog.propTypes = {
 /* harmony default export */ var components_DashboardEditDialog = (Object(es["connect"])(null, {
   updateDashboard: dashboards_updateDashboard,
   addImage: dashboards_addImage
-})(Object(styles["withStyles"])(DashboardEditDialog_styles)(DashboardEditDialog_DashboardEditDialog)));
+})(Object(esm_styles["withStyles"])(DashboardEditDialog_styles)(DashboardEditDialog_DashboardEditDialog)));
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Stepper/index.js + 3 modules
 var Stepper = __webpack_require__("./node_modules/@material-ui/core/esm/Stepper/index.js");
 
@@ -8720,7 +9712,7 @@ function (_Component) {
 
     _this.thirdForm = function () {
       var background = _this.state.background;
-      return react_default.a.createElement(lib["ChromePicker"], {
+      return react_default.a.createElement(react_color_lib["ChromePicker"], {
         color: background,
         onChangeComplete: _this.handleChangeColor
       });
@@ -8792,7 +9784,7 @@ DashboardBuilder_DashboardBuilder.propTypes = {
 };
 /* harmony default export */ var components_DashboardBuilder = (Object(es["connect"])(null, {
   addDashboard: dashboards_addDashboard
-})(Object(styles["withStyles"])(DashboardBuilder_styles)(DashboardBuilder_DashboardBuilder)));
+})(Object(esm_styles["withStyles"])(DashboardBuilder_styles)(DashboardBuilder_DashboardBuilder)));
 // CONCATENATED MODULE: ./frontend/src/scenes/home/components/DashboardNewDialog.js
 function DashboardNewDialog_extends() { DashboardNewDialog_extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return DashboardNewDialog_extends.apply(this, arguments); }
 
@@ -8810,7 +9802,7 @@ function DashboardNewDialog_extends() { DashboardNewDialog_extends = Object.assi
 
 
 
-var DashboardNewDialog_useStyles = Object(styles["makeStyles"])(function (theme) {
+var DashboardNewDialog_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
   return {
     appBar: {
       position: "relative",
@@ -8868,7 +9860,7 @@ function DashboardCard_slicedToArray(arr, i) { return DashboardCard_arrayWithHol
 
 function DashboardCard_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-function DashboardCard_iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function DashboardCard_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function DashboardCard_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
@@ -8886,7 +9878,7 @@ function DashboardCard_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr;
 
 
 
-var DashboardCard_useStyles = Object(styles["makeStyles"])({
+var DashboardCard_useStyles = Object(esm_styles["makeStyles"])({
   card: {
     minWidth: 275,
     marginBottom: "20px"
@@ -8906,7 +9898,7 @@ var DashboardCard_useStyles = Object(styles["makeStyles"])({
     marginLeft: "auto"
   }
 });
-function components_DashboardCard_DashboardCard(props) {
+function DashboardCard(props) {
   var classes = DashboardCard_useStyles();
   var _props$dashboard = props.dashboard,
       author = _props$dashboard.author,
@@ -8973,11 +9965,11 @@ function components_DashboardCard_DashboardCard(props) {
   }, "Edit"), react_default.a.createElement(MenuItem["default"], {
     onClick: function onClick() {
       handleClose();
-      onRemoveClick();
+      onRemoveClick(props.dashboard);
     }
   }, "Delete")));
 }
-components_DashboardCard_DashboardCard.propTypes = {
+DashboardCard.propTypes = {
   onEditClick: prop_types_default.a.func.isRequired,
   onRemoveClick: prop_types_default.a.func.isRequired,
   dashboard: prop_types_default.a.shape({
@@ -9038,6 +10030,8 @@ function (_Component) {
       _this.setState({
         removeItem: removeItem
       });
+
+      _this.RemoveConfirmation.current.handleToggleOpen(true)();
     };
 
     _this.setEdit = function (dashboard) {
@@ -9081,6 +10075,7 @@ function (_Component) {
       editIsOpen: false,
       newIsOpen: false
     };
+    _this.RemoveConfirmation = react_default.a.createRef();
     return _this;
   }
 
@@ -9110,7 +10105,7 @@ function (_Component) {
           item: true,
           md: 4,
           key: dashboard.id
-        }, react_default.a.createElement(components_DashboardCard_DashboardCard, {
+        }, react_default.a.createElement(DashboardCard, {
           dashboard: dashboard,
           onRemoveClick: _this2.setRemove,
           onEditClick: _this2.setEdit
@@ -9121,12 +10116,13 @@ function (_Component) {
       }, react_default.a.createElement(ui_NewCard, {
         text: "Dashboard",
         handleClick: this.handleOpenNew
-      }))), react_default.a.createElement(RemoveConfirmation, {
+      }))), react_default.a.createElement(ui_RemoveConfirmation, {
         removeContext: {
           item: removeItem,
           type: "dashboard",
           onSubmit: this.onRemoveConfirmationSubmit
-        }
+        },
+        ref: this.RemoveConfirmation
       }), react_default.a.createElement(components_DashboardEditDialog, {
         open: editIsOpen,
         handleClose: this.handleCloseEdit,
@@ -9236,7 +10232,7 @@ home_Dashboard.propType = {
 /* harmony default export */ var home = (Object(es["connect"])(null, {
   clearCurrentDashboard: dashboards_clearCurrentDashboard,
   clearActionTables: dashboards_clearActionTables
-})(Object(styles["withStyles"])(home_styles)(home_Dashboard)));
+})(Object(esm_styles["withStyles"])(home_styles)(home_Dashboard)));
 // CONCATENATED MODULE: ./frontend/src/scenes/contact/index.js
 
 
@@ -9566,7 +10562,9 @@ function dashboards_iterableToArray(iter) { if (Symbol.iterator in Object(iter) 
 
 function dashboards_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-function dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { reducers_dashboards_defineProperty(target, key, source[key]); }); } return target; }
+function reducers_dashboards_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function reducers_dashboards_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { reducers_dashboards_ownKeys(Object(source), true).forEach(function (key) { reducers_dashboards_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { reducers_dashboards_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function reducers_dashboards_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -9585,60 +10583,60 @@ var initalState = {
 
   switch (action.type) {
     case GET_A_DASHBOARD:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         currentDashboard: action.payload
       });
 
     case GET_DASHBOARDS:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: action.payload
       });
 
     case DELETE_DASHBOARD:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: state.dashboards.filter(function (dashboard) {
           return dashboard.id !== action.payload;
         })
       });
 
     case ADD_DASHBOARD:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: [].concat(dashboards_toConsumableArray(state.dashboards), [action.payload])
       });
 
     case UPDATE_DASHBOARD:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: state.dashboards.map(function (dashboard) {
           if (dashboard.id === action.payload.id) return action.payload;else return dashboard;
         })
       });
 
     case GET_KPIS:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: action.payload
       });
 
     case ADD_KPI:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: [].concat(dashboards_toConsumableArray(state.kpis), [action.payload])
       });
 
     case UPDATE_KPI:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: state.kpis.map(function (kpi) {
           return kpi.id === action.payload.id ? action.payload : kpi;
         })
       });
 
     case DELETE_KPI:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: state.kpis.filter(function (kpi) {
           return kpi.id !== action.payload;
         })
       });
 
     case CLEAR_KPIS:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: []
       });
 
@@ -9646,50 +10644,50 @@ var initalState = {
       var kpis = state.kpis.map(function (kpi) {
         if (kpi.id != action.payload.kpi) return kpi;
         var series = kpi.series;
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: [].concat(dashboards_toConsumableArray(series), [action.payload])
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis
       });
 
     case UPDATE_SERIES:
       var kpis__ = state.kpis.map(function (kpi) {
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
             if (series.id != action.payload.id) return series;
             return action.payload;
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis__
       });
 
     case GET_SERIES:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         series: action.payload
       });
 
     case DELETE_SERIES:
       var kpis_ = state.kpis.map(function (kpi) {
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: kpi.series.filter(function (series) {
             return series.id != action.payload;
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis_
       });
 
     case UPDATE_DATAPOINT:
       var kpis = state.kpis.map(function (kpi) {
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
             if (series.id != action.payload.series) return series;
-            return dashboards_objectSpread({}, series, {
+            return reducers_dashboards_objectSpread({}, series, {
               entries: series.entries.map(function (datapoint) {
                 if (datapoint.id != action.payload.id) return datapoint;
                 return action.payload;
@@ -9698,15 +10696,15 @@ var initalState = {
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis
       });
 
     case DELETE_DATAPOINT:
       var kpis = state.kpis.map(function (kpi) {
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
-            return dashboards_objectSpread({}, series, {
+            return reducers_dashboards_objectSpread({}, series, {
               entries: series.entries.filter(function (datapoint) {
                 return datapoint != action.payload;
               })
@@ -9714,63 +10712,63 @@ var initalState = {
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis
       });
 
     case ADD_DATAPOINT:
       var kpis___ = state.kpis.map(function (kpi) {
-        return dashboards_objectSpread({}, kpi, {
+        return reducers_dashboards_objectSpread({}, kpi, {
           series: kpi.series.map(function (series) {
             if (series.id != action.payload.series) return series;
-            return dashboards_objectSpread({}, series, {
+            return reducers_dashboards_objectSpread({}, series, {
               entries: [].concat(dashboards_toConsumableArray(series.entries), [action.payload])
             });
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         kpis: kpis___
       });
 
     case GET_ACTION_TABLE:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: action.payload
       });
 
     case ADD_ACTION:
       var actionTables = state.actionTables.map(function (at) {
         if (action.payload.tables.indexOf(at.id) == -1) return at;
-        return dashboards_objectSpread({}, at, {
+        return reducers_dashboards_objectSpread({}, at, {
           actions: [].concat(dashboards_toConsumableArray(at.actions), [action.payload])
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: actionTables
       });
 
     case DELETE_ACTION:
       var actionTables = state.actionTables.map(function (at) {
-        return dashboards_objectSpread({}, at, {
+        return reducers_dashboards_objectSpread({}, at, {
           actions: at.actions.filter(function (act) {
             return act.id != action.payload;
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: actionTables
       });
 
     case UPDATE_ACTION:
       var actionTables = state.actionTables.map(function (at) {
-        return dashboards_objectSpread({}, at, {
+        return reducers_dashboards_objectSpread({}, at, {
           actions: at.actions.map(function (act) {
             if (act.id != action.payload.id) return act;
             return action.payload;
           })
         });
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: actionTables
       });
 
@@ -9779,93 +10777,93 @@ var initalState = {
         if (at.id != action.payload.id) return at;
         return action.payload;
       });
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: actionTables
       });
 
     case CLEAR_CURRENT_DASHBOARD:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         actionTables: []
       });
 
     case CLEAR_ACTION_TABLES:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         currentDashboard: null
       });
 
     case GET_AUDITS:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         audits: action.payload
       });
 
     case ADD_AUDIT:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         audits: [].concat(dashboards_toConsumableArray(state.audits), [action.payload])
       });
 
     case DELETE_AUDIT:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         audits: state.audits.filter(function (audit) {
           return audit.id != action.payload;
         })
       });
 
     case UPDATE_AUDIT:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         audits: state.audits.map(function (audit) {
           if (audit.id === action.payload.id) return action.payload;else return audit;
         })
       });
 
     case GET_WINS:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         wins: action.payload
       });
 
     case ADD_WIN:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         wins: [].concat(dashboards_toConsumableArray(state.wins), [action.payload])
       });
 
     case DELETE_WIN:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         wins: state.wins.filter(function (win) {
           return win.id != action.payload;
         })
       });
 
     case UPDATE_WIN:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         wins: state.wins.map(function (win) {
           if (win.id === action.payload.id) return action.payload;else return win;
         })
       });
 
     case UPDATE_HEAT:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         heat: state.heat.map(function (h) {
           if (h.id === action.payload.id) return action.payload;else return h;
         })
       });
 
     case GET_HEAT:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         heat: action.payload
       });
 
     case ADD_IMAGE:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: state.dashboards.map(function (dashboard) {
-          if (dashboard.id != action.payload.dashboard) return dashboard;else return dashboards_objectSpread({}, dashboard, {
+          if (dashboard.id != action.payload.dashboard) return dashboard;else return reducers_dashboards_objectSpread({}, dashboard, {
             images: [].concat(dashboards_toConsumableArray(dashboard.images), [action.payload])
           });
         })
       });
 
     case DELETE_IMAGE:
-      return dashboards_objectSpread({}, state, {
+      return reducers_dashboards_objectSpread({}, state, {
         dashboards: state.dashboards.map(function (dashboard) {
-          return dashboards_objectSpread({}, dashboard, {
+          return reducers_dashboards_objectSpread({}, dashboard, {
             images: dashboard.images.filter(function (image) {
               return image.id !== action.payload;
             })
@@ -9917,7 +10915,9 @@ var messages_initialState = {
   }
 });
 // CONCATENATED MODULE: ./frontend/src/core/reducers/auth.js
-function auth_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { auth_defineProperty(target, key, source[key]); }); } return target; }
+function auth_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function auth_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { auth_ownKeys(Object(source), true).forEach(function (key) { auth_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { auth_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function auth_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -9948,7 +10948,7 @@ var auth_initialState = {
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       localStorage.setItem("token", action.payload.token);
-      return auth_objectSpread({}, state, action.payload, {
+      return auth_objectSpread({}, state, {}, action.payload, {
         isAuthenticated: true,
         isLoading: false
       });
@@ -9958,10 +10958,10 @@ var auth_initialState = {
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
       localStorage.removeItem("token");
+      console.log(action);
       return auth_objectSpread({}, state, {
         token: null,
         user: null,
-        leads: [],
         isAuthenticated: false,
         isLoading: false
       });
@@ -10295,7 +11295,7 @@ var Navbar_mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ var layout_Navbar = (Object(es["connect"])(Navbar_mapStateToProps, {
   logout: auth_logout
-})(Object(styles["withStyles"])(Navbar_styles)(Navbar_Navbar)));
+})(Object(esm_styles["withStyles"])(Navbar_styles)(Navbar_Navbar)));
 // CONCATENATED MODULE: ./frontend/src/core/components/App.js
 function App_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { App_typeof = function _typeof(obj) { return typeof obj; }; } else { App_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return App_typeof(obj); }
 

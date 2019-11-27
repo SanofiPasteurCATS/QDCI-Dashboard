@@ -1,90 +1,122 @@
 // DEPENDANCIES
-import React, { Component, Fragment } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React from "react";
 import { connect } from "react-redux";
-import parseISO from "date-fns/parseISO";
-import format from "date-fns/format";
 import PropTypes from "prop-types";
 
-// ACTIONS
-import { updateAction, deleteAction } from "../../../core/actions/dashboards";
+// MATERIAL-UI
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
-class ActionForm extends Component {
-  static propTypes = {
-    action: PropTypes.object,
-    updateAction: PropTypes.func.isRequired,
-    deleteAction: PropTypes.func.isRequired
-  };
+import { makeStyles } from "@material-ui/core/styles";
 
-  state = {
-    letter: "",
-    problem: "",
-    root_cause: "",
-    solution: "",
-    leader: "",
-    date: new Date()
-  };
-
-  componentDidUpdate(prevProps) {
-    const { action } = this.props;
-    if (prevProps.action !== action) {
-      if (!action) return;
-      this.update({
-        letter: action.letter || "",
-        problem: action.problem || "",
-        root_cause: action.root_cause || "",
-        solution: action.solution || "",
-        leader: action.leader || "",
-        date: action.date ? parseISO(action.date) : new Date()
-      });
-    }
+const useStyles = makeStyles(theme => ({
+  textField: {
+    marginBottom: theme.spacing(5),
+    width: "100%"
   }
+}));
 
-  update = state => {
-    this.setState(state);
-  };
+function ActionForm(props) {
+  const { onChange } = props;
+  const classes = useStyles();
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  onDateChange = date => {
-    this.setState({ date });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { letter, problem, root_cause, solution, leader, date } = this.state;
-    const { action, updateAction } = this.props;
-    const newAction = {
-      letter,
-      problem,
-      root_cause,
-      solution,
-      leader
-    };
-    newAction.date = format(date, "yyyy-MM-dd");
-
-    updateAction(newAction, action.id);
-    this.setState({
-      letter: "",
-      problem: "",
-      root_cause: "",
-      solution: "",
-      leader: "",
-      date: parseISO("2019-01-01")
+  const handleDateChange = (date, name) => {
+    const { onChange } = props;
+    onChange({
+      target: { value: date.toLocaleDateString(), name: name }
     });
-    $("#actionOptions").modal("hide");
   };
 
-  delete = () => {
-    const { deleteAction, action } = this.props;
-    deleteAction(action.id);
-    $("#actionOptions").modal("hide");
-  };
-
-  render() {
-    const { letter, problem, root_cause, solution, leader, date } = this.state;
-    return (
+  const { letter, problem, root_cause, solution, leader, date } = props.action;
+  return (
+    <Grid container>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="letter"
+          label="Letter"
+          className={classes.textField}
+          onChange={onChange}
+          value={letter || ""}
+          name="letter"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="problem"
+          label="Problem"
+          className={classes.textField}
+          onChange={onChange}
+          value={problem || ""}
+          name="problem"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="root_cause"
+          label="Root Cause"
+          className={classes.textField}
+          onChange={onChange}
+          value={root_cause || ""}
+          name="root_cause"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="solution"
+          label="Solution"
+          className={classes.textField}
+          onChange={onChange}
+          value={solution || ""}
+          name="solution"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="leader"
+          label="Leader"
+          className={classes.textField}
+          onChange={onChange}
+          value={leader || ""}
+          name="leader"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="date"
+            className={classes.textField}
+            label="Due Date"
+            value={date}
+            onChange={date => {
+              handleDateChange(date, "date");
+            }}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </Grid>
+    </Grid>
+    /*
       <Fragment>
         <h2>Edit Action</h2>
         <form onSubmit={this.onSubmit}>
@@ -175,15 +207,12 @@ class ActionForm extends Component {
           </div>
         </form>
       </Fragment>
-    );
-  }
+      */
+  );
 }
 
 ActionForm.defaultProps = {
   action: null
 };
 
-export default connect(
-  null,
-  { updateAction, deleteAction }
-)(ActionForm);
+export default ActionForm;

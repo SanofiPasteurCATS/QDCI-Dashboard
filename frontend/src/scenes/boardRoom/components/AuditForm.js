@@ -1,143 +1,91 @@
 // DEPENDANCIES
-import React, { Component, Fragment } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { connect } from "react-redux";
-import parseISO from "date-fns/parseISO";
-import format from "date-fns/format";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-// ACTIONS
-import { updateAudit, deleteAudit } from "../../../core/actions/dashboards";
+// MATERIAL-UI
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import { makeStyles } from "@material-ui/core/styles";
 
-class AuditForm extends Component {
-  static propTypes = {
-    audit: PropTypes.object,
-    updateAudit: PropTypes.func.isRequired,
-    deleteAudit: PropTypes.func.isRequired
-  };
-
-  state = {
-    description: "",
-    start_date: new Date(),
-    end_date: new Date()
-  };
-
-  componentDidUpdate(prevProps) {
-    const { audit } = this.props;
-    if (prevProps.audit !== audit) {
-      if (!audit) return;
-      this.onUpdate(() => {
-        this.setState({
-          description: audit.description,
-          start_date: audit.start_date
-            ? parseISO(audit.start_date)
-            : new Date(),
-          end_date: audit.end_date ? parseISO(audit.end_date) : new Date()
-        });
-      });
-    }
+const useStyles = makeStyles(theme => ({
+  textField: {
+    marginBottom: theme.spacing(5),
+    width: "100%"
   }
+}));
 
-  onUpdate = hook => {
-    hook();
-  };
+function AuditForm(props) {
+  const { description, start_date, end_date } = props.audit;
+  const { onChange } = props;
+  const classes = useStyles();
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
-
-  onDateChange = (date, key) => {
-    this.setState({ [key]: date });
-  };
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { description, start_date, end_date } = this.state;
-    const { audit, updateAudit } = this.props;
-    const newAudit = {
-      description
-    };
-    newAudit.start_date = format(start_date, "yyyy-MM-dd");
-    newAudit.end_date = format(end_date, "yyyy-MM-dd");
-
-    updateAudit(newAudit, audit.id);
-    this.setState({
-      description: "",
-      start_date: parseISO("2019-01-01"),
-      end_date: parseISO("2019-01-01")
+  const handleDateChange = (date, name) => {
+    const { onChange } = props;
+    onChange({
+      target: { value: date.toLocaleDateString(), name: name }
     });
-    $("#auditOptions").modal("hide");
   };
-
-  delete = () => {
-    const { deleteAudit, audit } = this.props;
-    deleteAudit(audit.id);
-    $("#auditOptions").modal("hide");
-  };
-
-  render() {
-    const { description, end_date, start_date } = this.state;
-    return (
-      <form onSubmit={this.onSubmit}>
-        <div className="row justify-content-between">
-          <div className="col-sm-12">
-            <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <input
-                className="form-control"
-                type="text"
-                name="description"
-                onChange={this.onChange}
-                value={description || ""}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="start_date" className="d-block">
-                Start Date
-              </label>
-              <DatePicker
-                className="form-control"
-                onChange={date => this.onDateChange(date, "start_date")}
-                selected={start_date}
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="end_date" className="d-block">
-                End Date
-              </label>
-              <DatePicker
-                className="form-control"
-                onChange={date => this.onDateChange(date, "end_date")}
-                selected={end_date}
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-          </div>
-
-          <div className="col-sm-12 d-flex justify-content-end">
-            <button
-              type="button"
-              className="btn
-            btn-danger mr-4"
-              onClick={this.delete}
-            >
-              Delete
-            </button>
-            <button
-              type="submit"
-              className="btn
-            btn-primary"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </form>
-    );
-  }
+  return (
+    <Grid container>
+      <Grid item md={12} className={classes.container}>
+        <TextField
+          required
+          fullWidth
+          id="description"
+          label="Description"
+          className={classes.textField}
+          onChange={onChange}
+          value={description || ""}
+          name="description"
+        />
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            className={classes.textField}
+            id="start_date"
+            label="Start Date"
+            value={start_date}
+            onChange={date => {
+              handleDateChange(date, "start_date");
+            }}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </Grid>
+      <Grid item md={12} className={classes.container}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            disableToolbar
+            variant="inline"
+            format="MM/dd/yyyy"
+            margin="normal"
+            id="end_date"
+            className={classes.textField}
+            label="End Date"
+            value={end_date}
+            onChange={date => {
+              handleDateChange(date, "end_date");
+            }}
+            KeyboardButtonProps={{
+              "aria-label": "change date"
+            }}
+          />
+        </MuiPickersUtilsProvider>
+      </Grid>
+    </Grid>
+  );
 }
 
-export default connect(
-  null,
-  { updateAudit, deleteAudit }
-)(AuditForm);
+export default AuditForm;

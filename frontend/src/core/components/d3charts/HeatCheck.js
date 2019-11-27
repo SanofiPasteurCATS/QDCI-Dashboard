@@ -25,7 +25,9 @@ class HeatCheck extends Component {
 
   render() {
     const { chart } = this.props;
-    return <div className="d-flex justify-content-center"> {chart} </div>;
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>{chart}</div>
+    );
   }
 
   renderD3() {
@@ -64,6 +66,8 @@ class HeatCheck extends Component {
       .enter()
       .append("text")
       .merge(texts)
+      .style("font-size", "24px")
+      .style("font-weight", "bold")
       .attr("dx", function(d, i) {
         return 56 + 120 * i + d.value.toString().length * -9;
       })

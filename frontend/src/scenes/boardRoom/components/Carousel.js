@@ -12,7 +12,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 800,
+    maxWidth: "100%",
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     height: 50,
     width: "100%",
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(1),
     backgroundColor: "rgba(0, 0, 0, 0.1)",
     position: "absolute",
     top: 0,
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
   img: {
     display: "block",
-    maxWidth: 800,
+    maxWidth: "100%",
     overflow: "hidden",
     maxHeight: "300px",
     maxWidth: "1500px",
@@ -47,7 +47,8 @@ const useStyles = makeStyles(theme => ({
   buttonsContainer: {
     position: "absolute",
     height: "100%",
-    width: "100%"
+    width: "100%",
+    padding: theme.spacing(3)
   },
   buttons: {
     display: "flex",
@@ -133,6 +134,7 @@ function SwipeableTextMobileStepper(props) {
         steps={maxSteps}
         position="static"
         variant="dots"
+        dotActive={{ color: "red" }}
         activeStep={activeStep}
         className={classes.stepper}
         backButton={<div />}
