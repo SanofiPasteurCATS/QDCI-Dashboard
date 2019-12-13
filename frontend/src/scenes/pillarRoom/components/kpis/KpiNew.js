@@ -7,6 +7,13 @@ import KpiForm from "./KpiForm";
 // ACTIONS
 import { addKpi } from "../../../../core/actions/dashboards";
 
+// MATERIAL-Ui
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 class KpiNew extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +53,7 @@ class KpiNew extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { addKpi, pillar, dashboard } = this.props;
+    const { addKpi, pillar, dashboard, handleToggleOpen } = this.props;
     const {
       name,
       frequency,
@@ -88,7 +95,7 @@ class KpiNew extends Component {
       global_target: "",
       unit: ""
     });
-    $("#newKpi").modal("hide");
+    handleToggleOpen(false)();
   };
 
   onChange = e => {
@@ -96,24 +103,34 @@ class KpiNew extends Component {
   };
 
   render() {
-    const { pillar } = this.props;
+    const { pillar, open, handleToggleOpen } = this.props;
+
     return (
-      <form onSubmit={this.onSubmit} className="w-100 mt-3">
-        <KpiForm
-          onChange={this.onChange}
-          values={this.state}
-          pillar={pillar}
-          editFrequency
-        />
-        <button type="submit" className="btn btn-success mb-4 mt-3">
-          Create
-        </button>
-      </form>
+      <Dialog
+        open={open}
+        onClose={handleToggleOpen(false)}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">New KPI</DialogTitle>
+        <DialogContent>
+          <KpiForm
+            onChange={this.onChange}
+            values={this.state}
+            pillar={pillar}
+            editFrequency
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleToggleOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.onSubmit} color="primary">
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }
 
-export default connect(
-  null,
-  { addKpi }
-)(KpiNew);
+export default connect(null, { addKpi })(KpiNew);

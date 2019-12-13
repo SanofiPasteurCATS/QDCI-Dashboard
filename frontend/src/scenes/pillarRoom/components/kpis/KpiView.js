@@ -7,24 +7,32 @@ import KpiEdit from "./KpiEdit";
 // ACTIONS
 import { deleteKpi } from "../../../../core/actions/dashboards";
 
+// MATERIAL-UI
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import RemoveConfirmation from "../../../../core/components/ui/RemoveConfirmation";
+
+const styles = theme => ({
+  heading: {
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4)
+  },
+  breadcrumbs: {
+    paddingTop: "12px",
+    paddingBottom: "12px"
+  }
+});
+
 class KpiView extends Component {
   constructor(props) {
     super(props);
     this.onSubmitRemove = this.onSubmitRemove.bind(this);
+    this.RemoveConfirmation = React.createRef();
   }
 
-  componentDidMount() {
-    const { setRemove, kpi } = this.props;
-    setRemove({ type: "kpi", item: kpi, onSubmit: this.onSubmitRemove });
-  }
-
-  componentDidUpdate(prevProps) {
-    const { kpi, setRemove } = this.props;
-    if (prevProps.kpi !== kpi);
-    setRemove({ type: "kpi", item: kpi, onSubmit: this.onSubmitRemove });
-  }
   onRemove = () => {
-    $("#removeConfirmation").modal("show");
+    this.RemoveConfirmation.current.handleToggleOpen(true)();
   };
 
   onSubmitRemove = state => {
@@ -36,33 +44,41 @@ class KpiView extends Component {
   };
 
   render() {
-    const { kpi, onSeriesSelect } = this.props;
-
+    const { kpi, onSeriesSelect, pillarId, classes } = this.props;
     return (
       <Fragment>
-        <h3 className="mt-4">Series</h3>
+        <Breadcrumbs className={classes.breadcrumbs} aria-label="breadcrumb">
+          <Typography color="inherit" href="/">
+            {pillarId}
+          </Typography>
+          <Typography color="inherit" href="/getting-started/installation/">
+            {kpi.name}
+          </Typography>
+        </Breadcrumbs>
+        <Typography className={classes.heading} variant={"h4"}>
+          Series
+        </Typography>
         <SeriesList
           kpiId={kpi.id}
           onClick={onSeriesSelect}
           series={kpi.series}
         />
-        <h3>Properties</h3>
-        <div className="d-flex">
-          <KpiEdit kpi={kpi} />
-        </div>
-        <hr />
+        <Typography className={classes.heading} variant={"h4"}>
+          Properties
+        </Typography>
 
-        <div className="d-flex justify-content-end">
-          <button className="btn btn-danger" onClick={this.onRemove}>
-            Delete Kpi
-          </button>
-        </div>
+        <KpiEdit kpi={kpi} onRemove={this.onRemove} />
+        <RemoveConfirmation
+          removeContext={{
+            item: kpi,
+            type: "kpi",
+            onSubmit: this.onSubmitRemove
+          }}
+          ref={this.RemoveConfirmation}
+        />
       </Fragment>
     );
   }
 }
 
-export default connect(
-  null,
-  { deleteKpi }
-)(KpiView);
+export default connect(null, { deleteKpi })(withStyles(styles)(KpiView));

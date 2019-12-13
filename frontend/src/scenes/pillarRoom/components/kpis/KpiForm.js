@@ -5,6 +5,17 @@ import PropTypes from "prop-types";
 // CORE COMPONENTS
 import DeviationSlider from "../../../../core/components/ui/slider/DeviationSlider";
 import ThresholdSlider from "../../../../core/components/ui/slider/ThresholdSlider";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
+import { withStyles } from "@material-ui/core/styles";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Typography from "@material-ui/core/Typography";
 
 // CONFIG
 import {
@@ -12,6 +23,22 @@ import {
   KPI_TYPE_CHOICES
 } from "../../../../core/config/dashboardConfig";
 import { THRESHOLD_TYPE_GREATER } from "../../../../core/config/dashboardConfig";
+
+const styles = theme => ({
+  textField: {
+    marginBottom: "20px",
+    paddingRight: theme.spacing(2)
+  },
+  formControl: {
+    width: "100%",
+    marginBottom: "20px"
+  },
+  heading: {
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
+    width: "100%"
+  }
+});
 
 class KpiForm extends Component {
   constructor(props) {
@@ -50,7 +77,7 @@ class KpiForm extends Component {
     });
   };
 
-  onKpiTypeChange = e => {
+  onKpiTypeChange = (e, selection) => {
     const { onChange } = this.props;
     const {
       kpi_type,
@@ -58,10 +85,11 @@ class KpiForm extends Component {
       warning_margin,
       danger_deviation
     } = this.props.values;
+
     if (kpi_type === 0)
       this.updateSlider([0, safe_deviation, danger_deviation, 100]);
     else if (kpi_type === 1) this.updateSlider([0, warning_margin, 100]);
-    onChange(e);
+    onChange({ target: { name: "kpi_type", value: selection.props.value } });
   };
 
   onGlobalTargetChange = e => {
@@ -71,14 +99,14 @@ class KpiForm extends Component {
     else onChange(e);
   };
 
-  onThresholdTypeChange = e => {
+  onThresholdTypeChange = (e, value) => {
     const { onChange } = this.props;
-    if (e.target.id === "greater" && e.target.checked) {
+    if (value == 0) {
       this.updateSlider([-50, 0, 100]);
       onChange({ target: { name: "threshold_type", value: 0 } });
       onChange({ target: { name: "warning_margin", value: -50 } });
     }
-    if (e.target.id === "less" && e.target.checked) {
+    if (value == 1) {
       this.updateSlider([0, 50, 100]);
       onChange({ target: { name: "threshold_type", value: 1 } });
       onChange({ target: { name: "warning_margin", value: 50 } });
@@ -89,23 +117,12 @@ class KpiForm extends Component {
     if (this.slider.current) this.slider.current.onChange(values);
   }
 
-  render() {
-    const { onChange, pillar, editFrequency } = this.props;
-    const {
-      name,
-      frequency,
-      safe_deviation,
-      danger_deviation,
-      kpi_type,
-      warning_margin,
-      threshold_type,
-      global_target,
-      leader,
-      unit
-    } = this.props.values;
-    const sliders = [
-      <div className="row justify-content-center">
-        <div className="col-sm-11">
+  deviationOptions = () => {
+    const { safe_deviation, danger_deviation } = this.props.values;
+    const { classes } = this.props;
+    return (
+      <>
+        <Grid item lg={12}>
           <DeviationSlider
             disabledRail
             onUpdate={this.onSliderUpdate}
@@ -113,82 +130,78 @@ class KpiForm extends Component {
             danger_deviation={danger_deviation}
             safe_deviation={safe_deviation}
           ></DeviationSlider>
-        </div>
+        </Grid>
 
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="safe">Safe Limit</label>
-            <input
-              className="form-control"
-              type="text"
-              name="safe_deviation"
-              placeholder="..."
-              value={`${safe_deviation}%`}
-              disabled
-            />
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="danger">Danger Limit</label>
-            <input
-              className="form-control"
-              type="text"
-              name="danger_deviation"
-              placeholder="..."
-              value={`${danger_deviation}%`}
-              disabled
-            />
-          </div>
-        </div>
-      </div>,
-      <div className="row justify-content-center">
-        <div className="col-sm-6 mt-3">
-          <div className="form-check">
-            <input
-              type="radio"
-              name="threshold_type"
-              className="form-check-input"
-              id="greater"
-              onChange={this.onThresholdTypeChange}
-              checked={threshold_type ? false : true}
-            />
-            <label htmlFor="threshold_type" className="form-check-label mb-3">
-              Greater Than
-            </label>
-          </div>
+        <Grid item lg={4}>
+          <TextField
+            fullWidth
+            id="safe_deviation"
+            label="Safe Limit"
+            className={classes.textField}
+            disabled
+            value={safe_deviation || ""}
+            name="safe_deviation"
+          />
+        </Grid>
+        <Grid item lg={4}>
+          <TextField
+            fullWidth
+            id="danger_deviation"
+            label="Danger Limit"
+            className={classes.textField}
+            disabled
+            value={safe_deviation || ""}
+            name="danger_deviation"
+          />
+        </Grid>
+      </>
+    );
+  };
 
-          <div className="form-check">
-            <input
-              type="radio"
-              name="threshold_type"
-              className="form-check-input"
-              id="less"
-              onChange={this.onThresholdTypeChange}
-              checked={threshold_type ? true : false}
+  winLoseOptions = () => {
+    const { threshold_type, global_target } = this.props.values;
+    const { classes } = this.props;
+
+    return (
+      <>
+        <Grid item lg={2}>
+          <RadioGroup
+            aria-label="threshold_type"
+            name="threshold_type"
+            value={threshold_type}
+            onChange={this.onThresholdTypeChange}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Greater Than"
             />
-            <label htmlFor="threshold_type" className="form-check-label mb-3">
-              Less Than
-            </label>
-          </div>
-        </div>
-        <div className="col-sm-6 mt-3">
-          <div className="form-group">
-            <label htmlFor="global_target">Target</label>
-            <input
-              className="form-control"
-              type="text"
-              name="global_target"
-              onChange={this.onGlobalTargetChange}
-              placeholder="..."
-              value={global_target || ""}
-              required
-            />
-          </div>
-        </div>
-      </div>,
-      <div className="row justify-content-center">
-        <div className="col-sm-11">
+            <FormControlLabel value={1} control={<Radio />} label="Less Than" />
+          </RadioGroup>
+        </Grid>
+        <Grid item lg={4}>
+          <TextField
+            fullWidth
+            id="global_target"
+            label="Target"
+            className={classes.textField}
+            onChange={this.onGlobalTargetChange}
+            value={global_target || ""}
+            name="global_target"
+            type="text"
+            placeholder="..."
+          />
+        </Grid>
+      </>
+    );
+  };
+
+  thresholdOptions = () => {
+    const { warning_margin, threshold_type, global_target } = this.props.values;
+    const { onChange, classes } = this.props;
+    return (
+      <>
+        <Grid item lg={11}>
           <ThresholdSlider
             threshold_type={threshold_type}
             disabledRail
@@ -209,148 +222,142 @@ class KpiForm extends Component {
                   ]
             }
           ></ThresholdSlider>
-        </div>
+        </Grid>
 
-        <div className="col-sm-2">
-          <div className="form-check">
-            <input
-              type="radio"
-              name="threshold_type"
-              className="form-check-input"
-              id="greater"
-              onChange={this.onThresholdTypeChange}
-              checked={threshold_type ? false : true}
+        <Grid item lg={2}>
+          <RadioGroup
+            aria-label="threshold_type"
+            name="threshold_type"
+            value={threshold_type}
+            onChange={this.onThresholdTypeChange}
+          >
+            <FormControlLabel
+              value={0}
+              control={<Radio />}
+              label="Greater Than"
             />
-            <label htmlFor="threshold_type" className="form-check-label mb-3">
-              Greater Than
-            </label>
-          </div>
-
-          <div className="form-check">
-            <input
-              type="radio"
-              name="threshold_type"
-              className="form-check-input"
-              id="less"
-              onChange={this.onThresholdTypeChange}
-              checked={threshold_type ? true : false}
-            />
-            <label htmlFor="threshold_type" className="form-check-label mb-3">
-              Less Than
-            </label>
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <div className="form-group">
-            <label htmlFor="global_target">Target</label>
-            <input
-              className="form-control"
-              type="text"
-              name="global_target"
-              onChange={this.onGlobalTargetChange}
-              placeholder="..."
-              value={global_target || ""}
-            />
-          </div>
-        </div>
-        <div className="col-sm-4">
-          <label htmlFor="warning_margin">Warning Limit</label>
-          <input
-            className="form-control"
+            <FormControlLabel value={1} control={<Radio />} label="Less Than" />
+          </RadioGroup>
+        </Grid>
+        <Grid item lg={4}>
+          <TextField
+            fullWidth
+            id="global_target"
+            label="Target"
+            className={classes.textField}
+            onChange={this.onGlobalTargetChange}
+            value={global_target || ""}
+            name="global_target"
             type="text"
-            name="warning_margin"
             placeholder="..."
-            value={`${warning_margin}${global_target ? "" : "%"}`}
-            disabled
           />
-        </div>
-      </div>
-    ];
+        </Grid>
+
+        <Grid item lg={4}>
+          <TextField
+            fullWidth
+            label="Warning Limit"
+            className={classes.textField}
+            onChange={onChange}
+            value={`${warning_margin}${global_target ? "" : "%"}`}
+            name="warning_margin"
+            type="text"
+            placeholder="..."
+          />
+        </Grid>
+      </>
+    );
+  };
+
+  renderSliderOptions() {
+    const { kpi_type } = this.props.values;
+    switch (kpi_type) {
+      case 0:
+        return this.deviationOptions();
+      case 1:
+        return this.winLoseOptions();
+      case 2:
+        return this.thresholdOptions();
+    }
+  }
+
+  render() {
+    const { onChange, pillar, editFrequency, classes } = this.props;
+    const { name, frequency, kpi_type, leader, unit } = this.props.values;
 
     return (
       <>
-        <div className="row">
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                className="form-control"
-                type="text"
-                name="name"
-                onChange={onChange}
-                placeholder="..."
-                value={name}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="kpi_type">Type</label>
-              <select
-                className="form-control"
-                type="text"
-                name="kpi_type"
-                onChange={this.onKpiTypeChange}
-                placeholder="..."
-                value={kpi_type}
-                required
-              >
+        <Grid container spacing={2}>
+          <Grid item lg={6}>
+            <TextField
+              fullWidth
+              label="Name"
+              className={classes.textField}
+              type="text"
+              name="name"
+              onChange={onChange}
+              placeholder="..."
+              value={name}
+              required
+            />
+            <FormControl className={classes.formControl}>
+              <InputLabel id="kpi_type">Type</InputLabel>
+              <Select onChange={this.onKpiTypeChange} value={kpi_type}>
                 {KPI_TYPE_CHOICES.map(choice => (
-                  <option key={`choice-${choice.id}`} value={choice.id}>
+                  <MenuItem key={`choice-${choice.id}`} value={choice.id}>
                     {choice.name}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="frequency">Frequency</label>
-              <select
-                className="form-control"
-                type="text"
-                name="frequency"
+              </Select>
+            </FormControl>
+
+            <FormControl className={classes.formControl}>
+              <InputLabel id="frequency">Frequency</InputLabel>
+              <Select
                 onChange={onChange}
-                placeholder="..."
                 value={frequency}
                 required
                 disabled={!editFrequency}
               >
                 {FREQUENCY_CHOICES.map(choice => (
-                  <option key={`choice-${choice.id}`} value={choice.id}>
+                  <MenuItem key={`choice-${choice.id}`} value={choice.id}>
                     {choice.name}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </div>
-          </div>
+              </Select>
+            </FormControl>
+          </Grid>
 
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label htmlFor="leader">Leader</label>
-              <input
-                className="form-control"
-                type="text"
-                name="leader"
-                onChange={onChange}
-                placeholder="..."
-                value={leader}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="unit">Unit</label>
-              <input
-                className="form-control"
-                type="text"
-                name="unit"
-                onChange={onChange}
-                placeholder="..."
-                value={unit || ""}
-              />
-            </div>
-          </div>
-        </div>
-
-        {sliders[kpi_type]}
+          <Grid item lg={6}>
+            <TextField
+              fullWidth
+              label="Leader"
+              className={classes.textField}
+              type="text"
+              name="leader"
+              onChange={onChange}
+              placeholder="..."
+              value={leader}
+              required
+            />
+            <TextField
+              fullWidth
+              label="Unit"
+              className={classes.textField}
+              type="text"
+              name="unit"
+              onChange={onChange}
+              placeholder="..."
+              value={unit || ""}
+            />
+          </Grid>
+          <Grid item container lg={12}>
+            <Typography variant={"h4"} className={classes.heading}>
+              Evaluation
+            </Typography>
+            {this.renderSliderOptions()}
+          </Grid>
+        </Grid>
       </>
     );
   }
@@ -360,4 +367,4 @@ KpiForm.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-export default KpiForm;
+export default withStyles(styles)(KpiForm);

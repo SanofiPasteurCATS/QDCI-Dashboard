@@ -97,7 +97,7 @@ class Example extends Component {
     } = this;
     const { threshold_type, target, domain } = this.props;
     return (
-      <div className="mt-5" style={{ height: 70, width: "95%" }}>
+      <div style={{ height: 70, width: "95%", paddingLeft: "10px" }}>
         <Slider
           mode={2}
           step={1}

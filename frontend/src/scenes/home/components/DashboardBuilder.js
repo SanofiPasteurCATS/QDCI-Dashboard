@@ -325,7 +325,6 @@ DashboardBuilder.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(
-  null,
-  { addDashboard }
-)(withStyles(styles)(DashboardBuilder));
+export default connect(null, { addDashboard })(
+  withStyles(styles)(DashboardBuilder)
+);

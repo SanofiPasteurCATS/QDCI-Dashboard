@@ -46,8 +46,12 @@ class Pillar extends React.Component {
 
   // Renders svg markup in the chart props
   render() {
-    const { chart } = this.props;
-    return <div style={{ margin: `${10}px ${10}px` }}>{chart}</div>;
+    const { chart, className } = this.props;
+    return (
+      <div style={{ margin: `${10}px ${10}px` }} className={className}>
+        {chart}
+      </div>
+    );
   }
 
   // Renders D3 chart to the faux DOM
@@ -224,7 +228,8 @@ class Pillar extends React.Component {
             kpiName,
             threshold_type,
             warning_margin,
-            ...d.data
+            ...d.data,
+            i
           }
         });
       })

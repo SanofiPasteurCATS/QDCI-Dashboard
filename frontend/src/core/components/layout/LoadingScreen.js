@@ -1,10 +1,14 @@
 // DEPENDANCIES
 import React from "react";
-import CircleLoader from "react-spinners/CircleLoader";
+import BounceLoader from "react-spinners/BounceLoader";
 import { css } from "@emotion/core";
 
 // CONFIG
 import { accentColor } from "../../config/styleConfig";
+
+import { makeStyles } from "@material-ui/core/styles";
+
+import Grid from "@material-ui/core/Grid";
 
 const override = css`
   display: flex;
@@ -12,21 +16,27 @@ const override = css`
   justify-content: center;
   align-items: center;
 `;
-
+const useStyles = makeStyles({
+  root: {
+    height: "100%"
+  }
+});
 export default function() {
+  const classes = useStyles();
   return (
-    <div className="col-md-6 m-auto">
-      <div className="card text-center mt-5">
-        <div className="card card-body">
-          <CircleLoader
-            sizeUnit="px"
-            size={60}
-            css={override}
-            color={accentColor}
-          />
-          <h1 style={{ margin: 0 }}>Loading</h1>
-        </div>
-      </div>
-    </div>
+    <Grid
+      container
+      alignItems="center"
+      justify="center"
+      spcaing={0}
+      className={classes.root}
+    >
+      <BounceLoader
+        sizeUnit="px"
+        size={60}
+        css={override}
+        color={accentColor}
+      />
+    </Grid>
   );
 }

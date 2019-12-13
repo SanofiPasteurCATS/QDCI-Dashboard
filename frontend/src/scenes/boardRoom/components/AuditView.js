@@ -3,21 +3,23 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Table from "./Table";
 
+// MATERIAL-UI
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import Button from "@material-ui/core/Button";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-import AuditForm from "./AuditForm";
-
+//CORE COMPONENTS
 import { AUDIT_TABLE_HEADERS } from "../../../core/config/dashboardConfig";
 import {
   updateAudit,
   deleteAudit,
   addAudit
 } from "../../../core/actions/dashboards";
+
+// NATIVE COMPONENTS
+import AuditForm from "./AuditForm";
 
 class AuditView extends Component {
   static propTypes = {

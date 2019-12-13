@@ -18,7 +18,6 @@ import Contact from "../../scenes/contact";
 
 // COMPONENTS
 import { loadUser } from "../actions/auth";
-import Header from "./layout/Header";
 import Alerts from "./layout/Alerts";
 import store from "../../store";
 import Navbar from "../../core/components/layout/Navbar";
@@ -37,11 +36,12 @@ class App extends Component {
   }
 
   render() {
+    const state = store.getState();
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
           <Router>
-            <Navbar />
+            <Navbar currentDashboard={state.dashboards.currentDashboard} />
             <Alerts />
 
             <Switch>

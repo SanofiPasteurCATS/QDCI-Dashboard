@@ -24,43 +24,43 @@ import LoadingScreen from "../../core/components/layout/LoadingScreen";
 import PillarBar from "./components/PillarBar";
 import AuditView from "./components/AuditView";
 import WinView from "./components/WinView";
-import Table from "./components/Table";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
 import Carousel from "./components/Carousel";
-import Toolbar from "@material-ui/core/Toolbar";
-import ReplayIcon from "@material-ui/icons/Replay";
 import ActionView from "./components/ActionView";
 
+// MATERIAL-UI
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
+import Toolbar from "@material-ui/core/Toolbar";
+import ReplayIcon from "@material-ui/icons/Replay";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = theme => ({
   rootContainer: {
     margin: 0,
     width: "100%",
-    marginTop: theme.spacing(2)
+    paddingTop: theme.spacing(5)
   },
   carouselContainer: {
     display: "flex",
     justifyContent: "center",
     height: "fit-content"
   },
-  nestedGrid: {
-    display: "flex"
+  nestedColumn: {
+    marginTop: "-8px",
+    flexDirection: "column",
+    paddingRight: "0 !important"
   },
   pillarBarContainer: {
-    //flexBasis: "20%"
+    width: "100%"
   },
   column: {
     flexDirection: "column"
   },
   mediaContainer: {
-    //flexBasis: "80%",
-    //maxWidth: "80%"
+    justifyContent: "start"
   },
   card: {
     maxWidth: "100%"
@@ -71,6 +71,10 @@ const styles = theme => ({
   title: {
     flex: "1 1 100%",
     color: "rgba(0, 0, 0, 0.87)"
+  },
+  heatCheck: {
+    width: "100%",
+    marginBottom: theme.spacing(3)
   }
 });
 
@@ -130,9 +134,14 @@ class Boardroom extends Component {
 
     const images = currentDashboard.images;
     return (
-      <Grid container spacing={4} className={classes.rootContainer}>
+      <Grid
+        container
+        spacing={4}
+        className={classes.rootContainer}
+        style={{ background: currentDashboard.background }}
+      >
         <Grid item lg={2} className={classes.pillarBarContainer}>
-          <Card>
+          <Card className={classes.card}>
             <PillarBar kpis={kpis} dashboardId={id} />
           </Card>
         </Grid>
@@ -143,8 +152,9 @@ class Boardroom extends Component {
           lg={10}
           spacing={1}
           className={classes.mediaContainer}
+          alignContent="flex-start"
         >
-          <Grid item lg={6} className={classes.carouselContainer}>
+          <Grid item lg={7} className={classes.carouselContainer}>
             {images.length ? (
               <Carousel
                 slides={images.map(image => {
@@ -154,24 +164,26 @@ class Boardroom extends Component {
             ) : null}
           </Grid>
 
-          <Grid item lg={6}>
-            <Toolbar>
-              <Typography
-                className={classes.title}
-                variant="h6"
-                id="heatCheckTitle"
-                color="inherit"
-              >
-                Heat Check
-              </Typography>
-              <Tooltip title="Reset">
-                <IconButton onClick={this.resetHeat} aria-label="reset">
-                  <ReplayIcon />
-                </IconButton>
-              </Tooltip>
-            </Toolbar>
+          <Grid item lg={5} className={classes.heatCheck}>
+            <Card className={classes.card}>
+              <Toolbar>
+                <Typography
+                  className={classes.title}
+                  variant="h6"
+                  id="heatCheckTitle"
+                  color="inherit"
+                >
+                  Heat Check
+                </Typography>
+                <Tooltip title="Reset">
+                  <IconButton onClick={this.resetHeat} aria-label="reset">
+                    <ReplayIcon />
+                  </IconButton>
+                </Tooltip>
+              </Toolbar>
 
-            <HeatCheck heat={heat} onClick={updateHeat}></HeatCheck>
+              <HeatCheck heat={heat} onClick={updateHeat}></HeatCheck>
+            </Card>
           </Grid>
 
           <Grid item container spacing={4}>
@@ -186,13 +198,12 @@ class Boardroom extends Component {
               </Card>
             </Grid>
 
-            <Grid item container lg={5} className={classes.column}>
+            <Grid item container lg={5} className={classes.nestedColumn}>
               <Card className={classes.stackedCard}>
-                <AuditView data={audits} dashboardId={currentDashboard.id} />
-              </Card>
-
-              <Card>
                 <WinView data={wins} dashboardId={currentDashboard.id} />
+              </Card>
+              <Card>
+                <AuditView data={audits} dashboardId={currentDashboard.id} />
               </Card>
             </Grid>
           </Grid>

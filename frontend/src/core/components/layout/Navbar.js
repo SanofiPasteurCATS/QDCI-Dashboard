@@ -6,6 +6,7 @@ import { getWeekNumber } from "./NavbarUtils";
 import { logout } from "../../actions/auth";
 import { connect } from "react-redux";
 
+// MATERIAL-UI
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -23,9 +24,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Hidden from "@material-ui/core/Hidden";
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -115,7 +113,7 @@ class Navbar extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, currentDashboard } = this.props;
     const { sidenavOpen, anchorEl, menuOpen, curTime, weekNum } = this.state;
     return (
       <div className={classes.root}>
@@ -139,7 +137,7 @@ class Navbar extends Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              My Dashboards
+              {currentDashboard ? currentDashboard.title : "My Dashboards"}
             </Typography>
             <Hidden smDown>
               <Typography className={classes.date}>
@@ -195,7 +193,4 @@ const mapStateToProps = state => ({
   currentDashboard: state.dashboards.currentDashboard
 });
 
-export default connect(
-  mapStateToProps,
-  { logout }
-)(withStyles(styles)(Navbar));
+export default connect(mapStateToProps, { logout })(withStyles(styles)(Navbar));

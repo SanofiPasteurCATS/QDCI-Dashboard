@@ -26,7 +26,15 @@ class HeatCheck extends Component {
   render() {
     const { chart } = this.props;
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>{chart}</div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "15px"
+        }}
+      >
+        {chart}
+      </div>
     );
   }
 
@@ -69,7 +77,7 @@ class HeatCheck extends Component {
       .style("font-size", "24px")
       .style("font-weight", "bold")
       .attr("dx", function(d, i) {
-        return 56 + 120 * i + d.value.toString().length * -9;
+        return 75 + 120 * i + d.value.toString().length * -9;
       })
       .attr("dy", function(d, i) {
         return 76;
@@ -92,7 +100,7 @@ class HeatCheck extends Component {
       .merge(circles)
       .attr("cy", 70)
       .attr("cx", function(d, i) {
-        return 53 + 120 * i;
+        return 75 + 120 * i;
       })
       .style("opacity", 0.6)
       .on("click", function(d) {

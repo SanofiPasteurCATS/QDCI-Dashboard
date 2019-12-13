@@ -8,28 +8,43 @@ import { deleteSeries } from "../../../../core/actions/dashboards";
 
 // COMPONENTS
 import SeriesEdit from "./SeriesEdit";
-import DataTable from "../datapoints/DataTable";
+
 import { getItem } from "../../../../core/helpers/Filters";
-import Modal from "../../../../core/components/ui/modal/Modal";
-import DataForm from "../datapoints/DataForm";
+
+import RemoveConfirmation from "../../../../core/components/ui/RemoveConfirmation";
+import DataView from "../datapoints/DataView";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import { withStyles } from "@material-ui/core/styles";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+
+const styles = theme => ({
+  heading: {
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4)
+  },
+  breadcrumbs: {
+    paddingTop: "12px",
+    paddingBottom: "12px"
+  }
+});
 
 class SeriesView extends Component {
   constructor(props) {
     super(props);
     this.onSubmitRemove = this.onSubmitRemove.bind(this);
+    this.RemoveConfirmation = React.createRef();
   }
 
   state = {
     selectedDatapoint: null
   };
 
-  componentDidMount() {
-    const { setRemove, series } = this.props;
-    setRemove({ type: "series", item: series, onSubmit: this.onSubmitRemove });
-  }
-
   setRemove = () => {
-    $("#removeConfirmation").modal("show");
+    this.RemoveConfirmation.current.handleToggleOpen(true)();
   };
 
   onSubmitRemove = state => {
@@ -39,12 +54,9 @@ class SeriesView extends Component {
       return true;
     } else return false;
   };
-  selectDatapoint = id => {
-    this.setState({ selectedDatapoint: id });
-    $("#dataOptions").modal("show");
-  };
+
   render() {
-    const { series, onBack } = this.props;
+    const { series, onBack, kpi, pillarId, classes } = this.props;
     const { selectedDatapoint } = this.state;
     if (!series) return <></>;
     let datapoint = {};
@@ -54,41 +66,47 @@ class SeriesView extends Component {
     }
     return (
       <Fragment>
-        <button
-          className="mb-4 btn btn-sm btn-primary"
-          onClick={onBack}
-          style={{ padding: "1px 8px", position: "fixed", zIndex: 1000 }}
-        >
-          <i
-            className="im im-arrow-left icon"
-            style={{ lineHeight: 1.5, fontSize: "20px" }}
-          ></i>
-        </button>
-        <h3>Properties</h3>
-        <div className="d-flex">
-          <SeriesEdit series={series} />
-        </div>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Typography color="inherit" href="/">
+            {pillarId}
+          </Typography>
+          <Typography color="inherit" href="/getting-started/installation/">
+            {kpi.name}
+          </Typography>
+          <Typography>{series.name}</Typography>
+          <IconButton onClick={onBack}>
+            <KeyboardBackspaceIcon></KeyboardBackspaceIcon>
+          </IconButton>
+        </Breadcrumbs>
+        <Typography className={classes.heading} variant={"h4"}>
+          Properties
+        </Typography>
+
+        <SeriesEdit series={series} />
+
         <hr />
-        <h3 className="mt-4">Data</h3>
-        <DataTable data={series.entries} rowClick={this.selectDatapoint} />
-        <Modal title="Update Data" id="dataOptions" overflow="visible">
-          <DataForm datapoint={datapoint} series={series.id}></DataForm>
-        </Modal>
-        <div className="d-flex justify-content-end">
-          <button
-            type="button"
-            className="btn btn-danger"
+        <DataView series={series}></DataView>
+        <div style={{ float: "right" }}>
+          <Button
+            color="secondary"
+            variant="contained"
+            startIcon={<DeleteIcon />}
             onClick={this.setRemove}
           >
             Delete Series
-          </button>
+          </Button>
         </div>
+        <RemoveConfirmation
+          removeContext={{
+            item: series,
+            type: "series",
+            onSubmit: this.onSubmitRemove
+          }}
+          ref={this.RemoveConfirmation}
+        />
       </Fragment>
     );
   }
 }
 
-export default connect(
-  null,
-  { deleteSeries }
-)(SeriesView);
+export default connect(null, { deleteSeries })(withStyles(styles)(SeriesView));

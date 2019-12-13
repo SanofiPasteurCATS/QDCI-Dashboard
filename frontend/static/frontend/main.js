@@ -157,12 +157,13 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 71 modules ***!
+  !*** ./frontend/src/index.js + 70 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@date-io/date-fns/build/index.esm.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/CircleLoader.js (referenced with amd require)) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@emotion/core/dist/core.browser.esm.js (<- Module is referenced from these modules with unsupported syntax: ./node_modules/react-spinners/BounceLoader.js (referenced with amd require)) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/AppBar/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Breadcrumbs/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Button/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/CardActions/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/CardContent/index.js */
@@ -193,6 +194,9 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Menu/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/MobileStepper/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Paper/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Popover/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/RadioGroup/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Radio/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Select/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Slide/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/StepLabel/index.js */
@@ -211,6 +215,7 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Tooltip/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/Typography/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/core/esm/styles/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/AccountBox.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/AccountCircle.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Add.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/ArrowDownward.js (<- Module is not an ECMAScript module) */
@@ -220,17 +225,24 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Delete.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/DeleteForever.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Edit.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Email.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/FilterList.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/KeyboardArrowLeft.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/KeyboardArrowRight.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/KeyboardBackspace.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/LibraryAdd.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Menu.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/MoreHoriz.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Palette.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Publish.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Replay.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Save.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/School.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Settings.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/SupervisorAccount.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Timeline.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/pickers/esm/index.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/styles/esm/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/axios/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/clsx/dist/clsx.m.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/d3/index.js */
@@ -241,15 +253,13 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert/dist/esm/react-alert.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-color/lib/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-compound-slider/es/index.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-datepicker/dist/react-datepicker.min.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-dom/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-faux-dom/lib/ReactFauxDOM.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-redux/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-router-dom/esm/react-router-dom.js */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-spinners/CircleLoader.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-spinners/BounceLoader.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-swipeable-views-utils/lib/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-swipeable-views/lib/index.js (<- Module is not an ECMAScript module) */
-/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-tooltip/dist/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/redux-devtools-extension/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/redux-thunk/es/index.js */
@@ -258,12 +268,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/bootstrap/dist/js/bootstrap.min.js
-var bootstrap_min = __webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.min.js");
-
-// EXTERNAL MODULE: ./node_modules/bootstrap/dist/css/bootstrap.min.css
-var css_bootstrap_min = __webpack_require__("./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__("./node_modules/react/index.js");
@@ -1043,7 +1047,8 @@ function (_Component) {
       return react_default.a.createElement("div", {
         style: {
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
+          marginBottom: "15px"
         }
       }, chart);
     }
@@ -1075,7 +1080,7 @@ function (_Component) {
       var texts = chart.selectAll("text");
       var textsData = texts.data(heat);
       var text = textsData.enter().append("text").merge(texts).style("font-size", "24px").style("font-weight", "bold").attr("dx", function (d, i) {
-        return 56 + 120 * i + d.value.toString().length * -9;
+        return 75 + 120 * i + d.value.toString().length * -9;
       }).attr("dy", function (d, i) {
         return 76;
       }).style("opacity", 1).text(function (d) {
@@ -1086,7 +1091,7 @@ function (_Component) {
       var circlesData = circles.data(heat); // ENTER SECLECTION
 
       var circleEnter = circlesData.enter().append("circle").attr("r", 0).merge(circles).attr("cy", 70).attr("cx", function (d, i) {
-        return 53 + 120 * i;
+        return 75 + 120 * i;
       }).style("opacity", 0.6).on("click", function (d) {
         var newHeat = _objectSpread({}, d);
 
@@ -1710,9 +1715,9 @@ var dashboards_deleteImage = function deleteImage(id) {
     });
   };
 };
-// EXTERNAL MODULE: ./node_modules/react-spinners/CircleLoader.js
-var CircleLoader = __webpack_require__("./node_modules/react-spinners/CircleLoader.js");
-var CircleLoader_default = /*#__PURE__*/__webpack_require__.n(CircleLoader);
+// EXTERNAL MODULE: ./node_modules/react-spinners/BounceLoader.js
+var BounceLoader = __webpack_require__("./node_modules/react-spinners/BounceLoader.js");
+var BounceLoader_default = /*#__PURE__*/__webpack_require__.n(BounceLoader);
 
 // EXTERNAL MODULE: ./node_modules/@emotion/core/dist/core.browser.esm.js + 5 modules
 var core_browser_esm = __webpack_require__("./node_modules/@emotion/core/dist/core.browser.esm.js");
@@ -1731,29 +1736,33 @@ function _EMOTION_STRINGIFIED_CSS_ERROR__() { return "You have tried to stringif
  // CONFIG
 
 
+
+
 var override =  false ? undefined : {
   name: "11wvrmk-override",
   styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;;label:override;",
-  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFRb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IENpcmNsZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQ2lyY2xlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5jb25zdCBvdmVycmlkZSA9IGNzc2BcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIG1hcmdpbjogMCBhdXRvIDIwcHggYXV0bztcclxuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG5gO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24oKSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxkaXYgY2xhc3NOYW1lPVwiY29sLW1kLTYgbS1hdXRvXCI+XHJcbiAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY2FyZCB0ZXh0LWNlbnRlciBtdC01XCI+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjYXJkIGNhcmQtYm9keVwiPlxyXG4gICAgICAgICAgPENpcmNsZUxvYWRlclxyXG4gICAgICAgICAgICBzaXplVW5pdD1cInB4XCJcclxuICAgICAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgICAgIGNzcz17b3ZlcnJpZGV9XHJcbiAgICAgICAgICAgIGNvbG9yPXthY2NlbnRDb2xvcn1cclxuICAgICAgICAgIC8+XHJcbiAgICAgICAgICA8aDEgc3R5bGU9e3sgbWFyZ2luOiAwIH19PkxvYWRpbmc8L2gxPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn1cclxuIl19 */",
+  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFZb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IEJvdW5jZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQm91bmNlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5pbXBvcnQgeyBtYWtlU3R5bGVzIH0gZnJvbSBcIkBtYXRlcmlhbC11aS9jb3JlL3N0eWxlc1wiO1xyXG5cclxuaW1wb3J0IEdyaWQgZnJvbSBcIkBtYXRlcmlhbC11aS9jb3JlL0dyaWRcIjtcclxuXHJcbmNvbnN0IG92ZXJyaWRlID0gY3NzYFxyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgbWFyZ2luOiAwIGF1dG8gMjBweCBhdXRvO1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbmA7XHJcbmNvbnN0IHVzZVN0eWxlcyA9IG1ha2VTdHlsZXMoe1xyXG4gIHJvb3Q6IHtcclxuICAgIGhlaWdodDogXCIxMDAlXCJcclxuICB9XHJcbn0pO1xyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbigpIHtcclxuICBjb25zdCBjbGFzc2VzID0gdXNlU3R5bGVzKCk7XHJcbiAgcmV0dXJuIChcclxuICAgIDxHcmlkXHJcbiAgICAgIGNvbnRhaW5lclxyXG4gICAgICBhbGlnbkl0ZW1zPVwiY2VudGVyXCJcclxuICAgICAganVzdGlmeT1cImNlbnRlclwiXHJcbiAgICAgIHNwY2Fpbmc9ezB9XHJcbiAgICAgIGNsYXNzTmFtZT17Y2xhc3Nlcy5yb290fVxyXG4gICAgPlxyXG4gICAgICA8Qm91bmNlTG9hZGVyXHJcbiAgICAgICAgc2l6ZVVuaXQ9XCJweFwiXHJcbiAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgY3NzPXtvdmVycmlkZX1cclxuICAgICAgICBjb2xvcj17YWNjZW50Q29sb3J9XHJcbiAgICAgIC8+XHJcbiAgICA8L0dyaWQ+XHJcbiAgKTtcclxufVxyXG4iXX0= */",
   toString: _EMOTION_STRINGIFIED_CSS_ERROR__
 };
+var useStyles = Object(esm_styles["makeStyles"])({
+  root: {
+    height: "100%"
+  }
+});
 /* harmony default export */ var LoadingScreen = (function () {
-  return react_default.a.createElement("div", {
-    className: "col-md-6 m-auto"
-  }, react_default.a.createElement("div", {
-    className: "card text-center mt-5"
-  }, react_default.a.createElement("div", {
-    className: "card card-body"
-  }, react_default.a.createElement(CircleLoader_default.a, {
+  var classes = useStyles();
+  return react_default.a.createElement(Grid["default"], {
+    container: true,
+    alignItems: "center",
+    justify: "center",
+    spcaing: 0,
+    className: classes.root
+  }, react_default.a.createElement(BounceLoader_default.a, {
     sizeUnit: "px",
     size: 60,
     css: override,
     color: accentColor
-  }), react_default.a.createElement("h1", {
-    style: {
-      margin: 0
-    }
-  }, "Loading"))));
+  }));
 });
 // CONCATENATED MODULE: ./frontend/src/core/config/dashboardConfig.js
 // Configuration for table headers and form controls
@@ -2092,26 +2101,29 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var chart = this.props.chart;
+      var _this$props = this.props,
+          chart = _this$props.chart,
+          className = _this$props.className;
       return react_default.a.createElement("div", {
         style: {
           margin: "".concat(10, "px ", 10, "px")
-        }
+        },
+        className: className
       }, chart);
     } // Renders D3 chart to the faux DOM
 
   }, {
     key: "renderD3",
     value: function renderD3() {
-      var _this$props = this.props,
-          connectFauxDOM = _this$props.connectFauxDOM,
-          animateFauxDOM = _this$props.animateFauxDOM;
+      var _this$props2 = this.props,
+          connectFauxDOM = _this$props2.connectFauxDOM,
+          animateFauxDOM = _this$props2.animateFauxDOM;
       var faux = connectFauxDOM("svg", "chart");
       var plotSize = 200;
-      var _this$props2 = this.props,
-          letter = _this$props2.letter,
-          dashboardId = _this$props2.dashboardId,
-          labeled = _this$props2.labeled;
+      var _this$props3 = this.props,
+          letter = _this$props3.letter,
+          dashboardId = _this$props3.dashboardId,
+          labeled = _this$props3.labeled;
       var radius = plotSize / xFactor;
       var labelScale = labeled ? 0.4 : 1;
       var svg = d3["select"](faux).attr("id", "chartPillar").attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink").attr("viewBox", "0 0 ".concat(plotSize, " ").concat(plotSize)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true);
@@ -2124,11 +2136,11 @@ function (_React$Component) {
   }, {
     key: "updateD3",
     value: function updateD3() {
-      var _this$props3 = this.props,
-          kpis = _this$props3.kpis,
-          letter = _this$props3.letter,
-          labeled = _this$props3.labeled,
-          onHover = _this$props3.onHover;
+      var _this$props4 = this.props,
+          kpis = _this$props4.kpis,
+          letter = _this$props4.letter,
+          labeled = _this$props4.labeled,
+          onHover = _this$props4.onHover;
       var plotSize = 200;
       var radius = plotSize / xFactor;
       var count = kpis.length;
@@ -2203,7 +2215,9 @@ function (_React$Component) {
             kpiName: kpiName,
             threshold_type: threshold_type,
             warning_margin: warning_margin
-          }, d.data)
+          }, d.data, {
+            i: i
+          })
         });
       }).on("mouseout", function (d) {
         d3["select"]("#ring_".concat(d.data.id)).style("stroke", "none");
@@ -2312,7 +2326,7 @@ PillarBar_PillarBar.defaultProps = {
 var clsx_m = __webpack_require__("./node_modules/clsx/dist/clsx.m.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Table/index.js + 1 modules
-var esm_Table = __webpack_require__("./node_modules/@material-ui/core/esm/Table/index.js");
+var Table = __webpack_require__("./node_modules/@material-ui/core/esm/Table/index.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/TableBody/index.js + 1 modules
 var TableBody = __webpack_require__("./node_modules/@material-ui/core/esm/TableBody/index.js");
@@ -2335,9 +2349,6 @@ var TableSortLabel = __webpack_require__("./node_modules/@material-ui/core/esm/T
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Toolbar/index.js + 1 modules
 var Toolbar = __webpack_require__("./node_modules/@material-ui/core/esm/Toolbar/index.js");
 
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Paper/index.js + 1 modules
-var Paper = __webpack_require__("./node_modules/@material-ui/core/esm/Paper/index.js");
-
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Checkbox/index.js + 4 modules
 var Checkbox = __webpack_require__("./node_modules/@material-ui/core/esm/Checkbox/index.js");
 
@@ -2349,13 +2360,7 @@ var Edit = __webpack_require__("./node_modules/@material-ui/icons/Edit.js");
 var Edit_default = /*#__PURE__*/__webpack_require__.n(Edit);
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Tooltip/index.js + 3 modules
-var esm_Tooltip = __webpack_require__("./node_modules/@material-ui/core/esm/Tooltip/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/FormControlLabel/index.js + 1 modules
-var FormControlLabel = __webpack_require__("./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Switch/index.js + 1 modules
-var Switch = __webpack_require__("./node_modules/@material-ui/core/esm/Switch/index.js");
+var Tooltip = __webpack_require__("./node_modules/@material-ui/core/esm/Tooltip/index.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/Delete.js
 var Delete = __webpack_require__("./node_modules/@material-ui/icons/Delete.js");
@@ -2388,9 +2393,6 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Table_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
 
 
 
@@ -2551,22 +2553,22 @@ var Table_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
     className: classes.title,
     variant: "h6",
     id: "tableTitle"
-  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickEdit && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickEdit && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
     title: "Edit"
   }, react_default.a.createElement(IconButton["default"], {
     onClick: handleClickEdit,
     "aria-label": "edit"
-  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(Tooltip["default"], {
     title: "Delete"
   }, react_default.a.createElement(IconButton["default"], {
     onClick: handleClickDelete,
     "aria-label": "delete"
-  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(Tooltip["default"], {
     title: "Add entry"
   }, react_default.a.createElement(IconButton["default"], {
     "aria-label": "add",
     onClick: onClickAdd
-  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(Tooltip["default"], {
     title: "Filter list"
   }, react_default.a.createElement(IconButton["default"], {
     "aria-label": "filter list"
@@ -2576,7 +2578,7 @@ var Table_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
 Table_EnhancedTableToolbar.propTypes = {
   numSelected: prop_types_default.a.number.isRequired
 };
-var useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+var Table_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
   return {
     root: {
       width: "100%",
@@ -2622,7 +2624,7 @@ function EnhancedTable(props) {
       onClickAdd = props.onClickAdd,
       onClickDelete = props.onClickDelete,
       onClickEdit = props.onClickEdit;
-  var classes = useStyles();
+  var classes = Table_useStyles();
 
   var _React$useState = react_default.a.useState("asc"),
       _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -2720,7 +2722,7 @@ function EnhancedTable(props) {
     data: data
   }), react_default.a.createElement("div", {
     className: classes.tableWrapper
-  }, react_default.a.createElement(esm_Table["default"], {
+  }, react_default.a.createElement(Table["default"], {
     className: classes.table,
     "aria-labelledby": "tableTitle",
     "aria-label": "enhanced table",
@@ -2745,7 +2747,7 @@ function EnhancedTable(props) {
       role: "checkbox",
       "aria-checked": isItemSelected,
       tabIndex: -1,
-      key: row.id,
+      key: "".concat(row.id, "-checkbox"),
       selected: isItemSelected
     }, react_default.a.createElement(TableCell["default"], {
       padding: "checkbox"
@@ -2754,8 +2756,9 @@ function EnhancedTable(props) {
       inputProps: {
         "aria-labelledby": labelId
       }
-    })), tableMeta.map(function (field) {
+    })), tableMeta.map(function (field, index) {
       return react_default.a.createElement(TableCell["default"], {
+        key: "".concat(index, "-").concat(row.id),
         align: "left",
         id: row.id,
         className: classes.tableCell
@@ -2791,9 +2794,6 @@ var DialogActions = __webpack_require__("./node_modules/@material-ui/core/esm/Di
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogContent/index.js + 1 modules
 var DialogContent = __webpack_require__("./node_modules/@material-ui/core/esm/DialogContent/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogContentText/index.js + 1 modules
-var DialogContentText = __webpack_require__("./node_modules/@material-ui/core/esm/DialogContentText/index.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogTitle/index.js + 1 modules
 var DialogTitle = __webpack_require__("./node_modules/@material-ui/core/esm/DialogTitle/index.js");
@@ -2930,14 +2930,16 @@ function AuditView_setPrototypeOf(o, p) { AuditView_setPrototypeOf = Object.setP
 
 
 
+ // MATERIAL-UI
 
 
 
 
 
+ //CORE COMPONENTS
 
 
-
+ // NATIVE COMPONENTS
 
 
 
@@ -3088,6 +3090,9 @@ AuditView_AuditView.defaultProps = {
   appendable: false,
   rowClick: null
 };
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/DialogContentText/index.js + 1 modules
+var DialogContentText = __webpack_require__("./node_modules/@material-ui/core/esm/DialogContentText/index.js");
+
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinForm.js
 // DEPENDANCIES
 
@@ -3177,8 +3182,7 @@ function WinForm(props) {
 
 WinForm.propTypes = {
   win: prop_types_default.a.object,
-  updateWin: prop_types_default.a.func.isRequired,
-  deleteWin: prop_types_default.a.func.isRequired
+  onChange: prop_types_default.a.func
 };
 /* harmony default export */ var components_WinForm = (WinForm);
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/WinView.js
@@ -3396,7 +3400,7 @@ function Carousel_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Carousel_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
+ // MATERIAL-UI
 
 
 
@@ -3496,7 +3500,7 @@ function SwipeableTextMobileStepper(props) {
     enableMouseEvents: true
   }, slides.map(function (step, index) {
     return react_default.a.createElement("div", {
-      key: step.label
+      key: index
     }, Math.abs(activeStep - index) <= 2 ? react_default.a.createElement("img", {
       className: classes.img,
       src: step.imgPath,
@@ -3520,9 +3524,6 @@ function SwipeableTextMobileStepper(props) {
     steps: maxSteps,
     position: "static",
     variant: "dots",
-    dotActive: {
-      color: "red"
-    },
     activeStep: activeStep,
     className: classes.stepper,
     backButton: react_default.a.createElement("div", null),
@@ -3531,10 +3532,6 @@ function SwipeableTextMobileStepper(props) {
 }
 
 /* harmony default export */ var Carousel = (SwipeableTextMobileStepper);
-// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Replay.js
-var Replay = __webpack_require__("./node_modules/@material-ui/icons/Replay.js");
-var Replay_default = /*#__PURE__*/__webpack_require__.n(Replay);
-
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/ArrowDownward.js
 var ArrowDownward = __webpack_require__("./node_modules/@material-ui/icons/ArrowDownward.js");
 var ArrowDownward_default = /*#__PURE__*/__webpack_require__.n(ArrowDownward);
@@ -3542,9 +3539,6 @@ var ArrowDownward_default = /*#__PURE__*/__webpack_require__.n(ArrowDownward);
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/Settings.js
 var Settings = __webpack_require__("./node_modules/@material-ui/icons/Settings.js");
 var Settings_default = /*#__PURE__*/__webpack_require__.n(Settings);
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/icons/DynamicFeed.js
-var DynamicFeed = __webpack_require__("./node_modules/@material-ui/icons/DynamicFeed.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/ArrowUpward.js
 var ArrowUpward = __webpack_require__("./node_modules/@material-ui/icons/ArrowUpward.js");
@@ -3563,11 +3557,7 @@ function ActionTable_defineProperty(obj, key, value) { if (key in obj) { Object.
 
 
 
-
-
-
-
-
+ // MATERIAL-UI
 
 
 
@@ -3738,27 +3728,27 @@ var ActionTable_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
     className: classes.title,
     variant: "h6",
     id: "tableTitle"
-  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickDelete && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickDelete && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
     title: "Escalate"
   }, react_default.a.createElement(IconButton["default"], {
     onClick: handleClickEscalate,
     "aria-label": "delete"
-  }, react_default.a.createElement(ArrowUpward_default.a, null))), onClickEdit && numSelected === 1 && react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(ArrowUpward_default.a, null))), onClickEdit && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
     title: "Edit"
   }, react_default.a.createElement(IconButton["default"], {
     onClick: handleClickEdit,
     "aria-label": "edit"
-  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(Tooltip["default"], {
     title: "Delete"
   }, react_default.a.createElement(IconButton["default"], {
     onClick: handleClickDelete,
     "aria-label": "delete"
-  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(Tooltip["default"], {
     title: "Add entry"
   }, react_default.a.createElement(IconButton["default"], {
     "aria-label": "add",
     onClick: onClickAdd
-  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(esm_Tooltip["default"], {
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(Tooltip["default"], {
     title: "Manage Escaltions"
   }, react_default.a.createElement(IconButton["default"], {
     "aria-label": "manage escalations",
@@ -3902,11 +3892,11 @@ function ActionTable_EnhancedTable(props) {
     if (!entry.tables) return "---";
 
     if (entry.tables.length > 1) {
-      if (entry.source.dashboard.id != currentDashboardId) return react_default.a.createElement(esm_Tooltip["default"], {
+      if (entry.source.dashboard.id != currentDashboardId) return react_default.a.createElement(Tooltip["default"], {
         disableFocusListener: true,
         disableTouchListener: true,
         title: "Source - ".concat(entry.source.dashboard.title)
-      }, react_default.a.createElement(ArrowDownward_default.a, null));else return react_default.a.createElement(esm_Tooltip["default"], {
+      }, react_default.a.createElement(ArrowDownward_default.a, null));else return react_default.a.createElement(Tooltip["default"], {
         disableFocusListener: true,
         disableTouchListener: true,
         title: "Escalated upward"
@@ -3936,7 +3926,7 @@ function ActionTable_EnhancedTable(props) {
     data: data
   }), react_default.a.createElement("div", {
     className: classes.tableWrapper
-  }, react_default.a.createElement(esm_Table["default"], {
+  }, react_default.a.createElement(Table["default"], {
     className: classes.table,
     "aria-labelledby": "tableTitle",
     "aria-label": "enhanced table",
@@ -3961,7 +3951,7 @@ function ActionTable_EnhancedTable(props) {
       role: "checkbox",
       "aria-checked": isItemSelected,
       tabIndex: -1,
-      key: row.id,
+      key: "".concat(row.id, "-checkbox"),
       selected: isItemSelected
     }, react_default.a.createElement(TableCell["default"], {
       padding: "checkbox"
@@ -3970,10 +3960,11 @@ function ActionTable_EnhancedTable(props) {
       inputProps: {
         "aria-labelledby": labelId
       }
-    })), tableMeta.map(function (field) {
+    })), tableMeta.map(function (field, index) {
       return react_default.a.createElement(TableCell["default"], {
         align: "left",
         id: row.id,
+        key: "".concat(index, "-").concat(row.id),
         className: classes.tableCell
       }, row[field.prop] === null ? "---" : row[field.prop]);
     }), react_default.a.createElement(TableCell["default"], {
@@ -4112,6 +4103,9 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 
+ // CORE COMPONENTS
+
+ // MATERIAL-UI
 
 
 
@@ -4122,9 +4116,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 
-
-
-
+ // NATIVE COMPONENTS
 
 
 var EscalationView_Transition = react_default.a.forwardRef(function Transition(props, ref) {
@@ -4296,7 +4288,6 @@ EscalationView_ActionView.defaultProps = {
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/ActionForm.js
 // DEPENDANCIES
 
-
  // MATERIAL-UI
 
 
@@ -4422,99 +4413,7 @@ function ActionForm(props) {
     KeyboardButtonProps: {
       "aria-label": "change date"
     }
-  }))))
-  /*
-    <Fragment>
-      <h2>Edit Action</h2>
-      <form onSubmit={this.onSubmit}>
-        <div className="row justify-content-between">
-          <div className="col-sm-6">
-            <div className="form-group">
-              <label htmlFor="letter">Letter</label>
-              <input
-                className="form-control"
-                type="text"
-                name="letter"
-                onChange={this.onChange}
-                value={letter || ""}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="problem">Problem</label>
-              <input
-                className="form-control"
-                type="text"
-                name="problem"
-                onChange={this.onChange}
-                value={problem}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="root_cause">Root Cause</label>
-              <input
-                className="form-control"
-                type="text"
-                name="root_cause"
-                onChange={this.onChange}
-                value={root_cause}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="solution">Solution</label>
-              <input
-                className="form-control"
-                type="text"
-                name="solution"
-                onChange={this.onChange}
-                value={solution}
-              />
-            </div>
-          </div>
-          <div className="col-sm-5">
-            <div className="form-group">
-              <label htmlFor="leader">Leader</label>
-              <input
-                className="form-control"
-                type="text"
-                name="leader"
-                onChange={this.onChange}
-                value={leader}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="date" className="d-block">
-                Date
-              </label>
-              <DatePicker
-                className="form-control"
-                onChange={date => this.onDateChange(date)}
-                selected={date}
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-          </div>
-            <div className="col-sm-12 d-flex justify-content-end">
-            <button
-              type="button"
-              className="btn
-          btn-danger mr-4"
-              onClick={this.delete}
-            >
-              Delete
-            </button>
-            <button
-              type="submit"
-              className="btn
-          btn-primary"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </form>
-    </Fragment>
-    */
-  ;
+  }))));
 }
 
 ActionForm.defaultProps = {
@@ -4557,7 +4456,7 @@ function ActionView_setPrototypeOf(o, p) { ActionView_setPrototypeOf = Object.se
 
 
 
-
+ // MATERIAL-UI
 
 
 
@@ -4771,6 +4670,10 @@ ActionView_ActionView.defaultProps = {
   appendable: false,
   rowClick: null
 };
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Replay.js
+var Replay = __webpack_require__("./node_modules/@material-ui/icons/Replay.js");
+var Replay_default = /*#__PURE__*/__webpack_require__.n(Replay);
+
 // CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/index.js
 function boardRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { boardRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { boardRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return boardRoom_typeof(obj); }
 
@@ -4810,8 +4713,7 @@ function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setP
 
 
 
-
-
+ // MATERIAL-UI
 
 
 
@@ -4827,23 +4729,26 @@ var boardRoom_styles = function styles(theme) {
     rootContainer: {
       margin: 0,
       width: "100%",
-      marginTop: theme.spacing(2)
+      paddingTop: theme.spacing(5)
     },
     carouselContainer: {
       display: "flex",
       justifyContent: "center",
       height: "fit-content"
     },
-    nestedGrid: {
-      display: "flex"
+    nestedColumn: {
+      marginTop: "-8px",
+      flexDirection: "column",
+      paddingRight: "0 !important"
     },
-    pillarBarContainer: {//flexBasis: "20%"
+    pillarBarContainer: {
+      width: "100%"
     },
     column: {
       flexDirection: "column"
     },
-    mediaContainer: {//flexBasis: "80%",
-      //maxWidth: "80%"
+    mediaContainer: {
+      justifyContent: "start"
     },
     card: {
       maxWidth: "100%"
@@ -4854,6 +4759,10 @@ var boardRoom_styles = function styles(theme) {
     title: {
       flex: "1 1 100%",
       color: "rgba(0, 0, 0, 0.87)"
+    },
+    heatCheck: {
+      width: "100%",
+      marginBottom: theme.spacing(3)
     }
   };
 };
@@ -4933,12 +4842,17 @@ function (_Component) {
       return react_default.a.createElement(Grid["default"], {
         container: true,
         spacing: 4,
-        className: classes.rootContainer
+        className: classes.rootContainer,
+        style: {
+          background: currentDashboard.background
+        }
       }, react_default.a.createElement(Grid["default"], {
         item: true,
         lg: 2,
         className: classes.pillarBarContainer
-      }, react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_PillarBar, {
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.card
+      }, react_default.a.createElement(components_PillarBar, {
         kpis: kpis,
         dashboardId: id
       }))), react_default.a.createElement(Grid["default"], {
@@ -4946,10 +4860,11 @@ function (_Component) {
         container: true,
         lg: 10,
         spacing: 1,
-        className: classes.mediaContainer
+        className: classes.mediaContainer,
+        alignContent: "flex-start"
       }, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 6,
+        lg: 7,
         className: classes.carouselContainer
       }, images.length ? react_default.a.createElement(Carousel, {
         slides: images.map(function (image) {
@@ -4959,13 +4874,16 @@ function (_Component) {
         })
       }) : null), react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 6
+        lg: 5,
+        className: classes.heatCheck
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.card
       }, react_default.a.createElement(Toolbar["default"], null, react_default.a.createElement(Typography["default"], {
         className: classes.title,
         variant: "h6",
         id: "heatCheckTitle",
         color: "inherit"
-      }, "Heat Check"), react_default.a.createElement(esm_Tooltip["default"], {
+      }, "Heat Check"), react_default.a.createElement(Tooltip["default"], {
         title: "Reset"
       }, react_default.a.createElement(IconButton["default"], {
         onClick: this.resetHeat,
@@ -4973,7 +4891,7 @@ function (_Component) {
       }, react_default.a.createElement(Replay_default.a, null)))), react_default.a.createElement(d3charts_HeatCheck, {
         heat: heat,
         onClick: updateHeat
-      })), react_default.a.createElement(Grid["default"], {
+      }))), react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
         spacing: 4
@@ -4994,14 +4912,14 @@ function (_Component) {
         item: true,
         container: true,
         lg: 5,
-        className: classes.column
+        className: classes.nestedColumn
       }, react_default.a.createElement(Card["default"], {
         className: classes.stackedCard
-      }, react_default.a.createElement(components_AuditView, {
-        data: audits,
-        dashboardId: currentDashboard.id
-      })), react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_WinView, {
+      }, react_default.a.createElement(components_WinView, {
         data: wins,
+        dashboardId: currentDashboard.id
+      })), react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_AuditView, {
+        data: audits,
         dashboardId: currentDashboard.id
       }))))));
     }
@@ -5143,9 +5061,9 @@ var margin = {
   top: 10,
   right: 150,
   bottom: 30,
-  left: 50
+  left: 24
 };
-var LineChart_width = 1100 - margin.left - margin.right;
+var LineChart_width = 950 - margin.left - margin.right;
 var LineChart_height = 600 - margin.top - margin.bottom;
 
 var LineChart_LineChart =
@@ -5208,7 +5126,7 @@ function (_React$Component) {
       }
 
       var svg = d3["select"](faux).attr("id", "chart").attr("viewBox", "0 0 ".concat(LineChart_width + margin.left + margin.right, " ").concat(LineChart_height + margin.bottom + margin.top)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink") // CSS Styles
-      .style("margin", "20px 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
+      .style("margin", "20px 0 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
       svg.append("rect").attr("width", LineChart_width).attr("height", LineChart_height).style("opacity", 0).attr("id", "facade").on("click", function () {
         highlightLine("null");
         selectSeries(null);
@@ -5220,7 +5138,7 @@ function (_React$Component) {
 
       svg.append("text").attr("x", 0 - margin.left / 4).attr("y", 0 - margin.top).attr("id", "y_unit").style("fill", "black").attr("text-anchor", "middle").style("font-size", "15px"); // Title
 
-      svg.append("text").attr("x", LineChart_width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("text-decoration", "underline").style("font-size", "31px").attr("fill", accentColor);
+      svg.append("text").attr("x", LineChart_width / 2).attr("id", "title").attr("y", 0 - margin.top / 2).attr("text-anchor", "middle").style("font-weight", "bold").style("font-size", "31px").attr("fill", accentColor);
     }
   }, {
     key: "updateD3",
@@ -5238,7 +5156,7 @@ function (_React$Component) {
       });
       index = index == -1 ? 0 : index;
       var data = kpis[index] ? kpis[index].series : [];
-      var test = {};
+      var test = null;
 
       if (kpis[index] && kpis[index].series) {
         test = LineChart_objectSpread({}, kpis[index].series[0]);
@@ -5256,7 +5174,6 @@ function (_React$Component) {
         });
         test.color = "#008000";
         test.name = "".concat(test.name, " Threshold");
-        data = [test].concat(LineChart_toConsumableArray(data));
       }
 
       var parseTime = d3["timeParse"]("%Y-%m-%d");
@@ -5309,13 +5226,13 @@ function (_React$Component) {
       var y_axis = d3["axisLeft"](yScale);
       var x_axis = d3["axisBottom"](xScale).tickFormat(d3["timeFormat"]("%b")); // Update the X_Axis
 
-      d3["select"](faux).selectAll(".myXaxis").transition().duration(1000).call(x_axis); // Update the Y_Axis
+      d3["select"](faux).selectAll(".myXaxis").style("font-size", "0.7rem").transition().duration(1000).call(x_axis); // Update the Y_Axis
 
-      d3["select"](faux).selectAll(".myYaxis").transition().duration(1000).call(y_axis); // -----------------------------------------------------------------------------
+      d3["select"](faux).selectAll(".myYaxis").style("font-size", "0.6rem").transition().duration(1000).call(y_axis); // -----------------------------------------------------------------------------
       // LINES
       // -----------------------------------------------------------------------------
 
-      var line = d3["line"]().y(function (d) {
+      var line = d3["line"]().curve(d3["curveCardinal"]).y(function (d) {
         return yScale(d.value);
       }).defined(function (d) {
         return d.value != null;
@@ -5323,12 +5240,15 @@ function (_React$Component) {
         return xScale(parseTime(d.date));
       });
       var s = d3["select"](faux).select("#plotArea").selectAll(".line");
-      var sData = s.data(data);
+      var extendedData = test != null ? [test].concat(LineChart_toConsumableArray(data)) : data;
+      var sData = s.data(extendedData);
       var sEnter = sData.enter().append("path").merge(s).attr("d", function (d) {
         return line(d.entries);
       }).style("opacity", 1).attr("id", function (d) {
         return "line_".concat(d.id);
-      }).attr("class", "line").attr("fill", "none").attr("stroke-width", 1.8).attr("stroke", function (d) {
+      }).attr("class", "line").attr("fill", function (d) {
+        return "url(#".concat(d.id, "-gradient)");
+      }).attr("stroke-width", 1.8).attr("stroke", function (d) {
         return d.color;
       }); // Then the following lines transition the line so that the gap is hidden...
 
@@ -5378,7 +5298,7 @@ function (_React$Component) {
       }); // Legend text explaining the symbols
 
       legend.append("text").attr("x", LineChart_width + margin.right).attr("y", function (d, i) {
-        return LineChart_height / 2 + 20 * i;
+        return margin.top * 2 + 20 * i;
       }).attr("id", function (d) {
         return "legend_".concat(d.id);
       }).attr("class", "legend").style("opacity", 1).style("cursor", "pointer").attr("dy", ".35em").attr("font-size", 17).attr("fill", function (d) {
@@ -5417,417 +5337,195 @@ LineChart_LineChart.defaultProps = {
   selectedKpi: null
 };
 /* harmony default export */ var d3charts_LineChart = (Object(ReactFauxDOM["withFauxDOM"])(LineChart_LineChart));
-// EXTERNAL MODULE: ./node_modules/react-tooltip/dist/index.js
-var dist = __webpack_require__("./node_modules/react-tooltip/dist/index.js");
-var dist_default = /*#__PURE__*/__webpack_require__.n(dist);
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Table.js
+function Table_slicedToArray(arr, i) { return Table_arrayWithHoles(arr) || Table_iterableToArrayLimit(arr, i) || Table_nonIterableRest(); }
 
-// EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.min.js
-var react_datepicker_min = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.min.js");
-var react_datepicker_min_default = /*#__PURE__*/__webpack_require__.n(react_datepicker_min);
+function Table_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
 
-// EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.css
-var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.css");
+function Table_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Row.js
-function Row_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Row_typeof = function _typeof(obj) { return typeof obj; }; } else { Row_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Row_typeof(obj); }
-
-function Row_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function Row_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Row_ownKeys(Object(source), true).forEach(function (key) { Row_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Row_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function Row_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function Row_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Row_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Row_createClass(Constructor, protoProps, staticProps) { if (protoProps) Row_defineProperties(Constructor.prototype, protoProps); if (staticProps) Row_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Row_possibleConstructorReturn(self, call) { if (call && (Row_typeof(call) === "object" || typeof call === "function")) { return call; } return Row_assertThisInitialized(self); }
-
-function Row_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Row_getPrototypeOf(o) { Row_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Row_getPrototypeOf(o); }
-
-function Row_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Row_setPrototypeOf(subClass, superClass); }
-
-function Row_setPrototypeOf(o, p) { Row_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Row_setPrototypeOf(o, p); }
+function Table_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 
-var Row_Row =
-/*#__PURE__*/
-function (_Component) {
-  Row_inherits(Row, _Component);
 
-  function Row(props) {
-    var _this;
 
-    Row_classCallCheck(this, Row);
 
-    _this = Row_possibleConstructorReturn(this, Row_getPrototypeOf(Row).call(this, props));
 
-    _this.handleChange = function (e) {
-      var current = Row_objectSpread({}, _this.state.entry);
 
-      current[e.target.name] = e.target.value;
 
-      _this.setState({
-        entry: current
-      });
-    };
-
-    _this.handleDateChange = function (date, prop) {
-      var current = Row_objectSpread({}, _this.state.entry);
-
-      current[prop] = date;
-
-      _this.setState({
-        entry: current
-      });
-    };
-
-    var row = [];
-
-    for (var i in _this.props.header) {
-      var prop = _this.props.header[i].prop;
-      row[prop] = _this.props.data[prop];
-    }
-
-    _this.state = {
-      entry: row
-    };
-    return _this;
+function Table_desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
   }
 
-  Row_createClass(Row, [{
-    key: "stopEditing",
-    value: function stopEditing(e) {
-      var current = this.state.entry;
-      this.props.stopEditingHook(e, this.props.id, current);
-    }
-  }, {
-    key: "renderCellData",
-    value: function renderCellData(y) {
-      if (y.map) return y.map(this.props.data[y.prop]);else return this.props.data[y.prop];
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props = this.props,
-          editIdx = _this$props.editIdx,
-          data = _this$props.data,
-          header = _this$props.header,
-          i = _this$props.i,
-          editable = _this$props.editable,
-          tableId = _this$props.tableId,
-          rowClick = _this$props.rowClick,
-          deletable = _this$props.deletable,
-          formatRow = _this$props.formatRow;
-      var entry = this.state.entry;
-      var currentlyEditing = editIdx === i;
-
-      if (editable) {
-        return react_default.a.createElement("tr", {
-          className: formatRow ? formatRow(data) : "",
-          key: data.id,
-          "data-tip": i,
-          "data-for": "global-".concat(tableId),
-          onClick: function onClick() {
-            if (rowClick) rowClick(data.id);
-          }
-        }, header.map(function (y, k) {
-          if (y.date) return react_default.a.createElement("td", {
-            key: "trc-".concat(k)
-          }, currentlyEditing ? react_default.a.createElement(react_datepicker_min_default.a, {
-            onChange: function onChange(date) {
-              return _this2.handleDateChange(date, y.prop);
-            },
-            selected: entry[y.prop]
-          }) : _this2.props.data[y.prop] != null ? _this2.props.data[y.prop] : "---");
-          return react_default.a.createElement("td", {
-            key: "trc-".concat(k)
-          }, currentlyEditing ? react_default.a.createElement("input", {
-            name: y.prop,
-            onChange: function onChange(e) {
-              return _this2.handleChange(e);
-            },
-            type: "text",
-            placeholder: _this2.props.data[y.prop],
-            value: entry[y.prop],
-            style: {
-              width: "".concat(100, "%")
-            }
-          }) : _this2.props.data[y.prop] != null ? _this2.renderCellData(y) : "---");
-        }), currentlyEditing ? react_default.a.createElement("td", {
-          key: "done",
-          className: "im im-check-mark icon co-primary",
-          style: {
-            display: "table-cell"
-          },
-          onClick: function onClick(e) {
-            return _this2.stopEditing(e);
-          }
-        }) : react_default.a.createElement("td", {
-          style: {
-            display: "table-cell"
-          },
-          className: "im im-edit co-primary icon",
-          key: "edit",
-          onClick: function onClick() {
-            return _this2.props.startEditing(i);
-          }
-        }), deletable && react_default.a.createElement("td", {
-          style: {
-            display: "table-cell"
-          },
-          className: "im im-trash-can co-primary icon",
-          key: "delete",
-          onClick: function onClick() {
-            return _this2.props.handleRemove(data.id);
-          }
-        }));
-      }
-
-      return react_default.a.createElement("tr", {
-        key: data.id,
-        "data-tip": i,
-        "data-for": "global-".concat(tableId),
-        onClick: function onClick() {
-          if (rowClick) rowClick(data.id);
-        }
-      }, header.map(function (y, k) {
-        return react_default.a.createElement("td", {
-          key: "trc-".concat(k)
-        }, _this2.props.data[y.prop] != null ? _this2.renderCellData(y) : "---");
-      }), deletable && react_default.a.createElement("td", {
-        style: {
-          display: "table-cell"
-        },
-        className: "im im-trash-can co-primary icon",
-        key: "delete",
-        onClick: function onClick() {
-          return _this2.props.handleRemove(data.id);
-        }
-      }));
-    }
-  }]);
-
-  return Row;
-}(react["Component"]);
-
-/* harmony default export */ var table_Row = (Row_Row);
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/table/Table.js
-function Table_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Table_typeof = function _typeof(obj) { return typeof obj; }; } else { Table_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Table_typeof(obj); }
-
-function Table_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Table_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Table_createClass(Constructor, protoProps, staticProps) { if (protoProps) Table_defineProperties(Constructor.prototype, protoProps); if (staticProps) Table_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Table_possibleConstructorReturn(self, call) { if (call && (Table_typeof(call) === "object" || typeof call === "function")) { return call; } return Table_assertThisInitialized(self); }
-
-function Table_getPrototypeOf(o) { Table_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Table_getPrototypeOf(o); }
-
-function Table_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Table_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Table_setPrototypeOf(subClass, superClass); }
-
-function Table_setPrototypeOf(o, p) { Table_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Table_setPrototypeOf(o, p); }
-
-// DEPENDACIES
-
-
- // COMPONENTS
-
-
-
-
-var Table_Table =
-/*#__PURE__*/
-function (_Component) {
-  Table_inherits(Table, _Component);
-
-  function Table(props) {
-    var _this;
-
-    Table_classCallCheck(this, Table);
-
-    _this = Table_possibleConstructorReturn(this, Table_getPrototypeOf(Table).call(this, props));
-    _this.id = _this.constructor.generateUID();
-
-    _this.handleRemove = function (id) {
-      var response = confirm("Are you sure you want to delete this entry? \n All related data will be lost.");
-
-      if (response) {
-        _this.setState({
-          editIdx: -1
-        });
-
-        _this.props["delete"](id);
-      }
-    };
-
-    _this.startEditing = function (i) {
-      _this.setState({
-        editIdx: i
-      });
-    };
-
-    _this.handleInsert = function () {
-      _this.props.insert();
-    };
-
-    _this.stopEditingHook = function (e, id, current) {
-      _this.props.update(current, id);
-
-      _this.setState({
-        editIdx: -1
-      });
-    };
-
-    _this.handleRemove = _this.handleRemove.bind(Table_assertThisInitialized(_this));
-    _this.startEditing = _this.startEditing.bind(Table_assertThisInitialized(_this));
-    _this.stopEditingHook = _this.stopEditingHook.bind(Table_assertThisInitialized(_this));
-    _this.handleInsert = _this.handleInsert.bind(Table_assertThisInitialized(_this));
-    _this.state = {
-      isLoading: true,
-      editIdx: -1
-    };
-    return _this;
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
   }
 
-  Table_createClass(Table, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      dist_default.a.rebuild();
+  return 0;
+}
+
+function Table_stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function Table_getSorting(order, orderBy) {
+  return order === "desc" ? function (a, b) {
+    return Table_desc(a, b, orderBy);
+  } : function (a, b) {
+    return -Table_desc(a, b, orderBy);
+  };
+}
+
+function ExtendedTableHead(props) {
+  var classes = props.classes,
+      order = props.order,
+      orderBy = props.orderBy,
+      tableMeta = props.tableMeta;
+  return react_default.a.createElement(TableHead["default"], null, react_default.a.createElement(TableRow["default"], null, tableMeta.map(function (field, i) {
+    return react_default.a.createElement(TableCell["default"], {
+      key: field.name,
+      align: field.numeric ? "right" : "left",
+      className: classes.tableHeadCell,
+      sortDirection: orderBy === field.prop ? order : false
+    }, field.name);
+  })));
+}
+
+ExtendedTableHead.propTypes = {
+  classes: prop_types_default.a.object.isRequired,
+  rowCount: prop_types_default.a.number.isRequired
+};
+var components_Table_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: "100%",
+      maxWidth: "100%"
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      maxWidth: "100%"
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1
+    },
+    tableCell: {
+      fontSize: "0.6rem",
+      paddingLeft: "5px",
+      paddingRight: "5px"
+    },
+    tableHeadCell: {
+      paddingLeft: "5px",
+      paddingRight: "5px"
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
+  };
+});
+function Table_EnhancedTable(props) {
+  var data = props.data,
+      tableMeta = props.tableMeta;
+  var classes = components_Table_useStyles();
 
-      var _this$props = this.props,
-          data = _this$props.data,
-          header = _this$props.header,
-          editable = _this$props.editable,
-          fontSize = _this$props.fontSize,
-          summary = _this$props.summary,
-          appendable = _this$props.appendable,
-          tooltipMessage = _this$props.tooltipMessage,
-          rowClick = _this$props.rowClick,
-          deletable = _this$props.deletable,
-          formatRow = _this$props.formatRow;
-      if (!data) return react_default.a.createElement(LoadingScreen, null);
-      return !data.length ? react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "d-flex flex-row justify-content-start mb-5"
-      }, react_default.a.createElement("p", null, "Nothing to show"), appendable && react_default.a.createElement("i", {
-        className: "im im-plus co-primary icon d-flex ml-3 pb-1",
-        style: {
-          lineHeight: 1.5,
-          verticalAlign: "middle",
-          fontSize: "".concat(1, "rem")
-        },
-        onClick: this.handleInsert
-      }))) : react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("div", {
-        className: "column"
-      }, summary && react_default.a.createElement("p", {
-        className: "d-inline",
-        style: {
-          fontSize: "0.9rem"
-        }
-      }, "Showing ", react_default.a.createElement("strong", null, data.length), " items"), appendable && react_default.a.createElement("i", {
-        className: "im im-plus co-primary icon d-line ml-3 pb-1",
-        style: {
-          lineHeight: 1.5,
-          verticalAlign: "middle",
-          fontSize: "".concat(1, "rem")
-        },
-        onClick: this.handleInsert
-      }), react_default.a.createElement("div", {
-        className: "table-responsive mt-3",
-        style: {
-          fontSize: fontSize
-        }
-      }, react_default.a.createElement("table", {
-        className: "table is-striped table-sm",
-        style: {
-          textAlign: "center"
-        }
-      }, react_default.a.createElement("thead", null, react_default.a.createElement("tr", {
-        key: "thr"
-      }, header.map(function (x, i) {
-        return react_default.a.createElement("th", {
-          key: "thc-".concat(i)
-        }, x.name);
-      }), editable && react_default.a.createElement("th", null, "Edit"), editable && react_default.a.createElement("th", null, "Delete"))), react_default.a.createElement("tbody", null, data.map(function (x, i) {
-        var hover = null;
-        return react_default.a.createElement(react["Fragment"], {
-          key: data[i].id
-        }, react_default.a.createElement(table_Row, {
-          data: x,
-          i: i,
-          id: data[i].id,
-          header: header,
-          startEditing: _this2.startEditing,
-          editable: _this2.props.editable,
-          editIdx: _this2.state.editIdx,
-          stopEditingHook: _this2.stopEditingHook,
-          handleRemove: _this2.handleRemove,
-          hover: hover,
-          tableId: _this2.id,
-          rowClick: rowClick,
-          deletable: deletable,
-          formatRow: formatRow
-        }));
-      }))))), tooltipMessage && react_default.a.createElement(dist_default.a, {
-        id: "global-".concat(this.id),
-        type: "info",
-        place: "left",
-        effect: "solid",
-        getContent: function getContent(dataTip) {
-          if (!dataTip) return;
-          if (!data[dataTip]) return;
-          if (tooltipMessage) return tooltipMessage(dataTip);
-        }
-      }));
+  var _React$useState = react_default.a.useState("asc"),
+      _React$useState2 = Table_slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react_default.a.useState(tableMeta[0].name),
+      _React$useState4 = Table_slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState(0),
+      _React$useState6 = Table_slicedToArray(_React$useState5, 2),
+      page = _React$useState6[0],
+      setPage = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(5),
+      _React$useState8 = Table_slicedToArray(_React$useState7, 2),
+      rowsPerPage = _React$useState8[0],
+      setRowsPerPage = _React$useState8[1];
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react_default.a.createElement(Table["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    "aria-label": "enhanced table",
+    size: "small"
+  }, react_default.a.createElement(ExtendedTableHead, {
+    classes: classes,
+    rowCount: data.length,
+    tableMeta: tableMeta
+  }), react_default.a.createElement(TableBody["default"], null, Table_stableSort(data, Table_getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    return react_default.a.createElement(TableRow["default"], {
+      hover: true,
+      role: "checkbox",
+      tabIndex: -1,
+      key: row.id
+    }, tableMeta.map(function (field, index) {
+      return react_default.a.createElement(TableCell["default"], {
+        align: "left",
+        id: row.id,
+        key: "".concat(index, "-").concat(row.id),
+        className: classes.tableCell
+      }, row[field.prop] === null ? "---" : row[field.prop]);
+    }));
+  }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
+    style: {
+      height: 32.67 * emptyRows
     }
-  }]);
-
-  return Table;
-}(react["Component"]);
-
-Table_Table.propTypes = {
-  data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array.isRequired,
-  "delete": prop_types_default.a.func,
-  update: prop_types_default.a.func,
-  editable: prop_types_default.a.bool,
-  insert: prop_types_default.a.func,
-  fontSize: prop_types_default.a.string,
-  summary: prop_types_default.a.bool,
-  tooltipMessage: prop_types_default.a.func
-};
-
-Table_Table.generateUID = function () {
-  return "_".concat(Math.random().toString(36).substr(2, 9));
-};
-
-Table_Table.defaultProps = {
-  editable: false,
-  update: null,
-  "delete": null,
-  fontSize: "".concat(1, "rem"),
-  summary: true,
-  deletable: false
-};
-/* harmony default export */ var table_Table = (Table_Table);
+  }, react_default.a.createElement(TableCell["default"], {
+    colSpan: 6
+  }))))), react_default.a.createElement(TablePagination["default"], {
+    rowsPerPageOptions: [],
+    component: "div",
+    count: data.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      "aria-label": "previous page"
+    },
+    nextIconButtonProps: {
+      "aria-label": "next page"
+    },
+    onChangePage: handleChangePage
+  }));
+}
 // CONCATENATED MODULE: ./frontend/src/core/components/ui/modal/Modal.js
 function Modal_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Modal_typeof = function _typeof(obj) { return typeof obj; }; } else { Modal_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Modal_typeof(obj); }
 
@@ -5923,6 +5621,23 @@ function (_Component) {
 }(react["Component"]);
 
 /* harmony default export */ var modal_Modal = (Modal_Modal);
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/MenuItem/index.js + 1 modules
+var MenuItem = __webpack_require__("./node_modules/@material-ui/core/esm/MenuItem/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Select/index.js + 5 modules
+var Select = __webpack_require__("./node_modules/@material-ui/core/esm/Select/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Timeline.js
+var Timeline = __webpack_require__("./node_modules/@material-ui/icons/Timeline.js");
+var Timeline_default = /*#__PURE__*/__webpack_require__.n(Timeline);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/LibraryAdd.js
+var LibraryAdd = __webpack_require__("./node_modules/@material-ui/icons/LibraryAdd.js");
+var LibraryAdd_default = /*#__PURE__*/__webpack_require__.n(LibraryAdd);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/styles/esm/index.js + 49 modules
+var styles_esm = __webpack_require__("./node_modules/@material-ui/styles/esm/index.js");
+
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/ChartOptions.js
 function ChartOptions_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { ChartOptions_typeof = function _typeof(obj) { return typeof obj; }; } else { ChartOptions_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return ChartOptions_typeof(obj); }
 
@@ -5943,7 +5658,26 @@ function ChartOptions_inherits(subClass, superClass) { if (typeof superClass !==
 function ChartOptions_setPrototypeOf(o, p) { ChartOptions_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return ChartOptions_setPrototypeOf(o, p); }
 
 // DEPENDANCIES
+ // MATERIAL-UI
 
+
+
+
+
+
+
+
+
+var ChartOptions_styles = function styles(theme) {
+  return {
+    KpiSelect: {
+      width: "200px"
+    },
+    plotButton: {
+      marginLeft: "auto !important"
+    }
+  };
+};
 
 var ChartOptions_ChartOptions =
 /*#__PURE__*/
@@ -5969,8 +5703,6 @@ function (_Component) {
       selectKpi(e.target.value);
       selectSeries(null);
       deselect();
-    }, _this.openKpiNew = function () {
-      $("#newKpi").modal("show");
     }, _temp));
   }
 
@@ -5990,80 +5722,62 @@ function (_Component) {
           kpis = _this$props2.kpis,
           changeMenu = _this$props2.changeMenu,
           menuMode = _this$props2.menuMode,
-          kpi = _this$props2.kpi;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h4", {
-        style: {
-          height: "fit-content",
-          marginBottom: 0,
-          lineHeight: 1.4
-        },
-        className: "mt-auto mb-auto"
-      }, "KPI:", " "), react_default.a.createElement("select", {
-        className: "form-control ml-2 mt-auto mb-auto",
-        style: {
-          width: "".concat(200, "px")
-        },
-        onChange: this.onChange
+          kpi = _this$props2.kpi,
+          classes = _this$props2.classes,
+          handleKpiNewOpen = _this$props2.handleKpiNewOpen;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(Select["default"], {
+        onChange: this.onChange,
+        className: classes.KpiSelect,
+        value: kpi ? kpi.id : ""
       }, kpis.map(function (kpi) {
-        return react_default.a.createElement("option", {
+        return react_default.a.createElement(MenuItem["default"], {
           key: "choice-".concat(kpi.id),
           value: kpi.id
         }, kpi.name);
-      })), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success btn-sm mt-auto ml-3",
-        style: {
-          padding: "1px 8px"
-        },
-        onClick: this.openKpiNew
-      }, react_default.a.createElement("i", {
-        className: "im im-plus",
-        style: {
-          lineHeight: "1.5",
-          fontSize: "20px"
-        }
-      })), kpi && react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-sm mt-auto ml-auto ".concat(menuMode ? "btn-secondary" : "btn-primary"),
+      })), react_default.a.createElement(IconButton["default"], {
+        onClick: handleKpiNewOpen(true)
+      }, react_default.a.createElement(LibraryAdd_default.a, {
+        color: "primary"
+      })), kpi && react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(IconButton["default"], {
+        className: classes.plotButton,
         onClick: function onClick() {
           return changeMenu(false);
         },
-        style: {
-          padding: "1px 8px"
-        },
         disabled: menuMode ? false : true
-      }, react_default.a.createElement("i", {
-        className: "im im-line-chart-up",
-        style: {
-          lineHeight: "1.5",
-          fontSize: "20px"
-        }
-      })), react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-sm mt-auto ml-2 ".concat(menuMode ? "btn-primary" : "btn-secondary"),
+      }, react_default.a.createElement(Timeline_default.a, null)), react_default.a.createElement(IconButton["default"], {
         onClick: function onClick() {
           return changeMenu(true);
         },
-        style: {
-          padding: "1px 8px"
-        },
         disabled: menuMode ? true : false
-      }, react_default.a.createElement("i", {
-        className: "im im-gear",
-        style: {
-          lineHeight: "1.5",
-          fontSize: "20px"
-        }
-      })), " "));
+      }, react_default.a.createElement(Settings_default.a, null))));
     }
   }]);
 
   return ChartOptions;
 }(react["Component"]);
 
-/* harmony default export */ var components_ChartOptions = (ChartOptions_ChartOptions);
+/* harmony default export */ var components_ChartOptions = (Object(styles_esm["withStyles"])(ChartOptions_styles)(ChartOptions_ChartOptions));
 // EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
 var react_color_lib = __webpack_require__("./node_modules/react-color/lib/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/RadioGroup/index.js + 3 modules
+var RadioGroup = __webpack_require__("./node_modules/@material-ui/core/esm/RadioGroup/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Radio/index.js + 4 modules
+var Radio = __webpack_require__("./node_modules/@material-ui/core/esm/Radio/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/FormControlLabel/index.js + 1 modules
+var FormControlLabel = __webpack_require__("./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/FormControl/index.js + 1 modules
+var FormControl = __webpack_require__("./node_modules/@material-ui/core/esm/FormControl/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/InputLabel/index.js + 3 modules
+var InputLabel = __webpack_require__("./node_modules/@material-ui/core/esm/InputLabel/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Save.js
+var Save = __webpack_require__("./node_modules/@material-ui/icons/Save.js");
+var Save_default = /*#__PURE__*/__webpack_require__.n(Save);
 
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesEdit.js
 function SeriesEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesEdit_typeof(obj); }
@@ -6094,7 +5808,35 @@ function SeriesEdit_setPrototypeOf(o, p) { SeriesEdit_setPrototypeOf = Object.se
 
  // ACTIONS
 
+ // MATERIAL-UI
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var SeriesEdit_styles = function styles(theme) {
+  return {
+    textField: {
+      marginBottom: "40px",
+      paddingRight: theme.spacing(2)
+    },
+    formControl: {
+      width: "100%",
+      marginBottom: "20px"
+    }
+  };
+};
 
 var SeriesEdit_SeriesEdit =
 /*#__PURE__*/
@@ -6171,59 +5913,60 @@ function (_Component) {
           name = _this$state2.name,
           color = _this$state2.color,
           plot_type = _this$state2.plot_type;
+      var classes = this.props.classes;
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
         onSubmit: this.onSubmit,
         noValidate: true,
         className: "w-100"
-      }, react_default.a.createElement("div", {
-        className: "row m-0"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "d-flex flex-column"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Name"), react_default.a.createElement("input", {
-        className: "form-control",
+      }, react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 4
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        sm: 6
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Name",
+        className: classes.textField,
         type: "text",
         name: "name",
         onChange: this.onChange,
         placeholder: "...",
         value: name,
         required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group mt-4"
-      }, react_default.a.createElement("label", {
-        htmlFor: "plot_type"
-      }, "Plot Type"), react_default.a.createElement("select", {
-        className: "form-control",
+      }), react_default.a.createElement(FormControl["default"], {
+        className: classes.formControl
+      }, react_default.a.createElement(InputLabel["default"], {
+        id: "kpi_type"
+      }, "Type"), react_default.a.createElement(Select["default"], {
         type: "text",
         name: "plot_type",
         onChange: this.onChange,
         placeholder: "...",
         value: plot_type,
+        fullWidth: true,
         required: true
       }, PLOT_TYPE_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
+        return react_default.a.createElement(MenuItem["default"], {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      }))))), react_default.a.createElement("div", {
-        className: "col-sm-4 m-auto"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
+      })))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        sm: 4
+      }, react_default.a.createElement(FormControl["default"], {
+        className: classes.textField
       }, react_default.a.createElement("label", {
         htmlFor: "color"
       }, "Color"), react_default.a.createElement(react_color_lib["ChromePicker"], {
         color: color,
         onChangeComplete: this.onChangeColor
-      })))), react_default.a.createElement("button", {
+      })))), react_default.a.createElement(Button["default"], {
         type: "submit",
-        className: "btn btn-success" //data-dismiss="modal"
-
-      }, "Save Changes")));
+        color: "primary",
+        variant: "contained",
+        startIcon: react_default.a.createElement(Save_default.a, null)
+      }, "Save Series")));
     }
   }]);
 
@@ -6235,109 +5978,523 @@ SeriesEdit_SeriesEdit.propTypes = {
 };
 /* harmony default export */ var series_SeriesEdit = (Object(es["connect"])(null, {
   updateSeries: dashboards_updateSeries
-})(SeriesEdit_SeriesEdit));
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataTable.js
-function DataTable_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataTable_typeof = function _typeof(obj) { return typeof obj; }; } else { DataTable_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataTable_typeof(obj); }
+})(Object(esm_styles["withStyles"])(SeriesEdit_styles)(SeriesEdit_SeriesEdit)));
+// CONCATENATED MODULE: ./frontend/src/core/components/ui/RemoveConfirmation.js
+function RemoveConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { RemoveConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { RemoveConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return RemoveConfirmation_typeof(obj); }
 
-function DataTable_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function RemoveConfirmation_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function DataTable_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function RemoveConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function DataTable_createClass(Constructor, protoProps, staticProps) { if (protoProps) DataTable_defineProperties(Constructor.prototype, protoProps); if (staticProps) DataTable_defineProperties(Constructor, staticProps); return Constructor; }
+function RemoveConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function DataTable_possibleConstructorReturn(self, call) { if (call && (DataTable_typeof(call) === "object" || typeof call === "function")) { return call; } return DataTable_assertThisInitialized(self); }
+function RemoveConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) RemoveConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) RemoveConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
 
-function DataTable_getPrototypeOf(o) { DataTable_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DataTable_getPrototypeOf(o); }
+function RemoveConfirmation_possibleConstructorReturn(self, call) { if (call && (RemoveConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return RemoveConfirmation_assertThisInitialized(self); }
 
-function DataTable_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function RemoveConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function DataTable_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DataTable_setPrototypeOf(subClass, superClass); }
+function RemoveConfirmation_getPrototypeOf(o) { RemoveConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return RemoveConfirmation_getPrototypeOf(o); }
 
-function DataTable_setPrototypeOf(o, p) { DataTable_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DataTable_setPrototypeOf(o, p); }
+function RemoveConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) RemoveConfirmation_setPrototypeOf(subClass, superClass); }
 
-// DEPENDANCIES
-
-
- // CONFIG
-
- // ACTIONS
-
- // CORE COMPONENTS
+function RemoveConfirmation_setPrototypeOf(o, p) { RemoveConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return RemoveConfirmation_setPrototypeOf(o, p); }
 
 
 
-var DataTable_DatapointTable =
+
+
+
+
+
+
+
+
+
+var RemoveConfirmation_RemoveConfirmation =
 /*#__PURE__*/
 function (_Component) {
-  DataTable_inherits(DatapointTable, _Component);
+  RemoveConfirmation_inherits(RemoveConfirmation, _Component);
 
-  function DatapointTable(props) {
+  function RemoveConfirmation(props) {
     var _this;
 
-    DataTable_classCallCheck(this, DatapointTable);
+    RemoveConfirmation_classCallCheck(this, RemoveConfirmation);
 
-    _this = DataTable_possibleConstructorReturn(this, DataTable_getPrototypeOf(DatapointTable).call(this, props));
+    _this = RemoveConfirmation_possibleConstructorReturn(this, RemoveConfirmation_getPrototypeOf(RemoveConfirmation).call(this, props));
 
-    _this.formatRow = function (datapoint) {
-      var today = new Date();
-      var date = new Date(datapoint.date);
-
-      if (date.getTime() <= today.getTime()) {
-        if (!datapoint.value) return "table-danger";
-      } else if (date.getTime() <= today.setDate(today.getDate() + 5)) return "table-warning";
-
-      return "";
+    _this.handleChange = function (e) {
+      _this.setState(RemoveConfirmation_defineProperty({}, e.target.name, e.target.value));
     };
 
-    _this.update = _this.update.bind(DataTable_assertThisInitialized(_this));
-    _this["delete"] = _this["delete"].bind(DataTable_assertThisInitialized(_this));
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.handleSubmit = function (e) {
+      e.preventDefault();
+      var removeContext = _this.props.removeContext;
+      var response = removeContext.onSubmit(_this.state);
+      if (response) _this.setState({
+        open: false
+      });
+    };
+
+    _this.modalRef = react_default.a.createRef();
+    _this.state = {
+      password: "",
+      exported: false,
+      name: "",
+      open: false
+    };
     return _this;
   }
 
-  DataTable_createClass(DatapointTable, [{
-    key: "delete",
-    value: function _delete(id) {
-      alert("Cannot Delete Datapoint");
-    }
-  }, {
-    key: "update",
-    value: function update(current, id) {
-      this.props.updateDatapoint(current, id);
-    }
-  }, {
+  RemoveConfirmation_createClass(RemoveConfirmation, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          data = _this$props.data,
-          header = _this$props.header,
-          rowClick = _this$props.rowClick;
-      return react_default.a.createElement(table_Table //editable
-      , {
-        data: data,
-        header: header,
-        update: this.update //delete={this.delete}
-        //deletable
-        ,
-        rowClick: rowClick,
-        formatRow: this.formatRow
-      });
+      var removeContext = this.props.removeContext;
+      if (!removeContext) return react_default.a.createElement(react_default.a.Fragment, null);
+      var type = removeContext.type,
+          item = removeContext.item;
+      var _this$state = this.state,
+          name = _this$state.name,
+          open = _this$state.open;
+      return react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Are You Sure?"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(DialogContentText["default"], null, "This action cannot be undone. This will permanetly remove the", " ", react_default.a.createElement("span", {
+        style: {
+          color: "#3F51B5",
+          fontWeight: "bold"
+        }
+      }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement(TextField["default"], {
+        autoFocus: true,
+        margin: "dense",
+        id: "name",
+        label: "Confirm name",
+        type: "text",
+        fullWidth: true,
+        name: "name",
+        onChange: this.handleChange,
+        value: name
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleSubmit,
+        color: "primary"
+      }, "Confirm")));
     }
   }]);
 
-  return DatapointTable;
+  return RemoveConfirmation;
 }(react["Component"]);
 
-DataTable_DatapointTable.propTypes = {
-  data: prop_types_default.a.array.isRequired,
-  header: prop_types_default.a.array
+RemoveConfirmation_RemoveConfirmation.propTypes = {
+  removeContext: prop_types_default.a.object
 };
-DataTable_DatapointTable.defaultProps = {
-  header: DATAPOINT_TABLE_HEADERS
+/* harmony default export */ var ui_RemoveConfirmation = (RemoveConfirmation_RemoveConfirmation);
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Paper/index.js + 1 modules
+var Paper = __webpack_require__("./node_modules/@material-ui/core/esm/Paper/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Switch/index.js + 1 modules
+var Switch = __webpack_require__("./node_modules/@material-ui/core/esm/Switch/index.js");
+
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataTable.js
+function DataTable_slicedToArray(arr, i) { return DataTable_arrayWithHoles(arr) || DataTable_iterableToArrayLimit(arr, i) || DataTable_nonIterableRest(); }
+
+function DataTable_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function DataTable_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function DataTable_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function DataTable_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function DataTable_desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function DataTable_stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function DataTable_getSorting(order, orderBy) {
+  return order === "desc" ? function (a, b) {
+    return DataTable_desc(a, b, orderBy);
+  } : function (a, b) {
+    return -DataTable_desc(a, b, orderBy);
+  };
+}
+
+function DataTable_EnhancedTableHead(props) {
+  var classes = props.classes,
+      onSelectAllClick = props.onSelectAllClick,
+      order = props.order,
+      orderBy = props.orderBy,
+      numSelected = props.numSelected,
+      rowCount = props.rowCount,
+      onRequestSort = props.onRequestSort,
+      tableMeta = props.tableMeta;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react_default.a.createElement(TableHead["default"], null, react_default.a.createElement(TableRow["default"], null, tableMeta.map(function (field, i) {
+    return react_default.a.createElement(TableCell["default"], {
+      key: field.name,
+      align: field.numeric ? "right" : "left",
+      className: classes.tableHeadCell,
+      sortDirection: orderBy === field.prop ? order : false
+    }, react_default.a.createElement(TableSortLabel["default"], {
+      active: orderBy === field.prop,
+      direction: order,
+      onClick: createSortHandler(field.prop)
+    }, field.name, orderBy === field.prop ? react_default.a.createElement("span", {
+      className: classes.visuallyHidden
+    }, order === "desc" ? "sorted descending" : "sorted ascending") : null));
+  })));
+}
+
+DataTable_EnhancedTableHead.propTypes = {
+  classes: prop_types_default.a.object.isRequired,
+  numSelected: prop_types_default.a.number.isRequired,
+  onRequestSort: prop_types_default.a.func.isRequired,
+  onSelectAllClick: prop_types_default.a.func.isRequired,
+  order: prop_types_default.a.oneOf(["asc", "desc"]).isRequired,
+  orderBy: prop_types_default.a.string.isRequired,
+  rowCount: prop_types_default.a.number.isRequired
 };
-/* harmony default export */ var DataTable = (Object(es["connect"])(null, {
-  updateDatapoint: dashboards_updateDatapoint,
-  deleteDatapoint: dashboards_deleteDatapoint
-})(DataTable_DatapointTable));
+var DataTable_useToolbarStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1)
+    },
+    highlight: theme.palette.type === "light" ? {
+      color: theme.palette.secondary.main,
+      backgroundColor: Object(esm_styles["lighten"])(theme.palette.secondary.light, 0.85)
+    } : {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    title: {
+      flex: "1 1 100%"
+    }
+  };
+});
+
+var DataTable_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
+  var classes = DataTable_useToolbarStyles();
+  var numSelected = props.numSelected,
+      title = props.title,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      data = props.data;
+
+  var handleClickEdit = function handleClickEdit() {
+    var onClickEdit = props.onClickEdit,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickEdit(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickDelete = function handleClickDelete() {
+    var onClickDelete = props.onClickDelete,
+        selected = props.selected,
+        setSelected = props.setSelected;
+    onClickDelete(selected);
+    setSelected([]);
+  };
+
+  return react_default.a.createElement(Toolbar["default"], {
+    className: Object(clsx_m["default"])(classes.root, DataTable_defineProperty({}, classes.highlight, numSelected > 0))
+  }, numSelected > 0 ? react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    color: "inherit",
+    variant: "subtitle1"
+  }, numSelected, " selected") : react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    variant: "h6",
+    id: "tableTitle"
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickEdit && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
+    title: "Edit"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickEdit,
+    "aria-label": "edit"
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(Tooltip["default"], {
+    title: "Delete"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickDelete,
+    "aria-label": "delete"
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(Tooltip["default"], {
+    title: "Add entry"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "add",
+    onClick: onClickAdd
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(Tooltip["default"], {
+    title: "Filter list"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "filter list"
+  }, react_default.a.createElement(FilterList_default.a, null)))));
+};
+
+DataTable_EnhancedTableToolbar.propTypes = {
+  numSelected: prop_types_default.a.number.isRequired
+};
+var DataTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: "100%",
+      marginTop: theme.spacing(1),
+      maxWidth: "100%"
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      maxWidth: "100%"
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1
+    },
+    tableCell: {
+      fontSize: "1rem",
+      paddingLeft: "5px",
+      paddingRight: "5px"
+    },
+    tableHeadCell: {
+      paddingLeft: "5px",
+      paddingRight: "5px"
+    },
+    tableRow: {
+      cursor: "pointer"
+    }
+  };
+});
+function DataTable_EnhancedTable(props) {
+  var title = props.title,
+      data = props.data,
+      tableMeta = props.tableMeta,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      onRowClick = props.onRowClick;
+  var classes = DataTable_useStyles();
+
+  var _React$useState = react_default.a.useState("asc"),
+      _React$useState2 = DataTable_slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react_default.a.useState(tableMeta[0].name),
+      _React$useState4 = DataTable_slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState([]),
+      _React$useState6 = DataTable_slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(0),
+      _React$useState8 = DataTable_slicedToArray(_React$useState7, 2),
+      page = _React$useState8[0],
+      setPage = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(false),
+      _React$useState10 = DataTable_slicedToArray(_React$useState9, 2),
+      dense = _React$useState10[0],
+      setDense = _React$useState10[1];
+
+  var _React$useState11 = react_default.a.useState(5),
+      _React$useState12 = DataTable_slicedToArray(_React$useState11, 2),
+      rowsPerPage = _React$useState12[0],
+      setRowsPerPage = _React$useState12[1];
+
+  var handleRequestSort = function handleRequestSort(event, property) {
+    var isDesc = orderBy === property && order === "desc";
+    setOrder(isDesc ? "asc" : "desc");
+    setOrderBy(property);
+  };
+
+  var handleSelectAllClick = function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      var newSelecteds = data.map(function (entry) {
+        return entry.id;
+      });
+      setSelected(newSelecteds);
+      return;
+    }
+
+    setSelected([]);
+  };
+
+  var setSelectedHook = function setSelectedHook(newSelected) {
+    setSelected(newSelected);
+  };
+
+  var handleClick = function handleClick(event, id) {
+    onRowClick(getItem(id, data, "id"));
+  };
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var handleChangeRowsPerPage = function handleChangeRowsPerPage(event) {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  var isSelected = function isSelected(id) {
+    return selected.indexOf(id) !== -1;
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement(DataTable_EnhancedTableToolbar, {
+    title: title,
+    numSelected: selected.length,
+    onClickAdd: onClickAdd,
+    onClickDelete: onClickDelete,
+    onClickEdit: onClickEdit,
+    selected: selected,
+    setSelected: setSelectedHook,
+    data: data
+  }), react_default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react_default.a.createElement(Table["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    "aria-label": "enhanced table"
+  }, react_default.a.createElement(DataTable_EnhancedTableHead, {
+    classes: classes,
+    numSelected: selected.length,
+    order: order,
+    orderBy: orderBy,
+    onSelectAllClick: handleSelectAllClick,
+    onRequestSort: handleRequestSort,
+    rowCount: data.length,
+    tableMeta: tableMeta
+  }), react_default.a.createElement(TableBody["default"], null, DataTable_stableSort(data, DataTable_getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    var isItemSelected = isSelected(row.id);
+    var labelId = "enhanced-table-checkbox-".concat(index);
+    return react_default.a.createElement(TableRow["default"], {
+      hover: true,
+      onClick: function onClick(event) {
+        return handleClick(event, row.id);
+      },
+      role: "checkbox",
+      "aria-checked": isItemSelected,
+      tabIndex: -1,
+      key: row.id,
+      className: classes.tableRow,
+      selected: isItemSelected
+    }, tableMeta.map(function (field, index) {
+      return react_default.a.createElement(TableCell["default"], {
+        align: "left",
+        id: row.id,
+        className: classes.tableCell,
+        key: "".concat(index, "-").concat(row.id)
+      }, row[field.prop] === null ? "---" : row[field.prop]);
+    }));
+  }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
+    style: {
+      height: 55.33 * emptyRows
+    }
+  }, react_default.a.createElement(TableCell["default"], {
+    colSpan: 6
+  }))))), react_default.a.createElement(TablePagination["default"], {
+    rowsPerPageOptions: [],
+    component: "div",
+    count: data.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      "aria-label": "previous page"
+    },
+    nextIconButtonProps: {
+      "aria-label": "next page"
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  }));
+}
+// EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.min.js
+var react_datepicker_min = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.min.js");
+
+// EXTERNAL MODULE: ./node_modules/react-datepicker/dist/react-datepicker.css
+var react_datepicker = __webpack_require__("./node_modules/react-datepicker/dist/react-datepicker.css");
+
 // EXTERNAL MODULE: ./node_modules/date-fns/esm/parseISO/index.js
 var parseISO = __webpack_require__("./node_modules/date-fns/esm/parseISO/index.js");
 
@@ -6346,12 +6503,6 @@ var esm_format = __webpack_require__("./node_modules/date-fns/esm/format/index.j
 
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataForm.js
 function DataForm_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataForm_typeof = function _typeof(obj) { return typeof obj; }; } else { DataForm_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataForm_typeof(obj); }
-
-function DataForm_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function DataForm_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { DataForm_ownKeys(Object(source), true).forEach(function (key) { DataForm_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { DataForm_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function DataForm_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function DataForm_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -6378,6 +6529,20 @@ function DataForm_setPrototypeOf(o, p) { DataForm_setPrototypeOf = Object.setPro
 
 
 
+
+
+
+
+
+var DataForm_styles = function styles(theme) {
+  return {
+    textField: {
+      marginBottom: theme.spacing(5),
+      width: "100%"
+    }
+  };
+};
+
 var DataForm_DataForm =
 /*#__PURE__*/
 function (_Component) {
@@ -6394,106 +6559,72 @@ function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return DataForm_possibleConstructorReturn(_this, (_temp = _this = DataForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DataForm_getPrototypeOf(DataForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      value: "",
-      target: "",
-      date: new Date()
-    }, _this.update = function (payload) {
-      _this.setState(DataForm_objectSpread({}, payload));
-    }, _this.onSubmit = function (e) {
-      e.preventDefault();
-      var _this$props = _this.props,
-          updateDatapoint = _this$props.updateDatapoint,
-          series = _this$props.series;
-      var _this$state = _this.state,
-          value = _this$state.value,
-          target = _this$state.target,
-          date = _this$state.date,
-          id = _this$state.id;
-      var datapoint = {
-        value: value,
-        target: target,
-        series: series,
-        date: Object(esm_format["default"])(date, "yyyy-MM-dd")
-      };
-      updateDatapoint(datapoint, id);
-      $("#dataOptions").modal("hide");
-    }, _this.onChange = function (e) {
-      _this.setState(DataForm_defineProperty({}, e.target.name, e.target.value));
-    }, _this.onDateChange = function (date) {
-      _this.setState({
-        date: date
+    return DataForm_possibleConstructorReturn(_this, (_temp = _this = DataForm_possibleConstructorReturn(this, (_getPrototypeOf2 = DataForm_getPrototypeOf(DataForm)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.handleDateChange = function (date) {
+      var onChange = _this.props.onChange;
+      onChange({
+        target: {
+          name: "date",
+          value: Object(esm_format["default"])(date, "yyyy-MM-dd")
+        }
       });
     }, _temp));
   }
 
   DataForm_createClass(DataForm, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var datapoint = this.props.datapoint;
-
-      if (prevProps.datapoint !== datapoint) {
-        this.update(DataForm_objectSpread({}, datapoint, {
-          date: datapoint.date ? Object(parseISO["default"])(datapoint.date) : new Date()
-        }));
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var _this$state2 = this.state,
-          value = _this$state2.value,
-          target = _this$state2.target,
-          date = _this$state2.date;
+      var _this$props$datapoint = this.props.datapoint,
+          value = _this$props$datapoint.value,
+          target = _this$props$datapoint.target,
+          date = _this$props$datapoint.date;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          onChange = _this$props.onChange;
+      var parts = date.split("-"); // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+      // January - 0, February - 1, etc.
+
+      var newDate = new Date(parts[0], parts[1] - 1, parts[2]);
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
         onSubmit: this.onSubmit,
         noValidate: true
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Value"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "value",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: value != null ? value : ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "plot_type"
-      }, "Target"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "target",
-        onChange: this.onChange,
-        placeholder: "...",
-        value: target != null ? target : ""
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "date",
-        className: "d-block"
-      }, "Date"), react_default.a.createElement(react_datepicker_min_default.a, {
-        className: "form-control",
+      }, react_default.a.createElement(TextField["default"], {
+        required: true,
+        fullWidth: true,
+        id: "value",
+        label: "Value",
+        className: classes.textField,
+        onChange: onChange,
+        value: value != null ? value : "",
+        name: "value"
+      }), react_default.a.createElement(TextField["default"], {
+        required: true,
+        fullWidth: true,
+        id: "target",
+        label: "Target",
+        className: classes.textField,
+        onChange: onChange,
+        value: target != null ? target : "",
+        name: "target"
+      }), react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+        utils: index_esm["default"]
+      }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+        disableToolbar: true,
+        variant: "inline",
+        format: "yyyy-MM-dd",
+        margin: "normal",
+        id: "date",
+        className: classes.textField,
+        label: "Date",
+        value: newDate,
         onChange: function onChange(date) {
-          return _this2.onDateChange(date);
+          _this2.handleDateChange(date);
         },
-        selected: date,
-        dateFormat: "yyyy-MM-dd"
-      })), react_default.a.createElement("div", {
-        className: "modal-footer"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "Close"), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-primary"
-      }, "Update Datapoint"))));
+        KeyboardButtonProps: {
+          "aria-label": "change date"
+        }
+      }))));
     }
   }]);
 
@@ -6511,7 +6642,166 @@ DataForm_DataForm.defaultProps = {
 };
 /* harmony default export */ var datapoints_DataForm = (Object(es["connect"])(null, {
   updateDatapoint: dashboards_updateDatapoint
-})(DataForm_DataForm));
+})(Object(esm_styles["withStyles"])(DataForm_styles)(DataForm_DataForm)));
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/datapoints/DataView.js
+function DataView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { DataView_typeof = function _typeof(obj) { return typeof obj; }; } else { DataView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return DataView_typeof(obj); }
+
+function DataView_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function DataView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { DataView_ownKeys(Object(source), true).forEach(function (key) { DataView_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { DataView_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function DataView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function DataView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function DataView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function DataView_createClass(Constructor, protoProps, staticProps) { if (protoProps) DataView_defineProperties(Constructor.prototype, protoProps); if (staticProps) DataView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function DataView_possibleConstructorReturn(self, call) { if (call && (DataView_typeof(call) === "object" || typeof call === "function")) { return call; } return DataView_assertThisInitialized(self); }
+
+function DataView_getPrototypeOf(o) { DataView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return DataView_getPrototypeOf(o); }
+
+function DataView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function DataView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) DataView_setPrototypeOf(subClass, superClass); }
+
+function DataView_setPrototypeOf(o, p) { DataView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return DataView_setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var DataView_DatapointView =
+/*#__PURE__*/
+function (_Component) {
+  DataView_inherits(DatapointView, _Component);
+
+  function DatapointView(props) {
+    var _this;
+
+    DataView_classCallCheck(this, DatapointView);
+
+    _this = DataView_possibleConstructorReturn(this, DataView_getPrototypeOf(DatapointView).call(this, props));
+
+    _this.rowClick = function (datapoint) {
+      var open = _this.state.open;
+      if (open) return;
+
+      _this.setState({
+        open: true,
+        formState: DataView_objectSpread({}, datapoint)
+      });
+    };
+
+    _this.edit = function (selection) {
+      _this.setState({
+        open: true,
+        formState: selection
+      });
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.onChange = function (e) {
+      _this.setState({
+        formState: DataView_objectSpread({}, _this.state.formState, DataView_defineProperty({}, e.target.name, e.target.value))
+      });
+    };
+
+    _this.handleUpdate = function (e) {
+      _this.setState({
+        open: false
+      });
+
+      var updateDatapoint = _this.props.updateDatapoint;
+      var formState = _this.state.formState;
+
+      var datapoint = DataView_objectSpread({}, formState);
+
+      updateDatapoint(datapoint, datapoint.id);
+    };
+
+    _this.update = _this.update.bind(DataView_assertThisInitialized(_this));
+    _this.state = {
+      open: false,
+      formState: {}
+    };
+    return _this;
+  }
+
+  DataView_createClass(DatapointView, [{
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          open = _this$state.open,
+          formState = _this$state.formState;
+      var series = this.props.series;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(DataTable_EnhancedTable, {
+        title: "Data",
+        data: series.entries,
+        tableMeta: DATAPOINT_TABLE_HEADERS,
+        onRowClick: this.rowClick
+      }), react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Edit Datapoint"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(datapoints_DataForm, {
+        datapoint: formState,
+        onChange: this.onChange
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleUpdate,
+        color: "primary"
+      }, "Confirm"))));
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      var updateDatapoint = this.props.updateDatapoint;
+      updateDatapoint(current, id);
+    }
+  }]);
+
+  return DatapointView;
+}(react["Component"]);
+
+DataView_DatapointView.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var DataView = (Object(es["connect"])(null, {
+  updateDatapoint: dashboards_updateDatapoint
+})(DataView_DatapointView));
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Breadcrumbs/index.js + 4 modules
+var Breadcrumbs = __webpack_require__("./node_modules/@material-ui/core/esm/Breadcrumbs/index.js");
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/KeyboardBackspace.js
+var KeyboardBackspace = __webpack_require__("./node_modules/@material-ui/icons/KeyboardBackspace.js");
+var KeyboardBackspace_default = /*#__PURE__*/__webpack_require__.n(KeyboardBackspace);
+
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesView.js
 function SeriesView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesView_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesView_typeof(obj); }
 
@@ -6544,6 +6834,25 @@ function SeriesView_setPrototypeOf(o, p) { SeriesView_setPrototypeOf = Object.se
 
 
 
+
+
+
+
+
+
+var SeriesView_styles = function styles(theme) {
+  return {
+    heading: {
+      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(4)
+    },
+    breadcrumbs: {
+      paddingTop: "12px",
+      paddingBottom: "12px"
+    }
+  };
+};
+
 var SeriesView_SeriesView =
 /*#__PURE__*/
 function (_Component) {
@@ -6560,7 +6869,7 @@ function (_Component) {
     };
 
     _this.setRemove = function () {
-      $("#removeConfirmation").modal("show");
+      _this.RemoveConfirmation.current.handleToggleOpen(true)();
     };
 
     _this.onSubmitRemove = function (state) {
@@ -6574,36 +6883,20 @@ function (_Component) {
       } else return false;
     };
 
-    _this.selectDatapoint = function (id) {
-      _this.setState({
-        selectedDatapoint: id
-      });
-
-      $("#dataOptions").modal("show");
-    };
-
     _this.onSubmitRemove = _this.onSubmitRemove.bind(SeriesView_assertThisInitialized(_this));
+    _this.RemoveConfirmation = react_default.a.createRef();
     return _this;
   }
 
   SeriesView_createClass(SeriesView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props2 = this.props,
-          setRemove = _this$props2.setRemove,
-          series = _this$props2.series;
-      setRemove({
-        type: "series",
-        item: series,
-        onSubmit: this.onSubmitRemove
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props3 = this.props,
-          series = _this$props3.series,
-          onBack = _this$props3.onBack;
+      var _this$props2 = this.props,
+          series = _this$props2.series,
+          onBack = _this$props2.onBack,
+          kpi = _this$props2.kpi,
+          pillarId = _this$props2.pillarId,
+          classes = _this$props2.classes;
       var selectedDatapoint = this.state.selectedDatapoint;
       if (!series) return react_default.a.createElement(react_default.a.Fragment, null);
       var datapoint = {};
@@ -6612,43 +6905,40 @@ function (_Component) {
         datapoint = getItem(selectedDatapoint, series.entries, "id");
       }
 
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("button", {
-        className: "mb-4 btn btn-sm btn-primary",
-        onClick: onBack,
-        style: {
-          padding: "1px 8px",
-          position: "fixed",
-          zIndex: 1000
-        }
-      }, react_default.a.createElement("i", {
-        className: "im im-arrow-left icon",
-        style: {
-          lineHeight: 1.5,
-          fontSize: "20px"
-        }
-      })), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement(series_SeriesEdit, {
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(Breadcrumbs["default"], {
+        "aria-label": "breadcrumb"
+      }, react_default.a.createElement(Typography["default"], {
+        color: "inherit",
+        href: "/"
+      }, pillarId), react_default.a.createElement(Typography["default"], {
+        color: "inherit",
+        href: "/getting-started/installation/"
+      }, kpi.name), react_default.a.createElement(Typography["default"], null, series.name), react_default.a.createElement(IconButton["default"], {
+        onClick: onBack
+      }, react_default.a.createElement(KeyboardBackspace_default.a, null))), react_default.a.createElement(Typography["default"], {
+        className: classes.heading,
+        variant: "h4"
+      }, "Properties"), react_default.a.createElement(series_SeriesEdit, {
         series: series
-      })), react_default.a.createElement("hr", null), react_default.a.createElement("h3", {
-        className: "mt-4"
-      }, "Data"), react_default.a.createElement(DataTable, {
-        data: series.entries,
-        rowClick: this.selectDatapoint
-      }), react_default.a.createElement(modal_Modal, {
-        title: "Update Data",
-        id: "dataOptions",
-        overflow: "visible"
-      }, react_default.a.createElement(datapoints_DataForm, {
-        datapoint: datapoint,
-        series: series.id
-      })), react_default.a.createElement("div", {
-        className: "d-flex justify-content-end"
-      }, react_default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-danger",
+      }), react_default.a.createElement("hr", null), react_default.a.createElement(DataView, {
+        series: series
+      }), react_default.a.createElement("div", {
+        style: {
+          "float": "right"
+        }
+      }, react_default.a.createElement(Button["default"], {
+        color: "secondary",
+        variant: "contained",
+        startIcon: react_default.a.createElement(Delete_default.a, null),
         onClick: this.setRemove
-      }, "Delete Series")));
+      }, "Delete Series")), react_default.a.createElement(ui_RemoveConfirmation, {
+        removeContext: {
+          item: series,
+          type: "series",
+          onSubmit: this.onSubmitRemove
+        },
+        ref: this.RemoveConfirmation
+      }));
     }
   }]);
 
@@ -6657,7 +6947,11 @@ function (_Component) {
 
 /* harmony default export */ var series_SeriesView = (Object(es["connect"])(null, {
   deleteSeries: dashboards_deleteSeries
-})(SeriesView_SeriesView));
+})(Object(esm_styles["withStyles"])(SeriesView_styles)(SeriesView_SeriesView)));
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Palette.js
+var Palette = __webpack_require__("./node_modules/@material-ui/icons/Palette.js");
+var Palette_default = /*#__PURE__*/__webpack_require__.n(Palette);
+
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/series/SeriesCard.js
 function SeriesCard_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { SeriesCard_typeof = function _typeof(obj) { return typeof obj; }; } else { SeriesCard_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return SeriesCard_typeof(obj); }
 
@@ -6680,6 +6974,12 @@ function SeriesCard_setPrototypeOf(o, p) { SeriesCard_setPrototypeOf = Object.se
 // DEPENDANCIES
 
 
+
+
+
+
+
+
 var SeriesCard_SeriesCard =
 /*#__PURE__*/
 function (_Component) {
@@ -6697,30 +6997,16 @@ function (_Component) {
       var _this$props = this.props,
           series = _this$props.series,
           _onClick = _this$props.onClick;
-      return react_default.a.createElement("div", {
-        className: "card m-3 card-hover",
-        onClick: function onClick() {
-          return _onClick(series.id);
-        },
-        "data-toggle": "modal",
-        "data-target": "#manageKpi"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement("div", {
-        className: "card-title",
-        style: {
-          fontSize: "1.25rem",
-          fontWeight: "bold"
-        }
-      }, series.name, " "), react_default.a.createElement("i", {
+      return react_default.a.createElement(Card["default"], null, react_default.a.createElement(CardContent["default"], null, react_default.a.createElement(Typography["default"], null, series.name, react_default.a.createElement(Palette_default.a, {
         style: {
           color: series.color,
-          textAlign: "right"
-        },
-        className: "im im-drop ml-auto"
-      }))));
+          "float": "right"
+        }
+      }))), react_default.a.createElement(CardActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: function onClick() {
+          return _onClick(series.id);
+        }
+      }, "EDIT")));
     }
   }]);
 
@@ -6804,6 +7090,8 @@ function SeriesList_setPrototypeOf(o, p) { SeriesList_setPrototypeOf = Object.se
 
 
 
+ // REDUX
+
  // CORE COMPONENTS
 
 
@@ -6844,18 +7132,21 @@ function (_Component) {
           series = _this$props2.series,
           onClick = _this$props2.onClick;
       if (!series) return react_default.a.createElement("div", null);
-      return react_default.a.createElement("div", {
-        className: "row"
+      return react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 3
       }, series.map(function (series) {
-        return react_default.a.createElement("div", {
+        return react_default.a.createElement(Grid["default"], {
           key: series.id,
-          className: "col-sm-3"
+          item: true,
+          lg: 3
         }, react_default.a.createElement(series_SeriesCard, {
           onClick: onClick,
           series: series
         }));
-      }), react_default.a.createElement("div", {
-        className: "col-sm-3"
+      }), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 3
       }, react_default.a.createElement(ui_NewCard, {
         handleClick: this.onNewSeriesClick,
         text: "Series"
@@ -6897,7 +7188,7 @@ function SliderProps_defineProperty(obj, key, value) { if (key in obj) { Object.
 var railOuterStyle = {
   position: "absolute",
   width: "100%",
-  height: 42,
+  height: 6,
   transform: "translate(0%, -50%)",
   borderRadius: 7,
   cursor: "pointer" // border: '1px solid white',
@@ -6906,7 +7197,7 @@ var railOuterStyle = {
 var railInnerStyle = {
   position: "absolute",
   width: "100%",
-  height: 14,
+  height: 6,
   transform: "translate(0%, -50%)",
   borderRadius: 7,
   pointerEvents: "none",
@@ -7013,8 +7304,8 @@ function KeyboardHandle(_ref3) {
       position: "absolute",
       transform: "translate(-50%, -50%)",
       zIndex: 2,
-      width: 24,
-      height: 24,
+      width: 16,
+      height: 16,
       borderRadius: "50%",
       boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.3)",
       backgroundColor: disabled ? "#666" : "#218838"
@@ -7048,7 +7339,7 @@ function Track(_ref4) {
     style: {
       position: "absolute",
       transform: "translate(0%, -50%)",
-      height: 14,
+      height: 6,
       zIndex: 1,
       backgroundColor: disabled ? "#999" : color,
       borderRadius: 7,
@@ -7184,10 +7475,10 @@ function (_Component) {
           values = _this$state.values,
           update = _this$state.update;
       return react_default.a.createElement("div", {
-        className: "mt-5",
         style: {
           height: 70,
-          width: "95%"
+          width: "95%",
+          paddingLeft: "10px"
         }
       }, react_default.a.createElement(react_compound_slider_es["Slider"], {
         mode: 1,
@@ -7410,10 +7701,10 @@ function (_Component) {
           target = _this$props3.target,
           domain = _this$props3.domain;
       return react_default.a.createElement("div", {
-        className: "mt-5",
         style: {
           height: 70,
-          width: "95%"
+          width: "95%",
+          paddingLeft: "10px"
         }
       }, react_default.a.createElement(react_compound_slider_es["Slider"], {
         mode: 2,
@@ -7584,10 +7875,39 @@ function KpiForm_setPrototypeOf(o, p) { KpiForm_setPrototypeOf = Object.setProto
  // CORE COMPONENTS
 
 
+
+
+
+
+
+
+
+
+
+
+
  // CONFIG
 
 
 
+
+var KpiForm_styles = function styles(theme) {
+  return {
+    textField: {
+      marginBottom: "20px",
+      paddingRight: theme.spacing(2)
+    },
+    formControl: {
+      width: "100%",
+      marginBottom: "20px"
+    },
+    heading: {
+      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(4),
+      width: "100%"
+    }
+  };
+};
 
 var KpiForm_KpiForm =
 /*#__PURE__*/
@@ -7628,7 +7948,7 @@ function (_Component) {
       });
     };
 
-    _this.onKpiTypeChange = function (e) {
+    _this.onKpiTypeChange = function (e, selection) {
       var onChange = _this.props.onChange;
       var _this$props$values = _this.props.values,
           kpi_type = _this$props$values.kpi_type,
@@ -7636,7 +7956,12 @@ function (_Component) {
           warning_margin = _this$props$values.warning_margin,
           danger_deviation = _this$props$values.danger_deviation;
       if (kpi_type === 0) _this.updateSlider([0, safe_deviation, danger_deviation, 100]);else if (kpi_type === 1) _this.updateSlider([0, warning_margin, 100]);
-      onChange(e);
+      onChange({
+        target: {
+          name: "kpi_type",
+          value: selection.props.value
+        }
+      });
     };
 
     _this.onGlobalTargetChange = function (e) {
@@ -7645,10 +7970,10 @@ function (_Component) {
       if (isNaN(target)) return;else onChange(e);
     };
 
-    _this.onThresholdTypeChange = function (e) {
+    _this.onThresholdTypeChange = function (e, value) {
       var onChange = _this.props.onChange;
 
-      if (e.target.id === "greater" && e.target.checked) {
+      if (value == 0) {
         _this.updateSlider([-50, 0, 100]);
 
         onChange({
@@ -7665,7 +7990,7 @@ function (_Component) {
         });
       }
 
-      if (e.target.id === "less" && e.target.checked) {
+      if (value == 1) {
         _this.updateSlider([0, 50, 100]);
 
         onChange({
@@ -7683,6 +8008,145 @@ function (_Component) {
       }
     };
 
+    _this.deviationOptions = function () {
+      var _this$props$values2 = _this.props.values,
+          safe_deviation = _this$props$values2.safe_deviation,
+          danger_deviation = _this$props$values2.danger_deviation;
+      var classes = _this.props.classes;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 12
+      }, react_default.a.createElement(DeviationSlider, {
+        disabledRail: true,
+        onUpdate: _this.onSliderUpdate,
+        ref: _this.slider,
+        danger_deviation: danger_deviation,
+        safe_deviation: safe_deviation
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        id: "safe_deviation",
+        label: "Safe Limit",
+        className: classes.textField,
+        disabled: true,
+        value: safe_deviation || "",
+        name: "safe_deviation"
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        id: "danger_deviation",
+        label: "Danger Limit",
+        className: classes.textField,
+        disabled: true,
+        value: safe_deviation || "",
+        name: "danger_deviation"
+      })));
+    };
+
+    _this.winLoseOptions = function () {
+      var _this$props$values3 = _this.props.values,
+          threshold_type = _this$props$values3.threshold_type,
+          global_target = _this$props$values3.global_target;
+      var classes = _this.props.classes;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 2
+      }, react_default.a.createElement(RadioGroup["default"], {
+        "aria-label": "threshold_type",
+        name: "threshold_type",
+        value: threshold_type,
+        onChange: _this.onThresholdTypeChange
+      }, react_default.a.createElement(FormControlLabel["default"], {
+        value: 0,
+        control: react_default.a.createElement(Radio["default"], null),
+        label: "Greater Than"
+      }), react_default.a.createElement(FormControlLabel["default"], {
+        value: 1,
+        control: react_default.a.createElement(Radio["default"], null),
+        label: "Less Than"
+      }))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        id: "global_target",
+        label: "Target",
+        className: classes.textField,
+        onChange: _this.onGlobalTargetChange,
+        value: global_target || "",
+        name: "global_target",
+        type: "text",
+        placeholder: "..."
+      })));
+    };
+
+    _this.thresholdOptions = function () {
+      var _this$props$values4 = _this.props.values,
+          warning_margin = _this$props$values4.warning_margin,
+          threshold_type = _this$props$values4.threshold_type,
+          global_target = _this$props$values4.global_target;
+      var _this$props = _this.props,
+          onChange = _this$props.onChange,
+          classes = _this$props.classes;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 11
+      }, react_default.a.createElement(ThresholdSlider, {
+        threshold_type: threshold_type,
+        disabledRail: true,
+        onUpdate: _this.onThresholdSliderUpdate,
+        ref: _this.slider,
+        warning_margin: warning_margin,
+        target: global_target,
+        domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 2
+      }, react_default.a.createElement(RadioGroup["default"], {
+        "aria-label": "threshold_type",
+        name: "threshold_type",
+        value: threshold_type,
+        onChange: _this.onThresholdTypeChange
+      }, react_default.a.createElement(FormControlLabel["default"], {
+        value: 0,
+        control: react_default.a.createElement(Radio["default"], null),
+        label: "Greater Than"
+      }), react_default.a.createElement(FormControlLabel["default"], {
+        value: 1,
+        control: react_default.a.createElement(Radio["default"], null),
+        label: "Less Than"
+      }))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        id: "global_target",
+        label: "Target",
+        className: classes.textField,
+        onChange: _this.onGlobalTargetChange,
+        value: global_target || "",
+        name: "global_target",
+        type: "text",
+        placeholder: "..."
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Warning Limit",
+        className: classes.textField,
+        onChange: onChange,
+        value: "".concat(warning_margin).concat(global_target ? "" : "%"),
+        name: "warning_margin",
+        type: "text",
+        placeholder: "..."
+      })));
+    };
+
     _this.onSliderUpdate = _this.onSliderUpdate.bind(KpiForm_assertThisInitialized(_this));
     _this.slider = react_default.a.createRef();
     return _this;
@@ -7691,11 +8155,11 @@ function (_Component) {
   KpiForm_createClass(KpiForm, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this$props$values2 = this.props.values,
-          danger_deviation = _this$props$values2.danger_deviation,
-          safe_deviation = _this$props$values2.safe_deviation,
-          kpi_type = _this$props$values2.kpi_type,
-          warning_margin = _this$props$values2.warning_margin;
+      var _this$props$values5 = this.props.values,
+          danger_deviation = _this$props$values5.danger_deviation,
+          safe_deviation = _this$props$values5.safe_deviation,
+          kpi_type = _this$props$values5.kpi_type,
+          warning_margin = _this$props$values5.warning_margin;
       if (kpi_type === 0) this.updateSlider([0, safe_deviation, danger_deviation, 100]);else if (kpi_type === 1) this.updateSlider([0, warning_margin, 100]);
     }
   }, {
@@ -7704,241 +8168,107 @@ function (_Component) {
       if (this.slider.current) this.slider.current.onChange(values);
     }
   }, {
+    key: "renderSliderOptions",
+    value: function renderSliderOptions() {
+      var kpi_type = this.props.values.kpi_type;
+
+      switch (kpi_type) {
+        case 0:
+          return this.deviationOptions();
+
+        case 1:
+          return this.winLoseOptions();
+
+        case 2:
+          return this.thresholdOptions();
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          onChange = _this$props.onChange,
-          pillar = _this$props.pillar,
-          editFrequency = _this$props.editFrequency;
-      var _this$props$values3 = this.props.values,
-          name = _this$props$values3.name,
-          frequency = _this$props$values3.frequency,
-          safe_deviation = _this$props$values3.safe_deviation,
-          danger_deviation = _this$props$values3.danger_deviation,
-          kpi_type = _this$props$values3.kpi_type,
-          warning_margin = _this$props$values3.warning_margin,
-          threshold_type = _this$props$values3.threshold_type,
-          global_target = _this$props$values3.global_target,
-          leader = _this$props$values3.leader,
-          unit = _this$props$values3.unit;
-      var sliders = [react_default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-11"
-      }, react_default.a.createElement(DeviationSlider, {
-        disabledRail: true,
-        onUpdate: this.onSliderUpdate,
-        ref: this.slider,
-        danger_deviation: danger_deviation,
-        safe_deviation: safe_deviation
-      })), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "safe"
-      }, "Safe Limit"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "safe_deviation",
-        placeholder: "...",
-        value: "".concat(safe_deviation, "%"),
-        disabled: true
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "danger"
-      }, "Danger Limit"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "danger_deviation",
-        placeholder: "...",
-        value: "".concat(danger_deviation, "%"),
-        disabled: true
-      })))), react_default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6 mt-3"
-      }, react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "radio",
-        name: "threshold_type",
-        className: "form-check-input",
-        id: "greater",
-        onChange: this.onThresholdTypeChange,
-        checked: threshold_type ? false : true
-      }), react_default.a.createElement("label", {
-        htmlFor: "threshold_type",
-        className: "form-check-label mb-3"
-      }, "Greater Than")), react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "radio",
-        name: "threshold_type",
-        className: "form-check-input",
-        id: "less",
-        onChange: this.onThresholdTypeChange,
-        checked: threshold_type ? true : false
-      }), react_default.a.createElement("label", {
-        htmlFor: "threshold_type",
-        className: "form-check-label mb-3"
-      }, "Less Than"))), react_default.a.createElement("div", {
-        className: "col-sm-6 mt-3"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "global_target"
-      }, "Target"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "global_target",
-        onChange: this.onGlobalTargetChange,
-        placeholder: "...",
-        value: global_target || "",
-        required: true
-      })))), react_default.a.createElement("div", {
-        className: "row justify-content-center"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-11"
-      }, react_default.a.createElement(ThresholdSlider, {
-        threshold_type: threshold_type,
-        disabledRail: true,
-        onUpdate: this.onThresholdSliderUpdate,
-        ref: this.slider,
-        warning_margin: warning_margin,
-        target: global_target,
-        domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
-      })), react_default.a.createElement("div", {
-        className: "col-sm-2"
-      }, react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "radio",
-        name: "threshold_type",
-        className: "form-check-input",
-        id: "greater",
-        onChange: this.onThresholdTypeChange,
-        checked: threshold_type ? false : true
-      }), react_default.a.createElement("label", {
-        htmlFor: "threshold_type",
-        className: "form-check-label mb-3"
-      }, "Greater Than")), react_default.a.createElement("div", {
-        className: "form-check"
-      }, react_default.a.createElement("input", {
-        type: "radio",
-        name: "threshold_type",
-        className: "form-check-input",
-        id: "less",
-        onChange: this.onThresholdTypeChange,
-        checked: threshold_type ? true : false
-      }), react_default.a.createElement("label", {
-        htmlFor: "threshold_type",
-        className: "form-check-label mb-3"
-      }, "Less Than"))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "global_target"
-      }, "Target"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "global_target",
-        onChange: this.onGlobalTargetChange,
-        placeholder: "...",
-        value: global_target || ""
-      }))), react_default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react_default.a.createElement("label", {
-        htmlFor: "warning_margin"
-      }, "Warning Limit"), react_default.a.createElement("input", {
-        className: "form-control",
-        type: "text",
-        name: "warning_margin",
-        placeholder: "...",
-        value: "".concat(warning_margin).concat(global_target ? "" : "%"),
-        disabled: true
-      })))];
-      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement("div", {
-        className: "row"
-      }, react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "name"
-      }, "Name"), react_default.a.createElement("input", {
-        className: "form-control",
+      var _this$props2 = this.props,
+          onChange = _this$props2.onChange,
+          pillar = _this$props2.pillar,
+          editFrequency = _this$props2.editFrequency,
+          classes = _this$props2.classes;
+      var _this$props$values6 = this.props.values,
+          name = _this$props$values6.name,
+          frequency = _this$props$values6.frequency,
+          kpi_type = _this$props$values6.kpi_type,
+          leader = _this$props$values6.leader,
+          unit = _this$props$values6.unit;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 2
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 6
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Name",
+        className: classes.textField,
         type: "text",
         name: "name",
         onChange: onChange,
         placeholder: "...",
         value: name,
         required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "kpi_type"
-      }, "Type"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "kpi_type",
+      }), react_default.a.createElement(FormControl["default"], {
+        className: classes.formControl
+      }, react_default.a.createElement(InputLabel["default"], {
+        id: "kpi_type"
+      }, "Type"), react_default.a.createElement(Select["default"], {
         onChange: this.onKpiTypeChange,
-        placeholder: "...",
-        value: kpi_type,
-        required: true
+        value: kpi_type
       }, KPI_TYPE_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
+        return react_default.a.createElement(MenuItem["default"], {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      }))), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "frequency"
-      }, "Frequency"), react_default.a.createElement("select", {
-        className: "form-control",
-        type: "text",
-        name: "frequency",
+      }))), react_default.a.createElement(FormControl["default"], {
+        className: classes.formControl
+      }, react_default.a.createElement(InputLabel["default"], {
+        id: "frequency"
+      }, "Frequency"), react_default.a.createElement(Select["default"], {
         onChange: onChange,
-        placeholder: "...",
         value: frequency,
         required: true,
         disabled: !editFrequency
       }, FREQUENCY_CHOICES.map(function (choice) {
-        return react_default.a.createElement("option", {
+        return react_default.a.createElement(MenuItem["default"], {
           key: "choice-".concat(choice.id),
           value: choice.id
         }, choice.name);
-      })))), react_default.a.createElement("div", {
-        className: "col-sm-6"
-      }, react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "leader"
-      }, "Leader"), react_default.a.createElement("input", {
-        className: "form-control",
+      })))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 6
+      }, react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Leader",
+        className: classes.textField,
         type: "text",
         name: "leader",
         onChange: onChange,
         placeholder: "...",
         value: leader,
         required: true
-      })), react_default.a.createElement("div", {
-        className: "form-group"
-      }, react_default.a.createElement("label", {
-        htmlFor: "unit"
-      }, "Unit"), react_default.a.createElement("input", {
-        className: "form-control",
+      }), react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Unit",
+        className: classes.textField,
         type: "text",
         name: "unit",
         onChange: onChange,
         placeholder: "...",
         value: unit || ""
-      })))), sliders[kpi_type]);
+      })), react_default.a.createElement(Grid["default"], {
+        item: true,
+        container: true,
+        lg: 12
+      }, react_default.a.createElement(Typography["default"], {
+        variant: "h4",
+        className: classes.heading
+      }, "Evaluation"), this.renderSliderOptions())));
     }
   }]);
 
@@ -7948,7 +8278,7 @@ function (_Component) {
 KpiForm_KpiForm.propTypes = {
   onChange: prop_types_default.a.func.isRequired
 };
-/* harmony default export */ var kpis_KpiForm = (KpiForm_KpiForm);
+/* harmony default export */ var kpis_KpiForm = (Object(esm_styles["withStyles"])(KpiForm_styles)(KpiForm_KpiForm));
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/kpis/KpiEdit.js
 function KpiEdit_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { KpiEdit_typeof = function _typeof(obj) { return typeof obj; }; } else { KpiEdit_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return KpiEdit_typeof(obj); }
 
@@ -7980,6 +8310,9 @@ function KpiEdit_setPrototypeOf(o, p) { KpiEdit_setPrototypeOf = Object.setProto
  // NATIVE COMPONENTS
 
  // ACTIONS
+
+
+
 
 
 
@@ -8065,18 +8398,33 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var kpi = this.props.kpi;
+      var _this$props2 = this.props,
+          kpi = _this$props2.kpi,
+          onRemove = _this$props2.onRemove;
       return react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        className: "w-100 mt-3"
+        onSubmit: this.onSubmit
       }, react_default.a.createElement(kpis_KpiForm, {
         onChange: this.onChange,
         pillar: kpi.pillar,
         values: this.state
-      }), react_default.a.createElement("button", {
+      }), react_default.a.createElement("div", {
+        style: {
+          "float": "right"
+        }
+      }, react_default.a.createElement(Button["default"], {
+        color: "primary",
         type: "submit",
-        className: "btn btn-success mb-4 mt-3"
-      }, "Save Changes"));
+        variant: "contained",
+        style: {
+          marginRight: "15px"
+        },
+        startIcon: react_default.a.createElement(Save_default.a, null)
+      }, "Save Changes"), react_default.a.createElement(Button["default"], {
+        color: "secondary",
+        variant: "contained",
+        onClick: onRemove,
+        startIcon: react_default.a.createElement(Delete_default.a, null)
+      }, "Delete Kpi")));
     }
   }]);
 
@@ -8113,7 +8461,25 @@ function KpiView_setPrototypeOf(o, p) { KpiView_setPrototypeOf = Object.setProto
 
  // ACTIONS
 
+ // MATERIAL-UI
 
+
+
+
+
+
+var KpiView_styles = function styles(theme) {
+  return {
+    heading: {
+      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(4)
+    },
+    breadcrumbs: {
+      paddingTop: "12px",
+      paddingBottom: "12px"
+    }
+  };
+};
 
 var KpiView_KpiView =
 /*#__PURE__*/
@@ -8128,7 +8494,7 @@ function (_Component) {
     _this = KpiView_possibleConstructorReturn(this, KpiView_getPrototypeOf(KpiView).call(this, props));
 
     _this.onRemove = function () {
-      $("#removeConfirmation").modal("show");
+      _this.RemoveConfirmation.current.handleToggleOpen(true)();
     };
 
     _this.onSubmitRemove = function (state) {
@@ -8143,56 +8509,48 @@ function (_Component) {
     };
 
     _this.onSubmitRemove = _this.onSubmitRemove.bind(KpiView_assertThisInitialized(_this));
+    _this.RemoveConfirmation = react_default.a.createRef();
     return _this;
   }
 
   KpiView_createClass(KpiView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props2 = this.props,
-          setRemove = _this$props2.setRemove,
-          kpi = _this$props2.kpi;
-      setRemove({
-        type: "kpi",
-        item: kpi,
-        onSubmit: this.onSubmitRemove
-      });
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      var _this$props3 = this.props,
-          kpi = _this$props3.kpi,
-          setRemove = _this$props3.setRemove;
-      if (prevProps.kpi !== kpi) ;
-      setRemove({
-        type: "kpi",
-        item: kpi,
-        onSubmit: this.onSubmitRemove
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props4 = this.props,
-          kpi = _this$props4.kpi,
-          onSeriesSelect = _this$props4.onSeriesSelect;
-      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("h3", {
-        className: "mt-4"
+      var _this$props2 = this.props,
+          kpi = _this$props2.kpi,
+          onSeriesSelect = _this$props2.onSeriesSelect,
+          pillarId = _this$props2.pillarId,
+          classes = _this$props2.classes;
+      return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement(Breadcrumbs["default"], {
+        className: classes.breadcrumbs,
+        "aria-label": "breadcrumb"
+      }, react_default.a.createElement(Typography["default"], {
+        color: "inherit",
+        href: "/"
+      }, pillarId), react_default.a.createElement(Typography["default"], {
+        color: "inherit",
+        href: "/getting-started/installation/"
+      }, kpi.name)), react_default.a.createElement(Typography["default"], {
+        className: classes.heading,
+        variant: "h4"
       }, "Series"), react_default.a.createElement(series_SeriesList, {
         kpiId: kpi.id,
         onClick: onSeriesSelect,
         series: kpi.series
-      }), react_default.a.createElement("h3", null, "Properties"), react_default.a.createElement("div", {
-        className: "d-flex"
-      }, react_default.a.createElement(kpis_KpiEdit, {
-        kpi: kpi
-      })), react_default.a.createElement("hr", null), react_default.a.createElement("div", {
-        className: "d-flex justify-content-end"
-      }, react_default.a.createElement("button", {
-        className: "btn btn-danger",
-        onClick: this.onRemove
-      }, "Delete Kpi")));
+      }), react_default.a.createElement(Typography["default"], {
+        className: classes.heading,
+        variant: "h4"
+      }, "Properties"), react_default.a.createElement(kpis_KpiEdit, {
+        kpi: kpi,
+        onRemove: this.onRemove
+      }), react_default.a.createElement(ui_RemoveConfirmation, {
+        removeContext: {
+          item: kpi,
+          type: "kpi",
+          onSubmit: this.onSubmitRemove
+        },
+        ref: this.RemoveConfirmation
+      }));
     }
   }]);
 
@@ -8201,7 +8559,7 @@ function (_Component) {
 
 /* harmony default export */ var kpis_KpiView = (Object(es["connect"])(null, {
   deleteKpi: dashboards_deleteKpi
-})(KpiView_KpiView));
+})(Object(esm_styles["withStyles"])(KpiView_styles)(KpiView_KpiView)));
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/MenuView.js
 function MenuView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { MenuView_typeof = function _typeof(obj) { return typeof obj; }; } else { MenuView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return MenuView_typeof(obj); }
 
@@ -8305,7 +8663,8 @@ function (_Component) {
     value: function render() {
       var _this$props2 = this.props,
           kpi = _this$props2.kpi,
-          changeMenu = _this$props2.changeMenu;
+          changeMenu = _this$props2.changeMenu,
+          pillarId = _this$props2.pillarId;
 
       if (!kpi) {
         changeMenu(false);
@@ -8322,14 +8681,17 @@ function (_Component) {
           return react_default.a.createElement(kpis_KpiView, {
             kpi: kpi,
             onSeriesSelect: this.onSeriesSelect,
-            setRemove: this.setRemove
+            setRemove: this.setRemove,
+            pillarId: pillarId
           });
 
         case SERIES_VIEW:
           return react_default.a.createElement(series_SeriesView, {
             series: series,
+            kpi: kpi,
             onBack: this.onSeriesBack,
-            setRemove: this.setRemove
+            setRemove: this.setRemove,
+            pillarId: pillarId
           });
 
         default:
@@ -8373,6 +8735,12 @@ function KpiNew_setPrototypeOf(o, p) { KpiNew_setPrototypeOf = Object.setPrototy
 
  // ACTIONS
 
+ // MATERIAL-Ui
+
+
+
+
+
 
 
 var KpiNew_KpiNew =
@@ -8396,7 +8764,8 @@ function (_Component) {
       var _this$props = _this.props,
           addKpi = _this$props.addKpi,
           pillar = _this$props.pillar,
-          dashboard = _this$props.dashboard;
+          dashboard = _this$props.dashboard,
+          handleToggleOpen = _this$props.handleToggleOpen;
       var _this$state = _this.state,
           name = _this$state.name,
           frequency = _this$state.frequency,
@@ -8438,7 +8807,7 @@ function (_Component) {
         unit: ""
       });
 
-      $("#newKpi").modal("hide");
+      handleToggleOpen(false)();
     };
 
     _this.onChange = function (e) {
@@ -8472,19 +8841,28 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var pillar = this.props.pillar;
-      return react_default.a.createElement("form", {
-        onSubmit: this.onSubmit,
-        className: "w-100 mt-3"
-      }, react_default.a.createElement(kpis_KpiForm, {
+      var _this$props2 = this.props,
+          pillar = _this$props2.pillar,
+          open = _this$props2.open,
+          handleToggleOpen = _this$props2.handleToggleOpen;
+      return react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "New KPI"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(kpis_KpiForm, {
         onChange: this.onChange,
         values: this.state,
         pillar: pillar,
         editFrequency: true
-      }), react_default.a.createElement("button", {
-        type: "submit",
-        className: "btn btn-success mb-4 mt-3"
-      }, "Create"));
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.onSubmit,
+        color: "primary"
+      }, "Confirm")));
     }
   }]);
 
@@ -8497,212 +8875,107 @@ KpiNew_KpiNew.propTypes = {
 /* harmony default export */ var kpis_KpiNew = (Object(es["connect"])(null, {
   addKpi: dashboards_addKpi
 })(KpiNew_KpiNew));
-// CONCATENATED MODULE: ./frontend/src/core/components/ui/RemoveConfirmation.js
-function RemoveConfirmation_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { RemoveConfirmation_typeof = function _typeof(obj) { return typeof obj; }; } else { RemoveConfirmation_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return RemoveConfirmation_typeof(obj); }
+// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Popover/index.js + 1 modules
+var Popover = __webpack_require__("./node_modules/@material-ui/core/esm/Popover/index.js");
 
-function RemoveConfirmation_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function RemoveConfirmation_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function RemoveConfirmation_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function RemoveConfirmation_createClass(Constructor, protoProps, staticProps) { if (protoProps) RemoveConfirmation_defineProperties(Constructor.prototype, protoProps); if (staticProps) RemoveConfirmation_defineProperties(Constructor, staticProps); return Constructor; }
-
-function RemoveConfirmation_possibleConstructorReturn(self, call) { if (call && (RemoveConfirmation_typeof(call) === "object" || typeof call === "function")) { return call; } return RemoveConfirmation_assertThisInitialized(self); }
-
-function RemoveConfirmation_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function RemoveConfirmation_getPrototypeOf(o) { RemoveConfirmation_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return RemoveConfirmation_getPrototypeOf(o); }
-
-function RemoveConfirmation_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) RemoveConfirmation_setPrototypeOf(subClass, superClass); }
-
-function RemoveConfirmation_setPrototypeOf(o, p) { RemoveConfirmation_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return RemoveConfirmation_setPrototypeOf(o, p); }
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/PillarPopover.js
+ // MATERIAL-UI
 
 
 
+ // CONFIG
 
 
-
-
-
-
-
-
-
-var RemoveConfirmation_RemoveConfirmation =
-/*#__PURE__*/
-function (_Component) {
-  RemoveConfirmation_inherits(RemoveConfirmation, _Component);
-
-  function RemoveConfirmation(props) {
-    var _this;
-
-    RemoveConfirmation_classCallCheck(this, RemoveConfirmation);
-
-    _this = RemoveConfirmation_possibleConstructorReturn(this, RemoveConfirmation_getPrototypeOf(RemoveConfirmation).call(this, props));
-
-    _this.handleChange = function (e) {
-      _this.setState(RemoveConfirmation_defineProperty({}, e.target.name, e.target.value));
-    };
-
-    _this.handleToggleOpen = function (state) {
-      return function () {
-        _this.setState({
-          open: state
-        });
-      };
-    };
-
-    _this.handleSubmit = function (e) {
-      e.preventDefault();
-      var removeContext = _this.props.removeContext;
-      var response = removeContext.onSubmit(_this.state);
-      if (response) _this.setState({
-        open: false
-      });
-    };
-
-    _this.modalRef = react_default.a.createRef();
-    _this.state = {
-      password: "",
-      exported: false,
-      name: "",
-      open: false
-    };
-    return _this;
+var PillarPopover_useStyles = Object(styles_esm["makeStyles"])({
+  popover: {
+    pointerEvents: "none"
+  },
+  paper: {
+    padding: "10px"
   }
+});
 
-  RemoveConfirmation_createClass(RemoveConfirmation, [{
-    key: "render",
-    value: function render() {
-      var removeContext = this.props.removeContext;
-      if (!removeContext) return react_default.a.createElement(react_default.a.Fragment, null);
-      var type = removeContext.type,
-          item = removeContext.item;
-      var _this$state = this.state,
-          name = _this$state.name,
-          open = _this$state.open;
-      return react_default.a.createElement(Dialog["default"], {
-        open: open,
-        onClose: this.handleToggleOpen(false),
-        "aria-labelledby": "form-dialog-title"
-      }, react_default.a.createElement(DialogTitle["default"], {
-        id: "form-dialog-title"
-      }, "Are You Sure?"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(DialogContentText["default"], null, "This action cannot be undone. This will permanetly remove the", " ", react_default.a.createElement("span", {
-        style: {
-          color: "#3F51B5",
-          fontWeight: "bold"
-        }
-      }, item ? item.name || item.title : "null"), " ", "".concat(type, " and all associated data."), " "), react_default.a.createElement(TextField["default"], {
-        autoFocus: true,
-        margin: "dense",
-        id: "name",
-        label: "Confirm name",
-        type: "text",
-        fullWidth: true,
-        name: "name",
-        onChange: this.handleChange,
-        value: name
-      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
-        onClick: this.handleToggleOpen(false),
-        color: "primary"
-      }, "Cancel"), react_default.a.createElement(Button["default"], {
-        onClick: this.handleSubmit,
-        color: "primary"
-      }, "Confirm")));
+function PillarPopover(props) {
+  var data = props.data,
+      open = props.open;
+  var classes = PillarPopover_useStyles();
+  var renderDeviation = react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Target: ".concat(data.target)), react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Deviation: ".concat(((data.value / data.target - 1) * 100).toFixed(2), "%")));
+  var renderThreshold = react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Target: ".concat(data.target)), react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Warning Margin: ".concat(data.warning_margin)));
+  var renderWinLose = react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Target: ".concat(data.target)));
+
+  var renderEvaluation = function renderEvaluation() {
+    switch (data.kpi_type) {
+      case KPI_TYPE_WIN_LOSE:
+        return renderWinLose;
+
+      case KPI_TYPE_THRESHOLD:
+        return renderThreshold;
+
+      case KPI_TYPE_DEVIATION:
+        return renderDeviation;
     }
-  }]);
+  };
 
-  return RemoveConfirmation;
-}(react["Component"]);
+  return react_default.a.createElement(Popover["default"], {
+    anchorReference: "anchorPosition",
+    anchorPosition: {
+      top: data.y ? data.y : 0,
+      left: data.x ? data.x : 0
+    },
+    anchorOrigin: {
+      vertical: "top",
+      horizontal: "left"
+    },
+    transformOrigin: {
+      vertical: "top",
+      horizontal: "left"
+    },
+    classes: {
+      paper: classes.paper
+    },
+    open: open,
+    disableAutoFocus: true,
+    disableEnforceFocus: true,
+    disableRestoreFocus: true,
+    className: classes.popover
+  }, react_default.a.createElement(Typography["default"], {
+    variant: "h6"
+  }, "".concat(data.kpiName, " - (").concat(data.i + 1, ")"), react_default.a.createElement("hr", null)), react_default.a.createElement("div", {
+    style: {
+      display: "flex"
+    }
+  }, react_default.a.createElement("div", {
+    style: {
+      marginRight: "20px"
+    }
+  }, react_default.a.createElement(Typography["default"], {
+    variant: "subtitle2",
+    gutterBottom: true
+  }, "Performance"), react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Value: ".concat(data.value)), react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Date: ".concat(data.date))), react_default.a.createElement("div", null, react_default.a.createElement(Typography["default"], {
+    variant: "subtitle2",
+    gutterBottom: true
+  }, "Evaluation"), renderEvaluation())));
+}
 
-RemoveConfirmation_RemoveConfirmation.propTypes = {
-  removeContext: prop_types_default.a.object
+PillarPopover.defaultProps = {
+  open: false,
+  data: {}
 };
-/* harmony default export */ var ui_RemoveConfirmation = (RemoveConfirmation_RemoveConfirmation);
-// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Tooltip.js
-
-
-
-var Tooltip_Tooltip = function Tooltip(props) {
-  if (!props.show || !props.data) return react_default.a.createElement(react_default.a.Fragment, null);
-  var _props$data = props.data,
-      kpiName = _props$data.kpiName,
-      warning_margin = _props$data.warning_margin,
-      target = _props$data.target,
-      date = _props$data.date,
-      value = _props$data.value,
-      kpi_type = _props$data.kpi_type,
-      x = _props$data.x,
-      y = _props$data.y;
-
-  switch (kpi_type) {
-    case KPI_TYPE_THRESHOLD:
-      return react_default.a.createElement("div", {
-        className: "card qd-tooltip",
-        style: {
-          left: x + "px",
-          top: y + "px",
-          display: "block"
-        }
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        style: {
-          lineHeight: 0.4
-        }
-      }, kpiName), react_default.a.createElement("div", {
-        className: "card-text",
-        style: {
-          lineHeight: 0.5
-        }
-      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "), react_default.a.createElement("p", null, "Warning Margin: ", warning_margin, " "))));
-
-    case KPI_TYPE_DEVIATION:
-      return react_default.a.createElement("div", {
-        className: "card p-2 qd-tooltip",
-        style: {
-          left: x + "px",
-          top: y + "px",
-          display: "block"
-        }
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        style: {
-          lineHeight: 0.4
-        }
-      }, kpiName), react_default.a.createElement("div", {
-        className: "card-text",
-        style: {
-          lineHeight: 0.5
-        }
-      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "), react_default.a.createElement("p", null, "Deviation: ", ((value / target - 1) * 100).toFixed(2), "% "))));
-
-    case KPI_TYPE_WIN_LOSE:
-      return react_default.a.createElement("div", {
-        className: "card p-2 qd-tooltip",
-        style: {
-          left: x + "px",
-          top: y + "px",
-          display: "block"
-        }
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement("h5", {
-        style: {
-          lineHeight: 0.4
-        }
-      }, kpiName), react_default.a.createElement("div", {
-        className: "card-text",
-        style: {
-          lineHeight: 0.5
-        }
-      }, react_default.a.createElement("hr", null), react_default.a.createElement("p", null, "Value: ", value), react_default.a.createElement("p", null, "Target: ", target), react_default.a.createElement("p", null, "Date: ", date, " "))));
-  }
-};
-
-/* harmony default export */ var components_Tooltip = (Tooltip_Tooltip);
+/* harmony default export */ var components_PillarPopover = (PillarPopover);
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/index.js
 function pillarRoom_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pillarRoom_typeof = function _typeof(obj) { return typeof obj; }; } else { pillarRoom_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pillarRoom_typeof(obj); }
 
@@ -8742,8 +9015,47 @@ function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.se
 
 
 
+ // MATERIAl-UI
 
 
+
+
+
+
+
+var pillarRoom_styles = function styles(theme) {
+  return {
+    rootContainer: {
+      margin: 0,
+      width: "100%",
+      overflow: "hidden",
+      flex: 1
+    },
+    cardAction: {
+      padding: "8px 25px",
+      position: "sticky",
+      marginTop: "auto",
+      borderTop: "1px solid rgba(0, 0, 0, 0.14)"
+    },
+    card: {
+      display: "flex",
+      flexDirection: "column",
+      overflow: "auto",
+      height: "100%",
+      maxHeight: "100%"
+    },
+    chartCardContent: {
+      overflow: "auto",
+      flex: 1
+    },
+    gridItem: {
+      maxHeight: "100%"
+    },
+    pillar: {
+      margin: "0 10px !important"
+    }
+  };
+};
 
 var pillarRoom_pillarRoom =
 /*#__PURE__*/
@@ -8794,6 +9106,14 @@ function (_Component) {
       });
     };
 
+    _this.openKpiNew = function (state) {
+      return function () {
+        _this.setState({
+          kpiNewOpen: state
+        });
+      };
+    };
+
     _this.deselect = function () {
       d3["selectAll"](".line").attr("stroke-width", 1.8);
       d3["selectAll"](".dot").attr("r", 3);
@@ -8808,8 +9128,9 @@ function (_Component) {
       selectedKpi: null,
       menuMode: false,
       removeContext: null,
-      toolTipData: null,
-      toolTipShow: false
+      toolTipData: {},
+      toolTipShow: false,
+      kpiNewOpen: false
     };
     _this.selectSeries = _this.selectSeries.bind(pillarRoom_assertThisInitialized(_this));
     _this.selectKpi = _this.selectKpi.bind(pillarRoom_assertThisInitialized(_this));
@@ -8820,12 +9141,6 @@ function (_Component) {
   }
 
   pillarRoom_createClass(pillarRoom, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(prevProps) {
-      if (prevProps.kpis != this.props.kpis) {// this.selectSeriesHook(null);
-      }
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this$props = this.props,
@@ -8858,7 +9173,8 @@ function (_Component) {
     value: function render() {
       var _this$props2 = this.props,
           kpis = _this$props2.kpis,
-          currentDashboard = _this$props2.currentDashboard;
+          currentDashboard = _this$props2.currentDashboard,
+          classes = _this$props2.classes;
       var _this$props$match$par2 = this.props.match.params,
           pillarId = _this$props$match$par2.pillarId,
           dashboardId = _this$props$match$par2.dashboardId;
@@ -8866,9 +9182,9 @@ function (_Component) {
           selectedSeries = _this$state.selectedSeries,
           selectedKpi = _this$state.selectedKpi,
           menuMode = _this$state.menuMode,
-          removeContext = _this$state.removeContext,
           toolTipData = _this$state.toolTipData,
-          toolTipShow = _this$state.toolTipShow;
+          toolTipShow = _this$state.toolTipShow,
+          kpiNewOpen = _this$state.kpiNewOpen;
       var kpi = getItem(selectedKpi, kpis, "id");
 
       if (currentDashboard == null) {
@@ -8876,66 +9192,53 @@ function (_Component) {
       }
 
       var color = currentDashboard.background;
-      return react_default.a.createElement("div", {
-        className: "container-fluid pt-4 pb-4",
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(components_PillarPopover, {
+        open: toolTipShow,
+        data: toolTipData
+      }), react_default.a.createElement(Grid["default"], {
+        container: true,
+        spacing: 4,
+        className: classes.rootContainer,
         style: {
-          padding: 0,
-          background: color,
-          height: "".concat(100, "%"),
-          minHeight: "fit-content"
+          background: color
         }
-      }, react_default.a.createElement(components_Tooltip, {
-        data: toolTipData,
-        show: toolTipShow
-      }), react_default.a.createElement("div", {
-        className: "row m-0 h-100"
-      }, react_default.a.createElement("div", {
-        className: "col-lg-4 mx-vh-90"
-      }, react_default.a.createElement("div", {
-        className: "card h-100"
-      }, react_default.a.createElement("div", {
-        className: "card-body"
-      }, react_default.a.createElement(d3charts_pillar, {
+      }, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 4,
+        className: classes.gridItem
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.card
+      }, react_default.a.createElement(CardContent["default"], null, react_default.a.createElement(d3charts_pillar, {
         kpis: kpis,
         letter: pillarId === "Plus" ? "+" : pillarId,
         dashboardId: dashboardId,
         labeled: true,
+        className: classes.pillar,
         onHover: this.showTooltip
-      })), react_default.a.createElement("div", {
-        className: "card-footer",
-        style: {
-          display: "flex"
-        }
-      }, react_default.a.createElement("div", {
-        className: "row w-100"
-      }, react_default.a.createElement("div", {
-        className: "col-lg-12"
-      }, react_default.a.createElement(table_Table, {
+      }), react_default.a.createElement(CardActions["default"], null, react_default.a.createElement(Table_EnhancedTable, {
         data: kpis,
-        header: KPI_TABLE_HEADERS,
-        fontSize: "".concat(0.7, "rem"),
-        summary: false
-      })))))), react_default.a.createElement("div", {
-        className: "col-lg-8 mx-vh-90"
-      }, react_default.a.createElement("div", {
-        className: "card h-100"
-      }, react_default.a.createElement("div", {
-        className: "card-body scroll"
+        tableMeta: KPI_TABLE_HEADERS
+      }))))), react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 8,
+        className: classes.gridItem
+      }, react_default.a.createElement(Card["default"], {
+        className: classes.card
+      }, react_default.a.createElement(CardContent["default"], {
+        className: classes.chartCardContent
       }, menuMode ? react_default.a.createElement(components_MenuView, {
         kpi: kpi,
         setRemove: this.setRemove,
         changeMenu: this.setMenuState,
         menuState: this.menuMode,
-        resetKpiSelect: this.resetKpiSelect
+        resetKpiSelect: this.resetKpiSelect,
+        pillarId: pillarId
       }) : react_default.a.createElement(d3charts_LineChart, {
         kpis: kpis,
         selectSeries: this.selectSeries,
         selectedKpi: selectedKpi
-      })), react_default.a.createElement("div", {
-        className: "card-footer",
-        style: {
-          display: "flex"
-        }
+      })), react_default.a.createElement(CardActions["default"], {
+        className: classes.cardAction
       }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,
         selectKpi: this.selectKpi,
@@ -8944,16 +9247,13 @@ function (_Component) {
         kpis: kpis,
         changeMenu: this.setMenuState,
         menuMode: menuMode,
-        kpi: kpi
-      }))))), react_default.a.createElement(modal_Modal, {
-        id: "newKpi",
-        title: "New KPI",
-        iconClass: "im im-dashboard"
-      }, react_default.a.createElement(kpis_KpiNew, {
+        kpi: kpi,
+        handleKpiNewOpen: this.openKpiNew
+      }))))), react_default.a.createElement(kpis_KpiNew, {
         pillar: pillarId,
-        dashboard: currentDashboard.id
-      })), react_default.a.createElement(ui_RemoveConfirmation, {
-        removeContext: removeContext
+        dashboard: currentDashboard.id,
+        open: kpiNewOpen,
+        handleToggleOpen: this.openKpiNew
       }));
     }
   }]);
@@ -8978,21 +9278,9 @@ var pillarRoom_mapStateToProps = function mapStateToProps(state) {
   getADashboard: dashboards_getADashboard,
   getKpis: dashboards_getKpis,
   clearKpis: dashboards_clearKpis
-})(pillarRoom_pillarRoom));
+})(Object(esm_styles["withStyles"])(pillarRoom_styles)(pillarRoom_pillarRoom)));
 // EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Container/index.js + 1 modules
 var Container = __webpack_require__("./node_modules/@material-ui/core/esm/Container/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/MenuItem/index.js + 1 modules
-var MenuItem = __webpack_require__("./node_modules/@material-ui/core/esm/MenuItem/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/FormControl/index.js + 1 modules
-var FormControl = __webpack_require__("./node_modules/@material-ui/core/esm/FormControl/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/InputLabel/index.js + 3 modules
-var InputLabel = __webpack_require__("./node_modules/@material-ui/core/esm/InputLabel/index.js");
-
-// EXTERNAL MODULE: ./node_modules/@material-ui/core/esm/Select/index.js + 5 modules
-var Select = __webpack_require__("./node_modules/@material-ui/core/esm/Select/index.js");
 
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/Publish.js
 var Publish = __webpack_require__("./node_modules/@material-ui/icons/Publish.js");
@@ -10253,214 +10541,67 @@ home_Dashboard.propType = {
   clearCurrentDashboard: dashboards_clearCurrentDashboard,
   clearActionTables: dashboards_clearActionTables
 })(Object(esm_styles["withStyles"])(home_styles)(home_Dashboard)));
-// CONCATENATED MODULE: ./frontend/src/scenes/contact/index.js
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/Email.js
+var Email = __webpack_require__("./node_modules/@material-ui/icons/Email.js");
+var Email_default = /*#__PURE__*/__webpack_require__.n(Email);
 
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/AccountBox.js
+var AccountBox = __webpack_require__("./node_modules/@material-ui/icons/AccountBox.js");
+var AccountBox_default = /*#__PURE__*/__webpack_require__.n(AccountBox);
+
+// CONCATENATED MODULE: ./frontend/src/scenes/contact/index.js
+ // MATERIAL-UI
+
+
+
+
+
+
+
+
+var contact_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      height: "100%"
+    },
+    heading: {
+      marginBottom: theme.spacing(3)
+    },
+    icon: {
+      marginRight: theme.spacing(1)
+    }
+  };
+});
 
 var contact_Contact = function Contact(props) {
-  return react_default.a.createElement("div", {
-    className: "row justify-content-center m-0"
-  }, react_default.a.createElement("div", {
-    className: "col-lg-5 mt-5"
-  }, react_default.a.createElement("div", {
-    className: "card"
-  }, react_default.a.createElement("div", {
-    className: "card-body"
-  }, react_default.a.createElement("h1", {
-    className: "card-title"
-  }, "Contact"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, react_default.a.createElement("span", {
-    className: "im-user-male im mr-3"
-  }), "Kyle Thatcher - Co-op Student"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, react_default.a.createElement("span", {
-    className: "im im-mail mr-3"
-  }), "kyle.thatcher@sanofi.com"), react_default.a.createElement("p", {
-    className: "card-text"
-  }, "Please contact for any and all bugs and issues encountered")))));
+  var classes = contact_useStyles();
+  return react_default.a.createElement(Grid["default"], {
+    container: true,
+    spacing: 0,
+    alignItems: "center",
+    justify: "center",
+    className: classes.root
+  }, react_default.a.createElement(Card["default"], null, react_default.a.createElement(CardContent["default"], null, react_default.a.createElement(Typography["default"], {
+    variant: "h3",
+    className: classes.heading
+  }, "Contact"), react_default.a.createElement(Typography["default"], {
+    variant: "body1",
+    gutterBottom: true
+  }, react_default.a.createElement(AccountBox_default.a, {
+    className: classes.icon,
+    color: "primary"
+  }), "Kyle Thatcher - Co-op Student"), react_default.a.createElement(Typography["default"], {
+    variant: "body1",
+    gutterBottom: true
+  }, react_default.a.createElement(Email_default.a, {
+    className: classes.icon,
+    color: "primary"
+  }), "kyle.thatcher@sanofi.com"), react_default.a.createElement(Typography["default"], {
+    variant: "body1"
+  }, "Please contact for any and all bugs and issues encountered. Thanks."))));
 };
 
 /* harmony default export */ var contact = (contact_Contact);
-// CONCATENATED MODULE: ./frontend/src/core/components/layout/Header.js
-function Header_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Header_typeof = function _typeof(obj) { return typeof obj; }; } else { Header_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Header_typeof(obj); }
-
-function Header_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function Header_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function Header_createClass(Constructor, protoProps, staticProps) { if (protoProps) Header_defineProperties(Constructor.prototype, protoProps); if (staticProps) Header_defineProperties(Constructor, staticProps); return Constructor; }
-
-function Header_possibleConstructorReturn(self, call) { if (call && (Header_typeof(call) === "object" || typeof call === "function")) { return call; } return Header_assertThisInitialized(self); }
-
-function Header_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function Header_getPrototypeOf(o) { Header_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Header_getPrototypeOf(o); }
-
-function Header_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Header_setPrototypeOf(subClass, superClass); }
-
-function Header_setPrototypeOf(o, p) { Header_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Header_setPrototypeOf(o, p); }
-
-// DEPENDANCIES
-
-
-
- // ACTIONS
-
-
-/**
- * Header component for the site
- */
-
-var Header_Header =
-/*#__PURE__*/
-function (_Component) {
-  Header_inherits(Header, _Component);
-
-  function Header() {
-    var _getPrototypeOf2;
-
-    var _temp, _this;
-
-    Header_classCallCheck(this, Header);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return Header_possibleConstructorReturn(_this, (_temp = _this = Header_possibleConstructorReturn(this, (_getPrototypeOf2 = Header_getPrototypeOf(Header)).call.apply(_getPrototypeOf2, [this].concat(args))), _this.state = {
-      curTime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).toLocaleDateString(),
-      weekNum: 0
-    }, _temp));
-  }
-
-  Header_createClass(Header, [{
-    key: "getWeekNumber",
-    value: function getWeekNumber(d) {
-      // Copy date so don't modify original
-      d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); // Set to nearest Thursday: current date + 4 - current day number
-      // Make Sunday's day number 7
-
-      d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7)); // Get first day of year
-
-      var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1)); // Calculate full weeks to nearest Thursday
-
-      var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7); // Return array of year and week number
-
-      return weekNo;
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      setInterval(function () {
-        _this2.setState({
-          curTime: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).toLocaleDateString()
-        });
-      }, 1000);
-      this.setState({
-        weekNum: this.getWeekNumber(new Date())
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props$auth = this.props.auth,
-          isAuthenticated = _this$props$auth.isAuthenticated,
-          user = _this$props$auth.user;
-      var currentDashboard = this.props.currentDashboard;
-      var _this$state = this.state,
-          curTime = _this$state.curTime,
-          weekNum = _this$state.weekNum;
-      var authLinks = react_default.a.createElement("ul", {
-        className: "navbar-nav ml-auto mt-2"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("button", {
-        onClick: this.props.logout,
-        className: "nav-link btn btn-info btn-sm text-light pl-2 pr-2"
-      }, "Logout")));
-      var guestLinks = react_default.a.createElement("ul", {
-        className: "navbar-nav ml-auto mt-2"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement(react_router_dom["Link"], {
-        to: "/register",
-        className: "nav-link"
-      }, "Register")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement(react_router_dom["Link"], {
-        to: "/login",
-        className: "nav-link"
-      }, "Login")));
-      return react_default.a.createElement("nav", {
-        className: "navbar navbar-expand-lg co-accent"
-      }, react_default.a.createElement("div", {
-        className: "container-fluid",
-        style: {
-          fontSize: 18 + "px"
-        }
-      }, react_default.a.createElement("img", {
-        src: "../../../../static/media/sms-logo.png",
-        style: {
-          height: "50px",
-          width: "50px"
-        },
-        className: "mr-3 p-1"
-      }), react_default.a.createElement("a", {
-        className: "navbar-brand brand",
-        href: "#"
-      }, "+QDCI Boards"), react_default.a.createElement("button", {
-        className: "navbar-toggler",
-        type: "button",
-        "data-toggle": "collapse",
-        "data-target": "#navbarNavDropdown",
-        "aria-controls": "navbarNavDropdown",
-        "aria-expanded": "false",
-        "aria-label": "Toggle navigation"
-      }, react_default.a.createElement("span", {
-        className: "navbar-toggler-icon"
-      })), react_default.a.createElement("div", {
-        className: "collapse navbar-collapse",
-        id: "navbarNavDropdown"
-      }, react_default.a.createElement("ul", {
-        className: "navbar-nav"
-      }, react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#"
-      }, "My Dashboards")), react_default.a.createElement("li", {
-        className: "nav-item"
-      }, react_default.a.createElement("a", {
-        className: "nav-link",
-        href: "#/contact"
-      }, "Contact an Admin"))), currentDashboard && react_default.a.createElement("h4", {
-        className: "m-auto"
-      }, currentDashboard.title), react_default.a.createElement("h5", {
-        className: "m-auto"
-      }, curTime, ", Week # ", weekNum), isAuthenticated ? authLinks : guestLinks)));
-    }
-  }]);
-
-  return Header;
-}(react["Component"]);
-
-Header_Header.propTypes = {
-  auth: prop_types_default.a.object.isRequired,
-  logout: prop_types_default.a.func.isRequired
-};
-
-var Header_mapStateToProps = function mapStateToProps(state) {
-  return {
-    auth: state.auth,
-    currentDashboard: state.dashboards.currentDashboard
-  };
-};
-
-/* harmony default export */ var layout_Header = (Object(es["connect"])(Header_mapStateToProps, {
-  logout: auth_logout
-})(Header_Header));
 // CONCATENATED MODULE: ./frontend/src/core/components/layout/Alerts.js
 function Alerts_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Alerts_typeof = function _typeof(obj) { return typeof obj; }; } else { Alerts_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Alerts_typeof(obj); }
 
@@ -11107,6 +11248,7 @@ function Navbar_setPrototypeOf(o, p) { Navbar_setPrototypeOf = Object.setPrototy
 
 
 
+ // MATERIAL-UI
 
 
 
@@ -11126,9 +11268,6 @@ function Navbar_setPrototypeOf(o, p) { Navbar_setPrototypeOf = Object.setPrototy
 
 var Navbar_styles = function styles(theme) {
   return {
-    root: {
-      flexGrow: 1
-    },
     menuButton: {
       marginRight: theme.spacing(2)
     },
@@ -11234,7 +11373,9 @@ function (_Component) {
   Navbar_createClass(Navbar, [{
     key: "render",
     value: function render() {
-      var classes = this.props.classes;
+      var _this$props = this.props,
+          classes = _this$props.classes,
+          currentDashboard = _this$props.currentDashboard;
       var _this$state = this.state,
           sidenavOpen = _this$state.sidenavOpen,
           anchorEl = _this$state.anchorEl,
@@ -11262,7 +11403,7 @@ function (_Component) {
       }, react_default.a.createElement(Menu_default.a, null)), react_default.a.createElement(Typography["default"], {
         variant: "h6",
         className: classes.title
-      }, "My Dashboards"), react_default.a.createElement(Hidden["default"], {
+      }, currentDashboard ? currentDashboard.title : "My Dashboards"), react_default.a.createElement(Hidden["default"], {
         smDown: true
       }, react_default.a.createElement(Typography["default"], {
         className: classes.date
@@ -11357,7 +11498,6 @@ function App_setPrototypeOf(o, p) { App_setPrototypeOf = Object.setPrototypeOf |
 
 
 
-
  // Alert Options
 
 var alertOptions = {
@@ -11387,11 +11527,14 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var state = src_store.getState();
       return react_default.a.createElement(es["Provider"], {
         store: src_store
       }, react_default.a.createElement(react_alert["Provider"], App_extends({
         template: react_alert_template_basic["default"]
-      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(layout_Navbar, null), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(utils_PrivateRoute, {
+      }, alertOptions), react_default.a.createElement(react_router_dom["HashRouter"], null, react_default.a.createElement(layout_Navbar, {
+        currentDashboard: state.dashboards.currentDashboard
+      }), react_default.a.createElement(layout_Alerts, null), react_default.a.createElement(react_router_dom["Switch"], null, react_default.a.createElement(utils_PrivateRoute, {
         exact: true,
         path: "/",
         component: home
@@ -11422,8 +11565,6 @@ function (_Component) {
 
 react_dom_default.a.render(react_default.a.createElement(App_App, null), document.getElementById("app"));
 // CONCATENATED MODULE: ./frontend/src/index.js
-
-
 
 
 /***/ })

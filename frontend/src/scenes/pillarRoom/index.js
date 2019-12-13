@@ -11,7 +11,7 @@ import { KPI_TABLE_HEADERS } from "../../core/config/dashboardConfig";
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
 import Pillar from "../../core/components/d3charts/pillar";
 import LineChart from "../../core/components/d3charts/LineChart";
-import Table from "../../core/components/ui/table/Table";
+import Table from "./components/Table";
 import Modal from "../../core/components/ui/modal/Modal";
 import { getItem } from "../../core/helpers/Filters";
 
@@ -26,8 +26,46 @@ import {
 import ChartOptions from "./components/ChartOptions";
 import MenuView from "./components/MenuView";
 import KpiNew from "./components/kpis/KpiNew";
-import RemoveConformation from "../../core/components/ui/RemoveConfirmation";
-import Tooltip from "./components/Tooltip";
+import PillarPopover from "./components/PillarPopover";
+
+// MATERIAl-UI
+import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({
+  rootContainer: {
+    margin: 0,
+    width: "100%",
+    overflow: "hidden",
+    flex: 1
+  },
+  cardAction: {
+    padding: "8px 25px",
+    position: "sticky",
+    marginTop: "auto",
+    borderTop: "1px solid rgba(0, 0, 0, 0.14)"
+  },
+  card: {
+    display: "flex",
+    flexDirection: "column",
+    overflow: "auto",
+    height: "100%",
+    maxHeight: "100%"
+  },
+  chartCardContent: {
+    overflow: "auto",
+    flex: 1
+  },
+  gridItem: {
+    maxHeight: "100%"
+  },
+  pillar: {
+    margin: "0 10px !important"
+  }
+});
 
 class pillarRoom extends Component {
   static propTypes = {
@@ -45,8 +83,9 @@ class pillarRoom extends Component {
       selectedKpi: null,
       menuMode: false,
       removeContext: null,
-      toolTipData: null,
-      toolTipShow: false
+      toolTipData: {},
+      toolTipShow: false,
+      kpiNewOpen: false
     };
 
     this.selectSeries = this.selectSeries.bind(this);
@@ -54,12 +93,6 @@ class pillarRoom extends Component {
     this.setRemove = this.setRemove.bind(this);
     this.resetKpiSelect = this.resetKpiSelect.bind(this);
     this.showTooltip = this.showTooltip.bind(this);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.kpis != this.props.kpis) {
-      // this.selectSeriesHook(null);
-    }
   }
 
   componentDidMount() {
@@ -103,6 +136,10 @@ class pillarRoom extends Component {
     this.setState({ selectedKpi: id });
   }
 
+  openKpiNew = state => () => {
+    this.setState({ kpiNewOpen: state });
+  };
+
   deselect = () => {
     d3.selectAll(".line").attr("stroke-width", 1.8);
     d3.selectAll(".dot").attr("r", 3);
@@ -113,15 +150,15 @@ class pillarRoom extends Component {
   };
 
   render() {
-    const { kpis, currentDashboard } = this.props;
+    const { kpis, currentDashboard, classes } = this.props;
     const { pillarId, dashboardId } = this.props.match.params;
     const {
       selectedSeries,
       selectedKpi,
       menuMode,
-      removeContext,
       toolTipData,
-      toolTipShow
+      toolTipShow,
+      kpiNewOpen
     } = this.state;
 
     const kpi = getItem(selectedKpi, kpis, "id");
@@ -130,46 +167,38 @@ class pillarRoom extends Component {
       return <LoadingScreen />;
     }
     const color = currentDashboard.background;
+
     return (
-      <div
-        className="container-fluid pt-4 pb-4"
-        style={{
-          padding: 0,
-          background: color,
-          height: `${100}%`,
-          minHeight: "fit-content"
-        }}
-      >
-        <Tooltip data={toolTipData} show={toolTipShow} />
-        <div className="row m-0 h-100">
-          <div className="col-lg-4 mx-vh-90">
-            <div className="card h-100">
-              <div className="card-body">
+      <>
+        <PillarPopover open={toolTipShow} data={toolTipData} />
+
+        <Grid
+          container
+          spacing={4}
+          className={classes.rootContainer}
+          style={{ background: color }}
+        >
+          <Grid item lg={4} className={classes.gridItem}>
+            <Card className={classes.card}>
+              <CardContent>
                 <Pillar
                   kpis={kpis}
                   letter={pillarId === "Plus" ? "+" : pillarId}
                   dashboardId={dashboardId}
                   labeled
+                  className={classes.pillar}
                   onHover={this.showTooltip}
                 />
-              </div>
-              <div className="card-footer" style={{ display: "flex" }}>
-                <div className="row w-100">
-                  <div className="col-lg-12">
-                    <Table
-                      data={kpis}
-                      header={KPI_TABLE_HEADERS}
-                      fontSize={`${0.7}rem`}
-                      summary={false}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-8 mx-vh-90">
-            <div className="card h-100">
-              <div className="card-body scroll">
+
+                <CardActions>
+                  <Table data={kpis} tableMeta={KPI_TABLE_HEADERS} />
+                </CardActions>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item lg={8} className={classes.gridItem}>
+            <Card className={classes.card}>
+              <CardContent className={classes.chartCardContent}>
                 {menuMode ? (
                   <MenuView
                     kpi={kpi}
@@ -177,6 +206,7 @@ class pillarRoom extends Component {
                     changeMenu={this.setMenuState}
                     menuState={this.menuMode}
                     resetKpiSelect={this.resetKpiSelect}
+                    pillarId={pillarId}
                   ></MenuView>
                 ) : (
                   <LineChart
@@ -185,9 +215,8 @@ class pillarRoom extends Component {
                     selectedKpi={selectedKpi}
                   />
                 )}
-              </div>
-
-              <div className="card-footer" style={{ display: "flex" }}>
+              </CardContent>
+              <CardActions className={classes.cardAction}>
                 <ChartOptions
                   active={selectedSeries}
                   selectKpi={this.selectKpi}
@@ -197,17 +226,20 @@ class pillarRoom extends Component {
                   changeMenu={this.setMenuState}
                   menuMode={menuMode}
                   kpi={kpi}
+                  handleKpiNewOpen={this.openKpiNew}
                 />
-              </div>
-            </div>
-          </div>
-        </div>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
 
-        <Modal id="newKpi" title="New KPI" iconClass="im im-dashboard">
-          <KpiNew pillar={pillarId} dashboard={currentDashboard.id}></KpiNew>
-        </Modal>
-        <RemoveConformation removeContext={removeContext}></RemoveConformation>
-      </div>
+        <KpiNew
+          pillar={pillarId}
+          dashboard={currentDashboard.id}
+          open={kpiNewOpen}
+          handleToggleOpen={this.openKpiNew}
+        ></KpiNew>
+      </>
     );
   }
 }
@@ -217,7 +249,6 @@ const mapStateToProps = state => ({
   currentDashboard: state.dashboards.currentDashboard
 });
 
-export default connect(
-  mapStateToProps,
-  { getADashboard, getKpis, clearKpis }
-)(pillarRoom);
+export default connect(mapStateToProps, { getADashboard, getKpis, clearKpis })(
+  withStyles(styles)(pillarRoom)
+);

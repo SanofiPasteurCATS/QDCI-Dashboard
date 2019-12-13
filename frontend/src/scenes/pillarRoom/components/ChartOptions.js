@@ -1,6 +1,24 @@
 // DEPENDANCIES
 import React, { Fragment, Component } from "react";
 
+// MATERIAL-UI
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import TimelineIcon from "@material-ui/icons/Timeline";
+import IconButton from "@material-ui/core/IconButton";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
+import { withStyles } from "@material-ui/styles";
+
+const styles = theme => ({
+  KpiSelect: {
+    width: "200px"
+  },
+  plotButton: {
+    marginLeft: "auto !important"
+  }
+});
+
 class ChartOptions extends Component {
   onChange = e => {
     const { selectKpi, selectSeries, deselect } = this.props;
@@ -16,81 +34,52 @@ class ChartOptions extends Component {
     }
   }
 
-  openKpiNew = () => {
-    $("#newKpi").modal("show");
-  };
-
   render() {
-    const { kpis, changeMenu, menuMode, kpi } = this.props;
+    const {
+      kpis,
+      changeMenu,
+      menuMode,
+      kpi,
+      classes,
+      handleKpiNewOpen
+    } = this.props;
 
     return (
       <Fragment>
-        <h4
-          style={{
-            height: "fit-content",
-            marginBottom: 0,
-            lineHeight: 1.4
-          }}
-          className="mt-auto mb-auto"
-        >
-          KPI:{" "}
-        </h4>
-        <select
-          className="form-control ml-2 mt-auto mb-auto"
-          style={{ width: `${200}px` }}
+        <Select
           onChange={this.onChange}
+          className={classes.KpiSelect}
+          value={kpi ? kpi.id : ""}
         >
           {kpis.map(kpi => (
-            <option key={`choice-${kpi.id}`} value={kpi.id}>
+            <MenuItem key={`choice-${kpi.id}`} value={kpi.id}>
               {kpi.name}
-            </option>
+            </MenuItem>
           ))}
-        </select>
-        <button
-          type="button"
-          className={"btn btn-success btn-sm mt-auto ml-3"}
-          style={{ padding: "1px 8px" }}
-          onClick={this.openKpiNew}
-        >
-          <i
-            className="im im-plus"
-            style={{ lineHeight: "1.5", fontSize: "20px" }}
-          ></i>
-        </button>
+        </Select>
+        <IconButton onClick={handleKpiNewOpen(true)}>
+          <LibraryAddIcon color="primary"></LibraryAddIcon>
+        </IconButton>
+
         {kpi && (
           <>
-            <button
-              type="button"
-              className={`btn btn-sm mt-auto ml-auto ${
-                menuMode ? "btn-secondary" : "btn-primary"
-              }`}
+            <IconButton
+              className={classes.plotButton}
               onClick={() => changeMenu(false)}
-              style={{ padding: "1px 8px" }}
               disabled={menuMode ? false : true}
             >
-              <i
-                className="im im-line-chart-up"
-                style={{ lineHeight: "1.5", fontSize: "20px" }}
-              ></i>
-            </button>
-            <button
-              type="button"
-              className={`btn btn-sm mt-auto ml-2 ${
-                menuMode ? "btn-primary" : "btn-secondary"
-              }`}
+              <TimelineIcon></TimelineIcon>
+            </IconButton>
+            <IconButton
               onClick={() => changeMenu(true)}
-              style={{ padding: "1px 8px" }}
               disabled={menuMode ? true : false}
             >
-              <i
-                className="im im-gear"
-                style={{ lineHeight: "1.5", fontSize: "20px" }}
-              ></i>
-            </button>{" "}
+              <SettingsIcon></SettingsIcon>
+            </IconButton>
           </>
         )}
       </Fragment>
     );
   }
 }
-export default ChartOptions;
+export default withStyles(styles)(ChartOptions);

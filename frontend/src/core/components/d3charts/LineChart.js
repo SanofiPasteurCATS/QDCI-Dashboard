@@ -11,10 +11,10 @@ const margin = {
   top: 10,
   right: 150,
   bottom: 30,
-  left: 50
+  left: 24
 };
 
-const width = 1100 - margin.left - margin.right;
+const width = 950 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
 class LineChart extends React.Component {
@@ -84,7 +84,7 @@ class LineChart extends React.Component {
       .attr("xmlns", "http://www.w3.org/2000/svg")
       .attr("xmlnsXlink", "http://www.w3.org/1999/xlink")
       // CSS Styles
-      .style("margin", "20px 0")
+      .style("margin", "20px 0 0")
       .append("g")
       .attr("id", "plotArea")
       .attr("transform", `translate(${margin.left + 30},${margin.bottom})`);
@@ -132,7 +132,7 @@ class LineChart extends React.Component {
       .attr("id", "title")
       .attr("y", 0 - margin.top / 2)
       .attr("text-anchor", "middle")
-      .style("text-decoration", "underline")
+      .style("font-weight", "bold")
       .style("font-size", "31px")
       .attr("fill", accentColor);
   }
@@ -156,7 +156,7 @@ class LineChart extends React.Component {
 
     let data = kpis[index] ? kpis[index].series : [];
 
-    let test = {};
+    let test = null;
     if (kpis[index] && kpis[index].series) {
       test = { ...kpis[index].series[0] };
       let entries = [...kpis[index].series[0].entries];
@@ -171,7 +171,6 @@ class LineChart extends React.Component {
       });
       test.color = "#008000";
       test.name = `${test.name} Threshold`;
-      data = [test, ...data];
     }
 
     const parseTime = d3.timeParse("%Y-%m-%d");
@@ -230,6 +229,7 @@ class LineChart extends React.Component {
     // Update the X_Axis
     d3.select(faux)
       .selectAll(".myXaxis")
+      .style("font-size", "0.7rem")
       .transition()
       .duration(1000)
       .call(x_axis);
@@ -237,6 +237,7 @@ class LineChart extends React.Component {
     // Update the Y_Axis
     d3.select(faux)
       .selectAll(".myYaxis")
+      .style("font-size", "0.6rem")
       .transition()
       .duration(1000)
       .call(y_axis);
@@ -247,6 +248,7 @@ class LineChart extends React.Component {
 
     const line = d3
       .line()
+      .curve(d3.curveCardinal)
       .y(d => yScale(d.value))
       .defined(d => d.value != null)
       .x(d => xScale(parseTime(d.date)));
@@ -256,7 +258,8 @@ class LineChart extends React.Component {
       .select("#plotArea")
       .selectAll(".line");
 
-    const sData = s.data(data);
+    const extendedData = test != null ? [test, ...data] : data;
+    const sData = s.data(extendedData);
 
     const sEnter = sData
       .enter()
@@ -266,7 +269,9 @@ class LineChart extends React.Component {
       .style("opacity", 1)
       .attr("id", d => `line_${d.id}`)
       .attr("class", "line")
-      .attr("fill", "none")
+      .attr("fill", d => {
+        return `url(#${d.id}-gradient)`;
+      })
       .attr("stroke-width", 1.8)
       .attr("stroke", d => d.color);
 
@@ -349,7 +354,7 @@ class LineChart extends React.Component {
       .append("text")
       .attr("x", width + margin.right)
       .attr("y", function(d, i) {
-        return height / 2 + 20 * i;
+        return margin.top * 2 + 20 * i;
       })
       .attr("id", function(d) {
         return `legend_${d.id}`;

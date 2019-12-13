@@ -2,8 +2,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import SeriesCard from "./SeriesCard";
+import Grid from "@material-ui/core/Grid";
 
+// REDUX
 import { addSeries } from "../../../../core/actions/dashboards";
+
 // CORE COMPONENTS
 import NewCard from "../../../../core/components/ui/NewCard";
 
@@ -22,21 +25,18 @@ class SeriesList extends Component {
     const { series, onClick } = this.props;
     if (!series) return <div></div>;
     return (
-      <div className="row">
+      <Grid container spacing={3}>
         {series.map(series => (
-          <div key={series.id} className="col-sm-3">
+          <Grid key={series.id} item lg={3}>
             <SeriesCard onClick={onClick} series={series} />
-          </div>
+          </Grid>
         ))}
-        <div className="col-sm-3">
+        <Grid item lg={3}>
           <NewCard handleClick={this.onNewSeriesClick} text="Series" />
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 }
 
-export default connect(
-  null,
-  { addSeries }
-)(SeriesList);
+export default connect(null, { addSeries })(SeriesList);

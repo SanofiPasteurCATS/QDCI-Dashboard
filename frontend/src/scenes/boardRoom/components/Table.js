@@ -11,13 +11,10 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import FilterListIcon from "@material-ui/icons/FilterList";
@@ -364,7 +361,7 @@ export default function EnhancedTable(props) {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={`${row.id}-checkbox`}
                     selected={isItemSelected}
                   >
                     <TableCell padding="checkbox">
@@ -373,9 +370,10 @@ export default function EnhancedTable(props) {
                         inputProps={{ "aria-labelledby": labelId }}
                       />
                     </TableCell>
-                    {tableMeta.map(field => {
+                    {tableMeta.map((field, index) => {
                       return (
                         <TableCell
+                          key={`${index}-${row.id}`}
                           align="left"
                           id={row.id}
                           className={classes.tableCell}

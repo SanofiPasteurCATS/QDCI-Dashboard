@@ -7,107 +7,92 @@ import "react-datepicker/dist/react-datepicker.css";
 import parseISO from "date-fns/parseISO";
 import format from "date-fns/format";
 
-class DataForm extends Component {
-  state = {
-    value: "",
-    target: "",
-    date: new Date()
-  };
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import { withStyles } from "@material-ui/core/styles";
 
+const styles = theme => ({
+  textField: {
+    marginBottom: theme.spacing(5),
+    width: "100%"
+  }
+});
+
+class DataForm extends Component {
   static propTypes = {
     datapoint: PropTypes.object,
     updateDatapoint: PropTypes.func.isRequired,
     series: PropTypes.number
   };
 
-  update = payload => {
-    this.setState({ ...payload });
-  };
+  handleDateChange = date => {
+    const { onChange } = this.props;
 
-  componentDidUpdate(prevProps) {
-    const { datapoint } = this.props;
-    if (prevProps.datapoint !== datapoint) {
-      this.update({
-        ...datapoint,
-        date: datapoint.date ? parseISO(datapoint.date) : new Date()
-      });
-    }
-  }
-
-  onSubmit = e => {
-    e.preventDefault();
-    const { updateDatapoint, series } = this.props;
-    const { value, target, date, id } = this.state;
-    const datapoint = {
-      value: value,
-      target: target,
-      series: series,
-      date: format(date, "yyyy-MM-dd")
-    };
-    updateDatapoint(datapoint, id);
-    $("#dataOptions").modal("hide");
-  };
-
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onDateChange = date => {
-    this.setState({ date });
+    onChange({
+      target: {
+        name: "date",
+        value: format(date, "yyyy-MM-dd")
+      }
+    });
   };
 
   render() {
-    const { value, target, date } = this.state;
+    const { value, target, date } = this.props.datapoint;
+    const { classes, onChange } = this.props;
+
+    const parts = date.split("-");
+    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+    // January - 0, February - 1, etc.
+    var newDate = new Date(parts[0], parts[1] - 1, parts[2]);
+
     return (
       <Fragment>
         <form onSubmit={this.onSubmit} noValidate>
-          <div className="form-group">
-            <label htmlFor="name">Value</label>
-            <input
-              className="form-control"
-              type="text"
-              name="value"
-              onChange={this.onChange}
-              placeholder="..."
-              value={value != null ? value : ""}
-            />
-          </div>
+          <TextField
+            required
+            fullWidth
+            id="value"
+            label="Value"
+            className={classes.textField}
+            onChange={onChange}
+            value={value != null ? value : ""}
+            name="value"
+          />
 
-          <div className="form-group">
-            <label htmlFor="plot_type">Target</label>
-            <input
-              className="form-control"
-              type="text"
-              name="target"
-              onChange={this.onChange}
-              placeholder="..."
-              value={target != null ? target : ""}
-            />
-          </div>
+          <TextField
+            required
+            fullWidth
+            id="target"
+            label="Target"
+            className={classes.textField}
+            onChange={onChange}
+            value={target != null ? target : ""}
+            name="target"
+          />
 
-          <div className="form-group">
-            <label htmlFor="date" className="d-block">
-              Date
-            </label>
-            <DatePicker
-              className="form-control"
-              onChange={date => this.onDateChange(date)}
-              selected={date}
-              dateFormat="yyyy-MM-dd"
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="yyyy-MM-dd"
+              margin="normal"
+              id="date"
+              className={classes.textField}
+              label="Date"
+              value={newDate}
+              onChange={date => {
+                this.handleDateChange(date);
+              }}
+              KeyboardButtonProps={{
+                "aria-label": "change date"
+              }}
             />
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="submit" className="btn btn-primary">
-              Update Datapoint
-            </button>
-          </div>
+          </MuiPickersUtilsProvider>
         </form>
       </Fragment>
     );
@@ -119,7 +104,4 @@ DataForm.defaultProps = {
   series: null
 };
 
-export default connect(
-  null,
-  { updateDatapoint }
-)(DataForm);
+export default connect(null, { updateDatapoint })(withStyles(styles)(DataForm));

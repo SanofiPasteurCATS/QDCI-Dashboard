@@ -88,7 +88,4 @@ ImageList.propTypes = {
   deleteImage: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  { deleteImage }
-)(ImageList);
+export default connect(null, { deleteImage })(ImageList);

@@ -1,7 +1,8 @@
 import React from "react";
+
+// MATERIAL-UI
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MobileStepper from "@material-ui/core/MobileStepper";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -90,7 +91,7 @@ function SwipeableTextMobileStepper(props) {
         enableMouseEvents
       >
         {slides.map((step, index) => (
-          <div key={step.label}>
+          <div key={index}>
             {Math.abs(activeStep - index) <= 2 ? (
               <img
                 className={classes.img}
@@ -134,7 +135,6 @@ function SwipeableTextMobileStepper(props) {
         steps={maxSteps}
         position="static"
         variant="dots"
-        dotActive={{ color: "red" }}
         activeStep={activeStep}
         className={classes.stepper}
         backButton={<div />}

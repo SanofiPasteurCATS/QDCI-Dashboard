@@ -8,6 +8,9 @@ import KpiForm from "./KpiForm";
 
 // ACTIONS
 import { updateKpi } from "../../../../core/actions/dashboards";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
 
 class KpiEdit extends Component {
   constructor(props) {
@@ -85,23 +88,36 @@ class KpiEdit extends Component {
   };
 
   render() {
-    const { kpi } = this.props;
+    const { kpi, onRemove } = this.props;
     return (
-      <form onSubmit={this.onSubmit} className="w-100 mt-3">
+      <form onSubmit={this.onSubmit}>
         <KpiForm
           onChange={this.onChange}
           pillar={kpi.pillar}
           values={this.state}
         />
-        <button type="submit" className="btn btn-success mb-4 mt-3">
-          Save Changes
-        </button>
+        <div style={{ float: "right" }}>
+          <Button
+            color="primary"
+            type="submit"
+            variant="contained"
+            style={{ marginRight: "15px" }}
+            startIcon={<SaveIcon />}
+          >
+            Save Changes
+          </Button>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={onRemove}
+            startIcon={<DeleteIcon />}
+          >
+            Delete Kpi
+          </Button>
+        </div>
       </form>
     );
   }
 }
 
-export default connect(
-  null,
-  { updateKpi }
-)(KpiEdit);
+export default connect(null, { updateKpi })(KpiEdit);

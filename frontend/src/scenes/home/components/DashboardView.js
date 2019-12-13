@@ -123,7 +123,6 @@ DashboardView.propTypes = {
 const mapStateToProps = state => ({
   dashboards: state.dashboards.dashboards
 });
-export default connect(
-  mapStateToProps,
-  { getDashboards, deleteDashboard }
-)(DashboardView);
+export default connect(mapStateToProps, { getDashboards, deleteDashboard })(
+  DashboardView
+);

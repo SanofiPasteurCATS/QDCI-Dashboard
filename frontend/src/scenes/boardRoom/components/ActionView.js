@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ActionTable from "./ActionTable";
 
+// MATERIAL-UI
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";

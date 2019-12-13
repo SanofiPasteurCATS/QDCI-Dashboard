@@ -36,7 +36,7 @@ class Example extends Component {
     } = this;
 
     return (
-      <div className="mt-5" style={{ height: 70, width: "95%" }}>
+      <div style={{ height: 70, width: "95%", paddingLeft: "10px" }}>
         <Slider
           mode={1}
           step={1}

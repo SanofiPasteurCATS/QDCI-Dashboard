@@ -59,7 +59,7 @@ class MenuView extends Component {
   };
 
   render() {
-    const { kpi, changeMenu } = this.props;
+    const { kpi, changeMenu, pillarId } = this.props;
     if (!kpi) {
       changeMenu(false);
       return <div></div>;
@@ -67,7 +67,6 @@ class MenuView extends Component {
     const { selectedSeries, view } = this.state;
 
     const series = getItem(selectedSeries, kpi.series, "id");
-
     switch (view) {
       case KPI_VIEW:
         return (
@@ -75,14 +74,17 @@ class MenuView extends Component {
             kpi={kpi}
             onSeriesSelect={this.onSeriesSelect}
             setRemove={this.setRemove}
+            pillarId={pillarId}
           ></KpiView>
         );
       case SERIES_VIEW:
         return (
           <SeriesView
             series={series}
+            kpi={kpi}
             onBack={this.onSeriesBack}
             setRemove={this.setRemove}
+            pillarId={pillarId}
           ></SeriesView>
         );
       default:

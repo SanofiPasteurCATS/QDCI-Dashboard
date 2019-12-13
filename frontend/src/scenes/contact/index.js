@@ -1,26 +1,56 @@
 import React from "react";
 
+// MATERIAL-UI
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import EmailIcon from "@material-ui/icons/Email";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
+import CardContent from "@material-ui/core/CardContent";
+
+import Grid from "@material-ui/core/Grid";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    height: "100%"
+  },
+  heading: {
+    marginBottom: theme.spacing(3)
+  },
+  icon: {
+    marginRight: theme.spacing(1)
+  }
+}));
 const Contact = props => {
+  const classes = useStyles();
+
   return (
-    <div className="row justify-content-center m-0">
-      <div className="col-lg-5 mt-5">
-        <div className="card">
-          <div className="card-body">
-            <h1 className="card-title">Contact</h1>
-            <p className="card-text">
-              <span className="im-user-male im mr-3"></span>
-              Kyle Thatcher - Co-op Student
-            </p>
-            <p className="card-text">
-              <span className="im im-mail mr-3"></span>kyle.thatcher@sanofi.com
-            </p>
-            <p className="card-text">
-              Please contact for any and all bugs and issues encountered
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Grid
+      container
+      spacing={0}
+      alignItems="center"
+      justify="center"
+      className={classes.root}
+    >
+      <Card>
+        <CardContent>
+          <Typography variant="h3" className={classes.heading}>
+            Contact
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <AccountBoxIcon className={classes.icon} color="primary" />
+            Kyle Thatcher - Co-op Student
+          </Typography>
+          <Typography variant="body1" gutterBottom>
+            <EmailIcon className={classes.icon} color="primary" />
+            kyle.thatcher@sanofi.com
+          </Typography>
+          <Typography variant="body1">
+            Please contact for any and all bugs and issues encountered. Thanks.
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 

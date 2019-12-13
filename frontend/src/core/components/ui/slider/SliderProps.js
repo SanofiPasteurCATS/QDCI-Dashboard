@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const railOuterStyle = {
   position: "absolute",
   width: "100%",
-  height: 42,
+  height: 6,
   transform: "translate(0%, -50%)",
   borderRadius: 7,
   cursor: "pointer"
@@ -17,7 +17,7 @@ const railOuterStyle = {
 const railInnerStyle = {
   position: "absolute",
   width: "100%",
-  height: 14,
+  height: 6,
   transform: "translate(0%, -50%)",
   borderRadius: 7,
   pointerEvents: "none",
@@ -124,8 +124,8 @@ export function KeyboardHandle({
         position: "absolute",
         transform: "translate(-50%, -50%)",
         zIndex: 2,
-        width: 24,
-        height: 24,
+        width: 16,
+        height: 16,
         borderRadius: "50%",
         boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.3)",
         backgroundColor: disabled ? "#666" : "#218838"
@@ -160,7 +160,7 @@ export function Track({ source, target, getTrackProps, disabled, color }) {
       style={{
         position: "absolute",
         transform: "translate(0%, -50%)",
-        height: 14,
+        height: 6,
         zIndex: 1,
         backgroundColor: disabled ? "#999" : color,
         borderRadius: 7,

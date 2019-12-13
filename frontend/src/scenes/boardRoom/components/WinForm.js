@@ -1,5 +1,5 @@
 // DEPENDANCIES
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 // MATERIAL-UI
@@ -77,8 +77,7 @@ function WinForm(props) {
 }
 WinForm.propTypes = {
   win: PropTypes.object,
-  updateWin: PropTypes.func.isRequired,
-  deleteWin: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 export default WinForm;

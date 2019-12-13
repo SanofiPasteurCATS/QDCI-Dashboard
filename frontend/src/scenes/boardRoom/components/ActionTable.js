@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+
+// MATERIAL-UI
 import { lighten, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -12,19 +14,14 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import SettingsIcon from "@material-ui/icons/Settings";
 import EditIcon from "@material-ui/icons/Edit";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import { getItem } from "../../../core/helpers/Filters";
-import DynamicFeedIcon from "@material-ui/icons/DynamicFeed";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
 function desc(a, b, orderBy) {
@@ -416,7 +413,7 @@ export default function EnhancedTable(props) {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={`${row.id}-checkbox`}
                     selected={isItemSelected}
                   >
                     <TableCell padding="checkbox">
@@ -425,11 +422,12 @@ export default function EnhancedTable(props) {
                         inputProps={{ "aria-labelledby": labelId }}
                       />
                     </TableCell>
-                    {tableMeta.map(field => {
+                    {tableMeta.map((field, index) => {
                       return (
                         <TableCell
                           align="left"
                           id={row.id}
+                          key={`${index}-${row.id}`}
                           className={classes.tableCell}
                         >
                           {row[field.prop] === null ? "---" : row[field.prop]}

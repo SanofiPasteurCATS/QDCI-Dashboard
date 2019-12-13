@@ -171,7 +171,4 @@ DashboardForm.propTypes = {
   })
 };
 
-export default connect(
-  null,
-  { addDashboard }
-)(DashboardForm);
+export default connect(null, { addDashboard })(DashboardForm);

@@ -1,6 +1,5 @@
 // DEPENDANCIES
 import React from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 // MATERIAL-UI
@@ -116,98 +115,6 @@ function ActionForm(props) {
         </MuiPickersUtilsProvider>
       </Grid>
     </Grid>
-    /*
-      <Fragment>
-        <h2>Edit Action</h2>
-        <form onSubmit={this.onSubmit}>
-          <div className="row justify-content-between">
-            <div className="col-sm-6">
-              <div className="form-group">
-                <label htmlFor="letter">Letter</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="letter"
-                  onChange={this.onChange}
-                  value={letter || ""}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="problem">Problem</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="problem"
-                  onChange={this.onChange}
-                  value={problem}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="root_cause">Root Cause</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="root_cause"
-                  onChange={this.onChange}
-                  value={root_cause}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="solution">Solution</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="solution"
-                  onChange={this.onChange}
-                  value={solution}
-                />
-              </div>
-            </div>
-            <div className="col-sm-5">
-              <div className="form-group">
-                <label htmlFor="leader">Leader</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="leader"
-                  onChange={this.onChange}
-                  value={leader}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="date" className="d-block">
-                  Date
-                </label>
-                <DatePicker
-                  className="form-control"
-                  onChange={date => this.onDateChange(date)}
-                  selected={date}
-                  dateFormat="yyyy-MM-dd"
-                />
-              </div>
-            </div>
-
-            <div className="col-sm-12 d-flex justify-content-end">
-              <button
-                type="button"
-                className="btn
-            btn-danger mr-4"
-                onClick={this.delete}
-              >
-                Delete
-              </button>
-              <button
-                type="submit"
-                className="btn
-            btn-primary"
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-        </form>
-      </Fragment>
-      */
   );
 }
 
