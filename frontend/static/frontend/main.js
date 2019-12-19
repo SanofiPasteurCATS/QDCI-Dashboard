@@ -5126,7 +5126,7 @@ function (_React$Component) {
       }
 
       var svg = d3["select"](faux).attr("id", "chart").attr("viewBox", "0 0 ".concat(LineChart_width + margin.left + margin.right, " ").concat(LineChart_height + margin.bottom + margin.top)).attr("preserveAspectRatio", "xMidYMid meet").classed("svg-content", true).attr("xmlns", "http://www.w3.org/2000/svg").attr("xmlnsXlink", "http://www.w3.org/1999/xlink") // CSS Styles
-      .style("margin", "20px 0 0").append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
+      .append("g").attr("id", "plotArea").attr("transform", "translate(".concat(margin.left + 30, ",").concat(margin.bottom, ")"));
       svg.append("rect").attr("width", LineChart_width).attr("height", LineChart_height).style("opacity", 0).attr("id", "facade").on("click", function () {
         highlightLine("null");
         selectSeries(null);

@@ -84,7 +84,6 @@ class LineChart extends React.Component {
       .attr("xmlns", "http://www.w3.org/2000/svg")
       .attr("xmlnsXlink", "http://www.w3.org/1999/xlink")
       // CSS Styles
-      .style("margin", "20px 0 0")
       .append("g")
       .attr("id", "plotArea")
       .attr("transform", `translate(${margin.left + 30},${margin.bottom})`);
