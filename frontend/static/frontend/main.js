@@ -8042,7 +8042,7 @@ function (_Component) {
         label: "Danger Limit",
         className: classes.textField,
         disabled: true,
-        value: safe_deviation || "",
+        value: danger_deviation || "",
         name: "danger_deviation"
       })));
     };

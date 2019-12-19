@@ -150,7 +150,7 @@ class KpiForm extends Component {
             label="Danger Limit"
             className={classes.textField}
             disabled
-            value={safe_deviation || ""}
+            value={danger_deviation || ""}
             name="danger_deviation"
           />
         </Grid>
