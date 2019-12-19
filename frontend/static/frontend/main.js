@@ -8233,6 +8233,7 @@ function (_Component) {
       }, "Frequency"), react_default.a.createElement(Select["default"], {
         onChange: onChange,
         value: frequency,
+        name: "frequency",
         required: true,
         disabled: !editFrequency
       }, FREQUENCY_CHOICES.map(function (choice) {

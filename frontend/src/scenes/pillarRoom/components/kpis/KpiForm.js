@@ -316,6 +316,7 @@ class KpiForm extends Component {
               <Select
                 onChange={onChange}
                 value={frequency}
+                name="frequency"
                 required
                 disabled={!editFrequency}
               >
