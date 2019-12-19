@@ -5064,7 +5064,7 @@ var margin = {
   left: 24
 };
 var LineChart_width = 950 - margin.left - margin.right;
-var LineChart_height = 600 - margin.top - margin.bottom;
+var LineChart_height = 550 - margin.top - margin.bottom;
 
 var LineChart_LineChart =
 /*#__PURE__*/
@@ -9064,7 +9064,7 @@ var pillarRoom_styles = function styles(theme) {
       maxHeight: "100%"
     },
     pillar: {
-      margin: "0 10px !important"
+      margin: "0 20px !important"
     }
   };
 };

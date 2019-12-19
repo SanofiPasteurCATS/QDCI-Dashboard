@@ -63,7 +63,7 @@ const styles = theme => ({
     maxHeight: "100%"
   },
   pillar: {
-    margin: "0 10px !important"
+    margin: "0 20px !important"
   }
 });
 

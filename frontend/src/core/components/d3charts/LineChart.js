@@ -15,7 +15,7 @@ const margin = {
 };
 
 const width = 950 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const height = 550 - margin.top - margin.bottom;
 
 class LineChart extends React.Component {
   static propTypes = {
