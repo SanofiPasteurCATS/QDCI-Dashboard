@@ -213,7 +213,10 @@ class LineChart extends React.Component {
     // -----------------------------------------------------------------------------
     const xScale = d3
       .scaleTime()
-      .domain([new Date("2019-01-01"), new Date("2019-12-31")])
+      .domain([
+        new Date(new Date().getFullYear(), 0, 1),
+        new Date(new Date().getFullYear(), 11, 31)
+      ])
       .range([0, width]);
     const yScale = d3
       .scaleLinear()

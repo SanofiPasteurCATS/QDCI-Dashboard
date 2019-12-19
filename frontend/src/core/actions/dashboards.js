@@ -167,10 +167,10 @@ export const getKpis = (id, pillar = "") => (dispatch, getState) => {
     });
 };
 
-export const addKpi = kpi => (dispatch, getState) => {
+export const addKpi = (kpi, year) => (dispatch, getState) => {
   // Send request to server
   axios
-    .post("/api/kpis/", kpi, tokenConfig(getState))
+    .post(`/api/kpis/?year=${year}`, kpi, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addKpi: "KPI Added!" }));
       dispatch({

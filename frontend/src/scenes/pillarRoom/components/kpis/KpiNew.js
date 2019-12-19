@@ -62,7 +62,8 @@ class KpiNew extends Component {
       warning_margin,
       kpi_type,
       leader,
-      threshold_type
+      threshold_type,
+      year
     } = this.state;
     const global_target = this.state.global_target || null;
     const isPercentage = global_target ? false : true;
@@ -83,7 +84,7 @@ class KpiNew extends Component {
       isPercentage
     };
 
-    addKpi(k);
+    addKpi(k, year);
     this.setState({
       name: "",
       danger_deviation: 75,
@@ -93,7 +94,8 @@ class KpiNew extends Component {
       kpi_type: 0,
       leader: "",
       global_target: "",
-      unit: ""
+      unit: "",
+      year: ""
     });
     handleToggleOpen(false)();
   };

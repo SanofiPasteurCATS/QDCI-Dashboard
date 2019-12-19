@@ -164,7 +164,7 @@ class KpiForm extends Component {
 
     return (
       <>
-        <Grid item lg={2}>
+        <Grid item lg={4}>
           <RadioGroup
             aria-label="threshold_type"
             name="threshold_type"
@@ -224,7 +224,7 @@ class KpiForm extends Component {
           ></ThresholdSlider>
         </Grid>
 
-        <Grid item lg={2}>
+        <Grid item lg={3}>
           <RadioGroup
             aria-label="threshold_type"
             name="threshold_type"
@@ -283,7 +283,7 @@ class KpiForm extends Component {
 
   render() {
     const { onChange, pillar, editFrequency, classes } = this.props;
-    const { name, frequency, kpi_type, leader, unit } = this.props.values;
+    const { name, frequency, kpi_type, leader, unit, year } = this.props.values;
 
     return (
       <>
@@ -349,6 +349,16 @@ class KpiForm extends Component {
               onChange={onChange}
               placeholder="..."
               value={unit || ""}
+            />
+            <TextField
+              fullWidth
+              label="Year"
+              className={classes.textField}
+              type="text"
+              name="year"
+              onChange={onChange}
+              placeholder="..."
+              value={year || ""}
             />
           </Grid>
           <Grid item container lg={12}>

@@ -1247,10 +1247,10 @@ var dashboards_getKpis = function getKpis(id) {
     });
   };
 };
-var dashboards_addKpi = function addKpi(kpi) {
+var dashboards_addKpi = function addKpi(kpi, year) {
   return function (dispatch, getState) {
     // Send request to server
-    axios_default.a.post("/api/kpis/", kpi, tokenConfig(getState)).then(function (res) {
+    axios_default.a.post("/api/kpis/?year=".concat(year), kpi, tokenConfig(getState)).then(function (res) {
       dispatch(messages_createMessage({
         addKpi: "KPI Added!"
       }));
@@ -5221,7 +5221,7 @@ function (_React$Component) {
       // AXES & SCALES
       // -----------------------------------------------------------------------------
 
-      var xScale = d3["scaleTime"]().domain([new Date("2019-01-01"), new Date("2019-12-31")]).range([0, LineChart_width]);
+      var xScale = d3["scaleTime"]().domain([new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31)]).range([0, LineChart_width]);
       var yScale = d3["scaleLinear"]().domain(minimum.length ? [d3["min"](minimum) * 0.8, d3["max"](maximum) * 1.2] : [0, 100]).range([LineChart_height - margin.bottom, 0]);
       var y_axis = d3["axisLeft"](yScale);
       var x_axis = d3["axisBottom"](xScale).tickFormat(d3["timeFormat"]("%b")); // Update the X_Axis
@@ -8054,7 +8054,7 @@ function (_Component) {
       var classes = _this.props.classes;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 2
+        lg: 4
       }, react_default.a.createElement(RadioGroup["default"], {
         "aria-label": "threshold_type",
         name: "threshold_type",
@@ -8105,7 +8105,7 @@ function (_Component) {
         domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
       })), react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 2
+        lg: 3
       }, react_default.a.createElement(RadioGroup["default"], {
         "aria-label": "threshold_type",
         name: "threshold_type",
@@ -8196,7 +8196,8 @@ function (_Component) {
           frequency = _this$props$values6.frequency,
           kpi_type = _this$props$values6.kpi_type,
           leader = _this$props$values6.leader,
-          unit = _this$props$values6.unit;
+          unit = _this$props$values6.unit,
+          year = _this$props$values6.year;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
         container: true,
         spacing: 2
@@ -8261,6 +8262,15 @@ function (_Component) {
         onChange: onChange,
         placeholder: "...",
         value: unit || ""
+      }), react_default.a.createElement(TextField["default"], {
+        fullWidth: true,
+        label: "Year",
+        className: classes.textField,
+        type: "text",
+        name: "year",
+        onChange: onChange,
+        placeholder: "...",
+        value: year || ""
       })), react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
@@ -8774,7 +8784,8 @@ function (_Component) {
           warning_margin = _this$state.warning_margin,
           kpi_type = _this$state.kpi_type,
           leader = _this$state.leader,
-          threshold_type = _this$state.threshold_type;
+          threshold_type = _this$state.threshold_type,
+          year = _this$state.year;
       var global_target = _this.state.global_target || null;
       var isPercentage = global_target ? false : true;
       var unit = _this.state.unit || null;
@@ -8793,7 +8804,7 @@ function (_Component) {
         unit: unit,
         isPercentage: isPercentage
       };
-      addKpi(k);
+      addKpi(k, year);
 
       _this.setState({
         name: "",
@@ -8804,7 +8815,8 @@ function (_Component) {
         kpi_type: 0,
         leader: "",
         global_target: "",
-        unit: ""
+        unit: "",
+        year: ""
       });
 
       handleToggleOpen(false)();

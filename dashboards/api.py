@@ -134,11 +134,12 @@ class KpiViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         kpi = serializer.save()
-
         s = Series(name="My Series", plot_type="li", color="#000000", kpi=kpi)
         series = s.save()
         def monthly():
-            year = datetime.now().year
+            year = int(self.request.query_params.get('year', None))
+            if (year == None):
+                year = datetime.now().year
             d = date(year,1,1)
             while d.year == year:
                 yield d
@@ -146,7 +147,9 @@ class KpiViewSet(viewsets.ModelViewSet):
                 d = d.replace(day=1)
 
         def weekly():
-            year = datetime.now().year
+            year = int(self.request.query_params.get('year', None))
+            if (year == None):
+                year = datetime.now().year
             d = date(year, 1, 1)                    # January 1st
             d += timedelta(days = 7 - d.weekday())  # First Sunday
             while d.year == year:
@@ -154,7 +157,9 @@ class KpiViewSet(viewsets.ModelViewSet):
                 d += timedelta(days = 7)
 
         def biweekly():
-            year = datetime.now().year
+            year = int(self.request.query_params.get('year', None))
+            if (year == None):
+                year = datetime.now().year
             d = date(year, 1, 1)                    # January 1st
             d += timedelta(days = 7 - d.weekday())  # First Sunday
             while d.year == year:
