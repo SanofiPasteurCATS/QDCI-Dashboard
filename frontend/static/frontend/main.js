@@ -5221,7 +5221,17 @@ function (_React$Component) {
       // AXES & SCALES
       // -----------------------------------------------------------------------------
 
-      var xScale = d3["scaleTime"]().domain([new Date(new Date().getFullYear(), 0, 1), new Date(new Date().getFullYear(), 11, 31)]).range([0, LineChart_width]);
+      var startDate = new Date();
+
+      if (data[0]) {
+        if (data[0].entries[0]) {
+          var date = data[0].entries[0].date;
+          var parts = date.split("-");
+          startDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        }
+      }
+
+      var xScale = d3["scaleTime"]().domain([new Date(startDate.getFullYear(), 0, 1), new Date(startDate.getFullYear(), 11, 31)]).range([0, LineChart_width]);
       var yScale = d3["scaleLinear"]().domain(minimum.length ? [d3["min"](minimum) * 0.8, d3["max"](maximum) * 1.2] : [0, 100]).range([LineChart_height - margin.bottom, 0]);
       var y_axis = d3["axisLeft"](yScale);
       var x_axis = d3["axisBottom"](xScale).tickFormat(d3["timeFormat"]("%b")); // Update the X_Axis
@@ -6582,9 +6592,7 @@ function (_Component) {
       var _this$props = this.props,
           classes = _this$props.classes,
           onChange = _this$props.onChange;
-      var parts = date.split("-"); // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-      // January - 0, February - 1, etc.
-
+      var parts = date.split("-");
       var newDate = new Date(parts[0], parts[1] - 1, parts[2]);
       return react_default.a.createElement(react["Fragment"], null, react_default.a.createElement("form", {
         onSubmit: this.onSubmit,

@@ -46,8 +46,6 @@ class DataForm extends Component {
     const { classes, onChange } = this.props;
 
     const parts = date.split("-");
-    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-    // January - 0, February - 1, etc.
     var newDate = new Date(parts[0], parts[1] - 1, parts[2]);
 
     return (

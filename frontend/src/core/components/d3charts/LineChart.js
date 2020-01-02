@@ -210,11 +210,20 @@ class LineChart extends React.Component {
     // -----------------------------------------------------------------------------
     // AXES & SCALES
     // -----------------------------------------------------------------------------
+    let startDate = new Date();
+    if (data[0]) {
+      if (data[0].entries[0]) {
+        const date = data[0].entries[0].date;
+        const parts = date.split("-");
+        startDate = new Date(parts[0], parts[1] - 1, parts[2]);
+      }
+    }
+
     const xScale = d3
       .scaleTime()
       .domain([
-        new Date(new Date().getFullYear(), 0, 1),
-        new Date(new Date().getFullYear(), 11, 31)
+        new Date(startDate.getFullYear(), 0, 1),
+        new Date(startDate.getFullYear(), 11, 31)
       ])
       .range([0, width]);
     const yScale = d3
