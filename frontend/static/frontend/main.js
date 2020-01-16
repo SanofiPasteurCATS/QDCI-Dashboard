@@ -157,7 +157,7 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 70 modules ***!
+  !*** ./frontend/src/index.js + 71 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@date-io/date-fns/build/index.esm.js */
@@ -251,6 +251,7 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/prop-types/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert-template-basic/dist/esm/react-alert-template-basic.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-alert/dist/esm/react-alert.js */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-apexcharts/dist/react-apexcharts.min.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-color/lib/index.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-compound-slider/es/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/react-dom/index.js (<- Module is not an ECMAScript module) */
@@ -1741,7 +1742,7 @@ function _EMOTION_STRINGIFIED_CSS_ERROR__() { return "You have tried to stringif
 var override =  false ? undefined : {
   name: "11wvrmk-override",
   styles: "display:flex;margin:0 auto 20px auto;justify-content:center;align-items:center;;label:override;",
-  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcdGhhdGNcXERvY3VtZW50c1xccWRjaV9lbnZpcm9tZW50XFxxZGNpX3Byb2plY3RcXGZyb250ZW5kXFxzcmNcXGNvcmVcXGNvbXBvbmVudHNcXGxheW91dFxcTG9hZGluZ1NjcmVlbi5qcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFZb0IiLCJmaWxlIjoiQzpcXFVzZXJzXFx0aGF0Y1xcRG9jdW1lbnRzXFxxZGNpX2Vudmlyb21lbnRcXHFkY2lfcHJvamVjdFxcZnJvbnRlbmRcXHNyY1xcY29yZVxcY29tcG9uZW50c1xcbGF5b3V0XFxMb2FkaW5nU2NyZWVuLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gREVQRU5EQU5DSUVTXHJcbmltcG9ydCBSZWFjdCBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IEJvdW5jZUxvYWRlciBmcm9tIFwicmVhY3Qtc3Bpbm5lcnMvQm91bmNlTG9hZGVyXCI7XHJcbmltcG9ydCB7IGNzcyB9IGZyb20gXCJAZW1vdGlvbi9jb3JlXCI7XHJcblxyXG4vLyBDT05GSUdcclxuaW1wb3J0IHsgYWNjZW50Q29sb3IgfSBmcm9tIFwiLi4vLi4vY29uZmlnL3N0eWxlQ29uZmlnXCI7XHJcblxyXG5pbXBvcnQgeyBtYWtlU3R5bGVzIH0gZnJvbSBcIkBtYXRlcmlhbC11aS9jb3JlL3N0eWxlc1wiO1xyXG5cclxuaW1wb3J0IEdyaWQgZnJvbSBcIkBtYXRlcmlhbC11aS9jb3JlL0dyaWRcIjtcclxuXHJcbmNvbnN0IG92ZXJyaWRlID0gY3NzYFxyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgbWFyZ2luOiAwIGF1dG8gMjBweCBhdXRvO1xyXG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xyXG4gIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbmA7XHJcbmNvbnN0IHVzZVN0eWxlcyA9IG1ha2VTdHlsZXMoe1xyXG4gIHJvb3Q6IHtcclxuICAgIGhlaWdodDogXCIxMDAlXCJcclxuICB9XHJcbn0pO1xyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbigpIHtcclxuICBjb25zdCBjbGFzc2VzID0gdXNlU3R5bGVzKCk7XHJcbiAgcmV0dXJuIChcclxuICAgIDxHcmlkXHJcbiAgICAgIGNvbnRhaW5lclxyXG4gICAgICBhbGlnbkl0ZW1zPVwiY2VudGVyXCJcclxuICAgICAganVzdGlmeT1cImNlbnRlclwiXHJcbiAgICAgIHNwY2Fpbmc9ezB9XHJcbiAgICAgIGNsYXNzTmFtZT17Y2xhc3Nlcy5yb290fVxyXG4gICAgPlxyXG4gICAgICA8Qm91bmNlTG9hZGVyXHJcbiAgICAgICAgc2l6ZVVuaXQ9XCJweFwiXHJcbiAgICAgICAgc2l6ZT17NjB9XHJcbiAgICAgICAgY3NzPXtvdmVycmlkZX1cclxuICAgICAgICBjb2xvcj17YWNjZW50Q29sb3J9XHJcbiAgICAgIC8+XHJcbiAgICA8L0dyaWQ+XHJcbiAgKTtcclxufVxyXG4iXX0= */",
+  map: "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxkZXZcXHFkY2lfZW52aXJvbWVudFxccWRjaV9wcm9qZWN0XFxmcm9udGVuZFxcc3JjXFxjb3JlXFxjb21wb25lbnRzXFxsYXlvdXRcXExvYWRpbmdTY3JlZW4uanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBWW9CIiwiZmlsZSI6IkM6XFxkZXZcXHFkY2lfZW52aXJvbWVudFxccWRjaV9wcm9qZWN0XFxmcm9udGVuZFxcc3JjXFxjb3JlXFxjb21wb25lbnRzXFxsYXlvdXRcXExvYWRpbmdTY3JlZW4uanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBERVBFTkRBTkNJRVNcclxuaW1wb3J0IFJlYWN0IGZyb20gXCJyZWFjdFwiO1xyXG5pbXBvcnQgQm91bmNlTG9hZGVyIGZyb20gXCJyZWFjdC1zcGlubmVycy9Cb3VuY2VMb2FkZXJcIjtcclxuaW1wb3J0IHsgY3NzIH0gZnJvbSBcIkBlbW90aW9uL2NvcmVcIjtcclxuXHJcbi8vIENPTkZJR1xyXG5pbXBvcnQgeyBhY2NlbnRDb2xvciB9IGZyb20gXCIuLi8uLi9jb25maWcvc3R5bGVDb25maWdcIjtcclxuXHJcbmltcG9ydCB7IG1ha2VTdHlsZXMgfSBmcm9tIFwiQG1hdGVyaWFsLXVpL2NvcmUvc3R5bGVzXCI7XHJcblxyXG5pbXBvcnQgR3JpZCBmcm9tIFwiQG1hdGVyaWFsLXVpL2NvcmUvR3JpZFwiO1xyXG5cclxuY29uc3Qgb3ZlcnJpZGUgPSBjc3NgXHJcbiAgZGlzcGxheTogZmxleDtcclxuICBtYXJnaW46IDAgYXV0byAyMHB4IGF1dG87XHJcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuYDtcclxuY29uc3QgdXNlU3R5bGVzID0gbWFrZVN0eWxlcyh7XHJcbiAgcm9vdDoge1xyXG4gICAgaGVpZ2h0OiBcIjEwMCVcIlxyXG4gIH1cclxufSk7XHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uKCkge1xyXG4gIGNvbnN0IGNsYXNzZXMgPSB1c2VTdHlsZXMoKTtcclxuICByZXR1cm4gKFxyXG4gICAgPEdyaWRcclxuICAgICAgY29udGFpbmVyXHJcbiAgICAgIGFsaWduSXRlbXM9XCJjZW50ZXJcIlxyXG4gICAgICBqdXN0aWZ5PVwiY2VudGVyXCJcclxuICAgICAgc3BjYWluZz17MH1cclxuICAgICAgY2xhc3NOYW1lPXtjbGFzc2VzLnJvb3R9XHJcbiAgICA+XHJcbiAgICAgIDxCb3VuY2VMb2FkZXJcclxuICAgICAgICBzaXplVW5pdD1cInB4XCJcclxuICAgICAgICBzaXplPXs2MH1cclxuICAgICAgICBjc3M9e292ZXJyaWRlfVxyXG4gICAgICAgIGNvbG9yPXthY2NlbnRDb2xvcn1cclxuICAgICAgLz5cclxuICAgIDwvR3JpZD5cclxuICApO1xyXG59XHJcbiJdfQ== */",
   toString: _EMOTION_STRINGIFIED_CSS_ERROR__
 };
 var useStyles = Object(esm_styles["makeStyles"])({
@@ -5017,6 +5018,144 @@ PrivateRoute_PrivateRoute.propTypes = {
   auth: prop_types_default.a.object
 };
 /* harmony default export */ var utils_PrivateRoute = (Object(es["connect"])(PrivateRoute_mapStateToProps)(PrivateRoute_PrivateRoute));
+// EXTERNAL MODULE: ./node_modules/react-apexcharts/dist/react-apexcharts.min.js
+var react_apexcharts_min = __webpack_require__("./node_modules/react-apexcharts/dist/react-apexcharts.min.js");
+var react_apexcharts_min_default = /*#__PURE__*/__webpack_require__.n(react_apexcharts_min);
+
+// CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Chart.js
+function Chart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Chart_typeof = function _typeof(obj) { return typeof obj; }; } else { Chart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Chart_typeof(obj); }
+
+function Chart_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function Chart_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Chart_ownKeys(Object(source), true).forEach(function (key) { Chart_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Chart_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function Chart_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function Chart_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function Chart_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function Chart_createClass(Constructor, protoProps, staticProps) { if (protoProps) Chart_defineProperties(Constructor.prototype, protoProps); if (staticProps) Chart_defineProperties(Constructor, staticProps); return Constructor; }
+
+function Chart_possibleConstructorReturn(self, call) { if (call && (Chart_typeof(call) === "object" || typeof call === "function")) { return call; } return Chart_assertThisInitialized(self); }
+
+function Chart_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function Chart_getPrototypeOf(o) { Chart_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return Chart_getPrototypeOf(o); }
+
+function Chart_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) Chart_setPrototypeOf(subClass, superClass); }
+
+function Chart_setPrototypeOf(o, p) { Chart_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return Chart_setPrototypeOf(o, p); }
+
+
+
+
+var Chart_Chart =
+/*#__PURE__*/
+function (_Component) {
+  Chart_inherits(Chart, _Component);
+
+  function Chart(props) {
+    var _this;
+
+    Chart_classCallCheck(this, Chart);
+
+    _this = Chart_possibleConstructorReturn(this, Chart_getPrototypeOf(Chart).call(this, props));
+    _this.state = {
+      series: props.series,
+      options: {
+        chart: {
+          animations: {
+            enabled: true,
+            easing: "easeinout",
+            speed: 800,
+            animateGradually: {
+              enabled: false,
+              delay: 150
+            },
+            dynamicAnimation: {
+              enabled: true,
+              speed: 350
+            }
+          },
+          zoom: {
+            enabled: false
+          }
+        },
+        colors: props.colors,
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: "smooth"
+        },
+        fill: {
+          gradient: {
+            enabled: true,
+            opacityFrom: 0.6,
+            opacityTo: 0.8
+          }
+        },
+        legend: {
+          position: "top",
+          horizontalAlign: "left"
+        },
+        xaxis: {
+          type: "datetime"
+        }
+      }
+    };
+    return _this;
+  }
+
+  Chart_createClass(Chart, [{
+    key: "generateDayWiseTimeSeries",
+    value: function generateDayWiseTimeSeries(baseval, count, yrange) {
+      var i = 0;
+      var series = [];
+
+      while (i < count) {
+        var x = baseval;
+        var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+        series.push([x, y]);
+        baseval += 86400000;
+        i++;
+      }
+
+      return series;
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var _this$props = this.props,
+          series = _this$props.series,
+          colors = _this$props.colors;
+      if (series != prevProps.series) this.setState({
+        series: series
+      });
+      if (colors != prevProps.colors) this.setState({
+        options: Chart_objectSpread({}, this.state.options, {
+          colors: colors
+        })
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var type = this.props.type;
+      return react_default.a.createElement(react_apexcharts_min_default.a, {
+        options: this.state.options,
+        series: this.state.series,
+        type: type,
+        width: "100%"
+      });
+    }
+  }]);
+
+  return Chart;
+}(react["Component"]);
+
+/* harmony default export */ var components_Chart = (Chart_Chart);
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
 function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
 
@@ -5080,7 +5219,7 @@ function (_React$Component) {
     _this.renderD3 = _this.renderD3.bind(LineChart_assertThisInitialized(_this));
     _this.updateD3 = _this.updateD3.bind(LineChart_assertThisInitialized(_this));
     return _this;
-  } // Trigger D3 intial render()
+  } // Trigger D3 initial render()
 
 
   LineChart_createClass(LineChart, [{
@@ -5088,7 +5227,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.renderD3();
       this.updateD3();
-    } // Triger D3 update()
+    } // Trigger D3 update()
 
   }, {
     key: "componentDidUpdate",
@@ -5276,18 +5415,7 @@ function (_React$Component) {
       }) // Second we need to enter in the 'values' part of this group
       .selectAll(".dot").data(function (d) {
         return d.entries;
-      }).enter().append("circle")
-      /* .attr("class", function(d) {
-        var color = "grey";
-        var deviation = Math.abs(d.val / d.target - 1);
-        if (d.val == null) return color;
-        // Calculating color
-        if (deviation < safe) color = "green";
-        else if (deviation > safe && deviation < danger) color = "orange";
-        else color = "red";
-        return color;
-      }) */
-      .attr("cx", function (d) {
+      }).enter().append("circle").attr("cx", function (d) {
         return xScale(parseTime(d.date));
       }).attr("cy", function (d) {
         return yScale(d.value ? d.value : -50);
@@ -7913,6 +8041,9 @@ var KpiForm_styles = function styles(theme) {
       marginBottom: theme.spacing(4),
       marginTop: theme.spacing(4),
       width: "100%"
+    },
+    paragraph: {
+      marginBottom: theme.spacing(2)
     }
   };
 };
@@ -8023,7 +8154,7 @@ function (_Component) {
       var classes = _this.props.classes;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 12
+        lg: 11
       }, react_default.a.createElement(DeviationSlider, {
         disabledRail: true,
         onUpdate: _this.onSliderUpdate,
@@ -8061,6 +8192,11 @@ function (_Component) {
           global_target = _this$props$values3.global_target;
       var classes = _this.props.classes;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
+        item: true,
+        lg: 12
+      }, react_default.a.createElement(Typography["default"], {
+        className: classes.paragraph
+      }, "Is green when value is:", " ")), react_default.a.createElement(Grid["default"], {
         item: true,
         lg: 4
       }, react_default.a.createElement(RadioGroup["default"], {
@@ -9020,6 +9156,7 @@ function pillarRoom_setPrototypeOf(o, p) { pillarRoom_setPrototypeOf = Object.se
 
 
 
+
  // CONFIG
 
  // CORE COMPONENTS
@@ -9207,6 +9344,23 @@ function (_Component) {
           toolTipShow = _this$state.toolTipShow,
           kpiNewOpen = _this$state.kpiNewOpen;
       var kpi = getItem(selectedKpi, kpis, "id");
+      var chartSeries = [];
+      var seriesColors = [];
+      kpi && kpi.series.forEach(function (series) {
+        var data = [];
+        series.entries.forEach(function (datapoint) {
+          if (!datapoint.value) return;
+          data.push({
+            x: new Date(datapoint.date).getTime(),
+            y: datapoint.value
+          });
+        });
+        chartSeries.push({
+          name: series.name,
+          data: data
+        });
+        seriesColors.push(series.color);
+      });
 
       if (currentDashboard == null) {
         return react_default.a.createElement(LoadingScreen, null);
@@ -9254,11 +9408,18 @@ function (_Component) {
         menuState: this.menuMode,
         resetKpiSelect: this.resetKpiSelect,
         pillarId: pillarId
-      }) : react_default.a.createElement(d3charts_LineChart, {
-        kpis: kpis,
-        selectSeries: this.selectSeries,
-        selectedKpi: selectedKpi
-      })), react_default.a.createElement(CardActions["default"], {
+      }) : react_default.a.createElement(components_Chart, {
+        type: "line",
+        series: chartSeries,
+        colors: seriesColors
+      })
+      /*
+      <LineChart
+        kpis={kpis}
+        selectSeries={this.selectSeries}
+        selectedKpi={selectedKpi}
+      /> */
+      ), react_default.a.createElement(CardActions["default"], {
         className: classes.cardAction
       }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,
@@ -10343,6 +10504,12 @@ function DashboardView_setPrototypeOf(o, p) { DashboardView_setPrototypeOf = Obj
 
 
 
+var DashboardView_styles = {
+  cardRoot: {
+    flexBasis: "100%"
+  }
+};
+
 var DashboardView_DashboardView =
 /*#__PURE__*/
 function (_Component) {
@@ -10418,7 +10585,9 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var dashboards = this.props.dashboards;
+      var _this$props = this.props,
+          dashboards = _this$props.dashboards,
+          classes = _this$props.classes;
       var _this$state = this.state,
           removeItem = _this$state.removeItem,
           editItem = _this$state.editItem,
@@ -10433,7 +10602,8 @@ function (_Component) {
         return react_default.a.createElement(Grid["default"], {
           item: true,
           md: 4,
-          key: dashboard.id
+          key: dashboard.id,
+          className: classes.cardRoot
         }, react_default.a.createElement(DashboardCard, {
           dashboard: dashboard,
           onRemoveClick: _this2.setRemove,
@@ -10481,7 +10651,7 @@ var DashboardView_mapStateToProps = function mapStateToProps(state) {
 /* harmony default export */ var components_DashboardView = (Object(es["connect"])(DashboardView_mapStateToProps, {
   getDashboards: dashboards_getDashboards,
   deleteDashboard: dashboards_deleteDashboard
-})(DashboardView_DashboardView));
+})(Object(esm_styles["withStyles"])(DashboardView_styles)(DashboardView_DashboardView)));
 // CONCATENATED MODULE: ./frontend/src/scenes/home/index.js
 function home_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { home_typeof = function _typeof(obj) { return typeof obj; }; } else { home_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return home_typeof(obj); }
 

@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import * as d3 from "d3";
 import PropTypes from "prop-types";
+import Chart from "./components/Chart";
 
 // CONFIG
 import { KPI_TABLE_HEADERS } from "../../core/config/dashboardConfig";
@@ -162,6 +163,22 @@ class pillarRoom extends Component {
     } = this.state;
 
     const kpi = getItem(selectedKpi, kpis, "id");
+    const chartSeries = [];
+    const seriesColors = [];
+    kpi &&
+      kpi.series.forEach(series => {
+        let data = [];
+
+        series.entries.forEach(datapoint => {
+          if (!datapoint.value) return;
+          data.push({
+            x: new Date(datapoint.date).getTime(),
+            y: datapoint.value
+          });
+        });
+        chartSeries.push({ name: series.name, data: data });
+        seriesColors.push(series.color);
+      });
 
     if (currentDashboard == null) {
       return <LoadingScreen />;
@@ -209,11 +226,17 @@ class pillarRoom extends Component {
                     pillarId={pillarId}
                   ></MenuView>
                 ) : (
+                  <Chart
+                    type="line"
+                    series={chartSeries}
+                    colors={seriesColors}
+                  />
+                  /*
                   <LineChart
                     kpis={kpis}
                     selectSeries={this.selectSeries}
                     selectedKpi={selectedKpi}
-                  />
+                  /> */
                 )}
               </CardContent>
               <CardActions className={classes.cardAction}>

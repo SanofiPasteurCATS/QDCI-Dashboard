@@ -11,7 +11,7 @@ import {
 
 // MATERIAL-UI
 import Grid from "@material-ui/core/Grid";
-
+import { withStyles } from "@material-ui/core/styles";
 import DashboardEditDialog from "./DashboardEditDialog";
 import DashboardNewDialog from "./DashboardNewDialog";
 import DashboardCard from "./DashboardCard";
@@ -19,6 +19,11 @@ import NewCard from "../../../core/components/ui/NewCard";
 import { getItem } from "../../../core/helpers/Filters";
 import RemoveConfirmation from "../../../core/components/ui/RemoveConfirmation";
 
+const styles = {
+  cardRoot: {
+    flexBasis: "100%"
+  }
+};
 class DashboardView extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +41,7 @@ class DashboardView extends Component {
   }
 
   render() {
-    const { dashboards } = this.props;
+    const { dashboards, classes } = this.props;
     const { removeItem, editItem, editIsOpen, newIsOpen } = this.state;
     let editableDashboard = {};
     if (editItem) editableDashboard = getItem(editItem.id, dashboards, "id");
@@ -44,7 +49,7 @@ class DashboardView extends Component {
       <Fragment>
         <Grid container spacing={2}>
           {dashboards.map(dashboard => (
-            <Grid item md={4} key={dashboard.id}>
+            <Grid item md={4} key={dashboard.id} className={classes.cardRoot}>
               <DashboardCard
                 dashboard={dashboard}
                 onRemoveClick={this.setRemove}
@@ -124,5 +129,5 @@ const mapStateToProps = state => ({
   dashboards: state.dashboards.dashboards
 });
 export default connect(mapStateToProps, { getDashboards, deleteDashboard })(
-  DashboardView
+  withStyles(styles)(DashboardView)
 );

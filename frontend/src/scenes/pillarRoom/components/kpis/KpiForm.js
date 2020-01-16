@@ -37,6 +37,9 @@ const styles = theme => ({
     marginBottom: theme.spacing(4),
     marginTop: theme.spacing(4),
     width: "100%"
+  },
+  paragraph: {
+    marginBottom: theme.spacing(2)
   }
 });
 
@@ -122,7 +125,7 @@ class KpiForm extends Component {
     const { classes } = this.props;
     return (
       <>
-        <Grid item lg={12}>
+        <Grid item lg={11}>
           <DeviationSlider
             disabledRail
             onUpdate={this.onSliderUpdate}
@@ -164,6 +167,11 @@ class KpiForm extends Component {
 
     return (
       <>
+        <Grid item lg={12}>
+          <Typography className={classes.paragraph}>
+            Is green when value is:{" "}
+          </Typography>
+        </Grid>
         <Grid item lg={4}>
           <RadioGroup
             aria-label="threshold_type"

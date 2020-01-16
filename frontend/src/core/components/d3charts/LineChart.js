@@ -33,13 +33,13 @@ class LineChart extends React.Component {
     this.updateD3 = this.updateD3.bind(this);
   }
 
-  // Trigger D3 intial render()
+  // Trigger D3 initial render()
   componentDidMount() {
     this.renderD3();
     this.updateD3();
   }
 
-  // Triger D3 update()
+  // Trigger D3 update()
   componentDidUpdate(prevProps) {
     const { kpis, selectedKpi } = this.props;
 
@@ -317,16 +317,6 @@ class LineChart extends React.Component {
       .data(d => d.entries)
       .enter()
       .append("circle")
-      /* .attr("class", function(d) {
-        var color = "grey";
-        var deviation = Math.abs(d.val / d.target - 1);
-        if (d.val == null) return color;
-        // Calculating color
-        if (deviation < safe) color = "green";
-        else if (deviation > safe && deviation < danger) color = "orange";
-        else color = "red";
-        return color;
-      }) */
       .attr("cx", d => xScale(parseTime(d.date)))
       .attr("cy", d => yScale(d.value ? d.value : -50))
       .attr("r", 3)
