@@ -60,7 +60,7 @@ class Chart extends Component {
         },
         colors: props.colors,
         dataLabels: {
-          enabled: true,
+          enabled: false,
           formatter: function(val, opts) {
             return val;
           }

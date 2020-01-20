@@ -5141,7 +5141,7 @@ function (_Component) {
         },
         colors: props.colors,
         dataLabels: {
-          enabled: true,
+          enabled: false,
           formatter: function formatter(val, opts) {
             return val;
           }
