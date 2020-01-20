@@ -7,10 +7,13 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 # Dashboard viewset
 
 class DashboardViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
 
     serializer_class = DashboardSerializer
     def get_queryset(self):
-        return Dashboard.objects.all()
+        return self.request.user.dashboards.all()
 
     def perform_create(self, serializer):
         dashboard = serializer.save(owner=self.request.user)
