@@ -30,6 +30,13 @@ class KpiSerializer(serializers.ModelSerializer):
     class Meta:
         model = Kpi
         fields = '__all__'
+        extra_kwargs = {
+                'unit': {
+                    # Tell DRF that the link field is not required.
+                    'required': False,
+                    'allow_blank': True,
+                 }
+            }
 
 class ShallowActionTableSerializer(serializers.ModelSerializer):
 

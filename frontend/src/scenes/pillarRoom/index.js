@@ -60,7 +60,7 @@ const styles = theme => ({
     maxHeight: "100%"
   },
   chartCardContent: {
-    overflow: "auto",
+    overflowX: "hidden",
     flex: 1
   },
   gridItem: {
@@ -182,7 +182,6 @@ class pillarRoom extends Component {
         chartSeries.push({
           name: series.name,
           data: data,
-          unit: "$",
           type: PLOT_TYPE_MAP[series.plot_type]
         });
         seriesColors.push(series.color);
@@ -238,6 +237,7 @@ class pillarRoom extends Component {
                     type={"line"}
                     series={chartSeries}
                     colors={seriesColors}
+                    unit={kpi ? kpi.unit : ""}
                   />
                   /*
                   <LineChart

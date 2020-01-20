@@ -113,21 +113,26 @@ class Chart extends Component {
     return series;
   }
   componentDidUpdate(prevProps) {
-    const { series, colors } = this.props;
-    const options = { ...this.state.options };
+    const { series, colors, unit } = this.props;
 
     const formatter = (unit => val => {
       return `${val} ${unit}`;
-    })("$");
-
-    options.dataLabels.formatter = formatter;
-
-    options.colors = colors;
-
-    if (series !== prevProps.series) {
+    })(unit);
+    if (
+      series !== prevProps.series ||
+      unit != prevProps.unit ||
+      colors != prevProps.colors
+    ) {
       this.setState({
         series: series,
-        options: options
+        options: {
+          ...this.state.options,
+          colors: colors,
+          dataLabels: {
+            ...this.state.options.dataLabels,
+            formatter: formatter
+          }
+        }
       });
     }
   }
@@ -144,5 +149,7 @@ class Chart extends Component {
     );
   }
 }
-
+Chart.defaultProps = {
+  unit: ""
+};
 export default Chart;

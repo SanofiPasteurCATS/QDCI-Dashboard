@@ -1867,7 +1867,7 @@ var KPI_TABLE_HEADERS = [{
 }, {
   name: "Pillar",
   prop: "pillar",
-  map: function map(pillar) {
+  formatter: function formatter(pillar) {
     return PILLAR_CHOICES.filter(function (choice) {
       return choice.id === pillar;
     })[0].name;
@@ -1875,13 +1875,13 @@ var KPI_TABLE_HEADERS = [{
 }, {
   name: "Frequency",
   prop: "frequency",
-  map: function map(frequency) {
+  formatter: function formatter(frequency) {
     return FREQUENCY_CHOICES[frequency].name;
   }
 }, {
   name: "Type",
   prop: "kpi_type",
-  map: function map(kpi_type) {
+  formatter: function formatter(kpi_type) {
     return KPI_TYPE_CHOICES[kpi_type].name;
   }
 }];
@@ -5189,23 +5189,24 @@ function (_Component) {
     value: function componentDidUpdate(prevProps) {
       var _this$props = this.props,
           series = _this$props.series,
-          colors = _this$props.colors;
-
-      var options = Chart_objectSpread({}, this.state.options);
+          colors = _this$props.colors,
+          unit = _this$props.unit;
 
       var formatter = function (unit) {
         return function (val) {
           return "".concat(val, " ").concat(unit);
         };
-      }("$");
+      }(unit);
 
-      options.dataLabels.formatter = formatter;
-      options.colors = colors;
-
-      if (series !== prevProps.series) {
+      if (series !== prevProps.series || unit != prevProps.unit || colors != prevProps.colors) {
         this.setState({
           series: series,
-          options: options
+          options: Chart_objectSpread({}, this.state.options, {
+            colors: colors,
+            dataLabels: Chart_objectSpread({}, this.state.options.dataLabels, {
+              formatter: formatter
+            })
+          })
         });
       }
     }
@@ -5225,6 +5226,9 @@ function (_Component) {
   return Chart;
 }(react["Component"]);
 
+Chart_Chart.defaultProps = {
+  unit: ""
+};
 /* harmony default export */ var components_Chart = (Chart_Chart);
 // CONCATENATED MODULE: ./frontend/src/core/components/d3charts/LineChart.js
 function LineChart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { LineChart_typeof = function _typeof(obj) { return typeof obj; }; } else { LineChart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return LineChart_typeof(obj); }
@@ -5711,7 +5715,7 @@ function Table_EnhancedTable(props) {
         id: row.id,
         key: "".concat(index, "-").concat(row.id),
         className: classes.tableCell
-      }, row[field.prop] === null ? "---" : row[field.prop]);
+      }, row[field.prop] === null ? "---" : field.formatter ? field.formatter(row[field.prop]) : row[field.prop]);
     }));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
@@ -9273,7 +9277,7 @@ var pillarRoom_styles = function styles(theme) {
       maxHeight: "100%"
     },
     chartCardContent: {
-      overflow: "auto",
+      overflowX: "hidden",
       flex: 1
     },
     gridItem: {
@@ -9428,7 +9432,6 @@ function (_Component) {
         chartSeries.push({
           name: series.name,
           data: data,
-          unit: "$",
           type: PLOT_TYPE_MAP[series.plot_type]
         });
         seriesColors.push(series.color);
@@ -9483,7 +9486,8 @@ function (_Component) {
       }) : react_default.a.createElement(components_Chart, {
         type: "line",
         series: chartSeries,
-        colors: seriesColors
+        colors: seriesColors,
+        unit: kpi ? kpi.unit : ""
       })
       /*
       <LineChart

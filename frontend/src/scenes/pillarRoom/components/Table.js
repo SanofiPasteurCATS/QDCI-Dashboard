@@ -142,7 +142,11 @@ export default function EnhancedTable(props) {
                           key={`${index}-${row.id}`}
                           className={classes.tableCell}
                         >
-                          {row[field.prop] === null ? "---" : row[field.prop]}
+                          {row[field.prop] === null
+                            ? "---"
+                            : field.formatter
+                            ? field.formatter(row[field.prop])
+                            : row[field.prop]}
                         </TableCell>
                       );
                     })}

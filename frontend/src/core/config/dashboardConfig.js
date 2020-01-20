@@ -103,21 +103,21 @@ export const KPI_TABLE_HEADERS = [
   {
     name: "Pillar",
     prop: "pillar",
-    map: function(pillar) {
+    formatter: function(pillar) {
       return PILLAR_CHOICES.filter(choice => choice.id === pillar)[0].name;
     }
   },
   {
     name: "Frequency",
     prop: "frequency",
-    map: function(frequency) {
+    formatter: function(frequency) {
       return FREQUENCY_CHOICES[frequency].name;
     }
   },
   {
     name: "Type",
     prop: "kpi_type",
-    map: function(kpi_type) {
+    formatter: function(kpi_type) {
       return KPI_TYPE_CHOICES[kpi_type].name;
     }
   }

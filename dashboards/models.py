@@ -74,7 +74,7 @@ class Kpi(models.Model):
     
 class Series(models.Model):
     name = models.CharField(max_length=256)
-    plot_type = models.CharField(max_length=2, choices=PLOT_TYPE_CHOICES)
+    plot_type = models.CharField(max_length=3, choices=PLOT_TYPE_CHOICES)
     color = models.CharField(max_length=7)
     kpi = models.ForeignKey(Kpi, on_delete=models.CASCADE, related_name="series")
 
