@@ -1775,8 +1775,23 @@ var useStyles = Object(esm_styles["makeStyles"])({
  ********************************************/
 var PLOT_TYPE_CHOICES = [{
   id: "li",
-  name: "Connected Scatter Plot"
+  name: "line"
+}, {
+  id: "ar",
+  name: "area"
+}, {
+  id: "bar",
+  name: "bar"
+}, {
+  id: "sc",
+  name: "scatter"
 }];
+var PLOT_TYPE_MAP = {
+  li: "line",
+  ar: "area",
+  bar: "bar",
+  sc: "scatter"
+};
 var DASHBOARD_TYPE_CHOICES = [{
   id: 0,
   name: "QDCI Dashboard"
@@ -5061,6 +5076,17 @@ function (_Component) {
     Chart_classCallCheck(this, Chart);
 
     _this = Chart_possibleConstructorReturn(this, Chart_getPrototypeOf(Chart).call(this, props));
+
+    _this.toggleLabels = function () {
+      _this.setState({
+        options: Chart_objectSpread({}, _this.state.options, {
+          dataLabels: Chart_objectSpread({}, _this.state.options.dataLabels, {
+            enabled: !_this.state.options.dataLabels.enabled
+          })
+        })
+      });
+    };
+
     _this.state = {
       series: props.series,
       options: {
@@ -5080,11 +5106,45 @@ function (_Component) {
           },
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            tools: {
+              download: true,
+              customIcons: [{
+                icon: '<i class="fas fa-tag chart-icon"></i>',
+                index: -1,
+                title: "Toggle data labels",
+                click: _this.toggleLabels
+              }]
+            }
+          }
+        },
+        markers: {
+          size: 5,
+          colors: undefined,
+          strokeColors: "#fff",
+          strokeWidth: 2,
+          strokeOpacity: 0.9,
+          strokeDashArray: 0,
+          fillOpacity: 1,
+          discrete: [],
+          shape: "circle",
+          radius: 5,
+          offsetX: 0,
+          offsetY: 0,
+          onClick: undefined,
+          onDblClick: undefined,
+          hover: {
+            size: 7,
+            sizeOffset: 3
           }
         },
         colors: props.colors,
         dataLabels: {
-          enabled: false
+          enabled: true,
+          formatter: function formatter(val, opts) {
+            return val;
+          }
         },
         stroke: {
           curve: "smooth"
@@ -5130,14 +5190,24 @@ function (_Component) {
       var _this$props = this.props,
           series = _this$props.series,
           colors = _this$props.colors;
-      if (series != prevProps.series) this.setState({
-        series: series
-      });
-      if (colors != prevProps.colors) this.setState({
-        options: Chart_objectSpread({}, this.state.options, {
-          colors: colors
-        })
-      });
+
+      var options = Chart_objectSpread({}, this.state.options);
+
+      var formatter = function (unit) {
+        return function (val) {
+          return "".concat(val, " ").concat(unit);
+        };
+      }("$");
+
+      options.dataLabels.formatter = formatter;
+      options.colors = colors;
+
+      if (series !== prevProps.series) {
+        this.setState({
+          series: series,
+          options: options
+        });
+      }
     }
   }, {
     key: "render",
@@ -5147,7 +5217,7 @@ function (_Component) {
         options: this.state.options,
         series: this.state.series,
         type: type,
-        width: "100%"
+        height: "95%"
       });
     }
   }]);
@@ -9357,7 +9427,9 @@ function (_Component) {
         });
         chartSeries.push({
           name: series.name,
-          data: data
+          data: data,
+          unit: "$",
+          type: PLOT_TYPE_MAP[series.plot_type]
         });
         seriesColors.push(series.color);
       });

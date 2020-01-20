@@ -342,6 +342,9 @@ details {
   display: block;
 }
 
+.chart-icon {
+  margin-right: 0.5rem;
+}
 /*
  * Add the correct display in all browsers.
  */

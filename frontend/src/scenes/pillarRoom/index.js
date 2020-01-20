@@ -6,7 +6,10 @@ import PropTypes from "prop-types";
 import Chart from "./components/Chart";
 
 // CONFIG
-import { KPI_TABLE_HEADERS } from "../../core/config/dashboardConfig";
+import {
+  KPI_TABLE_HEADERS,
+  PLOT_TYPE_MAP
+} from "../../core/config/dashboardConfig";
 
 // CORE COMPONENTS
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
@@ -176,7 +179,12 @@ class pillarRoom extends Component {
             y: datapoint.value
           });
         });
-        chartSeries.push({ name: series.name, data: data });
+        chartSeries.push({
+          name: series.name,
+          data: data,
+          unit: "$",
+          type: PLOT_TYPE_MAP[series.plot_type]
+        });
         seriesColors.push(series.color);
       });
 
@@ -227,7 +235,7 @@ class pillarRoom extends Component {
                   ></MenuView>
                 ) : (
                   <Chart
-                    type="line"
+                    type={"line"}
                     series={chartSeries}
                     colors={seriesColors}
                   />

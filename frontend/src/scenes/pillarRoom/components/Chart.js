@@ -23,12 +23,47 @@ class Chart extends Component {
           },
           zoom: {
             enabled: false
+          },
+          toolbar: {
+            tools: {
+              download: true,
+              customIcons: [
+                {
+                  icon: '<i class="fas fa-tag chart-icon"></i>',
+                  index: -1,
+                  title: "Toggle data labels",
+                  click: this.toggleLabels
+                }
+              ]
+            }
           }
         },
-
+        markers: {
+          size: 5,
+          colors: undefined,
+          strokeColors: "#fff",
+          strokeWidth: 2,
+          strokeOpacity: 0.9,
+          strokeDashArray: 0,
+          fillOpacity: 1,
+          discrete: [],
+          shape: "circle",
+          radius: 5,
+          offsetX: 0,
+          offsetY: 0,
+          onClick: undefined,
+          onDblClick: undefined,
+          hover: {
+            size: 7,
+            sizeOffset: 3
+          }
+        },
         colors: props.colors,
         dataLabels: {
-          enabled: false
+          enabled: true,
+          formatter: function(val, opts) {
+            return val;
+          }
         },
         stroke: {
           curve: "smooth"
@@ -52,6 +87,17 @@ class Chart extends Component {
     };
   }
 
+  toggleLabels = () => {
+    this.setState({
+      options: {
+        ...this.state.options,
+        dataLabels: {
+          ...this.state.options.dataLabels,
+          enabled: !this.state.options.dataLabels.enabled
+        }
+      }
+    });
+  };
   generateDayWiseTimeSeries(baseval, count, yrange) {
     var i = 0;
     var series = [];
@@ -68,9 +114,22 @@ class Chart extends Component {
   }
   componentDidUpdate(prevProps) {
     const { series, colors } = this.props;
-    if (series != prevProps.series) this.setState({ series: series });
-    if (colors != prevProps.colors)
-      this.setState({ options: { ...this.state.options, colors: colors } });
+    const options = { ...this.state.options };
+
+    const formatter = (unit => val => {
+      return `${val} ${unit}`;
+    })("$");
+
+    options.dataLabels.formatter = formatter;
+
+    options.colors = colors;
+
+    if (series !== prevProps.series) {
+      this.setState({
+        series: series,
+        options: options
+      });
+    }
   }
 
   render() {
@@ -80,7 +139,7 @@ class Chart extends Component {
         options={this.state.options}
         series={this.state.series}
         type={type}
-        width="100%"
+        height="95%"
       />
     );
   }

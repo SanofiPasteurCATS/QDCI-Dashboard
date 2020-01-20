@@ -13,7 +13,10 @@ PILLAR_CHOICES = [
 ]
 # Choices for plot-type field for series
 PLOT_TYPE_CHOICES = [
-    ('li', 'Connected Scatter Plot'),
+    ('li', 'line'),
+    ('ar', 'area'),
+    ('bar', 'bar'),
+    ('sc', 'scatter')
 ]
 
 DASHBOARD_TYPE_CHOICES = [

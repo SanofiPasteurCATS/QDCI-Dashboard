@@ -6,7 +6,19 @@
  *
  ********************************************/
 
-export const PLOT_TYPE_CHOICES = [{ id: "li", name: "Connected Scatter Plot" }];
+export const PLOT_TYPE_CHOICES = [
+  { id: "li", name: "line" },
+  { id: "ar", name: "area" },
+  { id: "bar", name: "bar" },
+  { id: "sc", name: "scatter" }
+];
+
+export const PLOT_TYPE_MAP = {
+  li: "line",
+  ar: "area",
+  bar: "bar",
+  sc: "scatter"
+};
 
 export const DASHBOARD_TYPE_CHOICES = [
   {
