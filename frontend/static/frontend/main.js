@@ -9423,7 +9423,8 @@ function (_Component) {
       kpi && kpi.series.forEach(function (series) {
         var data = [];
         series.entries.forEach(function (datapoint) {
-          if (!datapoint.value) return;
+          if (Number.isNaN(datapoint.value) || datapoint.value === null) return;
+          console.log(datapoint.value);
           data.push({
             x: new Date(datapoint.date).getTime(),
             y: datapoint.value

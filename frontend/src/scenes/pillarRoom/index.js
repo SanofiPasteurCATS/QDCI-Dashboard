@@ -173,7 +173,8 @@ class pillarRoom extends Component {
         let data = [];
 
         series.entries.forEach(datapoint => {
-          if (!datapoint.value) return;
+          if (Number.isNaN(datapoint.value) || datapoint.value === null) return;
+          console.log(datapoint.value);
           data.push({
             x: new Date(datapoint.date).getTime(),
             y: datapoint.value
