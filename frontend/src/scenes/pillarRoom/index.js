@@ -168,13 +168,13 @@ class pillarRoom extends Component {
     const kpi = getItem(selectedKpi, kpis, "id");
     const chartSeries = [];
     const seriesColors = [];
+    const strokeWidths = [];
     kpi &&
       kpi.series.forEach(series => {
         let data = [];
 
         series.entries.forEach(datapoint => {
           if (Number.isNaN(datapoint.value) || datapoint.value === null) return;
-          console.log(datapoint.value);
           data.push({
             x: new Date(datapoint.date).getTime(),
             y: datapoint.value
@@ -186,13 +186,13 @@ class pillarRoom extends Component {
           type: PLOT_TYPE_MAP[series.plot_type]
         });
         seriesColors.push(series.color);
+        strokeWidths.push(series.plot_type === "bar" ? 0 : 3);
       });
 
     if (currentDashboard == null) {
       return <LoadingScreen />;
     }
     const color = currentDashboard.background;
-
     return (
       <>
         <PillarPopover open={toolTipShow} data={toolTipData} />
@@ -239,13 +239,8 @@ class pillarRoom extends Component {
                     series={chartSeries}
                     colors={seriesColors}
                     unit={kpi ? kpi.unit : ""}
+                    strokeWidths={strokeWidths}
                   />
-                  /*
-                  <LineChart
-                    kpis={kpis}
-                    selectSeries={this.selectSeries}
-                    selectedKpi={selectedKpi}
-                  /> */
                 )}
               </CardContent>
               <CardActions className={classes.cardAction}>

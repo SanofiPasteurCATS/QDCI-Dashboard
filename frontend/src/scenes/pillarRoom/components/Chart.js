@@ -66,7 +66,8 @@ class Chart extends Component {
           }
         },
         stroke: {
-          curve: "smooth"
+          curve: "smooth",
+          width: props.strokeWidths
         },
 
         fill: {
@@ -82,6 +83,19 @@ class Chart extends Component {
         },
         xaxis: {
           type: "datetime"
+        },
+        plotOptions: {
+          bar: {
+            colors: {
+              ranges: [
+                {
+                  from: -1 * Number.MAX_SAFE_INTEGER,
+                  to: 0,
+                  color: "#dc3545"
+                }
+              ]
+            }
+          }
         }
       }
     };
@@ -98,23 +112,10 @@ class Chart extends Component {
       }
     });
   };
-  generateDayWiseTimeSeries(baseval, count, yrange) {
-    var i = 0;
-    var series = [];
-    while (i < count) {
-      var x = baseval;
-      var y =
-        Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
-      series.push([x, y]);
-      baseval += 86400000;
-      i++;
-    }
-    return series;
-  }
   componentDidUpdate(prevProps) {
-    const { series, colors, unit } = this.props;
-
+    const { series, colors, unit, type, strokeWidths } = this.props;
+    let plotOptions = {};
     const formatter = (unit => val => {
       return `${val} ${unit}`;
     })(unit);
@@ -128,10 +129,14 @@ class Chart extends Component {
         options: {
           ...this.state.options,
           colors: colors,
+          stroke: {
+            width: strokeWidths
+          },
           dataLabels: {
             ...this.state.options.dataLabels,
             formatter: formatter
-          }
+          },
+          plotOptions: plotOptions
         }
       });
     }

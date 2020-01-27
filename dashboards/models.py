@@ -33,7 +33,8 @@ LEVEL_CHOICES = [
 FREQUENCY_CHOICES = [
     (0, "Monthly"),
     (1, "Weekly"),
-    (2, "Bi-Weekly")
+    (2, "Bi-Weekly"),
+    (3, "Daily")
 ]
 
 KPI_TYPE_CHOICES = [

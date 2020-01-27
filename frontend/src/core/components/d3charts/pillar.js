@@ -136,11 +136,13 @@ class Pillar extends React.Component {
       .sort(null)
       .value(d => 1);
 
-    const arc = d3
-      .arc()
-      .cornerRadius(2)
-      .padAngle(0.6)
-      .padRadius(3);
+    const arc = (cornerRadius = 2, padAngle = 0.6, padRadius = 3) => {
+      return d3
+        .arc()
+        .cornerRadius(cornerRadius)
+        .padAngle(padAngle)
+        .padRadius(padRadius);
+    };
 
     const labelArc = d3
       .arc()
@@ -200,7 +202,11 @@ class Pillar extends React.Component {
       })
       .attr("d", (d, i, j) => {
         const index = $(j)[i].parentNode.getAttribute("data-index");
-        return arc
+        const frequency = $(j)[i].parentNode.getAttribute("data-frequency");
+        let line = arc();
+        if (frequency === 3) line = arc(0, 0, 0);
+
+        return line
           .outerRadius(
             radius + ((plotSize * labelScale) / 16) * (index + 1 + labelOffset)
           )

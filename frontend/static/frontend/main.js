@@ -1844,6 +1844,9 @@ var FREQUENCY_CHOICES = [{
 }, {
   id: 2,
   name: "Bi-Weekly"
+}, {
+  id: 3,
+  name: "Daily"
 }];
 /********************************************
  *
@@ -2180,7 +2183,14 @@ function (_React$Component) {
       var pie = d3["pie"]().sort(null).value(function (d) {
         return 1;
       });
-      var arc = d3["arc"]().cornerRadius(2).padAngle(0.6).padRadius(3);
+
+      var arc = function arc() {
+        var cornerRadius = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
+        var padAngle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.6;
+        var padRadius = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 3;
+        return d3["arc"]().cornerRadius(cornerRadius).padAngle(padAngle).padRadius(padRadius);
+      };
+
       var labelArc = d3["arc"]().innerRadius(radius * 0.84 + plotSize * labelScale / 21 * (count - 1) * 1.0 + 15).outerRadius(radius * 0.84 + plotSize * labelScale / 20 * (count - 1) * 1.3 + 15).cornerRadius(2).padAngle(0.05).padRadius(80);
       var faux = this.props.connectFauxDOM("svg", "chart");
       d3["select"](faux).select("#text").text(letter);
@@ -2215,7 +2225,10 @@ function (_React$Component) {
         return "ring_".concat(d.data.id);
       }).attr("d", function (d, i, j) {
         var index = $(j)[i].parentNode.getAttribute("data-index");
-        return arc.outerRadius(radius + plotSize * labelScale / 16 * (index + 1 + labelOffset)).innerRadius(radius + plotSize * labelScale / 16 * (index + labelOffset) + 4)(d);
+        var frequency = $(j)[i].parentNode.getAttribute("data-frequency");
+        var line = arc();
+        if (frequency === 3) line = arc(0, 0, 0);
+        return line.outerRadius(radius + plotSize * labelScale / 16 * (index + 1 + labelOffset)).innerRadius(radius + plotSize * labelScale / 16 * (index + labelOffset) + 4)(d);
       }).on("mouseover", function (d, i, j) {
         var kpi_type = $(j)[i].parentNode.getAttribute("data-type");
         var kpiName = $(j)[i].parentNode.getAttribute("data-name");
@@ -5147,7 +5160,8 @@ function (_Component) {
           }
         },
         stroke: {
-          curve: "smooth"
+          curve: "smooth",
+          width: props.strokeWidths
         },
         fill: {
           gradient: {
@@ -5162,6 +5176,17 @@ function (_Component) {
         },
         xaxis: {
           type: "datetime"
+        },
+        plotOptions: {
+          bar: {
+            colors: {
+              ranges: [{
+                from: -1 * Number.MAX_SAFE_INTEGER,
+                to: 0,
+                color: "#dc3545"
+              }]
+            }
+          }
         }
       }
     };
@@ -5169,28 +5194,15 @@ function (_Component) {
   }
 
   Chart_createClass(Chart, [{
-    key: "generateDayWiseTimeSeries",
-    value: function generateDayWiseTimeSeries(baseval, count, yrange) {
-      var i = 0;
-      var series = [];
-
-      while (i < count) {
-        var x = baseval;
-        var y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-        series.push([x, y]);
-        baseval += 86400000;
-        i++;
-      }
-
-      return series;
-    }
-  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       var _this$props = this.props,
           series = _this$props.series,
           colors = _this$props.colors,
-          unit = _this$props.unit;
+          unit = _this$props.unit,
+          type = _this$props.type,
+          strokeWidths = _this$props.strokeWidths;
+      var plotOptions = {};
 
       var formatter = function (unit) {
         return function (val) {
@@ -5203,9 +5215,13 @@ function (_Component) {
           series: series,
           options: Chart_objectSpread({}, this.state.options, {
             colors: colors,
+            stroke: {
+              width: strokeWidths
+            },
             dataLabels: Chart_objectSpread({}, this.state.options.dataLabels, {
               formatter: formatter
-            })
+            }),
+            plotOptions: plotOptions
           })
         });
       }
@@ -8270,7 +8286,7 @@ function (_Component) {
         lg: 12
       }, react_default.a.createElement(Typography["default"], {
         className: classes.paragraph
-      }, "Is green when value is:", " ")), react_default.a.createElement(Grid["default"], {
+      }, "Is green when value is:")), react_default.a.createElement(Grid["default"], {
         item: true,
         lg: 4
       }, react_default.a.createElement(RadioGroup["default"], {
@@ -8281,11 +8297,11 @@ function (_Component) {
       }, react_default.a.createElement(FormControlLabel["default"], {
         value: 0,
         control: react_default.a.createElement(Radio["default"], null),
-        label: "Greater Than"
+        label: "Greater Than (or equal to)"
       }), react_default.a.createElement(FormControlLabel["default"], {
         value: 1,
         control: react_default.a.createElement(Radio["default"], null),
-        label: "Less Than"
+        label: "Less Than (or equal to)"
       }))), react_default.a.createElement(Grid["default"], {
         item: true,
         lg: 4
@@ -8323,6 +8339,11 @@ function (_Component) {
         domain: threshold_type === THRESHOLD_TYPE_GREATER ? [global_target ? 0 : -100, global_target ? parseInt(global_target) * 1.5 : 100] : [parseInt(global_target) - parseInt(global_target) * 0.5 || -100, global_target ? parseInt(global_target) * 2 : 100]
       })), react_default.a.createElement(Grid["default"], {
         item: true,
+        lg: 12
+      }, react_default.a.createElement(Typography["default"], {
+        className: classes.paragraph
+      }, "Is green when value is:")), react_default.a.createElement(Grid["default"], {
+        item: true,
         lg: 3
       }, react_default.a.createElement(RadioGroup["default"], {
         "aria-label": "threshold_type",
@@ -8332,11 +8353,11 @@ function (_Component) {
       }, react_default.a.createElement(FormControlLabel["default"], {
         value: 0,
         control: react_default.a.createElement(Radio["default"], null),
-        label: "Greater Than"
+        label: "Greater Than (or equal to)"
       }), react_default.a.createElement(FormControlLabel["default"], {
         value: 1,
         control: react_default.a.createElement(Radio["default"], null),
-        label: "Less Than"
+        label: "Less Than (or equal to)"
       }))), react_default.a.createElement(Grid["default"], {
         item: true,
         lg: 4
@@ -9420,11 +9441,11 @@ function (_Component) {
       var kpi = getItem(selectedKpi, kpis, "id");
       var chartSeries = [];
       var seriesColors = [];
+      var strokeWidths = [];
       kpi && kpi.series.forEach(function (series) {
         var data = [];
         series.entries.forEach(function (datapoint) {
           if (Number.isNaN(datapoint.value) || datapoint.value === null) return;
-          console.log(datapoint.value);
           data.push({
             x: new Date(datapoint.date).getTime(),
             y: datapoint.value
@@ -9436,6 +9457,7 @@ function (_Component) {
           type: PLOT_TYPE_MAP[series.plot_type]
         });
         seriesColors.push(series.color);
+        strokeWidths.push(series.plot_type === "bar" ? 0 : 3);
       });
 
       if (currentDashboard == null) {
@@ -9488,15 +9510,9 @@ function (_Component) {
         type: "line",
         series: chartSeries,
         colors: seriesColors,
-        unit: kpi ? kpi.unit : ""
-      })
-      /*
-      <LineChart
-        kpis={kpis}
-        selectSeries={this.selectSeries}
-        selectedKpi={selectedKpi}
-      /> */
-      ), react_default.a.createElement(CardActions["default"], {
+        unit: kpi ? kpi.unit : "",
+        strokeWidths: strokeWidths
+      })), react_default.a.createElement(CardActions["default"], {
         className: classes.cardAction
       }, react_default.a.createElement(components_ChartOptions, {
         active: selectedSeries,

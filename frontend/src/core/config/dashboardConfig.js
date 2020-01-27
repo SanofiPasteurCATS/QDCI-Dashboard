@@ -71,7 +71,8 @@ export const PILLAR_CHOICES = [
 export const FREQUENCY_CHOICES = [
   { id: 0, name: "Monthly" },
   { id: 1, name: "Weekly" },
-  { id: 2, name: "Bi-Weekly" }
+  { id: 2, name: "Bi-Weekly" },
+  { id: 3, name: "Daily" }
 ];
 
 /********************************************

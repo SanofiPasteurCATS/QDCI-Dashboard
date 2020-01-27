@@ -91,6 +91,22 @@ class SeriesViewSet(viewsets.ModelViewSet):
             while d.year == year:
                 yield d
                 d += timedelta(days = 14)
+        
+        def daily():
+            year = datetime.now().year
+            if (year == None):
+                year = datetime.now().year
+            d = date(year, 1, 1)                    # January 1st
+            d += timedelta(days = 7 - d.weekday())  # First Monday
+            weekdayCounter = 0
+            while d.year == year:
+                yield d
+                if (weekdayCounter < 4) :
+                    d += timedelta(days = 1)
+                    weekdayCounter += 1
+                else:
+                    d += timedelta(days = 3)
+                    weekdayCounter = 0
 
         if (kpi.frequency == 0):
             for d in monthly():
@@ -102,6 +118,10 @@ class SeriesViewSet(viewsets.ModelViewSet):
                 d.save()
         elif (kpi.frequency == 2):
             for d in biweekly():
+                d= Datapoint(series=s, date=d)
+                d.save()
+        elif (kpi.frequency == 3):
+            for d in daily():
                 d= Datapoint(series=s, date=d)
                 d.save()
 
@@ -159,6 +179,21 @@ class KpiViewSet(viewsets.ModelViewSet):
                 yield d
                 d += timedelta(days = 7)
 
+        def daily():
+            year = int(self.request.query_params.get('year', None))
+            if (year == None):
+                year = datetime.now().year
+            d = date(year, 1, 1)                    # January 1st
+            d += timedelta(days = 8 - d.weekday())  # First Monday
+            weekdayCounter = 0
+            while d.year == year:
+                yield d
+                if (weekdayCounter < 5) :
+                    d += timedelta(days = 1)
+                    weekdayCounter += 1
+                else:
+                    d += timedelta(days = 3)
+                    weekdayCounter = 0
         def biweekly():
             year = int(self.request.query_params.get('year', None))
             if (year == None):
@@ -180,6 +215,10 @@ class KpiViewSet(viewsets.ModelViewSet):
         elif (kpi.frequency == 2):
             for d in biweekly():
                 d= Datapoint(series=s, date=d, target=kpi.global_target)
+                d.save()
+        elif (kpi.frequency == 3):
+            for d in daily():
+                d= Datapoint(series=s, date=d)
                 d.save()
 
     def put(self, request, *args, **kwargs):

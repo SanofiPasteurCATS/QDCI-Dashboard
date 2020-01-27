@@ -169,7 +169,7 @@ class KpiForm extends Component {
       <>
         <Grid item lg={12}>
           <Typography className={classes.paragraph}>
-            Is green when value is:{" "}
+            Is green when value is:
           </Typography>
         </Grid>
         <Grid item lg={4}>
@@ -182,9 +182,13 @@ class KpiForm extends Component {
             <FormControlLabel
               value={0}
               control={<Radio />}
-              label="Greater Than"
+              label="Greater Than (or equal to)"
             />
-            <FormControlLabel value={1} control={<Radio />} label="Less Than" />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Less Than (or equal to)"
+            />
           </RadioGroup>
         </Grid>
         <Grid item lg={4}>
@@ -231,7 +235,11 @@ class KpiForm extends Component {
             }
           ></ThresholdSlider>
         </Grid>
-
+        <Grid item lg={12}>
+          <Typography className={classes.paragraph}>
+            Is green when value is:
+          </Typography>
+        </Grid>
         <Grid item lg={3}>
           <RadioGroup
             aria-label="threshold_type"
@@ -242,9 +250,13 @@ class KpiForm extends Component {
             <FormControlLabel
               value={0}
               control={<Radio />}
-              label="Greater Than"
+              label="Greater Than (or equal to)"
             />
-            <FormControlLabel value={1} control={<Radio />} label="Less Than" />
+            <FormControlLabel
+              value={1}
+              control={<Radio />}
+              label="Less Than (or equal to)"
+            />
           </RadioGroup>
         </Grid>
         <Grid item lg={4}>
