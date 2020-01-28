@@ -238,7 +238,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: "100%",
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(1)
   },
   table: {
     maxWidth: "100%"
@@ -258,13 +258,12 @@ const useStyles = makeStyles(theme => ({
     width: 1
   },
   tableCell: {
-    fontSize: "0.6rem",
-    paddingLeft: "5px",
-    paddingRight: "5px"
+    fontSize: "0.5rem",
+    padding: "2px"
   },
   tableHeadCell: {
-    paddingLeft: "5px",
-    paddingRight: "5px"
+    fontSize: "1rem",
+    padding: "2px"
   }
 }));
 
@@ -286,7 +285,7 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(4);
 
   const handleRequestSort = (event, property) => {
     const isDesc = orderBy === property && order === "desc";
@@ -439,7 +438,7 @@ export default function EnhancedTable(props) {
                 );
               })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 32.67 * emptyRows }}>
+              <TableRow style={{ height: 30 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}

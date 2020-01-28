@@ -2636,13 +2636,12 @@ var Table_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
       width: 1
     },
     tableCell: {
-      fontSize: "0.6rem",
-      paddingLeft: "5px",
-      paddingRight: "5px"
+      fontSize: "0.5rem",
+      padding: "2px"
     },
     tableHeadCell: {
-      paddingLeft: "5px",
-      paddingRight: "5px"
+      fontSize: "1rem",
+      padding: "2px"
     }
   };
 });
@@ -2680,7 +2679,7 @@ function EnhancedTable(props) {
       dense = _React$useState10[0],
       setDense = _React$useState10[1];
 
-  var _React$useState11 = react_default.a.useState(5),
+  var _React$useState11 = react_default.a.useState(4),
       _React$useState12 = _slicedToArray(_React$useState11, 2),
       rowsPerPage = _React$useState12[0],
       setRowsPerPage = _React$useState12[1];
@@ -2795,7 +2794,7 @@ function EnhancedTable(props) {
     }));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
-      height: 32.67 * emptyRows
+      height: 30 * emptyRows
     }
   }, react_default.a.createElement(TableCell["default"], {
     colSpan: 6
@@ -3797,7 +3796,7 @@ var ActionTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
     },
     paper: {
       width: "100%",
-      marginBottom: theme.spacing(2)
+      marginBottom: theme.spacing(1)
     },
     table: {
       maxWidth: "100%"
@@ -3817,13 +3816,12 @@ var ActionTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
       width: 1
     },
     tableCell: {
-      fontSize: "0.6rem",
-      paddingLeft: "5px",
-      paddingRight: "5px"
+      fontSize: "0.5rem",
+      padding: "2px"
     },
     tableHeadCell: {
-      paddingLeft: "5px",
-      paddingRight: "5px"
+      fontSize: "1rem",
+      padding: "2px"
     }
   };
 });
@@ -3864,7 +3862,7 @@ function ActionTable_EnhancedTable(props) {
       dense = _React$useState10[0],
       setDense = _React$useState10[1];
 
-  var _React$useState11 = react_default.a.useState(5),
+  var _React$useState11 = react_default.a.useState(4),
       _React$useState12 = ActionTable_slicedToArray(_React$useState11, 2),
       rowsPerPage = _React$useState12[0],
       setRowsPerPage = _React$useState12[1];
@@ -4001,7 +3999,7 @@ function ActionTable_EnhancedTable(props) {
     }, getStatus(row)));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
-      height: 32.67 * emptyRows
+      height: 30 * emptyRows
     }
   }, react_default.a.createElement(TableCell["default"], {
     colSpan: 6
