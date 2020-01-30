@@ -1,7 +1,7 @@
 
-from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action, Audit, Win, Heat, Image
+from dashboards.models import Dashboard, Kpi, Series, Datapoint, ActionTable, Action, Audit, Win, Heat, Image, Irritant
 from rest_framework import viewsets, permissions
-from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer, AuditSerializer, WinSerializer, HeatSerializer, ImageSerializer
+from .serializers import DashboardSerializer, KpiSerializer, SeriesSerializer, DatapointSerializer, ActionTableSerializer, ActionSerializer, AuditSerializer, WinSerializer, HeatSerializer, ImageSerializer, IrritantSerializer
 from datetime import datetime, time, date, timedelta 
 from rest_framework.viewsets import ReadOnlyModelViewSet
 # Dashboard viewset
@@ -31,7 +31,6 @@ class DashboardViewSet(viewsets.ModelViewSet):
         heat.save()
         heat = Heat(name="Bad", color="#EF0000", dashboard=dashboard)
         heat.save()
-    
 
 class DatapointViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -62,7 +61,7 @@ class SeriesViewSet(viewsets.ModelViewSet):
         queryset = Series.objects.all()
         kpi = self.request.query_params.get('kpi', None)
         if kpi is not None:
-            queryset = querysey.filter(kpi=kpi)
+            queryset = queryset.filter(kpi=kpi)
         return queryset
     def perform_create(self, serializer):
         s = serializer.save()
@@ -345,6 +344,29 @@ class HeatViewSet(viewsets.ModelViewSet):
     def patch(self, request, pk):
         heat = self.get_object(pk)
         serializer = HeatSerializer(heat, data = request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+
+class IrritantViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAuthenticated
+    ]
+
+    serializer_class = IrritantSerializer
+
+    def get_queryset(self):
+        queryset = Irritant.objects.all()
+        dashboard = self.request.query_params.get('dashboard', None)
+        if dashboard is not None:
+            queryset = queryset.filter(dashboard=dashboard)
+        return queryset
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(self, request, *args, **kwargs)
+        
+    def patch(self, request, pk):
+        irritant = self.get_object(pk)
+        serializer = IrritantSerializer(irritant, data = request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
 

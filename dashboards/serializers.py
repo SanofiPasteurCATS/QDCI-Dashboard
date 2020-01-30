@@ -1,5 +1,5 @@
 from rest_framework import serializers, fields
-from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable, Audit, Win, Heat, Image
+from dashboards.models import Dashboard, Kpi, Datapoint, Series, Action, ActionTable, Audit, Win, Heat, Image, Irritant
 
 # Serializers for all Dashboard models (converts python objects to JSON format for REST API endpoints)
 
@@ -73,5 +73,10 @@ class WinSerializer(serializers.ModelSerializer):
 class HeatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Heat
+        fields = '__all__'
+
+class IrritantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Irritant
         fields = '__all__'
 

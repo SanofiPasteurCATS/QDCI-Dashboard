@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .api import DashboardViewSet, KpiViewSet, SeriesViewSet, DatapointViewSet, ActionTableViewSet, ActionViewSet, WinViewSet, AuditViewSet, HeatViewSet, ImageViewSet
+from .api import DashboardViewSet, KpiViewSet, SeriesViewSet, DatapointViewSet, ActionTableViewSet, ActionViewSet, WinViewSet, AuditViewSet, HeatViewSet, ImageViewSet, IrritantViewSet
 
 # RESTful API endpoints
 
@@ -14,6 +14,7 @@ router.register('win', WinViewSet, "win")
 router.register('audit', AuditViewSet, "audit")
 router.register('heat', HeatViewSet, 'heat')
 router.register('image', ImageViewSet, 'image')
+router.register('irritant', IrritantViewSet, 'irritant')
 
 
 urlpatterns = router.urls

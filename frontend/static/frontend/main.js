@@ -157,7 +157,7 @@
 
 /***/ "./frontend/src/index.js":
 /*!********************************************!*\
-  !*** ./frontend/src/index.js + 71 modules ***!
+  !*** ./frontend/src/index.js + 74 modules ***!
   \********************************************/
 /*! no exports provided */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@date-io/date-fns/build/index.esm.js */
@@ -240,6 +240,8 @@
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/School.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Settings.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/SupervisorAccount.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/ThumbDown.js (<- Module is not an ECMAScript module) */
+/*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/ThumbUp.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/icons/Timeline.js (<- Module is not an ECMAScript module) */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/pickers/esm/index.js */
 /*! ModuleConcatenation bailout: Cannot concat with ./node_modules/@material-ui/styles/esm/index.js */
@@ -269,6 +271,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/@babel/polyfill/lib/index.js
+var lib = __webpack_require__("./node_modules/@babel/polyfill/lib/index.js");
 
 // EXTERNAL MODULE: ./node_modules/react/index.js
 var react = __webpack_require__("./node_modules/react/index.js");
@@ -352,6 +357,10 @@ var GET_HEAT = "GET_HEAT";
 var UPDATE_HEAT = "UPDATE_HEAT";
 var ADD_IMAGE = "ADD_IMAGE";
 var DELETE_IMAGE = "DELETE_IMAGE";
+var ADD_IRRITANT = "ADD_IRRITANT";
+var UPDATE_IRRITANT = "UPDATE_IRRITANT";
+var GET_IRRITANT = "GET_IRRITANT";
+var DELETE_IRRITANT = "DELETE_IRRITANT";
 // CONCATENATED MODULE: ./frontend/src/core/actions/messages.js
  // CREATE MESSAGE
 
@@ -1386,7 +1395,6 @@ var dashboards_deleteSeries = function deleteSeries(id) {
 };
 var dashboards_updateDatapoint = function updateDatapoint(datapoint, id) {
   return function (dispatch, getState) {
-    console.log(datapoint);
     axios_default.a.patch("/api/datapoint/".concat(id, "/"), datapoint, tokenConfig(getState)).then(function (res) {
       dispatch(messages_createMessage({
         updateDatapoint: "Datapoint Updated"
@@ -1716,6 +1724,69 @@ var dashboards_deleteImage = function deleteImage(id) {
     });
   };
 };
+var dashboards_addIrritant = function addIrritant(irritant) {
+  return function (dispatch, getState) {
+    axios_default.a.post("api/irritant/", irritant, tokenConfig(getState)).then(function (res) {
+      // Dispatch a message action which notifies user of success
+      dispatch(messages_createMessage({
+        addIrritant: "Irritant Added"
+      })); // Dispatch the action to reducer. Payload is the dashboard which was added
+
+      dispatch({
+        type: ADD_IRRITANT,
+        payload: res.data
+      });
+    }) // If there is an error, dispatch a error message to reducer
+    ["catch"](function (err) {
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+    });
+  };
+};
+var dashboards_deleteIrritant = function deleteIrritant(id) {
+  return function (dispatch, getState) {
+    axios_default.a["delete"]("/api/irritant/".concat(id, "/"), tokenConfig(getState)).then(function () {
+      dispatch(messages_createMessage({
+        deleteIrritant: "Irritant Deleted"
+      }));
+      dispatch({
+        type: DELETE_IRRITANT,
+        payload: id
+      });
+    });
+  };
+};
+var dashboards_updateIrritant = function updateIrritant(irritant, id) {
+  return function (dispatch, getState) {
+    console.log(irritant);
+    axios_default.a.patch("/api/irritant/".concat(id, "/"), irritant, tokenConfig(getState)).then(function (res) {
+      dispatch(messages_createMessage({
+        updateIrritant: "Irritant Updated"
+      }));
+      dispatch({
+        type: UPDATE_IRRITANT,
+        payload: res.data
+      });
+    })["catch"](function (err) {
+      dispatch(messages_returnErrors(err.response.data, err.response.status));
+      dispatch(messages_createMessage({
+        invalidForm: "Form is invalid"
+      }));
+    });
+  };
+};
+var dashboards_getIrritant = function getIrritant(dashboardId) {
+  return function (dispatch, getState) {
+    axios_default.a.get("api/irritant/?dashboard=".concat(dashboardId), tokenConfig(getState)).then(function (res) {
+      dispatch({
+        type: GET_IRRITANT,
+        payload: res.data
+      });
+    });
+  };
+};
 // EXTERNAL MODULE: ./node_modules/react-spinners/BounceLoader.js
 var BounceLoader = __webpack_require__("./node_modules/react-spinners/BounceLoader.js");
 var BounceLoader_default = /*#__PURE__*/__webpack_require__.n(BounceLoader);
@@ -1937,6 +2008,16 @@ var ACTION_TABLE_HEADERS = [{
   name: "Date",
   prop: "date",
   date: true
+}];
+var IRRITANT_TABLE_HEADERS = [{
+  name: "Description",
+  prop: "description"
+}, {
+  name: "Date",
+  prop: "date"
+}, {
+  name: "Votes",
+  prop: "votes"
 }];
 /********************************************
  *
@@ -2794,7 +2875,7 @@ function EnhancedTable(props) {
     }));
   }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
     style: {
-      height: 30 * emptyRows
+      height: 22 * emptyRows
     }
   }, react_default.a.createElement(TableCell["default"], {
     colSpan: 6
@@ -3411,8 +3492,8 @@ var KeyboardArrowRight = __webpack_require__("./node_modules/@material-ui/icons/
 var KeyboardArrowRight_default = /*#__PURE__*/__webpack_require__.n(KeyboardArrowRight);
 
 // EXTERNAL MODULE: ./node_modules/react-swipeable-views/lib/index.js
-var lib = __webpack_require__("./node_modules/react-swipeable-views/lib/index.js");
-var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
+var react_swipeable_views_lib = __webpack_require__("./node_modules/react-swipeable-views/lib/index.js");
+var react_swipeable_views_lib_default = /*#__PURE__*/__webpack_require__.n(react_swipeable_views_lib);
 
 // EXTERNAL MODULE: ./node_modules/react-swipeable-views-utils/lib/index.js
 var react_swipeable_views_utils_lib = __webpack_require__("./node_modules/react-swipeable-views-utils/lib/index.js");
@@ -3437,7 +3518,7 @@ function Carousel_defineProperty(obj, key, value) { if (key in obj) { Object.def
 
 
 
-var AutoPlaySwipeableViews = Object(react_swipeable_views_utils_lib["autoPlay"])(lib_default.a);
+var AutoPlaySwipeableViews = Object(react_swipeable_views_utils_lib["autoPlay"])(react_swipeable_views_lib_default.a);
 var Carousel_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
   var _img;
 
@@ -4697,6 +4778,732 @@ ActionView_ActionView.defaultProps = {
   appendable: false,
   rowClick: null
 };
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/IrritantForm.js
+// DEPENDANCIES
+
+ // MATERIAL-UI
+
+
+
+
+
+
+var IrritantForm_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    textField: {
+      marginBottom: theme.spacing(5),
+      width: "100%"
+    }
+  };
+});
+
+function IrritantForm(props) {
+  var onChange = props.onChange;
+  var classes = IrritantForm_useStyles();
+
+  var handleDateChange = function handleDateChange(date, name) {
+    var onChange = props.onChange;
+    onChange({
+      target: {
+        value: date.toLocaleDateString(),
+        name: name
+      }
+    });
+  };
+
+  var _props$irritant = props.irritant,
+      description = _props$irritant.description,
+      date = _props$irritant.date;
+  return react_default.a.createElement(Grid["default"], {
+    container: true
+  }, react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(TextField["default"], {
+    required: true,
+    fullWidth: true,
+    id: "description",
+    label: "Description",
+    className: classes.textField,
+    onChange: onChange,
+    value: description || "",
+    name: "description"
+  })), react_default.a.createElement(Grid["default"], {
+    item: true,
+    md: 12,
+    className: classes.container
+  }, react_default.a.createElement(esm["MuiPickersUtilsProvider"], {
+    utils: index_esm["default"]
+  }, react_default.a.createElement(esm["KeyboardDatePicker"], {
+    disableToolbar: true,
+    variant: "inline",
+    format: "MM/dd/yyyy",
+    margin: "normal",
+    id: "date",
+    className: classes.textField,
+    label: "Due Date",
+    value: date,
+    onChange: function onChange(date) {
+      handleDateChange(date, "date");
+    },
+    KeyboardButtonProps: {
+      "aria-label": "change date"
+    }
+  }))));
+}
+
+IrritantForm.defaultProps = {
+  irritant: null
+};
+/* harmony default export */ var components_IrritantForm = (IrritantForm);
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/ThumbUp.js
+var ThumbUp = __webpack_require__("./node_modules/@material-ui/icons/ThumbUp.js");
+var ThumbUp_default = /*#__PURE__*/__webpack_require__.n(ThumbUp);
+
+// EXTERNAL MODULE: ./node_modules/@material-ui/icons/ThumbDown.js
+var ThumbDown = __webpack_require__("./node_modules/@material-ui/icons/ThumbDown.js");
+var ThumbDown_default = /*#__PURE__*/__webpack_require__.n(ThumbDown);
+
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/IrritantTable.js
+function IrritantTable_slicedToArray(arr, i) { return IrritantTable_arrayWithHoles(arr) || IrritantTable_iterableToArrayLimit(arr, i) || IrritantTable_nonIterableRest(); }
+
+function IrritantTable_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function IrritantTable_iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function IrritantTable_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function IrritantTable_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function IrritantTable_desc(a, b, orderBy) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function IrritantTable_stableSort(array, cmp) {
+  var stabilizedThis = array.map(function (el, index) {
+    return [el, index];
+  });
+  stabilizedThis.sort(function (a, b) {
+    var order = cmp(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map(function (el) {
+    return el[0];
+  });
+}
+
+function IrritantTable_getSorting(order, orderBy) {
+  return order === "desc" ? function (a, b) {
+    return IrritantTable_desc(a, b, orderBy);
+  } : function (a, b) {
+    return -IrritantTable_desc(a, b, orderBy);
+  };
+}
+
+function IrritantTable_EnhancedTableHead(props) {
+  var classes = props.classes,
+      onSelectAllClick = props.onSelectAllClick,
+      order = props.order,
+      orderBy = props.orderBy,
+      numSelected = props.numSelected,
+      rowCount = props.rowCount,
+      onRequestSort = props.onRequestSort,
+      tableMeta = props.tableMeta;
+
+  var createSortHandler = function createSortHandler(property) {
+    return function (event) {
+      onRequestSort(event, property);
+    };
+  };
+
+  return react_default.a.createElement(TableHead["default"], null, react_default.a.createElement(TableRow["default"], null, react_default.a.createElement(TableCell["default"], {
+    padding: "checkbox"
+  }, react_default.a.createElement(Checkbox["default"], {
+    indeterminate: numSelected > 0 && numSelected < rowCount,
+    checked: numSelected === rowCount && rowCount != 0,
+    onChange: onSelectAllClick,
+    inputProps: {
+      "aria-label": "select all"
+    }
+  })), tableMeta.map(function (field, i) {
+    return react_default.a.createElement(TableCell["default"], {
+      key: field.name,
+      align: field.numeric ? "right" : "left",
+      className: classes.tableHeadCell,
+      sortDirection: orderBy === field.prop ? order : false
+    }, react_default.a.createElement(TableSortLabel["default"], {
+      active: orderBy === field.prop,
+      direction: order,
+      onClick: createSortHandler(field.prop)
+    }, field.name, orderBy === field.prop ? react_default.a.createElement("span", {
+      className: classes.visuallyHidden
+    }, order === "desc" ? "sorted descending" : "sorted ascending") : null));
+  })));
+}
+
+IrritantTable_EnhancedTableHead.propTypes = {
+  classes: prop_types_default.a.object.isRequired,
+  numSelected: prop_types_default.a.number.isRequired,
+  onRequestSort: prop_types_default.a.func.isRequired,
+  onSelectAllClick: prop_types_default.a.func.isRequired,
+  order: prop_types_default.a.oneOf(["asc", "desc"]).isRequired,
+  orderBy: prop_types_default.a.string.isRequired,
+  rowCount: prop_types_default.a.number.isRequired
+};
+var IrritantTable_useToolbarStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1)
+    },
+    highlight: theme.palette.type === "light" ? {
+      color: theme.palette.secondary.main,
+      backgroundColor: Object(esm_styles["lighten"])(theme.palette.secondary.light, 0.85)
+    } : {
+      color: theme.palette.text.primary,
+      backgroundColor: theme.palette.secondary.dark
+    },
+    title: {
+      flex: "1 1 100%"
+    }
+  };
+});
+
+var IrritantTable_EnhancedTableToolbar = function EnhancedTableToolbar(props) {
+  var classes = IrritantTable_useToolbarStyles();
+  var numSelected = props.numSelected,
+      title = props.title,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      onClickVote = props.onClickVote,
+      onClickDownVote = props.onClickDownVote,
+      data = props.data;
+
+  var handleClickEdit = function handleClickEdit() {
+    var onClickEdit = props.onClickEdit,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickEdit(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickVote = function handleClickVote() {
+    var onClickVote = props.onClickVote,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickVote(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickDownVote = function handleClickDownVote() {
+    var onClickDownVote = props.onClickDownVote,
+        selected = props.selected,
+        data = props.data;
+    if (selected.length) onClickDownVote(getItem(selected[0], data, "id"));
+  };
+
+  var handleClickDelete = function handleClickDelete() {
+    var onClickDelete = props.onClickDelete,
+        selected = props.selected,
+        setSelected = props.setSelected;
+    onClickDelete(selected);
+    setSelected([]);
+  };
+
+  return react_default.a.createElement(Toolbar["default"], {
+    className: Object(clsx_m["default"])(classes.root, IrritantTable_defineProperty({}, classes.highlight, numSelected > 0))
+  }, numSelected > 0 ? react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    color: "inherit",
+    variant: "subtitle1"
+  }, numSelected, " selected") : react_default.a.createElement(Typography["default"], {
+    className: classes.title,
+    variant: "h6",
+    id: "tableTitle"
+  }, title), numSelected > 0 ? react_default.a.createElement(react_default.a.Fragment, null, onClickVote && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
+    title: "Vote"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickVote,
+    "aria-label": "vote"
+  }, react_default.a.createElement(ThumbUp_default.a, null))), onClickDownVote && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
+    title: "Vote"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickDownVote,
+    "aria-label": "vote"
+  }, react_default.a.createElement(ThumbDown_default.a, null))), onClickEdit && numSelected === 1 && react_default.a.createElement(Tooltip["default"], {
+    title: "Edit"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickEdit,
+    "aria-label": "edit"
+  }, react_default.a.createElement(Edit_default.a, null))), onClickDelete && react_default.a.createElement(Tooltip["default"], {
+    title: "Delete"
+  }, react_default.a.createElement(IconButton["default"], {
+    onClick: handleClickDelete,
+    "aria-label": "delete"
+  }, react_default.a.createElement(Delete_default.a, null)))) : react_default.a.createElement(react_default.a.Fragment, null, onClickAdd && react_default.a.createElement(Tooltip["default"], {
+    title: "Add entry"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "add",
+    onClick: onClickAdd
+  }, react_default.a.createElement(Add_default.a, null))), react_default.a.createElement(Tooltip["default"], {
+    title: "Filter list"
+  }, react_default.a.createElement(IconButton["default"], {
+    "aria-label": "filter list"
+  }, react_default.a.createElement(FilterList_default.a, null)))));
+};
+
+IrritantTable_EnhancedTableToolbar.propTypes = {
+  numSelected: prop_types_default.a.number.isRequired
+};
+var IrritantTable_useStyles = Object(esm_styles["makeStyles"])(function (theme) {
+  return {
+    root: {
+      width: "100%",
+      marginTop: theme.spacing(1),
+      maxWidth: "100%"
+    },
+    paper: {
+      width: "100%",
+      marginBottom: theme.spacing(2)
+    },
+    table: {
+      maxWidth: "100%"
+    },
+    tableWrapper: {
+      overflowX: "auto"
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: "rect(0 0 0 0)",
+      height: 1,
+      margin: -1,
+      overflow: "hidden",
+      padding: 0,
+      position: "absolute",
+      top: 20,
+      width: 1
+    },
+    tableCell: {
+      fontSize: "0.5rem",
+      padding: "2px"
+    },
+    tableHeadCell: {
+      fontSize: "1rem",
+      padding: "2px"
+    }
+  };
+});
+function IrritantTable_EnhancedTable(props) {
+  var title = props.title,
+      data = props.data,
+      tableMeta = props.tableMeta,
+      onClickAdd = props.onClickAdd,
+      onClickDelete = props.onClickDelete,
+      onClickEdit = props.onClickEdit,
+      onClickVote = props.onClickVote,
+      onClickDownVote = props.onClickDownVote;
+  var classes = IrritantTable_useStyles();
+
+  var _React$useState = react_default.a.useState("asc"),
+      _React$useState2 = IrritantTable_slicedToArray(_React$useState, 2),
+      order = _React$useState2[0],
+      setOrder = _React$useState2[1];
+
+  var _React$useState3 = react_default.a.useState(tableMeta[0].name),
+      _React$useState4 = IrritantTable_slicedToArray(_React$useState3, 2),
+      orderBy = _React$useState4[0],
+      setOrderBy = _React$useState4[1];
+
+  var _React$useState5 = react_default.a.useState([]),
+      _React$useState6 = IrritantTable_slicedToArray(_React$useState5, 2),
+      selected = _React$useState6[0],
+      setSelected = _React$useState6[1];
+
+  var _React$useState7 = react_default.a.useState(0),
+      _React$useState8 = IrritantTable_slicedToArray(_React$useState7, 2),
+      page = _React$useState8[0],
+      setPage = _React$useState8[1];
+
+  var _React$useState9 = react_default.a.useState(false),
+      _React$useState10 = IrritantTable_slicedToArray(_React$useState9, 2),
+      dense = _React$useState10[0],
+      setDense = _React$useState10[1];
+
+  var _React$useState11 = react_default.a.useState(4),
+      _React$useState12 = IrritantTable_slicedToArray(_React$useState11, 2),
+      rowsPerPage = _React$useState12[0],
+      setRowsPerPage = _React$useState12[1];
+
+  var handleRequestSort = function handleRequestSort(event, property) {
+    var isDesc = orderBy === property && order === "desc";
+    setOrder(isDesc ? "asc" : "desc");
+    setOrderBy(property);
+  };
+
+  var handleSelectAllClick = function handleSelectAllClick(event) {
+    if (event.target.checked) {
+      var newSelecteds = data.map(function (entry) {
+        return entry.id;
+      });
+      setSelected(newSelecteds);
+      return;
+    }
+
+    setSelected([]);
+  };
+
+  var setSelectedHook = function setSelectedHook(newSelected) {
+    setSelected(newSelected);
+  };
+
+  var handleClick = function handleClick(event, id) {
+    var selectedIndex = selected.indexOf(id);
+    var newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+
+    setSelected(newSelected);
+  };
+
+  var handleChangePage = function handleChangePage(event, newPage) {
+    setPage(newPage);
+  };
+
+  var handleChangeRowsPerPage = function handleChangeRowsPerPage(event) {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  var isSelected = function isSelected(id) {
+    return selected.indexOf(id) !== -1;
+  };
+
+  var emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
+  return react_default.a.createElement("div", {
+    className: classes.root
+  }, react_default.a.createElement(IrritantTable_EnhancedTableToolbar, {
+    title: title,
+    numSelected: selected.length,
+    onClickAdd: onClickAdd,
+    onClickDelete: onClickDelete,
+    onClickVote: onClickVote,
+    onClickEdit: onClickEdit,
+    onClickDownVote: onClickDownVote,
+    selected: selected,
+    setSelected: setSelectedHook,
+    data: data
+  }), react_default.a.createElement("div", {
+    className: classes.tableWrapper
+  }, react_default.a.createElement(Table["default"], {
+    className: classes.table,
+    "aria-labelledby": "tableTitle",
+    "aria-label": "enhanced table",
+    size: "small"
+  }, react_default.a.createElement(IrritantTable_EnhancedTableHead, {
+    classes: classes,
+    numSelected: selected.length,
+    order: order,
+    orderBy: orderBy,
+    onSelectAllClick: handleSelectAllClick,
+    onRequestSort: handleRequestSort,
+    rowCount: data.length,
+    tableMeta: tableMeta
+  }), react_default.a.createElement(TableBody["default"], null, IrritantTable_stableSort(data, IrritantTable_getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(function (row, index) {
+    var isItemSelected = isSelected(row.id);
+    var labelId = "enhanced-table-checkbox-".concat(index);
+    return react_default.a.createElement(TableRow["default"], {
+      hover: true,
+      onClick: function onClick(event) {
+        return handleClick(event, row.id);
+      },
+      role: "checkbox",
+      "aria-checked": isItemSelected,
+      tabIndex: -1,
+      key: "".concat(row.id, "-checkbox"),
+      selected: isItemSelected
+    }, react_default.a.createElement(TableCell["default"], {
+      padding: "checkbox"
+    }, react_default.a.createElement(Checkbox["default"], {
+      checked: isItemSelected,
+      inputProps: {
+        "aria-labelledby": labelId
+      }
+    })), tableMeta.map(function (field, index) {
+      return react_default.a.createElement(TableCell["default"], {
+        key: "".concat(index, "-").concat(row.id),
+        align: "left",
+        id: row.id,
+        className: classes.tableCell
+      }, row[field.prop] === null ? "---" : row[field.prop]);
+    }));
+  }), emptyRows > 0 && react_default.a.createElement(TableRow["default"], {
+    style: {
+      height: 22 * emptyRows
+    }
+  }, react_default.a.createElement(TableCell["default"], {
+    colSpan: 6
+  }))))), react_default.a.createElement(TablePagination["default"], {
+    rowsPerPageOptions: [],
+    component: "div",
+    count: data.length,
+    rowsPerPage: rowsPerPage,
+    page: page,
+    backIconButtonProps: {
+      "aria-label": "previous page"
+    },
+    nextIconButtonProps: {
+      "aria-label": "next page"
+    },
+    onChangePage: handleChangePage,
+    onChangeRowsPerPage: handleChangeRowsPerPage
+  }));
+}
+// CONCATENATED MODULE: ./frontend/src/scenes/boardRoom/components/IrritantView.js
+function IrritantView_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { IrritantView_typeof = function _typeof(obj) { return typeof obj; }; } else { IrritantView_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return IrritantView_typeof(obj); }
+
+function IrritantView_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function IrritantView_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { IrritantView_ownKeys(Object(source), true).forEach(function (key) { IrritantView_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { IrritantView_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function IrritantView_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function IrritantView_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function IrritantView_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function IrritantView_createClass(Constructor, protoProps, staticProps) { if (protoProps) IrritantView_defineProperties(Constructor.prototype, protoProps); if (staticProps) IrritantView_defineProperties(Constructor, staticProps); return Constructor; }
+
+function IrritantView_possibleConstructorReturn(self, call) { if (call && (IrritantView_typeof(call) === "object" || typeof call === "function")) { return call; } return IrritantView_assertThisInitialized(self); }
+
+function IrritantView_getPrototypeOf(o) { IrritantView_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return IrritantView_getPrototypeOf(o); }
+
+function IrritantView_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function IrritantView_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) IrritantView_setPrototypeOf(subClass, superClass); }
+
+function IrritantView_setPrototypeOf(o, p) { IrritantView_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return IrritantView_setPrototypeOf(o, p); }
+
+
+
+
+ // MATERIAL-UI
+
+
+
+
+
+
+ //CORE COMPONENTS
+
+
+
+ // NATIVE COMPONENTS
+
+
+
+var IrritantView_IrritantView =
+/*#__PURE__*/
+function (_Component) {
+  IrritantView_inherits(IrritantView, _Component);
+
+  function IrritantView(props) {
+    var _this;
+
+    IrritantView_classCallCheck(this, IrritantView);
+
+    _this = IrritantView_possibleConstructorReturn(this, IrritantView_getPrototypeOf(IrritantView).call(this, props));
+
+    _this.edit = function (selection) {
+      _this.setState({
+        open: true,
+        formState: selection
+      });
+    };
+
+    _this.vote = function (selection) {
+      var updateIrritant = _this.props.updateIrritant;
+      updateIrritant(IrritantView_objectSpread({}, selection, {
+        votes: selection.votes + 1
+      }), selection.id);
+    };
+
+    _this.downVote = function (selection) {
+      var updateIrritant = _this.props.updateIrritant;
+      updateIrritant(IrritantView_objectSpread({}, selection, {
+        votes: Math.max(selection.votes - 1, 0)
+      }), selection.id);
+    };
+
+    _this.handleToggleOpen = function (state) {
+      return function () {
+        _this.setState({
+          open: state
+        });
+      };
+    };
+
+    _this.onChange = function (e) {
+      _this.setState({
+        formState: IrritantView_objectSpread({}, _this.state.formState, IrritantView_defineProperty({}, e.target.name, e.target.value))
+      });
+    };
+
+    _this.handleUpdate = function (e) {
+      _this.setState({
+        open: false
+      });
+
+      var updateIrritant = _this.props.updateIrritant;
+      var formState = _this.state.formState;
+
+      var irritant = IrritantView_objectSpread({}, formState);
+
+      updateIrritant(irritant, irritant.id);
+
+      _this.setState({
+        formState: {
+          description: "",
+          date: null
+        }
+      });
+    };
+
+    _this.update = _this.update.bind(IrritantView_assertThisInitialized(_this));
+    _this["delete"] = _this["delete"].bind(IrritantView_assertThisInitialized(_this));
+    _this.insert = _this.insert.bind(IrritantView_assertThisInitialized(_this));
+    _this.state = {
+      open: false,
+      formState: {}
+    };
+    return _this;
+  }
+
+  IrritantView_createClass(IrritantView, [{
+    key: "render",
+    value: function render() {
+      var data = this.props.data;
+      var _this$state = this.state,
+          open = _this$state.open,
+          formState = _this$state.formState;
+      return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(IrritantTable_EnhancedTable, {
+        title: "Irritants",
+        onClickDelete: this["delete"],
+        onClickEdit: this.edit,
+        onClickAdd: this.insert,
+        onClickVote: this.vote,
+        onClickDownVote: this.downVote,
+        data: data,
+        tableMeta: IRRITANT_TABLE_HEADERS
+      }), react_default.a.createElement(Dialog["default"], {
+        open: open,
+        onClose: this.handleToggleOpen(false),
+        "aria-labelledby": "form-dialog-title"
+      }, react_default.a.createElement(DialogTitle["default"], {
+        id: "form-dialog-title"
+      }, "Edit Irritant"), react_default.a.createElement(DialogContent["default"], null, react_default.a.createElement(components_IrritantForm, {
+        irritant: formState,
+        onChange: this.onChange
+      })), react_default.a.createElement(DialogActions["default"], null, react_default.a.createElement(Button["default"], {
+        onClick: this.handleToggleOpen(false),
+        color: "primary"
+      }, "Cancel"), react_default.a.createElement(Button["default"], {
+        onClick: this.handleUpdate,
+        color: "primary"
+      }, "Confirm"))));
+    }
+  }, {
+    key: "insert",
+    value: function insert() {
+      var _this$props = this.props,
+          addIrritant = _this$props.addIrritant,
+          dashboardId = _this$props.dashboardId;
+      var irritant = {
+        description: null,
+        end_date: null,
+        start_date: null,
+        dashboard: dashboardId
+      };
+      addIrritant(irritant);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(selection) {
+      var deleteIrritant = this.props.deleteIrritant;
+
+      for (var i in selection) {
+        deleteIrritant(selection[i]);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update(current, id) {
+      var updateIrritant = this.props.updateIrritant;
+      updateIrritant(current, id);
+    }
+  }]);
+
+  return IrritantView;
+}(react["Component"]);
+
+IrritantView_IrritantView.propTypes = {
+  data: prop_types_default.a.array,
+  editable: prop_types_default.a.bool,
+  rowClick: prop_types_default.a.func,
+  deletable: prop_types_default.a.bool
+};
+/* harmony default export */ var components_IrritantView = (Object(es["connect"])(null, {
+  updateIrritant: dashboards_updateIrritant,
+  deleteIrritant: dashboards_deleteIrritant,
+  addIrritant: dashboards_addIrritant
+})(IrritantView_IrritantView));
+IrritantView_IrritantView.defaultProps = {
+  hoverable: false,
+  editable: false,
+  deletable: false,
+  appendable: false,
+  rowClick: null
+};
 // EXTERNAL MODULE: ./node_modules/@material-ui/icons/Replay.js
 var Replay = __webpack_require__("./node_modules/@material-ui/icons/Replay.js");
 var Replay_default = /*#__PURE__*/__webpack_require__.n(Replay);
@@ -4735,6 +5542,7 @@ function boardRoom_setPrototypeOf(o, p) { boardRoom_setPrototypeOf = Object.setP
 
  //import Carousel from "../../core/components/ui/Carousel";
 // NATIVE COMPONENTS
+
 
 
 
@@ -4834,7 +5642,8 @@ function (_Component) {
           getDashboards = _this$props2.getDashboards,
           getAudits = _this$props2.getAudits,
           getWins = _this$props2.getWins,
-          getHeat = _this$props2.getHeat; // Fetch data from server
+          getHeat = _this$props2.getHeat,
+          getIrritant = _this$props2.getIrritant; // Fetch data from server
       // Source of ALL data for boardroom
 
       var id = this.props.match.params.id;
@@ -4845,6 +5654,7 @@ function (_Component) {
       getAudits(id);
       getWins(id);
       getHeat(id);
+      getIrritant(id);
     }
   }, {
     key: "render",
@@ -4858,7 +5668,8 @@ function (_Component) {
           wins = _this$props3.wins,
           heat = _this$props3.heat,
           classes = _this$props3.classes,
-          updateHeat = _this$props3.updateHeat;
+          updateHeat = _this$props3.updateHeat,
+          irritants = _this$props3.irritants;
       var id = this.props.match.params.id; // If there is no current dashboard show the loading screen
 
       if (currentDashboard == null) {
@@ -4945,8 +5756,15 @@ function (_Component) {
       }, react_default.a.createElement(components_WinView, {
         data: wins,
         dashboardId: currentDashboard.id
-      })), react_default.a.createElement(Card["default"], null, react_default.a.createElement(components_AuditView, {
+      })), react_default.a.createElement(Card["default"], {
+        className: classes.stackedCard
+      }, react_default.a.createElement(components_AuditView, {
         data: audits,
+        dashboardId: currentDashboard.id
+      })), react_default.a.createElement(Card["default"], {
+        className: classes.stackedCard
+      }, react_default.a.createElement(components_IrritantView, {
+        data: irritants,
         dashboardId: currentDashboard.id
       }))))));
     }
@@ -4979,7 +5797,8 @@ var boardRoom_mapStateToProps = function mapStateToProps(state) {
     currentDashboard: state.dashboards.currentDashboard,
     audits: state.dashboards.audits,
     wins: state.dashboards.wins,
-    heat: state.dashboards.heat
+    heat: state.dashboards.heat,
+    irritants: state.dashboards.irritants
   };
 };
 
@@ -4990,6 +5809,7 @@ var boardRoom_mapStateToProps = function mapStateToProps(state) {
   clearKpis: dashboards_clearKpis,
   getActionTable: dashboards_getActionTable,
   getAudits: dashboards_getAudits,
+  getIrritant: dashboards_getIrritant,
   getWins: dashboards_getWins,
   getHeat: dashboards_getHeat,
   updateHeat: dashboards_updateHeat,
@@ -11018,7 +11838,8 @@ var initalState = {
   currentDashboard: null,
   actionTables: [],
   audits: [],
-  wins: []
+  wins: [],
+  irritants: []
 };
 /* harmony default export */ var reducers_dashboards = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initalState;
@@ -11314,6 +12135,30 @@ var initalState = {
         })
       });
 
+    case GET_IRRITANT:
+      return reducers_dashboards_objectSpread({}, state, {
+        irritants: action.payload
+      });
+
+    case DELETE_IRRITANT:
+      return reducers_dashboards_objectSpread({}, state, {
+        irritants: state.irritants.filter(function (irritant) {
+          return irritant.id !== action.payload;
+        })
+      });
+
+    case UPDATE_IRRITANT:
+      return reducers_dashboards_objectSpread({}, state, {
+        irritants: state.irritants.map(function (irritant) {
+          if (irritant.id != action.payload.id) return irritant;else return action.payload;
+        })
+      });
+
+    case ADD_IRRITANT:
+      return reducers_dashboards_objectSpread({}, state, {
+        irritants: [].concat(dashboards_toConsumableArray(state.irritants), [action.payload])
+      });
+
     default:
       return state;
   }
@@ -11401,7 +12246,6 @@ var auth_initialState = {
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
       localStorage.removeItem("token");
-      console.log(action);
       return auth_objectSpread({}, state, {
         token: null,
         user: null,
@@ -11847,6 +12691,7 @@ function (_Component) {
 
 react_dom_default.a.render(react_default.a.createElement(App_App, null), document.getElementById("app"));
 // CONCATENATED MODULE: ./frontend/src/index.js
+
 
 
 /***/ })

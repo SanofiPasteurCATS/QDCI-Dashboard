@@ -34,7 +34,11 @@ import {
   UPDATE_HEAT,
   UPDATE_DASHBOARD,
   ADD_IMAGE,
-  DELETE_IMAGE
+  DELETE_IMAGE,
+  GET_IRRITANT,
+  DELETE_IRRITANT,
+  UPDATE_IRRITANT,
+  ADD_IRRITANT
 } from "../actions/types";
 
 const initalState = {
@@ -43,7 +47,8 @@ const initalState = {
   currentDashboard: null,
   actionTables: [],
   audits: [],
-  wins: []
+  wins: [],
+  irritants: []
 };
 
 export default function(state = initalState, action) {
@@ -356,6 +361,31 @@ export default function(state = initalState, action) {
             })
           };
         })
+      };
+    case GET_IRRITANT:
+      return {
+        ...state,
+        irritants: action.payload
+      };
+    case DELETE_IRRITANT:
+      return {
+        ...state,
+        irritants: state.irritants.filter(irritant => {
+          return irritant.id !== action.payload;
+        })
+      };
+    case UPDATE_IRRITANT:
+      return {
+        ...state,
+        irritants: state.irritants.map(irritant => {
+          if (irritant.id != action.payload.id) return irritant;
+          else return action.payload;
+        })
+      };
+    case ADD_IRRITANT:
+      return {
+        ...state,
+        irritants: [...state.irritants, action.payload]
       };
     default:
       return state;

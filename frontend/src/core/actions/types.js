@@ -53,3 +53,8 @@ export const UPDATE_HEAT = "UPDATE_HEAT";
 
 export const ADD_IMAGE = "ADD_IMAGE";
 export const DELETE_IMAGE = "DELETE_IMAGE";
+
+export const ADD_IRRITANT = "ADD_IRRITANT";
+export const UPDATE_IRRITANT = "UPDATE_IRRITANT";
+export const GET_IRRITANT = "GET_IRRITANT";
+export const DELETE_IRRITANT = "DELETE_IRRITANT";

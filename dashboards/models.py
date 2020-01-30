@@ -109,6 +109,12 @@ class Win(models.Model):
     participants = models.CharField(max_length = 256, null=True)
     date= models.CharField(max_length=50, null=True)
 
+class Irritant(models.Model):
+    dashboard = models.ForeignKey(Dashboard, related_name="irritant", on_delete=models.CASCADE, default= None, null=True)
+    description = models.CharField(max_length=256, null=True)
+    date= models.CharField(max_length=50, null=True)
+    votes = models.IntegerField(null=False, default=0)
+
 class Heat(models.Model):
     dashboard = models.ForeignKey(Dashboard, related_name="heat", on_delete=models.CASCADE, default= None, null=True)
     name = models.CharField(max_length=256)

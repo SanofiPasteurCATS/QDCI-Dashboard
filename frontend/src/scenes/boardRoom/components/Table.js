@@ -385,7 +385,7 @@ export default function EnhancedTable(props) {
                 );
               })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: 30 * emptyRows }}>
+              <TableRow style={{ height: 22 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}

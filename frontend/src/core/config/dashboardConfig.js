@@ -185,6 +185,21 @@ export const ACTION_TABLE_HEADERS = [
   }
 ];
 
+export const IRRITANT_TABLE_HEADERS = [
+  {
+    name: "Description",
+    prop: "description"
+  },
+  {
+    name: "Date",
+    prop: "date"
+  },
+  {
+    name: "Votes",
+    prop: "votes"
+  }
+];
+
 /********************************************
  *
  * MISCELLANEOUS

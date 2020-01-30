@@ -15,7 +15,8 @@ import {
   getWins,
   getHeat,
   updateHeat,
-  addWin
+  addWin,
+  getIrritant
 } from "../../core/actions/dashboards";
 import LoadingScreen from "../../core/components/layout/LoadingScreen";
 //import Carousel from "../../core/components/ui/Carousel";
@@ -26,6 +27,7 @@ import AuditView from "./components/AuditView";
 import WinView from "./components/WinView";
 import Carousel from "./components/Carousel";
 import ActionView from "./components/ActionView";
+import IrritantView from "./components/IrritantView";
 
 // MATERIAL-UI
 import Typography from "@material-ui/core/Typography";
@@ -98,7 +100,8 @@ class Boardroom extends Component {
       getDashboards,
       getAudits,
       getWins,
-      getHeat
+      getHeat,
+      getIrritant
     } = this.props;
 
     // Fetch data from server
@@ -111,6 +114,7 @@ class Boardroom extends Component {
     getAudits(id);
     getWins(id);
     getHeat(id);
+    getIrritant(id);
   }
 
   render() {
@@ -123,7 +127,8 @@ class Boardroom extends Component {
       wins,
       heat,
       classes,
-      updateHeat
+      updateHeat,
+      irritants
     } = this.props;
     const { id } = this.props.match.params;
     // If there is no current dashboard show the loading screen
@@ -202,8 +207,14 @@ class Boardroom extends Component {
               <Card className={classes.stackedCard}>
                 <WinView data={wins} dashboardId={currentDashboard.id} />
               </Card>
-              <Card>
+              <Card className={classes.stackedCard}>
                 <AuditView data={audits} dashboardId={currentDashboard.id} />
+              </Card>
+              <Card className={classes.stackedCard}>
+                <IrritantView
+                  data={irritants}
+                  dashboardId={currentDashboard.id}
+                />
               </Card>
             </Grid>
           </Grid>
@@ -234,7 +245,8 @@ const mapStateToProps = state => ({
   currentDashboard: state.dashboards.currentDashboard,
   audits: state.dashboards.audits,
   wins: state.dashboards.wins,
-  heat: state.dashboards.heat
+  heat: state.dashboards.heat,
+  irritants: state.dashboards.irritants
 });
 
 export default connect(mapStateToProps, {
@@ -244,6 +256,7 @@ export default connect(mapStateToProps, {
   clearKpis,
   getActionTable,
   getAudits,
+  getIrritant,
   getWins,
   getHeat,
   updateHeat,

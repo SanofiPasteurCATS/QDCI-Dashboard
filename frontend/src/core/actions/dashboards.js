@@ -37,7 +37,11 @@ import {
   GET_HEAT,
   UPDATE_DASHBOARD,
   ADD_IMAGE,
-  DELETE_IMAGE
+  DELETE_IMAGE,
+  ADD_IRRITANT,
+  UPDATE_IRRITANT,
+  GET_IRRITANT,
+  DELETE_IRRITANT
 } from "./types";
 
 /*---------------------------------------
@@ -289,7 +293,6 @@ export const deleteSeries = id => (dispatch, getState) => {
 };
 
 export const updateDatapoint = (datapoint, id) => (dispatch, getState) => {
-  console.log(datapoint);
   axios
     .patch(`/api/datapoint/${id}/`, datapoint, tokenConfig(getState))
     .then(res => {
@@ -597,4 +600,61 @@ export const deleteImage = id => (dispatch, getState) => {
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
+};
+
+export const addIrritant = irritant => (dispatch, getState) => {
+  axios
+    .post(`api/irritant/`, irritant, tokenConfig(getState))
+    .then(res => {
+      // Dispatch a message action which notifies user of success
+      dispatch(createMessage({ addIrritant: "Irritant Added" }));
+      // Dispatch the action to reducer. Payload is the dashboard which was added
+      dispatch({
+        type: ADD_IRRITANT,
+        payload: res.data
+      });
+    })
+    // If there is an error, dispatch a error message to reducer
+    .catch(err => {
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const deleteIrritant = id => (dispatch, getState) => {
+  axios.delete(`/api/irritant/${id}/`, tokenConfig(getState)).then(() => {
+    dispatch(createMessage({ deleteIrritant: "Irritant Deleted" }));
+    dispatch({
+      type: DELETE_IRRITANT,
+      payload: id
+    });
+  });
+};
+
+export const updateIrritant = (irritant, id) => (dispatch, getState) => {
+  console.log(irritant);
+  axios
+    .patch(`/api/irritant/${id}/`, irritant, tokenConfig(getState))
+    .then(res => {
+      dispatch(createMessage({ updateIrritant: "Irritant Updated" }));
+      dispatch({
+        type: UPDATE_IRRITANT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(createMessage({ invalidForm: "Form is invalid" }));
+    });
+};
+
+export const getIrritant = dashboardId => (dispatch, getState) => {
+  axios
+    .get(`api/irritant/?dashboard=${dashboardId}`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_IRRITANT,
+        payload: res.data
+      });
+    });
 };
