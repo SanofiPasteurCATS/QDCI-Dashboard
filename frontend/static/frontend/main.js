@@ -1760,7 +1760,6 @@ var dashboards_deleteIrritant = function deleteIrritant(id) {
 };
 var dashboards_updateIrritant = function updateIrritant(irritant, id) {
   return function (dispatch, getState) {
-    console.log(irritant);
     axios_default.a.patch("/api/irritant/".concat(id, "/"), irritant, tokenConfig(getState)).then(function (res) {
       dispatch(messages_createMessage({
         updateIrritant: "Irritant Updated"
@@ -8952,6 +8951,9 @@ var KpiForm_styles = function styles(theme) {
     },
     paragraph: {
       marginBottom: theme.spacing(2)
+    },
+    gridItem: {
+      width: "100%"
     }
   };
 };
@@ -9062,7 +9064,8 @@ function (_Component) {
       var classes = _this.props.classes;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 11
+        lg: 11,
+        className: classes.gridItem
       }, react_default.a.createElement(DeviationSlider, {
         disabledRail: true,
         onUpdate: _this.onSliderUpdate,
@@ -9146,7 +9149,8 @@ function (_Component) {
           classes = _this$props.classes;
       return react_default.a.createElement(react_default.a.Fragment, null, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 11
+        lg: 11,
+        className: classes.gridItem
       }, react_default.a.createElement(ThresholdSlider, {
         threshold_type: threshold_type,
         disabledRail: true,
@@ -10099,7 +10103,6 @@ var pillarRoom_styles = function styles(theme) {
     rootContainer: {
       margin: 0,
       width: "100%",
-      overflow: "hidden",
       flex: 1
     },
     cardAction: {
@@ -10120,7 +10123,8 @@ var pillarRoom_styles = function styles(theme) {
       flex: 1
     },
     gridItem: {
-      maxHeight: "100%"
+      maxHeight: "100%",
+      flexBasis: "100%"
     },
     pillar: {
       margin: "0 20px !important"
@@ -10295,7 +10299,7 @@ function (_Component) {
         }
       }, react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 4,
+        md: 4,
         className: classes.gridItem
       }, react_default.a.createElement(Card["default"], {
         className: classes.card
@@ -10311,7 +10315,7 @@ function (_Component) {
         tableMeta: KPI_TABLE_HEADERS
       }))))), react_default.a.createElement(Grid["default"], {
         item: true,
-        lg: 8,
+        md: 8,
         className: classes.gridItem
       }, react_default.a.createElement(Card["default"], {
         className: classes.card

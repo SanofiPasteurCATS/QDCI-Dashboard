@@ -632,7 +632,6 @@ export const deleteIrritant = id => (dispatch, getState) => {
 };
 
 export const updateIrritant = (irritant, id) => (dispatch, getState) => {
-  console.log(irritant);
   axios
     .patch(`/api/irritant/${id}/`, irritant, tokenConfig(getState))
     .then(res => {

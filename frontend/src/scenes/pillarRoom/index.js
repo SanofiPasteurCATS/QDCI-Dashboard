@@ -43,7 +43,6 @@ const styles = theme => ({
   rootContainer: {
     margin: 0,
     width: "100%",
-    overflow: "hidden",
     flex: 1
   },
   cardAction: {
@@ -64,7 +63,8 @@ const styles = theme => ({
     flex: 1
   },
   gridItem: {
-    maxHeight: "100%"
+    maxHeight: "100%",
+    flexBasis: "100%"
   },
   pillar: {
     margin: "0 20px !important"
@@ -203,7 +203,7 @@ class pillarRoom extends Component {
           className={classes.rootContainer}
           style={{ background: color }}
         >
-          <Grid item lg={4} className={classes.gridItem}>
+          <Grid item md={4} className={classes.gridItem}>
             <Card className={classes.card}>
               <CardContent>
                 <Pillar
@@ -221,7 +221,7 @@ class pillarRoom extends Component {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item lg={8} className={classes.gridItem}>
+          <Grid item md={8} className={classes.gridItem}>
             <Card className={classes.card}>
               <CardContent className={classes.chartCardContent}>
                 {menuMode ? (

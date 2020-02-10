@@ -183,11 +183,11 @@ class KpiViewSet(viewsets.ModelViewSet):
             if (year == None):
                 year = datetime.now().year
             d = date(year, 1, 1)                    # January 1st
-            d += timedelta(days = 8 - d.weekday())  # First Monday
+            d += timedelta(days = 7 - d.weekday())  # First Monday
             weekdayCounter = 0
             while d.year == year:
                 yield d
-                if (weekdayCounter < 5) :
+                if (weekdayCounter < 4) :
                     d += timedelta(days = 1)
                     weekdayCounter += 1
                 else:

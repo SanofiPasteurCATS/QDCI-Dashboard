@@ -40,6 +40,9 @@ const styles = theme => ({
   },
   paragraph: {
     marginBottom: theme.spacing(2)
+  },
+  gridItem: {
+    width: "100%"
   }
 });
 
@@ -125,7 +128,7 @@ class KpiForm extends Component {
     const { classes } = this.props;
     return (
       <>
-        <Grid item lg={11}>
+        <Grid item lg={11} className={classes.gridItem}>
           <DeviationSlider
             disabledRail
             onUpdate={this.onSliderUpdate}
@@ -213,7 +216,7 @@ class KpiForm extends Component {
     const { onChange, classes } = this.props;
     return (
       <>
-        <Grid item lg={11}>
+        <Grid item lg={11} className={classes.gridItem}>
           <ThresholdSlider
             threshold_type={threshold_type}
             disabledRail
