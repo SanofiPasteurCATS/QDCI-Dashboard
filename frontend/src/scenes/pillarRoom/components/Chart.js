@@ -26,15 +26,21 @@ class Chart extends Component {
           },
           toolbar: {
             tools: {
-              download: true,
               customIcons: [
                 {
                   icon: '<i class="fas fa-tag chart-icon"></i>',
-                  index: -1,
+                  index: 0,
                   title: "Toggle data labels",
                   click: this.toggleLabels
+                },
+                {
+                  icon: `<i class="fas fa-bullseye chart-icon"></i>`,
+                  index: 1,
+                  title: "Toggle target series",
+                  click: this.toggleTargets
                 }
-              ]
+              ],
+              download: true
             }
           }
         },
@@ -109,6 +115,26 @@ class Chart extends Component {
           ...this.state.options.dataLabels,
           enabled: !this.state.options.dataLabels.enabled
         }
+      }
+    });
+  };
+
+  toggleTargets = () => {
+    const { targets, colors } = this.props;
+    const { series, options } = this.state;
+    const newSeries = series.filter(s => s.name != "Targets");
+
+    if (newSeries.length != series.length) {
+      this.setState({
+        series: newSeries
+      });
+      return;
+    }
+    this.setState({
+      series: [...newSeries, targets],
+      options: {
+        ...options,
+        colors: [...colors, "#007e00"]
       }
     });
   };

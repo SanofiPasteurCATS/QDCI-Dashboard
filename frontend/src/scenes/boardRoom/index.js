@@ -53,16 +53,21 @@ const styles = theme => ({
   nestedColumn: {
     marginTop: "-8px",
     flexDirection: "column",
-    paddingRight: "0 !important"
+    paddingRight: "0 !important",
+    maxWidth: "100%"
   },
   pillarBarContainer: {
     width: "100%"
   },
   column: {
-    flexDirection: "column"
+    flexDirection: "column",
+    padding: "0 !important",
+    margin: "0 !important"
   },
   mediaContainer: {
-    justifyContent: "start"
+    justifyContent: "start",
+    margin: 0,
+    maxWidth: "100%"
   },
   card: {
     maxWidth: "100%"
@@ -76,7 +81,12 @@ const styles = theme => ({
   },
   heatCheck: {
     width: "100%",
+    padding: "0 !important",
     marginBottom: theme.spacing(3)
+  },
+  gridParent: {
+    margin: "0 !important",
+    padding: "0 !important"
   }
 });
 
@@ -191,7 +201,7 @@ class Boardroom extends Component {
             </Card>
           </Grid>
 
-          <Grid item container spacing={4}>
+          <Grid item container spacing={4} className={classes.gridParent}>
             <Grid item container lg={7} className={classes.column} spacing={2}>
               <Card className={classes.card}>
                 <ActionView

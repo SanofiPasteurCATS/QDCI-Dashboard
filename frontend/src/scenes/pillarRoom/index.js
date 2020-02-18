@@ -188,6 +188,18 @@ class pillarRoom extends Component {
         seriesColors.push(series.color);
         strokeWidths.push(series.plot_type === "bar" ? 0 : 3);
       });
+    const targetSeries = { name: "Targets", type: "line" };
+    if (kpi && kpi.series && kpi.series[0]) {
+      let data = [];
+      kpi.series[0].entries.forEach(datapoint => {
+        if (Number.isNaN(datapoint.target) || datapoint.target === null) return;
+        data.push({
+          x: new Date(datapoint.date).getTime(),
+          y: datapoint.target
+        });
+      });
+      targetSeries.data = data;
+    }
 
     if (currentDashboard == null) {
       return <LoadingScreen />;
@@ -237,6 +249,7 @@ class pillarRoom extends Component {
                   <Chart
                     type={"line"}
                     series={chartSeries}
+                    targets={targetSeries}
                     colors={seriesColors}
                     unit={kpi ? kpi.unit : ""}
                     strokeWidths={strokeWidths}

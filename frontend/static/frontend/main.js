@@ -5573,16 +5573,21 @@ var boardRoom_styles = function styles(theme) {
     nestedColumn: {
       marginTop: "-8px",
       flexDirection: "column",
-      paddingRight: "0 !important"
+      paddingRight: "0 !important",
+      maxWidth: "100%"
     },
     pillarBarContainer: {
       width: "100%"
     },
     column: {
-      flexDirection: "column"
+      flexDirection: "column",
+      padding: "0 !important",
+      margin: "0 !important"
     },
     mediaContainer: {
-      justifyContent: "start"
+      justifyContent: "start",
+      margin: 0,
+      maxWidth: "100%"
     },
     card: {
       maxWidth: "100%"
@@ -5596,7 +5601,12 @@ var boardRoom_styles = function styles(theme) {
     },
     heatCheck: {
       width: "100%",
+      padding: "0 !important",
       marginBottom: theme.spacing(3)
+    },
+    gridParent: {
+      margin: "0 !important",
+      padding: "0 !important"
     }
   };
 };
@@ -5731,7 +5741,8 @@ function (_Component) {
       }))), react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
-        spacing: 4
+        spacing: 4,
+        className: classes.gridParent
       }, react_default.a.createElement(Grid["default"], {
         item: true,
         container: true,
@@ -5870,6 +5881,14 @@ var react_apexcharts_min_default = /*#__PURE__*/__webpack_require__.n(react_apex
 // CONCATENATED MODULE: ./frontend/src/scenes/pillarRoom/components/Chart.js
 function Chart_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { Chart_typeof = function _typeof(obj) { return typeof obj; }; } else { Chart_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return Chart_typeof(obj); }
 
+function Chart_toConsumableArray(arr) { return Chart_arrayWithoutHoles(arr) || Chart_iterableToArray(arr) || Chart_nonIterableSpread(); }
+
+function Chart_nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function Chart_iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function Chart_arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function Chart_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function Chart_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { Chart_ownKeys(Object(source), true).forEach(function (key) { Chart_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { Chart_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5917,6 +5936,33 @@ function (_Component) {
       });
     };
 
+    _this.toggleTargets = function () {
+      var _this$props = _this.props,
+          targets = _this$props.targets,
+          colors = _this$props.colors;
+      var _this$state = _this.state,
+          series = _this$state.series,
+          options = _this$state.options;
+      var newSeries = series.filter(function (s) {
+        return s.name != "Targets";
+      });
+
+      if (newSeries.length != series.length) {
+        _this.setState({
+          series: newSeries
+        });
+
+        return;
+      }
+
+      _this.setState({
+        series: [].concat(Chart_toConsumableArray(newSeries), [targets]),
+        options: Chart_objectSpread({}, options, {
+          colors: [].concat(Chart_toConsumableArray(colors), ["#007e00"])
+        })
+      });
+    };
+
     _this.state = {
       series: props.series,
       options: {
@@ -5939,13 +5985,18 @@ function (_Component) {
           },
           toolbar: {
             tools: {
-              download: true,
               customIcons: [{
                 icon: '<i class="fas fa-tag chart-icon"></i>',
-                index: -1,
+                index: 0,
                 title: "Toggle data labels",
                 click: _this.toggleLabels
-              }]
+              }, {
+                icon: "<i class=\"fas fa-bullseye chart-icon\"></i>",
+                index: 1,
+                title: "Toggle target series",
+                click: _this.toggleTargets
+              }],
+              download: true
             }
           }
         },
@@ -6013,12 +6064,12 @@ function (_Component) {
   Chart_createClass(Chart, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this$props = this.props,
-          series = _this$props.series,
-          colors = _this$props.colors,
-          unit = _this$props.unit,
-          type = _this$props.type,
-          strokeWidths = _this$props.strokeWidths;
+      var _this$props2 = this.props,
+          series = _this$props2.series,
+          colors = _this$props2.colors,
+          unit = _this$props2.unit,
+          type = _this$props2.type,
+          strokeWidths = _this$props2.strokeWidths;
       var plotOptions = {};
 
       var formatter = function (unit) {
@@ -10281,6 +10332,22 @@ function (_Component) {
         seriesColors.push(series.color);
         strokeWidths.push(series.plot_type === "bar" ? 0 : 3);
       });
+      var targetSeries = {
+        name: "Targets",
+        type: "line"
+      };
+
+      if (kpi && kpi.series && kpi.series[0]) {
+        var data = [];
+        kpi.series[0].entries.forEach(function (datapoint) {
+          if (Number.isNaN(datapoint.target) || datapoint.target === null) return;
+          data.push({
+            x: new Date(datapoint.date).getTime(),
+            y: datapoint.target
+          });
+        });
+        targetSeries.data = data;
+      }
 
       if (currentDashboard == null) {
         return react_default.a.createElement(LoadingScreen, null);
@@ -10331,6 +10398,7 @@ function (_Component) {
       }) : react_default.a.createElement(components_Chart, {
         type: "line",
         series: chartSeries,
+        targets: targetSeries,
         colors: seriesColors,
         unit: kpi ? kpi.unit : "",
         strokeWidths: strokeWidths
@@ -11526,7 +11594,10 @@ function (_Component) {
         }));
       }), react_default.a.createElement(Grid["default"], {
         item: true,
-        md: 4
+        md: 4,
+        style: {
+          width: "100%"
+        }
       }, react_default.a.createElement(ui_NewCard, {
         text: "Dashboard",
         handleClick: this.handleOpenNew

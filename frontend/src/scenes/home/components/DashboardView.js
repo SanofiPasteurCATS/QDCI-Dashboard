@@ -58,7 +58,7 @@ class DashboardView extends Component {
             </Grid>
           ))}
 
-          <Grid item md={4}>
+          <Grid item md={4} style={{ width: "100%" }}>
             <NewCard text="Dashboard" handleClick={this.handleOpenNew} />
           </Grid>
         </Grid>
